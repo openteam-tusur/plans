@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(:version => 20120530055638) do
 
   create_table "departments", :force => true do |t|
-    t.string   "name"
+    t.string   "title"
     t.string   "abbr"
     t.integer  "year_id"
     t.datetime "created_at", :null => false
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20120530055638) do
 
   create_table "specialities", :force => true do |t|
     t.string   "code"
-    t.string   "name"
+    t.string   "title"
     t.string   "type"
     t.integer  "year_id"
     t.datetime "created_at", :null => false
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20120530055638) do
   add_index "specialities", ["year_id"], :name => "index_specialities_on_year_id"
 
   create_table "subdepartments", :force => true do |t|
-    t.string   "name"
+    t.string   "title"
     t.string   "abbr"
     t.integer  "department_id"
     t.datetime "created_at",    :null => false
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(:version => 20120530055638) do
   add_index "subdepartments", ["department_id"], :name => "index_subdepartments_on_department_id"
 
   create_table "subspecialities", :force => true do |t|
-    t.string   "name"
+    t.string   "title"
     t.integer  "speciality_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false

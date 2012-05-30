@@ -1,7 +1,7 @@
 class CreateSubdepartments < ActiveRecord::Migration
   def change
     create_table :subdepartments do |t|
-      t.string :name
+      t.string :title
       t.string :abbr
       t.references :department
 

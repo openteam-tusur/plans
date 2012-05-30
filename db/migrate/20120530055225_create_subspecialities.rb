@@ -1,7 +1,7 @@
 class CreateSubspecialities < ActiveRecord::Migration
   def change
     create_table :subspecialities do |t|
-      t.string :name
+      t.string :title
       t.references :speciality
 
       t.timestamps

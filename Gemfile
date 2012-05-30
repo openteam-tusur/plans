@@ -9,6 +9,7 @@ group :assets do
 end
 
 group :default do
+  gem 'attribute_normalizer'
   gem 'inherited_resources'
   gem 'nokogiri'
   gem 'openteam-commons'
@@ -21,6 +22,7 @@ end
 
 group :test do
   gem 'sqlite3'
+  gem 'rspec-rails'
 end
 
 group :production do
