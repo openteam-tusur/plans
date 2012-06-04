@@ -1,0 +1,90 @@
+-
+  code: "010400.62"
+  direction: "Прикладная математика и информатика"
+  profiles:
+    -
+      subdepartment: "АСУ"
+      profile: "Программное обеспечение вычислительных машин, систем и компьютерных сетей"
+
+-
+  code: "022000.62"
+  direction: "Экология и природопользование"
+  profiles:
+    -
+      subdepartment: "РЭТЭМ"
+      profile: "Экология и природопользование"
+
+-
+  code: "030900.62"
+  direction: "Юриспруденция"
+  profiles:
+    -
+      subdepartment: "ИП"
+      profile: "Юриспруденция"
+
+-
+  code: "040400.62"
+  direction: "Социальная работа"
+  profiles:
+    -
+      subdepartment: "ИСР"
+      profile: "Социальная работа"
+
+-
+  code: "040700.62"
+  direction: "Организация работы с молодежью"
+  profiles:
+    -
+      subdepartment: "ФС"
+      profile: "Организация работы с молодежью"
+
+-
+  code: "080100.62"
+  direction: "Экономика"
+  profiles:
+    -
+      subdepartment: "Экономики"
+      profile: "Финансы и кредит"
+
+-
+  code: "080200.62"
+  direction: "Менеджмент"
+  profiles:
+    -
+      subdepartment: "Экономики"
+      profile: "Управление проектом"
+    -
+      subdepartment: "ТУ"
+      profile: "Информационный менеджмент"
+
+-
+  code: "080500.62"
+  direction: "Бизнес-информатика"
+  profiles:
+    -
+      subdepartment: "АОИ"
+      profile: "Бизнес-информатика"
+
+-
+  code: "081100.62"
+  direction: "Государственное и муниципальное управление"
+  profiles:
+    -
+      subdepartment: "АОИ"
+      profile: "Государственное и муниципальное управление"
+
+-
+  code: "090900.62"
+  direction: "Информационная безопасность"
+  profiles:
+    -
+      subdepartment: "РЗИ"
+      profile: "Комплексная защита объектов информатизации"
+
+-
+  code: "100100.62"
+  direction: "Сервис"
+  profiles:
+    -
+      subdepartment: "ТУ"
+      profile: "Сервис"
