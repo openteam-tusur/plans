@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20120530055638) do
   create_table "departments", :force => true do |t|
     t.string   "title"
     t.string   "abbr"
+    t.integer  "number"
     t.integer  "year_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20120530055638) do
   create_table "subdepartments", :force => true do |t|
     t.string   "title"
     t.string   "abbr"
+    t.integer  "number"
     t.integer  "department_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false

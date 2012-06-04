@@ -1,5 +1,6 @@
 class Subspeciality < ActiveRecord::Base
   belongs_to :speciality
+
   attr_accessible :title
 end
 #--
