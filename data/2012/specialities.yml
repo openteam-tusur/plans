@@ -88,3 +88,25 @@
     -
       subdepartment: "ТУ"
       profile: "Сервис"
+
+-
+  code: "200700.62"
+  direction: "Фотоника и оптоинформатика"
+  profiles:
+    -
+      subdepartment: "ЭП"
+      profile: "Фотоника и оптоинформатика"
+
+-
+  code: "210100.62"
+  direction: "Электроника и наноэлектроника"
+  profiles:
+    -
+      subdepartment: "ФЭ"
+      profile: "Микроэлектроника и твердотельная электроника"
+    -
+      subdepartment: "ЭП"
+      profile: "Электронные приборы и устройства, квантовая и оптическая электроника"
+    -
+      subdepartment: "ПРЭ"
+      profile: "Промышленная электроника"
