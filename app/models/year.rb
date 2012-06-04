@@ -4,6 +4,8 @@ class Year < ActiveRecord::Base
   has_many :departments, :dependent => :destroy
   has_many :subdepartments, :through => :departments
 
+  has_many :specialities, :dependent => :destroy
+
   validates_presence_of :number
 end
 #--

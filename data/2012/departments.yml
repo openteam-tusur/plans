@@ -1,7 +1,7 @@
 -
   title:            Радиотехнический факультет
   abbr:             РТФ
-  subdepartments_attributes:
+  subdepartments:
     -
       title:          Кафедра радиоэлектроники и защиты информации
       abbr:           РЗИ
@@ -30,7 +30,7 @@
 -
   title:            Радиоконструкторский факультет
   abbr:             РКФ
-  subdepartments_attributes:
+  subdepartments:
     -
       title:          Кафедра конструирования и производства радиоаппаратуры
       abbr:           КИПР
@@ -47,7 +47,7 @@
 -
   title:            Факультет электронной техники
   abbr:             ФЭТ
-  subdepartments_attributes:
+  subdepartments:
     -
       title:          Кафедра промышленной электроники
       abbr:           ПрЭ
@@ -62,14 +62,14 @@
       number:         13
     -
       title:          Кафедра физики
-      abbr:           Физ.
+      abbr:           Физики
       number:         14
 
 
 -
   title:            Факультет систем управления
   abbr:             ФСУ
-  subdepartments_attributes:
+  subdepartments:
     -
       title:          Кафедра автоматизации обработки информации
       abbr:           АОИ
@@ -79,17 +79,17 @@
       abbr:           АСУ
       number:         8
     -
-      title:          Кафедра высшей математики
-      abbr:           ВМ
+      title:          Кафедра математики
+      abbr:           Математики
       number:         15
 
 -
   title:            Факультет вычислительных систем
   abbr:             ФВС
-  subdepartments_attributes:
+  subdepartments:
     -
       title:          Кафедра механики и графики
-      abbr:           МиГ
+      abbr:           МГ
       number:         17
     -
       title:          Кафедра электронных средств автоматизации и управления
@@ -107,7 +107,7 @@
 -
   title:            Гуманитарный факультет
   abbr:             ГФ
-  subdepartments_attributes:
+  subdepartments:
     -
       title:          Кафедра истории и социальной работы
       abbr:           ИСР
@@ -132,20 +132,19 @@
 -
   title:            Экономический факультет
   abbr:             ЭФ
-  subdepartments_attributes:
+  subdepartments:
     -
       title:          Кафедра экономики
-      abbr:           Эконом.
+      abbr:           Экономики
       number:         9
     -
       title:          Кафедра экономической математики, информатики и статистики
       abbr:           ЭМИС
       number:         30
-
 -
   title:            Факультет инновационных технологий
   abbr:             ФИТ
-  subdepartments_attributes:
+  subdepartments:
     -
       title:          Отделение кафедры ЮНЕСКО
       abbr:           ОКЮ
@@ -155,14 +154,14 @@
       abbr:           УИ
       number:         37
     -
-      title:          Кафедра Электронных систем
+      title:          Кафедра электронных систем
       abbr:           ЭС
       number:         22
 
 -
   title:            Юридический факультет
   abbr:             ЮФ
-  subdepartments_attributes:
+  subdepartments:
     -
       title:          Кафедра теории права
       abbr:           ТП
@@ -181,25 +180,25 @@
       number:         36
 
 -
-  title:            Заочный и вечерний факультет
-  abbr:             ЗиВФ
-
--
-  title:            Высший колледж информатики, электроники и менеджмента
-  abbr:             ВКИЭМ
-  number:           31
-  subdepartments_attributes:
+  title:            Факультет моделирования систем
+  abbr:             ФМС
+  subdepartments:
     -
-      title:          Кафедра теоретических основ электротехники
-      abbr:           ТОЭ
-      number:         16
+      title:            Кафедра системного анализа
+      abbr:             СА
+      number:           31
+    -
+      title:            Кафедра моделирования и основ теории цепей
+      abbr:             МОТЦ
+      number:           16
 
 -
   title:            Факультет дистанционного обучения
   abbr:             ФДО
-  subdepartments_attributes:
+  subdepartments:
     -
       title:          Кафедра прикладной математики и информатики
-      abbr:           КПМиИ
+      abbr:           ПМИ
       number:         32
+
 

@@ -14,6 +14,7 @@ group :default do
   gem 'nokogiri'
   gem 'openteam-commons'
   gem 'rails'
+  gem 'russian'
 end
 
 group :development do

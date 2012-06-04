@@ -3,6 +3,7 @@ class CreateSubspecialities < ActiveRecord::Migration
     create_table :subspecialities do |t|
       t.string :title
       t.references :speciality
+      t.references :graduator, :polymorphic => true
 
       t.timestamps
     end
