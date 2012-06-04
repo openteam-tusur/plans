@@ -3,7 +3,7 @@ class Department < ActiveRecord::Base
 
   belongs_to :year
 
-  has_many :subdepartments
+  has_many :subdepartments, :dependent => :destroy
 
   accepts_nested_attributes_for :subdepartments
 end

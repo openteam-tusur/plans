@@ -1,7 +1,8 @@
 class Year < ActiveRecord::Base
   attr_accessible :number
 
-  has_many :departments
+  has_many :departments, :dependent => :destroy
+  has_many :subdepartments, :through => :departments
 
   validates_presence_of :number
 end
