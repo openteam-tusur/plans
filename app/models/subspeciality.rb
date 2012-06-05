@@ -4,7 +4,7 @@ class Subspeciality < ActiveRecord::Base
   belongs_to :speciality
   belongs_to :subdepartment
 
-  has_one :programm
+  has_one :programm, :as => :with_programm
   has_many :disciplines, :dependent => :destroy
 
   validates_presence_of :title, :speciality, :subdepartment

@@ -37,14 +37,16 @@ ActiveRecord::Schema.define(:version => 20120604101759) do
   add_index "disciplines", ["subspeciality_id"], :name => "index_disciplines_on_subspeciality_id"
 
   create_table "programms", :force => true do |t|
-    t.integer  "subspeciality_id"
+    t.integer  "with_programm_id"
+    t.string   "with_programm_type"
     t.text     "description"
     t.string   "vfs_path"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
-  add_index "programms", ["subspeciality_id"], :name => "index_programms_on_subspeciality_id"
+  add_index "programms", ["with_programm_id"], :name => "index_programms_on_with_programm_id"
+  add_index "programms", ["with_programm_type"], :name => "index_programms_on_with_programm_type"
 
   create_table "specialities", :force => true do |t|
     t.string   "code"

@@ -4,6 +4,8 @@ class Discipline < ActiveRecord::Base
   belongs_to :subspeciality
   belongs_to :subdepartment
 
+  has_one :programm, :as => :with_programm
+
   validates_presence_of :title, :subspeciality, :subdepartment
 end
 #--

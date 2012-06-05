@@ -52,7 +52,12 @@ GEM
       compass (>= 0.12.0, < 0.14)
     configliere (0.4.8)
       json
+    curb (0.8.0)
     diff-lcs (1.1.3)
+    el_vfs_client (0.3.5)
+      configliere
+      curb
+      rails
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -168,6 +173,7 @@ DEPENDENCIES
   attribute_normalizer
   coffee-rails
   compass-rails
+  el_vfs_client
   inherited_resources
   jquery-rails
   nokogiri
