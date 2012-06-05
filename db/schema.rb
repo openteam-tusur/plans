@@ -71,10 +71,9 @@ ActiveRecord::Schema.define(:version => 20120604101759) do
   create_table "subspecialities", :force => true do |t|
     t.string   "title"
     t.integer  "speciality_id"
-    t.integer  "graduator_id"
-    t.string   "graduator_type"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer  "subdepartment_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   add_index "subspecialities", ["speciality_id"], :name => "index_subspecialities_on_speciality_id"

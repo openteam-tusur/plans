@@ -18,7 +18,7 @@
           <% speciality.subspecialities.each do |subspeciality| %>
             <li class='subspeciality <%= "with_programm" if subspeciality.programm %>'>
               <%= link_to "#{subspeciality.title}", year_speciality_subspeciality_path(@year.number, speciality.code, subspeciality) %>
-              <span class='subdepartment'><%=  "#{subspeciality.graduator.abbr}" %></span>
+              <span class='subdepartment'><%= subspeciality.subdepartment.abbr %></span>
             </li>
           <% end %>
         </ul>

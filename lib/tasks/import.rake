@@ -22,8 +22,7 @@ def import_specialities(year)
       speciality.update_attributes! speciality_attributes.merge(:degree => degree)
       subspecialities_attributes.each do |subspeciality_attributes|
         subspeciality = speciality.subspecialities.find_or_initialize_by_title(subspeciality_attributes['title'])
-        subspeciality.graduator = year.subdepartments.find_by_abbr(subspeciality_attributes['subdepartment']) ||
-                                  year.departments.find_by_abbr(subspeciality_attributes['subdepartment'])
+        subspeciality.subdepartment = year.subdepartments.find_by_abbr(subspeciality_attributes['subdepartment'])
         subspeciality.save! rescue p subspeciality_attributes['subdepartment']
       end
     end

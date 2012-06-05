@@ -168,7 +168,7 @@ bachelor:
     title: "Системный анализ и управление"
     subspecialities:
       -
-        subdepartment: "ФМС"
+        subdepartment: "СА"
         title: "Системный анализ и управление в технических системах"
 
   -
@@ -385,10 +385,10 @@ magistracy:
     title: "Управление в технических системах"
     subspecialities:
       -
-        subdepartment: "ФМС"
+        subdepartment: "СА"
         title: "Автоматизация управления в административных, коммерческих и финансовых сферах"
       -
-        subdepartment: "ФМС"
+        subdepartment: "СА"
         title: "Компьютерное моделирование и обработка информации в технических системах"
 
   -
