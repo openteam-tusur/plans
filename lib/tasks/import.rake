@@ -44,7 +44,7 @@ def import_plans(year)
       discipline.subdepartment = year.subdepartments.find_by_number((discipline_xml['Кафедра'] || title_node['КодКафедры']))
       cycle_abbr = discipline_xml['Цикл'].split('.').first
       cycle = xml.css("АтрибутыЦиклов Цикл[Аббревиатура=#{cycle_abbr}]", "АтрибутыЦиклов Цикл[Абревиатура=#{cycle_abbr}]")[0]['Название']
-      discipline.cycle = cycle
+      discipline.cycle = "#{cycle_abbr}. #{cycle}"
       discipline.save!
     end
   end
