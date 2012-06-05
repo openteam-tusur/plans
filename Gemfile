@@ -14,6 +14,7 @@ group :default do
   gem 'inherited_resources'
   gem 'nokogiri'
   gem 'openteam-commons'
+  gem 'progress_bar',         :require => false
   gem 'rails'
   gem 'russian'
 end
