@@ -1,14 +1,6 @@
-<div class="submenu">
-  <h6>Степени обучения</h6>
-  <ul>
-    <li><a href='#bachelor'>Бакалавриат</a></li>
-    <li><a href='#specialty'>Специалитет</a></li>
-    <li><a href='#magistracy'>Магистратура</a></li>
-    <li>&uarr;&nbsp;<a href='#top'>Наверх</a>&nbsp;&uarr;</li>
-  </ul>
-</div>
-
+<% degrees = {} %>
 <% collection.group_by(&:degree).each do |degree, specialities| %>
+  <% degrees[t(degree)] = degree %>
   <h2 class='degree' id='<%= degree %>'><%= t degree %></h2>
   <ul>
     <% specialities.each do |speciality| %>
@@ -26,3 +18,14 @@
     <% end %>
   </ul>
 <% end %>
+
+<div class="submenu">
+  <h6>Степени обучения</h6>
+  <ul>
+    <% degrees.each do |degree, anchor| %>
+      <li><a href='#<%= anchor %>'><%= degree %></a></li>
+    <% end %>
+    <li>&uarr;&nbsp;<a href='#top'>Наверх</a>&nbsp;&uarr;</li>
+  </ul>
+</div>
+
