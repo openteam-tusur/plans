@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120530055638) do
+ActiveRecord::Schema.define(:version => 20120604101759) do
 
   create_table "departments", :force => true do |t|
     t.string   "title"
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(:version => 20120530055638) do
   end
 
   add_index "departments", ["year_id"], :name => "index_departments_on_year_id"
+
+  create_table "disciplines", :force => true do |t|
+    t.string   "title"
+    t.string   "cycle"
+    t.integer  "subspeciality_id"
+    t.integer  "subdepartment_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "disciplines", ["subdepartment_id"], :name => "index_disciplines_on_subdepartment_id"
+  add_index "disciplines", ["subspeciality_id"], :name => "index_disciplines_on_subspeciality_id"
 
   create_table "programms", :force => true do |t|
     t.integer  "subspeciality_id"

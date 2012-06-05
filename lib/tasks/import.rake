@@ -33,12 +33,21 @@ end
 def import_plans(year)
   Dir.glob("data/#{year.number}/plans/*/*/*.xml") do |file_path|
     xml = Nokogiri::XML(File.new(file_path))
-    year_number = xml.css('Титул').first.attributes['ГодНачалаПодготовки'].value.to_i
+    title_node = xml.css('Титул').first
+    year_number = title_node['ГодНачалаПодготовки'].to_i
     raise "Год не совпадает #{year_number} != #{year.number}!!!" if year_number != year.number
-    speciality_code = xml.css('Специальность')[0].attributes['Название'].value.scan(/\d{6}.\d{2}/).first
+    speciality_code = xml.css('Специальность')[0]['Название'].scan(/\d{6}.\d{2}/).first
     speciality = year.specialities.find_by_code(speciality_code)
-    subspeciality_title = xml.css('Специальность')[1].attributes['Название'].value.match(/"(.*)"/)[1]
+    subspeciality_title = xml.css('Специальность')[1]['Название'].match(/"(.*)"/)[1].squish
     subspeciality = speciality.subspecialities.find_by_title(subspeciality_title)
+    xml.css('СтрокиПлана Строка').each do |discipline_xml|
+      discipline = subspeciality.disciplines.find_or_initialize_by_title(discipline_xml['Дис'].squish)
+      discipline.subdepartment = year.subdepartments.find_by_number((discipline_xml['Кафедра'] || title_node['КодКафедры']))
+      cycle_abbr = discipline_xml['Цикл'].split('.').first
+      cycle = xml.css("АтрибутыЦиклов Цикл[Аббревиатура=#{cycle_abbr}]", "АтрибутыЦиклов Цикл[Абревиатура=#{cycle_abbr}]")[0]['Название']
+      discipline.cycle = cycle
+      discipline.save!
+    end
   end
 end
 

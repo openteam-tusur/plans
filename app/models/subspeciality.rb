@@ -5,6 +5,7 @@ class Subspeciality < ActiveRecord::Base
   belongs_to :graduator, :polymorphic => true
 
   has_one :programm
+  has_many :disciplines, :dependent => :destroy
 
   validates_presence_of :title, :speciality, :graduator
 end
