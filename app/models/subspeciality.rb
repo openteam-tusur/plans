@@ -4,6 +4,8 @@ class Subspeciality < ActiveRecord::Base
   belongs_to :speciality
   belongs_to :graduator, :polymorphic => true
 
+  has_one :programm
+
   validates_presence_of :title, :speciality, :graduator
 end
 #--

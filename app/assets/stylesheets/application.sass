@@ -1,0 +1,136 @@
+@import 'compass/reset'
+@import 'compass/utilities'
+@import 'compass/css3'
+
+@import url(http://fonts.googleapis.com/css?family=Jura&subset=cyrillic)
+
+html, body
+  font-size: 1em
+  line-height: 1.62em
+
+p
+  margin: 0 0 1.31em 0
+
+html, body, input, a, p
+  font-family: 'Jura', sans-serif
+  font-weight: normal
+
+h1, h2, h3, h4, h5, h6
+  font-weight: normal
+  margin: 0 0 0.62em 0
+
+h1
+  font-size: 2em
+
+h2
+  font-size: 1.7em
+
+h3
+  font-size: 1.5em
+
+h4
+  font-size: 1.4em
+
+h5
+  font-size: 1.2em
+
+h6
+  font-size: 0.8em
+
+a
+  color: #14526a
+
+  &:hover
+    color: #218ab2
+
+body
+  background: #f3f3f3
+  margin: 0 auto
+  width: 90%
+
+ul
+  +clearfix
+
+  li
+    +clearfix
+
+    ul
+      margin: 0 0 1.62em 0
+
+      li
+        padding: 0 1.62em
+
+        &:hover
+          background: #eaeaea
+
+.top_menu
+  +border-radius(3px)
+  background: #E7E7E9
+
+  padding: 10px
+  ul
+    text-align: center
+
+    li
+      +inline-block
+      border-right: 1px solid #CCC9C7
+      font-size: 1.3em
+      margin: 0 0 0 10px
+      padding: 0 10px 0 0
+
+      &:first-child
+        margin: 0
+
+      &:last-child
+        border: none
+        padding: 0
+
+    .active
+      a
+        font-size: 1.4em
+        font-weight: bold
+        text-decoration: none
+
+.submenu
+  +clearfix
+  +border-radius(3px)
+  background: #E7E7E9
+  bottom: 5px
+  color: #14526a
+  right: 5px
+  text-align: center
+  opacity: 0.5
+  padding: 5px 15px
+  position: fixed
+  width: 120px
+
+  &:hover
+    opacity: 1
+
+  ul
+    li
+      &:last-child
+        border-top: 1px solid #CCC9C7
+        margin: 15px 0 0 0
+        padding: 5px 0 0 0
+
+.content
+  padding: 1.62em
+
+.degree
+  margin: 0 0 2.62em 0
+  text-align: center
+
+.subdepartment
+  float: right
+
+.subspeciality
+  &:before
+    color: #e14b32
+    content: '\2022'
+    font-size: 1.3em
+    margin: 0 5px 0 0
+
+.with_programm
+  &:before
+    color: #358f04

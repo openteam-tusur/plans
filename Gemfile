@@ -2,6 +2,7 @@ source :rubygems
 
 group :assets do
   gem 'coffee-rails'
+  gem 'compass-rails'
   gem 'jquery-rails'
   gem 'sass-rails'
   gem 'therubyracer'

@@ -1,0 +1,12 @@
+<h1>Образовательная программа</h1>
+<%= t resource.speciality.degree %>
+<%= resource.speciality.title %><br/>
+
+<%= resource.speciality.code %>
+<%= resource.title %>
+<%= resource.graduator.abbr %><br/>
+Год набора <%= resource.speciality.year.number %>
+
+<p>
+  <%= link_to 'Назад', year_specialities_path(resource.speciality.year.number)  %>
+</p>

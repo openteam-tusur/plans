@@ -7,8 +7,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <div class="top_menu">
+    <ul>
+      <% Year.order(:number).each do |year| %>
+        <li <%= 'class=active' if year.number.to_s == params[:year_id] %>>
+          <%= link_to year.number, year_specialities_path(year.number) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="content">
+    <%= yield %>
+  </div>
 </body>
 </html>

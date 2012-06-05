@@ -1,0 +1,28 @@
+<div class="submenu">
+  <h6>Степени обучения</h6>
+  <ul>
+    <li><a href='#bachelor'>Бакалавриат</a></li>
+    <li><a href='#specialty'>Специалитет</a></li>
+    <li><a href='#magistracy'>Магистратура</a></li>
+    <li>&uarr;&nbsp;<a href='#top'>Наверх</a>&nbsp;&uarr;</li>
+  </ul>
+</div>
+
+<% collection.group_by(&:degree).each do |degree, specialities| %>
+  <h2 class='degree' id='<%= degree %>'><%= t degree %></h2>
+  <ul>
+    <% specialities.each do |speciality| %>
+      <li>
+        <h4 class='speciality'><%= speciality.code %> &mdash; <%= speciality.title %></h4>
+        <ul>
+          <% speciality.subspecialities.each do |subspeciality| %>
+            <li class='subspeciality <%= "with_programm" if subspeciality.programm %>'>
+              <%= link_to "#{subspeciality.title}", year_speciality_subspeciality_path(@year.number, speciality.code, subspeciality) %>
+              <span class='subdepartment'><%=  "#{subspeciality.graduator.abbr}" %></span>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
