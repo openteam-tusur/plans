@@ -8,8 +8,9 @@
         <h4 class='speciality'><%= speciality.code %> &mdash; <%= speciality.title %></h4>
         <ul>
           <% speciality.subspecialities.each do |subspeciality| %>
-            <li class='subspeciality <%= "with_programm" if subspeciality.programm %>'>
+            <li class='subspeciality <%= "with_programm" if subspeciality.warnings.empty? %> <%= "deleted" if subspeciality.deleted? %>'>
               <%= link_to "#{subspeciality.title}", year_speciality_subspeciality_path(@year.number, speciality.code, subspeciality) %>
+              <%= content_tag :span, subspeciality.warnings.join(", ") if subspeciality.warnings.any? %>
               <span class='subdepartment'><%= subspeciality.subdepartment.abbr %></span>
             </li>
           <% end %>

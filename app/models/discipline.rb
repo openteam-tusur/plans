@@ -6,6 +6,8 @@ class Discipline < ActiveRecord::Base
 
   has_one :programm, :as => :with_programm
 
+  scope :actual, where(:deleted_at => nil)
+
   validates_presence_of :title, :subspeciality, :subdepartment
 end
 #--
