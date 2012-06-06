@@ -15,6 +15,7 @@ end
 #   abbr          :string(255)
 #   number        :integer
 #   department_id :integer
+#   deleted_at    :datetime
 #   created_at    :datetime        not null
 #   updated_at    :datetime        not null
 #

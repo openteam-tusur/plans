@@ -5,6 +5,8 @@ class CreateSubdepartments < ActiveRecord::Migration
       t.string :abbr
       t.integer :number
       t.references :department
+
+      t.datetime :deleted_at
       t.timestamps
     end
     add_index :subdepartments, :department_id

@@ -6,6 +6,7 @@ class CreateSpecialities < ActiveRecord::Migration
       t.string :degree
       t.references :year
 
+      t.datetime :deleted_at
       t.timestamps
     end
     add_index :specialities, :year_id

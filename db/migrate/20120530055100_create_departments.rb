@@ -6,6 +6,7 @@ class CreateDepartments < ActiveRecord::Migration
       t.integer :number
       t.references :year
 
+      t.datetime :deleted_at
       t.timestamps
     end
     add_index :departments, :year_id

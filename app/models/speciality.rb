@@ -21,6 +21,7 @@ end
 #   title      :string(255)
 #   degree     :string(255)
 #   year_id    :integer
+#   deleted_at :datetime
 #   created_at :datetime        not null
 #   updated_at :datetime        not null
 #

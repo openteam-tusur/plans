@@ -4,6 +4,7 @@ class CreateProgramms < ActiveRecord::Migration
       t.references  :with_programm, :polymorphic => true
       t.text        :description
       t.string      :vfs_path
+
       t.timestamps
     end
     add_index :programms, :with_programm_id

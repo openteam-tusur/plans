@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20120604101759) do
     t.string   "abbr"
     t.integer  "number"
     t.integer  "year_id"
+    t.datetime "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -29,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20120604101759) do
     t.string   "cycle"
     t.integer  "subspeciality_id"
     t.integer  "subdepartment_id"
+    t.datetime "deleted_at"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
@@ -53,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20120604101759) do
     t.string   "title"
     t.string   "degree"
     t.integer  "year_id"
+    t.datetime "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -64,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20120604101759) do
     t.string   "abbr"
     t.integer  "number"
     t.integer  "department_id"
+    t.datetime "deleted_at"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
@@ -74,6 +78,7 @@ ActiveRecord::Schema.define(:version => 20120604101759) do
     t.string   "title"
     t.integer  "speciality_id"
     t.integer  "subdepartment_id"
+    t.datetime "deleted_at"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
@@ -82,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20120604101759) do
 
   create_table "years", :force => true do |t|
     t.integer  "number"
+    t.datetime "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

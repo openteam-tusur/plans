@@ -6,6 +6,7 @@ class CreateDisciplines < ActiveRecord::Migration
       t.references :subspeciality
       t.references :subdepartment
 
+      t.datetime :deleted_at
       t.timestamps
     end
     add_index :disciplines, :subspeciality_id

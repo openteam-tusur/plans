@@ -5,6 +5,7 @@ class CreateSubspecialities < ActiveRecord::Migration
       t.references :speciality
       t.references :subdepartment
 
+      t.datetime :deleted_at
       t.timestamps
     end
     add_index :subspecialities, :speciality_id
