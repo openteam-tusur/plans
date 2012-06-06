@@ -1,0 +1,5 @@
+app:
+  secret:   APP_SECRET
+
+storage:
+  url:      http://esp-storage.openteam.ru
