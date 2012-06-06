@@ -40,8 +40,9 @@ class YearImporter
         refresh speciality
         speciality.update_attributes! speciality_attributes.merge(:degree => degree)
         subspecialities_attributes.each do |subspeciality_attributes|
-          subspeciality = speciality.subspecialities.find_or_initialize_by_title(subspeciality_attributes['title'])
-          subspeciality.subdepartment = year.subdepartments.find_by_abbr(subspeciality_attributes['subdepartment'])
+          subdepartment = year.subdepartments.find_by_abbr(subspeciality_attributes['subdepartment'])
+          subspeciality = speciality.subspecialities.find_or_initialize_by_title_and_subdepartment_id(:title => subspeciality_attributes['title'],
+                                                                                                      :subdepartment_id => subdepartment.id)
           refresh subspeciality
           subspeciality.save! rescue p subspeciality_attributes['subdepartment']
         end

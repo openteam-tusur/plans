@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class Subspeciality < ActiveRecord::Base
-  attr_accessible :title
+  attr_accessible :title, :subdepartment_id
 
   alias_attribute :deleted?, :deleted_at?
 
