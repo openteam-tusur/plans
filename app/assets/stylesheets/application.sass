@@ -1,7 +1,7 @@
 @import 'compass/reset'
 @import 'compass/utilities'
 @import 'compass/css3'
-
+@import 'jquery-ui/jquery-ui'
 @import url(http://fonts.googleapis.com/css?family=Jura&subset=cyrillic)
 
 html, body
@@ -9,7 +9,7 @@ html, body
   line-height: 1.62em
 
 p
-  margin: 0 0 1.31em 0
+  margin: 0 0 0.1em 0
 
 html, body, input, a, p
   font-family: 'Jura', sans-serif
@@ -148,5 +148,58 @@ ul
     margin: 0 0 10px 0
     width: 100%
 
+form
+  .error
+    color: #e95b48
+    font-size: 0.7em
+    float: right
 
+    &:before
+      content: '\2b11'
 
+  label
+    display: block
+    margin: 0 0 0.62em 0
+
+    abbr
+      display: none
+
+  textarea
+    border: 1px solid #CCC9C7
+    height: 80px
+    margin: 0 0 0.62em 0
+    width: 100%
+
+  .submit, .choose_file
+    +border-radius(3px)
+    +inline-block
+    background: #f1fff2
+    border: 1px solid #CCC9C7
+    color: #000
+    font-size: 0.7em
+    margin: 0 0 0.62em 0
+    padding: 3px 7px
+    text-decoration: none
+
+    &:hover
+      background: #e0ffe3
+      cursor: pointer
+
+    &:active
+      position: relative
+      top: 1px
+
+  .add_file_wrapper
+    margin: 0 0 0.62em 0
+
+  .choose_file
+    height: 16px
+    line-height: 16px
+
+    &:before
+      content: '\2B'
+      margin: 0 5px 0 0
+
+.link
+  font-size: 0.7em
+  margin: 0 10px 0 0

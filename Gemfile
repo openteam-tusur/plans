@@ -18,6 +18,7 @@ group :default do
   gem 'progress_bar',         :require => false
   gem 'rails'
   gem 'russian'
+  gem 'simple_form'
 end
 
 group :development do

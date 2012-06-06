@@ -6,3 +6,19 @@ ru:
   magistracy_prepare: Подготовка магистра
   specialty_prepare: Подготовка специалиста
 
+  activerecord:
+    errors:
+      models:
+        programm:
+          attributes:
+            vfs_path:
+              blank: файл не выбран
+
+    attributes:
+      programm:
+        description: Описание основной образовательной программы
+
+    models:
+      programm: программу
+
+
