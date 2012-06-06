@@ -18,7 +18,7 @@
   <% if resource.programm %>
     <%= render :file => 'programms/show.html.erb', :locals => { :resource => resource.programm } %>
   <% else %>
-    <a href='#' class='add_link' data-url='<%= new_year_speciality_subspeciality_programm_path(parent.year.number, parent.code, resource) %>'>Добавить программу</a>
+    <%= link_to 'Добавить прогорамму', new_year_speciality_subspeciality_programm_path(parent.year.number, parent.code, resource), :class => 'add_link', :remote => true %>
   <% end %>
 </h4>
 

@@ -1,3 +1,14 @@
+@remove_file = (wrapper, input, link) ->
+  wrapper.find('.remove_file').on 'click', ->
+    input.val('')
+    wrapper.find('.link').remove()
+    if wrapper.find('.choose_file').length
+      link.show()
+    else
+      link.appendTo(wrapper)
+      init_choose_file()
+    false
+
 @init_choose_file = () ->
   link = $('.choose_file')
   wrapper = link.parent()
@@ -13,18 +24,9 @@
 
     input.change ->
       file_url = input.val()
-      file_name = file_url.match(/([^\/.]+)(\.(.{3}))?$/)
-      remove_file(link, input, wrapper, file_url)
+      link.hide()
+      wrapper.prepend('<a href='+file_url+' class="link">Скачать файл ('+file_url.match(/([^\/.]+)(\.(.{3}))?$/)[0]+')</a><a href="#" class="remove_file link">Удалить</a>')
+      remove_file(wrapper, input, link)
       input.unbind('change')
 
     false
-
-remove_file = (link, input, wrapper, file_url) ->
-  link.hide()
-  wrapper.prepend('<a href='+file_url+' class="link">Скачать файл</a><a href="#" class="remove_file link">Удалить</a>')
-  wrapper.find('.remove_file').on 'click', ->
-    input.val('')
-    wrapper.find('.link').remove()
-    link.show()
-    false
-

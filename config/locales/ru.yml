@@ -5,6 +5,7 @@ ru:
   bachelor_prepare: Подготовка бакалавра
   magistracy_prepare: Подготовка магистра
   specialty_prepare: Подготовка специалиста
+  'Are you sure?': Вы уверены?
 
   activerecord:
     errors:
