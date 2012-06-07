@@ -14,7 +14,7 @@
   wrapper = link.parent()
 
   link.click ->
-    params = link.attr('params')
+    params = link.parent().find('input').attr('params')
     dialog = link.create_or_return_dialog('elfinder_picture_dialog')
     input  = link.parent().find('input')
     origin_id = input.attr('id')

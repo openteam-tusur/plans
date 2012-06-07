@@ -6,7 +6,8 @@
     <% else %>
       <%= link_to 'Выбрать файл', '#', :class => 'choose_file' %>
     <% end %>
-    <%= form.input :vfs_path, :as => :hidden %>
+
+    <%= form.input :vfs_path, :as => :hidden, :input_html => {:params => "vfs_path=/plans/#{@year.number}/#{t(@speciality.degree)}/#{@speciality.code}/#{@subspeciality.subdepartment.abbr}/#{@subspeciality.title}/ООП"}  %>
   </div>
   <%= form.submit :class => 'submit' %>
   <%= link_to "Отмена", resource_path, :remote => true if resource.persisted? %>
