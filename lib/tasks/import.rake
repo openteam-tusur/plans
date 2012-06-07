@@ -41,7 +41,7 @@ class YearImporter
         speciality.update_attributes! speciality_attributes.merge(:degree => degree)
         subspecialities_attributes.each do |subspeciality_attributes|
           subdepartment = year.subdepartments.find_by_abbr(subspeciality_attributes['subdepartment'])
-          subspeciality = speciality.subspecialities.find_or_initialize_by_title_and_subdepartment_id(:title => subspeciality_attributes['title'],
+          subspeciality = speciality.subspecialities.find_or_initialize_by_title_and_subdepartment_id(:title => subspeciality_attributes['title'].squish,
                                                                                                       :subdepartment_id => subdepartment.id)
           refresh subspeciality
           subspeciality.save! rescue p subspeciality_attributes['subdepartment']
@@ -57,15 +57,16 @@ class YearImporter
       title_node = xml.css('Титул').first
       year_number = title_node['ГодНачалаПодготовки'].to_i
       raise "Год не совпадает #{year_number} != #{year.number}!!!" if year_number != year.number
-      speciality_code = xml.css('Специальность')[0]['Название'].scan(/\d{6}.\d{2}/).first
+      speciality_full_name = xml.css('Специальность').map{|speciality_node| speciality_node['Название']}.join(' ')
+      speciality_code = speciality_full_name.scan(/\d{6}.\d{2}/).first
       speciality = year.specialities.find_by_code(speciality_code)
-      subspeciality_title = xml.css('Специальность')[1]['Название'].match(/"(.*)"/)[1].squish
+      subspeciality_title = speciality_full_name.match(/"(.*)"/)[1].squish
       subspeciality = speciality.subspecialities.find_by_title(subspeciality_title)
       xml.css('СтрокиПлана Строка').each do |discipline_xml|
         discipline = subspeciality.disciplines.find_or_initialize_by_title(discipline_xml['Дис'].squish)
         discipline.subdepartment = year.subdepartments.find_by_number((discipline_xml['Кафедра'] || title_node['КодКафедры']))
         cycle_abbr = discipline_xml['Цикл'].split('.').first
-        cycle = xml.css("АтрибутыЦиклов Цикл[Аббревиатура=#{cycle_abbr}]", "АтрибутыЦиклов Цикл[Абревиатура=#{cycle_abbr}]")[0]['Название']
+        cycle = xml.css("АтрибутыЦиклов Цикл[Аббревиатура='#{cycle_abbr}']", "АтрибутыЦиклов Цикл[Абревиатура=#{cycle_abbr}]")[0]['Название'].squish
         discipline.cycle = "#{cycle_abbr}. #{cycle}"
         refresh discipline
         discipline.save!
