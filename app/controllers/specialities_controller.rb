@@ -1,4 +1,6 @@
 class SpecialitiesController < ApplicationController
+  inherit_resources
+
   belongs_to :year, :finder => :find_by_number!
   defaults :finder => :find_by_code!
 

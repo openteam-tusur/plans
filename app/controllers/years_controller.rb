@@ -1,2 +1,0 @@
-class YearsController < ApplicationController
-end
