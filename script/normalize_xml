@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for file in `find data -name '*.xml'`; do
+  chmod a-x $file
+  xmllint --format --encode utf-8 $file --output $file
+done
