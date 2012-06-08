@@ -1,7 +1,7 @@
   <%= form.input :description %>
   <div class='add_file_wrapper'>
     <% if form.object.vfs_path? %>
-      <%= link_to "Скачать файл (#{form.object.vfs_path.match(/([^\/.]+)(\.(.{3}))?$/)})", form.object.vfs_path, :class => 'link' %>
+      <%= link_to "Скачать файл (#{URI.decode(form.object.vfs_path.match(/([^\/.]+)(\.(.{3}))?$/)[0])})", form.object.vfs_path, :class => 'link' %>
       <%= link_to "Удалить", '#', :class => 'link remove_file' %>
     <% else %>
       <%= link_to 'Выбрать файл', '#', :class => 'choose_file' %>
