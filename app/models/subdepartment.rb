@@ -2,6 +2,8 @@ class Subdepartment < ActiveRecord::Base
   attr_accessible :abbr, :title, :number
 
   belongs_to :department
+  has_many :subspecialities
+  has_many :disciplines
 
   validates_presence_of :title, :abbr, :number, :department
 end

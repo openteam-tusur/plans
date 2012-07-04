@@ -13,6 +13,8 @@ class Subspeciality < ActiveRecord::Base
 
   validates_presence_of :title, :speciality, :subdepartment
 
+  delegate :degree, :to => :speciality
+
   def warnings
     warnings = []
     warnings << "нет ООП" unless programm
