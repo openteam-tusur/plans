@@ -14,7 +14,7 @@ group :default do
   gem 'el_vfs_client'
   gem 'inherited_resources'
   gem 'nokogiri'
-  gem 'openteam-commons'
+  gem 'openteam-commons',     '>= 0.2.3'
   gem 'progress_bar',         :require => false
   gem 'rails'
   gem 'russian'
