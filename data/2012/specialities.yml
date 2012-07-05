@@ -64,7 +64,7 @@ bachelor:
     subspecialities:
       -
         subdepartment: "АОИ"
-        title: "Бизнес-информатика"
+        title: "Без профиля"
 
   -
     code: "081100.62"
@@ -72,7 +72,7 @@ bachelor:
     subspecialities:
       -
         subdepartment: "АОИ"
-        title: "Государственное и муниципальное управление"
+        title: "Без профиля"
 
   -
     code: "090900.62"
@@ -247,7 +247,7 @@ bachelor:
     subspecialities:
       -
         subdepartment: "АОИ"
-        title: "Программная инженерия"
+        title: "Без профиля"
 
   -
     code: "230700.62"
