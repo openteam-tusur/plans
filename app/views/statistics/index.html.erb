@@ -30,8 +30,8 @@
           <%= department.title %>
         </td>
       </tr>
-      <% department.subdepartments.each do |subdepartment| %>
-        <% subspecialities = subdepartment.subspecialities %>
+      <% department.subdepartments.actual.each do |subdepartment| %>
+        <% subspecialities = subdepartment.subspecialities.actual %>
         <% grouped_subspecialities = subspecialities.group_by(&:degree) %>
         <tr>
           <td class='subdepartment_title'>

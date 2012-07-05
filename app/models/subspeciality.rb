@@ -14,6 +14,7 @@ class Subspeciality < ActiveRecord::Base
   validates_presence_of :title, :speciality, :subdepartment
 
   delegate :degree, :to => :speciality
+  scope :actual, where(:deleted_at => nil)
 
   def warnings
     warnings = []

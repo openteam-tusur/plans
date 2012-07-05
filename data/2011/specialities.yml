@@ -249,7 +249,7 @@ bachelor:
     subspecialities:
       -
         subdepartment: "АОИ"
-        title: "Без профиля:"
+        title: "Без профиля"
 
   -
     code: "230700.62"
