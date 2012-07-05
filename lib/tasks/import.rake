@@ -2,6 +2,35 @@
 
 require 'progress_bar'
 
+module PlanImporter
+  def self.import_plan_from_file(file_path, year)
+    xml = Nokogiri::XML(File.new(file_path))
+    title_node = xml.css('Титул').first
+    year_number = title_node['ГодНачалаПодготовки'].to_i
+    raise "Год не совпадает #{year_number} != #{year.number}!!!" if year_number != year.number
+    speciality_full_name = xml.css('Специальность').map{|speciality_node| speciality_node['Название']}.join(' ')
+    speciality_code = speciality_full_name.scan(/\d{6}.\d{2}/).first
+    speciality = year.specialities.find_by_code(speciality_code)
+    raise "нет специальности с кодом #{speciality_code} в year_number году" unless speciality
+    subspeciality_title = speciality_full_name.match(/"(.*)"/) ? speciality_full_name.match(/"(.*)"/)[1].squish : "Без профиля"
+    subspeciality = speciality.subspecialities.find_by_title(subspeciality_title)
+    raise "нет профиля #{subspeciality_title} для специальности #{speciality_code} в #{year_number} года" unless subspeciality
+    xml.css('СтрокиПлана Строка').each do |discipline_xml|
+      discipline = subspeciality.disciplines.find_or_initialize_by_title(discipline_xml['Дис'].squish)
+      discipline.subdepartment = year.subdepartments.find_by_number((discipline_xml['Кафедра'] || title_node['КодКафедры']))
+      cycle_abbr = discipline_xml['Цикл'].split('.').first
+      cycle = xml.css("АтрибутыЦиклов Цикл[Аббревиатура='#{cycle_abbr}']", "АтрибутыЦиклов Цикл[Абревиатура=#{cycle_abbr}]")[0]['Название'].squish
+      discipline.cycle = "#{cycle_abbr}. #{cycle}"
+      refresh discipline
+      discipline.save!
+    end
+  end
+
+  def self.refresh(object)
+    object.deleted_at = nil
+  end
+end
+
 class YearImporter
   attr_accessor :year, :bar
 
@@ -53,24 +82,7 @@ class YearImporter
 
   def import_plans
     Dir.glob("data/#{year.number}/plans/*/*/*.xml") do |file_path|
-      xml = Nokogiri::XML(File.new(file_path))
-      title_node = xml.css('Титул').first
-      year_number = title_node['ГодНачалаПодготовки'].to_i
-      raise "Год не совпадает #{year_number} != #{year.number}!!!" if year_number != year.number
-      speciality_full_name = xml.css('Специальность').map{|speciality_node| speciality_node['Название']}.join(' ')
-      speciality_code = speciality_full_name.scan(/\d{6}.\d{2}/).first
-      speciality = year.specialities.find_by_code(speciality_code)
-      subspeciality_title = speciality_full_name.match(/"(.*)"/)[1].squish
-      subspeciality = speciality.subspecialities.find_by_title(subspeciality_title)
-      xml.css('СтрокиПлана Строка').each do |discipline_xml|
-        discipline = subspeciality.disciplines.find_or_initialize_by_title(discipline_xml['Дис'].squish)
-        discipline.subdepartment = year.subdepartments.find_by_number((discipline_xml['Кафедра'] || title_node['КодКафедры']))
-        cycle_abbr = discipline_xml['Цикл'].split('.').first
-        cycle = xml.css("АтрибутыЦиклов Цикл[Аббревиатура='#{cycle_abbr}']", "АтрибутыЦиклов Цикл[Абревиатура=#{cycle_abbr}]")[0]['Название'].squish
-        discipline.cycle = "#{cycle_abbr}. #{cycle}"
-        refresh discipline
-        discipline.save!
-      end
+      PlanImporter.import_plan_from_file(file_path, year)
       bar.increment!
     end
   end
@@ -103,4 +115,12 @@ task :sync => :environment do
     year.update_attribute :deleted_at, nil
     YearImporter.new(year, bar).import
   end
+end
+
+
+desc "Загрузка учебного плана"
+task :import_plan => :environment do
+  year = Year.find_by_number(ENV['FILE_PATH'].match(/\b\d{4}\b/)[0])
+  raise "нет такого года" unless year
+  PlanImporter.import_plan_from_file(ENV['FILE_PATH'], year)
 end
