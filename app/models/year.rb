@@ -8,9 +8,19 @@ class Year < ActiveRecord::Base
   has_many :subspecialities, :through => :specialities
 
   validates_presence_of :number
+  after_save :move_descendants_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
 
   def to_param
     number
+  end
+
+  private
+
+  def move_descendants_to_trash
+    departments.update_all(:deleted_at =>  Time.now)
+    specialities.update_all(:deleted_at => Time.now)
+    subdepartments.update_all(:deleted_at => Time.now)
+    subspecialities.update_all(:deleted_at => Time.now)
   end
 end
 #--
