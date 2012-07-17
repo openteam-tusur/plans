@@ -47,6 +47,21 @@ ru:
           course_work: КР
           course_projecting: КП
 
+      loading:
+        kind_enum:
+          csr: Контроль самостоятельной работы
+          exam: Подготовка к экзамену
+          srs: Самостоятельная работа
+          lecture: Лекций
+          lab: Лабораторных
+          practice: Практик
+        kind_abbrs:
+          csr: КСР
+          exam: ЧасЭкз
+          srs: СРС
+          lecture: Лек
+          lab: Лаб
+          practice: Пр
 
     models:
       didactic_unit: Дидактическая единица

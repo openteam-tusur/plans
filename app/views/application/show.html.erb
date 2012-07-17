@@ -25,9 +25,19 @@
 <table>
   <thead>
     <tr>
-      <th>Название дисциплины</th>
+      <th rowspan=2>Название дисциплины</th>
       <% Check.human_enum_values(:kind).each do |kind, caption| %>
-        <th><%= caption %></th>
+        <th rowspan=2><%= caption %></th>
+      <% end %>
+      <% resource.semesters.each do |semester| %>
+        <th colspan=<%= Loading.enum_values(:kind).size %>><%= semester.number %> семестр</th>
+      <% end %>
+    </tr>
+    <tr>
+      <% resource.semesters.each do |semester| %>
+        <% Loading.enum_values(:kind).each do |kind| %>
+          <th><%= I18n.t kind, :scope => "activerecord.attributes.loading.kind_abbrs" %></th>
+        <% end %>
       <% end %>
     </tr>
   </thead>
@@ -36,7 +46,7 @@
     <% resource.disciplines.group_by(&:cycle).each do |cycle, disciplines| %>
       <% cycles[cycle] = I18n.transliterate(cycle).downcase.gsub(/[^[:alnum:]]+/, '_') %>
       <tr>
-        <th colspan=5><h4 id='<%= cycles[cycle] %>'><%= cycle %></h4></th>
+        <th colspan=5+resource.semesters.count*Loading.enum_values(:kind).size><h4 id='<%= cycles[cycle] %>'><%= cycle %></h4></th>
       </tr>
       <% disciplines.sort_by{|obj| obj.title}.each do |discipline| %>
         <tr>
@@ -47,6 +57,11 @@
         <% Check.enum_values(:kind).each do |kind| %>
           <td><%= discipline.checks.where(:kind => kind).map(&:semester).map(&:number).join(', ') %></td>
         <% end %>
+        <% resource.semesters.each do |semester| %>
+          <% Loading.enum_values(:kind).each do |kind| %>
+            <td><%= discipline.loadings.find_by_semester_id_and_kind(semester.id, kind).try(&:value) %></td>
+          <% end %>
+      <% end %>
       </tr>
       <% end %>
     <% end %>
@@ -63,4 +78,3 @@
   </ul>
 </div>
 
-</ul>

@@ -5,6 +5,7 @@ require 'spec_helper'
 
 describe Discipline do
   it { should have_many :checks }
+  it { should have_many :loadings }
   it { should validate_presence_of :title }
   it { should validate_presence_of :subspeciality }
   it { should validate_presence_of :subdepartment }
@@ -14,8 +15,10 @@ describe Discipline do
   let(:check) { Fabricate(:check) }
 
   it "when set deleted_at" do
+    loading = check.discipline.loadings.create(:semester => check.semester, :value => 10, :kind => 'lecture')
     check.discipline.update_attribute(:deleted_at, Time.now)
     check.reload.deleted_at.should_not be_nil
+    loading.reload.deleted_at.should_not be_nil
   end
 
 end

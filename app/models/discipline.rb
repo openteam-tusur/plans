@@ -6,6 +6,7 @@ class Discipline < ActiveRecord::Base
 
   has_one :programm, :as => :with_programm
   has_many :checks, :dependent => :destroy
+  has_many :loadings, :dependent => :destroy
 
   scope :actual, where(:deleted_at => nil)
 
@@ -13,10 +14,11 @@ class Discipline < ActiveRecord::Base
 
   alias_attribute :deleted?, :deleted_at?
 
-  after_save :move_checks_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
+  after_save :move_descendants_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
 
-  def move_checks_to_trash
+  def move_descendants_to_trash
     checks.update_all(:deleted_at => Time.now)
+    loadings.update_all(:deleted_at => Time.now)
   end
 end
 #--

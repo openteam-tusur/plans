@@ -26,10 +26,18 @@ class Subspeciality < ActiveRecord::Base
     warnings
   end
 
-
   def move_descendants_to_trash
     disciplines.update_all(:deleted_at => Time.now)
     semesters.update_all(:deleted_at => Time.now)
+  end
+
+  def create_or_refresh_semester(number_str)
+    number = number_str.to_i
+    return nil unless number > 0
+    semester = semesters.find_or_initialize_by_number(number)
+    semester.deleted_at = nil
+    semester.save!
+    semester
   end
 end
 #--
