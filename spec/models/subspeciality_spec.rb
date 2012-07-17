@@ -12,7 +12,9 @@ describe Subspeciality do
   let(:discipline) { Fabricate(:discipline) }
 
   it "when set deleted_at" do
+    semester = discipline.subspeciality.semesters.create(:number => 1)
     discipline.subspeciality.update_attribute(:deleted_at, Time.now)
     discipline.reload.deleted_at.should_not be_nil
+    semester.reload.deleted_at.should_not be_nil
   end
 end

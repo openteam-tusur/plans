@@ -17,7 +17,7 @@ module PlanImporter
     raise "нет специальности с кодом #{speciality_code} в year_number году" unless speciality
     subspeciality_title = speciality_full_name.match(/"(.*)"/) ? speciality_full_name.match(/"(.*)"/)[1].squish : speciality.degree == 'specialty' ? "Без специализации" : "Без профиля"
     subspeciality = speciality.subspecialities.find_by_title(subspeciality_title)
-    subspeciality.move_disciplines_to_trash
+    subspeciality.move_descendants_to_trash
     raise "нет профиля #{subspeciality_title} для специальности #{speciality_code} в #{year_number} года" unless subspeciality
     xml.css('СтрокиПлана Строка').each do |discipline_xml|
       discipline = subspeciality.disciplines.find_or_initialize_by_title(discipline_xml['Дис'].squish)
@@ -27,6 +27,21 @@ module PlanImporter
       discipline.cycle = "#{cycle_abbr}. #{cycle}"
       refresh discipline
       discipline.save!
+      Check.enum_values(:kind).each do |kind|
+        kind_abbr = I18n.t kind, :scope => "activerecord.attributes.check.kind_abbrs"
+        semester_numbers = discipline_xml["Сем#{kind_abbr}"]
+        next unless semester_numbers
+        semester_numbers.each_char do |semester_number|
+          i_semester_number = semester_number.to_i
+          next unless i_semester_number > 0
+          semester = subspeciality.semesters.find_or_initialize_by_number(i_semester_number)
+          refresh semester
+          semester.save
+          check = discipline.checks.where(:semester_id => semester, :kind => kind).first || discipline.checks.build(:semester => semester, :kind => kind)
+          refresh check
+          check.save
+        end
+      end
     end
   end
 

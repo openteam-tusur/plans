@@ -12,6 +12,7 @@ end
 group :default do
   gem 'attribute_normalizer'
   gem 'el_vfs_client'
+  gem 'has_enum'
   gem 'inherited_resources'
   gem 'nokogiri'
   gem 'openteam-commons',     '>= 0.2.3'

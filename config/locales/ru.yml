@@ -35,6 +35,19 @@ ru:
       programm:
         description: Описание основной образовательной программы
 
+      check:
+        kind_enum:
+          exam: Экзамен
+          end_of_term: Зачет
+          course_work: Курсовая работа
+          course_projecting: Курсовое проектирование
+        kind_abbrs:
+          exam: Экз
+          end_of_term: Зач
+          course_work: КР
+          course_projecting: КП
+
+
     models:
       didactic_unit: Дидактическая единица
       gos: Государственный образовательный стандарт

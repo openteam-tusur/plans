@@ -22,21 +22,36 @@
   <% end %>
 </h4>
 
-<ul class='disciplines'>
-  <% cycles = {} %>
-  <% resource.disciplines.group_by(&:cycle).each do |cycle, disciplines| %>
-    <% cycles[cycle] = I18n.transliterate(cycle).downcase.gsub(/[^[:alnum:]]+/, '_') %>
-    <li>
-      <h4 id='<%= cycles[cycle] %>'><%= cycle %></h4>
-      <ul>
-        <% disciplines.sort_by{|obj| obj.title}.each do |discipline| %>
-          <li <%= " class='deleted'" if discipline.deleted? %>>
-            <%= discipline.title %>
-          </li>
+<table>
+  <thead>
+    <tr>
+      <th>Название дисциплины</th>
+      <% Check.human_enum_values(:kind).each do |kind, caption| %>
+        <th><%= caption %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% cycles = {} %>
+    <% resource.disciplines.group_by(&:cycle).each do |cycle, disciplines| %>
+      <% cycles[cycle] = I18n.transliterate(cycle).downcase.gsub(/[^[:alnum:]]+/, '_') %>
+      <tr>
+        <th colspan=5><h4 id='<%= cycles[cycle] %>'><%= cycle %></h4></th>
+      </tr>
+      <% disciplines.sort_by{|obj| obj.title}.each do |discipline| %>
+        <tr>
+
+        <td <%= " class='deleted'" if discipline.deleted? %>>
+          <%= discipline.title %>
+        </td>
+        <% Check.enum_values(:kind).each do |kind| %>
+          <td><%= discipline.checks.where(:kind => kind).map(&:semester).map(&:number).join(', ') %></td>
         <% end %>
-      </ul>
-    </li>
-  <% end %>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
 
 <div class="submenu">
   <h6>Циклы обучения</h6>

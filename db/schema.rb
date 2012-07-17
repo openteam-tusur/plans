@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120716080214) do
+ActiveRecord::Schema.define(:version => 20120717031313) do
+
+  create_table "checks", :force => true do |t|
+    t.integer  "semester_id"
+    t.integer  "discipline_id"
+    t.string   "kind"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.datetime "deleted_at"
+  end
+
+  add_index "checks", ["discipline_id"], :name => "index_checks_on_discipline_id"
+  add_index "checks", ["semester_id"], :name => "index_checks_on_semester_id"
 
   create_table "departments", :force => true do |t|
     t.string   "title"
@@ -66,6 +78,16 @@ ActiveRecord::Schema.define(:version => 20120716080214) do
 
   add_index "programms", ["with_programm_id"], :name => "index_programms_on_with_programm_id"
   add_index "programms", ["with_programm_type"], :name => "index_programms_on_with_programm_type"
+
+  create_table "semesters", :force => true do |t|
+    t.integer  "subspeciality_id"
+    t.integer  "number"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.datetime "deleted_at"
+  end
+
+  add_index "semesters", ["subspeciality_id"], :name => "index_semesters_on_subspeciality_id"
 
   create_table "specialities", :force => true do |t|
     t.string   "code"

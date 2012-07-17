@@ -65,6 +65,8 @@ GEM
     fabrication (2.1.0)
     fattr (2.2.1)
     fssm (0.2.9)
+    has_enum (0.10.1)
+      rails (> 3.0.0)
     has_scope (0.5.1)
     highline (1.6.12)
     hike (1.2.1)
@@ -186,6 +188,7 @@ DEPENDENCIES
   compass-rails
   el_vfs_client
   fabrication
+  has_enum
   inherited_resources
   jquery-rails
   nokogiri
