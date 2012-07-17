@@ -1,11 +1,21 @@
 ru:
+  'are_you_sure?': Вы уверены?
   bachelor: Бакалавриат
-  magistracy: Магистратура
-  specialty: Специалитет
   bachelor_prepare: Подготовка бакалавра
+  magistracy: Магистратура
   magistracy_prepare: Подготовка магистра
+  specialty: Специалитет
   specialty_prepare: Подготовка специалиста
-  'Are you sure?': Вы уверены?
+
+  new_gos: Добавление ГОС'а
+  create_gos: Добавление ГОС'а
+  edit_gos: Редактирование ГОС'а
+  update_gos: Редактирование ГОС'а
+
+  new_didactic_unit: Добавление дидактической единицы
+  create_didactic_unit: Добавление дидактической единицы
+  edit_didactic_unit: Редактирование дидактической единицы
+  update_didactic_unit: Редактирование дидактической единицы
 
   activerecord:
     errors:
@@ -16,10 +26,16 @@ ru:
               blank: файл не выбран
 
     attributes:
+      didactic_unit:
+        discipline: Дисциплина
+        content: Содержимое
+      gos:
+        speciality: Название специальности
+        code: Код специальности
       programm:
         description: Описание основной образовательной программы
 
     models:
+      didactic_unit: Дидактическая единица
+      gos: Государственный образовательный стандарт
       programm: программу
-
-

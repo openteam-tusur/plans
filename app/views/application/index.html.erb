@@ -1,5 +1,6 @@
 <div class="additional_links">
   <%= link_to "Статистика по кафедрам", year_statistics_path(@year.number) %>
+  <%= link_to "ГОС'ы", goses_path %>
 </div>
 <% degrees = {} %>
 <% collection.group_by(&:degree).each do |degree, specialities| %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120604101759) do
+ActiveRecord::Schema.define(:version => 20120716080214) do
 
   create_table "departments", :force => true do |t|
     t.string   "title"
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(:version => 20120604101759) do
 
   add_index "departments", ["year_id"], :name => "index_departments_on_year_id"
 
+  create_table "didactic_units", :force => true do |t|
+    t.integer  "gos_id"
+    t.string   "discipline"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "didactic_units", ["gos_id"], :name => "index_didactic_units_on_gos_id"
+
   create_table "disciplines", :force => true do |t|
     t.string   "title"
     t.string   "cycle"
@@ -37,6 +47,13 @@ ActiveRecord::Schema.define(:version => 20120604101759) do
 
   add_index "disciplines", ["subdepartment_id"], :name => "index_disciplines_on_subdepartment_id"
   add_index "disciplines", ["subspeciality_id"], :name => "index_disciplines_on_subspeciality_id"
+
+  create_table "goses", :force => true do |t|
+    t.text     "speciality"
+    t.string   "code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "programms", :force => true do |t|
     t.integer  "with_programm_id"

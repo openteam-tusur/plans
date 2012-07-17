@@ -1,0 +1,15 @@
+<p>
+  <%= link_to "&larr;&nbsp;Назад к ГОС'у (#{parent})".html_safe, parent_path %>
+</p>
+
+<h1>Дидактическая единица</h1>
+
+<div class="actions">
+  <%= link_to 'Редактировать', edit_resource_path %>
+  <%= link_to 'Удалить', [parent, resource], :confirm => t('are_you_sure?'), :method => :delete %>
+</div>
+<h2><%= resource %></h2>
+
+<p>
+  <%= resource.content %>
+</p>

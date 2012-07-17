@@ -1,0 +1,17 @@
+<p>
+  <%= link_to '&larr;&nbsp;К списку специальностей'.html_safe, root_path  %>
+</p>
+
+<h1>Государственные общеобразовательные стандарты</h1>
+
+<%= link_to 'Добавить ГОС', new_gos_path %>
+
+<ul>
+  <% collection.each do |item| %>
+    <h4>
+      <li class="gos">
+        <%= link_to item, item %>
+      </li>
+    </h4>
+  <% end %>
+</ul>

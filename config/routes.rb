@@ -8,6 +8,10 @@ Plans::Application.routes.draw do
     end
   end
 
+  resources :goses do
+    resources :didactic_units, :except => :index
+  end
+
   root :to => 'specialities#index'
   mount ElVfsClient::Engine => '/'
 end

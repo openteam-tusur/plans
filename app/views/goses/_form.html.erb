@@ -1,0 +1,10 @@
+<h1><%= t("#{action_name}_#{resource_class.name.underscore}") %></h1>
+
+<%= simple_form_for resource do |f| %>
+  <%= f.input :speciality %>
+  <%= f.input :code %>
+  <%= f.submit %>
+  или
+  <%= link_to 'Отмена', smart_resource_url %>
+<% end %>
+
