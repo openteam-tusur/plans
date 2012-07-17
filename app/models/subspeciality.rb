@@ -13,7 +13,7 @@ class Subspeciality < ActiveRecord::Base
 
   validates_presence_of :title, :speciality, :subdepartment
 
-  after_save :move_discipline_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
+  after_save :move_disciplines_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
 
   delegate :degree, :to => :speciality
   scope :actual, where(:deleted_at => nil)
@@ -26,9 +26,7 @@ class Subspeciality < ActiveRecord::Base
   end
 
 
-  private
-
-  def move_discipline_to_trash
+  def move_disciplines_to_trash
     disciplines.update_all(:deleted_at => Time.now)
   end
 end

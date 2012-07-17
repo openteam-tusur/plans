@@ -30,7 +30,7 @@
       <h4 id='<%= cycles[cycle] %>'><%= cycle %></h4>
       <ul>
         <% disciplines.sort_by{|obj| obj.title}.each do |discipline| %>
-          <li>
+          <li <%= " class='deleted'" if discipline.deleted? %>>
             <%= discipline.title %>
           </li>
         <% end %>

@@ -3,6 +3,9 @@
 require 'progress_bar'
 
 module PlanImporter
+  #def self.import_plan_from_file(file_path, year)
+  #end
+
   def self.import_plan_from_file(file_path, year)
     xml = Nokogiri::XML(File.new(file_path))
     title_node = xml.css('Титул').first
@@ -12,8 +15,9 @@ module PlanImporter
     speciality_code = speciality_full_name.scan(/\d{6}.\d{2}/).first
     speciality = year.specialities.find_by_code(speciality_code)
     raise "нет специальности с кодом #{speciality_code} в year_number году" unless speciality
-    subspeciality_title = speciality_full_name.match(/"(.*)"/) ? speciality_full_name.match(/"(.*)"/)[1].squish : "Без профиля"
+    subspeciality_title = speciality_full_name.match(/"(.*)"/) ? speciality_full_name.match(/"(.*)"/)[1].squish : speciality.degree == 'specialty' ? "Без специализации" : "Без профиля"
     subspeciality = speciality.subspecialities.find_by_title(subspeciality_title)
+    subspeciality.move_disciplines_to_trash
     raise "нет профиля #{subspeciality_title} для специальности #{speciality_code} в #{year_number} года" unless subspeciality
     xml.css('СтрокиПлана Строка').each do |discipline_xml|
       discipline = subspeciality.disciplines.find_or_initialize_by_title(discipline_xml['Дис'].squish)
@@ -115,6 +119,15 @@ task :sync => :environment do
     year.update_attribute :deleted_at, nil
     YearImporter.new(year, bar).import
   end
+end
+
+desc "Синхронизация года"
+task :sync_year => :environment do
+  year_number = ENV['year']
+  bar = ProgressBar.new Dir.glob("data/#{year_number}/*.{xml,yml}").count
+  year = Year.find_or_create_by_number(year_number)
+  year.move_descendants_to_trash
+  YearImporter.new(year, bar).import
 end
 
 

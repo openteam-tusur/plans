@@ -14,8 +14,6 @@ class Year < ActiveRecord::Base
     number
   end
 
-  private
-
   def move_descendants_to_trash
     departments.update_all(:deleted_at =>  Time.now)
     specialities.update_all(:deleted_at => Time.now)
