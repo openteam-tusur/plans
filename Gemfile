@@ -11,11 +11,13 @@ end
 
 group :default do
   gem 'attribute_normalizer'
+  gem 'default_value_for'
   gem 'el_vfs_client'
   gem 'has_enum'
   gem 'inherited_resources'
   gem 'nokogiri'
   gem 'openteam-commons',     '>= 0.2.3'
+  gem 'prawn'
   gem 'progress_bar',         :require => false
   gem 'rails'
   gem 'russian'

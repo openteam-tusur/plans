@@ -1,17 +1,17 @@
 <p>
-  <%= link_to '&larr;&nbsp;К списку специальностей'.html_safe, year_specialities_path(resource.speciality.year.number)  %>
+  <%= link_to '&larr;&nbsp;К списку специальностей'.html_safe, year_specialities_path(resource.speciality.year.number) %>
 </p>
 
 <h1>Образовательная программа</h1>
 
 <h2>
-<%= resource.speciality.code %>
-<%= resource.speciality.title %><br/>
+  <%= resource.speciality.code %>
+  <%= resource.speciality.title %><br/>
 </h2>
 
 <h3><%= t "#{resource.speciality.degree}_prepare" %></h3>
 <h4><%= resource.title %></h4>
-<h4>Выпускающая кафедра <%= resource.subdepartment.abbr %><br/></h4>
+<h4>Профилирующая кафедра <%= resource.subdepartment.abbr %><br/></h4>
 <h4>Год набора <%= resource.speciality.year.number %></h4>
 
 <h4 class='programm'>
@@ -22,59 +22,30 @@
   <% end %>
 </h4>
 
-<table>
-  <thead>
-    <tr>
-      <th rowspan=2>Название дисциплины</th>
-      <% Check.human_enum_values(:kind).each do |kind, caption| %>
-        <th rowspan=2><%= caption %></th>
-      <% end %>
-      <% resource.semesters.each do |semester| %>
-        <th colspan=<%= Loading.enum_values(:kind).size %>><%= semester.number %> семестр</th>
-      <% end %>
-    </tr>
-    <tr>
-      <% resource.semesters.each do |semester| %>
-        <% Loading.enum_values(:kind).each do |kind| %>
-          <th><%= I18n.t kind, :scope => "activerecord.attributes.loading.kind_abbrs" %></th>
+<ul class='disciplines'>
+  <% cycles = {} %>
+  <% resource.disciplines.group_by(&:cycle).each do |cycle, disciplines| %>
+    <% cycles[cycle] = I18n.transliterate(cycle).downcase.gsub(/[^[:alnum:]]+/, '_') %>
+    <li>
+      <h4 id='<%= cycles[cycle] %>'><%= cycle %></h4>
+      <ul>
+        <% disciplines.sort_by{|obj| obj.title}.each do |discipline| %>
+          <li <%= " class='deleted'" if discipline.deleted? %>>
+            <%= link_to discipline.title, year_speciality_subspeciality_discipline_work_programms_path(@year, @speciality, resource, discipline)  %>
+          </li>
         <% end %>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% cycles = {} %>
-    <% resource.disciplines.group_by(&:cycle).each do |cycle, disciplines| %>
-      <% cycles[cycle] = I18n.transliterate(cycle).downcase.gsub(/[^[:alnum:]]+/, '_') %>
-      <tr>
-        <th colspan=5+resource.semesters.count*Loading.enum_values(:kind).size><h4 id='<%= cycles[cycle] %>'><%= cycle %></h4></th>
-      </tr>
-      <% disciplines.sort_by{|obj| obj.title}.each do |discipline| %>
-        <tr>
+      </ul>
+    </li>
+  <% end %>
 
-        <td <%= " class='deleted'" if discipline.deleted? %>>
-          <%= discipline.title %>
-        </td>
-        <% Check.enum_values(:kind).each do |kind| %>
-          <td><%= discipline.checks.where(:kind => kind).map(&:semester).map(&:number).join(', ') %></td>
-        <% end %>
-        <% resource.semesters.each do |semester| %>
-          <% Loading.enum_values(:kind).each do |kind| %>
-            <td><%= discipline.loadings.find_by_semester_id_and_kind(semester.id, kind).try(&:value) %></td>
-          <% end %>
+  <div class="submenu">
+    <h6>Циклы обучения</h6>
+    <ul>
+      <% cycles.each do |cycle, anchor| %>
+        <li><a href='#<%= anchor %>'><%= cycle %></a></li>
       <% end %>
-      </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+      <li>&uarr;&nbsp;<a href='#top'>Наверх</a>&nbsp;&uarr;</li>
+    </ul>
+  </div>
 
-<div class="submenu">
-  <h6>Циклы обучения</h6>
-  <ul>
-    <% cycles.each do |cycle, anchor| %>
-      <li><a href='#<%= anchor %>'><%= cycle %></a></li>
-    <% end %>
-    <li>&uarr;&nbsp;<a href='#top'>Наверх</a>&nbsp;&uarr;</li>
-  </ul>
-</div>
-
+</ul>

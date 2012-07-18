@@ -4,6 +4,9 @@ Plans::Application.routes.draw do
     resources :specialities, :id => /.*/, :only => :index do
       resources :subspecialities, :only => :show do
         resource :programm
+        resources :disciplines, :only => [] do
+          resources :work_programms
+        end
       end
     end
   end

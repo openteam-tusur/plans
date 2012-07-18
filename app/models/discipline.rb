@@ -7,6 +7,7 @@ class Discipline < ActiveRecord::Base
   has_one :programm, :as => :with_programm
   has_many :checks, :dependent => :destroy
   has_many :loadings, :dependent => :destroy
+  has_many :work_programms, :dependent => :destroy
 
   scope :actual, where(:deleted_at => nil)
 
