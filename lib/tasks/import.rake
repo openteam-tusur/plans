@@ -22,7 +22,9 @@ module PlanImporter
     xml.css('СтрокиПлана Строка').each do |discipline_xml|
       discipline = subspeciality.disciplines.find_or_initialize_by_title(discipline_xml['Дис'].squish)
       discipline.subdepartment = year.subdepartments.find_by_number((discipline_xml['Кафедра'] || title_node['КодКафедры']))
-      cycle_abbr = discipline_xml['Цикл'].split('.').first
+      cycle_value = discipline_xml['Цикл']
+      next unless cycle_value
+      cycle_abbr = cycle_value.split('.').first
       cycle = xml.css("АтрибутыЦиклов Цикл[Аббревиатура='#{cycle_abbr}']", "АтрибутыЦиклов Цикл[Абревиатура=#{cycle_abbr}]")[0]['Название'].squish
       discipline.cycle = "#{cycle_abbr}. #{cycle}"
       refresh discipline
