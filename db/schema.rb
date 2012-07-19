@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120719052731) do
+ActiveRecord::Schema.define(:version => 20120719053721) do
 
   create_table "checks", :force => true do |t|
     t.integer  "semester_id"
@@ -135,8 +135,9 @@ ActiveRecord::Schema.define(:version => 20120719052731) do
     t.integer  "speciality_id"
     t.integer  "subdepartment_id"
     t.datetime "deleted_at"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "graduate_subdepartment_id"
   end
 
   add_index "subspecialities", ["speciality_id"], :name => "index_subspecialities_on_speciality_id"

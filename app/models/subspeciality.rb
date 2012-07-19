@@ -1,12 +1,13 @@
 # encoding: utf-8
 
 class Subspeciality < ActiveRecord::Base
-  attr_accessible :title, :subdepartment_id
+  attr_accessible :title, :subdepartment_id, :graduate_subdepartment_id
 
   alias_attribute :deleted?, :deleted_at?
 
   belongs_to :speciality
   belongs_to :subdepartment
+  belongs_to :graduate_subdepartment, :class_name => 'Subdepartment'
 
   has_one :programm, :as => :with_programm
   has_many :disciplines, :dependent => :destroy
@@ -45,13 +46,14 @@ end
 #++
 # Table name: subspecialities
 #
-# * id               :integer         not null
-#   title            :string(255)
-#   speciality_id    :integer
-#   subdepartment_id :integer
-#   deleted_at       :datetime
-#   created_at       :datetime        not null
-#   updated_at       :datetime        not null
+# * id                        :integer         not null
+#   title                     :string(255)
+#   speciality_id             :integer
+#   subdepartment_id          :integer
+#   deleted_at                :datetime
+#   created_at                :datetime        not null
+#   updated_at                :datetime        not null
+#   graduate_subdepartment_id :integer
 #
 #  Indexes:
 #   index_subspecialities_on_speciality_id  speciality_id

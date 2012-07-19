@@ -102,8 +102,10 @@ class YearImporter
         speciality.update_attributes! speciality_attributes.merge(:degree => degree)
         subspecialities_attributes.each do |subspeciality_attributes|
           subdepartment = year.subdepartments.find_by_abbr(subspeciality_attributes['subdepartment'])
+          graduate_subdepartment = year.subdepartments.find_by_abbr(subspeciality_attributes['graduate_subdepartment'] || subspeciality_attributes['subdepartment'])
           subspeciality = speciality.subspecialities.find_or_initialize_by_title_and_subdepartment_id(:title => subspeciality_attributes['title'].squish,
                                                                                                       :subdepartment_id => subdepartment.id)
+          subspeciality.graduate_subdepartment = graduate_subdepartment
           refresh subspeciality
           subspeciality.save! rescue p subspeciality_attributes['subdepartment']
         end
@@ -152,7 +154,7 @@ end
 desc "Синхронизация года"
 task :sync_year => :environment do
   year_number = ENV['year']
-  bar = ProgressBar.new Dir.glob("data/#{year_number}/*.{xml,yml}").count
+  bar = ProgressBar.new Dir.glob("data/#{year_number}/**/*.{xml,yml}").count
   year = Year.find_or_create_by_number(year_number)
   year.move_descendants_to_trash
   YearImporter.new(year, bar).import
