@@ -64,6 +64,7 @@ end
 #   updated_at       :datetime        not null
 #   summ_loading     :integer
 #   summ_srs         :integer
+#   code             :string(255)
 #
 #  Indexes:
 #   index_disciplines_on_subdepartment_id  subdepartment_id

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120719050818) do
+ActiveRecord::Schema.define(:version => 20120719052731) do
 
   create_table "checks", :force => true do |t|
     t.integer  "semester_id"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20120719050818) do
     t.datetime "updated_at",       :null => false
     t.integer  "summ_loading"
     t.integer  "summ_srs"
+    t.string   "code"
   end
 
   add_index "disciplines", ["subdepartment_id"], :name => "index_disciplines_on_subdepartment_id"
