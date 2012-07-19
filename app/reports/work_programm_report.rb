@@ -25,7 +25,7 @@ class WorkProgrammReport < Prawn::Document
     loaded_semesters = @work_programm.discipline.loaded_semesters
 
     discipline_title_cell = make_cell(:content => "По дисциплине", :width => 140)
-    discipline_title_table = [[discipline_title_cell, "#{@work_programm.discipline.title}"]]
+    discipline_title_table = [[discipline_title_cell, "#{@work_programm.discipline.title} (#{@work_programm.discipline.code})"]]
     table(discipline_title_table, :cell_style => {:border_color => "FFFFFF"})
 
     discipline_speciality_cell = make_cell(:content => "Для специальности", :width => 140)
