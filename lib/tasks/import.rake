@@ -29,7 +29,7 @@ module PlanImporter
       discipline.summ_srs = discipline_xml['СР']
       refresh discipline
       discipline.save!
-      Check.enum_values(:kind).each do |kind|
+      Check.enum_values(:check_kind).each do |kind|
         kind_abbr = I18n.t kind, :scope => "activerecord.attributes.check.kind_abbrs"
         semester_numbers = discipline_xml["Сем#{kind_abbr}"]
         next unless semester_numbers
@@ -44,7 +44,7 @@ module PlanImporter
       discipline_xml.css('Сем').each do |loading_xml|
         semester = subspeciality.create_or_refresh_semester(loading_xml['Ном'])
         next unless semester
-        Loading.enum_values(:kind).each do |kind|
+        Loading.enum_values(:loading_kind).each do |kind|
           kind_abbr = I18n.t kind, :scope => "activerecord.attributes.loading.kind_abbrs"
           value = loading_xml[kind_abbr]
           next unless value

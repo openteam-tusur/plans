@@ -21,7 +21,7 @@ end
 # * id            :integer         not null
 #   semester_id   :integer
 #   discipline_id :integer
-#   kind          :string(255)
+#   loading_kind  :string(255)
 #   value         :integer
 #   deleted_at    :datetime
 #   created_at    :datetime        not null

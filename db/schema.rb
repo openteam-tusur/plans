@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120719021554) do
+ActiveRecord::Schema.define(:version => 20120719050818) do
 
   create_table "checks", :force => true do |t|
     t.integer  "semester_id"
@@ -65,8 +65,9 @@ ActiveRecord::Schema.define(:version => 20120719021554) do
   create_table "goses", :force => true do |t|
     t.text     "speciality"
     t.string   "code"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.date     "approved_on"
   end
 
   create_table "loadings", :force => true do |t|

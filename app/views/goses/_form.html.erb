@@ -3,6 +3,7 @@
 <%= simple_form_for resource do |f| %>
   <%= f.input :speciality %>
   <%= f.input :code %>
+  <%= f.input :approved_on, :as => :date, :start_year => 2000, :end_year => Date.today.year %>
   <%= f.submit %>
   или
   <%= link_to 'Отмена', smart_resource_url %>
