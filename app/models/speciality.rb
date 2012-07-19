@@ -4,6 +4,7 @@ class Speciality < ActiveRecord::Base
   belongs_to :year
 
   has_many :subspecialities
+  has_many :work_programms
 
   validates_presence_of :code, :title, :degree, :year
 

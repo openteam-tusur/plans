@@ -3,8 +3,6 @@
 require 'progress_bar'
 
 module PlanImporter
-  #def self.import_plan_from_file(file_path, year)
-  #end
 
   def self.import_plan_from_file(file_path, year)
     xml = Nokogiri::XML(File.new(file_path))
@@ -27,6 +25,8 @@ module PlanImporter
       cycle_abbr = cycle_value.split('.').first
       cycle = xml.css("АтрибутыЦиклов Цикл[Аббревиатура='#{cycle_abbr}']", "АтрибутыЦиклов Цикл[Абревиатура=#{cycle_abbr}]")[0]['Название'].squish
       discipline.cycle = "#{cycle_abbr}. #{cycle}"
+      discipline.summ_loading = discipline_xml['ПодлежитИзучению']
+      discipline.summ_srs = discipline_xml['СР']
       refresh discipline
       discipline.save!
       Check.enum_values(:kind).each do |kind|

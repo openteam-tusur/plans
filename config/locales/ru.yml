@@ -36,26 +36,32 @@ ru:
         description: Описание основной образовательной программы
 
       check:
-        kind_enum:
+        check_kind_enum:
           exam: Экзамен
           end_of_term: Зачет
           course_work: Курсовая работа
           course_projecting: Курсовое проектирование
-        kind_abbrs:
+        check_kind_abbrs:
           exam: Экз
           end_of_term: Зач
           course_work: КР
           course_projecting: КП
+        check_kind_reports:
+          exam: Экзамен
+          end_of_term: Зачет
+          course_work: Диф. зачет
+          course_projecting: Диф. зачет
+
 
       loading:
-        kind_enum:
-          csr: Контроль самостоятельной работы
+        loading_kind_enum:
+          lecture: Лекции
+          lab: Лабораторные занятия
+          practice: Практические занятия
+          csr: Контроль самостоятельной работы (курсовой проект / курсовая работа)
           exam: Подготовка к экзамену
           srs: Самостоятельная работа
-          lecture: Лекций
-          lab: Лабораторных
-          practice: Практик
-        kind_abbrs:
+        loading_kind_abbrs:
           csr: КСР
           exam: ЧасЭкз
           srs: СРС

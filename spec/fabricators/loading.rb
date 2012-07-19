@@ -1,5 +1,5 @@
 Fabricator(:loading) do
-  kind :lecture
+  loading_kind :lecture
   discipline
   semester
 end

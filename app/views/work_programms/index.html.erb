@@ -1,5 +1,10 @@
-<h1>Рабочие программы дисциплины</h1>
+<h1>Рабочие программы дисциплины &quot;<%= @discipline.title %>&quot;</h1>
 
 <%= render :partial => 'head' %>
-
+<ul>
+  <% collection.each do |work_programm| %>
+    <%= link_to "Рабочая программа дисциплины #{work_programm.year} года",
+      year_speciality_subspeciality_discipline_work_programm_path(@year, @speciality, @subspeciality, @discipline, work_programm) %>
+  <% end %>
+</ul>
 <%= link_to "Добавить рабочую программу", new_year_speciality_subspeciality_discipline_work_programm_path(@year, @speciality, @subspeciality, @discipline) %>

@@ -1,2 +1,3 @@
-<h1>Рабочая программа дисциплины <%= @work_programm.year %> года</h1>
+<h1>Рабочая программа дисциплины  &quot;<%= @discipline.title %>&quot; <%= @work_programm.year %> года</h1>
 <%= render :partial => 'head' %>
+<%= link_to "PDF", resource_path(:format => :pdf) %>

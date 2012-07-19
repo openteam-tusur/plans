@@ -1,5 +1,5 @@
 Fabricator(:check) do
-  kind :exam
+  check_kind :exam
   discipline
   semester
 end

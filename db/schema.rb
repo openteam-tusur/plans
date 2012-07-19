@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120718032156) do
+ActiveRecord::Schema.define(:version => 20120719021554) do
 
   create_table "checks", :force => true do |t|
     t.integer  "semester_id"
     t.integer  "discipline_id"
-    t.string   "kind"
+    t.string   "check_kind"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.datetime "deleted_at"
@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(:version => 20120718032156) do
     t.datetime "deleted_at"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.integer  "summ_loading"
+    t.integer  "summ_srs"
   end
 
   add_index "disciplines", ["subdepartment_id"], :name => "index_disciplines_on_subdepartment_id"
@@ -70,7 +72,7 @@ ActiveRecord::Schema.define(:version => 20120718032156) do
   create_table "loadings", :force => true do |t|
     t.integer  "semester_id"
     t.integer  "discipline_id"
-    t.string   "kind"
+    t.string   "loading_kind"
     t.integer  "value"
     t.datetime "deleted_at"
     t.datetime "created_at",    :null => false
