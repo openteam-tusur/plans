@@ -17,7 +17,7 @@ group :default do
   gem 'inherited_resources'
   gem 'nokogiri'
   gem 'openteam-commons',     '>= 0.2.3'
-  gem 'prawn'
+  gem 'prawn',                :branch => 'master', :git => 'git://github.com/prawnpdf/prawn.git'
   gem 'progress_bar',         :require => false
   gem 'rails'
   gem 'russian'
