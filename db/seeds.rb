@@ -1,7 +1,5 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ title: 'Chicago' }, { title: 'Copenhagen' }])
-#   Mayor.create(title: 'Emanuel', city: cities.first)
+# encoding: utf-8
+
+gos_gmu = Gos.find_or_initialize_by_code_and_speciality("061000", "Государственное и муниципальное управление")
+gos_gmu.approved_on = "2000-03-17"
+gos_gmu.save!

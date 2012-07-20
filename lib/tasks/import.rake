@@ -81,9 +81,11 @@ class YearImporter
       department = year.departments.find_or_initialize_by_abbr department_attributes['abbr']
       refresh department
       subdepartments_attributes = department_attributes.delete('subdepartments')
+      department_attributes.delete('chief')
       department.update_attributes! department_attributes
       subdepartments_attributes.each do |subdepartment_attributes|
         subdepartment = year.subdepartments.find_or_initialize_by_number(subdepartment_attributes['number'])
+        subdepartment_attributes.delete('chief')
         subdepartment.attributes = subdepartment_attributes
         subdepartment.department = department
         refresh subdepartment

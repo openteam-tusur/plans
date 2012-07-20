@@ -1,8 +1,9 @@
 class Person
-  attr_accessor :post, :name
-  def initialize(post, name)
+  attr_accessor :post, :name, :science_post
+  def initialize(name, post, science_post = "")
     self.post = post
     self.name = name
+    self.science_post = science_post
   end
 
   def short_name

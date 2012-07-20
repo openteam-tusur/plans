@@ -101,34 +101,70 @@ class WorkProgrammReport < Prawn::Document
     text "#{@work_programm.year}", :align => :center, :valign => :bottom
   end
 
-  def sign_page
-    text "Рабочая программа составлена на основании ГОС ВПО для специальности"
-    move_down 8
-    text "___________________________________________________________"
-    move_down 8
-    text "утвержденного _________________________, рассмотрена и утверждена на заседании"
-    move_down 8
-    text "кафедры «____» ______________ г., протокол № _______"
-    move_down 20
-
-
-    sign_creator_data = [["Разработчик", "", ""],
-                 ["________________________________", "_________________", "_____________________"],
-                 ["Зав. обеспечивающей кафедрой _________", "_________________", "_____________________"]]
-
-    table(sign_creator_data, :cell_style => {:border_color => "CCCCCC"})
-
-    move_down 16
-
-    text "Рабочая программа согласована с факультетом, профилирующей и выпускающей кафедрами специальности"
-
-    move_down 16
-
-    sign_data = [["Декан __________", "________________", "________________"],
-                ["Зав. профилирующей кафедрой ___________", "_______________", "______________"],
-                ["Зав. выпускающей кафедрой ___________", "_______________", "_______________"]]
-    table(sign_data, :cell_style => {:border_color => "CCCCCC"})
+  def sign_row(post_prefix, subdivision, person)
+    [
+      { :content => "#{post_prefix}#{subdivision.abbr}\n#{person ? person.science_post : '------'}", :width => 250 },
+      { :content => "______________", :width => 120, :align => :center, :valign => :bottom },
+      { :content => person ? person.short_name : '-------------', :valign => :bottom, :width => 150 }
+    ]
   end
+
+  def sign_page
+    gos = Gos.where("speciality = ? OR code = ?", @work_programm.discipline.subspeciality.speciality.title, @work_programm.discipline.subspeciality.speciality.code).order("approved_on desc").first
+    gos_info = "Рабочая программа составлена на основании ГОС ВПО для специальности "
+    gos_info << (gos ? "#{gos.code} «#{gos.speciality}»" : "----------------------")
+    gos_info << ", утвержденного "
+    gos_info << (gos ? "#{I18n.l(gos.approved_on)} г." : "----------------------")
+    gos_info << ", рассмотрена и утверждена на заседании "
+    gos_info << "кафедры «____» ______________ г., протокол № _______"
+    text gos_info, :align => :justify, :leading => 5, :indent_paragraphs => 30
+
+    move_down 16
+    text I18n.t('pluralize.author', :count => @work_programm.authors.size)
+
+    authors_data = []
+    @work_programm.authors.each do |author|
+      authors_data << [
+        { :content => "#{author.post}\n#{author.science_post}", :width => 250 },
+        { :content => "______________", :width => 120, :align => :center, :valign => :bottom },
+        { :content => author.short_name, :valign => :bottom, :width => 150 }
+      ]
+    end
+
+    table(authors_data, :cell_style => {:border_color => "FFFFFF"})
+
+    move_down 16
+
+    table([sign_row("Зав. обеспечивающей кафедрой ",
+                    @work_programm.discipline.subdepartment,
+                    @work_programm.discipline.subdepartment.chief(@work_programm.year))],
+          :cell_style => {:border_color => "FFFFFF"})
+    move_down 24
+
+    text "Рабочая программа согласована с факультетом, профилирующей и выпускающей кафедрами специальности", :align => :justify, :leading => 5, :indent_paragraphs => 30
+
+    move_down 16
+
+    sign_data = []
+    sign_data << sign_row("Декан ",
+                          @work_programm.discipline.subspeciality.subdepartment.department,
+                          @work_programm.discipline.subspeciality.subdepartment.department.chief(@work_programm.year))
+    if @work_programm.discipline.subspeciality.graduate_subdepartment == @work_programm.discipline.subspeciality.subdepartment
+      sign_data << sign_row("Зав. профилирующей и выпускающей кафедрой ",
+                            @work_programm.discipline.subspeciality.subdepartment,
+                            @work_programm.discipline.subspeciality.subdepartment.chief(@work_programm.year))
+    else
+      sign_data << sign_row("Зав. профилирующей кафедрой ",
+                            @work_programm.discipline.subspeciality.subdepartment,
+                            @work_programm.discipline.subspeciality.subdepartment.chief(@work_programm.year))
+      sign_data << sign_row("Зав. выпускающей кафедрой ",
+                            @work_programm.discipline.subspeciality.graduate_subdepartment,
+                            @work_programm.discipline.subspeciality.graduate_subdepartment.chief(@work_programm.year))
+    end
+    table(sign_data, :cell_style => {:border_color => "FFFFFF"})
+  end
+
+
 
   def to_pdf(work_programm)
     @work_programm = work_programm

@@ -1,4 +1,3 @@
-
 # encoding: utf-8
 
 require 'spec_helper'
@@ -40,10 +39,11 @@ describe Discipline do
     end
 
     it "when semesters 1-8" do
-      discipline.should_receive(:loaded_semesters).and_return((1..8).to_a)
+      discipline.stub(:loaded_semesters).and_return((1..8).to_a)
       discipline.loaded_courses.should == (1..4).to_a
     end
 
   end
+
 
 end
