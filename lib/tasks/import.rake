@@ -31,7 +31,7 @@ module PlanImporter
       refresh discipline
       discipline.save!
       Check.enum_values(:check_kind).each do |kind|
-        kind_abbr = I18n.t kind, :scope => "activerecord.attributes.check.kind_abbrs"
+        kind_abbr = I18n.t kind, :scope => "activerecord.attributes.check.check_kind_abbrs"
         semester_numbers = discipline_xml["Сем#{kind_abbr}"]
         next unless semester_numbers
         semester_numbers.each_char do |semester_number|
@@ -46,7 +46,7 @@ module PlanImporter
         semester = subspeciality.create_or_refresh_semester(loading_xml['Ном'])
         next unless semester
         Loading.enum_values(:loading_kind).each do |kind|
-          kind_abbr = I18n.t kind, :scope => "activerecord.attributes.loading.kind_abbrs"
+          kind_abbr = I18n.t kind, :scope => "activerecord.attributes.loading.loading_kind_abbrs"
           value = loading_xml[kind_abbr]
           next unless value
           loading = discipline.loadings.where(:semester_id => semester, :kind => kind).first || discipline.loadings.build(:semester => semester, :kind => kind)
