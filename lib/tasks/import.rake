@@ -30,14 +30,14 @@ module PlanImporter
       discipline.code = discipline_xml['ИдетификаторДисциплины']
       refresh discipline
       discipline.save!
-      Check.enum_values(:check_kind).each do |kind|
-        kind_abbr = I18n.t kind, :scope => "activerecord.attributes.check.check_kind_abbrs"
+      Check.enum_values(:check_kind).each do |check_kind|
+        kind_abbr = I18n.t check_kind, :scope => "activerecord.attributes.check.check_kind_abbrs"
         semester_numbers = discipline_xml["Сем#{kind_abbr}"]
         next unless semester_numbers
         semester_numbers.each_char do |semester_number|
           semester = subspeciality.create_or_refresh_semester(semester_number)
           next unless semester
-          check = discipline.checks.where(:semester_id => semester, :kind => kind).first || discipline.checks.build(:semester => semester, :kind => kind)
+          check = discipline.checks.where(:semester_id => semester, :check_kind => check_kind).first || discipline.checks.build(:semester => semester, :check_kind => check_kind)
           refresh check
           check.save
         end
@@ -45,11 +45,11 @@ module PlanImporter
       discipline_xml.css('Сем').each do |loading_xml|
         semester = subspeciality.create_or_refresh_semester(loading_xml['Ном'])
         next unless semester
-        Loading.enum_values(:loading_kind).each do |kind|
-          kind_abbr = I18n.t kind, :scope => "activerecord.attributes.loading.loading_kind_abbrs"
+        Loading.enum_values(:loading_kind).each do |loading_kind|
+          kind_abbr = I18n.t loading_kind, :scope => "activerecord.attributes.loading.loading_kind_abbrs"
           value = loading_xml[kind_abbr]
           next unless value
-          loading = discipline.loadings.where(:semester_id => semester, :kind => kind).first || discipline.loadings.build(:semester => semester, :kind => kind)
+          loading = discipline.loadings.where(:semester_id => semester, :loading_kind => loading_kind).first || discipline.loadings.build(:semester => semester, :loading_kind => loading_kind)
           refresh loading
           loading.value = value
           loading.save
