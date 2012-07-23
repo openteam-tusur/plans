@@ -4,11 +4,9 @@ class WorkProgrammReport < Prawn::Document
   attr_accessor :work_programm
 
   delegate :discipline, :to => :work_programm
-  delegate :subspeciality, :to => :discipline
+  delegate :subspeciality, :subdepartment, :loaded_semesters, :checks, :to => :discipline
   delegate :speciality, :to => :subspeciality
-  delegate :subdepartment, :to => :discipline
   delegate :department, :to => :subdepartment
-  delegate :loaded_semesters, :to => :discipline
   delegate :year, :to => :speciality, :prefix => true
 
   def title_page_date_line
@@ -45,6 +43,102 @@ class WorkProgrammReport < Prawn::Document
 
   def title_page_speciality_year
     "Учебный план набора #{speciality_year.number} года и последующих лет"
+  end
+
+  class Scheduling
+
+    class Row
+      attr_accessor :scheduling, :hours, :loading_kind, :title
+
+      delegate :discipline, :to => :scheduling
+
+      def initialize(options)
+        options.each do |key, value|
+          self.send "#{key}=", value
+        end
+      end
+
+      def hours
+        @hours ||= discipline.loadings.where(:loading_kind => loading_kind).inject({}) do |hash, loading|
+          hash[loading.semester.number] ||= 0
+          hash[loading.semester.number] += loading.value
+          hash
+        end
+      end
+
+      def total
+        hours.values.sum
+      end
+
+      def title
+        @title ||= Loading.human_enum_values(:loading_kind)[loading_kind]
+      end
+
+      def to_a
+        [title, total].tap do |arr|
+          arr.concat(hours.values) if hours.values.count > 1
+        end
+      end
+    end
+
+    attr_accessor :discipline
+
+    def initialize(discipline)
+      self.discipline = discipline
+    end
+
+    def semesters
+      discipline.loaded_semesters
+    end
+
+    Loading.enum_values(:loading_kind).each do |kind|
+      define_method "#{kind}" do
+        Row.new(:scheduling => self, :loading_kind => kind)
+      end
+    end
+
+    alias_method :old_exam, :exam
+
+    def exam
+      if discipline.summ_loading == total.total
+        old_exam
+      else
+        Row.new(:scheduling => self, :loading_kind => 'exam', :hours => {})
+      end
+    end
+
+    def classroom
+      Row.new(:scheduling => self, :loading_kind => Loading.classroom_kinds, :title => 'Всего аудиторных занятий')
+    end
+
+    def total
+      Row.new(:scheduling => self, :loading_kind => Loading.enum_values(:loading_kind), :title => 'Общая трудоемкость')
+    end
+
+    def header
+      if semesters.count > 1
+        [
+          [{:content => "", :rowspan=> 2}, {:content => "Всего часов", :rowspan => 2}, {:content => "По семестрам", :colspan => semesters.size}],
+          semesters.map { |number| "#{number}" }
+        ]
+      else
+        [["", "Всего часов"]]
+      end
+    end
+
+    def to_a
+      result = header
+
+      (Loading.classroom_kinds + ['classroom'] + Loading.srs_kinds + ['total']).each do |name|
+        row = self.send(name)
+        result << row.to_a unless row.total.zero?
+      end
+      result
+    end
+  end
+
+  def title_page_work_scheduling
+    Scheduling.new(discipline)
   end
 
   def title_table(field, value, width=120)
@@ -86,43 +180,7 @@ class WorkProgrammReport < Prawn::Document
     text "Распределение учебного времени", :align => :left
     move_down 8
 
-    grouped_loading = @work_programm.discipline.loadings.group_by(&:loading_kind)
-
-    loading_data_header = loaded_semesters.size > 1 ? [{:content => "", :rowspan=> 2}, {:content => "Всего часов", :rowspan => 2}, {:content => "По семестрам", :colspan => loaded_semesters.size}] : ["", "Всего часов"]
-
-    loading_data = [ loading_data_header ]
-    loading_data << loaded_semesters.map { |number| "#{number}" } if loaded_semesters.size > 1
-
-    Loading.classroom_kinds.each do |loading_kind|
-      next unless kind_loadings = grouped_loading[loading_kind]
-      loading_data_str = [ Loading.human_enum_values(:loading_kind)[loading_kind], kind_loadings.sum(&:value) ]
-      loaded_semesters.each do |semester_number|
-        summ_value = kind_loadings.select {|loading| loading.semester.number == semester_number }.sum(&:value)
-        loading_data_str << (summ_value > 0 ? summ_value : "-")
-      end if loaded_semesters.size > 1
-      loading_data << loading_data_str
-    end
-
-    loading_data_classroom_summ_str = [ 'Всего аудиторных занятий', @work_programm.discipline.calculated_classroom_loading_summ ]
-    loading_data_classroom_summ_str += loaded_semesters.map { |number| @work_programm.discipline.calculated_classroom_loading_summ_for_semester(number) } if loaded_semesters.size > 1
-    loading_data << loading_data_classroom_summ_str
-
-
-    Loading.srs_kinds.each do |loading_kind|
-      next unless kind_loadings = grouped_loading[loading_kind]
-      next if loading_kind == 'exam' && @work_programm.discipline.calculated_loading_summ > @work_programm.discipline.summ_loading
-      loading_data_str = [ Loading.human_enum_values(:loading_kind)[loading_kind], kind_loadings.sum(&:value) ]
-      loaded_semesters.each do |semester_number|
-        loading_data_str << kind_loadings.select {|loading| loading.semester.number == semester_number }.sum(&:value)
-      end if loaded_semesters.size > 1
-      loading_data << loading_data_str
-    end
-
-    loading_data_footer = [ 'Общая трудоемкость', @work_programm.discipline.summ_loading ]
-    loading_data_footer += loaded_semesters.map { |number| @work_programm.discipline.calculated_loading_summ_for_semester(number) } if loaded_semesters.size > 1
-    loading_data << loading_data_footer
-
-    table(loading_data, :cell_style => {:border_color => "000000"})
+    table(title_page_work_scheduling.to_a, :cell_style => {:border_color => "000000"})
 
     move_down 16
 
