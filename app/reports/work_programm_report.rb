@@ -1,9 +1,57 @@
 # encoding: utf-8
 
 class WorkProgrammReport < Prawn::Document
+  attr_accessor :work_programm
+
+  delegate :discipline, :to => :work_programm
+  delegate :subspeciality, :to => :discipline
+  delegate :speciality, :to => :subspeciality
+  delegate :subdepartment, :to => :discipline
+  delegate :department, :to => :subdepartment
+  delegate :loaded_semesters, :to => :discipline
+  delegate :year, :to => :speciality, :prefix => true
+
+  def title_page_date_line
+    "«____» _____________________ #{work_programm.year} г."
+  end
+
+  def title_page_discipline
+    "#{discipline.title} (#{discipline.code})"
+  end
+
+  def title_page_speciality
+    "#{speciality.code} #{speciality.title}"
+  end
+
+  def title_page_speciality_kind
+    speciality.degree == 'specialty' ? 'Специальность' : 'Направление'
+  end
+
+  def title_page_department
+    department.title.gsub(/факультет/i, '').squish.sub(/^(.)/) { $1.mb_chars.upcase }
+  end
+
+  def title_page_subdepartment
+    subdepartment.title.gsub(/кафедра/i, '').squish.sub(/^(.)/) { $1.mb_chars.upcase }
+  end
+
+  def title_page_courses
+    discipline.loaded_courses.join(', ')
+  end
+
+  def title_page_semesters
+    loaded_semesters.join(', ')
+  end
+
+  def title_page_speciality_year
+    "Учебный план набора #{speciality_year.number} года и последующих лет"
+  end
+
+  def title_table(field, value, width=120)
+    table([[{:content => field, :width => width}, value]], :cell_style => {:border_color => "FFFFFF"})
+  end
 
   def title_page
-    #move_down 20
     text "МИНИСТЕРСТВО ОБРАЗОВАНИЯ И НАУКИ РОСИИЙСКОЙ ФЕДЕРАЦИИ", :align => :center, :size => 13, :style => :bold
     move_down 4
     text "Федеральной государственное бюджетное образовательное учереждение высшего профессионального образования", :align => :center, :size => 14
@@ -16,39 +64,23 @@ class WorkProgrammReport < Prawn::Document
       move_down 4
       text "Первый проректор-", :align => :left, :size => 12
       move_down 4
-      text "проректор по учебной работе _______________________ Л. А. Боков «____» _____________________ #{@work_programm.year} г.", :align => :left, :size => 12
+      text "проректор по учебной работе _______________________ Л. А. Боков #{title_page_date_line}", :align => :left, :size => 12
     end
     move_down 16
 
     text "РАБОЧАЯ ПРОГРАММА", :align => :center, :style => :bold
     move_down 16
-    loaded_semesters = @work_programm.discipline.loaded_semesters
 
-    discipline_title_cell = make_cell(:content => "По дисциплине", :width => 120)
-    discipline_title_table = [[discipline_title_cell, "#{@work_programm.discipline.title} (#{@work_programm.discipline.code})"]]
-    table(discipline_title_table, :cell_style => {:border_color => "FFFFFF"})
+    title_table "По дисциплине", title_page_discipline
+    title_table title_page_speciality_kind, title_page_speciality
+    title_table "Факультет", title_page_department
+    title_table "Профилирующая кафедра", title_page_subdepartment, 180
+    title_table "Курс", title_page_courses
+    title_table "Семестр", title_page_semesters
 
-    discipline_speciality_cell = make_cell(:content => "Специальность", :width => 120)
-    discipline_speciality_table = [[discipline_speciality_cell, "#{@work_programm.discipline.subspeciality.speciality.code} #{@work_programm.discipline.subspeciality.speciality.title}"]]
-    table(discipline_speciality_table, :cell_style => {:border_color => "FFFFFF"})
-
-    discipline_department_table = [["Факультет #{@work_programm.discipline.subspeciality.subdepartment.department.title.gsub(/[ф|Ф]акультет/, '')}"]]
-    table(discipline_department_table, :cell_style => {:border_color => "FFFFFF"})
-
-    discipline_subdepartment_cell = make_cell(:content => "Профилирующая кафедра", :width => 180)
-    discipline_subdepartment_table = [[discipline_subdepartment_cell, "#{@work_programm.discipline.subspeciality.subdepartment.title}"]]
-    table(discipline_subdepartment_table, :cell_style => {:border_color => "FFFFFF"})
-
-    discipline_courses_cell = make_cell(:content => "Курс", :width => 120)
-    discipline_courses_table = [[discipline_courses_cell,"#{@work_programm.discipline.loaded_courses.join(', ')}"]]
-    table(discipline_courses_table, :cell_style => {:border_color => "FFFFFF"})
-
-    discipline_semesters_cell = make_cell(:content => "Семестр", :width => 120)
-    discipline_semesters_table = [[discipline_semesters_cell, "#{loaded_semesters.join(', ')}"]]
-    table(discipline_semesters_table, :cell_style => {:border_color => "FFFFFF"})
     move_down 24
 
-    text "Учебный план набора #{@work_programm.discipline.subspeciality.speciality.year.number} года и последующих лет", :align => :center
+    text title_page_speciality_year, :align => :center
     move_down 24
 
     text "Распределение учебного времени", :align => :left
@@ -167,7 +199,7 @@ class WorkProgrammReport < Prawn::Document
 
 
   def to_pdf(work_programm)
-    @work_programm = work_programm
+    self.work_programm = work_programm
     if RUBY_PLATFORM =~ /freebsd/
       font_families.update(
         "Times" => {

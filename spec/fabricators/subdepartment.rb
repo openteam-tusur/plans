@@ -1,6 +1,8 @@
+# encoding: utf-8
+
 Fabricator(:subdepartment) do
   department
-  title "Subdepartment"
-  abbr "S"
-  number "1"
+  title 'Кафедра обучающая'
+  abbr 'КО'
+  number '1'
 end

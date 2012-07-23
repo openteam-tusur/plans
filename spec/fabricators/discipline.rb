@@ -1,5 +1,8 @@
+# encoding: utf-8
+
 Fabricator(:discipline) do
   subspeciality
-  title "Discipline title"
+  title 'Учебная дисципина'
   subdepartment
+  code 'ЕСН.Ф.1'
 end
