@@ -1,23 +1,27 @@
 # encoding: utf-8
 
 class WorkProgramm < ActiveRecord::Base
-  belongs_to :discipline
-  has_one :subspeciality, :through => :discipline
   attr_accessible :year, :purpose, :task
-  validates_presence_of :discipline, :year
+
+  belongs_to :discipline
 
   has_many :dependent_disciplines, :dependent => :destroy
 
-  delegate :subsequent_disciplines, :to => :dependent_disciplines
-  delegate :current_disciplines,    :to => :dependent_disciplines
-  delegate :previous_disciplines,   :to => :dependent_disciplines
+  has_one :subspeciality, :through => :discipline
 
-  default_value_for :year do Time.now.year end
-  default_value_for :task do self.prepared_task_example end
+  validates_presence_of :discipline, :year
 
   validates_uniqueness_of :year, :scope => :discipline_id
 
+  delegate :subsequent_disciplines,
+    :current_disciplines,
+    :previous_disciplines,
+    :to => :dependent_disciplines
+
   delegate :disciplines, :to => :subspeciality
+
+  default_value_for(:year) { Time.now.year }
+  default_value_for(:task) { self.prepared_task_example }
 
   # FIXME: пока просто заглушка
   def authors
