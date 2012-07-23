@@ -76,7 +76,11 @@ class WorkProgrammReport < Prawn::Document
 
       def to_a
         [title, total].tap do |arr|
-          arr.concat(hours.values) if hours.values.count > 1
+          if hours.values.count > 1
+            scheduling.semesters.each do |semester|
+              arr << (hours[semester] || '-')
+            end
+          end
         end
       end
     end
