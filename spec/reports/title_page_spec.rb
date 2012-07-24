@@ -2,24 +2,24 @@
 
 require 'spec_helper'
 
-describe WorkProgrammReport do
-  let(:report) { WorkProgrammReport.new.tap {|report| report.work_programm = Fabricate(:work_programm)} }
+describe TitlePage do
+  let(:page) { TitlePage.new(Fabricate(:work_programm)) }
 
-  delegate :discipline, :to => :report
+  delegate :discipline, :to => :page
   delegate :loadings, :to => :discipline
   delegate :checks, :to => :discipline
 
-  subject { report }
+  subject { page }
 
-  let(:semester) { Fabricate(:semester, :subspeciality => report.subspeciality) }
-  let(:semester2) { Fabricate(:semester, :subspeciality => report.subspeciality, :number => 2) }
+  let(:semester) { Fabricate(:semester, :subspeciality => page.subspeciality) }
+  let(:semester2) { Fabricate(:semester, :subspeciality => page.subspeciality, :number => 2) }
 
-  its(:title_page_date_line) { should == '«____» _____________________ 2012 г.' }
-  its(:title_page_discipline) { should == 'Учебная дисципина (ЕСН.Ф.1)' }
+  its(:date_line) { should == '«____» _____________________ 2012 г.' }
+  its(:discipline_title) { should == 'Учебная дисципина (ЕСН.Ф.1)' }
 
   describe '#loaded_courses' do
-    before { report.should_receive(:loaded_semesters).and_return(semesters) }
-    subject { report.loaded_courses }
+    before { page.should_receive(:loaded_semesters).and_return(semesters) }
+    subject { page.loaded_courses }
     context 'semesters: 1' do
       let(:semesters)  { [1] }
       it { should == [1] }
@@ -38,76 +38,77 @@ describe WorkProgrammReport do
     end
   end
 
-  describe '#title_page_speciality_kind' do
-    subject { report.title_page_speciality_kind }
+  describe '#speciality_kind' do
+    subject { page.speciality_kind }
     context 'специалитет' do
-      before { report.speciality.degree = 'specialty' }
+      before { page.speciality.degree = 'specialty' }
       it { should == 'Специальность' }
     end
     context 'бакалвриат' do
-      before { report.speciality.degree = 'benchor' }
+      before { page.speciality.degree = 'benchor' }
       it { should == 'Направление' }
     end
     context 'магистратура' do
-      before { report.speciality.degree = 'magistracy' }
+      before { page.speciality.degree = 'magistracy' }
       it { should == 'Направление' }
     end
   end
 
-  its(:title_page_speciality) { should == '123123 Специальность подготовки' }
+  its(:speciality_title) { should == '123123 Специальность подготовки' }
 
-  describe '#title_page_department' do
-    subject { report.title_page_department }
+  describe '#department_title' do
+    subject { page.department_title }
     context 'Факультет систем управления' do
-      before { report.department.title = 'Факультет систем управления' }
+      before { page.department.title = 'Факультет систем управления' }
       it { should == 'Систем управления' }
     end
     context 'Юридический факультет' do
-      before { report.department.title = 'Юридический факультет' }
+      before { page.department.title = 'Юридический факультет' }
       it { should == 'Юридический' }
     end
   end
 
-  its(:title_page_subdepartment) { should == 'Обучающая' }
+  its(:subdepartment_title) { should == 'Обучающая' }
 
-  describe '#title_page_courses' do
-    subject { report.title_page_courses }
+  describe '#courses' do
+    subject { page.courses }
     context '1 курс' do
-      before { report.should_receive(:loaded_courses).and_return([1]) }
+      before { page.should_receive(:loaded_courses).and_return([1]) }
       it { should == "1" }
     end
     context '1,2 курс' do
-      before { report.should_receive(:loaded_courses).and_return([1, 2]) }
+      before { page.should_receive(:loaded_courses).and_return([1, 2]) }
       it { should == '1, 2' }
     end
   end
 
-  describe '#title_page_semesters' do
-    subject { report.title_page_semesters }
+  describe '#semesters' do
+    subject { page.semesters }
     context '1 семестр' do
-      before { report.should_receive(:loaded_semesters).and_return([1]) }
+      before { page.should_receive(:loaded_semesters).and_return([1]) }
       it { should == '1' }
     end
     context '1,2 семестр' do
-      before { report.should_receive(:loaded_semesters).and_return([1, 2]) }
+      before { page.should_receive(:loaded_semesters).and_return([1, 2]) }
       it { should == '1, 2' }
     end
   end
 
-  describe '#title_page_semesters' do
-    before { report.speciality_year.number = 2008 }
-    its(:title_page_speciality_year) { should == 'Учебный план набора 2008 года и последующих лет' }
+  describe '#semesters' do
+    before { page.speciality.year.number = 2008 }
+    its(:speciality_year) { should == 'Учебный план набора 2008 года и последующих лет' }
   end
 
-  describe '#title_page_work_scheduling' do
-    let(:scheduling) { report.title_page_work_scheduling }
+  describe '#scheduling' do
+    let(:scheduling) { page.scheduling }
     subject { scheduling }
     before { loadings.create(:loading_kind => 'practice', :semester => semester, :value => 36) }
     before { loadings.create(:loading_kind => 'lecture', :semester => semester, :value => 24) }
     before { loadings.create(:loading_kind => 'exam', :semester => semester, :value => 10) }
     before { loadings.create(:loading_kind => 'srs', :semester => semester, :value => 10) }
 
-    its(:semesters) { should == [1] }
+    its(:loaded_semesters) { should == [1] }
+
     context 'аудиторные занятия' do
       describe '#lecture' do
         subject { scheduling.lecture }
@@ -151,8 +152,8 @@ describe WorkProgrammReport do
     end
   end
 
-  describe '#title_page_checks' do
-    subject { report.title_page_checks }
+  describe '#checks' do
+    subject { page.checks }
     context 'зачёт в 1 семестре' do
       before { checks.create :check_kind => 'end_of_term', :semester => semester}
       it { should == {"Зачет" => "1 семестр"}}
@@ -164,5 +165,5 @@ describe WorkProgrammReport do
     end
   end
 
-  its (:title_page_year_line) { should == '2012' }
+  its (:year_line) { should == '2012' }
 end
