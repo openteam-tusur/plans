@@ -36,6 +36,19 @@ class WorkProgrammReport < Prawn::Document
     text "РАБОЧАЯ ПРОГРАММА", :align => :center, :style => :bold
     move_down 16
 
+    loaded_semesters = @work_programm.discipline.loaded_semester_numbers
+
+    discipline_title_cell = make_cell(:content => "По дисциплине", :width => 120)
+    discipline_title_table = [[discipline_title_cell, "#{@work_programm.discipline.title} (#{@work_programm.discipline.code})"]]
+    table(discipline_title_table, :cell_style => {:border_color => "FFFFFF"})
+
+    discipline_speciality_cell = make_cell(:content => "Специальность", :width => 120)
+    discipline_speciality_table = [[discipline_speciality_cell, "#{@work_programm.discipline.subspeciality.speciality.code} #{@work_programm.discipline.subspeciality.speciality.title}"]]
+    table(discipline_speciality_table, :cell_style => {:border_color => "FFFFFF"})
+
+    discipline_department_table = [["Факультет #{@work_programm.discipline.subspeciality.subdepartment.department.title.gsub(/[ф|Ф]акультет/, '')}"]]
+    table(discipline_department_table, :cell_style => {:border_color => "FFFFFF"})
+
     build_common_title_table "По дисциплине", title_page.discipline_title
     build_common_title_table title_page.speciality_kind, title_page.speciality_title
     build_common_title_table "Факультет", title_page.department_title

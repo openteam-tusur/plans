@@ -23,7 +23,7 @@ class Discipline < ActiveRecord::Base
   end
 
   def loaded_courses
-    loaded_semesters.map { |s| (s.to_f / 2).round }.uniq
+    loaded_semester_numbers.map { |s| (s.to_f / 2).round }.uniq
   end
 
   def loaded_semesters
