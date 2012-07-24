@@ -3,15 +3,19 @@
 class WorkProgrammReport < Prawn::Document
   attr_accessor :work_programm
 
-  def render_common_title_table(field, value, width=120)
-    table([[{:content => field, :width => width}, value]], :cell_style => {:border_color => "FFFFFF", :padding_top => 0} )
-  end
-
   def title_page
     TitlePage.new(work_programm)
   end
 
-  def render_title_page
+  def sign_page
+    SignPage.new(work_programm)
+  end
+
+  def build_common_title_table(field, value, width=120)
+    table([[{:content => field, :width => width}, value]], :cell_style => {:border_color => "FFFFFF", :padding_top => 0} )
+  end
+
+  def build_title_page
     text "МИНИСТЕРСТВО ОБРАЗОВАНИЯ И НАУКИ РОСИИЙСКОЙ ФЕДЕРАЦИИ", :align => :center, :size => 13, :style => :bold
     move_down 4
 
@@ -32,12 +36,12 @@ class WorkProgrammReport < Prawn::Document
     text "РАБОЧАЯ ПРОГРАММА", :align => :center, :style => :bold
     move_down 16
 
-    render_common_title_table "По дисциплине", title_page.discipline_title
-    render_common_title_table title_page.speciality_kind, title_page.speciality_title
-    render_common_title_table "Факультет", title_page.department_title
-    render_common_title_table "Профилирующая кафедра", title_page.subdepartment_title, 180
-    render_common_title_table "Курс", title_page.courses
-    render_common_title_table "Семестр", title_page.semesters
+    build_common_title_table "По дисциплине", title_page.discipline_title
+    build_common_title_table title_page.speciality_kind, title_page.speciality_title
+    build_common_title_table "Факультет", title_page.department_title
+    build_common_title_table "Профилирующая кафедра", title_page.subdepartment_title, 180
+    build_common_title_table "Курс", title_page.courses
+    build_common_title_table "Семестр", title_page.semesters
     move_down 24
 
     text title_page.speciality_year, :align => :center
@@ -54,7 +58,7 @@ class WorkProgrammReport < Prawn::Document
     text title_page.year_line, :align => :center, :valign => :bottom
   end
 
-  def sign_row(post_prefix, subdivision, person)
+  def build_sign_row(post_prefix, subdivision, person)
     [
       { :content => "#{post_prefix}#{subdivision.abbr}\n#{person ? person.science_post : '------'}", :width => 250 },
       { :content => "______________", :width => 120, :align => :center, :valign => :bottom },
@@ -62,8 +66,8 @@ class WorkProgrammReport < Prawn::Document
     ]
   end
 
-  def sign_page
-    gos = Gos.where("speciality = ? OR code = ?", @work_programm.discipline.subspeciality.speciality.title, @work_programm.discipline.subspeciality.speciality.code).order("approved_on desc").first
+  def build_sign_page
+    gos = Gos.where("speciality = ? OR code = ?", work_programm.discipline.subspeciality.speciality.title, work_programm.discipline.subspeciality.speciality.code).order("approved_on desc").first
     gos_info = "Рабочая программа составлена на основании ГОС ВПО для специальности "
     gos_info << (gos ? "#{gos.code} «#{gos.speciality}»" : "----------------------")
     gos_info << ", утвержденного "
@@ -73,22 +77,23 @@ class WorkProgrammReport < Prawn::Document
     text gos_info, :align => :justify, :leading => 5, :indent_paragraphs => 30
 
     move_down 16
-    text I18n.t('pluralize.author', :count => @work_programm.authors.size)
+    text sign_page.authors_header
 
-    authors_data = []
-    @work_programm.authors.each do |author|
-      authors_data << [
-        { :content => "#{author.post}\n#{author.science_post}", :width => 250 },
-        { :content => "______________", :width => 120, :align => :center, :valign => :bottom },
-        { :content => author.short_name, :valign => :bottom, :width => 150 }
-      ]
+    table(sign_page.authors, :cell_style => {:border_color => "FFFFFF"}, :column_widths => [250, 120, 150]) do
+      cells.style do |cell|
+        case cell.column
+        when 1
+          cell.align = :center
+          cell.valign = :bottom
+        when 2
+          cell.valign = :bottom
+        end
+      end
     end
-
-    table(authors_data, :cell_style => {:border_color => "FFFFFF"})
 
     move_down 16
 
-    table([sign_row("Зав. обеспечивающей кафедрой ",
+    table([build_sign_row("Зав. обеспечивающей кафедрой ",
                     @work_programm.discipline.subdepartment,
                     @work_programm.discipline.subdepartment.chief(@work_programm.year))],
           :cell_style => {:border_color => "FFFFFF"})
@@ -99,18 +104,18 @@ class WorkProgrammReport < Prawn::Document
     move_down 16
 
     sign_data = []
-    sign_data << sign_row("Декан ",
+    sign_data << build_sign_row("Декан ",
                           @work_programm.discipline.subspeciality.subdepartment.department,
                           @work_programm.discipline.subspeciality.subdepartment.department.chief(@work_programm.year))
     if @work_programm.discipline.subspeciality.graduate_subdepartment == @work_programm.discipline.subspeciality.subdepartment
-      sign_data << sign_row("Зав. профилирующей и выпускающей кафедрой ",
+      sign_data << build_sign_row("Зав. профилирующей и выпускающей кафедрой ",
                             @work_programm.discipline.subspeciality.subdepartment,
                             @work_programm.discipline.subspeciality.subdepartment.chief(@work_programm.year))
     else
-      sign_data << sign_row("Зав. профилирующей кафедрой ",
+      sign_data << build_sign_row("Зав. профилирующей кафедрой ",
                             @work_programm.discipline.subspeciality.subdepartment,
                             @work_programm.discipline.subspeciality.subdepartment.chief(@work_programm.year))
-      sign_data << sign_row("Зав. выпускающей кафедрой ",
+      sign_data << build_sign_row("Зав. выпускающей кафедрой ",
                             @work_programm.discipline.subspeciality.graduate_subdepartment,
                             @work_programm.discipline.subspeciality.graduate_subdepartment.chief(@work_programm.year))
     end
@@ -136,9 +141,10 @@ class WorkProgrammReport < Prawn::Document
     end
     font "Times", :size => 14
 
-    render_title_page
+    build_title_page
+
     start_new_page
-    sign_page
+    build_sign_page
 
     render
   end

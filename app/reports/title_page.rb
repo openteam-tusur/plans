@@ -1,17 +1,8 @@
 # encoding: utf-8
 
-class TitlePage
-  attr_accessor :work_programm
-  attr_accessor :scheduling
-
-  delegate :discipline, :to => :work_programm
-  delegate :subspeciality, :subdepartment, :checks, :to => :discipline
-  delegate :speciality, :to => :subspeciality
-  delegate :department, :to => :subdepartment
-
-  def initialize(work_programm)
-    self.work_programm = work_programm
-    self.scheduling = Scheduling.new(self, discipline)
+class TitlePage < Page
+  def scheduling
+    Scheduling.new(self, discipline)
   end
 
   def date_line
