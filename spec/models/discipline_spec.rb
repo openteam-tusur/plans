@@ -20,30 +20,4 @@ describe Discipline do
     loading.reload.deleted_at.should_not be_nil
   end
 
-  describe "#loaded_courses" do
-    let(:discipline) { Discipline.new }
-    # slecial for sev
-    it "when semesters 1" do
-      discipline.should_receive(:loaded_semesters).and_return([1])
-      discipline.loaded_courses.should == [1]
-    end
-
-    it "when semesters 1,2" do
-      discipline.should_receive(:loaded_semesters).and_return([1, 2])
-      discipline.loaded_courses.should == [1]
-    end
-
-    it "when semesters 2,3" do
-      discipline.should_receive(:loaded_semesters).and_return([2,3])
-      discipline.loaded_courses.should == [1,2]
-    end
-
-    it "when semesters 1-8" do
-      discipline.stub(:loaded_semesters).and_return((1..8).to_a)
-      discipline.loaded_courses.should == (1..4).to_a
-    end
-
-  end
-
-
 end

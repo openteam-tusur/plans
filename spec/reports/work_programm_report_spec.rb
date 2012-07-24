@@ -9,6 +9,27 @@ describe WorkProgrammReport do
   its(:title_page_date_line) { should == '«____» _____________________ 2012 г.' }
   its(:title_page_discipline) { should == 'Учебная дисципина (ЕСН.Ф.1)' }
 
+  describe '#loaded_courses' do
+    before { report.should_receive(:loaded_semesters).and_return(semesters) }
+    subject { report.loaded_courses }
+    context 'semesters: 1' do
+      let(:semesters)  { [1] }
+      it { should == [1] }
+    end
+    context 'semesters: 1, 2' do
+      let(:semesters)  { [1, 2] }
+      it { should == [1] }
+    end
+    context 'semesters: 1, 2, 3' do
+      let(:semesters)  { [1, 2, 3] }
+      it { should == [1, 2] }
+    end
+    context 'semesters: 1, 2, 3, 4' do
+      let(:semesters)  { [1, 2, 3, 4] }
+      it { should == [1, 2] }
+    end
+  end
+
   describe '#title_page_speciality_kind' do
     subject { report.title_page_speciality_kind }
     context 'специалитет' do
@@ -41,15 +62,14 @@ describe WorkProgrammReport do
 
   its(:title_page_subdepartment) { should == 'Обучающая' }
 
-
   describe '#title_page_courses' do
     subject { report.title_page_courses }
     context '1 курс' do
-      before { report.discipline.should_receive(:loaded_courses).and_return([1]) }
+      before { report.should_receive(:loaded_courses).and_return([1]) }
       it { should == "1" }
     end
     context '1,2 курс' do
-      before { report.discipline.should_receive(:loaded_courses).and_return([1, 2]) }
+      before { report.should_receive(:loaded_courses).and_return([1, 2]) }
       it { should == '1, 2' }
     end
   end
@@ -57,11 +77,11 @@ describe WorkProgrammReport do
   describe '#title_page_semesters' do
     subject { report.title_page_semesters }
     context '1 семестр' do
-      before { report.discipline.should_receive(:loaded_semesters).and_return([1]) }
+      before { report.should_receive(:loaded_semesters).and_return([1]) }
       it { should == '1' }
     end
     context '1,2 семестр' do
-      before { report.discipline.should_receive(:loaded_semesters).and_return([1, 2]) }
+      before { report.should_receive(:loaded_semesters).and_return([1, 2]) }
       it { should == '1, 2' }
     end
   end

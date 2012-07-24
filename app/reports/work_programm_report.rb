@@ -4,7 +4,7 @@ class WorkProgrammReport < Prawn::Document
   attr_accessor :work_programm
 
   delegate :discipline, :to => :work_programm
-  delegate :subspeciality, :subdepartment, :loaded_semesters, :checks, :to => :discipline
+  delegate :subspeciality, :subdepartment, :loaded_semesters, :loaded_courses, :checks, :to => :discipline
   delegate :speciality, :to => :subspeciality
   delegate :department, :to => :subdepartment
   delegate :year, :to => :speciality, :prefix => true
@@ -34,7 +34,7 @@ class WorkProgrammReport < Prawn::Document
   end
 
   def title_page_courses
-    discipline.loaded_courses.join(', ')
+    loaded_courses.join(', ')
   end
 
   def title_page_semesters
@@ -43,6 +43,14 @@ class WorkProgrammReport < Prawn::Document
 
   def title_page_speciality_year
     "Учебный план набора #{speciality_year.number} года и последующих лет"
+  end
+
+  def loaded_semesters
+    discipline.loadings.joins(:semester).pluck('distinct semesters.number')
+  end
+
+  def loaded_courses
+    loaded_semesters.map { |s| (s.to_f / 2).round }.uniq
   end
 
   class Scheduling
@@ -85,14 +93,15 @@ class WorkProgrammReport < Prawn::Document
       end
     end
 
-    attr_accessor :discipline
+    attr_accessor :report, :discipline
 
-    def initialize(discipline)
+    def initialize(report, discipline)
+      self.report = report
       self.discipline = discipline
     end
 
     def semesters
-      discipline.loaded_semesters
+      report.loaded_semesters
     end
 
     Loading.enum_values(:loading_kind).each do |kind|
@@ -142,7 +151,7 @@ class WorkProgrammReport < Prawn::Document
   end
 
   def title_page_work_scheduling
-    Scheduling.new(discipline)
+    Scheduling.new(self, discipline)
   end
 
   def title_table(field, value, width=120)
