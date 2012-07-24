@@ -33,6 +33,14 @@ class WorkProgramm < ActiveRecord::Base
     ]
   end
 
+  def lectures_grouped_by_semester_number
+    lectures.group_by(&:semester_number)
+  end
+
+  def lectures_grouped_by_semester
+    lectures.group_by(&:semester)
+  end
+
   def available_subsequent_disciplines
     disciplines.select{ |d| d.semesters.map(&:number).min > discipline.semesters.map(&:number).max } - [discipline.title]
   end
@@ -57,10 +65,6 @@ class WorkProgramm < ActiveRecord::Base
 * _уметь_
 * _владеть_
     eos
-  end
-
-  def lectures_grouped_by_semester_number
-    lectures.group_by(&:semester_number)
   end
 end
 

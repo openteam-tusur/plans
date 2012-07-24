@@ -5,9 +5,9 @@
 <%= link_to 'Добавить', [:new, association_chain, resource, :lecture].flatten, :class => 'actions' %>
 
 <h4>Содержание</h4>
-<% resource.loaded_semesters.each do |semester_number| %>
+<% resource.loaded_semesters.each do |semester| %>
   <div class="semester">
-    <h4><%= "#{semester_number} семестр" %></h4>
+    <h4><%= "#{semester.number} семестр" %></h4>
 
     <table class="lectures">
       <tbody>
@@ -16,14 +16,14 @@
           <th>Объем в часах</td>
         </tr>
 
-        <% [*resource.lectures_grouped_by_semester_number[semester_number]].each do |lecture| %>
+        <% [*resource.lectures_grouped_by_semester[semester]].each do |lecture| %>
           <%= render lecture %>
         <% end %>
       </tbody>
     </table>
 
     <%= link_to 'Добавить',
-      new_polymorphic_path([association_chain, resource, :lecture].flatten, 'lecture[semester_number]' => semester_number),
+      new_polymorphic_path([association_chain, resource, :lecture].flatten, 'lecture[semester_id]' => semester.id),
       :class => 'add_lecture',
       :remote => true %>
     <div class="form_wrapper"></div>

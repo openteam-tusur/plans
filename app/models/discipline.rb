@@ -27,7 +27,11 @@ class Discipline < ActiveRecord::Base
   end
 
   def loaded_semesters
-    loadings.map(&:semester).uniq.map(&:number)
+    loadings.map(&:semester).uniq.sort_by(&:number)
+  end
+
+  def loaded_semester_numbers
+    loaded_semesters.map(&:number)
   end
 
   def taught_in_one_semester?

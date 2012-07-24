@@ -89,9 +89,10 @@ ActiveRecord::Schema.define(:version => 20120724074825) do
     t.integer  "work_programm_id"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
-    t.integer  "semester_number"
+    t.integer  "semester_id"
   end
 
+  add_index "lectures", ["semester_id"], :name => "index_lectures_on_semester_id"
   add_index "lectures", ["work_programm_id"], :name => "index_lectures_on_work_programm_id"
 
   create_table "loadings", :force => true do |t|
