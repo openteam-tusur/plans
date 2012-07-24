@@ -312,5 +312,17 @@ form
     list-style: disc inside
 
 .lectures
-  td, th, tr
-    border: 1px solid black
+  p
+    padding-right: 10px
+
+  .description
+    float: left
+    font-size: 1em
+    width: 80%
+
+  .volume
+    float: right
+    width: 20%
+
+  .header, .lecture
+    +clearfix

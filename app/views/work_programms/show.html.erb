@@ -2,33 +2,32 @@
 
 <%= render :partial => 'head' %>
 
-<%= link_to 'Добавить', [:new, association_chain, resource, :lecture].flatten, :class => 'actions' %>
+<div class="lectures">
+  <h4>Лекции</h4>
 
-<h4>Содержание</h4>
-<% resource.loaded_semesters.each do |semester| %>
-  <div class="semester">
-    <h4><%= "#{semester.number} семестр" %></h4>
-
-    <table class="lectures">
-      <tbody>
-        <tr>
-          <th>Название</td>
-          <th>Объем в часах</td>
-        </tr>
-
-        <% [*resource.lectures_grouped_by_semester[semester]].each do |lecture| %>
-          <%= render lecture %>
-        <% end %>
-      </tbody>
-    </table>
-
-    <%= link_to 'Добавить',
-      new_polymorphic_path([association_chain, resource, :lecture].flatten, 'lecture[semester_id]' => semester.id),
-      :class => 'add_lecture',
-      :remote => true %>
-    <div class="form_wrapper"></div>
+  <div class="header">
+    <div class="description">
+      <p>Название</p>
+    </div>
+    <div class="volume">
+      <p>Объем в часах</p>
+    </div>
   </div>
-<% end %>
+
+  <% resource.loaded_semesters.each do |semester| %>
+    <div class="semester">
+      <h4><%= "#{semester.number} семестр" %></h4>
+
+      <%= render :partial => 'lectures/lecture', :collection =>  [*resource.lectures_grouped_by_semester[semester]] %>
+
+      <div class="form_wrapper"></div>
+      <%= link_to 'Добавить',
+        new_polymorphic_path([association_chain, resource, :lecture].flatten, 'lecture[semester_id]' => semester.id),
+        :class => 'add_lecture',
+        :remote => true %>
+    </div>
+  <% end %>
+</div>
 
 <div class='work_programm_wrapper with_text_styles'>
   <h4>Цели</h4>
