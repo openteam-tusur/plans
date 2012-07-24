@@ -4,7 +4,15 @@ require 'spec_helper'
 
 describe WorkProgrammReport do
   let(:report) { WorkProgrammReport.new.tap {|report| report.work_programm = Fabricate(:work_programm)} }
+
+  delegate :discipline, :to => :report
+  delegate :loadings, :to => :discipline
+  delegate :checks, :to => :discipline
+
   subject { report }
+
+  let(:semester) { Fabricate(:semester, :subspeciality => report.subspeciality) }
+  let(:semester2) { Fabricate(:semester, :subspeciality => report.subspeciality, :number => 2) }
 
   its(:title_page_date_line) { should == '«____» _____________________ 2012 г.' }
   its(:title_page_discipline) { should == 'Учебная дисципина (ЕСН.Ф.1)' }
@@ -93,12 +101,11 @@ describe WorkProgrammReport do
 
   describe '#title_page_work_scheduling' do
     let(:scheduling) { report.title_page_work_scheduling }
-    let(:semester) { Fabricate(:semester, :subspeciality => report.subspeciality) }
     subject { scheduling }
-    before { report.discipline.loadings.create(:loading_kind => 'practice', :semester => semester, :value => 36) }
-    before { report.discipline.loadings.create(:loading_kind => 'lecture', :semester => semester, :value => 24) }
-    before { report.discipline.loadings.create(:loading_kind => 'exam', :semester => semester, :value => 10) }
-    before { report.discipline.loadings.create(:loading_kind => 'srs', :semester => semester, :value => 10) }
+    before { loadings.create(:loading_kind => 'practice', :semester => semester, :value => 36) }
+    before { loadings.create(:loading_kind => 'lecture', :semester => semester, :value => 24) }
+    before { loadings.create(:loading_kind => 'exam', :semester => semester, :value => 10) }
+    before { loadings.create(:loading_kind => 'srs', :semester => semester, :value => 10) }
 
     its(:semesters) { should == [1] }
     context 'аудиторные занятия' do
@@ -106,6 +113,11 @@ describe WorkProgrammReport do
         subject { scheduling.lecture }
         its(:hours) { should == { 1 => 24 } }
         its(:total) { should == 24 }
+        describe '#to_a' do
+          before { loadings.create(:loading_kind => 'crs', :semester => semester2, :value => 7) }
+          subject { scheduling.lecture.to_a }
+          it { should == ["Лекции", 24, 24, "-"] }
+        end
       end
       describe '#practice' do
         subject { scheduling.practice }
@@ -125,11 +137,11 @@ describe WorkProgrammReport do
       describe '#exam' do
         subject { scheduling.exam }
         context 'нагрузка совпадает' do
-          before { report.discipline.summ_loading = 70 }
+          before { discipline.summ_loading = 70 }
           its(:total) { should == 0 }
         end
         context 'нагрузка совпадает' do
-          before { report.discipline.summ_loading = 80 }
+          before { discipline.summ_loading = 80 }
           its(:total) { should == 10 }
         end
       end
@@ -139,4 +151,18 @@ describe WorkProgrammReport do
     end
   end
 
+  describe '#title_page_checks' do
+    subject { report.title_page_checks }
+    context 'зачёт в 1 семестре' do
+      before { checks.create :check_kind => 'end_of_term', :semester => semester}
+      it { should == {"Зачет" => "1 семестр"}}
+    end
+    context 'курсовой проект в 1, 2 семестре' do
+      before { checks.create :check_kind => 'course_projecting', :semester => semester }
+      before { checks.create :check_kind => 'course_work', :semester => semester2 }
+      it { should == {'Диф. зачет' => '1, 2 семестр'}}
+    end
+  end
+
+  its (:title_page_year_line) { should == '2012' }
 end

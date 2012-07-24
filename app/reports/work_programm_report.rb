@@ -4,7 +4,7 @@ class WorkProgrammReport < Prawn::Document
   attr_accessor :work_programm
 
   delegate :discipline, :to => :work_programm
-  delegate :subspeciality, :subdepartment, :loaded_semesters, :loaded_courses, :checks, :to => :discipline
+  delegate :subspeciality, :subdepartment, :checks, :to => :discipline
   delegate :speciality, :to => :subspeciality
   delegate :department, :to => :subdepartment
   delegate :year, :to => :speciality, :prefix => true
@@ -45,8 +45,20 @@ class WorkProgrammReport < Prawn::Document
     "Учебный план набора #{speciality_year.number} года и последующих лет"
   end
 
+  def title_page_checks
+    hash = {}
+    discipline.checks.group_by(&:report_kind_value).each do |check_kind, checks|
+      hash[check_kind] =  "#{checks.map(&:semester).map(&:number).join(', ')} семестр"
+    end
+    hash
+  end
+
+  def title_page_year_line
+    work_programm.year.to_s
+  end
+
   def loaded_semesters
-    discipline.loadings.joins(:semester).pluck('distinct semesters.number')
+    @loaded_semesters ||= discipline.loadings.map(&:semester).uniq.map(&:number)
   end
 
   def loaded_courses
@@ -84,7 +96,7 @@ class WorkProgrammReport < Prawn::Document
 
       def to_a
         [title, total].tap do |arr|
-          if hours.values.count > 1
+          if scheduling.semesters.count > 1
             scheduling.semesters.each do |semester|
               arr << (hours[semester] || '-')
             end
@@ -155,25 +167,26 @@ class WorkProgrammReport < Prawn::Document
   end
 
   def title_table(field, value, width=120)
-    table([[{:content => field, :width => width}, value]], :cell_style => {:border_color => "FFFFFF"})
+    table([[{:content => field, :width => width}, value]], :cell_style => {:border_color => "FFFFFF", :padding_top => 0} )
   end
 
   def title_page
     text "МИНИСТЕРСТВО ОБРАЗОВАНИЯ И НАУКИ РОСИИЙСКОЙ ФЕДЕРАЦИИ", :align => :center, :size => 13, :style => :bold
     move_down 4
+
     text "Федеральной государственное бюджетное образовательное учереждение высшего профессионального образования", :align => :center, :size => 14
     move_down 4
-    text "«ТОМСКИЙ ГОСУДАРСТВЕННЫЙ УНИВЕРСИТЕТ СИСТЕМ УПРАВЛЕНИЯ И РАДИОЭЛЕКТРОНИКИ» (ТУСУР)", :align => :center, :size => 15, :style => :bold
-    move_down 8
 
-    bounding_box([300, 650], :width => 220, :height => 90) do
+    text "«ТОМСКИЙ ГОСУДАРСТВЕННЫЙ УНИВЕРСИТЕТ СИСТЕМ УПРАВЛЕНИЯ И РАДИОЭЛЕКТРОНИКИ» (ТУСУР)", :align => :center, :size => 15, :style => :bold
+    move_down 4
+
+    bounding_box([300, 685], :width => 220, :height => 100) do
       text "УТВЕРЖДАЮ", :align => :center, :size => 12
       move_down 4
       text "Первый проректор-", :align => :left, :size => 12
       move_down 4
       text "проректор по учебной работе _______________________ Л. А. Боков #{title_page_date_line}", :align => :left, :size => 12
     end
-    move_down 16
 
     text "РАБОЧАЯ ПРОГРАММА", :align => :center, :style => :bold
     move_down 16
@@ -184,7 +197,6 @@ class WorkProgrammReport < Prawn::Document
     title_table "Профилирующая кафедра", title_page_subdepartment, 180
     title_table "Курс", title_page_courses
     title_table "Семестр", title_page_semesters
-
     move_down 24
 
     text title_page_speciality_year, :align => :center
@@ -194,14 +206,11 @@ class WorkProgrammReport < Prawn::Document
     move_down 8
 
     table(title_page_work_scheduling.to_a, :cell_style => {:border_color => "000000"})
-
     move_down 16
 
-    @work_programm.discipline.checks.group_by(&:report_kind_value).each do |check_kind, checks|
-      text "#{check_kind} #{checks.map(&:semester).map(&:number).join(', ')} семестр"
-    end
+    table(title_page_checks.to_a, :cell_style => { :border_color => 'ffffff', :padding_top => 0})
 
-    text "#{@work_programm.year}", :align => :center, :valign => :bottom
+    text title_page_year_line, :align => :center, :valign => :bottom
   end
 
   def sign_row(post_prefix, subdivision, person)
