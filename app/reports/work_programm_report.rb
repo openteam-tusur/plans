@@ -67,9 +67,9 @@ class WorkProgrammReport < Prawn::Document
   end
 
   def build_sign_page
-    gos = Gos.where("speciality = ? OR code = ?", work_programm.discipline.subspeciality.speciality.title, work_programm.discipline.subspeciality.speciality.code).order("approved_on desc").first
+    gos = Gos.where(:speciality_code => work_programm.discipline.subspeciality.speciality.code).order("approved_on desc").first
     gos_info = "Рабочая программа составлена на основании ГОС ВПО для специальности "
-    gos_info << (gos ? "#{gos.code} «#{gos.speciality}»" : "----------------------")
+    gos_info << (gos ? "#{gos.code} «#{gos.title}»" : "----------------------")
     gos_info << ", утвержденного "
     gos_info << (gos ? "#{I18n.l(gos.approved_on)} г." : "----------------------")
     gos_info << ", рассмотрена и утверждена на заседании "
