@@ -6,6 +6,7 @@ class WorkProgramm < ActiveRecord::Base
   belongs_to :discipline
 
   has_many :dependent_disciplines, :dependent => :destroy
+  has_many :lectures,               :dependent => :destroy
 
   has_one :subspeciality, :through => :discipline
 
@@ -19,6 +20,7 @@ class WorkProgramm < ActiveRecord::Base
     :to => :dependent_disciplines
 
   delegate :disciplines, :to => :subspeciality
+  delegate :loaded_semesters, :to => :discipline
 
   default_value_for(:year) { Time.now.year }
   default_value_for(:task) { self.prepared_task_example }
@@ -55,6 +57,10 @@ class WorkProgramm < ActiveRecord::Base
 * _уметь_
 * _владеть_
     eos
+  end
+
+  def lectures_grouped_by_semester_number
+    lectures.group_by(&:semester_number)
   end
 end
 

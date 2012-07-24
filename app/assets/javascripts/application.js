@@ -7,4 +7,5 @@
 //= require ./add_discipline
 //= require ./add_autocomplete
 //= require ./cancel_handler
+//= require ./adding_lectures
 //= require main

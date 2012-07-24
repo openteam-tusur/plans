@@ -27,6 +27,7 @@ end
 
 group :development do
   gem 'annotated-rails'
+  gem 'hirb',                 :require => false
 end
 
 group :test do

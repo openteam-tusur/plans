@@ -1,0 +1,11 @@
+<%= simple_form_for [association_chain, resource].flatten, :remote => true do |f| %>
+  <%= f.input :title %>
+  <%= f.input :description %>
+  <%= f.input :volume %>
+  <%= f.input :semester_number, :as => :hidden %>
+  <%= f.submit %>
+  или
+  <%= link_to 'Отмена', smart_resource_url %>
+<% end %>
+
+

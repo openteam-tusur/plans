@@ -22,6 +22,22 @@ class Discipline < ActiveRecord::Base
     loadings.update_all(:deleted_at => Time.now)
   end
 
+  def loaded_courses
+    loaded_semesters.map { |s| (s.to_f / 2).round }.uniq
+  end
+
+  def loaded_semesters
+    loadings.map(&:semester).uniq.map(&:number)
+  end
+
+  def taught_in_one_semester?
+    loaded_semesters.one?
+  end
+
+  def calculated_classroom_loading_summ
+    loadings.where(:loading_kind => Loading.classroom_kinds).sum(&:value)
+  end
+
   def calculated_classroom_loading_summ_for_semester(semester_number)
     loadings.where(:loading_kind => Loading.classroom_kinds, :semester_id => subspeciality.semesters.where(:number => semester_number).first).sum(&:value)
   end

@@ -82,6 +82,18 @@ ActiveRecord::Schema.define(:version => 20120724074825) do
 
   add_index "goses", ["speciality_code"], :name => "index_goses_on_speciality_code"
 
+  create_table "lectures", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "volume"
+    t.integer  "work_programm_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "semester_number"
+  end
+
+  add_index "lectures", ["work_programm_id"], :name => "index_lectures_on_work_programm_id"
+
   create_table "loadings", :force => true do |t|
     t.integer  "semester_id"
     t.integer  "discipline_id"

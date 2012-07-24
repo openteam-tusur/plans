@@ -1,6 +1,6 @@
-
 class WorkProgrammsController < ApplicationController
   inherit_resources
+
   respond_to :html, :json
   respond_to :pdf, :only => :show
 

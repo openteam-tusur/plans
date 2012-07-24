@@ -1,5 +1,34 @@
 <h1>Рабочая программа дисциплины  &quot;<%= @discipline.title %>&quot; <%= @work_programm.year %> года</h1>
+
 <%= render :partial => 'head' %>
+
+<%= link_to 'Добавить', [:new, association_chain, resource, :lecture].flatten, :class => 'actions' %>
+
+<h4>Содержание</h4>
+<% resource.loaded_semesters.each do |semester_number| %>
+  <div class="semester">
+    <h4><%= "#{semester_number} семестр" %></h4>
+
+    <table class="lectures">
+      <tbody>
+        <tr>
+          <th>Название</td>
+          <th>Объем в часах</td>
+        </tr>
+
+        <% [*resource.lectures_grouped_by_semester_number[semester_number]].each do |lecture| %>
+          <%= render lecture %>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= link_to 'Добавить',
+      new_polymorphic_path([association_chain, resource, :lecture].flatten, 'lecture[semester_number]' => semester_number),
+      :class => 'add_lecture',
+      :remote => true %>
+    <div class="form_wrapper"></div>
+  </div>
+<% end %>
 
 <div class='work_programm_wrapper with_text_styles'>
   <h4>Цели</h4>

@@ -35,6 +35,11 @@ ru:
         code: Код специальности
         approved_on: Дата утверждения
 
+      lecture:
+        title: Название
+        description: Описание
+        volume: Объем в часах
+
       programm:
         description: Описание основной образовательной программы
 
@@ -62,7 +67,6 @@ ru:
           end_of_term: Зачет
           course_work: Диф. зачет
           course_projecting: Диф. зачет
-
 
       loading:
         loading_kind_enum:
