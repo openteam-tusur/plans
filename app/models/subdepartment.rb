@@ -11,11 +11,14 @@ class Subdepartment < ActiveRecord::Base
   def chief(year_number)
     subdepartments = YAML.load_file("data/#{year_number}/departments.yml").map { |dep| dep['subdepartments'] }.flatten
     subdepartment_hash = subdepartments.select { |subdep_hash| subdep_hash['number'] == number }
-    return nil unless subdepartment_hash
+    return Person::NIL unless subdepartment_hash
     subdepartment_hash = subdepartment_hash[0]
-    return nil unless subdepartment_hash
-    return nil unless subdepartment_hash['chief']
-    Person.new(subdepartment_hash['chief']['name'], subdepartment_hash['chief']['post'], subdepartment_hash['chief']['science_post'])
+    return Person::NIL unless subdepartment_hash
+    return Person::NIL unless subdepartment_hash['chief']
+    Person.new(subdepartment_hash['chief'])
+  end
+
+  def nil_chief
   end
 end
 #--

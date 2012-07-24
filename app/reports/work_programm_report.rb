@@ -60,26 +60,14 @@ class WorkProgrammReport < Prawn::Document
 
   def build_sign_row(post_prefix, subdivision, person)
     [
-      { :content => "#{post_prefix}#{subdivision.abbr}\n#{person ? person.science_post : '------'}", :width => 250 },
+      { :content => "#{post_prefix}#{subdivision.abbr}\n#{person.science_post}", :width => 250 },
       { :content => "______________", :width => 120, :align => :center, :valign => :bottom },
-      { :content => person ? person.short_name : '-------------', :valign => :bottom, :width => 150 }
+      { :content => person.short_name, :valign => :bottom, :width => 150 }
     ]
   end
 
-  def build_sign_page
-    gos = Gos.where(:speciality_code => work_programm.discipline.subspeciality.speciality.code).order("approved_on desc").first
-    gos_info = "Рабочая программа составлена на основании ГОС ВПО для специальности "
-    gos_info << (gos ? "#{gos.code} «#{gos.title}»" : "----------------------")
-    gos_info << ", утвержденного "
-    gos_info << (gos ? "#{I18n.l(gos.approved_on)} г." : "----------------------")
-    gos_info << ", рассмотрена и утверждена на заседании "
-    gos_info << "кафедры «____» ______________ г., протокол № _______"
-    text gos_info, :align => :justify, :leading => 5, :indent_paragraphs => 30
-
-    move_down 16
-    text sign_page.authors_header
-
-    table(sign_page.authors, :cell_style => {:border_color => "FFFFFF"}, :column_widths => [250, 120, 150]) do
+  def build_sign_table(rows)
+    table(rows.map(&:to_a), :cell_style => {:border_color => "FFFFFF"}, :column_widths => [250, 120, 150]) do
       cells.style do |cell|
         case cell.column
         when 1
@@ -90,36 +78,33 @@ class WorkProgrammReport < Prawn::Document
         end
       end
     end
+  end
+
+  def build_sign_page
+    gos_info = "Рабочая программа составлена на основании ГОС ВПО для специальности #{sign_page.gos[:title]}, "
+    gos_info << "утвержденного #{sign_page.gos[:approved_on]}, "
+    gos_info << "и утверждена на заседании кафедры «____» ______________ г., протокол № _______"
+    text gos_info, :align => :justify, :leading => 5, :indent_paragraphs => 30
+
+    move_down 16
+    text sign_page.authors_header
+
+    build_sign_table(sign_page.authors)
 
     move_down 16
 
-    table([build_sign_row("Зав. обеспечивающей кафедрой ",
-                    @work_programm.discipline.subdepartment,
-                    @work_programm.discipline.subdepartment.chief(@work_programm.year))],
-          :cell_style => {:border_color => "FFFFFF"})
+    build_sign_table([sign_page.subdepartment_chief])
     move_down 24
 
-    text "Рабочая программа согласована с факультетом, профилирующей и выпускающей кафедрами специальности", :align => :justify, :leading => 5, :indent_paragraphs => 30
+    text "Рабочая программа согласована с факультетом, профилирующей и выпускающей кафедрами специальности",
+          :align => :justify,
+          :leading => 5,
+          :indent_paragraphs => 30
 
     move_down 16
 
-    sign_data = []
-    sign_data << build_sign_row("Декан ",
-                          @work_programm.discipline.subspeciality.subdepartment.department,
-                          @work_programm.discipline.subspeciality.subdepartment.department.chief(@work_programm.year))
-    if @work_programm.discipline.subspeciality.graduate_subdepartment == @work_programm.discipline.subspeciality.subdepartment
-      sign_data << build_sign_row("Зав. профилирующей и выпускающей кафедрой ",
-                            @work_programm.discipline.subspeciality.subdepartment,
-                            @work_programm.discipline.subspeciality.subdepartment.chief(@work_programm.year))
-    else
-      sign_data << build_sign_row("Зав. профилирующей кафедрой ",
-                            @work_programm.discipline.subspeciality.subdepartment,
-                            @work_programm.discipline.subspeciality.subdepartment.chief(@work_programm.year))
-      sign_data << build_sign_row("Зав. выпускающей кафедрой ",
-                            @work_programm.discipline.subspeciality.graduate_subdepartment,
-                            @work_programm.discipline.subspeciality.graduate_subdepartment.chief(@work_programm.year))
-    end
-    table(sign_data, :cell_style => {:border_color => "FFFFFF"})
+    build_sign_table([sign_page.department_chief])
+    build_sign_table(sign_page.coordiantors)
   end
 
 

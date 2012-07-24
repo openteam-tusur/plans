@@ -3,8 +3,6 @@
 require 'spec_helper'
 
 describe Person do
-  it  "#short_name" do
-    person = Person.new("Петров Иван Сергеевич",  "должность")
-    person.short_name.should == "Петров И.С."
-  end
+  subject { Person.new(:name => "Петров Иван Сергеевич") }
+  its(:short_name) { should == 'Петров И.С.' }
 end

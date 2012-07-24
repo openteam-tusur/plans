@@ -13,7 +13,7 @@ describe Department do
 
     it "for fsu, 2011" do
       department.stub(:abbr).and_return('ФСУ')
-      department.chief(2011).should be_nil
+      department.chief(2011).should == Person::NIL
     end
   end
 end
