@@ -1,3 +1,77 @@
 <h1>Рабочая программа дисциплины  &quot;<%= @discipline.title %>&quot; <%= @work_programm.year %> года</h1>
 <%= render :partial => 'head' %>
+
+<div class='work_programm_wrapper with_text_styles'>
+  <h4>Цели</h4>
+  <div class="work_programm_purpose">
+    <%= raw RedCloth.new(@work_programm.purpose).to_html if @work_programm.purpose.present? %>
+  </div>
+  <% if @work_programm.purpose.blank? %>
+    <%= link_to "Добавить цели", '#', :class => 'add_text purpose' %>
+  <% else %>
+    <%= link_to "Редактировать цели", '#', :class => 'add_text purpose' %>
+  <% end %>
+</div>
+
+<div class='work_programm_wrapper with_text_styles'>
+  <h4>Задачи</h4>
+  <div class="work_programm_task">
+    <%= raw RedCloth.new(@work_programm.task).to_html if @work_programm.task.present? %>
+  </div>
+  <% if @work_programm.task.blank? %>
+    <%= link_to "Добавить задачи", '#', :class => 'add_text task' %>
+  <% else %>
+    <%= link_to "Редактировать задачи", '#', :class => 'add_text task' %>
+  <% end %>
+</div>
+
+<div class="discipline_wrapper">
+  <h4>Предшествующие дисциплины</h4>
+  <div class="disciplines" style='display: none;'>
+    <%= resource.available_previous_disciplines.map(&:title) %>
+  </div>
+  <ul>
+    <% @work_programm.previous_disciplines.each do|discipline| %>
+      <li>
+        <%= discipline.title %>
+        <%= link_to "Удалить", year_speciality_subspeciality_discipline_work_programm_dependent_discipline_path(@year, @speciality, @subspeciality, @discipline, @work_programm, discipline), :method => :delete, :confirm => t('are_you_sure?'), :class => 'delete_link' %>
+      </li>
+    <% end %>
+  </ul>
+  <%= link_to "Добавить дисциплину", new_year_speciality_subspeciality_discipline_work_programm_dependent_discipline_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => {:dependent_discipline => { :dependency_type => 'previous' }}), :class => 'add_discipline', :remote => true %>
+</div>
+
+<div class="discipline_wrapper">
+  <h4>Совместно идущие дисциплины</h4>
+  <div class="disciplines" style='display: none;'>
+    <%= resource.available_current_disciplines.map(&:title) %>
+  </div>
+  <ul>
+    <% @work_programm.current_disciplines.each do|discipline| %>
+      <li>
+        <%= discipline.title %>
+        <%= link_to "Удалить", year_speciality_subspeciality_discipline_work_programm_dependent_discipline_path(@year, @speciality, @subspeciality, @discipline, @work_programm, discipline), :method => :delete, :confirm => t('are_you_sure?'), :class => 'delete_link' %>
+      </li>
+    <% end %>
+  </ul>
+  <%= link_to "Добавить дисциплину", new_year_speciality_subspeciality_discipline_work_programm_dependent_discipline_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => {:dependent_discipline => { :dependency_type => 'current' }}), :class => 'add_discipline', :remote => true %>
+</div>
+
+<div class="discipline_wrapper">
+  <h4>Последующие дисциплины</h4>
+  <div class="disciplines" style='display: none;'>
+    <%= resource.available_subsequent_disciplines.map(&:title) %>
+  </div>
+  <ul>
+    <% @work_programm.subsequent_disciplines.each do|discipline| %>
+      <li>
+        <%= discipline.title %>
+        <%= link_to "Удалить", year_speciality_subspeciality_discipline_work_programm_dependent_discipline_path(@year, @speciality, @subspeciality, @discipline, @work_programm, discipline), :method => :delete, :confirm => t('are_you_sure?'), :class => 'delete_link' %>
+      </li>
+    <% end %>
+  </ul>
+  <%= link_to "Добавить дисциплину", new_year_speciality_subspeciality_discipline_work_programm_dependent_discipline_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => {:dependent_discipline => { :dependency_type => 'subsequent' }}), :class => 'add_discipline', :remote => true %>
+</div>
+
+<hr />
 <%= link_to "PDF", resource_path(:format => :pdf) %>

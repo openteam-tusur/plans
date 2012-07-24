@@ -3,4 +3,8 @@
 //= require jquery_ujs
 //= require ./choose_file
 //= require ./add_programm
+//= require ./add_text
+//= require ./add_discipline
+//= require ./add_autocomplete
+//= require ./cancel_handler
 //= require main

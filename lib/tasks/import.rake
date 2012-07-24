@@ -134,7 +134,7 @@ def move_all_to_trash
     time_of_sync = DateTime.now
     Dir.glob('app/models/**/*.rb') do |model|
       klass = File.basename(model, '.rb').classify.constantize
-      klass.update_all(:deleted_at => time_of_sync) if klass.attribute_method?(:deleted_at)
+      klass.update_all(:deleted_at => time_of_sync) if klass.respond_to?(:attribute_method?) && klass.attribute_method?(:deleted_at)
     end
   rescue => e
     p e

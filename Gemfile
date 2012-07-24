@@ -20,6 +20,7 @@ group :default do
   gem 'prawn',                :branch => 'master', :git => 'git://github.com/prawnpdf/prawn.git'
   gem 'progress_bar',         :require => false
   gem 'rails'
+  gem 'RedCloth'
   gem 'russian'
   gem 'simple_form'
 end

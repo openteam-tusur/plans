@@ -2,11 +2,22 @@
 
 class WorkProgramm < ActiveRecord::Base
   belongs_to :discipline
-  attr_accessible :year
+  has_one :subspeciality, :through => :discipline
+  attr_accessible :year, :purpose, :task
   validates_presence_of :discipline, :year
 
-  default_value_for :year do  Time.now.year end
+  has_many :dependent_disciplines, :dependent => :destroy
+
+  delegate :subsequent_disciplines, :to => :dependent_disciplines
+  delegate :current_disciplines,    :to => :dependent_disciplines
+  delegate :previous_disciplines,   :to => :dependent_disciplines
+
+  default_value_for :year do Time.now.year end
+  default_value_for :task do self.prepared_task_example end
+
   validates_uniqueness_of :year, :scope => :discipline_id
+
+  delegate :disciplines, :to => :subspeciality
 
   # FIXME: пока просто заглушка
   def authors
@@ -16,7 +27,31 @@ class WorkProgramm < ActiveRecord::Base
     ]
   end
 
+  def available_subsequent_disciplines
+    disciplines.select{ |d| d.semesters.map(&:number).min > discipline.semesters.map(&:number).max } - [discipline.title]
+  end
 
+  def available_current_disciplines
+    disciplines.select{ |d| (d.semesters.map(&:number) & discipline.semesters.map(&:number)).any? } - [discipline.title]
+  end
+
+  def available_previous_disciplines
+    disciplines.select{ |d| d.semesters.map(&:number).max < discipline.semesters.map(&:number).min } - [discipline.title]
+  end
+
+  def self.prepared_task_example
+    res = <<-eos
+# Первый пункт
+# Второй пункт
+# и т.д.
+
+По окончанию изучения дисциплины студент должен:
+* _иметь представление_
+* _знать_
+* _уметь_
+* _владеть_
+    eos
+  end
 end
 
 #--
@@ -29,6 +64,8 @@ end
 #   discipline_id :integer
 #   created_at    :datetime        not null
 #   updated_at    :datetime        not null
+#   purpose       :text
+#   task          :text
 #
 #  Indexes:
 #   index_work_programms_on_discipline_id  discipline_id

@@ -1,0 +1,6 @@
+<%= simple_form_for resource, :url => year_speciality_subspeciality_discipline_work_programm_dependent_disciplines_path(@year, @speciality, @subspeciality, @discipline, @work_programm), :remote => true do |f| %>
+  <%= f.input :dependency_type, :as => :hidden %>
+  <%= f.input :title, :as => :string, :input_html => { :class => 'need_autocomplete' } %>
+  <%= f.submit 'Добавить' %>
+  <%= link_to 'Отмена', "#", :class => 'cancel' %>
+<% end %>

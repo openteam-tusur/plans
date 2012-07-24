@@ -5,7 +5,9 @@ Plans::Application.routes.draw do
       resources :subspecialities, :only => :show do
         resource :programm
         resources :disciplines, :only => [] do
-          resources :work_programms
+          resources :work_programms do
+            resources :dependent_disciplines
+          end
         end
       end
     end

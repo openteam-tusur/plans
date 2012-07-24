@@ -29,12 +29,20 @@ ru:
       didactic_unit:
         discipline: Дисциплина
         content: Содержимое
+
       gos:
         speciality: Название специальности
         code: Код специальности
         approved_on: Дата утверждения
+
       programm:
         description: Описание основной образовательной программы
+
+      dependent_discipline:
+        title: Название дисциплины
+
+      work_programm:
+        year: Год
 
       check:
         check_kind_enum:
@@ -42,11 +50,13 @@ ru:
           end_of_term: Зачет
           course_work: Курсовая работа
           course_projecting: Курсовое проектирование
+
         check_kind_abbrs:
           exam: Экз
           end_of_term: Зач
           course_work: КР
           course_projecting: КП
+
         check_kind_reports:
           exam: Экзамен
           end_of_term: Зачет

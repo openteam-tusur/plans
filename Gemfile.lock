@@ -11,6 +11,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     Ascii85 (1.0.1)
+    RedCloth (4.2.9)
     actionmailer (3.2.5)
       actionpack (= 3.2.5)
       mail (~> 2.4.4)
@@ -198,6 +199,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  RedCloth
   annotated-rails
   attribute_normalizer
   coffee-rails

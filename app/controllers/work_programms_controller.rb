@@ -1,7 +1,7 @@
 
 class WorkProgrammsController < ApplicationController
   inherit_resources
-  respond_to :html
+  respond_to :html, :json
   respond_to :pdf, :only => :show
 
   belongs_to :year, :finder => :find_by_number! do
