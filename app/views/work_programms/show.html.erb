@@ -3,65 +3,6 @@
 <%= render :partial => 'head' %>
 
 
-<h4>Содержание дисциплины</h4>
-
-<table class="lectures">
-  <thead>
-    <tr>
-      <th>Наименование темы и содержание</th>
-      <th>Объем в часах</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% resource.loaded_semesters.each do |semester| %>
-      <tr>
-        <td colspan="2" class="semester">
-          <%= semester %>
-
-          (<%= link_to 'добавить',
-            new_polymorphic_path([association_chain, resource, :lecture].flatten, 'lecture[semester_id]' => semester.id),
-            :class => 'add_lecture',
-            'data-number' => semester.number,
-            :remote => true %>)
-        </td>
-      </tr>
-
-      <%= render :partial => 'lectures/lecture', :collection =>  [*resource.lectures_grouped_by_semester[semester]] %>
-
-      <tr class="<%= "semester_#{semester.number}_form_wrapper" %>"></tr>
-    <% end %>
-    <tr>
-    </tr>
-  </tbody>
-</table>
-
-<% if false %>
-<div class="lectures">
-  <h4>Лекции</h4>
-
-  <div class="header">
-    <div class="description">
-      <p>Название</p>
-    </div>
-    <div class="volume">
-      <p>Объем в часах</p>
-    </div>
-  </div>
-
-  <% resource.loaded_semesters.each do |semester| %>
-    <div class="semester">
-      <h4><%= "#{semester.number} семестр" %></h4>
-
-      <%= render :partial => 'lectures/lecture', :collection =>  [*resource.lectures_grouped_by_semester[semester]] %>
-
-      <div class="form_wrapper"></div>
-      <%= link_to 'Добавить',
-        new_polymorphic_path([association_chain, resource, :lecture].flatten, 'lecture[semester_id]' => semester.id),
-        :class => 'add_lecture',
-        :remote => true %>
-    </div>
-  <% end %>
-</div>
 
 <div class='work_programm_wrapper with_text_styles'>
   <h4>Цели</h4>
@@ -135,6 +76,36 @@
   <%= link_to "Добавить дисциплину", new_year_speciality_subspeciality_discipline_work_programm_dependent_discipline_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => {:dependent_discipline => { :dependency_type => 'subsequent' }}), :class => 'add_discipline', :remote => true %>
 </div>
 
-<hr />
-<%= link_to "PDF", resource_path(:format => :pdf) %>
-<% end %>
+<h4>Содержание дисциплины</h4>
+<table class="lectures">
+  <thead>
+    <tr>
+      <th class="title">Наименование темы и содержание</th>
+      <th class="volume">Объем в часах</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% resource.loaded_semesters.each do |semester| %>
+      <tr>
+        <td colspan="2" class="semester">
+          <%= semester %>
+
+          (<%= link_to 'добавить',
+           new_polymorphic_path([association_chain, resource, :lecture].flatten, 'lecture[semester_id]' => semester.id),
+           :class => 'add_lecture',
+           'data-number' => semester.number,
+           :remote => true %>)
+         </td>
+       </tr>
+
+       <%= render :partial => 'lectures/lecture', :collection =>  [*resource.lectures_grouped_by_semester[semester]] %>
+
+       <tr class="<%= "semester_#{semester.number}_form_wrapper" %>"></tr>
+     <% end %>
+     <tr>
+     </tr>
+   </tbody>
+ </table>
+
+ <hr />
+ <%= link_to "PDF", resource_path(:format => :pdf) %>
