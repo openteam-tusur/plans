@@ -1,8 +1,10 @@
 handle_adding = ->
   $('.add_lecture').on 'ajax:success', (event, data, status, xhr) ->
-    number = $(this).attr('data-number')
+    $this = $(this)
+    number = $this.attr('data-number')
     form_wrapper = $('.semester_' + number + '_form_wrapper')
 
+    $this.off()
     form_wrapper.html(data)
     handle_new_lecture_cancel()
 
@@ -14,6 +16,7 @@ handle_adding = ->
       else
         data.insertBefore(form_wrapper)
         form_wrapper.off().html('')
+        handle_adding()
         handle_editing()
         handle_deleting()
 
