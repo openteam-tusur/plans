@@ -31,8 +31,9 @@ ru:
         content: Содержимое
 
       gos:
-        speciality: Название специальности
-        code: Код специальности
+        title: Название специальности
+        code: Код специальности в ГОС
+        speciality_code: Код специальности
         approved_on: Дата утверждения
 
       lecture:
