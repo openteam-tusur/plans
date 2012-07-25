@@ -3,6 +3,7 @@ handle_adding = ->
     $this = $(this)
     number = $this.attr('data-number')
     form_wrapper = $('.semester_' + number + '_form_wrapper')
+    table = $('.lectures')
 
     $this.off()
     form_wrapper.html(data)
@@ -14,8 +15,7 @@ handle_adding = ->
       if data.find('input').length
         form_wrapper.html(data)
       else
-        data.insertBefore(form_wrapper)
-        form_wrapper.off().html('')
+        table.replaceWith(data)
         handle_adding()
         handle_editing()
         handle_deleting()
@@ -24,6 +24,7 @@ handle_editing = ->
   $('.edit_lecture').on 'ajax:success', (event, data, status, xhr) ->
     $this = $(this)
     lecture_wrapper = $this.closest('tr')
+    table = $('.lectures')
 
     lecture_wrapper.html(data)
 
@@ -33,13 +34,19 @@ handle_editing = ->
       if data.find('input').length
         lecture_wrapper.html(data)
       else
-        lecture_wrapper.replaceWith(data)
+        table.replaceWith(data)
+        handle_adding()
         handle_editing()
         handle_deleting()
 
 handle_deleting = ->
   $('.delete_lecture').on 'ajax:success', (event, data, status, xhr) ->
-    $(this).closest('tr').remove()
+    table = $('.lectures')
+
+    table.replaceWith(data)
+    handle_adding()
+    handle_editing()
+    handle_deleting()
 
 handle_new_lecture_cancel = ->
   $('.new_lecture_cancel').on 'click', ->

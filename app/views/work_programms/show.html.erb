@@ -77,35 +77,7 @@
 </div>
 
 <h4>Содержание дисциплины</h4>
-<table class="lectures">
-  <thead>
-    <tr>
-      <th class="title">Наименование темы и содержание</th>
-      <th class="volume">Объем в часах</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% resource.loaded_semesters.each do |semester| %>
-      <tr>
-        <td colspan="2" class="semester">
-          <%= semester %>
-
-          (<%= link_to 'добавить',
-           new_polymorphic_path([association_chain, resource, :lecture].flatten, 'lecture[semester_id]' => semester.id),
-           :class => 'add_lecture',
-           'data-number' => semester.number,
-           :remote => true %>)
-         </td>
-       </tr>
-
-       <%= render :partial => 'lectures/lecture', :collection =>  [*resource.lectures_grouped_by_semester[semester]] %>
-
-       <tr class="<%= "semester_#{semester.number}_form_wrapper" %>"></tr>
-     <% end %>
-     <tr>
-     </tr>
-   </tbody>
- </table>
+<%= render :file => 'lectures/index', :locals => { :parent => resource } %>
 
  <hr />
  <%= link_to "PDF", resource_path(:format => :pdf) %>
