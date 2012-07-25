@@ -221,7 +221,7 @@ form
   color: #f15d3c
   font-size: 0.7em
 
-.statistics
+.statistics, .lectures
   border: 0
   border-collapse: collapse
   width: 100%
@@ -245,7 +245,7 @@ form
     td
       text-align: center
 
-  .department_title
+  .department_title, .semester
     color: #797979
     text-align: center
 
@@ -312,17 +312,57 @@ form
     list-style: disc inside
 
 .lectures
-  p
-    padding-right: 10px
+  thead
+    th
+      text-align: left
+
+  tbody
+    td
+      padding: 5px
+
+  form
+    text-align: left
+
+    label
+      display: block
+
+    div.input
+      float: left
+      input
+        height: 20px
+        width: 650px
+
+    div.text
+      +clearfix
+      clear: left
+      float: left
+
+      textarea
+        width: 650px
+
+    div.integer
+      +clearfix
+      margin: 0 0 0 40px
+      width: 120px
+
+      input
+        width: 50px
+
+    .inputs
+      +clearfix
+
 
   .description
-    float: left
-    font-size: 1em
-    width: 80%
+    font-size: 0.9em
+    margin-left: 15px
+    text-align: left
 
-  .volume
-    float: right
-    width: 20%
-
-  .header, .lecture
+  .title
     +clearfix
+
+    p, .actions
+      padding: 0
+      float: left
+
+    .actions
+      margin-left: 10px

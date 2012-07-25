@@ -36,8 +36,8 @@ ru:
         approved_on: Дата утверждения
 
       lecture:
-        title: Название
-        description: Описание
+        title: Наименование темы
+        description: Содержание
         volume: Объем в часах
 
       programm:
@@ -90,6 +90,7 @@ ru:
       didactic_unit: Дидактическая единица
       gos: Государственный образовательный стандарт
       programm: программу
+      semester: семестр
 
   pluralize:
     author:

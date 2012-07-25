@@ -1,22 +1,26 @@
-<div class="lecture">
-  <div class="description">
-    <p><%= lecture.title %></p>
-    <p><%= lecture.description %></p>
-  </div>
+<tr>
+  <td>
+    <div class="title">
+      <p><%= lecture.title %></p>
 
-  <div class="volume">
-    <p><%= lecture.volume %></p>
-  </div>
+      <div class="actions">
+        (<%= link_to 'редактировать',
+          [:edit, @year, @speciality, @subspeciality, @discipline, @work_programm, lecture],
+          :remote => true,
+          :class => 'edit_lecture' %>
 
-  <%= link_to 'Редактировать',
-    [:edit, @year, @speciality, @subspeciality, @discipline, @work_programm, lecture],
-    :remote => true,
-    :class => 'edit_lecture' %>
+        <%= link_to 'удалить',
+          [@year, @speciality, @subspeciality, @discipline, @work_programm, lecture],
+          :confirm => t('are_you_sure?'),
+          :method => :delete,
+          :remote => true,
+          :class => 'delete_lecture' %>)
+      </div>
+    </div>
 
-  <%= link_to 'Удалить',
-    [@year, @speciality, @subspeciality, @discipline, @work_programm, lecture],
-    :confirm => t('are_you_sure?'),
-    :method => :delete,
-    :remote => true,
-    :class => 'delete_lecture' %>
-</div>
+    <div class='description'><%= simple_format lecture.description %></div>
+  </td>
+  <td>
+    <%= lecture.volume %>
+  </td>
+</tr>
