@@ -1,5 +1,7 @@
+# encoding: utf-8
+
 Fabricator(:subspeciality) do
   speciality
-  title "Subspeciality title"
+  title "Направление обучения"
   subdepartment
 end

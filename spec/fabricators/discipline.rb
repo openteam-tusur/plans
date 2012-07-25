@@ -5,4 +5,6 @@ Fabricator(:discipline) do
   title 'Учебная дисципина'
   subdepartment
   code 'ЕСН.Ф.1'
+  cycle 'ФТД. Факультативы'
+  component 'Ф'
 end

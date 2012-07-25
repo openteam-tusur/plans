@@ -7,24 +7,24 @@
 <div class='work_programm_wrapper with_text_styles'>
   <h4>Цели</h4>
   <div class="work_programm_purpose">
-    <%= raw RedCloth.new(@work_programm.purpose).to_html if @work_programm.purpose.present? %>
+    <%= @work_programm.purpose_html %>
   </div>
-  <% if @work_programm.purpose.blank? %>
-    <%= link_to "Добавить цели", '#', :class => 'add_text purpose' %>
-  <% else %>
+  <% if @work_programm.purpose? %>
     <%= link_to "Редактировать цели", '#', :class => 'add_text purpose' %>
+  <% else %>
+    <%= link_to "Добавить цели", '#', :class => 'add_text purpose' %>
   <% end %>
 </div>
 
 <div class='work_programm_wrapper with_text_styles'>
   <h4>Задачи</h4>
   <div class="work_programm_task">
-    <%= raw RedCloth.new(@work_programm.task).to_html if @work_programm.task.present? %>
+    <%= @work_programm.task_html %>
   </div>
-  <% if @work_programm.task.blank? %>
-    <%= link_to "Добавить задачи", '#', :class => 'add_text task' %>
-  <% else %>
+  <% if @work_programm.task? %>
     <%= link_to "Редактировать задачи", '#', :class => 'add_text task' %>
+  <% else %>
+    <%= link_to "Добавить задачи", '#', :class => 'add_text task' %>
   <% end %>
 </div>
 
@@ -34,7 +34,7 @@
     <%= resource.available_previous_disciplines.map(&:title) %>
   </div>
   <ul>
-    <% @work_programm.previous_disciplines.each do|discipline| %>
+    <% @work_programm.previous_disciplines.each do |discipline| %>
       <li>
         <%= discipline.title %>
         <%= link_to "Удалить", year_speciality_subspeciality_discipline_work_programm_dependent_discipline_path(@year, @speciality, @subspeciality, @discipline, @work_programm, discipline), :method => :delete, :confirm => t('are_you_sure?'), :class => 'delete_link' %>

@@ -10,6 +10,7 @@ group :assets do
 end
 
 group :default do
+  gem 'RedCloth'
   gem 'attribute_normalizer'
   gem 'default_value_for'
   gem 'el_vfs_client'
@@ -17,10 +18,10 @@ group :default do
   gem 'inherited_resources'
   gem 'nokogiri'
   gem 'openteam-commons',     '>= 0.2.3'
+  gem 'pdfkit'
   gem 'prawn',                :branch => 'master', :git => 'git://github.com/prawnpdf/prawn.git'
   gem 'progress_bar',         :require => false
   gem 'rails'
-  gem 'RedCloth'
   gem 'russian'
   gem 'simple_form'
 end

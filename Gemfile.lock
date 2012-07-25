@@ -112,6 +112,7 @@ GEM
     pdf-reader (1.1.1)
       Ascii85 (~> 1.0.0)
       ruby-rc4
+    pdfkit (0.5.2)
     pg (0.13.2)
     polyglot (0.3.3)
     progress_bar (0.4.0)
@@ -214,6 +215,7 @@ DEPENDENCIES
   jquery-rails
   nokogiri
   openteam-commons (>= 0.2.3)
+  pdfkit
   pg
   prawn!
   progress_bar

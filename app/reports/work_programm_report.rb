@@ -120,7 +120,9 @@ class WorkProgrammReport < Prawn::Document
     build_sign_table(sign_page.coordiantors)
   end
 
+  def build_purposes_and_tasks
 
+  end
 
   def to_pdf(work_programm)
     self.work_programm = work_programm
@@ -143,6 +145,9 @@ class WorkProgrammReport < Prawn::Document
 
     start_new_page
     build_sign_page
+
+    start_new_page
+    build_purposes_and_tasks
 
     render
   end

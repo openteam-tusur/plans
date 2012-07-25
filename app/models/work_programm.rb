@@ -54,17 +54,45 @@ class WorkProgramm < ActiveRecord::Base
   end
 
   def self.prepared_task_example
-    res = <<-eos
-# Первый пункт
-# Второй пункт
-# и т.д.
+    <<-TEXTILE.gsub(/^ +/, '')
+      # Первый пункт
+      # Второй пункт
+      # и т.д.
 
-По окончанию изучения дисциплины студент должен:
-* _иметь представление_
-* _знать_
-* _уметь_
-* _владеть_
-    eos
+      По окончанию изучения дисциплины студент должен:
+      * _иметь представление_
+      * _знать_
+      * _уметь_
+      * _владеть_
+    TEXTILE
+  end
+
+  def purpose_html
+    RedCloth.new(purpose).to_html.html_safe if purpose?
+  end
+
+  def task_html
+    RedCloth.new(task).to_html.html_safe if task?
+  end
+
+  def dependencies_html
+    <<-HTML
+      <p>
+        Дисциплина «#{discipline.title}» входит в #{discipline.decoded_component} компонент цикла «#{discipline.cycle}» по направлению «#{subspeciality.title}».
+      </p>
+    HTML
+  end
+
+  def purposes_and_tasks_html
+    <<-HTML
+      <h1>Цели и задачи дисциплины, ее место в учебном процессе</h1>
+      <h2>Цели преподавания дисциплины</h2>
+      #{purpose_html}
+      <h2>Задачи изучения дисциплины</h2>
+      #{task_html}
+      <h2>Место дисциплины в структуре ООП</h2>
+      #{dependencies_html}
+    HTML
   end
 end
 

@@ -22,12 +22,13 @@ module PlanImporter
       discipline.subdepartment = year.subdepartments.find_by_number((discipline_xml['Кафедра'] || title_node['КодКафедры']))
       cycle_value = discipline_xml['Цикл']
       next unless cycle_value
-      cycle_abbr = cycle_value.split('.').first
+      cycle_abbr, component = cycle_value.split('.')[0..1]
       cycle = xml.css("АтрибутыЦиклов Цикл[Аббревиатура='#{cycle_abbr}']", "АтрибутыЦиклов Цикл[Абревиатура=#{cycle_abbr}]")[0]['Название'].squish
       discipline.cycle = "#{cycle_abbr}. #{cycle}"
       discipline.summ_loading = discipline_xml['ПодлежитИзучению']
       discipline.summ_srs = discipline_xml['СР']
       discipline.code = discipline_xml['ИдетификаторДисциплины']
+      discipline.component = component
       refresh discipline
       discipline.save!
       Check.enum_values(:check_kind).each do |check_kind|
