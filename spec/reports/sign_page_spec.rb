@@ -52,7 +52,7 @@ describe SignPage do
     subject { page.coordiantors }
 
     context 'выпускающая и профилирующая кафедра одинаковая' do
-      before { page.subspeciality.graduate_subdepartment = page.subdepartment }
+      before { page.subspeciality.graduate_subdepartment = page.subspeciality.subdepartment }
       it { should have(1).item }
       its('first.post') { should == 'Зав. профилирующей и выпускающей кафедрой КО' }
     end

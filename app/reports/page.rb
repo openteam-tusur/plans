@@ -2,8 +2,8 @@ class Page
   attr_accessor :work_programm
 
   delegate :discipline, :to => :work_programm
-  delegate :subspeciality, :subdepartment, :checks, :to => :discipline
-  delegate :speciality, :to => :subspeciality
+  delegate :subspeciality, :checks, :to => :discipline
+  delegate :speciality, :subdepartment, :graduate_subdepartment, :to => :subspeciality
   delegate :department, :to => :subdepartment
 
   def initialize(work_programm)
