@@ -10,6 +10,10 @@ class WorkProgramm < ActiveRecord::Base
 
   has_one :subspeciality, :through => :discipline
 
+  delegate :previous_disciplines,   :to => :dependent_disciplines
+  delegate :current_disciplines,    :to => :dependent_disciplines
+  delegate :subsequent_disciplines, :to => :dependent_disciplines
+
   validates_presence_of :discipline, :year
 
   validates_uniqueness_of :year, :scope => :discipline_id
@@ -41,16 +45,16 @@ class WorkProgramm < ActiveRecord::Base
     lectures.group_by(&:semester)
   end
 
-  def available_subsequent_disciplines
-    disciplines.select{ |d| d.semesters.map(&:number).min > discipline.semesters.map(&:number).max } - [discipline.title]
+  def available_previous_disciplines
+    disciplines.select{ |d| d.semesters.map(&:number).max < discipline.semesters.map(&:number).min } - [discipline.title]
   end
 
   def available_current_disciplines
     disciplines.select{ |d| (d.semesters.map(&:number) & discipline.semesters.map(&:number)).any? } - [discipline.title]
   end
 
-  def available_previous_disciplines
-    disciplines.select{ |d| d.semesters.map(&:number).max < discipline.semesters.map(&:number).min } - [discipline.title]
+  def available_subsequent_disciplines
+    disciplines.select{ |d| d.semesters.map(&:number).min > discipline.semesters.map(&:number).max } - [discipline.title]
   end
 
   def self.prepared_task_example
@@ -94,6 +98,15 @@ class WorkProgramm < ActiveRecord::Base
       #{dependencies_html}
     HTML
   end
+
+  %w[previous_disciplines current_disciplines subsequent_disciplines].each do |type|
+    define_method "#{type}_html" do
+      I18n.t "pluralize.work_programm.#{type}",
+            :count => send(type).count,
+            :disciplines => send(type).map{|d| "«#{d.title}»"}.join(', ')
+    end
+  end
+
 end
 
 #--
