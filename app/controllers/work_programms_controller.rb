@@ -12,7 +12,7 @@ class WorkProgrammsController < ApplicationController
     end
   end
 
-  helper_method :title_page, :sign_page
+  helper_method :title_page, :sign_page, :purposes_and_tasks_page
 
   def show
     show! do |format|
@@ -30,5 +30,9 @@ class WorkProgrammsController < ApplicationController
 
     def sign_page
       SignPage.new(@work_programm)
+    end
+
+    def purposes_and_tasks_page
+      PurposesAndTasksPage.new(@work_programm)
     end
 end
