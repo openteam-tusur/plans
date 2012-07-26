@@ -29,7 +29,7 @@ class Discipline < ActiveRecord::Base
   end
 
   def loaded_semesters
-    loadings.map(&:semester).uniq.sort_by(&:number)
+    loadings.map(&:semester).uniq
   end
 
   def loaded_semester_numbers
@@ -38,24 +38,6 @@ class Discipline < ActiveRecord::Base
 
   def taught_in_one_semester?
     loaded_semesters.one?
-  end
-
-  def calculated_classroom_loading_summ
-    loadings.where(:loading_kind => Loading.classroom_kinds).sum(&:value)
-  end
-
-  def calculated_classroom_loading_summ_for_semester(semester_number)
-    loadings.where(:loading_kind => Loading.classroom_kinds, :semester_id => subspeciality.semesters.where(:number => semester_number).first).sum(&:value)
-  end
-
-  def calculated_loading_summ
-    loadings.sum(&:value)
-  end
-
-  def calculated_loading_summ_for_semester(semester_number)
-    uses_loading_kinds = Loading.enum_values(:loading_kind)
-    uses_loading_kinds.delete('exam') if calculated_loading_summ > summ_loading
-    loadings.where(:loading_kind => uses_loading_kinds, :semester_id => subspeciality.semesters.where(:number => semester_number).first).sum(&:value)
   end
 
   def semesters
