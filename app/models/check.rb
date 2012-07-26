@@ -10,3 +10,17 @@ class Check < ActiveRecord::Base
     I18n.t check_kind, :scope => 'activerecord.attributes.check.check_kind_reports'
   end
 end
+
+# == Schema Information
+#
+# Table name: checks
+#
+#  id            :integer          not null, primary key
+#  semester_id   :integer
+#  discipline_id :integer
+#  check_kind    :string(255)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  deleted_at    :datetime
+#
+

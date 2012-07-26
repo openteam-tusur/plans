@@ -72,3 +72,22 @@ class Discipline < ActiveRecord::Base
     COMPONENT_ABBR[component[0]] || raise("не могу расшифровать компонент '#{component}'")
   end
 end
+
+# == Schema Information
+#
+# Table name: disciplines
+#
+#  id               :integer          not null, primary key
+#  title            :string(255)
+#  cycle            :string(255)
+#  subspeciality_id :integer
+#  subdepartment_id :integer
+#  deleted_at       :datetime
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  summ_loading     :integer
+#  summ_srs         :integer
+#  code             :string(255)
+#  component        :string(255)
+#
+

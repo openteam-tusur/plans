@@ -21,3 +21,15 @@ class Year < ActiveRecord::Base
     subspecialities.update_all(:deleted_at => Time.now)
   end
 end
+
+# == Schema Information
+#
+# Table name: years
+#
+#  id         :integer          not null, primary key
+#  number     :integer
+#  deleted_at :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+

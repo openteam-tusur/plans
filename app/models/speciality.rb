@@ -24,3 +24,18 @@ class Speciality < ActiveRecord::Base
       subspecialities.update_all(:deleted_at => Time.now)
     end
 end
+
+# == Schema Information
+#
+# Table name: specialities
+#
+#  id         :integer          not null, primary key
+#  code       :string(255)
+#  title      :string(255)
+#  degree     :string(255)
+#  year_id    :integer
+#  deleted_at :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+

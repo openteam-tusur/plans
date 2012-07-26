@@ -22,3 +22,16 @@ class Semester < ActiveRecord::Base
     loadings.where(:loading_kind => 'lecture', :discipline_id => discipline).map(&:value).sum
   end
 end
+
+# == Schema Information
+#
+# Table name: semesters
+#
+#  id               :integer          not null, primary key
+#  subspeciality_id :integer
+#  number           :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  deleted_at       :datetime
+#
+

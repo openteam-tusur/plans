@@ -11,3 +11,16 @@ class DependentDiscipline < ActiveRecord::Base
   scope :current_disciplines,     where(:dependency_type => 'current')
   scope :previous_disciplines,    where(:dependency_type => 'previous')
 end
+
+# == Schema Information
+#
+# Table name: dependent_disciplines
+#
+#  id               :integer          not null, primary key
+#  title            :text
+#  dependency_type  :string(255)
+#  work_programm_id :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+

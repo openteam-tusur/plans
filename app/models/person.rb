@@ -1,3 +1,5 @@
+# -*- SkipSchemaAnnotations
+
 class Person
   attr_accessor :post, :name, :science_post, :short_name
 

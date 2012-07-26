@@ -13,3 +13,18 @@ class Loading < ActiveRecord::Base
     %w(srs exam)
   end
 end
+
+# == Schema Information
+#
+# Table name: loadings
+#
+#  id            :integer          not null, primary key
+#  semester_id   :integer
+#  discipline_id :integer
+#  loading_kind  :string(255)
+#  value         :integer
+#  deleted_at    :datetime
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+

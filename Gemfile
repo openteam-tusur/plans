@@ -26,7 +26,7 @@ group :default do
 end
 
 group :development do
-  gem 'annotated-rails'
+  gem 'annotate',             '>= 2.5.0.pre'
   gem 'hirb',                 :require => false
 end
 

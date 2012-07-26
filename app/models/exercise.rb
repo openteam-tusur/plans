@@ -10,3 +10,19 @@ class Exercise < ActiveRecord::Base
 
   has_enum :kind, [:lecture, :lab, :practice, :srs]
 end
+
+# == Schema Information
+#
+# Table name: exercises
+#
+#  id               :integer          not null, primary key
+#  title            :string(255)
+#  description      :text
+#  volume           :integer
+#  work_programm_id :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  semester_id      :integer
+#  kind             :string(255)
+#
+

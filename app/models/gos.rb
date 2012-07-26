@@ -17,3 +17,17 @@ class Gos < ActiveRecord::Base
     approved_on? ? "#{I18n.l(approved_on)} г." : '-'*10
   end
 end
+
+# == Schema Information
+#
+# Table name: goses
+#
+#  id              :integer          not null, primary key
+#  title           :text
+#  code            :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  approved_on     :date
+#  speciality_code :string(255)
+#
+
