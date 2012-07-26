@@ -82,10 +82,10 @@
 <h4 class='center'>2. Содержание дисциплины</h4>
 
 <% index = 1 %>
-<% resource.discipline.loadings.group_by(&:loading_kind).each do |kind, loadings| %>
+<% (Exercise.enum_values(:kind) & resource.discipline.loadings.group_by(&:loading_kind).keys).each do |kind| %>
   <h5 class='center'>2.<%= index %> <%= t("activerecord.attributes.exercise.#{kind.pluralize}") %></h5>
   <% index += 1 %>
-  <% loadings.group_by(&:semester).each do |semester, loadings| %>
+  <% resource.discipline.loadings.where(:loading_kind => kind).group_by(&:semester).each do |semester, loadings| %>
     <%= render :file => 'exercises/index', :locals => { :semester => semester, :kind => kind, :loadings => loadings } %>
   <% end %>
 <% end %>

@@ -10,6 +10,8 @@ class Speciality < ActiveRecord::Base
 
   after_save :move_subspeciality_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
 
+  default_scope order(:code)
+
   def to_param
     code
   end
