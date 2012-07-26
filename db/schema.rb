@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120725052018) do
+ActiveRecord::Schema.define(:version => 20120725091813) do
 
   create_table "checks", :force => true do |t|
     t.integer  "semester_id"
@@ -72,6 +72,20 @@ ActiveRecord::Schema.define(:version => 20120725052018) do
   add_index "disciplines", ["subdepartment_id"], :name => "index_disciplines_on_subdepartment_id"
   add_index "disciplines", ["subspeciality_id"], :name => "index_disciplines_on_subspeciality_id"
 
+  create_table "exercises", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "volume"
+    t.integer  "work_programm_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "semester_id"
+    t.string   "kind"
+  end
+
+  add_index "exercises", ["semester_id"], :name => "index_lectures_on_semester_id"
+  add_index "exercises", ["work_programm_id"], :name => "index_lectures_on_work_programm_id"
+
   create_table "goses", :force => true do |t|
     t.text     "title"
     t.string   "code"
@@ -82,19 +96,6 @@ ActiveRecord::Schema.define(:version => 20120725052018) do
   end
 
   add_index "goses", ["speciality_code"], :name => "index_goses_on_speciality_code"
-
-  create_table "lectures", :force => true do |t|
-    t.string   "title"
-    t.text     "description"
-    t.integer  "volume"
-    t.integer  "work_programm_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-    t.integer  "semester_id"
-  end
-
-  add_index "lectures", ["semester_id"], :name => "index_lectures_on_semester_id"
-  add_index "lectures", ["work_programm_id"], :name => "index_lectures_on_work_programm_id"
 
   create_table "loadings", :force => true do |t|
     t.integer  "semester_id"

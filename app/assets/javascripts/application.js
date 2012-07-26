@@ -7,5 +7,5 @@
 //= require ./add_discipline
 //= require ./add_autocomplete
 //= require ./cancel_handler
-//= require ./manage_lectures
+//= require ./manage_exercises
 //= require main

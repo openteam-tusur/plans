@@ -3,7 +3,7 @@ class Semester < ActiveRecord::Base
 
   belongs_to :subspeciality
 
-  has_many :lectures
+  has_many :exercises
   has_many :loadings, :dependent => :destroy
 
   validates_presence_of :subspeciality, :number
@@ -14,11 +14,11 @@ class Semester < ActiveRecord::Base
     "#{number} #{self.class.model_name.human}"
   end
 
-  def real_lecture_loading
-    lectures.map(&:volume).sum
+  def real_exercise_loading
+    exercises.map(&:volume).sum
   end
 
-  def planning_lecture_loading_for_discipline(discipline)
+  def planning_exercise_loading_for_discipline(discipline)
     loadings.where(:loading_kind => 'lecture', :discipline_id => discipline).map(&:value).sum
   end
 end

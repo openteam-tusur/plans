@@ -8,7 +8,7 @@ Plans::Application.routes.draw do
         resources :disciplines, :only => [] do
           resources :work_programms do
             resources :dependent_disciplines
-            resources :lectures, :except => :show
+            resources :exercises, :except => :index
           end
         end
       end

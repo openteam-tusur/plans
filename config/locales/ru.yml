@@ -36,7 +36,16 @@ ru:
         speciality_code: Код специальности
         approved_on: Дата утверждения
 
-      lecture:
+      exercise:
+        lectures: Лекции
+        labs: Лабораторные занятия
+        srs: Самостоятельная работа
+        practices: Практические занятия
+        kind_enum:
+          lecture: Лекция
+          lab: Лабораторная работа
+          srs: Самостоятельная работа
+          practice: Практическое занятие
         title: Наименование темы
         description: Содержание
         volume: Объем в часах
@@ -72,7 +81,7 @@ ru:
       loading:
         loading_kind_enum:
           # аудиторные
-          lecture: Лекции
+          exercise: Лекции
           lab: Лабораторные занятия
           practice: Практические занятия
           csr: "Контроль самостоятельной работы\n(курсовой проект / курсовая работа)"
@@ -83,7 +92,7 @@ ru:
           csr: КСР
           exam: ЧасЭкз
           srs: СРС
-          lecture: Лек
+          exercise: Лек
           lab: Лаб
           practice: Пр
 
@@ -92,6 +101,7 @@ ru:
       gos: Государственный образовательный стандарт
       programm: программу
       semester: семестр
+      exercise: занятие
 
   pluralize:
     author:

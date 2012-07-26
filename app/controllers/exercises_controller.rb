@@ -1,7 +1,7 @@
-class LecturesController < ApplicationController
+class ExercisesController < ApplicationController
   inherit_resources
 
-  actions :all, :except => :show
+  actions :all, :except => :index
 
   belongs_to :year, :finder => :find_by_number! do
     belongs_to :speciality, :finder => :find_by_code! do
@@ -14,8 +14,4 @@ class LecturesController < ApplicationController
   end
 
   layout false
-
-  def destroy
-    destroy! { render :index and return }
-  end
 end

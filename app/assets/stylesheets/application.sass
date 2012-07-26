@@ -43,6 +43,12 @@ a
   &:hover
     color: #218ab2
 
+.center
+  text-align: center
+
+.right
+  text-align: right !important
+
 body
   background: #fafafa
   margin: 0 auto
@@ -221,7 +227,7 @@ form
   color: #f15d3c
   font-size: 0.7em
 
-.statistics, .lectures
+.statistics, .exercises
   border: 0
   border-collapse: collapse
   width: 100%
@@ -311,65 +317,76 @@ form
   ul
     list-style: disc inside
 
-.lectures
-  thead
-    th
-      &.title
-        text-align: left
-        width: 85%
+.exercises
+  margin: 0 0 15px 0
 
-      &.volume
-        width: 15%
+  td
+    padding: 3px
 
-  tbody
-    td
-      padding: 5px
+  tr
+    .theme
+      text-align: left
 
-  form
-    text-align: left
-
-    label
-      display: block
-
-    div.input
-      float: left
-      input
-        height: 20px
-        width: 650px
-
-    div.text
-      +clearfix
-      clear: left
-      float: left
-
-      textarea
-        width: 650px
-
-    div.integer
-      +clearfix
-      margin: 0 0 0 40px
-      width: 120px
-
-      input
-        width: 50px
-
-    .inputs
-      +clearfix
-
-  .add_lecture
-    float: left
-
-  .description
-    font-size: 0.9em
-    margin-left: 15px
-    text-align: left
-
-  .title
-    +clearfix
-
-    p, .actions
-      padding: 0
-      float: left
+    .volume
+      width: 100px
 
     .actions
-      margin-left: 10px
+      float: none
+      width: 100px
+
+  .exercise
+    .title
+      font-size: 1.1em
+      text-align: left
+
+    .description
+      font-style: italic
+      font-size: 0.9em
+      padding: 0 15px
+      text-align: left
+
+  .add_exercise_wrapper
+    background: #eaeaea
+    border-top: 1px solid #CCC9C7
+
+  .total_hours
+    border-top: 1px solid #CCC9C7
+
+  .warning
+    color: #e95b48
+
+  form
+    +clearfix
+    padding: 10px
+    text-align: left
+
+    .error
+      display: block
+      float: none
+
+    .input
+      margin: 0 0 10px 0
+
+    div.string
+      float: left
+      margin: 0 15px 0 0
+
+      input
+        height: 20px
+        padding: 1px 4px
+        width: 700px
+
+    div.integer
+      input
+        height: 20px
+        width: 50px
+
+    .text
+      textarea
+        height: 100px
+        margin: 0
+        width: 98%
+
+    .buttons
+      input
+        height: 25px

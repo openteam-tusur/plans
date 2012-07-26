@@ -6,7 +6,7 @@ class WorkProgramm < ActiveRecord::Base
   belongs_to :discipline
 
   has_many :dependent_disciplines, :dependent => :destroy
-  has_many :lectures,               :dependent => :destroy
+  has_many :exercises,               :dependent => :destroy
 
   has_one :subspeciality, :through => :discipline
 
@@ -37,12 +37,14 @@ class WorkProgramm < ActiveRecord::Base
     ]
   end
 
-  def lectures_grouped_by_semester_number
-    lectures.group_by(&:semester_number)
+  Exercise.enums['kind'].each do |kind|
+    define_method kind.pluralize do
+      exercises.where(:kind => kind)
+    end
   end
 
-  def lectures_grouped_by_semester
-    lectures.group_by(&:semester)
+  def exercises_by_semester_and_kind(semester, kind)
+    send(kind.pluralize).where(:semester_id => semester)
   end
 
   def available_previous_disciplines
