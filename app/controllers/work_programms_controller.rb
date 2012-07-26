@@ -17,8 +17,14 @@ class WorkProgrammsController < ApplicationController
   def show
     show! do |format|
       format.pdf do
-        render :pdf => "work_programm_#{resource.id}.pdf",
-               :template => 'reports/work_programm.html.erb'
+        render  :pdf => "work_programm_#{resource.id}.pdf",
+                :template => 'reports/work_programm.html.erb',
+                :show_as_html => params[:debug],
+                :outline           => false,
+                :margin => { :top       => 5,
+                             :bottom    => 10,
+                             :left      => 25,
+                             :right     => 10 }
       end
     end
   end

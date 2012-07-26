@@ -7,44 +7,44 @@
   </head>
   <body>
     <div class="title_page">
-      <p class='ministry'>Министерство образования и науки Росиийской Федерации</p>
-      <p class='university_type'>Федеральной государственное бюджетное образовательное учереждение высшего профессионального образования</p>
-      <p class='university'>«Томский государственный университет систем управления и радиоэлектроники» (ТУСУР)</p>
+      <p class="ministry strong center uppercase">Министерство образования и науки Росиийской Федерации</p>
+      <p class="university_type center">Федеральной государственное бюджетное образовательное учереждение высшего профессионального образования</p>
+      <p class="university strong center uppercase">«Томский государственный университет систем управления и радиоэлектроники» (ТУСУР)</p>
       <div class='first_prorector'>
-        <p class="center">Утверждаю</p>
-        <p>Первый проректор проректор по учебной работе</p>
+        <p class="center uppercase">Утверждаю</p>
+        <p>Первый проректор-<br/> проректор по учебной работе</p>
         <p>_______________________ Л. А. Боков</p>
         <p>«____» _____________________ <%= resource.year %> г.</p>
       </div>
       <div class="programm_info">
-        <p class='title center'>Рабочая программа</p>
-        <table class='discipline_info'>
+        <p class="title center uppercase strong">Рабочая программа</p>
+        <table class="programm_info">
           <tr>
-            <td>По дисциплине</td>
+            <td class="left_part">По дисциплине</td>
             <td><%= title_page.discipline_title %></td>
           </tr>
           <tr>
-            <td><%= title_page.speciality_kind %></td>
+            <td class="left_part"><%= title_page.speciality_kind %></td>
             <td><%= title_page.speciality_title %></td>
           </tr>
           <tr>
-            <td>Факультет</td>
+            <td class="left_part">Факультет</td>
             <td><%= title_page.department_title %></td>
           </tr>
           <tr>
-            <td>Профилирующая кафедра</td>
+            <td class="left_part">Профилирующая кафедра</td>
             <td><%= title_page.subdepartment_title %></td>
           </tr>
           <tr>
-            <td>Курс</td>
+            <td class="left_part">Курс</td>
             <td><%= title_page.courses %></td>
           </tr>
           <tr>
-            <td>Семестр</td>
+            <td class="left_part">Семестр</td>
             <td><%= title_page.semesters %></td>
           </tr>
         </table>
-        <p><%= title_page.speciality_year %></p>
+        <p class="center"><%= title_page.speciality_year %></p>
       </div>
 
       <div class="programm_loading">
@@ -60,7 +60,7 @@
           <% title_page.scheduling.to_a.each do |row| %>
             <tr>
               <% row.each do |cell| %>
-                <td><%= cell %></td>
+                <td class="cell"><%= cell %></td>
               <% end %>
             </tr>
           <% end %>
@@ -78,28 +78,32 @@
           <% end %>
         </table>
       </div>
-
-      <p class="center bottom"><%= title_page.year_line %></p>
-    </div> <!-- title_page -->
+    </div> <!-- end title_page -->
+    <div class="center year"><%= title_page.year_line %></div>
 
     <div class="page-break"></div>
 
-    <div class='sign_page'>
-      <p>Рабочая программа составлена на основании ГОС ВПО
-        для специальности <%= sign_page.gos.code %> «<%= sign_page.gos.title %>» утвержденного <%= sign_page.gos.localized_approved_on %>,
-        и утверждена на заседании кафедры «____» ______________ г., протокол № _______</p>
+    <div class="sign_page">
+      <div class="authors">
+        <p>Рабочая программа составлена на основании ГОС ВПО
+          для специальности <%= sign_page.gos.code %> «<%= sign_page.gos.title %>» утвержденного <%= sign_page.gos.localized_approved_on %>,
+          и утверждена на заседании кафедры «____» ______________ г., протокол № _______</p>
 
-      <p><%= sign_page.authors_header %></p>
+        <p class="widthout_indent"><%= sign_page.authors_header %></p>
 
-      <%= table(sign_page.authors, 'authors') %>
+        <%= table(sign_page.authors, 'authors') %>
 
-      <%= table([sign_page.subdepartment_chief], 'subdepartment_chief') %>
+        <%= table([sign_page.subdepartment_chief], 'subdepartment_chief') %>
+      </div>
+      <div class="coordinators">
+        <p class='coordinators'>Рабочая программа согласована с факультетом, профилирующей и выпускающей кафедрами специальности</p>
 
-      <p class='coordinators'>Рабочая программа согласована с факультетом, профилирующей и выпускающей кафедрами специальности</p>
+        <%= table([sign_page.department_chief], 'department_chief') %>
+        <%= table(sign_page.coordiantors, 'coordinators') %>
+      </div>
+    </div> <!-- end sign_page -->
 
-      <%= table([sign_page.department_chief], 'department_chief') %>
-      <%= table(sign_page.coordiantors, 'coordinators') %>
-    </div> <!-- title_page -->
+    <div class="page-break"></div>
 
     <div class='purposes_and_tasks_page'>
       <h1>1. Цели и задачи дисциплины, ее место в учебном процессе</h1>

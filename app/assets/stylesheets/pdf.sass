@@ -2,9 +2,28 @@ body
   background-color: #fff
   color: #000
   font-family: "Times New Roman", Times, serif
-  font-size: 12px
+  font-size: 16px
   float: left
-  height: 100%
+
+p
+  text-indent: 2.5em
+
+.widthout_indent
+  text-indent: 0
+
+table
+  border: 0
+  border-collapse: collapse
+  width: 100%
+  tr
+    td
+      padding: 3px 0
+  th
+    font-weight: normal
+    text-align: center
+
+.left_part
+  width: 160px
 
 .page-break
   display: block
@@ -14,48 +33,79 @@ body
 .center
   text-align: center
 
-.bottom
-  bottom: 0
-  position: absolute
+.uppercase
+  text-transform: uppercase
+
+.strong
+  font-weight: bold
+
+.title_page
+  height: 1010px
+  border: 1px solid #fff
+  display: block
+  clear: both
 
 .title_page, .sign_page
   display: block
   clear: both
-  padding: 0 0 0 40px
   text-align: justify
-  min-height: 100%
-  height: auto !important
-  height: 100%
-
-  .ministry, .university_type, .university
-    text-align: center
 
   .ministry
-    text-transform: uppercase
     font-size: 14px
-    font-weight: bold
 
   .university_type
     font-size: 15px
 
   .university
-    text-transform: uppercase
-    font-size: 15px
-    font-weight: bold
+    font-size: 16px
 
 .first_prorector
   text-align: left
   float: right
-  height: 200px
+  font-size: 14px
   width: 280px
+  
+  p
+    text-indent: 0
 
 .programm_info, .programm_loading, .programm_checks
+  clear: both
+  display: block
   float: left
+  width: 100%
 
-.title
-  text-transform: uppercase
-  font-size: 15px
-  font-weight: bold
+.programm_loading
+  table
+    td
+      border-top: 1px solid #000
+      text-align: center
+      width: 40px
+    td:nth-child(1)
+      width: 220px
+      text-align: left
+    td:nth-child(2)
+      width: 100px
+  p
+    text-indent: 0
 
-h1
-  font-size: 14px
+.programm_checks
+  margin: 20px 0 0 0
+  table
+    width: 200px
+
+
+.programm_info
+  table
+    margin: 0 0 20px 0
+
+.authors, .subdepartment_chief, .coordinators
+  margin: 0 0 20px 0
+  table
+    td
+      padding: 10px 20px 10px 0
+    td:nth-child(1)
+      vertical-align: middle
+      width: 50%
+    td:nth-child(2), td:nth-child(3)
+      vertical-align: bottom
+      width: 20%
