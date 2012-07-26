@@ -1,73 +1,87 @@
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<style>h1 {font-size:14px;}</style>
-<p class='ministry'>Министерство образования и науки Росиийской Федерации</p>
-<p class='university_type'>Федеральной государственное бюджетное образовательное учереждение высшего профессионального образования</p>
-<p class='university'>«Томский государственный университет систем управления и радиоэлектроники» (ТУСУР)</p>
-<div class='first_prorector'>
-  <p>Утверждаю</p>
-  <p>Первый проректор проректор по учебной работе</p>
-  <p>_______________________ Л. А. Боков</p>
-  <p>«____» _____________________ <%= resource.year %> г.</p>
-</div>
-<p class='title'>Рабочая программа</p>
-<table class='discipline_info'>
-  <tr>
-    <td>По дисциплине</td>
-    <td><%= title_page.discipline_title %></td>
-  </tr>
-  <tr>
-    <td><%= title_page.speciality_kind %></td>
-    <td><%= title_page.speciality_title %></td>
-  </tr>
-  <tr>
-    <td>Факультет</td>
-    <td><%= title_page.department_title %></td>
-  </tr>
-  <tr>
-    <td>Профилирующая кафедра</td>
-    <td><%= title_page.subdepartment_title %></td>
-  </tr>
-  <tr>
-    <td>Курс</td>
-    <td><%= title_page.courses %></td>
-  </tr>
-  <tr>
-    <td>Семестр</td>
-    <td><%= title_page.semesters %></td>
-  </tr>
-</table>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+  </head>
+  <body>
+    <div class="title_page">
+      <p class='ministry'>Министерство образования и науки Росиийской Федерации</p>
+      <p class='university_type'>Федеральной государственное бюджетное образовательное учереждение высшего профессионального образования</p>
+      <p class='university'>«Томский государственный университет систем управления и радиоэлектроники» (ТУСУР)</p>
+      <div class='first_prorector'>
+        <p class="center">Утверждаю</p>
+        <p>Первый проректор проректор по учебной работе</p>
+        <p>_______________________ Л. А. Боков</p>
+        <p>«____» _____________________ <%= resource.year %> г.</p>
+      </div>
+      <div class="programm_info">
+        <p class='title center'>Рабочая программа</p>
+        <table class='discipline_info'>
+          <tr>
+            <td>По дисциплине</td>
+            <td><%= title_page.discipline_title %></td>
+          </tr>
+          <tr>
+            <td><%= title_page.speciality_kind %></td>
+            <td><%= title_page.speciality_title %></td>
+          </tr>
+          <tr>
+            <td>Факультет</td>
+            <td><%= title_page.department_title %></td>
+          </tr>
+          <tr>
+            <td>Профилирующая кафедра</td>
+            <td><%= title_page.subdepartment_title %></td>
+          </tr>
+          <tr>
+            <td>Курс</td>
+            <td><%= title_page.courses %></td>
+          </tr>
+          <tr>
+            <td>Семестр</td>
+            <td><%= title_page.semesters %></td>
+          </tr>
+        </table>
+        <p><%= title_page.speciality_year %></p>
+      </div>
+      
+      <div class="programm_loading">
+        <p>Распределение учебного времени</p>
+        <table>
+          <% title_page.scheduling.header.each do |row| %>
+            <tr>
+              <% row.each do |cell| %>
+                <%= content_tag :th, cell.delete(:content), cell %>
+              <% end %>
+            </tr>
+          <% end %>
+          <% title_page.scheduling.to_a.each do |row| %>
+            <tr>
+              <% row.each do |cell| %>
+                <td><%= cell %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
 
-<p><%= title_page.speciality_year %></p>
+      <div class="programm_checks">
+        <table>
+          <% title_page.checks.to_a.each do |row| %>
+            <tr>
+              <% row.each do |cell| %>
+                <td><%= cell %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
 
-<p>Распределение учебного времени</p>
-<table>
-  <% title_page.scheduling.header.each do |row| %>
-    <tr>
-      <% row.each do |cell| %>
-        <%= content_tag :th, cell.delete(:content), cell %>
-      <% end %>
-    </tr>
-  <% end %>
-  <% title_page.scheduling.to_a.each do |row| %>
-    <tr>
-      <% row.each do |cell| %>
-        <td><%= cell %></td>
-      <% end %>
-    </tr>
-  <% end %>
-</table>
-
-<table>
-  <% title_page.checks.to_a.each do |row| %>
-    <tr>
-      <% row.each do |cell| %>
-        <td><%= cell %></td>
-      <% end %>
-    </tr>
-  <% end %>
-</table>
-<p><%= title_page.year_line %></p>
-
+      <p class="center bottom"><%= title_page.year_line %></p>
+      <div class='break_line'/>
+    </div> <!-- page -->
 <div class='sign_page'>
   <p>Рабочая программа составлена на основании ГОС ВПО
     для специальности <%= sign_page.gos.code %> «<%= sign_page.gos.title %>» утвержденного <%= sign_page.gos.localized_approved_on %>,
@@ -94,3 +108,6 @@
 <%#= dependencies %>
 <h1>Hello world<h1>
     -->
+  </body>
+</html>
+
