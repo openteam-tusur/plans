@@ -14,7 +14,7 @@ class Gos < ActiveRecord::Base
   end
 
   def localized_approved_on
-    "#{I18n.l(approved_on)} г." if approved_on?
+    approved_on? ? "#{I18n.l(approved_on)} г." : '-'*10
   end
 end
 #--

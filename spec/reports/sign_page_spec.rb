@@ -41,7 +41,7 @@ describe SignPage do
     end
     context 'not founded' do
       its(:title) { should == '--------------------' }
-      its(:localized_approved_on) { should be(nil) }
+      its(:localized_approved_on) { should == '----------' }
     end
   end
 
