@@ -16,6 +16,11 @@ class Gos < ActiveRecord::Base
   def localized_approved_on
     approved_on? ? "#{I18n.l(approved_on)} г." : '-'*10
   end
+
+  def speciality_title
+    speciality = Speciality.find_by_code(speciality_code)
+    speciality ? speciality.title : 'не найдена'
+  end
 end
 
 # == Schema Information

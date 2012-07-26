@@ -11,7 +11,7 @@
 
 <h2><%= resource %></h2>
 <h3>Дата утверждения: <%= l resource.approved_on %></h3>
-<h3>Код специальности: <%= resource.speciality_code %></h3>
+<h3>Специальности: <%= resource.speciality_code %> <%= resource.speciality_title %></h3>
 
 <div class="actions">
   <%= link_to 'Добавить', new_gos_didactic_unit_path(resource) %>
