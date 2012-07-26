@@ -36,12 +36,12 @@ describe SignPage do
     subject { page.gos }
     context 'founded' do
       before { Gos.create! :speciality_code => page.speciality.code, :code => '000', :title => 'ГОС', :approved_on => '01.01.2012'}
-      its([:title]) { should == '000 «ГОС»' }
-      its([:approved_on]) { should == '01.01.2012 г.' }
+      its(:title) { should == 'ГОС' }
+      its(:localized_approved_on) { should == '01.01.2012 г.' }
     end
     context 'not founded' do
-      its([:title]) { should == '--------------------' }
-      its([:approved_on]) { should == '----------' }
+      its(:title) { should == '--------------------' }
+      its(:localized_approved_on) { should be(nil) }
     end
   end
 

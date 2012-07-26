@@ -18,12 +18,11 @@ group :default do
   gem 'inherited_resources'
   gem 'nokogiri'
   gem 'openteam-commons',     '>= 0.2.3'
-  gem 'pdfkit'
-  gem 'prawn',                :branch => 'master', :git => 'git://github.com/prawnpdf/prawn.git'
   gem 'progress_bar',         :require => false
   gem 'rails'
   gem 'russian'
   gem 'simple_form'
+  gem 'wicked_pdf'
 end
 
 group :development do

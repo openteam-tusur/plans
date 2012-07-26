@@ -12,12 +12,19 @@ class WorkProgrammsController < ApplicationController
     end
   end
 
+  helper_method :title_page
+
   def show
     show! do |format|
       format.pdf do
-        wp = WorkProgrammReport.new(:page_size => 'A4', :left_margin => 50, :right_margin => 25, :top_margin => 25, :bottom_margin => 25).to_pdf(resource)
-        send_data wp, :file_name => "rpd.pdf", :type => "application/pdf", :format => :pdf
+        render :pdf => "work_programm_#{resource.id}.pdf",
+               :template => 'reports/work_programm.html.erb'
       end
     end
   end
+
+  private
+    def title_page
+      TitlePage.new(@work_programm)
+    end
 end

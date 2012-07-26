@@ -79,34 +79,6 @@ class WorkProgramm < ActiveRecord::Base
     RedCloth.new(task).to_html.html_safe if task?
   end
 
-  def dependencies_html
-    <<-HTML
-      <p>
-        Дисциплина «#{discipline.title}» входит в #{discipline.decoded_component} компонент цикла «#{discipline.cycle}» по направлению «#{subspeciality.title}».
-      </p>
-    HTML
-  end
-
-  def purposes_and_tasks_html
-    <<-HTML
-      <h1>Цели и задачи дисциплины, ее место в учебном процессе</h1>
-      <h2>Цели преподавания дисциплины</h2>
-      #{purpose_html}
-      <h2>Задачи изучения дисциплины</h2>
-      #{task_html}
-      <h2>Место дисциплины в структуре ООП</h2>
-      #{dependencies_html}
-    HTML
-  end
-
-  %w[previous_disciplines current_disciplines subsequent_disciplines].each do |type|
-    define_method "#{type}_html" do
-      I18n.t "pluralize.work_programm.#{type}",
-            :count => send(type).count,
-            :disciplines => send(type).map{|d| "«#{d.title}»"}.join(', ')
-    end
-  end
-
 end
 
 #--

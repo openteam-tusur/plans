@@ -76,16 +76,17 @@ class TitlePage::Scheduling
     if loaded_semesters.count > 1
       [
         [{:content => "", :rowspan=> 2}, {:content => "Всего часов", :rowspan => 2}, {:content => "По семестрам", :colspan => loaded_semesters.size}],
-        loaded_semesters.map { |number| "#{number}" }
+        loaded_semesters.map { |number| { :content => "#{number}" } }
       ]
     else
-      [["", "Всего часов"]]
+      [
+        [{:content => ""}, {:content => "Всего часов"}]
+      ]
     end
   end
 
   def to_a
-    result = header
-
+    result = []
     (Loading.classroom_kinds + ['classroom'] + Loading.srs_kinds + ['total']).each do |name|
       row = self.send(name)
       result << row.to_a unless row.total.zero?

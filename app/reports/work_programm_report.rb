@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class WorkProgrammReport < Prawn::Document
+class WorkProgrammReport
   attr_accessor :work_programm
 
   def title_page
@@ -71,14 +71,6 @@ class WorkProgrammReport < Prawn::Document
     text title_page.year_line, :align => :center, :valign => :bottom
   end
 
-  def build_sign_row(post_prefix, subdivision, person)
-    [
-      { :content => "#{post_prefix}#{subdivision.abbr}\n#{person.science_post}", :width => 250 },
-      { :content => "______________", :width => 120, :align => :center, :valign => :bottom },
-      { :content => person.short_name, :valign => :bottom, :width => 150 }
-    ]
-  end
-
   def build_sign_table(rows)
     table(rows.map(&:to_a), :cell_style => {:border_color => "FFFFFF"}, :column_widths => [250, 120, 150]) do
       cells.style do |cell|
@@ -94,6 +86,8 @@ class WorkProgrammReport < Prawn::Document
   end
 
   def build_sign_page
+    start_new_page
+
     gos_info = "Рабочая программа составлена на основании ГОС ВПО для специальности #{sign_page.gos[:title]}, "
     gos_info << "утвержденного #{sign_page.gos[:approved_on]}, "
     gos_info << "и утверждена на заседании кафедры «____» ______________ г., протокол № _______"
@@ -121,7 +115,11 @@ class WorkProgrammReport < Prawn::Document
   end
 
   def build_purposes_and_tasks
-
+    Dir.mktmpdir do |dir|
+      filename = "#{dir}/purposes_and_tasks.pdf"
+      PurposesAndTasksPage.new(work_programm).to_pdf(filename)
+      start_new_page(:template => filename)
+    end
   end
 
   def to_pdf(work_programm)
@@ -143,10 +141,8 @@ class WorkProgrammReport < Prawn::Document
 
     build_title_page
 
-    start_new_page
     build_sign_page
 
-    start_new_page
     build_purposes_and_tasks
 
     render
