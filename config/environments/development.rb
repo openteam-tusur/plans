@@ -34,4 +34,18 @@ Plans::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.generators do |generators|
+    generators.assets               false
+    generators.helper               false
+    generators.stylesheets          false
+
+    generators.test_framework       :rspec
+    generators.fixture_replacement  :fabrication
+
+    generators.controller_specs     false
+    generators.helper_specs         false
+    generators.routing_specs        false
+    generators.view_specs           false
+  end
 end

@@ -26,6 +26,12 @@ ru:
               blank: файл не выбран
 
     attributes:
+      bibliographic_record:
+        place:  Размещение ресурса
+        url:    URL
+        text:   Библиографическая запись
+
+
       didactic_unit:
         discipline: Дисциплина
         content: Содержимое
@@ -58,6 +64,11 @@ ru:
 
       work_programm:
         year: Год
+        basic_bibliographic_records:      Основная литература
+        additional_bibliographic_records: Дополнительная литература
+        ump_bibliographic_records:        Перечень методических указаний (УМП) по проведению конкретных видов учебных занятий
+
+
 
       check:
         check_kind_enum:
