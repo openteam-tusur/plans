@@ -9,7 +9,7 @@
 <div class='work_programm_wrapper with_text_styles'>
   <h4 class='center'>1.1 Цели</h4>
   <div class="work_programm_purpose">
-    <%= @work_programm.purpose_html %>
+    <%= simple_format @work_programm.purpose %>
   </div>
   <% if @work_programm.purpose? %>
     <%= link_to "Редактировать цели", '#', :class => 'add_text purpose' %>
@@ -90,8 +90,6 @@
 <h4 class='center'>2. Содержание дисциплины</h4>
 
 <% index = 1 %>
-<%= Exercise.enum_values(:kind) %>
-<%= Exercise %>
 <% Exercise.enum_values(:kind).each do |kind| %>
   <h5 class='center'>2.<%= index %> <%= t("activerecord.attributes.exercise.#{kind.pluralize}") %></h5>
   <% index += 1 %>

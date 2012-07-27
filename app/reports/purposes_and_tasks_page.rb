@@ -1,13 +1,6 @@
 # encoding: utf-8
 
 class PurposesAndTasksPage < Page
-  def purposes
-    work_programm.purpose_html
-  end
-
-  def tasks
-    work_programm.task_html
-  end
 
   def dependencies
     <<-HTML.html_safe

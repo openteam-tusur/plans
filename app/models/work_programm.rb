@@ -64,14 +64,6 @@ class WorkProgramm < ActiveRecord::Base
     disciplines.select{ |d| d.semesters.map(&:number).min > discipline.semesters.map(&:number).max } - [discipline.title]
   end
 
-  def purpose_html
-    RedCloth.new(purpose).to_html.html_safe if purpose?
-  end
-
-  def task_html
-    RedCloth.new(task).to_html.html_safe if task?
-  end
-
   private
   def set_purpose
     self.purpose = "Целью изучения дисциплины «#{discipline.title}» является"

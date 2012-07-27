@@ -1,6 +1,6 @@
 <li>
   <%= simple_form_for [association_chain, resource].flatten, :remote => true do |f| %>
-    <%= f.input :description, :label => "#{f.object.human_kind}:" %>
+    <%= f.input :description, :label => "#{f.object.human_requirement_kind}:" %>
 
     <div class="buttons">
       <%= f.submit %>
