@@ -16,9 +16,6 @@ class WorkProgrammsController < ApplicationController
 
   def show
     show! do |format|
-      format.html do
-        render :file => 'reports/work_programm.html.erb'
-      end
       format.pdf do
         render  :pdf => "work_programm_#{resource.id}.pdf",
                 :template => 'reports/work_programm.html.erb',
