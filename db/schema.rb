@@ -201,7 +201,6 @@ ActiveRecord::Schema.define(:version => 20120727034532) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.text     "purpose"
-    t.text     "task"
   end
 
   add_index "work_programms", ["discipline_id"], :name => "index_work_programms_on_discipline_id"
