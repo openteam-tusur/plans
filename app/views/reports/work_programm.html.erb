@@ -116,45 +116,39 @@
     </div>
 
     <div class='content_chapter'>
-      <h1>Содержание дисциплины</h1>
-      <% index = 1 %>
-      <% @work_programm.discipline.loadings.group_by(&:loading_kind).each do |kind, loadings| %>
-        <h2>2.<%= index %> <%= t("activerecord.attributes.exercise.#{kind.pluralize}") %></h2>
-        <% index += 1 %>
-        <% loadings.group_by(&:semester).each do |semester, loadings| %>
-          <h3><%= semester %></h5>
+      <h1>2. Содержание дисциплины</h1>
+      <% Exercise.enum_values(:kind).each_with_index do |kind, index| %>
+        <h2>2.<%= index+1 %> <%= t("activerecord.attributes.exercise.#{kind.pluralize}") %></h2>
+        <% grouped_loadings = resource.discipline.loadings.where(:loading_kind => kind).group_by(&:semester) %>
+        <% if grouped_loadings.any? %>
           <table class='exercises'>
-            <thead>
-              <tr>
-                <th class='theme'>Тема и содержание</th>
-                <th class='right volume'>Объем, часов</th>
-              </tr>
-            </thead>
             <tbody>
-              <% resource.exercises_by_semester_and_kind(semester, kind).each do |exercise| %>
-                <tr>
-                  <td>
-                    <div class='title'><%= exercise.title %></div>
-                    <div class='description'><%= simple_format exercise.description %></div>
-                  </td>
-                  <td class='hours'>
-                    <%= exercise.volume %>
-                  </td>
+              <% grouped_loadings.each do |semester, loadings| %>
+                <tr class='semester'>
+                  <td class='semester'><%= semester %></td>
+                  <td class='hours'><%= title_page.scheduling.send(kind).hours[semester.number] %></td>
                 </tr>
+                <% resource.exercises_by_semester_and_kind(semester, kind).each do |exercise| %>
+                  <tr>
+                    <td>
+                      <div class='title'><%= exercise.title %></div>
+                      <div class='description'><%= simple_format exercise.description %></div>
+                    </td>
+                    <td class='hours'>
+                      <%= exercise.volume %>
+                    </td>
+                  </tr>
+                <% end %>
               <% end %>
-
               <tr class='total_hours'>
-                <% sum = resource.exercises_by_semester_and_kind(semester, kind).map(&:volume).sum %>
-                <td colspan='2' class='right <%= 'warning' if sum > loadings.first.value %>'>
-                  <%= "Всего часов добавленных занятий: <span>#{sum}</span>".html_safe %>
+                <td colspan='2'>
+                  Всего часов: <span><%= title_page.scheduling.send(kind).total %></span>
                 </td>
-              </tr>
-
-              <tr class='rup_hours'>
-                <td colspan='3' class='right'><%= "Необходимо часов по РУП: <span>#{loadings.first.value}</span>".html_safe %></td>
               </tr>
             </tbody>
           </table>
+        <% else %>
+          <%= content_tag :p, 'Занятия не предусмотрены учебным планом' %>
         <% end %>
       <% end %>
     </div>
