@@ -12,7 +12,7 @@ class PurposesAndTasksPage < Page
   def dependencies
     <<-HTML.html_safe
       <p>
-        Дисциплина «#{discipline.title}» входит в #{discipline.decoded_component} компонент цикла «#{discipline.cycle}» по направлению «#{speciality.gos.title}».
+        Дисциплина «#{discipline.title}» входит в цикл «#{discipline.cycle_code}» по направлению «#{speciality.gos.title}».
         #{previous_disciplines}
         #{current_disciplines}
         #{subsequent_disciplines}

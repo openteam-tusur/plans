@@ -10,7 +10,7 @@ class TitlePage < Page
   end
 
   def discipline_title
-    "#{discipline.title} (#{discipline.code})"
+    "#{discipline.title} (#{discipline.cycle_code})"
   end
 
   def speciality_title

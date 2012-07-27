@@ -27,8 +27,7 @@ module PlanImporter
       discipline.cycle = "#{cycle_abbr}. #{cycle}"
       discipline.summ_loading = discipline_xml['ПодлежитИзучению']
       discipline.summ_srs = discipline_xml['СР']
-      discipline.code = discipline_xml['ИдетификаторДисциплины']
-      discipline.component = component
+      discipline.cycle_code = discipline_xml['Цикл']
       refresh discipline
       discipline.save!
       Check.enum_values(:check_kind).each do |check_kind|

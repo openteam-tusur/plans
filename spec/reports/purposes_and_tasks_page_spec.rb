@@ -13,7 +13,7 @@ describe PurposesAndTasksPage do
     subject { page.dependencies }
 
     it { should =~ /Дисциплина «Учебная дисципина»/ }
-    it { should =~ /цикла «ФТД. Факультативы»/ }
+    it { should =~ /цикл «ЕСН.Ф»/ }
     context 'направление обучения' do
       context 'ГОС есть' do
         before { page.speciality.should_receive(:gos).and_return(Gos.new(:title => 'Направление обучения ГОС')) }
@@ -24,24 +24,6 @@ describe PurposesAndTasksPage do
       end
     end
 
-    context 'федеральный компонент' do
-      it { should =~ /входит в федеральный компонент/ }
-    end
-
-    context 'региональный компонет' do
-      before { discipline.component = 'Р1' }
-      it { should =~ /входит в региональный компонент/ }
-    end
-
-    context 'выборный компонет' do
-      before { discipline.component = 'В1' }
-      it { should =~ /входит в выборный компонент/ }
-    end
-
-    context 'неизвестный компонет' do
-      before { discipline.component = 'Г1' }
-      specify { expect{ page.dependencies }.should raise_error }
-    end
   end
 
   describe '#previous_disciplines' do

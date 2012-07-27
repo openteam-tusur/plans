@@ -44,15 +44,6 @@ class Discipline < ActiveRecord::Base
     loadings.map(&:semester).uniq
   end
 
-  COMPONENT_ABBR = {
-    'Ф' => 'федеральный',
-    'Р' => 'региональный',
-    'В' => 'выборный'
-  }
-
-  def decoded_component
-    COMPONENT_ABBR[component[0]] || raise("не могу расшифровать компонент '#{component}'")
-  end
 end
 
 # == Schema Information

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120727022718) do
+ActiveRecord::Schema.define(:version => 20120727034532) do
 
   create_table "bibliographic_records", :force => true do |t|
     t.integer  "work_programm_id"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(:version => 20120727022718) do
     t.integer  "summ_loading"
     t.integer  "summ_srs"
     t.string   "code"
-    t.string   "component"
+    t.string   "cycle_code"
   end
 
   add_index "disciplines", ["subdepartment_id"], :name => "index_disciplines_on_subdepartment_id"
