@@ -12,7 +12,7 @@ describe PurposesAndTasksPage do
   describe '#dependencies' do
     subject { page.dependencies }
 
-    it { should =~ /Дисциплина «Учебная дисципина»/ }
+    it { should =~ /Дисциплина «Учебная дисциплина»/ }
     it { should =~ /цикл «ЕСН.Ф»/ }
     context 'направление обучения' do
       context 'ГОС есть' do

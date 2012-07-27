@@ -2,7 +2,7 @@
 
 Fabricator(:discipline) do
   subspeciality
-  title 'Учебная дисципина'
+  title 'Учебная дисциплина'
   subdepartment
   cycle_code 'ЕСН.Ф'
   cycle 'ФТД. Факультативы'

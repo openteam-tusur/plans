@@ -29,6 +29,8 @@ class WorkProgramm < ActiveRecord::Base
   default_value_for(:year) { Time.now.year }
   default_value_for(:task) { self.prepared_task_example }
 
+  before_create :set_purpose
+
   # FIXME: пока просто заглушка
   def authors
     [
@@ -79,6 +81,11 @@ class WorkProgramm < ActiveRecord::Base
 
   def task_html
     RedCloth.new(task).to_html.html_safe if task?
+  end
+
+  private
+  def set_purpose
+    self.purpose = "Целью изучения дисциплины «#{discipline.title}» является"
   end
 
 end

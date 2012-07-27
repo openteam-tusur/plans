@@ -15,7 +15,7 @@ describe TitlePage do
   let(:semester2) { Fabricate(:semester, :subspeciality => page.subspeciality, :number => 2) }
 
   its(:date_line) { should == '«____» _____________________ 2012 г.' }
-  its(:discipline_title) { should == 'Учебная дисципина (ЕСН.Ф)' }
+  its(:discipline_title) { should == 'Учебная дисциплина (ЕСН.Ф)' }
 
   describe '#loaded_courses' do
     before { page.should_receive(:loaded_semesters).and_return(semesters) }
