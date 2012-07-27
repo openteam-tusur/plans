@@ -1,29 +1,21 @@
 # encoding: utf-8
 
 class WorkProgramm < ActiveRecord::Base
-  attr_accessible :year, :purpose, :task
+  attr_accessible :year, :purpose, :task, :related_discipline_ids
 
   belongs_to :discipline
 
-  has_many :dependent_disciplines,  :dependent => :destroy
   has_many :exercises,              :dependent => :destroy
   has_many :missions,               :dependent => :destroy
   has_many :requirements,           :dependent => :destroy
 
   has_one :subspeciality, :through => :discipline
 
-  delegate :previous_disciplines,   :to => :dependent_disciplines
-  delegate :current_disciplines,    :to => :dependent_disciplines
-  delegate :subsequent_disciplines, :to => :dependent_disciplines
+  has_and_belongs_to_many :related_disciplines, :class_name => Discipline
 
   validates_presence_of :discipline, :year
 
   validates_uniqueness_of :year, :scope => :discipline_id
-
-  delegate :subsequent_disciplines,
-    :current_disciplines,
-    :previous_disciplines,
-    :to => :dependent_disciplines
 
   delegate :disciplines, :to => :subspeciality
   delegate :loaded_semesters, :to => :discipline
@@ -52,16 +44,16 @@ class WorkProgramm < ActiveRecord::Base
     send(kind.pluralize).where(:semester_id => semester)
   end
 
-  def available_previous_disciplines
-    disciplines.select{ |d| d.semesters.map(&:number).max < discipline.semesters.map(&:number).min } - [discipline.title]
+  def previous_disciplines
+    related_disciplines.select{ |d| d.semesters.map(&:number).max < discipline.semesters.map(&:number).min } - [discipline.title]
   end
 
-  def available_current_disciplines
-    disciplines.select{ |d| (d.semesters.map(&:number) & discipline.semesters.map(&:number)).any? } - [discipline.title]
+  def current_disciplines
+    related_disciplines.select{ |d| (d.semesters.map(&:number) & discipline.semesters.map(&:number)).any? } - [discipline.title]
   end
 
-  def available_subsequent_disciplines
-    disciplines.select{ |d| d.semesters.map(&:number).min > discipline.semesters.map(&:number).max } - [discipline.title]
+  def subsequent_disciplines
+    related_disciplines.select{ |d| d.semesters.map(&:number).min > discipline.semesters.map(&:number).max } - [discipline.title]
   end
 
   private

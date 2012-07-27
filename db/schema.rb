@@ -84,6 +84,14 @@ ActiveRecord::Schema.define(:version => 20120727055621) do
   add_index "disciplines", ["subdepartment_id"], :name => "index_disciplines_on_subdepartment_id"
   add_index "disciplines", ["subspeciality_id"], :name => "index_disciplines_on_subspeciality_id"
 
+  create_table "disciplines_work_programms", :id => false, :force => true do |t|
+    t.integer "discipline_id"
+    t.integer "work_programm_id"
+  end
+
+  add_index "disciplines_work_programms", ["discipline_id"], :name => "index_disciplines_work_programms_on_discipline_id"
+  add_index "disciplines_work_programms", ["work_programm_id"], :name => "index_disciplines_work_programms_on_work_programm_id"
+
   create_table "exercises", :force => true do |t|
     t.string   "title"
     t.text     "description"

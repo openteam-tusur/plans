@@ -78,6 +78,10 @@ ru:
         basic_bibliographic_records:      Основная литература
         additional_bibliographic_records: Дополнительная литература
         ump_bibliographic_records:        Перечень методических указаний (УМП) по проведению конкретных видов учебных занятий
+        previous_disciplines:             Предшествующие дисциплины
+        current_disciplines:              Совместно идущие дисциплины
+        subsequent_disciplines:           Последующие дисциплины
+        related_disciplines:              Связанные дисциплины
 
       check:
         check_kind_enum:
