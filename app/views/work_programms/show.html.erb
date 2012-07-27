@@ -90,6 +90,8 @@
 <h4 class='center'>2. Содержание дисциплины</h4>
 
 <% index = 1 %>
+<%= Exercise.enum_values(:kind) %>
+<%= Exercise %>
 <% Exercise.enum_values(:kind).each do |kind| %>
   <h5 class='center'>2.<%= index %> <%= t("activerecord.attributes.exercise.#{kind.pluralize}") %></h5>
   <% index += 1 %>

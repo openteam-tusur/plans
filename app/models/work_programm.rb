@@ -78,8 +78,8 @@ class WorkProgramm < ActiveRecord::Base
   end
 
   def create_requirements
-    Requirement.enums['kind'].each do |kind|
-      requirements.create(:kind => kind)
+    Requirement.enums['requirement_kind'].each do |kind|
+      requirements.create(:requirement_kind => kind)
     end
   end
 end

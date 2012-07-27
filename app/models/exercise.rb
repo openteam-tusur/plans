@@ -8,7 +8,7 @@ class Exercise < ActiveRecord::Base
 
   default_scope order('id ASC')
 
-  has_enum :kind, [:lecture, :lab, :practice, :csr]
+  has_enum :kind
 end
 
 # == Schema Information

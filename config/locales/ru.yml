@@ -62,7 +62,7 @@ ru:
         description: Описание задачи
 
       requirement:
-        kind_enum:
+        requirement_kind_enum:
           know: знать
           be_able_to: уметь
           have: владеть
