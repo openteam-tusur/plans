@@ -122,6 +122,13 @@ ActiveRecord::Schema.define(:version => 20120727034532) do
   add_index "loadings", ["discipline_id"], :name => "index_loadings_on_discipline_id"
   add_index "loadings", ["semester_id"], :name => "index_loadings_on_semester_id"
 
+  create_table "missions", :force => true do |t|
+    t.text     "description"
+    t.integer  "work_programm_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
   create_table "programms", :force => true do |t|
     t.integer  "with_programm_id"
     t.string   "with_programm_type"
@@ -133,6 +140,14 @@ ActiveRecord::Schema.define(:version => 20120727034532) do
 
   add_index "programms", ["with_programm_id"], :name => "index_programms_on_with_programm_id"
   add_index "programms", ["with_programm_type"], :name => "index_programms_on_with_programm_type"
+
+  create_table "requirements", :force => true do |t|
+    t.integer  "work_programm_id"
+    t.string   "kind"
+    t.text     "description"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "semesters", :force => true do |t|
     t.integer  "subspeciality_id"

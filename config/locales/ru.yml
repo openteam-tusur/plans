@@ -58,6 +58,15 @@ ru:
         description: Содержание
         volume: Объем в часах
 
+      mission:
+        description: Описание задачи
+
+      requirement:
+        kind_enum:
+          know: знать
+          be_able_to: уметь
+          have: владеть
+
       programm:
         description: Описание основной образовательной программы
 
@@ -69,8 +78,6 @@ ru:
         basic_bibliographic_records:      Основная литература
         additional_bibliographic_records: Дополнительная литература
         ump_bibliographic_records:        Перечень методических указаний (УМП) по проведению конкретных видов учебных занятий
-
-
 
       check:
         check_kind_enum:
@@ -111,10 +118,12 @@ ru:
 
     models:
       didactic_unit: Дидактическая единица
-      gos: Государственный образовательный стандарт
-      programm: программу
-      semester: семестр
       exercise: занятие
+      gos: Государственный образовательный стандарт
+      mission: задачу
+      programm: программу
+      requirement: требование
+      semester: семестр
 
   pluralize:
     author:

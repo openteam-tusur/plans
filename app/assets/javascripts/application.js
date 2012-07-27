@@ -8,4 +8,5 @@
 //= require ./add_autocomplete
 //= require ./cancel_handler
 //= require ./manage_exercises
+//= require ./manage_missions
 //= require main

@@ -5,8 +5,10 @@ class WorkProgramm < ActiveRecord::Base
 
   belongs_to :discipline
 
-  has_many :dependent_disciplines, :dependent => :destroy
-  has_many :exercises,               :dependent => :destroy
+  has_many :dependent_disciplines,  :dependent => :destroy
+  has_many :exercises,              :dependent => :destroy
+  has_many :missions,               :dependent => :destroy
+  has_many :requirements,           :dependent => :destroy
 
   has_one :subspeciality, :through => :discipline
 
@@ -26,8 +28,9 @@ class WorkProgramm < ActiveRecord::Base
   delegate :disciplines, :to => :subspeciality
   delegate :loaded_semesters, :to => :discipline
 
+  after_create :create_requirements
+
   default_value_for(:year) { Time.now.year }
-  default_value_for(:task) { self.prepared_task_example }
 
   before_create :set_purpose
 
@@ -61,20 +64,6 @@ class WorkProgramm < ActiveRecord::Base
     disciplines.select{ |d| d.semesters.map(&:number).min > discipline.semesters.map(&:number).max } - [discipline.title]
   end
 
-  def self.prepared_task_example
-    <<-TEXTILE.gsub(/^ +/, '')
-      # Первый пункт
-      # Второй пункт
-      # и т.д.
-
-      По окончанию изучения дисциплины студент должен:
-      * _иметь представление_
-      * _знать_
-      * _уметь_
-      * _владеть_
-    TEXTILE
-  end
-
   def purpose_html
     RedCloth.new(purpose).to_html.html_safe if purpose?
   end
@@ -88,6 +77,11 @@ class WorkProgramm < ActiveRecord::Base
     self.purpose = "Целью изучения дисциплины «#{discipline.title}» является"
   end
 
+  def create_requirements
+    Requirement.enums['kind'].each do |kind|
+      requirements.create(:kind => kind)
+    end
+  end
 end
 
 # == Schema Information

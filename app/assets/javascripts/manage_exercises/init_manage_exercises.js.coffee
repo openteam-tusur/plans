@@ -30,7 +30,7 @@ $.fn.remote_hadler = () ->
     cancel_handler()
 
 cancel_handler = () ->
-  $('.cancel').on 'click', ->
+  $('.cancel', '.exercises').on 'click', ->
     link = $(this)
     new_record = link.hasClass('new_record')
 
