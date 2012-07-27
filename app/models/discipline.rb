@@ -10,6 +10,7 @@ class Discipline < ActiveRecord::Base
   has_many :checks, :dependent => :destroy
   has_many :loadings, :dependent => :destroy
   has_many :work_programms, :dependent => :destroy
+  has_many :semesters, :through => :loadings, :uniq => true
 
   scope :actual, where(:deleted_at => nil)
 
@@ -22,36 +23,6 @@ class Discipline < ActiveRecord::Base
   def move_descendants_to_trash
     checks.update_all(:deleted_at => Time.now)
     loadings.update_all(:deleted_at => Time.now)
-  end
-
-  def loaded_courses
-    loaded_semester_numbers.map { |s| (s.to_f / 2).round }.uniq
-  end
-
-  def loaded_semesters
-    loadings.map(&:semester).uniq
-  end
-
-  def loaded_semester_numbers
-    loaded_semesters.map(&:number)
-  end
-
-  def taught_in_one_semester?
-    loaded_semesters.one?
-  end
-
-  def semesters
-    loadings.map(&:semester).uniq
-  end
-
-  COMPONENT_ABBR = {
-    'Ф' => 'федеральный',
-    'Р' => 'региональный',
-    'В' => 'выборный'
-  }
-
-  def decoded_component
-    COMPONENT_ABBR[component[0]] || raise("не могу расшифровать компонент '#{component}'")
   end
 
   def to_s
