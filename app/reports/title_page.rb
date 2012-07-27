@@ -44,7 +44,7 @@ class TitlePage < Page
   def checks
     hash = {}
     discipline.checks.group_by(&:report_kind_value).each do |check_kind, checks|
-      hash[check_kind] =  "#{checks.map(&:semester).map(&:number).join(', ')} семестр"
+      hash[check_kind] =  "#{checks.map(&:semester).map(&:number).sort.join(', ')} семестр"
     end
     hash
   end
@@ -54,7 +54,7 @@ class TitlePage < Page
   end
 
   def loaded_semesters
-    @loaded_semesters ||= discipline.loadings.map(&:semester).uniq.map(&:number)
+    @loaded_semesters ||= discipline.loadings.map(&:semester).uniq.map(&:number).sort
   end
 
   def loaded_courses

@@ -5,8 +5,17 @@ body
   font-size: 16px
   float: left
 
+h1, h2
+  text-indent: 2.5em
+
+h1
+  font-size: 16px
+h2
+  font-size: 16px
+
 p
   text-indent: 2.5em
+  line-height: 1.5
 
 .widthout_indent
   text-indent: 0
@@ -17,7 +26,7 @@ table
   width: 100%
   tr
     td
-      padding: 3px 0
+      padding: 3px 0 3px 5px
   th
     font-weight: normal
     text-align: center
@@ -45,7 +54,7 @@ table
   display: block
   clear: both
 
-.title_page, .sign_page
+.title_page, .sign_page, .purposes_and_tasks_page, .content_chapter
   display: block
   clear: both
   text-align: justify
@@ -71,20 +80,25 @@ table
 .programm_info, .programm_loading, .programm_checks
   clear: both
   display: block
-  float: left
   width: 100%
 
 .programm_loading
   table
+    border: 1px solid #000
+    width: 70%
+    th
+      border: 1px solid #000
     td
-      border-top: 1px solid #000
+      border: 1px solid #000
+      padding: 3px 0
       text-align: center
-      width: 40px
+      width: 5%
     td:nth-child(1)
-      width: 220px
+      padding: 3px 0 3px 5px
+      width: 30%
       text-align: left
     td:nth-child(2)
-      width: 100px
+      width: 15%
   p
     text-indent: 0
 
@@ -109,3 +123,30 @@ table
     td:nth-child(2), td:nth-child(3)
       vertical-align: bottom
       width: 20%
+
+.exercises
+  td
+    &:tr
+    border: 1px solid #000
+    padding: 3px5px
+
+  .hours
+    td
+      text-align: center
+
+  .semester
+    td
+      text-align: left
+
+  .exercises_title
+    text-align: left
+
+  .description
+    text-align: justify
+
+    p
+      line-height: normal
+      margin: 0 0 0.5em 0
+
+  .total_hours
+    align: left
