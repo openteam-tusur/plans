@@ -1,0 +1,21 @@
+<div class="sign_page">
+  <div class="authors">
+    <p>Рабочая программа составлена на основании ГОС ВПО
+      для специальности <%= sign_page.gos.code %> «<%= sign_page.gos.title %>» утвержденного <%= sign_page.gos.localized_approved_on %>,
+      и утверждена на заседании кафедры «____» ______________ г., протокол № _______</p>
+
+    <p class="widthout_indent"><%= sign_page.authors_header %></p>
+
+    <%= table(sign_page.authors, 'authors') %>
+
+    <%= table([sign_page.subdepartment_chief], 'subdepartment_chief') %>
+  </div>
+  <div class="coordinators">
+    <p class='coordinators'>Рабочая программа согласована с факультетом, профилирующей и выпускающей кафедрами специальности</p>
+
+    <%= table([sign_page.department_chief], 'department_chief') %>
+    <%= table(sign_page.coordiantors, 'coordinators') %>
+  </div>
+</div> <!-- end sign_page -->
+
+<div class="page-break"></div>

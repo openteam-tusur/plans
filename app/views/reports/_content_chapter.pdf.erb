@@ -1,0 +1,55 @@
+<div class='content_chapter'>
+  <h1 class='uppercase strong'>2. Содержание дисциплины</h1>
+  <% Exercise.enum_values(:kind).each_with_index do |kind, index| %>
+  <h2 class='strong'>2.<%= index+1 %> <%= t("activerecord.attributes.exercise.#{kind.pluralize}") %></h2>
+  <% grouped_loadings = Hash[resource.discipline.loadings.where(:loading_kind => kind).group_by(&:semester).sort{|a,b| a[0].number <=> b[0].number}] %>
+
+  <% if grouped_loadings.any? %>
+    <% grouped_loadings.each do |semester, loadings| %>
+      <div class='split_table'>
+        <table class='exercises'>
+          <tbody>
+            <tr>
+              <td><%= semester %></td>
+              <td class='hours'><%= title_page.scheduling.send(kind).hours[semester.number] %></td>
+            <tr>
+          </tbody>
+        </table>
+      </div>
+
+      <% resource.exercises_by_semester_and_kind(semester, kind).each do |exercise| %>
+      <div class='split_table'>
+        <table class='exercises'>
+          <tbody>
+            <tr>
+              <td>
+                <div class='exercises_title strong'><%= exercise.title %></div>
+                <div class='description'><%= simple_format exercise.description %></div>
+              </td>
+              <td class='hours'><%= exercise.volume %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <% end %>
+    <% end %>
+
+    <div class='split_table'>
+      <table class='exercises'>
+        <tbody>
+          <tr>
+            <td>Всего часов:</td>
+            <td class='hours'><%= title_page.scheduling.send(kind).total %></td>
+          <tr>
+        </tbody>
+      </table>
+    </div>
+
+  <% else %>
+    <%= content_tag :p, 'Занятия не предусмотрены учебным планом' %>
+  <% end %>
+
+<% end %>
+</div> <!-- end content_chapter -->
+
+<div class="page-break"></div>

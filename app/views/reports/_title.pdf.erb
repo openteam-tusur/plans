@@ -1,0 +1,76 @@
+<div class="title_page">
+  <p class="ministry strong center uppercase">Министерство образования и науки Росиийской Федерации</p>
+  <p class="university_type center">Федеральной государственное бюджетное образовательное учереждение высшего профессионального образования</p>
+  <p class="university strong center uppercase">«Томский государственный университет систем управления и радиоэлектроники» (ТУСУР)</p>
+  <div class='first_prorector'>
+    <p class="center uppercase">Утверждаю</p>
+    <p>Первый проректор-<br/> проректор по учебной работе</p>
+    <p>_______________________ Л. А. Боков</p>
+    <p>«____» _____________________ <%= resource.year %> г.</p>
+  </div>
+  <div class="programm_info">
+    <p class="center uppercase strong">Рабочая программа</p>
+    <table class="programm_info">
+      <tr>
+        <td class="left_part">По дисциплине</td>
+        <td><%= title_page.discipline_title %></td>
+      </tr>
+      <tr>
+        <td class="left_part"><%= title_page.speciality_kind %></td>
+        <td><%= title_page.speciality_title %></td>
+      </tr>
+      <tr>
+        <td class="left_part">Факультет</td>
+        <td><%= title_page.department_title %></td>
+      </tr>
+      <tr>
+        <td class="left_part">Профилирующая кафедра</td>
+        <td><%= title_page.subdepartment_title %></td>
+      </tr>
+      <tr>
+        <td class="left_part">Курс</td>
+        <td><%= title_page.courses %></td>
+      </tr>
+      <tr>
+        <td class="left_part">Семестр</td>
+        <td><%= title_page.semesters %></td>
+      </tr>
+    </table>
+    <p class="center"><%= title_page.speciality_year %></p>
+  </div>
+
+  <div class="programm_loading">
+    <p>Распределение учебного времени</p>
+    <table>
+      <% title_page.scheduling.header.each do |row| %>
+        <tr>
+          <% row.each do |cell| %>
+            <%= content_tag :th, cell.delete(:content), cell %>
+          <% end %>
+        </tr>
+      <% end %>
+      <% title_page.scheduling.to_a.each do |row| %>
+        <tr>
+          <% row.each do |cell| %>
+            <td class="cell"><%= cell %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="programm_checks">
+    <table>
+      <% title_page.checks.to_a.each do |row| %>
+        <tr>
+          <% row.each do |cell| %>
+            <td><%= cell %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div> 
+<div class="center year"><%= title_page.year_line %></div> <!-- end title_page -->
+
+<div class="page-break"></div>
