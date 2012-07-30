@@ -11,6 +11,7 @@ Plans::Application.routes.draw do
             resources :exercises,    :except => :index
             resources :missions,     :except => :index
             resources :requirements, :except => [:index, :new, :create]
+            resource :self_education, :except => :show
           end
         end
       end

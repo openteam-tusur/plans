@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120730031015) do
+ActiveRecord::Schema.define(:version => 20120730055030) do
 
   create_table "bibliographic_records", :force => true do |t|
     t.integer  "work_programm_id"
@@ -148,6 +148,16 @@ ActiveRecord::Schema.define(:version => 20120730031015) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
+
+  create_table "self_educations", :force => true do |t|
+    t.integer  "work_programm_id"
+    t.integer  "lecture_hours"
+    t.text     "lecture_control"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "self_educations", ["work_programm_id"], :name => "index_self_educations_on_work_programm_id"
 
   create_table "semesters", :force => true do |t|
     t.integer  "subspeciality_id"

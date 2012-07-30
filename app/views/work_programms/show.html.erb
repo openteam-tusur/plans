@@ -57,7 +57,7 @@
 
 <% index = 1 %>
 <% Exercise.enum_values(:kind).each do |kind| %>
-  <h5 class='center'>2.<%= index %> <%= t("activerecord.attributes.exercise.#{kind.pluralize}") %></h5>
+  <h5 class='center'>2.<%= index %> <%= Exercise.human_attribute_name kind.pluralize %></h5>
   <% index += 1 %>
   <% grouped_loadings = resource.discipline.loadings.where(:loading_kind => kind).group_by(&:semester) %>
   <%= content_tag :p, 'Занятия не предусмотрены учебным планом' if grouped_loadings.empty?  %>
@@ -65,3 +65,10 @@
     <%= render :file => 'exercises/index', :locals => { :semester => semester, :kind => kind, :loadings => loadings } %>
   <% end %>
 <% end %>
+
+<h5 class='center'>2.5 <%= Exercise.human_attribute_name :srs %></h5>
+<% grouped_loadings = resource.discipline.loadings.where(:loading_kind => :srs).group_by(&:semester) %>
+<%= content_tag :p, 'Занятия не предусмотрены учебным планом' if grouped_loadings.empty? %>
+<%= link_to 'Изменить', [(resource.self_education ? :edit : :new), association_chain, resource, :self_education].flatten %>
+
+

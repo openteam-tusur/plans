@@ -11,6 +11,8 @@ class WorkProgramm < ActiveRecord::Base
 
   has_one :subspeciality, :through => :discipline
 
+  has_one :self_education
+
   has_and_belongs_to_many :related_disciplines, :class_name => Discipline
 
   validates_presence_of :discipline, :year

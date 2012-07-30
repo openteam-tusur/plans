@@ -51,7 +51,6 @@ ru:
         kind_enum:
           lecture: Лекция
           lab: Лабораторная работа
-          srs: Самостоятельная работа
           practice: Практическое занятие
           csr: Курсовой проект
         title: Наименование темы
@@ -61,17 +60,22 @@ ru:
       mission:
         description: Описание задачи
 
+      programm:
+        description: Описание основной образовательной программы
+
       requirement:
         requirement_kind_enum:
           know: знать
           be_able_to: уметь
           have: владеть
 
-      programm:
-        description: Описание основной образовательной программы
-
-      dependent_discipline:
-        title: Название дисциплины
+      self_education:
+        lecture_hours: Количество часов
+        lecture_control: Форма контроля
+        lecture_control_enum:
+          quiz:       опрос
+          test:       тест
+          home_work:  домашнее задание
 
       work_programm:
         year: Год

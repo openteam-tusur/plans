@@ -1,0 +1,5 @@
+<%= simple_form_for resource, :url => (association_chain + [:self_education]) do |form| %>
+  <%= form.input :lecture_hours %>
+  <%= form.input :lecture_control, :as => :check_boxes, :collection => SelfEducation.human_enums[:lecture_control].invert %>
+  <%= form.submit 'Сохранить' %>
+<% end %>
