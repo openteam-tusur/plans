@@ -26,31 +26,39 @@ describe PurposesAndTasksPage do
 
   end
 
+  def mock_disciplines(kind, discipline_titles)
+    disciplines = discipline_titles.map! {|discipline_title| Fabricate(:discipline, :title => discipline_title)}
+    work_programm.should_receive(kind).any_number_of_times.and_return(disciplines)
+  end
+
   describe '#previous_disciplines' do
     subject { page.previous_disciplines }
     context 'нет дисциплин' do
+      before { mock_disciplines :previous_disciplines, [] }
       it { should be nil }
     end
-    context 'есть дисциплины' do
-      before { work_programm.previous_disciplines.create(:title => 'Дисциплина 1').save(:validate => false) }
-      context 'одна' do
-        it { should == 'Изучение дисциплины базируется на материалах курса «Дисциплина 1».' }
-      end
-      context 'две' do
-        before { work_programm.previous_disciplines.create(:title => 'Дисциплина 2').save(:validate => false) }
-        it { should == 'Изучение дисциплины базируется на материалах таких курсов как «Дисциплина 1», «Дисциплина 2».' }
-      end
+    context 'одна дисциплина' do
+      before { mock_disciplines :previous_disciplines, ['Дисциплина 1'] }
+      it { should == 'Изучение дисциплины базируется на материалах курса «Дисциплина 1».' }
+    end
+    context 'две дисциплины' do
+      before { mock_disciplines :previous_disciplines, ['Дисциплина 1', 'Дисциплина 2'] }
+      it { should == 'Изучение дисциплины базируется на материалах таких курсов как «Дисциплина 1», «Дисциплина 2».' }
     end
   end
 
   describe '#current_disciplines' do
     subject { page.current_disciplines }
     context 'нет дисциплин' do
+      before { mock_disciplines :current_disciplines, [] }
       it { should be nil }
     end
-    context 'есть дисциплины' do
-      before { work_programm.current_disciplines.create(:title => 'Дисциплина 1').save(:validate => false) }
-      before { work_programm.current_disciplines.create(:title => 'Дисциплина 2').save(:validate => false) }
+    context 'одна дисциплина' do
+      before { mock_disciplines :current_disciplines, ['Дисциплина 1'] }
+      it { should == 'При освоении данной дисциплины компетенции одновременно формируются с дисциплиной «Дисциплина 1».' }
+    end
+    context 'две дисциплины' do
+      before { mock_disciplines :current_disciplines, ['Дисциплина 1', 'Дисциплина 2'] }
       it { should == 'При освоении данной дисциплины компетенции одновременно формируются с дисциплинами «Дисциплина 1», «Дисциплина 2».' }
     end
   end
@@ -58,11 +66,15 @@ describe PurposesAndTasksPage do
   describe '#subsequent_disciplines' do
     subject { page.subsequent_disciplines }
     context 'нет дисциплин' do
+      before { mock_disciplines :subsequent_disciplines, [] }
       it { should be nil }
     end
-    context 'есть дисциплины' do
-      before { work_programm.subsequent_disciplines.create(:title => 'Дисциплина 1').save(:validate => false) }
-      before { work_programm.subsequent_disciplines.create(:title => 'Дисциплина 2').save(:validate => false) }
+    context 'одна дисциплина' do
+      before { mock_disciplines :subsequent_disciplines, ['Дисциплина 1'] }
+      it { should == 'Она является основой для изучения дисциплины «Дисциплина 1».' }
+    end
+    context 'две дисциплины' do
+      before { mock_disciplines :subsequent_disciplines, ['Дисциплина 1', 'Дисциплина 2'] }
       it { should == 'Она является основой для изучения следующих дисциплин: «Дисциплина 1», «Дисциплина 2».' }
     end
   end
