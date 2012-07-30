@@ -1,10 +1,18 @@
-<table>
+<table class='self_education'>
+  <thead>
+    <tr>
+      <th>Номер</th>
+      <th>Наименование работы</th>
+      <th><%= SelfEducation.human_attribute_name :lecture_hours  %></th>
+      <th><%= SelfEducation.human_attribute_name :lecture_control  %></th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
       <td>1.</td>
       <td>Проработка лекционного материала</td>
-      <td><%= lecture_hours %></td>
-      <td></td>
+      <td><%= resource.self_education.lecture_hours %></td>
+      <td><%= SelfEducation.human_enum_values(:lecture_control).values_at(*resource.self_education.lecture_control).join(', ') %></td>
     </tr>
   </tbody>
 </table>
