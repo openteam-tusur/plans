@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120730050517) do
+ActiveRecord::Schema.define(:version => 20120730055030) do
 
   create_table "checks", :force => true do |t|
     t.integer  "semester_id"
