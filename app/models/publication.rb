@@ -3,7 +3,11 @@ class Publication < ActiveRecord::Base
 
   belongs_to :work_programm
 
-  alias_attribute :to_s, :text
+  validates_presence_of :text
 
   has_enum :publication_kind
+
+  def to_s
+    "#{text}".tap { |s| s << ". URL: #{url}"  if url? }
+  end
 end

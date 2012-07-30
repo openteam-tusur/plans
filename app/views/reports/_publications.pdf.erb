@@ -1,0 +1,36 @@
+<div class='publications_page'>
+  <h1 class='uppercase strong'>3. Учебно-методические материалы по дисциплине</h1>
+
+  <h2 class='strong'>3.1 Основная литература</h2>
+  <ol>
+    <% resource.publications_by_kind('basic').each do |publication| %>
+      <li><%= publication %></li>
+    <% end %>
+  </ol>
+
+  <h2 class='strong'>3.2 Дополнительная литература</h2>
+  <% if resource.publications_by_kind('additional').any? %>
+    <ol>
+      <% resource.publications_by_kind('additional').each do |publication| %>
+        <li><%= publication %></li>
+      <% end %>
+    </ol>
+  <% else %>
+    <p>Не указано</p>
+  <% end %>
+
+  <h2 class='strong'>3.3 Перечень учебно-методических пособий (УМП) </h2>
+  <% resource.ump_publication_kinds.each_with_index do |kind, index| %>
+    <h4 class="strong center">3.3.<%= index + 1 %> <%= t("activerecord.attributes.publication.publication_kind_enum.ump_#{kind}") %></h4>
+
+    <% if resource.publications_by_kind("ump_#{kind}").any? %>
+      <ol>
+      <% resource.publications_by_kind("ump_#{kind}").each do |publication| %>
+        <li><%= publication %></li>
+      <% end %>
+      </ol>
+    <% else %>
+      <p>Не указано</p>
+    <% end %>
+  <% end %>
+</div>
