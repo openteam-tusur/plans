@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120730055030) do
+ActiveRecord::Schema.define(:version => 20120730094257) do
 
   create_table "checks", :force => true do |t|
     t.integer  "semester_id"
@@ -154,6 +154,8 @@ ActiveRecord::Schema.define(:version => 20120730055030) do
     t.text     "lecture_control"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.integer  "lab_hours"
+    t.text     "lab_control"
   end
 
   add_index "self_educations", ["work_programm_id"], :name => "index_self_educations_on_work_programm_id"
