@@ -71,6 +71,10 @@ class WorkProgramm < ActiveRecord::Base
     publications.where publication_kind: kind
   end
 
+  def has_loadings_for?(kind)
+    discipline.loadings.where(:loading_kind => kind).any?
+  end
+
   private
   def set_purpose
     self.purpose = "Целью изучения дисциплины «#{discipline.title}» является"
