@@ -1,3 +1,13 @@
+html, body, div, p, h1, h2, h3, table
+  margin: 0
+  padding: 0
+  border: 0
+  font-weight: inherit
+  font-style: inherit
+  font-size: 100%
+  font-family: inherit
+  vertical-align: baseline
+
 body
   background-color: #fff
   color: #000
@@ -7,14 +17,16 @@ body
 
 h1, h2
   text-indent: 2.5em
+  margin-bottom: 0.5em
 
 h1, h2, h3
   font-size: 16px
   font-size: 16px
 
 p
-  text-indent: 2.5em
   line-height: 1.5
+  margin-bottom: 0.5em
+  text-indent: 2.5em
 
 .widthout_indent
   text-indent: 0
@@ -47,13 +59,10 @@ table
 .strong
   font-weight: bold
 
-.title_page
-  height: 1010px
-  border: 1px solid #fff
-  display: block
-  clear: both
+.indentation
+  margin: 20px 0
 
-.title_page, .sign_page, .purposes_and_tasks_page, .content_chapter
+.title_page, .sign_page, .purposes_and_tasks_page, .content_chapter_page
   display: block
   clear: both
   text-align: justify
@@ -71,6 +80,7 @@ table
   text-align: left
   float: right
   font-size: 14px
+  margin: 20px 0
   width: 280px
   
   p
@@ -105,7 +115,6 @@ table
   margin: 20px 0 0 0
   table
     width: 200px
-
 
 .programm_info
   table

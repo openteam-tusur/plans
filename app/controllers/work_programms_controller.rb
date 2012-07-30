@@ -20,11 +20,12 @@ class WorkProgrammsController < ApplicationController
         render  :pdf => "work_programm_#{resource.id}.pdf",
                 :template => 'reports/work_programm.html.erb',
                 :show_as_html => params[:debug],
-                :outline           => false,
-                :margin => { :top       => 5,
+                :outline => false,
+                :margin => { :top       => 10,
                              :bottom    => 10,
                              :left      => 25,
-                             :right     => 10 }
+                             :right     => 10 },
+                :footer => { :html => { :template => 'reports/work_programm_footer.pdf.erb' }}
       end
     end
   end
