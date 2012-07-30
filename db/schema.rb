@@ -11,19 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120730055030) do
-
-  create_table "bibliographic_records", :force => true do |t|
-    t.integer  "work_programm_id"
-    t.string   "kind"
-    t.string   "place"
-    t.text     "text"
-    t.text     "url"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  add_index "bibliographic_records", ["work_programm_id"], :name => "index_bibliographic_records_on_work_programm_id"
+ActiveRecord::Schema.define(:version => 20120730050517) do
 
   create_table "checks", :force => true do |t|
     t.integer  "semester_id"
@@ -140,6 +128,17 @@ ActiveRecord::Schema.define(:version => 20120730055030) do
 
   add_index "programms", ["with_programm_id"], :name => "index_programms_on_with_programm_id"
   add_index "programms", ["with_programm_type"], :name => "index_programms_on_with_programm_type"
+
+  create_table "publications", :force => true do |t|
+    t.integer  "work_programm_id"
+    t.string   "publication_kind"
+    t.text     "text"
+    t.text     "url"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "publications", ["work_programm_id"], :name => "index_bibliographic_records_on_work_programm_id"
 
   create_table "requirements", :force => true do |t|
     t.integer  "work_programm_id"

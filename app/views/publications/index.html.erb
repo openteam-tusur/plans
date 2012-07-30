@@ -1,0 +1,18 @@
+<table class='exercises'>
+  <thead>
+    <tr>
+      <th class='theme'>Название</th>
+      <th class='actions'></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% resource.publications_by_kind(kind).each do |item| %>
+      <%= render item %>
+    <% end %>
+    <tr>
+      <td colspan='3' class='right add_exercise_wrapper'>
+        <%= link_to "+ #{t("activerecord.attributes.publication.publication_kind_enum.#{kind}").mb_chars.downcase}", new_year_speciality_subspeciality_discipline_work_programm_publication_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :publication => { :publication_kind => kind }}), :remote => true, :class => 'new_record' %>
+      </td>
+    </tr>
+  </tbody>
+</table>

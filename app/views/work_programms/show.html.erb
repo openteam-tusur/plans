@@ -71,4 +71,18 @@
 <%= content_tag :p, 'Занятия не предусмотрены учебным планом' if grouped_loadings.empty? %>
 <%= link_to 'Изменить', [(resource.self_education ? :edit : :new), association_chain, resource, :self_education].flatten %>
 
+<h4 class="center">3. Учебно-методические материалы по дисциплине</h4>
+<h5 class='center'>3.1 Основная литература</h5>
 
+<%= render :file => 'publications/index', :locals => { :kind => 'basic' } %>
+
+<h5 class='center'>3.2 Дополнительная литература</h5>
+
+<%= render :file => 'publications/index', :locals => { :kind => 'additional' } %>
+
+<h5 class='center'>3.3 Перечень учебно-методических пособий (УМП) </h5>
+
+<% resource.ump_publication_kinds.each_with_index do |kind, index| %>
+  <h6>3.3.<%= index + 1 %> <%= t("activerecord.attributes.publication.publication_kind_enum.ump_#{kind}") %></h6>
+  <%= render :file => 'publications/index', :locals => { :kind => "ump_#{kind}" } %>
+<% end %>

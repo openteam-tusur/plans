@@ -10,6 +10,7 @@ Plans::Application.routes.draw do
             resources :dependent_disciplines
             resources :exercises,    :except => :index
             resources :missions,     :except => :index
+            resources :publications, :except => :index
             resources :requirements, :except => [:index, :new, :create]
             resource :self_education, :except => :show
           end

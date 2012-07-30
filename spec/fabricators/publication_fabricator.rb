@@ -1,4 +1,4 @@
-Fabricator(:bibliographic_record) do
+Fabricator(:publication) do
   work_programm nil
   kind "MyString"
   place "MyString"

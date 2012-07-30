@@ -7,6 +7,7 @@ class WorkProgramm < ActiveRecord::Base
 
   has_many :exercises,              :dependent => :destroy
   has_many :missions,               :dependent => :destroy
+  has_many :publications,           :dependent => :destroy
   has_many :requirements,           :dependent => :destroy
 
   has_one :subspeciality, :through => :discipline
@@ -56,6 +57,18 @@ class WorkProgramm < ActiveRecord::Base
 
   def subsequent_disciplines
     related_disciplines.select{ |d| d.semesters.map(&:number).min > discipline.semesters.map(&:number).max } - [discipline.title]
+  end
+
+  def available_exercise_kinds
+    discipline.loadings.pluck(:loading_kind) & Exercise.enum_values(:kind)
+  end
+
+  def ump_publication_kinds
+    available_exercise_kinds - ['lecture']
+  end
+
+  def publications_by_kind(kind)
+    publications.where publication_kind: kind
   end
 
   private
