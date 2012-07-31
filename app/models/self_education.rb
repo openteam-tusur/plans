@@ -9,6 +9,8 @@ class SelfEducation < ActiveRecord::Base
   FIFTH_ITEM_KINDS.each do |kind|
     attr_accessible "#{kind}_hours", "#{kind}_control"
 
+    validates "#{kind}_control", :presence => true, :if => "#{kind}_hours?"
+
     validates "#{kind}_hours",
               :presence => true,
               :numericality => { :only_integer => true, :greater_than_or_equal_to  => 0 }
@@ -18,6 +20,8 @@ class SelfEducation < ActiveRecord::Base
 
   Loading.enum_values(:loading_kind).each do |kind|
     attr_accessible "#{kind}_hours", "#{kind}_control"
+
+    validates "#{kind}_control", :presence => true, :if => "#{kind}_hours?"
 
     validates "#{kind}_hours",
               :presence => true,
