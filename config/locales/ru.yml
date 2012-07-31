@@ -86,6 +86,16 @@ ru:
         lab_control_enum:
           access:         допуск к ЛР
           defence:        защита отчета по ЛР
+        practice_hours:        Количество часов
+        practice_control:      Форма контроля
+        practice_control_enum:
+          quiz:             опрос
+          test:             тест
+          check:            проверка на практ.занятиях
+        csr_hours:        Количество часов
+        csr_control:      Форма контроля
+        csr_control_enum:
+          report:           устный отчет на консультациях по КП (КР)
 
       work_programm:
         year: Год

@@ -28,5 +28,25 @@
         <td colspan='2'>Не предусмотрено учебным планом</td>
       <% end %>
     </tr>
+    <tr>
+      <td>3.</td>
+      <td>Подготовка к практическим занятиям, семинарам</td>
+      <% if self_education.need_practice? %>
+        <td><%= self_education.practice_hours %></td>
+        <td><%= SelfEducation.human_enum_values(:practice_control).values_at(*self_education.practice_control).join(', ') %></td>
+      <% else %>
+        <td colspan='2'>Не предусмотрено учебным планом</td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>4.</td>
+      <td>Выполнение курсового проекта (работы)</td>
+      <% if self_education.need_csr? %>
+        <td><%= self_education.csr_hours %></td>
+        <td><%= SelfEducation.human_enum_values(:csr_control).values_at(*self_education.csr_control).join(', ') %></td>
+      <% else %>
+        <td colspan='2'>Не предусмотрено учебным планом</td>
+      <% end %>
+    </tr>
   </tbody>
 </table>
