@@ -12,50 +12,63 @@
   <tbody>
       <tr>
         <td>1.</td>
-        <td>Проработка лекционного материала</td>
+        <td class='left'>Проработка лекционного материала</td>
         <% if resource.need_lecture? %>
           <td><%= form.input :lecture_hours, :label => false %></td>
           <td>
             <%= form.input :lecture_control, :as => :check_boxes, :collection => SelfEducation.human_enums[:lecture_control].invert, :label => false %>
           </td>
         <% else %>
-          <td colspan='2'>Не предусмотрено учебным планом</td>
+          <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
         <% end %>
       </tr>
       <tr>
         <td>2.</td>
-        <td>Подготовка к лабораторным работам и оформление отчетов по ЛР</td>
+        <td class='left'>Подготовка к лабораторным работам и оформление отчетов по ЛР</td>
         <% if resource.need_lab? %>
           <td><%= form.input :lab_hours, :label => false %></td>
           <td>
             <%= form.input :lab_control, :as => :check_boxes, :collection => SelfEducation.human_enums[:lab_control].invert, :label => false %>
           </td>
         <% else %>
-          <td colspan='2'>Не предусмотрено учебным планом</td>
+          <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
         <% end %>
       </tr>
       <tr>
         <td>3.</td>
-        <td>Подготовка к практическим занятиям, семинарам</td>
+        <td class='left'>Подготовка к практическим занятиям, семинарам</td>
         <% if resource.need_practice? %>
           <td><%= form.input :practice_hours, :label => false %></td>
           <td>
             <%= form.input :practice_control, :as => :check_boxes, :collection => SelfEducation.human_enums[:practice_control].invert, :label => false %>
           </td>
         <% else %>
-          <td colspan='2'>Не предусмотрено учебным планом</td>
+          <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
         <% end %>
       </tr>
       <tr>
         <td>4.</td>
-        <td>Выполнение курсового проекта (работы)</td>
+        <td class='left'>Выполнение курсового проекта (работы)</td>
         <% if resource.need_csr? %>
           <td><%= form.input :csr_hours, :label => false %></td>
           <td>
             <%= form.input :csr_control, :as => :check_boxes, :collection => SelfEducation.human_enums[:csr_control].invert, :label => false %>
           </td>
         <% else %>
-          <td colspan='2'>Не предусмотрено учебным планом</td>
+          <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
+        <% end %>
+      </tr>
+      <!-- 5,6-->
+      <tr>
+        <td>7.</td>
+        <td class='left'>Подготовка к экзамену</td>
+        <% if resource.need_exam? %>
+          <td><%= form.input :exam_hours, :label => false %></td>
+          <td>
+            <%= form.input :exam_control, :as => :check_boxes, :collection => SelfEducation.human_enums[:exam_control].invert, :label => false %>
+          </td>
+        <% else %>
+          <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
         <% end %>
       </tr>
   </tbody>

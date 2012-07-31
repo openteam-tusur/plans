@@ -10,42 +10,55 @@
   <tbody>
     <tr>
       <td>1.</td>
-      <td>Проработка лекционного материала</td>
+      <td class='left'>Проработка лекционного материала</td>
       <% if self_education.need_lecture? %>
-        <td><%= self_education.lecture_hours %></td>
+        <td class='hours'><%= self_education.lecture_hours %></td>
         <td><%= SelfEducation.human_enum_values(:lecture_control).values_at(*self_education.lecture_control).join(', ') %></td>
       <% else %>
-        <td colspan='2'>Не предусмотрено учебным планом</td>
+        <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
       <% end %>
     </tr>
     <tr>
       <td>2.</td>
-      <td>Подготовка к лабораторным работам и оформление отчетов по ЛР</td>
+      <td class='left'>Подготовка к лабораторным работам и оформление отчетов по ЛР</td>
       <% if self_education.need_lab? %>
-        <td><%= self_education.lab_hours %></td>
+        <td class='hours'><%= self_education.lab_hours %></td>
         <td><%= SelfEducation.human_enum_values(:lab_control).values_at(*self_education.lab_control).join(', ') %></td>
       <% else %>
-        <td colspan='2'>Не предусмотрено учебным планом</td>
+        <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
       <% end %>
     </tr>
     <tr>
       <td>3.</td>
-      <td>Подготовка к практическим занятиям, семинарам</td>
+      <td class='left'>Подготовка к практическим занятиям, семинарам</td>
       <% if self_education.need_practice? %>
-        <td><%= self_education.practice_hours %></td>
+        <td class='hours'><%= self_education.practice_hours %></td>
         <td><%= SelfEducation.human_enum_values(:practice_control).values_at(*self_education.practice_control).join(', ') %></td>
       <% else %>
-        <td colspan='2'>Не предусмотрено учебным планом</td>
+        <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
       <% end %>
     </tr>
     <tr>
       <td>4.</td>
-      <td>Выполнение курсового проекта (работы)</td>
+      <td class='left'>Выполнение курсового проекта (работы)</td>
       <% if self_education.need_csr? %>
-        <td><%= self_education.csr_hours %></td>
+        <td class='hours'><%= self_education.csr_hours %></td>
         <td><%= SelfEducation.human_enum_values(:csr_control).values_at(*self_education.csr_control).join(', ') %></td>
       <% else %>
-        <td colspan='2'>Не предусмотрено учебным планом</td>
+        <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
+      <% end %>
+    </tr>
+    <tr>
+      <!-- 5,6 -->
+    </tr>
+    <tr>
+      <td>7.</td>
+      <td class='left'>Подготовка к экзамену</td>
+      <% if self_education.need_exam? %>
+        <td class='hours'><%= self_education.exam_hours %></td>
+        <td><%= SelfEducation.human_enum_values(:exam_control).values_at(*self_education.exam_control).join(', ') %></td>
+      <% else %>
+        <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
       <% end %>
     </tr>
   </tbody>

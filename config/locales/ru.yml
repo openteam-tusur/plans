@@ -96,6 +96,10 @@ ru:
         csr_control:      Форма контроля
         csr_control_enum:
           report:           устный отчет на консультациях по КП (КР)
+        exam_hours:        Количество часов
+        exam_control:      Форма контроля
+        exam_control_enum:
+          pass:           сдача экзамена
 
       work_programm:
         year: Год

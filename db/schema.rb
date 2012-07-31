@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120731030757) do
+ActiveRecord::Schema.define(:version => 20120731032907) do
 
   create_table "checks", :force => true do |t|
     t.integer  "semester_id"
@@ -160,6 +160,8 @@ ActiveRecord::Schema.define(:version => 20120731030757) do
     t.text     "practice_control"
     t.integer  "csr_hours"
     t.text     "csr_control"
+    t.integer  "exam_hours"
+    t.text     "exam_control"
   end
 
   add_index "self_educations", ["work_programm_id"], :name => "index_self_educations_on_work_programm_id"
