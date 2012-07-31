@@ -49,7 +49,24 @@
       <% end %>
     </tr>
     <tr>
-      <!-- 5,6 -->
+      <td>5.</td>
+      <td class='left'>Выполнение домашних заданий, написание рефератов, подготовка к контрольной работе (коллоквиуму), выполнение расчетной работы</td>
+      <% if self_education.need_home_work? %>
+        <td class='hours'><%= self_education.home_work_hours %></td>
+        <td><%= SelfEducation.human_enum_values(:home_work_control).values_at(*self_education.home_work_control).join(', ') %></td>
+      <% else %>
+        <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>6.</td>
+      <td class='left'>Изучение тем (вопросов) теоретической части курса, отводимых на самостоятельную проработку</td>
+      <% if self_education.need_srs? %>
+        <td class='hours'><%= self_education.srs_hours %></td>
+        <td><%= SelfEducation.human_enum_values(:srs_control).values_at(*self_education.srs_control).join(', ') %></td>
+      <% else %>
+        <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
+      <% end %>
     </tr>
     <tr>
       <td>7.</td>

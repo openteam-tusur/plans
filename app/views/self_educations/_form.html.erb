@@ -58,7 +58,30 @@
           <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
         <% end %>
       </tr>
-      <!-- 5,6-->
+      <tr>
+        <td>5.</td>
+        <td class='left'>Выполнение домашних заданий, написание рефератов, подготовка к контрольной работе (коллоквиуму), выполнение расчетной работы</td>
+        <% if resource.need_home_work? %>
+          <td><%= form.input :home_work_hours, :label => false %></td>
+          <td>
+            <%= form.input :home_work_control, :as => :check_boxes, :collection => SelfEducation.human_enums[:home_work_control].invert, :label => false %>
+          </td>
+        <% else %>
+          <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
+        <% end %>
+      </tr>
+      <tr>
+        <td>6.</td>
+        <td class='left'>Изучение тем (вопросов) теоретической части курса, отводимых на самостоятельную проработку</td>
+        <% if resource.need_srs? %>
+          <td><%= form.input :srs_hours, :label => false %></td>
+          <td>
+            <%= form.input :srs_control, :as => :check_boxes, :collection => SelfEducation.human_enums[:srs_control].invert, :label => false %>
+          </td>
+        <% else %>
+          <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
+        <% end %>
+      </tr>
       <tr>
         <td>7.</td>
         <td class='left'>Подготовка к экзамену</td>
@@ -72,7 +95,6 @@
         <% end %>
       </tr>
   </tbody>
-
 </table>
 
 <%= form.submit 'Сохранить' %>

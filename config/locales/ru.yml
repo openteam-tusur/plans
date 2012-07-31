@@ -96,6 +96,13 @@ ru:
         csr_control:      Форма контроля
         csr_control_enum:
           report:           устный отчет на консультациях по КП (КР)
+        srs_hours:        Количество часов
+        srs_control:      Форма контроля
+        srs_control_enum:
+          check_summary:    проверка конспектов самостоятельного изучения тем
+          quiz:             опрос
+          test:             тест
+          home_work:        дом.задание
         exam_hours:        Количество часов
         exam_control:      Форма контроля
         exam_control_enum:
