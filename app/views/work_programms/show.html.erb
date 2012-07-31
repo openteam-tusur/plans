@@ -67,12 +67,12 @@
 <% end %>
 
 <h5 class='center'>2.5 <%= Exercise.human_attribute_name :srs %></h5>
-<% grouped_loadings = resource.discipline.loadings.where(:loading_kind => :srs).group_by(&:semester) %>
-<%= content_tag :p, 'Занятия не предусмотрены учебным планом' if grouped_loadings.empty? %>
-
-<%= render resource.self_education if resource.self_education %>
-
-<%= link_to 'Изменить', [(resource.self_education ? :edit : :new), association_chain, resource, :self_education].flatten %>
+<% if resource.has_loadings_for? :srs %>
+  <%= render resource.self_education if resource.self_education %>
+  <%= link_to 'Изменить', [(resource.self_education ? :edit : :new), association_chain, resource, :self_education].flatten %>
+<% else %>
+  <%= content_tag :p, 'Не предусмотрено учебным планом' %>
+<% end %>
 
 <h4 class="center">3. Учебно-методические материалы по дисциплине</h4>
 <h5 class='center'>3.1 Основная литература</h5>

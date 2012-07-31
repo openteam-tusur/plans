@@ -1,7 +1,7 @@
 <div class='content_chapter_page'>
   <h1 class='uppercase strong'>2. Содержание дисциплины</h1>
   <% Exercise.enum_values(:kind).each_with_index do |kind, index| %>
-  <h2 class='strong indentation'>2.<%= index+1 %> <%= t("activerecord.attributes.exercise.#{kind.pluralize}") %></h2>
+  <h2 class='strong indentation'>2.<%= index+1 %> <%= Exercise.human_attribute_name kind.pluralize %></h2>
   <% grouped_loadings = Hash[resource.discipline.loadings.where(:loading_kind => kind).group_by(&:semester).sort{|a,b| a[0].number <=> b[0].number}] %>
 
   <% if grouped_loadings.any? %>
@@ -51,6 +51,11 @@
 
 <% end %>
 
-<%= render :partial => 'reports/self_education', :object => resource.self_education %>
+<h2 class='strong indentation'>2.5 <%= Exercise.human_attribute_name :srs %></h2>
+<% if resource.has_loadings_for? :srs %>
+  <%= render :partial => 'reports/self_education', :object => resource.self_education if resource.self_education %>
+<% else %>
+  <%= content_tag :p, 'Не предусмотрено учебным планом' %>
+<% end %>
 
 </div> <!-- end content_chapter -->
