@@ -21,6 +21,7 @@ class WorkProgrammsController < ApplicationController
                 :template => 'reports/work_programm.html.erb',
                 :show_as_html => params[:debug],
                 :outline => false,
+                :enable_javascript => true,
                 :margin => { :top       => 10,
                              :bottom    => 10,
                              :left      => 25,

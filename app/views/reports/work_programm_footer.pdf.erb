@@ -1,3 +1,36 @@
-<div class="center year" style="font-family: 'Times New Roman', Times, serif; font-size: 16px; text-align: center">
-  <%= title_page.year_line %>
-</div>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+    <script>
+      function subst() {
+        var vars={};
+        var x=document.location.search.substring(1).split('&');
+        for(var i in x) {var z=x[i].split('=',2);vars[z[0]] = unescape(z[1]);}
+        var x=['frompage','topage','page','webpage','section','subsection','subsubsection'];
+
+        for(var i in x) {
+          var y = document.getElementsByClassName(x[i]);
+          for(var j=0; j<y.length; ++j){
+               y[j].textContent = vars[x[i]];
+          }
+          /* if this is the first page, just remove the footer element from the Document */
+          if(vars['page'] != 1){
+            var elt = document.getElementById("pdfFooter");
+            elt.parentNode.removeChild(elt);
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class='title_page_body' onload="subst()">
+    <div id="pdfFooter">
+        <p class='center'><%= title_page.year_line %> г.</p>
+    </div>
+  </body>
+</html>
+
+
+
