@@ -33,4 +33,8 @@ class SelfEducation < ActiveRecord::Base
   def need_srs?
     work_programm.has_loadings_for? 'srs'
   end
+
+  def total_hours
+    [*lecture_hours, *lab_hours, *practice_hours, *csr_hours, *srs_hours, *exam_hours].sum
+  end
 end
