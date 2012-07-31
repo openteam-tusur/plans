@@ -60,7 +60,10 @@ class WorkProgramm < ActiveRecord::Base
   end
 
   def available_exercise_kinds
-    discipline.loadings.pluck(:loading_kind) & Exercise.enum_values(:kind)
+    res = []
+    res = discipline.loadings.pluck(:loading_kind) & Exercise.enum_values(:kind)
+    res << 'srs' if discipline.loadings.pluck(:loading_kind).include?('srs')
+    res
   end
 
   def ump_publication_kinds
