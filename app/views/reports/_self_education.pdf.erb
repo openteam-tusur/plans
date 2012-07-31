@@ -1,24 +1,3 @@
 <div class='split_table'>
-  <table class='self_education'>
-    <thead>
-      <tr>
-        <th>Номер</th>
-        <th>Наименование работы</th>
-        <th>Кол-во часов</th>
-        <th>Форма контроля</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1.</td>
-        <td>Проработка лекционного материала</td>
-        <% if self_education.need_lecture? %>
-          <td><%= self_education.lecture_hours %></td>
-          <td><%= SelfEducation.human_enum_values(:lecture_control).values_at(*self_education.lecture_control).join(', ') %></td>
-        <% else %>
-          <td colspan='2'>Не предусмотрено учебным планом</td>
-        <% end %>
-      </tr>
-    </tbody>
-  </table>
+  <%= render self_education %>
 </div>

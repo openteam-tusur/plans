@@ -75,12 +75,17 @@ ru:
           have: владеть
 
       self_education:
-        lecture_hours: Количество часов
-        lecture_control: Форма контроля
+        lecture_hours:    Количество часов
+        lecture_control:  Форма контроля
         lecture_control_enum:
-          quiz:       опрос
-          test:       тест
-          home_work:  домашнее задание
+          quiz:             опрос
+          test:             тест
+          home_work:        домашнее задание
+        lab_hours:        Количество часов
+        lab_control:      Форма контроля
+        lab_control_enum:
+          access:         допуск к ЛР
+          defence:        защита отчета по ЛР
 
       work_programm:
         year: Год

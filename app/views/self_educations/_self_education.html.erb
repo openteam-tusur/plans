@@ -18,5 +18,15 @@
         <td colspan='2'>Не предусмотрено учебным планом</td>
       <% end %>
     </tr>
+    <tr>
+      <td>2.</td>
+      <td>Подготовка к лабораторным работам и оформление отчетов по ЛР</td>
+      <% if self_education.need_lab? %>
+        <td><%= self_education.lab_hours %></td>
+        <td><%= SelfEducation.human_enum_values(:lab_control).values_at(*self_education.lab_control).join(', ') %></td>
+      <% else %>
+        <td colspan='2'>Не предусмотрено учебным планом</td>
+      <% end %>
+    </tr>
   </tbody>
 </table>

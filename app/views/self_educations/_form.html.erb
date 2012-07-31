@@ -13,10 +13,22 @@
       <tr>
         <td>1.</td>
         <td>Проработка лекционного материала</td>
-        <% if resource.need_lecture?  %>
+        <% if resource.need_lecture? %>
           <td><%= form.input :lecture_hours, :label => false %></td>
           <td>
             <%= form.input :lecture_control, :as => :check_boxes, :collection => SelfEducation.human_enums[:lecture_control].invert, :label => false %>
+          </td>
+        <% else %>
+          <td colspan='2'>Не предусмотрено учебным планом</td>
+        <% end %>
+      </tr>
+      <tr>
+        <td>2.</td>
+        <td>Подготовка к лабораторным работам и оформление отчетов по ЛР</td>
+        <% if resource.need_lab? %>
+          <td><%= form.input :lab_hours, :label => false %></td>
+          <td>
+            <%= form.input :lab_control, :as => :check_boxes, :collection => SelfEducation.human_enums[:lab_control].invert, :label => false %>
           </td>
         <% else %>
           <td colspan='2'>Не предусмотрено учебным планом</td>
