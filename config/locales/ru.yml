@@ -75,27 +75,66 @@ ru:
           have: владеть
 
       self_education:
+        lecture:          Проработка лекционного материала
         lecture_hours:    Количество часов
         lecture_control:  Форма контроля
         lecture_control_enum:
           quiz:             опрос
           test:             тест
           home_work:        домашнее задание
+
+        lab:              Подготовка к лабораторным работам и оформление отчетов по ЛР
         lab_hours:        Количество часов
         lab_control:      Форма контроля
         lab_control_enum:
           access:         допуск к ЛР
           defence:        защита отчета по ЛР
+
+        practice:         Подготовка к практическим занятиям, семинарам
         practice_hours:        Количество часов
         practice_control:      Форма контроля
         practice_control_enum:
           quiz:             опрос
           test:             тест
           check:            проверка на практ.занятиях
+
+        csr:              Выполнение курсового проекта (работы)
         csr_hours:        Количество часов
         csr_control:      Форма контроля
         csr_control_enum:
           report:           устный отчет на консультациях по КП (КР)
+
+        home_work:          Выполнение домашних заданий
+        home_work_hours:    Количество часов
+        home_work_control_enum:
+          defence:            защита отчета
+          mark:               оценка качества выполненных работ
+
+        referat:            Написание рефератов
+        referat_hours:      Количество часов
+        referat_control_enum:
+          defence:            защита отчета
+          mark:               оценка качества выполненных работ
+
+        test:               Подготовка к контрольной работе
+        test_hours:         Количество часов
+        test_control_enum:
+          check:              проверка контрольной работы
+          mark:               оценка качества выполненных работ
+
+        colloquium:         Подготовка к коллоквиуму
+        colloquium_hours:   Количество часов
+        colloquium_control_enum:
+          defence:            защита отчета
+          mark:               оценка качества выполненных работ
+
+        calculation:        Выполнение расчетной работы
+        calculation_hours:  Количество часов
+        calculation_control_enum:
+          defence:            защита отчета
+          mark:               оценка качества выполненных работ
+
+        srs:              Изучение тем (вопросов) теоретической части курса, отводимых на самостоятельную проработку
         srs_hours:        Количество часов
         srs_control:      Форма контроля
         srs_control_enum:
@@ -103,10 +142,13 @@ ru:
           quiz:             опрос
           test:             тест
           home_work:        дом.задание
-        exam_hours:        Количество часов
-        exam_control:      Форма контроля
+
+        exam:             Подготовка к экзамену
+        exam_hours:       Количество часов
+        exam_control:     Форма контроля
         exam_control_enum:
-          pass:           сдача экзамена
+          pass:             сдача экзамена
+
 
       work_programm:
         year: Год

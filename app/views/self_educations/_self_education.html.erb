@@ -8,79 +8,22 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>1.</td>
-      <td class='left'>Проработка лекционного материала</td>
-      <% if self_education.need_lecture? %>
-        <td class='hours'><%= self_education.lecture_hours %></td>
-        <td><%= SelfEducation.human_enum_values(:lecture_control).values_at(*self_education.lecture_control).join(', ') %></td>
-      <% else %>
-        <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
-      <% end %>
-    </tr>
-    <tr>
-      <td>2.</td>
-      <td class='left'>Подготовка к лабораторным работам и оформление отчетов по ЛР</td>
-      <% if self_education.need_lab? %>
-        <td class='hours'><%= self_education.lab_hours %></td>
-        <td><%= SelfEducation.human_enum_values(:lab_control).values_at(*self_education.lab_control).join(', ') %></td>
-      <% else %>
-        <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
-      <% end %>
-    </tr>
-    <tr>
-      <td>3.</td>
-      <td class='left'>Подготовка к практическим занятиям, семинарам</td>
-      <% if self_education.need_practice? %>
-        <td class='hours'><%= self_education.practice_hours %></td>
-        <td><%= SelfEducation.human_enum_values(:practice_control).values_at(*self_education.practice_control).join(', ') %></td>
-      <% else %>
-        <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
-      <% end %>
-    </tr>
-    <tr>
-      <td>4.</td>
-      <td class='left'>Выполнение курсового проекта (работы)</td>
-      <% if self_education.need_csr? %>
-        <td class='hours'><%= self_education.csr_hours %></td>
-        <td><%= SelfEducation.human_enum_values(:csr_control).values_at(*self_education.csr_control).join(', ') %></td>
-      <% else %>
-        <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
-      <% end %>
-    </tr>
-    <tr>
-      <td>5.</td>
-      <td class='left'>Выполнение домашних заданий, написание рефератов, подготовка к контрольной работе (коллоквиуму), выполнение расчетной работы</td>
-      <% if self_education.need_home_work? %>
-        <td class='hours'><%= self_education.home_work_hours %></td>
-        <td><%= SelfEducation.human_enum_values(:home_work_control).values_at(*self_education.home_work_control).join(', ') %></td>
-      <% else %>
-        <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
-      <% end %>
-    </tr>
-    <tr>
-      <td>6.</td>
-      <td class='left'>Изучение тем (вопросов) теоретической части курса, отводимых на самостоятельную проработку</td>
-      <% if self_education.need_srs? %>
-        <td class='hours'><%= self_education.srs_hours %></td>
-        <td><%= SelfEducation.human_enum_values(:srs_control).values_at(*self_education.srs_control).join(', ') %></td>
-      <% else %>
-        <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
-      <% end %>
-    </tr>
-    <tr>
-      <td>7.</td>
-      <td class='left'>Подготовка к экзамену</td>
-      <% if self_education.need_exam? %>
-        <td class='hours'><%= self_education.exam_hours %></td>
-        <td><%= SelfEducation.human_enum_values(:exam_control).values_at(*self_education.exam_control).join(', ') %></td>
-      <% else %>
-        <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
-      <% end %>
-    </tr>
+    <% SelfEducation::ALL_KINDS.each_with_index do |kind, index| %>
+      <tr>
+        <td><%= index + 1 %>.</td>
+        <td class='left'><%= SelfEducation.human_attribute_name(kind) %></td>
+        <% if self_education.respond_to?("need_#{kind}?") && self_education.send("need_#{kind}?") || !self_education.respond_to?("need_#{kind}?") %>
+          <td class='hours'><%= self_education.send("#{kind}_hours") %></td>
+          <td><%= SelfEducation.human_enum_values("#{kind}_control").values_at(*self_education.send("#{kind}_control")).join(', ') %></td>
+        <% else %>
+          <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
+        <% end %>
+      </tr>
+    <% end %>
     <tr>
       <td class='left' colspan='2'>Всего часов самостоятельной работы:</td>
-      <td class='hours center' colspan='2'><%= self_education.total_hours %></td>
+      <td class='hours center'><%= self_education.total_hours %></td>
+      <td></td>
     </tr>
   </tbody>
 </table>
