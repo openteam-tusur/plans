@@ -9,6 +9,7 @@ class WorkProgramm < ActiveRecord::Base
   has_many :missions,               :dependent => :destroy
   has_many :publications,           :dependent => :destroy
   has_many :requirements,           :dependent => :destroy
+  has_many :rating_items,           :dependent => :destroy
 
   has_one :subspeciality, :through => :discipline
 
@@ -76,6 +77,10 @@ class WorkProgramm < ActiveRecord::Base
 
   def has_loadings_for?(kind)
     discipline.loadings.where(:loading_kind => kind).any?
+  end
+
+  def rating_items_for_semester(semester)
+    rating_items.where(:semester_id => semester)
   end
 
   private

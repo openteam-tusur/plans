@@ -1,0 +1,45 @@
+<table class="exercises">
+  <thead>
+    <tr>
+      <th>Элементы учебной деятельности</th>
+      <th>Максимальный балл за период между началом семестра и 1КТ</th>
+      <th>Максимальный балл за период между 1КТ и 2КТ</th>
+      <th>Максимальный балл за период между 2КТ и концом семестра</th>
+      <th>Всего за семестр</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @work_programm.rating_items_for_semester(semester) %>
+    <tr>
+      <td>Итого максимум за период:</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Нарастающий итог:</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td colspan=6 class='right add_exercise_wrapper'>
+        <%= link_to "+ элемент учебной деятельности", new_year_speciality_subspeciality_discipline_work_programm_rating_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :rating_item => { :semester_id => semester.id }}), :remote => true, :class => 'new_record' %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<% if @discipline.has_exam_at_semester?(semester) %>
+  <div class='with_text_styles'>
+    <p>Экзаменационные билеты содержат:</p>
+    <ul>
+      <li>2 теоритических вопроса, оцениваемых по 10 баллов каждый</li>
+      <li>1 практический вопрос, оцениваемый в 25 баллов</li>
+    </ul>
+  </div>
+<% end %>

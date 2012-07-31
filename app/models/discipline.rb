@@ -28,6 +28,10 @@ class Discipline < ActiveRecord::Base
   def to_s
     title
   end
+
+  def has_exam_at_semester?(semester)
+    checks.where(:semester_id => semester).pluck(:check_kind).include?('exam')
+  end
 end
 
 # == Schema Information

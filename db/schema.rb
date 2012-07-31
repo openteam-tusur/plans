@@ -140,6 +140,20 @@ ActiveRecord::Schema.define(:version => 20120731085214) do
 
   add_index "publications", ["work_programm_id"], :name => "index_bibliographic_records_on_work_programm_id"
 
+  create_table "rating_items", :force => true do |t|
+    t.integer  "work_programm_id"
+    t.integer  "semester_id"
+    t.string   "title"
+    t.integer  "max_begin_1kt"
+    t.integer  "max_1kt_2kt"
+    t.integer  "max_2kt_end"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "rating_items", ["semester_id"], :name => "index_rating_items_on_semester_id"
+  add_index "rating_items", ["work_programm_id"], :name => "index_rating_items_on_work_programm_id"
+
   create_table "requirements", :force => true do |t|
     t.integer  "work_programm_id"
     t.string   "requirement_kind"

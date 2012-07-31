@@ -12,6 +12,7 @@ Plans::Application.routes.draw do
             resources :missions,     :except => :index
             resources :publications, :except => :index
             resources :requirements, :except => [:index, :new, :create]
+            resources :rating_items, :except => :index
             resource :self_education, :except => :show
           end
         end
