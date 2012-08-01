@@ -1,0 +1,8 @@
+<%= simple_form_for association_chain + [collection.build] do |form|%>
+  <%= form.input :title %>
+  <%= form.input :kind, :as => :hidden %>
+  <%= form.submit %>
+<% end %>
+<%= content_tag :ol do %>
+  <%= render collection %>
+<% end if collection.any? %>

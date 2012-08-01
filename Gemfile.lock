@@ -195,6 +195,7 @@ DEPENDENCIES
   el_vfs_client
   fabrication
   has_enum
+  has_scope
   hirb
   inherited_resources
   jquery-rails

@@ -11,10 +11,11 @@ class WorkProgramm < ActiveRecord::Base
   has_many :publications,           :dependent => :destroy
   has_many :rating_items,           :dependent => :destroy
   has_many :requirements,           :dependent => :destroy
+  has_many :appendixes,             :dependent => :destroy
 
   has_one :subspeciality, :through => :discipline
 
-  has_one :self_education
+  has_one :self_education,          :dependent => :destroy
 
   has_and_belongs_to_many :related_disciplines, :class_name => Discipline
 

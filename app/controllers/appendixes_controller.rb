@@ -1,0 +1,29 @@
+class AppendixesController < ApplicationController
+  inherit_resources
+
+  actions :all, :except => :show
+
+  has_scope :kind
+
+  belongs_to :year, :finder => :find_by_number! do
+    belongs_to :speciality, :finder => :find_by_code! do
+      belongs_to :subspeciality do
+        belongs_to :discipline do
+          belongs_to :work_programm
+        end
+      end
+    end
+  end
+
+  def create
+    create! { collection_path(:kind => resource.kind) }
+  end
+
+  def update
+    update! { collection_path(:kind => resource.kind) }
+  end
+
+  def destroy
+    destroy! { collection_path(:kind => resource.kind) }
+  end
+end

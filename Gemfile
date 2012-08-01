@@ -15,6 +15,7 @@ group :default do
   gem 'default_value_for'
   gem 'el_vfs_client'
   gem 'has_enum'
+  gem 'has_scope'
   gem 'inherited_resources'
   gem 'nokogiri'
   gem 'openteam-commons',     '>= 0.2.3'

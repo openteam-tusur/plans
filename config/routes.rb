@@ -15,6 +15,7 @@ Plans::Application.routes.draw do
             resources :rating_items, :except => :index
             resources :requirements, :except => [:index, :new, :create]
             resource :self_education, :except => :show
+            resources :appendixes, :except => :show
           end
         end
       end
