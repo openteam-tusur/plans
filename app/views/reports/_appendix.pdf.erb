@@ -1,0 +1,14 @@
+  <% index = 1 %>
+  <% SelfEducation::ALL_KINDS.each do |kind| %>
+    <% if (themes =  @work_programm.appendixes.kind(kind)).any? %>
+      <div class='appendix_page'>
+        <h1 class='strong'>Приложение <%= index %> Список тем по <%= kind %></h1>
+        <ol>
+        <% themes.each do |appendix| %>
+          <li><%= appendix.title %></li>
+        <% end %>
+        </ol>
+        <% index += 1 %>
+      </div>
+    <% end %>
+  <% end %>
