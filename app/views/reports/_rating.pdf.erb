@@ -1,61 +1,63 @@
-<div class='rating_page split_table page-break'>
+<div class='rating_page'>
   <h1 class='uppercase strong'>4. Рейтинговая система оценки качества</h1>
   <h2 class='strong'>4.1 Балльная раскладка отдельных элементов контроля по видам занятий</h2>
 
   <% resource.discipline.semesters.each_with_index do |semester, index| %>
     <h4 class='strong'>4.1.<%= index + 1 %> Балльная раскладка для <%= "#{semester.number} семестра" %></h4>
 
-    <table class="exercises rating_items">
-      <thead>
-        <tr>
-          <th>Элементы учебной деятельности</th>
-          <th>Максимальный балл за период между началом семестра и 1КТ</th>
-          <th>Максимальный балл за период между 1КТ и 2КТ</th>
-          <th>Максимальный балл за период между 2КТ и концом семестра</th>
-          <th>Всего за семестр</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% resource.rating_items_for_semester(semester).each do |rating_item| %>
+    <div class='split_table'>
+      <table class='exercises rating_items rating'>
+        <thead>
           <tr>
-            <td><%= rating_item.title %></td>
-            <td class='max_begin_1kt'><%= rating_item.max_begin_1kt %></td>
-            <td class='max_1kt_2kt'><%= rating_item.max_1kt_2kt %></td>
-            <td class='max_2kt_end'><%= rating_item.max_2kt_end %></td>
-            <td class='total_score'><%= rating_item.total_score %></td>
+            <th>Элементы учебной деятельности</th>
+            <th>Максимальный балл за период между началом семестра и 1КТ</th>
+            <th>Максимальный балл за период между 1КТ и 2КТ</th>
+            <th>Максимальный балл за период между 2КТ и концом семестра</th>
+            <th>Всего за семестр</th>
           </tr>
-        <% end %>
+        </thead>
+        <tbody>
+          <% resource.rating_items_for_semester(semester).each do |rating_item| %>
+            <tr>
+              <td><%= rating_item.title %></td>
+              <td class='max_begin_1kt'><%= rating_item.max_begin_1kt %></td>
+              <td class='max_1kt_2kt'><%= rating_item.max_1kt_2kt %></td>
+              <td class='max_2kt_end'><%= rating_item.max_2kt_end %></td>
+              <td class='total_score'><%= rating_item.total_score %></td>
+            </tr>
+          <% end %>
 
-        <tr>
-          <td>Итого максимум за период:</td>
-          <td class='target_max_begin_1kt'></td>
-          <td class='target_max_1kt_2kt'></td>
-          <td class='target_max_2kt_end'></td>
-          <td class='target_total_score'></td>
-        </tr>
-        <% if resource.discipline.has_exam_at_semester?(semester) %>
           <tr>
-            <td>Сдача экзамена</td>
-            <td>&mdash;</td>
-            <td>&mdash;</td>
-            <td>&mdash;</td>
-            <td class='examination_total'></td>
+            <td>Итого максимум за период:</td>
+            <td class='target_max_begin_1kt'></td>
+            <td class='target_max_1kt_2kt'></td>
+            <td class='target_max_2kt_end'></td>
+            <td class='target_total_score'></td>
           </tr>
-        <% end %>
-        <tr class='increasing_row'>
-          <td>Нарастающий итог:</td>
-          <td class='increasing_max_begin_1kt'></td>
-          <td class='increasing_max_1kt_2kt'></td>
-          <td class='increasing_max_2kt_end'></td>
-          <td class='increasing_total'></td>
-        </tr>
-      </tbody>
-    </table>
+          <% if resource.discipline.has_exam_at_semester?(semester) %>
+            <tr>
+              <td>Сдача экзамена</td>
+              <td>&mdash;</td>
+              <td>&mdash;</td>
+              <td>&mdash;</td>
+              <td class='examination_total'></td>
+            </tr>
+          <% end %>
+          <tr class='increasing_row'>
+            <td>Нарастающий итог:</td>
+            <td class='increasing_max_begin_1kt'></td>
+            <td class='increasing_max_1kt_2kt'></td>
+            <td class='increasing_max_2kt_end'></td>
+            <td class='increasing_total'></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <% if resource.discipline.has_exam_at_semester?(semester) %>
-      <div class='with_text_styles'>
+      <div class='with_text_styles split_table'>
         <p>Экзаменационные билеты содержат:</p>
-        <table class="exercises examination_questions">
+        <table class='exercises examination_questions rating'>
           <thead>
             <tr>
               <th>Вид вопроса</th>
@@ -73,89 +75,93 @@
         </table>
       </div>
     <% end %>
-    <div class="page-break"></div>
   <% end %>
 
   <h2 class="strong">4.2 Методика формирования пятибальных оценок в контрольные точки</h2>
   <p>Оценка в контрольные точки выставляется в соответствии с объемом работы, выполненной студентом к моменту контрольной точки. Для каждого студента рассчитывается процент  набранных им рейтинговых баллов относительно предложенных к данному моменту баллов.</p>
-  <table class='exercises' style="margin:0 0 20px 0">
-    <thead>
-      <tr>
-        <th rowspan=2>Оценка</th>
-        <th colspan=2>Процент выполнения работы</th>
-      </tr>
-      <tr>
-        <th>1 контрольная точка</th>
-        <th>2 контрольная точка</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>отлично</td>
-        <td>80%</td>
-        <td>85%</td>
-      </tr>
-      <tr>
-        <td>хорошо</td>
-        <td>65%</td>
-        <td>70%</td>
-      </tr>
-      <tr>
-        <td>удовлетворительно</td>
-        <td>50%</td>
-        <td>55%</td>
-      </tr>
-      <tr>
-        <td>неудовлетворительно</td>
-        <td>менее 50%</td>
-        <td>менее 55%</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class='split_table'>
+    <table class='exercises rating'>
+      <thead>
+        <tr>
+          <th rowspan=2>Оценка</th>
+          <th colspan=2>Процент выполнения работы</th>
+        </tr>
+        <tr>
+          <th>1 контрольная точка</th>
+          <th>2 контрольная точка</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>отлично</td>
+          <td>80%</td>
+          <td>85%</td>
+        </tr>
+        <tr>
+          <td>хорошо</td>
+          <td>65%</td>
+          <td>70%</td>
+        </tr>
+        <tr>
+          <td>удовлетворительно</td>
+          <td>50%</td>
+          <td>55%</td>
+        </tr>
+        <tr>
+          <td>неудовлетворительно</td>
+          <td>менее 50%</td>
+          <td>менее 55%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <h2 class="strong">4.3 Методика формирования итоговой оценки по дисциплине</h2>
   <p>Студент, успешно работавший в семестре, может получить экзаменационную оценку автоматически при условии, что он выполнил все индивидуальные задания и защитил отчеты перед преподавателем.</p>
-  <table class='exercises' style="margin:0 0 20px 0">
-    <thead>
-      <tr>
-        <th>Оценка</th>
-        <th>Процент выполненной работы</th>
-        <th>Оценка (ECTS)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>5 (отлично) (зачтено)</td>
-        <td>от 90%</td>
-        <td>А (отлично)</td>
-      </tr>
-      <tr>
-        <td rowspan=3>4 (хорошо) (зачтено)</td>
-        <td>85%-89%</td>
-        <td>B (очень хорошо)</td>
-      </tr>
-      <tr>
-        <td>75%-84%</td>
-        <td>С (хорошо)</td>
-      <tr>
-        <td>70%-74%</td>
-        <td rowspan=2>D (удовлетворительно)</td>
-      </tr>
-      <tr>
-        <td rowspan=2>3 (удовлетворительно) (зачтено)</td>
-        <td>65%-69%</td>
-      </tr>
-      <tr>
-        <td>60%-64%</td>
-        <td>E (посредственно)</td>
-      </tr>
-      <tr>
-        <td>2 (неудовлетворительно) (не зачтено)</td>
-        <td>менее 60%</td>
-        <td>F (неудовлетворительно)</td>
-      </tr>
-    </tbody>
-  </table
+  <div class='split_table'>
+    <table class='exercises rating' style="margin:0 0 20px 0">
+      <thead>
+        <tr>
+          <th>Оценка</th>
+          <th>Процент выполненной работы</th>
+          <th>Оценка (ECTS)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>5 (отлично) (зачтено)</td>
+          <td>от 90%</td>
+          <td>А (отлично)</td>
+        </tr>
+        <tr>
+          <td rowspan=3>4 (хорошо) (зачтено)</td>
+          <td>85%-89%</td>
+          <td>B (очень хорошо)</td>
+        </tr>
+        <tr>
+          <td>75%-84%</td>
+          <td>С (хорошо)</td>
+        <tr>
+          <td>70%-74%</td>
+          <td rowspan=2>D (удовлетворительно)</td>
+        </tr>
+        <tr>
+          <td rowspan=2>3 (удовлетворительно) (зачтено)</td>
+          <td>65%-69%</td>
+        </tr>
+        <tr>
+          <td>60%-64%</td>
+          <td>E (посредственно)</td>
+        </tr>
+        <tr>
+          <td>2 (неудовлетворительно) (не зачтено)</td>
+          <td>менее 60%</td>
+          <td>F (неудовлетворительно)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
   <p>Студент, не получивший экзаменационной оценки по рейтингу, имеет право, выполнив все индивидуальные задания и отчитавшись перед преподавателем, прийти на экзамен и сдать его в традиционной форме на оценку Государственного образовательного стандарта.</p>
 </div>
 <div class='page-break'></div>
