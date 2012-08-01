@@ -11,7 +11,7 @@
   <%= simple_form_for resource, :url => (association_chain + [:self_education]) do |form| %>
     <tbody>
     <% SelfEducation::ALL_KINDS.each_with_index do |kind, index| %>
-      <tr>
+      <tr class='<%= cycle("even", "odd") %>'>
         <td><%= index + 1 %>.</td>
         <td class='left'><%= SelfEducation.human_attribute_name(kind) %></td>
         <% if resource.respond_to?("need_#{kind}?") && resource.send("need_#{kind}?") || !resource.respond_to?("need_#{kind}?") %>

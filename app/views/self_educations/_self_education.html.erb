@@ -9,9 +9,9 @@
   </thead>
   <tbody>
     <% SelfEducation::ALL_KINDS.each_with_index do |kind, index| %>
-      <tr>
+      <tr class='<%= cycle("even", "odd") %>'>
         <td><%= index + 1 %>.</td>
-        <td class='left'><%= SelfEducation.human_attribute_name(kind) %></td>
+        <td class="left"><%= SelfEducation.human_attribute_name(kind) %></td>
         <% if self_education.respond_to?("need_#{kind}?") && self_education.send("need_#{kind}?") || !self_education.respond_to?("need_#{kind}?") %>
           <td class='hours'><%= self_education.send("#{kind}_hours") %></td>
           <td><%= SelfEducation.human_enum_values("#{kind}_control").values_at(*self_education.send("#{kind}_control")).join(', ') %></td>
