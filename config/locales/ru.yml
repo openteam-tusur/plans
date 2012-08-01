@@ -26,30 +26,32 @@ ru:
               blank: файл не выбран
 
     attributes:
-      publication:
-        text: Библиографическая запись
-        url: URL
-        publication_kind_enum:
-          basic: Основная литература
-          additional: Дополнительная литература
-          ump_practice: Перечень методических указаний (УМП) по проведению практических занятий
-          ump_lab: Перечень методических указаний (УМП) по проведению лабораторных работ
-          ump_srs: Перечень методических указаний (УМП) для самостоятельной работы
-          ump_course_work: Перечень методических указаний (УМП) для курсового проектирования
+      check:
+        check_kind_enum:
+          exam: Экзамен
+          end_of_term: Зачет
+          course_work: Курсовая работа
+          course_projecting: Курсовое проектирование
 
-      examination_question:
-        question_kind: Тип вопроса
-        score: Баллы
+        check_kind_abbrs:
+          exam: Экз
+          end_of_term: Зач
+          course_work: КР
+          course_projecting: КП
+
+        check_kind_reports:
+          exam: Экзамен
+          end_of_term: Зачет
+          course_work: Диф. зачет
+          course_projecting: Диф. зачет
 
       didactic_unit:
         discipline: Дисциплина
         content: Содержимое
 
-      gos:
-        title: Название специальности
-        code: Код специальности в ГОС
-        speciality_code: Код специальности
-        approved_on: Дата утверждения
+      examination_question:
+        question_kind: Тип вопроса
+        score: Баллы
 
       exercise:
         lectures: Лекции
@@ -66,11 +68,52 @@ ru:
         description: Содержание
         volume: Объем в часах
 
+      gos:
+        title: Название специальности
+        code: Код специальности в ГОС
+        speciality_code: Код специальности
+        approved_on: Дата утверждения
+
+      loading:
+        loading_kind_enum:
+          # аудиторные
+          lecture: Лекции
+          lab: Лабораторные занятия
+          practice: Практические занятия
+          csr: "Контроль самостоятельной работы\n(курсовой проект / курсовая работа)"
+          # самостоятельные
+          exam: Подготовка к экзамену
+          srs: Самостоятельная работа
+        loading_kind_abbrs:
+          csr: КСР
+          exam: ЧасЭкз
+          srs: СРС
+          lecture: Лек
+          lab: Лаб
+          practice: Пр
+
       mission:
         description: Описание задачи
 
       programm:
         description: Описание основной образовательной программы
+
+      publication:
+        text: Библиографическая запись
+        url: URL
+        publication_kind_enum:
+          basic: Основная литература
+          additional: Дополнительная литература
+          ump_practice: Перечень методических указаний (УМП) по проведению практических занятий
+          ump_lab: Перечень методических указаний (УМП) по проведению лабораторных работ
+          ump_srs: Перечень методических указаний (УМП) для самостоятельной работы
+          ump_course_work: Перечень методических указаний (УМП) для курсового проектирования
+
+      rating_item:
+        title: Элемент учебной деятельности
+        max_begin_1kt: Максимальный балл за период между началом семестра и 1КТ
+        max_1kt_2kt: Максимальный балл за период между 1КТ и 2КТ
+        max_2kt_end: Максимальный балл за период между 2КТ и концом семестра
 
       requirement:
         requirement_kind_enum:
@@ -160,49 +203,6 @@ ru:
         current_disciplines:              Совместно идущие дисциплины
         subsequent_disciplines:           Последующие дисциплины
         related_disciplines:              Связанные дисциплины
-
-      check:
-        check_kind_enum:
-          exam: Экзамен
-          end_of_term: Зачет
-          course_work: Курсовая работа
-          course_projecting: Курсовое проектирование
-
-        check_kind_abbrs:
-          exam: Экз
-          end_of_term: Зач
-          course_work: КР
-          course_projecting: КП
-
-        check_kind_reports:
-          exam: Экзамен
-          end_of_term: Зачет
-          course_work: Диф. зачет
-          course_projecting: Диф. зачет
-
-      loading:
-        loading_kind_enum:
-          # аудиторные
-          lecture: Лекции
-          lab: Лабораторные занятия
-          practice: Практические занятия
-          csr: "Контроль самостоятельной работы\n(курсовой проект / курсовая работа)"
-          # самостоятельные
-          exam: Подготовка к экзамену
-          srs: Самостоятельная работа
-        loading_kind_abbrs:
-          csr: КСР
-          exam: ЧасЭкз
-          srs: СРС
-          lecture: Лек
-          lab: Лаб
-          practice: Пр
-
-      rating_item:
-        title: Элемент учебной деятельности
-        max_begin_1kt: Максимальный балл за период между началом семестра и 1КТ
-        max_1kt_2kt: Максимальный балл за период между 1КТ и 2КТ
-        max_2kt_end: Максимальный балл за период между 2КТ и концом семестра
 
     models:
       didactic_unit: Дидактическая единица
