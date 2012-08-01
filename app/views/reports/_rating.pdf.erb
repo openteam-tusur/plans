@@ -1,0 +1,89 @@
+<%= javascript_include_tag 'jquery' %>
+<%= javascript_include_tag 'calculate_total' %>
+<script type="text/javascript">
+  $(function(){
+    init_calculate_total();
+  });
+</script>
+
+<div class='rating_page'>
+  <h1 class='uppercase strong'>4. Рейтинговая система оценки качества</h1>
+  <h2 class='strong'>4.1 Балльная раскладка отдельных элементов контроля по видам занятий</h2>
+
+  <% resource.discipline.semesters.each_with_index do |semester, index| %>
+    <h4 class='strong'>4.1.<%= index + 1 %> Балльная раскладка для <%= "#{semester.number} семестра" %></h4>
+
+    <table class="exercises rating_items">
+      <thead>
+        <tr>
+          <th>Элементы учебной деятельности</th>
+          <th>Максимальный балл за период между началом семестра и 1КТ</th>
+          <th>Максимальный балл за период между 1КТ и 2КТ</th>
+          <th>Максимальный балл за период между 2КТ и концом семестра</th>
+          <th>Всего за семестр</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% resource.rating_items_for_semester(semester).each do |rating_item| %>
+          <tr>
+            <td><%= rating_item.title %></td>
+            <td class='max_begin_1kt'><%= rating_item.max_begin_1kt %></td>
+            <td class='max_1kt_2kt'><%= rating_item.max_1kt_2kt %></td>
+            <td class='max_2kt_end'><%= rating_item.max_2kt_end %></td>
+            <td class='total_score'><%= rating_item.total_score %></td>
+          </tr>
+        <% end %>
+
+        <tr>
+          <td>Итого максимум за период:</td>
+          <td class='target_max_begin_1kt'></td>
+          <td class='target_max_1kt_2kt'></td>
+          <td class='target_max_2kt_end'></td>
+          <td class='target_total_score'></td>
+          <td></td>
+        </tr>
+        <% if resource.discipline.has_exam_at_semester?(semester) %>
+          <tr>
+            <td>Сдача экзамена</td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+            <td class='examination_total'></td>
+            <td></td>
+          </tr>
+        <% end %>
+        <tr class='increasing_row'>
+          <td>Нарастающий итог:</td>
+          <td class='increasing_max_begin_1kt'></td>
+          <td class='increasing_max_1kt_2kt'></td>
+          <td class='increasing_max_2kt_end'></td>
+          <td class='increasing_total'></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <% if resource.discipline.has_exam_at_semester?(semester) %>
+      <div class='with_text_styles'>
+        <p>Экзаменационные билеты содержат:</p>
+        <table class="exercises examination_questions">
+          <thead>
+            <tr>
+              <th>Вид вопроса</th>
+              <th>Кол-во баллов</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% resource.examination_questions_for_semester(semester).each do |examination_question| %>
+              <tr>
+                <td><%= examination_question.question_kind %></td>
+                <td><%= examination_question.score %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  <% end %>
+</div>
