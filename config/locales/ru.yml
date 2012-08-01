@@ -26,6 +26,9 @@ ru:
               blank: файл не выбран
 
     attributes:
+      appendix:
+        title:  Тема
+
       check:
         check_kind_enum:
           exam: Экзамен
