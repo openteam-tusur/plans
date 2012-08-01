@@ -72,6 +72,18 @@ ActiveRecord::Schema.define(:version => 20120731085214) do
   add_index "disciplines_work_programms", ["discipline_id"], :name => "index_disciplines_work_programms_on_discipline_id"
   add_index "disciplines_work_programms", ["work_programm_id"], :name => "index_disciplines_work_programms_on_work_programm_id"
 
+  create_table "examination_questions", :force => true do |t|
+    t.integer  "work_programm_id"
+    t.integer  "semester_id"
+    t.string   "question_kind"
+    t.integer  "score"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "examination_questions", ["semester_id"], :name => "index_examination_questions_on_semester_id"
+  add_index "examination_questions", ["work_programm_id"], :name => "index_examination_questions_on_work_programm_id"
+
   create_table "exercises", :force => true do |t|
     t.string   "title"
     t.text     "description"

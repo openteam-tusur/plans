@@ -27,6 +27,7 @@ $.fn.remote_hadler = () ->
       context.closest('tr').replaceWith(jqXHR.responseText)
 
     tbody.count_hours()
+    init_calculate_total()
     cancel_handler()
 
 cancel_handler = () ->

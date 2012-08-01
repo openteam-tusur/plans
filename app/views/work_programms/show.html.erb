@@ -94,7 +94,7 @@
 <h5 class="center">4.1 Балльная раскладка отдельных элементов контроля по видам занятий</h5>
 
 <% @discipline.semesters.each_with_index do |semester, index| %>
-  <h6 class='center'>4.1.<%= index+1 %> Балльная раскладка для <%= "#{semester.number} семестра" %></h6>
+  <h5 class='center'>4.1.<%= index+1 %> Балльная раскладка для <%= "#{semester.number} семестра" %></h5>
   <%= render :file => 'rating_items/index', :locals => { :semester => semester } %>
 <% end %>
 
@@ -142,7 +142,6 @@
     <tr>
       <th>Оценка</th>
       <th>Процент выполненной работы</th>
-      <th>Набранный балл</th>
       <th>Оценка (ECTS)</th>
     </tr>
   </thead>
@@ -150,38 +149,31 @@
     <tr>
       <td>5 (отлично) (зачтено)</td>
       <td>от 90%</td>
-      <td></td>
       <td>А (отлично)</td>
     </tr>
     <tr>
       <td rowspan=3>4 (хорошо) (зачтено)</td>
       <td>85%-89%</td>
-      <td></td>
       <td>B (очень хорошо)</td>
     </tr>
     <tr>
       <td>75%-84%</td>
-      <td></td>
       <td>С (хорошо)</td>
     <tr>
       <td>70%-74%</td>
-      <td></td>
       <td rowspan=2>D (удовлетворительно)</td>
     </tr>
     <tr>
       <td rowspan=2>3 (удовлетворительно) (зачтено)</td>
       <td>65%-69%</td>
-      <td></td>
     </tr>
     <tr>
       <td>60%-64%</td>
-      <td></td>
       <td>E (посредственно)</td>
     </tr>
     <tr>
       <td>2 (неудовлетворительно) (не зачтено)</td>
       <td>менее 60%</td>
-      <td></td>
       <td>F (неудовлетворительно)</td>
     </tr>
   </tbody>

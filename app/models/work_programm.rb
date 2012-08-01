@@ -5,11 +5,12 @@ class WorkProgramm < ActiveRecord::Base
 
   belongs_to :discipline
 
+  has_many :examination_questions,  :dependent => :destroy
   has_many :exercises,              :dependent => :destroy
   has_many :missions,               :dependent => :destroy
   has_many :publications,           :dependent => :destroy
-  has_many :requirements,           :dependent => :destroy
   has_many :rating_items,           :dependent => :destroy
+  has_many :requirements,           :dependent => :destroy
 
   has_one :subspeciality, :through => :discipline
 
@@ -22,7 +23,7 @@ class WorkProgramm < ActiveRecord::Base
   validates_uniqueness_of :year, :scope => :discipline_id
 
   delegate :disciplines, :to => :subspeciality
-  delegate :loaded_semesters, :to => :discipline
+  delegate :has_examinations?, :semesters, :semesters_with_examination, :to => :discipline
 
   after_create :create_requirements
 
@@ -76,11 +77,15 @@ class WorkProgramm < ActiveRecord::Base
   end
 
   def has_loadings_for?(kind)
-    discipline.loadings.where(:loading_kind => kind).any?
+    discipline.loadings.where(loading_kind: kind).any?
   end
 
   def rating_items_for_semester(semester)
-    rating_items.where(:semester_id => semester)
+    rating_items.where(semester_id: semester)
+  end
+
+  def examination_questions_for_semester(semester)
+    examination_questions.where(semester_id: semester)
   end
 
   private
@@ -90,7 +95,7 @@ class WorkProgramm < ActiveRecord::Base
 
   def create_requirements
     Requirement.enums['requirement_kind'].each do |kind|
-      requirements.create(:requirement_kind => kind)
+      requirements.create(requirement_kind: kind)
     end
   end
 end

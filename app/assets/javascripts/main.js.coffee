@@ -4,3 +4,4 @@ $ ->
   init_add_discipline()
   init_manage_exercises()
   init_manage_missions()
+  init_calculate_total()

@@ -1,12 +1,10 @@
 <tr class='exercise_form'>
-  <td colspan=5>
+  <td colspan=3>
     <%= simple_form_for [association_chain, resource].flatten, :remote => true do |f| %>
       <%= f.input :semester_id, :as => :hidden %>
 
-      <%= f.input :title, :wrapper_html => { :style => 'float: none;' } %>
-      <%= f.input :max_begin_1kt %>
-      <%= f.input :max_1kt_2kt %>
-      <%= f.input :max_2kt_end %>
+      <%= f.input :question_kind %>
+      <%= f.input :score %>
 
       <div class="buttons">
         <%= f.submit %>
@@ -19,4 +17,3 @@
     <% end %>
   </td>
 </tr>
-

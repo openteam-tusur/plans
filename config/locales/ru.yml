@@ -37,6 +37,10 @@ ru:
           ump_srs: Перечень методических указаний (УМП) для самостоятельной работы
           ump_course_work: Перечень методических указаний (УМП) для курсового проектирования
 
+      examination_question:
+        question_kind: Тип вопроса
+        score: Баллы
+
       didactic_unit:
         discipline: Дисциплина
         content: Содержимое
@@ -207,7 +211,9 @@ ru:
       mission: задачу
       programm: программу
       publication: публикацию
+      rating_item: элемент учебной деятельности
       requirement: требование
+      examination_question: экзаменационный вопрос
       semester: семестр
 
   pluralize:

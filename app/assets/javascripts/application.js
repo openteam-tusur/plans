@@ -9,4 +9,5 @@
 //= require ./cancel_handler
 //= require ./manage_exercises
 //= require ./manage_missions
+//= require ./calculate_total
 //= require main

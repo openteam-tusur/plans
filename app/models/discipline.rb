@@ -29,8 +29,16 @@ class Discipline < ActiveRecord::Base
     title
   end
 
+  def semesters_with_examination
+    checks.where(check_kind: 'exam').map(&:semester)
+  end
+
+  def has_examinations?
+    semesters_with_examination.any?
+  end
+
   def has_exam_at_semester?(semester)
-    checks.where(:semester_id => semester).pluck(:check_kind).include?('exam')
+    semesters_with_examination.include? semester
   end
 end
 
