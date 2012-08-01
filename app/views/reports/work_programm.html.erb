@@ -4,8 +4,10 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+    <%= wicked_pdf_javascript_include_tag 'jquery' %>
+    <%= wicked_pdf_javascript_include_tag 'calculate_total' %>
   </head>
-  <body>
+  <body onload='init_calculate_total();'>
     <%= render :partial => 'reports/title' %>
     <%= render :partial => 'reports/sign' %>
     <%= render :partial => 'reports/purposes_and_tasks' %>
