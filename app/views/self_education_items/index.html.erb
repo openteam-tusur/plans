@@ -16,7 +16,7 @@
         <% if resource.has_loadings_for?(kind) %>
           <% item = resource.send("self_education_#{kind}") || resource.send("build_self_education_#{kind}") %>
           <td class='hours'><%= item.hours %></td>
-          <td><%#= SelfEducation.human_enum_values("#{kind}_control").values_at(*self_education.send("#{kind}_control")).join(', ') %></td>
+          <td><%= SelfEducationItem.human_enum_values(:control).values_at(*item.control).join(', ') %></td>
           <% if item.new_record? %>
             <td><%= link_to "добавить", polymorphic_url([:new, association_chain, resource, :self_education_item].flatten, :kind => kind) %></td>
           <% else %>

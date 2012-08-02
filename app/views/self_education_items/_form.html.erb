@@ -1,6 +1,6 @@
 <%= simple_form_for association_chain + [resource] do |form| %>
   <%= form.input :hours %>
-  <%= form.input :control %>
+  <%= form.input :control, :as => :check_boxes, :collection => SelfEducationItem.available_human_control_values(resource.kind) %>
   <%= form.input :kind, :as => :hidden %>
   <%= form.submit %>
 <% end %>
