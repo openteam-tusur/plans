@@ -3,7 +3,6 @@
     <tbody>
       <tr>
         <td><%= semester %></td>
-        <td class='hours'><%= title_page.scheduling.send(:srs).hours[semester.number] %></td>
       </tr>
     </tbody>
   </table>
@@ -46,7 +45,7 @@
   <table class='self_education_items'>
     <tbody>
       <tr>
-        <td>Всего часов самостоятельной работы:</td>
+        <td>Всего часов самостоятельной работы в <%= semester.number %> семестре</td>
         <td class='hours'><%= title_page.scheduling.send(:srs).hours[semester.number] %></td>
       </tr>
     </tbody>
