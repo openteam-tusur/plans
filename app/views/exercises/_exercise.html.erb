@@ -2,6 +2,19 @@
   <td>
     <div class='title'><%= exercise.title %></div>
     <div class='description'><%= simple_format exercise.description %></div>
+
+    <% if exercise.appendix %>
+      <%= exercise.appendix.title %>
+      <ul>
+        <% exercise.appendix.appendix_items.each do |item| %>
+          <li><%= item.description %></li>
+        <% end %>
+      </ul>
+      <%= link_to 'править приложение', [:edit, @year, @speciality, @subspeciality, @discipline, @work_programm, exercise, :appendix] %>
+      <%= link_to 'удалить приложение', [@year, @speciality, @subspeciality, @discipline, @work_programm, exercise, :appendix], :confirm => t('are_you_sure?'), :method => :delete %>
+    <% else %>
+      <%= link_to '+ приложение', [:new, @year, @speciality, @subspeciality, @discipline, @work_programm, exercise, :appendix] %>
+    <% end %>
   </td>
   <td class='hours'>
     <%= exercise.volume %>

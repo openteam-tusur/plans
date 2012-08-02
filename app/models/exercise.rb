@@ -4,6 +4,8 @@ class Exercise < ActiveRecord::Base
   belongs_to :semester
   belongs_to :work_programm
 
+  has_one :appendix, :dependent => :destroy, :as => :appendixable
+
   validates_presence_of :description, :title, :volume, :semester, :kind
 
   default_scope order('id ASC')
