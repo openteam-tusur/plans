@@ -3,7 +3,6 @@
     <tr>
       <th>Номер</th>
       <th>Наименование работы</th>
-      <th></th>
       <th><%= SelfEducation.human_attribute_name :lecture_hours  %></th>
       <th><%= SelfEducation.human_attribute_name :lecture_control  %></th>
     </tr>
@@ -16,11 +15,10 @@
         <td><%= index + 1 %>.</td>
         <td class='left'><%= SelfEducation.human_attribute_name(kind) %></td>
         <% if resource.respond_to?("need_#{kind}?") && resource.send("need_#{kind}?") || !resource.respond_to?("need_#{kind}?") %>
-          <td><%= link_to "список тем (#{@work_programm.appendixes.send(:kind, kind).count})", polymorphic_url(association_chain + [:appendixes], :kind => kind) if Appendix::ALL_KINDS.include?(kind) %></td>
           <td><%= form.input "#{kind}_hours", :label => false %></td>
           <td><%= form.input "#{kind}_control", :as => :check_boxes, :collection => SelfEducation.human_enums["#{kind}_control"].invert, :label => false %></td>
         <% else %>
-          <td class='right warnings' colspan='3'>Не предусмотрено учебным планом</td>
+          <td class='right warnings' colspan='2'>Не предусмотрено учебным планом</td>
         <% end %>
       </tr>
     <% end %>
