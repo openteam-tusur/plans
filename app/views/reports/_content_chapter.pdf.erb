@@ -54,6 +54,7 @@
     <%= render :file => 'self_education_items/index', :locals => { :semester => semester, :loadings => loadings } %>
     <div class='table_break'></div>
   <% end %>
+  Всего часов: <%= title_page.scheduling.srs.total %>
 <% else %>
   <%= content_tag :p, 'Не предусмотрено учебным планом' %>
 <% end %>

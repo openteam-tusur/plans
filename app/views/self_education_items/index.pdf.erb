@@ -1,5 +1,5 @@
 <div class='split_table'>
-  <table class='exercises'>
+  <table class='self_education_items'>
     <tbody>
       <tr>
         <td><%= semester %></td>
@@ -10,7 +10,7 @@
 </div>
 
 <div class='split_table'>
-  <table class='exercises'>
+  <table class='self_education_items'>
     <tbody>
       <tr>
         <td class='number'>№</td>
@@ -23,7 +23,7 @@
 </div>
 <% SelfEducationItem::ALL_KINDS.each_with_index do |kind, index| %>
   <div class='split_table'>
-    <table class='self_education'>
+    <table class='self_education_items'>
       <tbody>
         <tr>
           <td class='number'><%= index + 1 %>.</td>
@@ -43,7 +43,7 @@
 <% end %>
 
 <div class='split_table'>
-  <table class='self_education'>
+  <table class='self_education_items'>
     <tbody>
       <tr>
         <td>Всего часов самостоятельной работы:</td>
