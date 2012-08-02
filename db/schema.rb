@@ -11,17 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120801015950) do
+ActiveRecord::Schema.define(:version => 20120802015322) do
 
   create_table "appendixes", :force => true do |t|
-    t.integer  "work_programm_id"
-    t.string   "kind"
-    t.text     "title"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.integer  "appendixable_id"
+    t.string   "appendixable_type"
+    t.string   "title"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
-  add_index "appendixes", ["work_programm_id"], :name => "index_appendixes_on_work_programm_id"
+  add_index "appendixes", ["appendixable_id", "appendixable_type"], :name => "index_appendixes_on_appendixable_id_and_appendixable_type"
 
   create_table "checks", :force => true do |t|
     t.integer  "semester_id"
