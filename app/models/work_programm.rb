@@ -11,11 +11,13 @@ class WorkProgramm < ActiveRecord::Base
   has_many :publications,           :dependent => :destroy
   has_many :rating_items,           :dependent => :destroy
   has_many :requirements,           :dependent => :destroy
-  has_many :appendixes, :through => :exercises
+  has_many :self_education_items,   :dependent => :destroy
+
+  has_many :exercise_appendixes,            :class_name => Appendix, :through => :exercises
+  has_many :self_education_item_appendixes, :class_name => Appendix, :through => :self_education_items
 
   has_one :subspeciality, :through => :discipline
 
-  has_many :self_education_items
 
   has_and_belongs_to_many :related_disciplines, :class_name => Discipline
 
@@ -31,6 +33,10 @@ class WorkProgramm < ActiveRecord::Base
   default_value_for(:year) { Time.now.year }
 
   before_create :set_purpose
+
+  def appendixes
+    exercise_appendixes + self_education_item_appendixes
+  end
 
   # FIXME: пока просто заглушка
   def authors
