@@ -13,8 +13,8 @@ class WorkProgramm < ActiveRecord::Base
   has_many :requirements,           :dependent => :destroy
   has_many :self_education_items,   :dependent => :destroy
 
-  has_many :exercise_appendixes,            :class_name => Appendix, :through => :exercises
-  has_many :self_education_item_appendixes, :class_name => Appendix, :through => :self_education_items
+  has_many :exercise_appendixes,            :through => :exercises,             :source => :appendix
+  has_many :self_education_item_appendixes, :through => :self_education_items,  :source => :appendix
 
   has_one :subspeciality, :through => :discipline
 
