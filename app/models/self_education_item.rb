@@ -1,13 +1,15 @@
 class SelfEducationItem < ActiveRecord::Base
-  ALL_KINDS  = %w[lecture lab practice csr srs exam]
-
   belongs_to :work_programm
-  attr_accessible :control, :hours, :kind
+  belongs_to :semester
+
+  attr_accessible :control, :hours, :kind, :semester_id
 
   scope :kind, ->(kind) { where :kind => kind }
+  scope :semester_id, ->(semester) { where :semester_id => semester }
 
   has_enum :control, :multiple => true
 
+  ALL_KINDS  = %w[lecture lab practice csr srs exam]
   AVAILABLE_CONTROLS = {
         lecture:      [:quiz, :test, :home_work],
         lab:          [:access, :defence],

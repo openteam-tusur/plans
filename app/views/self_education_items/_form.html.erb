@@ -2,5 +2,6 @@
   <%= form.input :hours %>
   <%= form.input :control, :as => :check_boxes, :collection => SelfEducationItem.available_human_control_values(resource.kind) %>
   <%= form.input :kind, :as => :hidden %>
+  <%= form.input :semester_id, :as => :hidden %>
   <%= form.submit %>
 <% end %>

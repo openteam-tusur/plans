@@ -1,4 +1,3 @@
-<h5 class='center' style='font-size: 16px'><%= semester %></h5>
 <table class='self_education'>
   <thead>
     <tr>
@@ -6,7 +5,6 @@
       <th>Наименование работы</th>
       <th><%= SelfEducationItem.human_attribute_name :hours  %></th>
       <th><%= SelfEducationItem.human_attribute_name :control  %></th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -15,15 +13,9 @@
         <td><%= index + 1 %>.</td>
         <td class="left title"><%= SelfEducationItem.human_attribute_name(kind) %></td>
         <% if resource.has_loadings_for?(kind) %>
-          <% scope = resource.self_education_items.kind(kind).semester_id(semester) %>
-          <% item = scope.first || scope.build %>
+          <% item = resource.send("self_education_#{kind}") || resource.send("build_self_education_#{kind}") %>
           <td class='hours'><%= item.hours %></td>
           <td><%= SelfEducationItem.human_enum_values(:control).values_at(*item.control).join(', ') %></td>
-          <% if item.new_record? %>
-            <td><%= link_to "добавить", polymorphic_url([:new, association_chain, resource, :self_education_item].flatten, :kind => kind, :semester_id => item.semester_id) %></td>
-          <% else %>
-            <td><%= link_to "изменить", [:edit, association_chain, resource, item].flatten %></td>
-          <% end %>
         <% else %>
           <td class='right warnings' colspan='3'>Не предусмотрено учебным планом</td>
         <% end %>

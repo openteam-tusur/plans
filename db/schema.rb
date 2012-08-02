@@ -186,6 +186,7 @@ ActiveRecord::Schema.define(:version => 20120802021748) do
 
   create_table "self_education_items", :force => true do |t|
     t.integer  "work_programm_id"
+    t.integer  "semester_id"
     t.string   "kind"
     t.integer  "hours"
     t.text     "control"
@@ -193,6 +194,7 @@ ActiveRecord::Schema.define(:version => 20120802021748) do
     t.datetime "updated_at",       :null => false
   end
 
+  add_index "self_education_items", ["semester_id"], :name => "index_self_education_items_on_semester_id"
   add_index "self_education_items", ["work_programm_id"], :name => "index_self_education_items_on_work_programm_id"
 
   create_table "self_educations", :force => true do |t|

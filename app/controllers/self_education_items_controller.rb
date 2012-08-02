@@ -14,6 +14,7 @@ class SelfEducationItemsController < ApplicationController
   end
 
   has_scope :kind
+  has_scope :semester_id
 
   layout false
 end

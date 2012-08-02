@@ -14,15 +14,7 @@ class WorkProgramm < ActiveRecord::Base
 
   has_one :subspeciality, :through => :discipline
 
-  has_one :self_education,          :dependent => :destroy
-
-  #FIFTH_ITEM_KINDS = %w[home_work referat test colloquium calculation]
-
   has_many :self_education_items
-
-  SelfEducationItem::ALL_KINDS.each do |kind|
-    has_one "self_education_#{kind}", :class_name => SelfEducationItem, :conditions => { :kind => kind }
-  end
 
   has_and_belongs_to_many :related_disciplines, :class_name => Discipline
 
@@ -45,6 +37,10 @@ class WorkProgramm < ActiveRecord::Base
       Person.new(:name => "Сидоров Анатолий Анатольевич", :post => "Доцент каф. АОИ", :science_post => "канд. экон. наук"),
       Person.new(:name => "Ехлаков Юрий Поликарпович", :post => "Зав. кафедрой АОИ", :science_post => "д-р техн. наук, профессор")
     ]
+  end
+
+  def self_education_items_by_semester(semester)
+    self_education_items.where(:semester_id => semester)
   end
 
   Exercise.enums['kind'].each do |kind|
