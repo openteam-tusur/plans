@@ -42,7 +42,6 @@
         </tbody>
       </table>
     </div>
-
   <% else %>
     <%= content_tag :p, 'Занятия не предусмотрены учебным планом' %>
   <% end %>
@@ -53,6 +52,7 @@
 <% if resource.has_loadings_for? :srs %>
   <% resource.grouped_loadings(:srs).each do |semester, loadings| %>
     <%= render :file => 'self_education_items/index', :locals => { :semester => semester, :loadings => loadings } %>
+    <div class='table_break'></div>
   <% end %>
 <% else %>
   <%= content_tag :p, 'Не предусмотрено учебным планом' %>

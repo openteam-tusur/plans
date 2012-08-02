@@ -9,23 +9,46 @@
   </table>
 </div>
 
+<div class='split_table'>
+  <table class='exercises'>
+    <tbody>
+      <tr>
+        <td class='number'>№</td>
+        <td class="left title">Наименование работы</td>
+        <td class='description'>Форма контроля</td>
+        <td class='hours'></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 <% SelfEducationItem::ALL_KINDS.each_with_index do |kind, index| %>
   <div class='split_table'>
-    <table class='self_education_items'>
+    <table class='self_education'>
       <tbody>
         <tr>
-          <td><%= index + 1 %>.</td>
+          <td class='number'><%= index + 1 %>.</td>
           <td class="left title"><%= SelfEducationItem.human_attribute_name(kind) %></td>
           <% if resource.has_loadings_for?(kind) %>
             <% scope = resource.self_education_items.kind(kind).semester_id(semester) %>
             <% item = scope.first || scope.build %>
-            <td><%= SelfEducationItem.human_enum_values(:control).values_at(*item.control).join(', ') %></td>
+            <td class='description'><%= SelfEducationItem.human_enum_values(:control).values_at(*item.control).join(', ') %></td>
             <td class='hours'><%= item.hours %></td>
           <% else %>
-            <td class='right warnings' colspan='3'>Не предусмотрено учебным планом</td>
+            <td class='center' colspan='3'>Не предусмотрено учебным планом</td>
           <% end %>
         </tr>
       </tbody>
     </table>
   </div>
 <% end %>
+
+<div class='split_table'>
+  <table class='self_education'>
+    <tbody>
+      <tr>
+        <td>Всего часов самостоятельной работы:</td>
+        <td class='hours'><%= title_page.scheduling.send(:srs).hours[semester.number] %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
