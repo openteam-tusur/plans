@@ -1,6 +1,6 @@
 <%= javascript_include_tag 'jquery_nested_form' %>
 
-<%= simple_nested_form_for resource, :url => year_speciality_subspeciality_discipline_work_programm_exercise_appendix_path(@year, @speciality, @subspeciality, @discipline, @work_programm, @appendixable) do |f| %>
+<%= simple_nested_form_for resource, :url => association_chain + [resource.class.name.underscore] do |f| %>
   <%= f.input :title %>
 
   <%= f.fields_for :appendix_items do |item_form| %>

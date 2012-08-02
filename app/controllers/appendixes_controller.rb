@@ -8,7 +8,7 @@ class AppendixesController < ApplicationController
       belongs_to :subspeciality do
         belongs_to :discipline do
           belongs_to :work_programm do
-             belongs_to :exercise, :singleton => true, :polymorphic => true, :instance_name => :appendixable
+             belongs_to :exercise, :self_education_item, :polymorphic => true, :singleton => true
           end
         end
       end

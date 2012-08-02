@@ -2,6 +2,8 @@ class SelfEducationItem < ActiveRecord::Base
   belongs_to :work_programm
   belongs_to :semester
 
+  has_one :appendix, :as => :appendixable
+
   attr_accessible :control, :hours, :kind, :semester_id
 
   scope :kind, ->(kind) { where :kind => kind }
