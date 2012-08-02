@@ -20,13 +20,13 @@
 
     <tr class='total_hours'>
       <% sum = resource.exercises_by_semester_and_kind(semester, kind).map(&:volume).sum %>
-      <td colspan='3' class='right <%= 'warning' if sum > loadings.first.value %>'>
-        <%= "Всего часов добавленных занятий: <span>#{sum}</span>".html_safe %>
+      <td colspan='3' class='right <%= 'warning' if sum != loadings.first.value %>'>
+        Всего часов добавленных занятий: <span><%= sum %></span>
       </td>
     </tr>
 
     <tr class='rup_hours'>
-      <td colspan='3' class='right'><%= "Необходимо часов по РУП: <span>#{loadings.first.value}</span>".html_safe %></td>
+      <td colspan='3' class='right'>Необходимо часов по РУП: <span><%= loadings.first.value %></span></td>
     </tr>
   </tbody>
 </table>

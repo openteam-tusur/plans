@@ -2,10 +2,8 @@
   <h1 class='uppercase strong'>2. Содержание дисциплины</h1>
   <% Exercise.enum_values(:kind).each_with_index do |kind, index| %>
   <h2 class='strong indentation'>2.<%= index+1 %> <%= Exercise.human_attribute_name kind.pluralize %></h2>
-  <% grouped_loadings = Hash[resource.discipline.loadings.where(:loading_kind => kind).group_by(&:semester).sort{|a,b| a[0].number <=> b[0].number}] %>
-
-  <% if grouped_loadings.any? %>
-    <% grouped_loadings.each do |semester, loadings| %>
+  <% if resource.has_loadings_for?(kind) %>
+    <% resource.grouped_loadings(kind).each do |semester, loadings| %>
       <div class='split_table'>
         <table class='exercises'>
           <tbody>
@@ -18,19 +16,19 @@
       </div>
 
       <% resource.exercises_by_semester_and_kind(semester, kind).each do |exercise| %>
-      <div class='split_table'>
-        <table class='exercises'>
-          <tbody>
-            <tr>
-              <td>
-                <div class='exercises_title strong'><%= exercise.title %></div>
-                <div class='description'><%= simple_format exercise.description %></div>
-              </td>
-              <td class='hours'><%= exercise.volume %></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <div class='split_table'>
+          <table class='exercises'>
+            <tbody>
+              <tr>
+                <td>
+                  <div class='exercises_title strong'><%= exercise.title %></div>
+                  <div class='description'><%= simple_format exercise.description %></div>
+                </td>
+                <td class='hours'><%= exercise.volume %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       <% end %>
     <% end %>
 
@@ -53,7 +51,9 @@
 
 <h2 class='strong indentation'>2.5 <%= Exercise.human_attribute_name :srs %></h2>
 <% if resource.has_loadings_for? :srs %>
-  <%= render :partial => 'reports/self_education', :object => resource.self_education if resource.self_education %>
+  <% resource.grouped_loadings(:srs).each do |semester, loadings| %>
+    <%= render :file => 'self_education_items/index', :locals => { :semester => semester, :loadings => loadings } %>
+  <% end %>
 <% else %>
   <%= content_tag :p, 'Не предусмотрено учебным планом' %>
 <% end %>

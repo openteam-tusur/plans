@@ -84,6 +84,10 @@ class WorkProgramm < ActiveRecord::Base
     discipline.loadings.where(loading_kind: kind).any?
   end
 
+  def grouped_loadings(kind)
+    Hash[discipline.loadings.where(:loading_kind => kind).group_by(&:semester).sort{|a,b| a[0].number <=> b[0].number}]
+  end
+
   def rating_items_for_semester(semester)
     rating_items.where(semester_id: semester)
   end

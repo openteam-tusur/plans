@@ -29,10 +29,14 @@
         <% end %>
       </tr>
     <% end %>
-    <tr>
-      <td class='left' colspan='2'>Всего часов самостоятельной работы:</td>
-      <td class='hours center'><%#= self_education.total_hours %></td>
-      <td></td>
+    <tr class='total_hours'>
+      <% sum = resource.self_education_items.semester_id(semester).map(&:hours).map(&:to_i).sum %>
+      <td colspan='5' class='right <%= 'warning' if sum != loadings.first.value %>'>
+        Всего часов добавленных занятий: <span><%= sum %></span>
+      </td>
+    </tr>
+    <tr class='rup_hours'>
+      <td colspan='5' class='right'>Необходимо часов по РУП: <span><%= loadings.first.value %></span></td>
     </tr>
   </tbody>
 </table>
