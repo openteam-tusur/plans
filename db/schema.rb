@@ -13,6 +13,15 @@
 
 ActiveRecord::Schema.define(:version => 20120802075943) do
 
+  create_table "appendix_items", :force => true do |t|
+    t.integer  "appendix_id"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "appendix_items", ["appendix_id"], :name => "index_appendix_items_on_appendix_id"
+
   create_table "appendixes", :force => true do |t|
     t.integer  "appendixable_id"
     t.string   "appendixable_type"
