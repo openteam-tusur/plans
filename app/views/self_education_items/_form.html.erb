@@ -1,0 +1,6 @@
+<%= simple_form_for association_chain + [resource] do |form| %>
+  <%= form.input :hours %>
+  <%= form.input :control %>
+  <%= form.input :kind, :as => :hidden %>
+  <%= form.submit %>
+<% end %>

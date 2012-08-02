@@ -134,7 +134,7 @@ ru:
           be_able_to: уметь
           have: владеть
 
-      self_education:
+      self_education_item:
         lecture:          Проработка лекционного материала
         lecture_hours:    Количество часов
         lecture_control:  Форма контроля

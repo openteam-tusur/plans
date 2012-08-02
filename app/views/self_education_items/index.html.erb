@@ -1,0 +1,36 @@
+<table class='self_education'>
+  <thead>
+    <tr>
+      <th>Номер</th>
+      <th>Наименование работы</th>
+      <th><%= SelfEducationItem.human_attribute_name :hours  %></th>
+      <th><%= SelfEducationItem.human_attribute_name :control  %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% SelfEducation::ALL_KINDS.each_with_index do |kind, index| %>
+      <tr class='<%= cycle("even", "odd") %>'>
+        <td><%= index + 1 %>.</td>
+        <td class="left title"><%= SelfEducationItem.human_attribute_name(kind) %></td>
+        <% if resource.has_loadings_for?(kind) %>
+          <% item = resource.send("self_education_#{kind}") || resource.send("build_self_education_#{kind}") %>
+          <td class='hours'><%= item.hours %></td>
+          <td><%#= SelfEducation.human_enum_values("#{kind}_control").values_at(*self_education.send("#{kind}_control")).join(', ') %></td>
+          <% if item.new_record? %>
+            <td><%= link_to "добавить", polymorphic_url([:new, association_chain, resource, :self_education_item].flatten, :kind => kind) %></td>
+          <% else %>
+            <td><%= link_to "изменить", [:edit, association_chain, resource, item].flatten %></td>
+          <% end %>
+        <% else %>
+          <td class='right warnings' colspan='3'>Не предусмотрено учебным планом</td>
+        <% end %>
+      </tr>
+    <% end %>
+    <tr>
+      <td class='left' colspan='2'>Всего часов самостоятельной работы:</td>
+      <td class='hours center'><%#= self_education.total_hours %></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

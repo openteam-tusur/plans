@@ -16,6 +16,14 @@ class WorkProgramm < ActiveRecord::Base
 
   has_one :self_education,          :dependent => :destroy
 
+  #FIFTH_ITEM_KINDS = %w[home_work referat test colloquium calculation]
+
+  has_many :self_education_items
+
+  SelfEducationItem::ALL_KINDS.each do |kind|
+    has_one "self_education_#{kind}", :class_name => SelfEducationItem, :conditions => { :kind => kind }
+  end
+
   has_and_belongs_to_many :related_disciplines, :class_name => Discipline
 
   validates_presence_of :discipline, :year
