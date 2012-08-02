@@ -1,4 +1,13 @@
 <div class='appenix_page'>
   <h1 class='strong uppercase'>5. Приложения</h1>
 
+    <% resource.appendixes.each_with_index do |appendix, index| %>
+        <h4 class='strong'>Приложение 5.<%= index+1 %>. <%= appendix.title  %></h4>
+        <ol>
+          <% appendix.appendix_items.each do |item| %>
+            <li><%= item.description %></li>
+          <% end %>
+        </ol>
+    <div class='page-break'></div>
+    <% end %>
 </div>
