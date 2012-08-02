@@ -22,7 +22,12 @@
               <tr>
                 <td>
                   <div class='exercises_title strong'><%= exercise.title %></div>
-                  <div class='description'><%= simple_format exercise.description %></div>
+                  <div class='description'>
+                      <%= simple_format exercise.description %>
+                      <% if exercise.appendix %>
+                        <em> См. приложение <%= exercise.appendix.title %></em>
+                      <% end %>
+                  </div>
                 </td>
                 <td class='hours'><%= exercise.volume %></td>
               </tr>
