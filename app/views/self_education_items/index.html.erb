@@ -1,5 +1,5 @@
 <h5 class='center' style='font-size: 16px'><%= semester %></h5>
-<table class='self_education'>
+<table class='self_education_items'>
   <thead>
     <tr>
       <th>Номер</th>
@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <% SelfEducation::ALL_KINDS.each_with_index do |kind, index| %>
+    <% SelfEducationItem::ALL_KINDS.each_with_index do |kind, index| %>
       <tr class='<%= cycle("even", "odd") %>'>
         <td><%= index + 1 %>.</td>
         <td class="left title"><%= SelfEducationItem.human_attribute_name(kind) %></td>
