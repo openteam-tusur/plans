@@ -82,7 +82,7 @@ class WorkProgramm < ActiveRecord::Base
   end
 
   def has_loadings_for?(kind)
-    discipline.loadings.where(loading_kind: kind).any?
+    discipline.loadings.where(loading_kind: kind).any? || SelfEducationItem::FIFTH_ITEM_KINDS.include?(kind)
   end
 
   def grouped_loadings(kind)
