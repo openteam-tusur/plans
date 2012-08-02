@@ -59,14 +59,14 @@
 <% Exercise.enum_values(:kind).each do |kind| %>
   <h5 class='center'>2.<%= index %> <%= Exercise.human_attribute_name kind.pluralize %></h5>
   <% index += 1 %>
-  <%= content_tag :p, 'Занятия не предусмотрены учебным планом' if resource.has_loadings_for?(:kind)  %>
+  <%= content_tag :p, 'Занятия не предусмотрены учебным планом' unless resource.has_loadings_for?(kind)  %>
   <% resource.grouped_loadings(kind).each do |semester, loadings| %>
     <%= render :file => 'exercises/index', :locals => { :semester => semester, :kind => kind, :loadings => loadings } %>
   <% end %>
 <% end %>
 
 <h5 class='center'>2.5 <%= Exercise.human_attribute_name :srs %></h5>
-<%= content_tag :p, 'Не предусмотрено учебным планом' if resource.has_loadings_for?(:kind) %>
+<%= content_tag :p, 'Не предусмотрено учебным планом' unless resource.has_loadings_for?(:srs) %>
 <% resource.grouped_loadings(:srs).each do |semester, loadings| %>
   <%= render :file => 'self_education_items/index', :locals => { :semester => semester, :loadings => loadings  } %>
 <% end %>
