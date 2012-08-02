@@ -8,4 +8,8 @@ class Appendix < ActiveRecord::Base
   accepts_nested_attributes_for :appendix_items, :allow_destroy => true
 
   validates_presence_of :title
+
+  def to_s
+    "#{self.class.model_name.human.mb_chars.titleize}. #{title}"
+  end
 end

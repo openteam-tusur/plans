@@ -11,6 +11,7 @@ class WorkProgramm < ActiveRecord::Base
   has_many :publications,           :dependent => :destroy
   has_many :rating_items,           :dependent => :destroy
   has_many :requirements,           :dependent => :destroy
+  has_many :appendixes, :through => :exercises
 
   has_one :subspeciality, :through => :discipline
 
