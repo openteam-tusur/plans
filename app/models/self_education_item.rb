@@ -40,3 +40,19 @@ class SelfEducationItem < ActiveRecord::Base
     self.weight = semester.number * 100 + ALL_KINDS.index(kind)
   end
 end
+
+# == Schema Information
+#
+# Table name: self_education_items
+#
+#  id               :integer          not null, primary key
+#  work_programm_id :integer
+#  semester_id      :integer
+#  kind             :string(255)
+#  hours            :integer
+#  control          :text
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  weight           :integer
+#
+

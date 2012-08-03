@@ -8,3 +8,16 @@ class Requirement < ActiveRecord::Base
     description
   end
 end
+
+# == Schema Information
+#
+# Table name: requirements
+#
+#  id               :integer          not null, primary key
+#  work_programm_id :integer
+#  requirement_kind :string(255)
+#  description      :text
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+

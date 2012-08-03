@@ -7,3 +7,15 @@ class Mission < ActiveRecord::Base
     description
   end
 end
+
+# == Schema Information
+#
+# Table name: missions
+#
+#  id               :integer          not null, primary key
+#  description      :text
+#  work_programm_id :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+

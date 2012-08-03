@@ -26,5 +26,6 @@ end
 #  updated_at       :datetime         not null
 #  semester_id      :integer
 #  kind             :string(255)
+#  weight           :integer
 #
 

@@ -57,6 +57,6 @@ end
 #  summ_loading     :integer
 #  summ_srs         :integer
 #  code             :string(255)
-#  component        :string(255)
+#  cycle_code       :string(255)
 #
 

@@ -23,3 +23,16 @@ class Appendix < ActiveRecord::Base
     "#{self.class.model_name.human.mb_chars.titleize} #{number}. «#{title}»"
   end
 end
+
+# == Schema Information
+#
+# Table name: appendixes
+#
+#  id                :integer          not null, primary key
+#  appendixable_id   :integer
+#  appendixable_type :string(255)
+#  title             :string(255)
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+
