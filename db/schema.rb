@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120803070838) do
+ActiveRecord::Schema.define(:version => 20120803072421) do
 
   create_table "appendix_items", :force => true do |t|
     t.integer  "appendix_id"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(:version => 20120803070838) do
     t.datetime "updated_at",       :null => false
     t.integer  "semester_id"
     t.string   "kind"
+    t.integer  "weight"
   end
 
   add_index "exercises", ["semester_id"], :name => "index_lectures_on_semester_id"

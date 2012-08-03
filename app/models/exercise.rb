@@ -8,9 +8,15 @@ class Exercise < ActiveRecord::Base
 
   validates_presence_of :description, :title, :volume, :semester, :kind
 
-  default_scope order('exercises.id ASC')
+  default_scope order('exercises.weight, exercises.id ASC')
+
+  before_create :set_weight
 
   has_enum :kind
+
+  def set_weight
+    self.weight = Exercise.enum_values(:kind).index(kind)
+  end
 end
 
 # == Schema Information
