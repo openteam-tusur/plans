@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Appendix < ActiveRecord::Base
   attr_accessible :title, :appendix_items_attributes
 
@@ -11,5 +13,13 @@ class Appendix < ActiveRecord::Base
 
   def to_s
     "#{self.class.model_name.human.mb_chars.titleize}. #{title}"
+  end
+
+  def number
+    appendixable.work_programm.appendixes.index(self) + 1
+  end
+
+  def to_s
+    "#{self.class.model_name.human.mb_chars.titleize} «#{title}»"
   end
 end

@@ -31,7 +31,7 @@
             <div>
               <% item = resource.self_education_items.kind(kind).semester_id(semester).first %>
               <% if item && item.appendix %>
-                <em> См. приложение <%= item.appendix.title %></em>
+                <em> См. <%= item.appendix %></em>
               <% end %>
             </div>
           </td>
