@@ -9,6 +9,10 @@ class SelfEducationItem < ActiveRecord::Base
   scope :kind, ->(kind) { where :kind => kind }
   scope :semester_id, ->(semester) { where :semester_id => semester }
 
+  before_create :set_weight
+
+  validates_presence_of :semester, :work_programm
+
   has_enum :control, :multiple => true
 
   FIFTH_ITEM_KINDS = %w[home_work referat test colloquium calculation]
@@ -30,5 +34,9 @@ class SelfEducationItem < ActiveRecord::Base
 
   def self.available_human_control_values(kind)
     human_enum_values(:control).keep_if{|key, value| AVAILABLE_CONTROLS[kind.to_sym].include?(key.to_sym) }.invert
+  end
+
+  def set_weight
+    self.weight = semester.number * 100 + ALL_KINDS.index(kind)
   end
 end

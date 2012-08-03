@@ -8,7 +8,7 @@ class Exercise < ActiveRecord::Base
 
   validates_presence_of :description, :title, :volume, :semester, :kind
 
-  default_scope order('id ASC')
+  default_scope order('exercises.id ASC')
 
   has_enum :kind
 end

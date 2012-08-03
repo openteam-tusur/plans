@@ -35,7 +35,7 @@ class WorkProgramm < ActiveRecord::Base
   before_create :set_purpose
 
   def appendixes
-    exercise_appendixes + self_education_item_appendixes
+    @appendixes ||= exercise_appendixes + self_education_item_appendixes
   end
 
   # FIXME: пока просто заглушка

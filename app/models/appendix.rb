@@ -20,6 +20,6 @@ class Appendix < ActiveRecord::Base
   end
 
   def to_s
-    "#{self.class.model_name.human.mb_chars.titleize} «#{title}»"
+    "#{self.class.model_name.human.mb_chars.titleize} #{number}. «#{title}»"
   end
 end
