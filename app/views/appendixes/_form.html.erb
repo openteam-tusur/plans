@@ -1,5 +1,3 @@
-<%= javascript_include_tag 'jquery_nested_form' %>
-
 <%= simple_nested_form_for resource, :url => association_chain + [resource.class.name.underscore] do |f| %>
   <%= f.input :title %>
 
