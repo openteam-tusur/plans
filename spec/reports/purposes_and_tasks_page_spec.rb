@@ -14,16 +14,7 @@ describe PurposesAndTasksPage do
 
     it { should =~ /Дисциплина «Учебная дисциплина»/ }
     it { should =~ /цикл «ЕСН.Ф»/ }
-    context 'направление обучения' do
-      context 'ГОС есть' do
-        before { page.speciality.should_receive(:gos).and_return(Gos.new(:title => 'Направление обучения ГОС')) }
-        it { should =~ /по направлению «Направление обучения ГОС»/ }
-      end
-      context 'ГОСа нет' do
-        it { should =~ /по направлению «--------------------»/ }
-      end
-    end
-
+    it { should =~ /по направлению «Специальность подготовки»/ }
   end
 
   def mock_disciplines(kind, discipline_titles)
