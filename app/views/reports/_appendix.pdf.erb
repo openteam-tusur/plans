@@ -1,6 +1,6 @@
 <div class='appenix_page'>
-    <% resource.appendixes.each_with_index do |appendix, index| %>
-        <h1 class='strong'><span class='uppercase'>Приложение №<%= index+1 %></span>. <%= appendix.title  %></h1>
+    <% resource.appendixes.each do |appendix| %>
+        <h1 class='strong'><span class='uppercase'>Приложение</span>. <%= appendix.title  %></h1>
         <ol>
           <% appendix.appendix_items.each do |item| %>
             <li><%= item.description %></li>
