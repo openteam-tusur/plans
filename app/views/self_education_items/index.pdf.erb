@@ -26,11 +26,20 @@
       <tbody>
         <tr>
           <td class='number'><%= index + 1 %>.</td>
-          <td class="left title"><%= SelfEducationItem.human_attribute_name(kind) %></td>
+          <td class="left title">
+            <%= SelfEducationItem.human_attribute_name(kind) %>
+            <div>
+              <% item = resource.self_education_items.kind(kind).semester_id(semester).first %>
+              <% if item && item.appendix %>
+                <em> См. приложение <%= item.appendix.title %></em>
+              <% end %>
+            </div>
+          </td>
           <% if resource.has_loadings_for?(kind) %>
             <% scope = resource.self_education_items.kind(kind).semester_id(semester) %>
             <% item = scope.first || scope.build %>
-            <td class='description'><%= SelfEducationItem.human_enum_values(:control).values_at(*item.control).join(', ') %></td>
+            <td class='description'><%= SelfEducationItem.human_enum_values(:control).values_at(*item.control).join(', ') %>
+            </td>
             <td class='hours'><%= item.hours %></td>
           <% else %>
             <td class='center' colspan='3'>Не предусмотрено учебным планом</td>
