@@ -3,5 +3,5 @@
     <%= form.association :related_disciplines, :collection => disciplines - [resource.discipline], :as => :check_boxes, :label => cycle, :wrapper_html => { :class => 'cycle_wrapper' } %>
   <% end %>
 
-  <%= form.submit %>
+  <%= form.submit 'Добавить дисциплины' %>
 <% end %>
