@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120803072421) do
+ActiveRecord::Schema.define(:version => 20120806073718) do
 
   create_table "appendix_items", :force => true do |t|
     t.integer  "appendix_id"
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(:version => 20120803072421) do
     t.datetime "updated_at",      :null => false
     t.date     "approved_on"
     t.string   "speciality_code"
+    t.text     "html"
   end
 
   add_index "goses", ["speciality_code"], :name => "index_goses_on_speciality_code"
