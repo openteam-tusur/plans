@@ -20,6 +20,10 @@ class Speciality < ActiveRecord::Base
     Gos.find_by_speciality_code(code) || Gos.new(:title => '-'*20)
   end
 
+  def gos?
+    Gos.where(:speciality_code => code).any?
+  end
+
   private
 
     def move_subspeciality_to_trash

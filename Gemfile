@@ -18,7 +18,7 @@ group :default do
   gem 'has_scope'
   gem 'inherited_resources'
   gem 'nested_form'
-  gem 'nokogiri'
+  gem 'nokogiri',             :require => false
   gem 'openteam-commons',     '>= 0.2.3'
   gem 'progress_bar',         :require => false
   gem 'rails'

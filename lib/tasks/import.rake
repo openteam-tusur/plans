@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require 'progress_bar'
+require 'nokogiri'
 
 module PlanImporter
 

@@ -3,6 +3,7 @@
 require 'rake'
 require 'open-uri'
 require 'progress_bar'
+require 'nokogiri'
 
 task :parse_goses => :environment do
   goses = Gos.where(:html => nil)
@@ -20,5 +21,27 @@ task :parse_goses => :environment do
                end
     gos.save!
     bar.increment!
+  end
+  Subspeciality.all.each do |subspeciality|
+    if subspeciality.gos?
+      html = Nokogiri::HTML subspeciality.gos.html
+      next if subspeciality.disciplines.empty?
+      if (table = html.css("blockquote table:contains('Наименование')")).any?
+        puts "="*100
+        puts "#{subspeciality.speciality.code} #{subspeciality.speciality.degree}  #{subspeciality.speciality.title} (#{subspeciality.gos})"
+        tds = table.css("tr>td[2]").map(&:text).map{|text| text.gsub(/^[^[:alnum:]]+|[^[:alnum:]]+$/, '').gsub(/\r/, '') }
+        subspeciality.disciplines.each do |discipline|
+         if td = tds.grep(/\A#{discipline.title}/i).first
+            td = tds[tds.index(td)+1] if td == discipline.title
+            discipline.didactic_units = td
+            discipline.save!
+            print "+"
+          else
+            print "."
+          end
+        end
+        puts
+      end
+    end
   end
 end

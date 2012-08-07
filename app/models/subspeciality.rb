@@ -20,6 +20,8 @@ class Subspeciality < ActiveRecord::Base
   delegate :degree, :to => :speciality
   scope :actual, where(:deleted_at => nil)
 
+  delegate :gos, :gos?, :to => :speciality
+
   def warnings
     warnings = []
     warnings << "нет ООП" unless programm
