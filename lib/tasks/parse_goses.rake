@@ -26,15 +26,16 @@ task :parse_goses => :environment do
     if subspeciality.gos?
       html = Nokogiri::HTML subspeciality.gos.html
       next if subspeciality.disciplines.empty?
-      if (table = html.css("blockquote table:contains('Наименование')")).any?
+      if table = html.css("blockquote table:contains('Наименование')").first
         puts "="*100
         puts "#{subspeciality.speciality.code} #{subspeciality.speciality.degree}  #{subspeciality.speciality.title} (#{subspeciality.gos})"
         tds = table.css("tr>td[2]").map(&:text).map{|text| text.gsub(/^[^[:alnum:]]+|[^[:alnum:]]+$/, '').gsub(/\r/, '') }
         subspeciality.disciplines.each do |discipline|
-         if td = tds.grep(/\A#{discipline.title}/i).first
-            td = tds[tds.index(td)+1] if td == discipline.title
-            discipline.didactic_units = td
-            discipline.save!
+         if content = tds.grep(/\A#{discipline.title}/i).first
+            didactic_unit = subspeciality.gos.didactic_units.find_or_initialize_by_discipline(discipline.title)
+            content = tds[tds.index(content)+1] if content == discipline.title
+            content.gsub!(/\A#{discipline.title}[^[:alnum:]]+/i, '')
+            didactic_unit.update_attributes! :content => content if didactic_unit.new_record? || !didactic_unit.content?
             print "+"
           else
             print "."
