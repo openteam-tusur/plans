@@ -4,6 +4,8 @@ class WorkProgrammsController < ApplicationController
   respond_to :html, :json
   respond_to :pdf, :only => :show
 
+  layout false, :except => [:index, :show]
+
   belongs_to :year, :finder => :find_by_number! do
     belongs_to :speciality, :finder => :find_by_code! do
       belongs_to :subspeciality do

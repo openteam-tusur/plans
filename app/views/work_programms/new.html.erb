@@ -1,8 +1,7 @@
-<h1>Добавление рабочей программы дисциплины &quot;<%= @discipline.title %>&quot;</h1>
-
-<%= render :partial => 'head' %>
-
-<%= simple_form_for [@year, @speciality, @subspeciality, @discipline, @work_programm] do | f | %>
-  <%= f.input :year %>
-  <%= f.submit 'Добавить' %>
+<%= simple_form_for [@year, @speciality, @subspeciality, @discipline, @work_programm], :remote => true do | f | %>
+  <%= f.input :year, :label => 'Укажите год рабочей программы' %>
+  <div class="buttons">
+    <%= f.submit  %>
+    <%= link_to 'Отмена', '#', :class => 'cancel_link' %>
+  </div>
 <% end %>

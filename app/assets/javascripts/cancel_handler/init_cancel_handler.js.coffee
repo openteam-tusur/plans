@@ -1,11 +1,9 @@
 @init_cancel_handler = () ->
-  $('.cancel').on 'click', ->
+  $('.cancel_link').on 'click', ->
     $this = $(this)
-    parent = $this.parent()
-    parent.find('.add_text').show()
-    parent.find('textarea, .submit_link, .cancel').remove()
-    if parent.is('form')
-      parent.closest('.form_wrapper').siblings('.add_discipline').show()
-      parent.parent().off().remove()
+    parent = $this.closest('form')
+    parent.siblings('.add_text').show()
+    parent.parent().siblings('.add_discipline').show()
+    parent.remove()
 
     false

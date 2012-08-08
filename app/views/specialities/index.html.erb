@@ -1,18 +1,14 @@
-<div class="additional_links">
-  <%= link_to "Статистика по кафедрам", year_statistics_path(@year.number) %>
-  <%= link_to "ГОС'ы", goses_path %>
-</div>
 <% degrees = {} %>
 <% collection.group_by(&:degree).each do |degree, specialities| %>
   <% degrees[t(degree)] = degree %>
-  <h2 class='degree' id='<%= degree %>'><%= t degree %></h2>
-  <ul>
+  <h2 class='head_degree' id='<%= degree %>'><%= t degree %></h2>
+  <ul class='list specialities'>
     <% specialities.each do |speciality| %>
       <li>
         <h4 class='speciality'><%= speciality.code %> &mdash; <%= speciality.title %></h4>
-        <ul>
+        <ul class='sub_list'>
           <% speciality.subspecialities.each do |subspeciality| %>
-            <li class='subspeciality <%= "with_programm" if subspeciality.warnings.empty? %> <%= "deleted" if subspeciality.deleted? %>'>
+            <li class='subspeciality <%= "success" if subspeciality.warnings.empty? %> <%= "deleted" if subspeciality.deleted? %>'>
               <%= link_to "#{subspeciality.title}", year_speciality_subspeciality_path(@year.number, speciality.code, subspeciality) %>
               <%= content_tag :span, "(#{subspeciality.warnings.join(", ")})", :class => 'warnings' if subspeciality.warnings.any? %>
               <span class='subdepartment'><%= subspeciality.subdepartment.abbr %></span>
@@ -24,13 +20,4 @@
   </ul>
 <% end %>
 
-<div class="submenu">
-  <h6>Степени обучения</h6>
-  <ul>
-    <% degrees.each do |degree, anchor| %>
-      <li><a href='#<%= anchor %>'><%= degree %></a></li>
-    <% end %>
-    <li>&uarr;&nbsp;<a href='#top'>Наверх</a>&nbsp;&uarr;</li>
-  </ul>
-</div>
-
+<%= render :partial => 'commons/nav_menu', :locals => { :nav_collection => degrees, :title => 'Степени обучения' } %>

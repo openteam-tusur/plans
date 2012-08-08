@@ -1,14 +1,20 @@
-  <%= form.input :description %>
+<%= simple_form_for resource, :url => resource_path, :remote => true do |f| %>
+  <%= f.input :description %>
   <div class='add_file_wrapper'>
-    <% if form.object.vfs_path? %>
-      <%= link_to "Скачать файл (#{URI.decode(form.object.vfs_path.match(/([^\/.]+)(\.(.{3}))?$/)[0])})", form.object.vfs_path, :class => 'link' %>
+    <% if f.object.vfs_path? %>
+      <%= link_to "Скачать файл (#{URI.decode(f.object.vfs_path.match(/([^\/.]+)(\.(.{3}))?$/)[0])})", f.object.vfs_path, :class => 'link' %>
       <%= link_to "Удалить", '#', :class => 'link remove_file' %>
     <% else %>
       <%= link_to 'Выбрать файл', '#', :class => 'choose_file' %>
     <% end %>
-
-    <%= form.input :vfs_path, :as => :hidden, :input_html => {:params => "vfs_path=/plans/#{@year.number}/#{t(@speciality.degree)}/#{@speciality.code}/#{@subspeciality.subdepartment.abbr}/#{@subspeciality.title}/ООП"}  %>
+    <%= f.input :vfs_path, :as => :hidden, :input_html => {:params => "vfs_path=/plans/#{@year.number}/#{t(@speciality.degree)}/#{@speciality.code}/#{@subspeciality.subdepartment.abbr}/#{@subspeciality.title}/ООП"}  %>
   </div>
-  <%= form.submit :class => 'submit' %>
-  <%= link_to "Отмена", resource_path, :remote => true if resource.persisted? %>
-
+  <div class="buttons">
+    <%= f.submit %>
+    <% if resource.persisted? %>
+      <%= link_to "Отмена", resource_path, :remote => true %>
+    <% else %>
+      <%= link_to "Отмена", '#', :class => 'cancel_link' %>
+    <% end %>
+  </div>
+<% end %>

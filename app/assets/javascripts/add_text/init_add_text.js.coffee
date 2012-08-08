@@ -18,10 +18,13 @@
         dataType: 'json'
       ).done ( data, status, jqXHR ) ->
         work_programm = JSON.parse jqXHR.responseText
-        textarea = $('<textarea id='+kind+'/>').insertAfter($this)
+        form = $('<form/>').insertAfter($this)
+        input_div = $('<div class="input" />').appendTo(form)
+        textarea = $('<textarea id='+kind+'/>').appendTo(input_div)
         textarea.val(work_programm[kind])
-        submit = $('<a href="#" class="submit_link">Сохранить</a>').insertAfter(textarea)
-        cancel = $('<a href="#" class="cancel">Отмена</a>').insertAfter(submit)
+        buttons = $('<div class="buttons"/>').appendTo(form)
+        submit = $('<a href="#" class="submit_link">Сохранить цели</a>').appendTo(buttons)
+        cancel = $('<a href="#" class="cancel_link">Отмена</a>').appendTo(buttons)
         init_cancel_handler()
         submit.on 'click', ->
           data_params.work_programm[kind] = textarea.val()
@@ -32,7 +35,7 @@
             dataType: 'html'
           ).done (data, status, jqXHR) ->
             $('.work_programm_'+kind).html $(jqXHR.responseText).find('.work_programm_'+kind).html()
-            textarea.add(submit).add(cancel).remove()
+            form.remove()
             $this.show()
 
           false

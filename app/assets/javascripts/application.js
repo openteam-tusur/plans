@@ -7,8 +7,10 @@
 //= require ./add_text
 //= require ./add_discipline
 //= require ./add_autocomplete
+//= require ./add_work_programm
 //= require ./cancel_handler
 //= require ./manage_exercises
 //= require ./manage_missions
 //= require ./calculate_total
+//= require ./collapser
 //= require main

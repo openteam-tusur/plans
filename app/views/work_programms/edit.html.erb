@@ -1,7 +1,10 @@
-<%= simple_form_for [association_chain, resource].flatten do |form| %>
+<%= simple_form_for [association_chain, resource].flatten, :remote => true do |form| %>
   <% resource.disciplines.group_by(&:cycle).each do |cycle, disciplines| %>
     <%= form.association :related_disciplines, :collection => disciplines - [resource.discipline], :as => :check_boxes, :label => cycle, :wrapper_html => { :class => 'cycle_wrapper' } %>
   <% end %>
 
-  <%= form.submit 'Добавить дисциплины' %>
+  <div class="buttons">
+    <%= form.submit 'Добавить дисциплины' %>
+    <%= link_to "Отмена", '', :class => 'cancel_link' %>
+  </div>
 <% end %>

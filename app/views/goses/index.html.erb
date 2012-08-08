@@ -1,12 +1,12 @@
-<p>
+<div class='top_nav'>
   <%= link_to '&larr;&nbsp;К списку специальностей'.html_safe, root_path  %>
-</p>
+</div>
 
-<h1>Государственные общеобразовательные стандарты</h1>
+<h1 class='head_center'>Государственные общеобразовательные стандарты</h1>
 
-<%= link_to 'Добавить ГОС', new_gos_path %>
+<%= link_to '+ Добавить ГОС', new_gos_path %>
 
-<ul>
+<ul class='list'>
   <% collection.each do |item| %>
     <h4>
       <li class="gos">

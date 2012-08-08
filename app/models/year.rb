@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Year < ActiveRecord::Base
   attr_accessible :number
 
@@ -19,6 +21,10 @@ class Year < ActiveRecord::Base
     specialities.update_all(:deleted_at => Time.now)
     subdepartments.update_all(:deleted_at => Time.now)
     subspecialities.update_all(:deleted_at => Time.now)
+  end
+
+  def to_s
+    "#{number} год"
   end
 end
 

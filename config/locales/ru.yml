@@ -176,6 +176,7 @@ ru:
       rating_item: элемент учебной деятельности
       requirement: требование
       semester: семестр
+      work_programm: рабочую программу
 
   pluralize:
     author:

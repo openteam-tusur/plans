@@ -1,0 +1,9 @@
+<h2>
+  <%= @speciality.code %>
+  <%= @speciality.title %><br/>
+</h2>
+
+<h5><%= t "#{@speciality.degree}_prepare" %></h5>
+<h5><%= @subspeciality.title %></h5>
+<h5>Профилирующая кафедра <%= @subspeciality.subdepartment.abbr %><br/></h5>
+<h5>Год набора <%= @year.number %></h5>

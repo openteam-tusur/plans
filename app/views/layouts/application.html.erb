@@ -1,23 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Plans</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <div class="top_menu">
-    <ul>
-      <% Year.order(:number).each do |year| %>
-        <li <%= 'class=active' if year.number.to_s == params[:year_id] %>>
-          <%= link_to year.number, year_specialities_path(year.number) %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-  <div class="content">
-    <%= yield %>
-  </div>
-</body>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Plans</title>
+    <%= stylesheet_link_tag    'application', :media => 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <%= render :partial => 'commons/top_menu' %>
+    <%= render :partial => 'commons/sub_menu' %>
+    <div class='main_wrapper'>
+      <%= yield %>
+    </div>
+  </body>
 </html>

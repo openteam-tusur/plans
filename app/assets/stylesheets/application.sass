@@ -4,6 +4,14 @@
 @import 'jquery-ui/jquery-ui'
 @import url(http://fonts.googleapis.com/css?family=Jura&subset=cyrillic)
 
+$border_color: #CCC9C7
+$button_hover_color: #DEDEDE
+$link_color:   #14526A
+$link_color_hover: #218AB2
+$sub_menu_bg: #F3F3F3
+$top_menu_bg: #E7E7E9
+$warn_color:  #F15D3C
+
 html, body
   font-size: 1em
   line-height: 1.62em
@@ -38,411 +46,324 @@ h6
   font-size: 0.8em
 
 a
-  color: #14526a
+  color: $link_color
 
   &:hover
-    color: #218ab2
-
-.center
-  text-align: center
-
-.left
-  text-align: left !important
-
-.right
-  text-align: right !important
-
-.even
-  background: #f6f7f8
-
-body
-  background: #fafafa
-  margin: 0 auto
-  width: 90%
-
-ul
-  +clearfix
-
-  li
-    +clearfix
-
-    ul
-      margin: 0 0 1.62em 0
-
-      li
-        padding: 0 1.62em
-
-        &:hover
-          background: #eaeaea
+    color: $link_color_hover
 
 .top_menu
-  +border-radius(3px)
-  background: #E7E7E9
+  background: $top_menu_bg
+  padding: 15px 0
 
-  padding: 10px
   ul
     text-align: center
 
     li
       +inline-block
-      border-right: 1px solid #CCC9C7
-      font-size: 1.3em
-      margin: 0 0 0 10px
+      border-right: 1px solid $border_color
+      margin: 0 10px 0 0
       padding: 0 10px 0 0
-
-      &:first-child
-        margin: 0
 
       &:last-child
         border: none
-        padding: 0
+
+      a
+        font-size: 1.5em
 
     .active
       a
-        font-size: 1.4em
+        font-size: 1.8em
         font-weight: bold
-        text-decoration: none
 
-.submenu
-  +clearfix
+.sub_menu
+  background: $sub_menu_bg
+  border-bottom: 1px solid $border_color
+  border-top: 1px solid $border_color
+  padding: 5px 15px
+
+  ul
+    text-align: right
+
+    li
+      +inline-block
+      border-left: 1px solid $border_color
+      margin: 0 0 0 10px
+      padding: 0 0 0 10px
+
+      &:first-child
+        border: none
+
+.nav_menu
   +border-radius(3px)
-  background: #E7E7E9
-  bottom: 5px
-  color: #14526a
-  right: 5px
-  text-align: center
+  background: $top_menu_bg
+  bottom: 10px
   opacity: 0.5
   padding: 5px 15px
   position: fixed
+  right: 5px
 
   &:hover
     opacity: 1
 
+  h6
+    font-size: 1.1em
+
   ul
     li
       &:last-child
-        border-top: 1px solid #CCC9C7
+        border-top: 1px solid $border_color
+        color: $link_color
         margin: 15px 0 0 0
         padding: 5px 0 0 0
+        text-align: center
 
-.actions
-  float: right
+.main_wrapper
+  padding: 25px 15px
 
-.additional_links
-  text-align: right
+  .top_nav
+    margin: 0 0 20px 0
 
-.content
-  padding: 1.62em
-
-  h1
+  .head_degree
+    font-size: 2.2em
     text-align: center
 
-.degree
-  margin: 0 0 2.62em 0
-  text-align: center
-
-.subdepartment
-  float: right
-
-.didactic_unit, .gos, .subspeciality
-  &:before
-    color: #e14b32
-    content: '\2022'
-    font-size: 1.3em
-    margin: 0 5px 0 0
-
-.with_programm
-  &:before
-    color: #358f04
-
-.deleted
-  a
-    text-decoration: line-through
-
-.disciplines
-  &:before
-    +clearfix
-    border-top: 1px solid #CCC9C7
-    border-bottom: 1px solid #F4F4F4
-    content: '\160'
-    display: block
-    height: 0
-    margin: 0 0 10px 0
-    width: 100%
-
-form
-  .error
-    color: #e95b48
-    font-size: 0.7em
-    float: right
-
-    &:before
-      content: '\2b11'
-
-  label
-    display: block
-    margin: 0 0 0.62em 0
-
-    abbr
-      display: none
-
-  textarea
-    border: 1px solid #CCC9C7
-    height: 80px
-    margin: 0 0 0.62em 0
-    width: 100%
-
-  .submit, .choose_file
-    +border-radius(3px)
-    +inline-block
-    background: #f1fff2
-    border: 1px solid #CCC9C7
-    color: #000
-    font-size: 0.7em
-    margin: 0 0 0.62em 0
-    padding: 3px 7px
-    text-decoration: none
-
-    &:hover
-      background: #e0ffe3
-      cursor: pointer
-
-    &:active
-      position: relative
-      top: 1px
-
-  .add_file_wrapper
-    margin: 0 0 0.62em 0
-
-  .choose_file
-    height: 16px
-    line-height: 16px
-
-    &:before
-      content: '\2B'
-      margin: 0 5px 0 0
-
-.link
-  font-size: 0.7em
-  margin: 0 10px 0 0
-
-.description
-  font-size: 0.7em
-
-.warnings, .error
-  color: #f15d3c
-  font-size: 0.7em
-
-.statistics, .exercises, .self_education_items
-  border: 0
-  border-collapse: collapse
-  width: 100%
-
-  .warnings
-    font-size: 1em
-
-  td, th
-    padding: 0
-
-  td.title
-    width: 720px
-
-  thead
-    th
-      color: #797979
-      padding: 0 10px
-      text-align: center
-
-  tbody
-    tr:hover
-      background: #eaeaea
-
-    td
-      text-align: center
-
-  .department_title, .semester
-    color: #797979
+  .head_center, .main_head, .center
     text-align: center
 
-  .subdepartment_title
+  .right
+    text-align: right
+
+  .left
     text-align: left
 
-.delete_link
-  color: #e95b48
-  font-size: 0.8em
+  .list
+    margin: 0 0 40px 0
 
-.work_programm_wrapper, .discipline_wrapper
-  +clearfix
-  padding: 0 0 20px 0
-
-  .submit_link, .cancel
-    margin: 0 5px
-
-  textarea
-    border: 1px solid #CCC9C7
-    display: block
-    height: 150px
-    margin: 20px 0 0 0
-    width: 99%
-
-  form
-    +clearfix
-    border-top: 1px solid #E7E7E9
-    border-bottom: 1px solid #E7E7E9
-    margin: 20px 0 0 0
-    padding: 10px 0 3px
-
-  .error
-    position: absolute
-    top: 20px
-    left: 190px
-
-  .input
-    float: left
-    margin: 0 20px 20px 0
-    position: relative
-
-    input
-      border: 1px solid #CCC9C7
-      height: 20px
-      margin: 0 0 0.62em 0
-      padding: 0 5px
-      width: 724px
-
-    label
-      float: left
-      margin: 0 20px 0 0
-
-.with_text_styles
-  em
-    font-style: italic
-
-  strong
-    font-wight: bold
-
-  ol
-    list-style: decimal inside
-
-  ul
-    list-style: disc inside
-
-.mission_list, .requirement_list
-  margin: 0 0 15px 0
-
-  form
-    +clearfix
-    padding: 10px
-
-    .error
-      display: block
-      float: none
-      position: static
-
-    .input
-      float: none
-      position: static
-
-      label
-        float: none
-
-    .text
-      textarea
-        height: 100px
-        margin: 0
-        width: 98%
-
-    .buttons
-      input
-        height: 25px
-
-.exercises, .self_education_items
-  margin: 0 0 15px 0
-
-  td
-    padding: 3px
-
-  tr
-    .theme
-      text-align: left
-
-    .volume
-      width: 100px
-
-    .actions
-      float: none
-      width: 100px
-
-  .exercise
-    .title
-      font-size: 1.1em
-      text-align: left
-
-    .description
-      font-style: italic
-      font-size: 0.9em
-      padding: 0 15px
-      text-align: left
-
-  .add_exercise_wrapper
-    background: #eaeaea
-    border-top: 1px solid #CCC9C7
-
-  .total_hours
-    border-top: 1px solid #CCC9C7
-
-  .warning
-    color: #e95b48
-
-  form
-    +clearfix
-    padding: 10px
-    text-align: left
-
-    .error
-      display: block
-      float: none
-
-    .input
+    li
       +clearfix
-      margin: 0 0 10px 0
 
-    div.string
-      float: left
-      margin: 0 15px 0 0
+  .sub_list
+    margin: 0 0 25px 0
+
+  .warnings, .error
+    color: $warn_color
+    font-size: 0.7em
+
+  .specialities
+    .subdepartment
+      float: right
+
+    .subspeciality
+      cursor: pointer
+      padding: 3px 25px
+
+      &:hover
+        background: $sub_menu_bg
+
+      &:before
+        color: #e14b32
+        content: '\2022'
+        font-size: 1.3em
+        margin: 0 5px 0 0
+
+    .success
+      &:before
+        color: #358f04
+
+    .deleted
+      a
+        text-decoration: line-through
+
+  table
+    border: 0
+    border-collapse: collapse
+    width: 100%
+
+    .warnings, .error
+      font-size: 1em
+
+    td, th
+      padding: 0
+    td.title
+      width: 720px
+
+    thead
+      th
+        color: #797979
+        padding: 0 10px
+        text-align: center
+
+    tbody
+      tr:hover
+        background: $sub_menu_bg
+
+      td
+        text-align: center
+
+    .department_title, .semester
+      border-top: 1px solid $border_color
+      border-bottom: 1px solid $border_color
+      color: #797979
+      text-align: center
+
+    .subdepartment_title
+      text-align: left
+
+  form
+    +clearfix
+    border: 1px solid $border_color
+    border-left: none
+    border-right: none
+    font-size: 0.8em
+    padding: 10px 0 15px
+
+    .error
+      color: #e95b48
+      display: block
+      font-size: 0.9em
+
+      &:before
+        content: '\2b11'
+
+    .input
+      label
+        display: block
+        margin: 0 0 0.62em 0
+
+        abbr
+          display: none
 
       input
-        height: 20px
-        padding: 1px 4px
-        width: 700px
+        border: 1px solid #CCC9C7
+        margin: 0 0 0.62em 0
+        padding: 3px 5px
+        width: 600px
 
-    div.integer
-      input
-        height: 20px
-        width: 50px
-
-    .text
       textarea
-        height: 100px
-        margin: 0
-        width: 98%
+        border: 1px solid #CCC9C7
+        height: 80px
+        margin: 0 0 0.62em 0
+        padding: 3px 5px
+        width: 600px
+
+    .check_boxes
+      input
+        margin: 0 10px 0 0
+        width: auto
 
     .buttons
-      input
-        height: 25px
+      margin: 10px 0 0 0
 
-.self_education_items
-  tr
-    border-top: 1px solid #ccc
-  td
-    padding: 5px 0
+      input, .submit_link
+        +border-radius(2px)
+        background: $sub_menu_bg
+        border: 1px solid $border_color
+        font-size: 0.9em
+        margin: 0 15px 0 0
+        padding: 3px 7px
 
-.edit_work_programm
-  .cycle_wrapper
-    margin-bottom: 15px
-    padding: 0 5px
+        &:hover
+          cursor: pointer
+          background: $button_hover_color
 
-  .check_boxes
-    +clearfix
+        &:active
+          position: relative
+          top: 1px
 
-  .checkbox
-    float: left
+      a
+        +border-radius(2px)
+        background: $sub_menu_bg
+        border: 1px solid $border_color
+        border: 1px solid $border_color
+        color: black
+        font-size: 0.9em
+        padding: 2px 7px
+        text-decoration: none
+
+        &:hover
+          cursor: pointer
+          background: $button_hover_color
+
+        &:active
+          position: relative
+          top: 1px
+
+  .main_head
+    margin: 25px 0
+
+  .subhead_wrapper
+    h4, h5
+      margin: 25px 0
+
+  .container
+    margin: 25px 0
+
+    h2
+      margin: 1em 0
+
+    h3
+      margin: 0.7em 0 0 0
+      padding: 0 0 0 15px
+
+    h4
+      margin: 0.7em 0 0 0
+      padding: 0 0 0 30px
+
+    h5
+      margin: 0.7em 0 0 0
+      padding: 0 0 0 0
+
+      &.collapsible
+        padding: 0 0 0 45px
+
+    .warning
+      background: #FDF3F1
+
+      span
+        background: image_url('warning.png') no-repeat
+
+    .success
+      background: #EBF4EB
+
+      span
+        background: image_url('success.png') no-repeat
+
+    .warning, .success
+      span
+        +inline-block
+        height: 16px
+        margin: 0 0 0 10px
+        position: relative
+        top: -1px
+        width: 16px
+
+    .toc
+      &:after
+        border-bottom: 1px dashed $link_color
+        color: $link_color
+        content: 'свернуть/развернуть все'
+        font-size: 0.6em
+        margin: 0 0 0 25px
+
+      &:hover
+        cursor: pointer
+
+    .collapsible
+      &:after
+        border-bottom: 1px dashed $link_color
+        color: $link_color
+        content: 'развернуть \2193'
+        font-size: 0.7em
+        margin: 0 0 0 25px
+
+      &:hover
+        cursor: pointer
+
+      &.opened
+        &:after
+          color: $link_color
+          content: 'свернуть \2191'
+
+    .collapsible_wrapper
+      display: none
+      margin: 15px 30px

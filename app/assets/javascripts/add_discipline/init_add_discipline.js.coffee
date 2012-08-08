@@ -1,7 +1,7 @@
 @init_add_discipline = () ->
   $('.add_discipline').on 'ajax:success', (evt, data, status, jqXHR) ->
     link = $(this).hide()
-    list = link.siblings('ul')
+    wrapper = link.siblings('.wrapper')
     response = $(jqXHR.responseText)
 
     $('<div />', { class: 'form_wrapper' }).insertAfter(link) unless $('.form_wrapper', link.parent()).length
@@ -17,7 +17,7 @@
         init_add_autocomplete()
         init_cancel_handler()
       else
-        list.append(jqXHR.responseText)
+        wrapper.html($(jqXHR.responseText).find('.discipline_wrapper'))
         form_wrapper.html('').off()
         link.show()
 

@@ -8,7 +8,7 @@ $.fn.count_hours = () ->
     res += Number($(item).html())
 
   total_hours_wrapper.find('span').html(res)
-  if res > total
+  if res != total
     total_hours_wrapper.addClass('warning')
   else
     total_hours_wrapper.removeClass('warning')
