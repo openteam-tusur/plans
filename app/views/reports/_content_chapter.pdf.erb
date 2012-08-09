@@ -3,6 +3,7 @@
   <% Exercise.enum_values(:kind).each_with_index do |kind, index| %>
   <h2 class='strong indentation'>2.<%= index+1 %> <%= Exercise.human_attribute_name kind.pluralize %></h2>
   <% if resource.has_loadings_for?(kind) %>
+    <div>Всего часов: <%= title_page.scheduling.send(kind).total %></div>
     <% ex_index = 1 %>
     <% resource.grouped_loadings(kind).each do |semester, loadings| %>
       <h3 class='strong indentation'><%= "2.#{index+1}.#{ex_index} #{Exercise.human_attribute_name kind.pluralize}" %> для <%= semester.number %> семестра</h3>
@@ -37,19 +38,16 @@
           </table>
         </div>
       <% end %>
+      <div class="split_table">
+        <table class='exercises'>
+          <tr>
+            <td>Всего часов за семестр:</td>
+            <td class='hours'><%= resource.exercises_by_semester_and_kind(semester, kind).map(&:volume).sum %></td>
+          </tr>
+        </table>
+      </div>
       <% ex_index += 1 %>
     <% end %>
-
-    <div class='split_table'>
-      <table class='exercises'>
-        <tbody>
-          <tr>
-            <td>Всего часов:</td>
-            <td class='hours'><%= title_page.scheduling.send(kind).total %></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   <% else %>
     <%= content_tag :p, 'Занятия не предусмотрены учебным планом' %>
   <% end %>
@@ -59,13 +57,13 @@
 <h2 class='strong indentation'>2.5 <%= Exercise.human_attribute_name :srs %></h2>
 <% if resource.has_loadings_for? :srs %>
   <% index = 1 %>
+  <div>Всего часов самостоятельной работы: <%= title_page.scheduling.srs.total %></div>
   <% resource.grouped_loadings(:srs).each do |semester, loadings| %>
     <h3 class='strong indentation'><%= "2.5.#{index}" %> Самостоятельная работа для <%= semester.number %> семестра</h3>
     <%= render :file => 'self_education_items/index', :locals => { :semester => semester, :loadings => loadings } %>
     <div class='table_break'></div>
     <% index += 1 %>
   <% end %>
-  <div>Всего часов самостоятельной работы: <%= title_page.scheduling.srs.total %></div>
 <% else %>
   <%= content_tag :p, 'Не предусмотрено учебным планом' %>
 <% end %>

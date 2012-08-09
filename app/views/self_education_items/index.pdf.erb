@@ -2,7 +2,6 @@
   <table class='self_education_items'>
     <tbody>
       <tr>
-        <td class='number'>№</td>
         <td class="left title">Наименование работы</td>
         <td class='description'>Форма контроля</td>
         <th style='width: 60px; padding: 0;'>Объем, часов</th>
@@ -16,7 +15,6 @@
     <table class='self_education_items'>
       <tbody>
         <tr>
-          <td class='number'><%= index + 1 %></td>
           <td class='left title'>
             <div>
               <div><%= t "activerecord.attributes.self_education_item.#{item.kind}" %></div>
@@ -35,7 +33,7 @@
   <table class='self_education_items'>
     <tbody>
       <tr>
-        <td>Всего часов самостоятельной работы в <%= semester.number %> семестре</td>
+        <td>Всего часов за семестр:</td>
         <td class='hours'><%= title_page.scheduling.send(:srs).hours[semester.number] %></td>
       </tr>
     </tbody>
