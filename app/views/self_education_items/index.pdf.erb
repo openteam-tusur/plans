@@ -2,48 +2,29 @@
   <table class='self_education_items'>
     <tbody>
       <tr>
-        <td><%= semester %></td>
+        <td class='number'>№</td>
+        <td class="left title">Наименование работы</td>
+        <td class='description'>Форма контроля</td>
+        <th style='width: 60px; padding: 0;'>Объем, часов</th>
       </tr>
     </tbody>
   </table>
 </div>
 
-<div class='split_table'>
-  <table class='self_education_items'>
-    <tbody>
-      <tr>
-        <td class='number'>№</td>
-        <td class="left title">Наименование работы</td>
-        <td class='description'>Форма контроля</td>
-        <td class='hours'></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<% SelfEducationItem::ALL_KINDS.each_with_index do |kind, index| %>
+<% resource.self_education_items.semester_id(semester).each_with_index do |item, index| %>
   <div class='split_table'>
     <table class='self_education_items'>
       <tbody>
         <tr>
-          <td class='number'><%= index + 1 %>.</td>
-          <td class="left title">
-            <%= SelfEducationItem.human_attribute_name(kind) %>
+          <td class='number'><%= index + 1 %></td>
+          <td class='left title'>
             <div>
-              <% item = resource.self_education_items.kind(kind).semester_id(semester).first %>
-              <% if item && item.appendix %>
-                <em> См. <%= item.appendix %></em>
-              <% end %>
+              <div><%= t "activerecord.attributes.self_education_item.#{item.kind}" %></div>
+              <%= content_tag :em, item.appendix if item.appendix.present? %>
             </div>
           </td>
-          <% if resource.has_loadings_for?(kind) %>
-            <% scope = resource.self_education_items.kind(kind).semester_id(semester) %>
-            <% item = scope.first || scope.build %>
-            <td class='description'><%= SelfEducationItem.human_enum_values(:control).values_at(*item.control).join(', ') %>
-            </td>
-            <td class='hours'><%= item.hours %></td>
-          <% else %>
-            <td class='center' colspan='3'>Не предусмотрено учебным планом</td>
-          <% end %>
+          <td class='description'><%= item.human_control.join(', ') if item.human_control.present?  %></td>
+          <td class='hours'> <%= item.hours %></td>
         </tr>
       </tbody>
     </table>

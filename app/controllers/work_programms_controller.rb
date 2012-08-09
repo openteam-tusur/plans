@@ -28,7 +28,8 @@ class WorkProgrammsController < ApplicationController
                              :bottom    => 10,
                              :left      => 25,
                              :right     => 10 },
-                :footer => { :html => { :template => 'reports/work_programm_footer.pdf.erb' }}
+                :footer => { :html => { :template => 'reports/work_programm_footer.pdf.erb' }},
+                :wkhtmltopdf => Rails.root.join('bin/wkhtmltopdf-amd64').to_s
       end
     end
   end

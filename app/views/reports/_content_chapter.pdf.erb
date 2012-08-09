@@ -3,13 +3,15 @@
   <% Exercise.enum_values(:kind).each_with_index do |kind, index| %>
   <h2 class='strong indentation'>2.<%= index+1 %> <%= Exercise.human_attribute_name kind.pluralize %></h2>
   <% if resource.has_loadings_for?(kind) %>
+    <% ex_index = 1 %>
     <% resource.grouped_loadings(kind).each do |semester, loadings| %>
+      <h3 class='strong indentation'><%= "2.#{index+1}.#{ex_index} #{Exercise.human_attribute_name kind.pluralize}" %> для <%= semester.number %> семестра</h3>
       <div class='split_table'>
         <table class='exercises'>
           <tbody>
             <tr>
-              <td><%= semester %></td>
-              <td class='hours'><%= title_page.scheduling.send(kind).hours[semester.number] %></td>
+              <th>Тема и содержание</ht>
+              <th style='width: 60px; padding: 0;'>Объем, часов</th>
             </tr>
           </tbody>
         </table>
@@ -35,6 +37,7 @@
           </table>
         </div>
       <% end %>
+      <% ex_index += 1 %>
     <% end %>
 
     <div class='split_table'>
@@ -55,11 +58,14 @@
 
 <h2 class='strong indentation'>2.5 <%= Exercise.human_attribute_name :srs %></h2>
 <% if resource.has_loadings_for? :srs %>
+  <% index = 1 %>
   <% resource.grouped_loadings(:srs).each do |semester, loadings| %>
+    <h3 class='strong indentation'><%= "2.5.#{index}" %> Самостоятельная работа для <%= semester.number %> семестра</h3>
     <%= render :file => 'self_education_items/index', :locals => { :semester => semester, :loadings => loadings } %>
     <div class='table_break'></div>
+    <% index += 1 %>
   <% end %>
-  Всего часов самостоятельной работы: <%= title_page.scheduling.srs.total %>
+  <div>Всего часов самостоятельной работы: <%= title_page.scheduling.srs.total %></div>
 <% else %>
   <%= content_tag :p, 'Не предусмотрено учебным планом' %>
 <% end %>
