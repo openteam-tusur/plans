@@ -34,5 +34,6 @@ end
 #  updated_at      :datetime         not null
 #  approved_on     :date
 #  speciality_code :string(255)
+#  html            :text
 #
 
