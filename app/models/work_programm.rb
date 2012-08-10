@@ -121,6 +121,26 @@ class WorkProgramm < ActiveRecord::Base
     purpose_valid? && missions_valid? && related_disciplines_valid?
   end
 
+  def exercises_by_semester_and_kind_valid?(semester, kind)
+    if kind.to_sym == :srs
+      self_education_items_by_semester(semester).map(&:hours).sum == grouped_loadings(kind)[semester].first.value
+    else
+      exercises_by_semester_and_kind(semester, kind).map(&:volume).sum == grouped_loadings(kind)[semester].first.value
+    end
+  end
+
+  def exercises_by_kind_valid?(kind)
+    !grouped_loadings(kind).keys.map{ |semester| exercises_by_semester_and_kind_valid?(semester, kind) }.include?(false)
+  end
+
+  def self_education_items_by_semester_valid?(semester)
+    exercises_by_semester_and_kind_valid?(semester, :srs)
+  end
+
+  def exercises_valid?
+    !(Exercise.enum_values(:kind) + [:srs]).map{|kind| exercises_by_kind_valid?(kind) }.include?(false)
+  end
+
   private
     def default_purpose
       "Целью изучения дисциплины «#{discipline.title}» является"

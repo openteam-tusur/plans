@@ -69,15 +69,15 @@
         <%= link_to "Изменить список связанных дисциплин", edit_resource_path, :class => 'add_discipline', :remote => true %>
       </div>
 
-    <h3 class='warning'>2. Содержание дисциплины<span></span></h3>
+    <h3 class='<%= @work_programm.exercises_valid? ? 'success' : 'warning' %>'>2. Содержание дисциплины<span></span></h3>
     <div>
       <% index = 1 %>
       <% Exercise.enum_values(:kind).each do |kind| %>
-        <h4 class='warning'>2.<%= index %> <%= Exercise.human_attribute_name kind.pluralize %><span></span></h4>
+        <h4 class='<%= @work_programm.exercises_by_kind_valid?(kind) ? 'success' : 'warning' %>'>2.<%= index %> <%= Exercise.human_attribute_name kind.pluralize %><span></span></h4>
         <%= content_tag :div, 'Не предусмотрено учебным планом', :style => 'margin: 15px 30px;' unless resource.has_loadings_for?(kind)  %>
         <% ex_index = 1 %>
         <% resource.grouped_loadings(kind).each do |semester, loadings| %>
-          <h5 class='warning collapsible semester'>2.<%= "#{index}.#{ex_index} #{Exercise.human_attribute_name kind.pluralize}" %> для <%= semester.number %> семестра</h5>
+          <h5 class='<%= @work_programm.exercises_by_semester_and_kind_valid?(semester, kind) ? 'success': 'warning' %> collapsible semester'>2.<%= "#{index}.#{ex_index} #{Exercise.human_attribute_name kind.pluralize}" %> для <%= semester.number %> семестра<span></span></h5>
           <div class="collapsible_wrapper">
             <%= render :file => 'exercises/index', :locals => { :semester => semester, :kind => kind, :loadings => loadings} %>
           </div>
@@ -86,11 +86,11 @@
         <% index += 1 %>
       <% end %>
 
-      <h4 class='warning'>2.5 <%= Exercise.human_attribute_name :srs %><span></span></h4>
+      <h4 class='<%= @work_programm.exercises_by_kind_valid?(:srs) ? 'success' : 'warning' %>'>2.5 <%= Exercise.human_attribute_name :srs %><span></span></h4>
       <%= content_tag :div, 'Не предусмотрено учебным планом', :style => 'margin: 15px 30px;' unless resource.has_loadings_for?(:srs) %>
       <% index = 1 %>
       <% resource.grouped_loadings(:srs).each do |semester, loadings| %>
-        <h5 class='warning collapsible semester'>2.5.<%= index %> Самостоятельная работа для <%= semester.number %> семестра</h5>
+        <h5 class='<%= @work_programm.self_education_items_by_semester_valid?(semester) ? 'success' : 'warning' %> collapsible semester'>2.5.<%= index %> Самостоятельная работа для <%= semester.number %> семестра<span></span></h5>
         <div class="collapsible_wrapper">
           <%= render :file => 'self_education_items/index', :locals => { :semester => semester, :loadings => loadings, :index => index } %>
         </div>
