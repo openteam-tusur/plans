@@ -8,9 +8,14 @@
 
 <%= render :partial => 'commons/work_programm_head' %>
 
-<h5><%= link_to "Скачать PDF рабочей программы", resource_path(:format => :pdf) %></h5>
-
 <div class="container">
+  <h5>
+    <% if @work_programm.whole_valid? %>
+      <%= link_to "Скачать PDF рабочей программы", resource_path(:format => :pdf)  %>
+    <% else %>
+      <div class='warning'>Вы не можете скачать PDF рабочей программы, потому что не заполнили все пункты.<span></span></div>
+    <% end %>
+  </h5>
   <h2 class='toc'>Содержание</h2>
 
   <h3 class='<%= @work_programm.purposes_and_missions_valid? ? 'success' : 'warning' %>'>1. Цели и задачи дисциплины, ее место в учебном процессе<span></span></h3>
@@ -117,10 +122,10 @@
         </div>
       <% end %>
 
-    <h3 class='warning'>4. Рейтинговая система оценки качества<span></span></h3>
-      <h4 class='warning'>4.1 Балльная раскладка отдельных элементов контроля по видам занятий<span></span></h4>
+    <h3 class='<%= @work_programm.brs_valid? ? 'success' : 'warning' %>'>4. Рейтинговая система оценки качества<span></span></h3>
+      <h4 class='<%= @work_programm.brs_valid? ? 'success' : 'warning' %>'>4.1 Балльная раскладка отдельных элементов контроля по видам занятий<span></span></h4>
       <% @discipline.semesters.each_with_index do |semester, index| %>
-        <h5 class='warning collapsible'>4.1.<%= index+1 %> Балльная раскладка для <%= "#{semester.number} семестра" %><span></span></h5>
+        <h5 class='<%= @work_programm.brs_by_semester_valid?(semester) ? 'success' : 'warning' %> collapsible'>4.1.<%= index+1 %> Балльная раскладка для <%= "#{semester.number} семестра" %><span></span></h5>
         <div class="collapsible_wrapper">
           <%= render :file => 'rating_items/index', :locals => { :semester => semester } %>
         </div>

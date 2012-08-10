@@ -153,6 +153,22 @@ class WorkProgramm < ActiveRecord::Base
     publications_by_kind_valid?(:basic) && publications_by_kind_valid?(:additional) && ump_publications_valid?
   end
 
+  def brs_by_semester_valid?(semester)
+    res = []
+    res << rating_items_for_semester(semester).rating_item_kind_default.any?
+    res << rating_items_for_semester(semester).rating_item_kind_csr.any? if grouped_loadings(:csr)[semester]
+    res << examination_questions_for_semester(semester).any? if grouped_loadings(:exam)[semester]
+    !res.include?(false)
+  end
+
+  def brs_valid?
+    !discipline.semesters.map{ |semester| brs_by_semester_valid?(semester) }.include?(false)
+  end
+
+  def whole_valid?
+    purposes_and_missions_valid? && exercises_valid? && publications_valid? && brs_valid?
+  end
+
   private
     def default_purpose
       "Целью изучения дисциплины «#{discipline.title}» является"
