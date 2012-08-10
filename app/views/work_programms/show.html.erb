@@ -13,8 +13,8 @@
 <div class="container">
   <h2 class='toc'>Содержание</h2>
 
-    <h3 class='warning'>1. Цели и задачи дисциплины, ее место в учебном процессе<span></span></h3>
-      <h4 class='success collapsible'>1.1 Цели<span></span></h4>
+  <h3 class='<%= @work_programm.purposes_and_missions_valid? ? 'success' : 'warning' %>'>1. Цели и задачи дисциплины, ее место в учебном процессе<span></span></h3>
+      <h4 class='<%= @work_programm.purpose_valid? ? 'success' : 'warning' %> collapsible'>1.1 Цели<span></span></h4>
       <div class="collapsible_wrapper">
         <div class='work_programm_wrapper with_text_styles'>
           <div class="work_programm_purpose">
@@ -28,7 +28,7 @@
         </div>
       </div>
 
-      <h4 class='warning collapsible'>1.2 Задачи<span></span></h4>
+      <h4 class='<%= @work_programm.missions_valid? ? 'success' : 'warning' %> collapsible'>1.2 Задачи<span></span></h4>
       <div class="collapsible_wrapper">
         <div class='work_programm_wrapper with_text_styles missions_wrapper'>
           <div class="work_programm_task">
@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <h4 class='success collapsible'>1.3 Место дисциплины в учебном процессе<span></span></h4>
+      <h4 class='<%= @work_programm.related_disciplines_valid? ? 'success' : 'warning' %> collapsible'>1.3 Место дисциплины в учебном процессе<span></span></h4>
       <div class="collapsible_wrapper">
         <div class="wrapper">
           <% %w[previous_disciplines current_disciplines subsequent_disciplines].each_with_index do |name, index| %>

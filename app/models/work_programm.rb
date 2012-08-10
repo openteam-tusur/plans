@@ -103,16 +103,38 @@ class WorkProgramm < ActiveRecord::Base
     examination_questions.where(semester_id: semester)
   end
 
-  private
-  def set_purpose
-    self.purpose = "Целью изучения дисциплины «#{discipline.title}» является"
+  # validate methods
+
+  def purpose_valid?
+    purpose =~ /#{default_purpose} .*[[:alnum:]]+/
   end
 
-  def create_requirements
-    Requirement.enums['requirement_kind'].each do |kind|
-      requirements.create(requirement_kind: kind)
-    end
+  def missions_valid?
+    missions.any? && requirements.select(&:description?).count == 3
   end
+
+  def related_disciplines_valid?
+    related_disciplines.any?
+  end
+
+  def purposes_and_missions_valid?
+    purpose_valid? && missions_valid? && related_disciplines_valid?
+  end
+
+  private
+    def default_purpose
+      "Целью изучения дисциплины «#{discipline.title}» является"
+    end
+
+    def set_purpose
+      self.purpose = default_purpose
+    end
+
+    def create_requirements
+      Requirement.enums['requirement_kind'].each do |kind|
+        requirements.create(requirement_kind: kind)
+      end
+    end
 end
 
 # == Schema Information
