@@ -141,6 +141,18 @@ class WorkProgramm < ActiveRecord::Base
     !(Exercise.enum_values(:kind) + [:srs]).map{|kind| exercises_by_kind_valid?(kind) }.include?(false)
   end
 
+  def publications_by_kind_valid?(kind)
+    publications_by_kind(kind).any?
+  end
+
+  def ump_publications_valid?
+    !ump_publication_kinds.map{ |kind| publications_by_kind_valid?("ump_#{kind}") }.include?(false)
+  end
+
+  def publications_valid?
+    publications_by_kind_valid?(:basic) && publications_by_kind_valid?(:additional) && ump_publications_valid?
+  end
+
   private
     def default_purpose
       "Целью изучения дисциплины «#{discipline.title}» является"

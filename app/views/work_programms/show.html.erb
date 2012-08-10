@@ -98,20 +98,20 @@
       <% end %>
     </div>
 
-    <h3 class='warning'>3. Учебно-методические материалы по дисциплине<span></span></h3>
-      <h4 class='success collapsible'>3.1 Основная литература<span></span></h4>
+    <h3 class='<%= @work_programm.publications_valid? ? 'success' : 'warning' %>'>3. Учебно-методические материалы по дисциплине<span></span></h3>
+      <h4 class='<%= @work_programm.publications_by_kind_valid?(:basic) ? 'success' : 'warning' %> collapsible'>3.1 Основная литература<span></span></h4>
       <div class='collapsible_wrapper'>
         <%= render :file => 'publications/index', :locals => { :kind => 'basic' } %>
       </div>
 
-      <h4 class='warning collapsible'>3.2 Дополнительная литература<span></span></h4>
+      <h4 class='<%= @work_programm.publications_by_kind_valid?(:additional) ? 'success' : 'warning' %> collapsible'>3.2 Дополнительная литература<span></span></h4>
       <div class="collapsible_wrapper">
         <%= render :file => 'publications/index', :locals => { :kind => 'additional' } %>
       </div>
 
-      <h4 class='warning'>3.3 Перечень учебно-методических пособий<span></span></h4>
+      <h4 class='<%= @work_programm.ump_publications_valid? ? 'success' : 'warning' %>'>3.3 Перечень учебно-методических пособий<span></span></h4>
       <% resource.ump_publication_kinds.each_with_index do |kind, index| %>
-        <h5 class='warning collapsible'>3.3.<%= index + 1 %> <%= t("activerecord.attributes.publication.publication_kind_enum.ump_#{kind}") %><span></span></h5>
+        <h5 class='<%= @work_programm.publications_by_kind_valid?("ump_#{kind}") ? 'success' : 'warning' %> collapsible'>3.3.<%= index + 1 %> <%= t("activerecord.attributes.publication.publication_kind_enum.ump_#{kind}") %><span></span></h5>
         <div class="collapsible_wrapper">
           <%= render :file => 'publications/index', :locals => { :kind => "ump_#{kind}" } %>
         </div>
