@@ -10,7 +10,7 @@ class Publication < ActiveRecord::Base
   validates_presence_of :count, :if => :location_library?
   validates_numericality_of :count, :greater_than => 0, :only_integer => true, :if => :location_library?
 
-  has_enums
+  has_enum :publication_kind, :location
 
   def to_s
     text.tap do |s|

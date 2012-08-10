@@ -2,6 +2,7 @@
   <td colspan=5>
     <%= simple_form_for [association_chain, resource].flatten, :remote => true do |f| %>
       <%= f.input :semester_id, :as => :hidden %>
+      <%= f.input :rating_item_kind, :as => :hidden %>
 
       <%= f.input :title, :wrapper_html => { :style => 'float: none;' } %>
       <%= f.input :max_begin_1kt %>

@@ -130,6 +130,10 @@ ru:
         max_1kt_2kt: Максимальный балл за период между 1КТ и 2КТ
         max_2kt_end: Максимальный балл за период между 2КТ и концом семестра
 
+        rating_item_kind:
+          csr: Курсовой проект / Курсовая работа
+          default: По умолчанию
+
       requirement:
         requirement_kind_enum:
           know: знать

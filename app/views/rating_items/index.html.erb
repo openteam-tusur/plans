@@ -10,10 +10,10 @@
     </tr>
   </thead>
   <tbody>
-    <%= render @work_programm.rating_items_for_semester(semester) %>
+    <%= render @work_programm.rating_items_for_semester(semester).rating_item_kind_default %>
     <tr>
       <td colspan=6 class='right add_exercise_wrapper'>
-        <%= link_to "+ элемент учебной деятельности", new_year_speciality_subspeciality_discipline_work_programm_rating_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :rating_item => { :semester_id => semester.id }}), :remote => true, :class => 'new_record' %>
+        <%= link_to "+ элемент учебной деятельности", new_year_speciality_subspeciality_discipline_work_programm_rating_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :rating_item => { :semester_id => semester.id, :rating_item_kind => :default }}), :remote => true, :class => 'new_record' %>
       </td>
     </tr>
     <tr>
@@ -44,6 +44,46 @@
     </tr>
   </tbody>
 </table>
+
+<% if @work_programm.grouped_loadings(:csr)[semester] %>
+  <h5 class='head_center'>Балльная раскладка для курсового проекта / курсовой работы</h5>
+  <table class="exercises rating_items">
+    <thead>
+      <tr>
+        <th>Элементы учебной деятельности</th>
+        <th>Максимальный балл за период между началом семестра и 1КТ</th>
+        <th>Максимальный балл за период между 1КТ и 2КТ</th>
+        <th>Максимальный балл за период между 2КТ и концом семестра</th>
+        <th>Всего за семестр</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @work_programm.rating_items_for_semester(semester).rating_item_kind_csr %>
+      <tr>
+        <td colspan=6 class='right add_exercise_wrapper'>
+          <%= link_to "+ элемент учебной деятельности", new_year_speciality_subspeciality_discipline_work_programm_rating_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :rating_item => { :semester_id => semester.id, :rating_item_kind => :csr }}), :remote => true, :class => 'new_record' %>
+        </td>
+      </tr>
+      <tr>
+        <td>Итого максимум за период:</td>
+        <td class='target_max_begin_1kt'></td>
+        <td class='target_max_1kt_2kt'></td>
+        <td class='target_max_2kt_end'></td>
+        <td class='target_total_score'></td>
+        <td></td>
+      </tr>
+      <tr class='increasing_row'>
+        <td>Нарастающий итог:</td>
+        <td class='increasing_max_begin_1kt'></td>
+        <td class='increasing_max_1kt_2kt'></td>
+        <td class='increasing_max_2kt_end'></td>
+        <td class='increasing_total'></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
 
 <% if @discipline.has_exam_at_semester?(semester) %>
   <div class='with_text_styles'>

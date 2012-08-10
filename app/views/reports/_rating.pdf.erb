@@ -3,7 +3,7 @@
   <h2 class='strong'>4.1 Балльная раскладка отдельных элементов контроля по видам занятий</h2>
 
   <% resource.discipline.semesters.each_with_index do |semester, index| %>
-    <h4 class='strong'>4.1.<%= index + 1 %> Балльная раскладка для <%= "#{semester.number} семестра" %></h4>
+    <h3 class='strong'>4.1.<%= index + 1 %> Балльная раскладка для <%= "#{semester.number} семестра" %></h3>
 
     <div class='split_table'>
       <table class='exercises rating_items rating'>
@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <% resource.rating_items_for_semester(semester).each do |rating_item| %>
+          <% resource.rating_items_for_semester(semester).rating_item_kind_default.each do |rating_item| %>
             <tr>
               <td><%= rating_item.title %></td>
               <td class='max_begin_1kt'><%= rating_item.max_begin_1kt %></td>
@@ -53,6 +53,49 @@
         </tbody>
       </table>
     </div>
+
+    <% if @work_programm.grouped_loadings(:csr)[semester] %>
+      <h4 class='head_center'>Балльная раскладка для курсового проекта / курсовой работы</h4>
+      <div class='split_table'>
+        <table class='exercises rating_items rating'>
+          <thead>
+            <tr>
+              <th>Элементы учебной деятельности</th>
+              <th>Максимальный балл за период между началом семестра и 1КТ</th>
+              <th>Максимальный балл за период между 1КТ и 2КТ</th>
+              <th>Максимальный балл за период между 2КТ и концом семестра</th>
+              <th>Всего за семестр</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% resource.rating_items_for_semester(semester).rating_item_kind_csr.each do |rating_item| %>
+              <tr>
+                <td><%= rating_item.title %></td>
+                <td class='max_begin_1kt'><%= rating_item.max_begin_1kt %></td>
+                <td class='max_1kt_2kt'><%= rating_item.max_1kt_2kt %></td>
+                <td class='max_2kt_end'><%= rating_item.max_2kt_end %></td>
+                <td class='total_score'><%= rating_item.total_score %></td>
+              </tr>
+            <% end %>
+
+            <tr>
+              <td>Итого максимум за период:</td>
+              <td class='target_max_begin_1kt'></td>
+              <td class='target_max_1kt_2kt'></td>
+              <td class='target_max_2kt_end'></td>
+              <td class='target_total_score'></td>
+            </tr>
+            <tr class='increasing_row'>
+              <td>Нарастающий итог:</td>
+              <td class='increasing_max_begin_1kt'></td>
+              <td class='increasing_max_1kt_2kt'></td>
+              <td class='increasing_max_2kt_end'></td>
+              <td class='increasing_total'></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
 
     <% if resource.discipline.has_exam_at_semester?(semester) %>
       <div class='with_text_styles split_table'>
