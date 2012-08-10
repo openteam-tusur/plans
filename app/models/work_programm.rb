@@ -106,7 +106,7 @@ class WorkProgramm < ActiveRecord::Base
   # validate methods
 
   def purpose_valid?
-    purpose =~ /#{default_purpose} .*[[:alnum:]]+/
+    !!(purpose.squish != default_purpose && purpose =~ /[[:alnum:]]+/)
   end
 
   def missions_valid?
@@ -145,12 +145,12 @@ class WorkProgramm < ActiveRecord::Base
     publications_by_kind(kind).any?
   end
 
-  def ump_publications_valid?
+  def publications_ump_valid?
     !ump_publication_kinds.map{ |kind| publications_by_kind_valid?("ump_#{kind}") }.include?(false)
   end
 
   def publications_valid?
-    publications_by_kind_valid?(:basic) && publications_by_kind_valid?(:additional) && ump_publications_valid?
+    publications_by_kind_valid?(:basic) && publications_by_kind_valid?(:additional) && publications_ump_valid?
   end
 
   def brs_by_semester_valid?(semester)
@@ -169,7 +169,56 @@ class WorkProgramm < ActiveRecord::Base
     purposes_and_missions_valid? && exercises_valid? && publications_valid? && brs_valid?
   end
 
+  def as_json(*options)
+    super(*options).merge :validations => { :whole_valid => whole_valid? }
+                                            .merge(purposes_and_missions_json)
+                                            .merge(exercises_json)
+                                            .merge(publications_json)
+                                            .merge(brs_json)
+  end
+
   private
+    def purposes_and_missions_json
+      {
+        :purpose_valid => purpose_valid?,
+        :missions_valid => missions_valid?,
+        :related_disciplines_valid => related_disciplines_valid?,
+        :purposes_and_missions_valid => purposes_and_missions_valid?
+      }
+    end
+
+    def exercises_json
+      json = { :exercises_valid => exercises_valid? }
+      (Exercise.enum_values(:kind) + [:srs]).each do |kind|
+        json[:"exercises_#{kind}_valid"] = exercises_by_kind_valid?(kind)
+        grouped_loadings(kind).keys.each do |semester|
+          json[:"exercises_#{kind}_#{semester.number}_valid"] = exercises_by_semester_and_kind_valid?(semester, kind)
+        end
+      end
+      json
+    end
+
+    def publications_json
+      json = {
+        :publications_valid => publications_valid?,
+        :publications_basic_valid => publications_by_kind_valid?(:basic),
+        :publications_additional_valid => publications_by_kind_valid?(:additional),
+        :publications_ump_valid => publications_ump_valid?,
+      }
+      ump_publication_kinds.each do |kind|
+        json[:"publications_ump_#{kind}_valid"] = publications_by_kind_valid?("ump_#{kind}")
+      end
+      json
+    end
+
+    def brs_json
+      json = { :brs_valid => brs_valid? }
+      semesters.each do |semester|
+        json[:"brs_#{semester.number}_valid"] = brs_by_semester_valid?(semester)
+      end
+      json
+    end
+
     def default_purpose
       "Целью изучения дисциплины «#{discipline.title}» является"
     end

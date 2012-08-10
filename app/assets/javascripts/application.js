@@ -14,4 +14,5 @@
 //= require ./calculate_total
 //= require ./collapser
 //= require ./publication_variation
+//= require ./check_valid
 //= require main

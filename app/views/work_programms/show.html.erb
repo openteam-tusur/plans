@@ -18,8 +18,8 @@
   </h5>
   <h2 class='toc'>Содержание</h2>
 
-  <h3 class='<%= @work_programm.purposes_and_missions_valid? ? 'success' : 'warning' %>'>1. Цели и задачи дисциплины, ее место в учебном процессе<span></span></h3>
-      <h4 class='<%= @work_programm.purpose_valid? ? 'success' : 'warning' %> collapsible'>1.1 Цели<span></span></h4>
+  <h3 class='<%= presentor.indicate_paragraph :purposes_and_missions_valid %>'>1. Цели и задачи дисциплины, ее место в учебном процессе<span></span></h3>
+      <h4 class='<%= presentor.indicate_paragraph :purpose_valid %> collapsible'>1.1 Цели<span></span></h4>
       <div class="collapsible_wrapper">
         <div class='work_programm_wrapper with_text_styles'>
           <div class="work_programm_purpose">
@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <h4 class='<%= @work_programm.missions_valid? ? 'success' : 'warning' %> collapsible'>1.2 Задачи<span></span></h4>
+      <h4 class='<%= presentor.indicate_paragraph :missions_valid %> collapsible'>1.2 Задачи<span></span></h4>
       <div class="collapsible_wrapper">
         <div class='work_programm_wrapper with_text_styles missions_wrapper'>
           <div class="work_programm_task">
@@ -55,7 +55,7 @@
         </div>
       </div>
 
-      <h4 class='<%= @work_programm.related_disciplines_valid? ? 'success' : 'warning' %> collapsible'>1.3 Место дисциплины в учебном процессе<span></span></h4>
+      <h4 class='<%= presentor.indicate_paragraph :related_disciplines_valid %> collapsible'>1.3 Место дисциплины в учебном процессе<span></span></h4>
       <div class="collapsible_wrapper">
         <div class="wrapper">
           <% %w[previous_disciplines current_disciplines subsequent_disciplines].each_with_index do |name, index| %>
@@ -74,15 +74,15 @@
         <%= link_to "Изменить список связанных дисциплин", edit_resource_path, :class => 'add_discipline', :remote => true %>
       </div>
 
-    <h3 class='<%= @work_programm.exercises_valid? ? 'success' : 'warning' %>'>2. Содержание дисциплины<span></span></h3>
+    <h3 class='<%= presentor.indicate_paragraph :exercises_valid %>'>2. Содержание дисциплины<span></span></h3>
     <div>
       <% index = 1 %>
       <% Exercise.enum_values(:kind).each do |kind| %>
-        <h4 class='<%= @work_programm.exercises_by_kind_valid?(kind) ? 'success' : 'warning' %>'>2.<%= index %> <%= Exercise.human_attribute_name kind.pluralize %><span></span></h4>
+        <h4 class='<%= presentor.indicate_paragraph "exercises_#{kind}_valid" %> <%= @work_programm.exercises_by_kind_valid?(kind) ? 'success' : 'warning' %>'>2.<%= index %> <%= Exercise.human_attribute_name kind.pluralize %><span></span></h4>
         <%= content_tag :div, 'Не предусмотрено учебным планом', :style => 'margin: 15px 30px;' unless resource.has_loadings_for?(kind)  %>
         <% ex_index = 1 %>
         <% resource.grouped_loadings(kind).each do |semester, loadings| %>
-          <h5 class='<%= @work_programm.exercises_by_semester_and_kind_valid?(semester, kind) ? 'success': 'warning' %> collapsible semester'>2.<%= "#{index}.#{ex_index} #{Exercise.human_attribute_name kind.pluralize}" %> для <%= semester.number %> семестра<span></span></h5>
+          <h5 class='<%= "exercises_#{kind}_#{semester.number}_valid" %> <%= @work_programm.exercises_by_semester_and_kind_valid?(semester, kind) ? 'success': 'warning' %> collapsible semester'>2.<%= "#{index}.#{ex_index} #{Exercise.human_attribute_name kind.pluralize}" %> для <%= semester.number %> семестра<span></span></h5>
           <div class="collapsible_wrapper">
             <%= render :file => 'exercises/index', :locals => { :semester => semester, :kind => kind, :loadings => loadings} %>
           </div>
@@ -91,11 +91,11 @@
         <% index += 1 %>
       <% end %>
 
-      <h4 class='<%= @work_programm.exercises_by_kind_valid?(:srs) ? 'success' : 'warning' %>'>2.5 <%= Exercise.human_attribute_name :srs %><span></span></h4>
+      <h4 class='<%= presentor.indicate_paragraph :exercises_srs_valid %>'>2.5 <%= Exercise.human_attribute_name :srs %><span></span></h4>
       <%= content_tag :div, 'Не предусмотрено учебным планом', :style => 'margin: 15px 30px;' unless resource.has_loadings_for?(:srs) %>
       <% index = 1 %>
       <% resource.grouped_loadings(:srs).each do |semester, loadings| %>
-        <h5 class='<%= @work_programm.self_education_items_by_semester_valid?(semester) ? 'success' : 'warning' %> collapsible semester'>2.5.<%= index %> Самостоятельная работа для <%= semester.number %> семестра<span></span></h5>
+        <h5 class='<%= presentor.indicate_paragraph "exercises_srs_#{semester.number}_valid" %> collapsible semester'>2.5.<%= index %> Самостоятельная работа для <%= semester.number %> семестра<span></span></h5>
         <div class="collapsible_wrapper">
           <%= render :file => 'self_education_items/index', :locals => { :semester => semester, :loadings => loadings, :index => index } %>
         </div>
@@ -103,29 +103,29 @@
       <% end %>
     </div>
 
-    <h3 class='<%= @work_programm.publications_valid? ? 'success' : 'warning' %>'>3. Учебно-методические материалы по дисциплине<span></span></h3>
-      <h4 class='<%= @work_programm.publications_by_kind_valid?(:basic) ? 'success' : 'warning' %> collapsible'>3.1 Основная литература<span></span></h4>
+    <h3 class='<%= presentor.indicate_paragraph :publications_valid %>'>3. Учебно-методические материалы по дисциплине<span></span></h3>
+      <h4 class='<%= presentor.indicate_paragraph :publications_basic_valid %> collapsible'>3.1 Основная литература<span></span></h4>
       <div class='collapsible_wrapper'>
         <%= render :file => 'publications/index', :locals => { :kind => 'basic' } %>
       </div>
 
-      <h4 class='<%= @work_programm.publications_by_kind_valid?(:additional) ? 'success' : 'warning' %> collapsible'>3.2 Дополнительная литература<span></span></h4>
+      <h4 class='<%= presentor.indicate_paragraph :publications_additional_valid %> collapsible'>3.2 Дополнительная литература<span></span></h4>
       <div class="collapsible_wrapper">
         <%= render :file => 'publications/index', :locals => { :kind => 'additional' } %>
       </div>
 
-      <h4 class='<%= @work_programm.ump_publications_valid? ? 'success' : 'warning' %>'>3.3 Перечень учебно-методических пособий<span></span></h4>
+      <h4 class='<%= presentor.indicate_paragraph :publications_ump_valid %>'>3.3 Перечень учебно-методических пособий<span></span></h4>
       <% resource.ump_publication_kinds.each_with_index do |kind, index| %>
-        <h5 class='<%= @work_programm.publications_by_kind_valid?("ump_#{kind}") ? 'success' : 'warning' %> collapsible'>3.3.<%= index + 1 %> <%= t("activerecord.attributes.publication.publication_kind_enum.ump_#{kind}") %><span></span></h5>
+        <h5 class='<%= presentor.indicate_paragraph "publications_ump_#{kind}_valid" %> collapsible'>3.3.<%= index + 1 %> <%= t("activerecord.attributes.publication.publication_kind_enum.ump_#{kind}") %><span></span></h5>
         <div class="collapsible_wrapper">
           <%= render :file => 'publications/index', :locals => { :kind => "ump_#{kind}" } %>
         </div>
       <% end %>
 
-    <h3 class='<%= @work_programm.brs_valid? ? 'success' : 'warning' %>'>4. Рейтинговая система оценки качества<span></span></h3>
-      <h4 class='<%= @work_programm.brs_valid? ? 'success' : 'warning' %>'>4.1 Балльная раскладка отдельных элементов контроля по видам занятий<span></span></h4>
+    <h3 class='<%= presentor.indicate_paragraph :brs_valid %>'>4. Рейтинговая система оценки качества<span></span></h3>
+      <h4 class='<%= presentor.indicate_paragraph :brs_valid %>'>4.1 Балльная раскладка отдельных элементов контроля по видам занятий<span></span></h4>
       <% @discipline.semesters.each_with_index do |semester, index| %>
-        <h5 class='<%= @work_programm.brs_by_semester_valid?(semester) ? 'success' : 'warning' %> collapsible'>4.1.<%= index+1 %> Балльная раскладка для <%= "#{semester.number} семестра" %><span></span></h5>
+        <h5 class='<%= presentor.indicate_paragraph "brs_#{semester.number}_valid" %> collapsible'>4.1.<%= index+1 %> Балльная раскладка для <%= "#{semester.number} семестра" %><span></span></h5>
         <div class="collapsible_wrapper">
           <%= render :file => 'rating_items/index', :locals => { :semester => semester } %>
         </div>

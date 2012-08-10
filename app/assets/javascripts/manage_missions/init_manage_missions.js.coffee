@@ -18,4 +18,5 @@ cancel_handler = () ->
     else
       context.closest('li').replaceWith(jqXHR.responseText)
 
+    init_check_valid()
     cancel_handler()

@@ -28,6 +28,7 @@ $.fn.remote_hadler = () ->
 
     init_publication_variation() if  $('#publication_location').length
     tbody.count_hours()
+    init_check_valid()
     init_calculate_total()
     cancel_handler()
 

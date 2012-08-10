@@ -37,6 +37,7 @@
             $('.work_programm_'+kind).html $(jqXHR.responseText).find('.work_programm_'+kind).html()
             form.remove()
             $this.show()
+            init_check_valid()
 
           false
 

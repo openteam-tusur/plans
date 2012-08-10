@@ -19,6 +19,7 @@
       else
         wrapper.html($(jqXHR.responseText).find('.discipline_wrapper'))
         form_wrapper.html('').off()
+        init_check_valid()
         link.show()
 
     false
