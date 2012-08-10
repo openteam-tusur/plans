@@ -105,8 +105,16 @@ ru:
         description: Описание основной образовательной программы
 
       publication:
+        count: Кол-во экземпляров
+        location: Где находится
         text: Библиографическая запись
         url: URL
+        location_enum:
+          lan: ЭБС "Лань"
+          library: Библиотека ТУСУР
+          portal: Портал ТУСУР
+          other: В другом месте
+
         publication_kind_enum:
           basic: Основная литература
           additional: Дополнительная литература

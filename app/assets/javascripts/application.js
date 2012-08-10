@@ -13,4 +13,5 @@
 //= require ./manage_missions
 //= require ./calculate_total
 //= require ./collapser
+//= require ./publication_variation
 //= require main

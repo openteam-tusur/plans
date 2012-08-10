@@ -26,6 +26,7 @@ $.fn.remote_hadler = () ->
     else
       context.closest('tr').replaceWith(jqXHR.responseText)
 
+    init_publication_variation() if  $('#publication_location').length
     tbody.count_hours()
     init_calculate_total()
     cancel_handler()
