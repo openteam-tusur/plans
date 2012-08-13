@@ -1,7 +1,8 @@
 # encoding: utf-8
 
 class WorkProgramm < ActiveRecord::Base
-  attr_accessible :year, :purpose, :task, :related_discipline_ids
+  attr_accessible :year, :purpose, :task, :related_discipline_ids, :generate
+  attr_accessor :generate
 
   belongs_to :discipline
 
@@ -29,6 +30,7 @@ class WorkProgramm < ActiveRecord::Base
   delegate :has_examinations?, :semesters, :semesters_with_examination, :to => :discipline
 
   after_create :create_requirements
+  after_create :generate_work_programm, :if => ->(w) { w.generate.to_i == 1 }
 
   default_value_for(:year) { Time.now.year }
 
@@ -231,6 +233,10 @@ class WorkProgramm < ActiveRecord::Base
       Requirement.enums['requirement_kind'].each do |kind|
         requirements.create(requirement_kind: kind)
       end
+    end
+
+    def generate_work_programm
+      # Генерация рабочей программы
     end
 end
 
