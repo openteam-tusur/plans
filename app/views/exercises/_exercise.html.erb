@@ -5,8 +5,8 @@
 
     <div class="description">
       <% if exercise.appendix %>
-        <%= exercise.appendix %>
-        <ul>
+        <b style='font-weight: bold;'><%= exercise.appendix %></b>
+        <ul class='list' style='padding: 0 0 0 15px'>
           <% exercise.appendix.appendix_items.each do |item| %>
             <li><%= item.description %></li>
           <% end %>

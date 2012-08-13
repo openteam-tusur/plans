@@ -7,6 +7,7 @@ class Exercise < ActiveRecord::Base
   has_one :appendix, :dependent => :destroy, :as => :appendixable
 
   validates_presence_of :title, :volume, :semester, :kind
+  validates_numericality_of :volume, :greater_than => 0, :only_integer => true
 
   default_scope order('exercises.weight, exercises.id ASC')
 

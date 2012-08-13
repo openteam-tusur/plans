@@ -1,7 +1,7 @@
 class SelfEducationItemsController < ApplicationController
   inherit_resources
 
-  actions :all, :except => [:index, :show]
+  actions :all, :except => [:index]
 
   belongs_to :year, :finder => :find_by_number! do
     belongs_to :speciality, :finder => :find_by_code! do

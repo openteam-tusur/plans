@@ -11,7 +11,8 @@ class SelfEducationItem < ActiveRecord::Base
 
   before_create :set_weight
 
-  validates_presence_of :semester, :work_programm
+  validates_presence_of :semester, :work_programm, :hours, :kind, :control
+  validates_numericality_of :hours, :greater_than => 0, :only_integer => true
 
   has_enum :control, :multiple => true
 
@@ -32,13 +33,26 @@ class SelfEducationItem < ActiveRecord::Base
         srs:              [:check_summary, :quiz, :test, :home_work],
         exam:             [:pass]
   }
+  CONTROL_TYPES = %[quiz test home_work access defence check report mark check_summary pass]
 
   def self.available_human_control_values(kind)
     human_enum_values(:control).keep_if{|key, value| AVAILABLE_CONTROLS[kind.to_sym].include?(key.to_sym) }.invert
   end
 
+  def self.kind_collection_for_select
+    ALL_KINDS.map { |kind|  [self.human_attribute_name(kind), kind] }
+  end
+
+  def self.control_collection_for_select
+    human_enum_values(:control).invert
+  end
+
   def set_weight
     self.weight = semester.number * 100 + ALL_KINDS.index(kind)
+  end
+
+  def title
+    self.class.human_attribute_name(kind)
   end
 end
 

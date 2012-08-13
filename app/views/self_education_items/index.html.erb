@@ -1,4 +1,4 @@
-<table class='self_education_items'>
+<table class="exercises">
   <thead>
     <tr>
       <th>Наименование работы</th>
@@ -8,39 +8,16 @@
     </tr>
   </thead>
   <tbody>
-    <% SelfEducationItem::ALL_KINDS.each_with_index do |kind, index| %>
-      <% scope = resource.self_education_items.kind(kind).semester_id(semester) %>
-      <% item = scope.first || scope.build %>
-      <tr class='<%= cycle("even", "odd") %>'>
-        <td class="left title">
-          <b style='font-size: 1.1em;'><%= SelfEducationItem.human_attribute_name(kind) %></b>
-          <br/>
-          <% if item.appendix %>
-            <b style='font-weight: bold'><%= item.appendix %></b>
-            <ul class='list' style='padding: 0 0 0 15px'>
-              <% item.appendix.appendix_items.each do |appendix_item| %>
-                <li><%= appendix_item.description %></li>
-              <% end %>
-            </ul>
-            <%= link_to 'править приложение', [:edit, @year, @speciality, @subspeciality, @discipline, @work_programm, item, :appendix] %>
-            <%= link_to 'удалить приложение', [@year, @speciality, @subspeciality, @discipline, @work_programm, item, :appendix], :confirm => t('are_you_sure?'), :method => :delete %>
-          <% else %>
-            <%= link_to '+ приложение', [:new, @year, @speciality, @subspeciality, @discipline, @work_programm, item, :appendix] if item.persisted? %>
-          <% end %>
-        </td>
-        <% if resource.has_loadings_for?(kind) %>
-          <td class='hours'><%= item.hours %></td>
-          <td><%= SelfEducationItem.human_enum_values(:control).values_at(*item.control).join(', ') %></td>
-          <% if item.new_record? %>
-            <td><%= link_to "добавить", polymorphic_url([:new, association_chain, resource, :self_education_item].flatten, :kind => kind, :semester_id => item.semester_id) %></td>
-          <% else %>
-            <td><%= link_to "изменить", [:edit, association_chain, resource, item].flatten %></td>
-          <% end %>
-        <% else %>
-          <td class='right warnings' colspan='3'>Не предусмотрено учебным планом</td>
-        <% end %>
-      </tr>
+    <% resource.self_education_items_by_semester(semester).each do |self_education_item| %>
+      <%= render self_education_item %>
     <% end %>
+
+    <tr>
+      <td colspan='5' class='noborder right add_exercise_wrapper'>
+        <%= link_to "+ вид самостоятельной работы", new_year_speciality_subspeciality_discipline_work_programm_self_education_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :self_education_item => { :semester_id => semester.id }}), :remote => true, :class => 'new_record' %>
+      </td>
+    </tr>
+
     <tr class='total_hours'>
       <% sum = resource.self_education_items.semester_id(semester).map(&:hours).map(&:to_i).sum %>
       <td colspan='5' class='noborder right <%= 'warning' if sum != loadings.first.value %>'>
