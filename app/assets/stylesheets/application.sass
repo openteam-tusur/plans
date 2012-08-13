@@ -176,7 +176,7 @@ a
 
   table
     border: 0
-    border-collapse: collapse
+    border-collapse: separate
     width: 100%
 
     .warnings, .error
@@ -184,6 +184,7 @@ a
 
     td, th
       padding: 0
+
     td.title
       width: 720px
 
@@ -198,7 +199,12 @@ a
         background: $sub_menu_bg
 
       td
+        border-bottom: 1px solid $border_color
+        padding: 5px 0
         text-align: center
+
+        &.noborder
+          border: none
 
       .warning
         span

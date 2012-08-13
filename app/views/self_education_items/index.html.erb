@@ -13,11 +13,11 @@
       <% item = scope.first || scope.build %>
       <tr class='<%= cycle("even", "odd") %>'>
         <td class="left title">
-          <%= SelfEducationItem.human_attribute_name(kind) %>
+          <b style='font-size: 1.1em;'><%= SelfEducationItem.human_attribute_name(kind) %></b>
           <br/>
           <% if item.appendix %>
-            <%= item.appendix %>
-            <ul>
+            <b style='font-weight: bold'><%= item.appendix %></b>
+            <ul class='list' style='padding: 0 0 0 15px'>
               <% item.appendix.appendix_items.each do |appendix_item| %>
                 <li><%= appendix_item.description %></li>
               <% end %>
@@ -43,12 +43,12 @@
     <% end %>
     <tr class='total_hours'>
       <% sum = resource.self_education_items.semester_id(semester).map(&:hours).map(&:to_i).sum %>
-      <td colspan='5' class='right <%= 'warning' if sum != loadings.first.value %>'>
+      <td colspan='5' class='noborder right <%= 'warning' if sum != loadings.first.value %>'>
         Всего часов добавленных занятий: <span><%= sum %></span>
       </td>
     </tr>
     <tr class='rup_hours'>
-      <td colspan='5' class='right'>Необходимо часов по РУП: <span><%= loadings.first.value %></span></td>
+      <td colspan='5' class='noborder right'>Необходимо часов по РУП: <span><%= loadings.first.value %></span></td>
     </tr>
   </tbody>
 </table>
