@@ -13,60 +13,63 @@ describe PurposesAndTasksPage do
     subject { page.dependencies }
 
     it { should =~ /Дисциплина «Учебная дисциплина»/ }
-    it { should =~ /цикл «ЕСН.Ф»/ }
+    it { should =~ /цикл «ЕСН.Ф.0»/ }
     it { should =~ /по направлению «Специальность подготовки»/ }
   end
 
-  def mock_disciplines(kind, discipline_titles)
-    disciplines = discipline_titles.map! {|discipline_title| Fabricate(:discipline, :title => discipline_title)}
+  def mock_disciplines(kind, disciplines_count)
+    disciplines = []
+    (1..disciplines_count).each do |discipline_number|
+      disciplines << Fabricate(:discipline, :title => "Дисциплина #{discipline_number}", :code => "ЕСН.Ф.#{discipline_number}")
+    end
     work_programm.should_receive(kind).any_number_of_times.and_return(disciplines)
   end
 
   describe '#previous_disciplines' do
     subject { page.previous_disciplines }
     context 'нет дисциплин' do
-      before { mock_disciplines :previous_disciplines, [] }
-      it { should be nil }
+      before { mock_disciplines :previous_disciplines, 0 }
+      it { should == '' }
     end
     context 'одна дисциплина' do
-      before { mock_disciplines :previous_disciplines, ['Дисциплина 1'] }
-      it { should == 'Изучение дисциплины базируется на материалах курса «Дисциплина 1».' }
+      before { mock_disciplines :previous_disciplines, 1 }
+      it { should == 'Изучение дисциплины базируется на материалах курса «Дисциплина 1» (ЕСН.Ф.1).' }
     end
     context 'две дисциплины' do
-      before { mock_disciplines :previous_disciplines, ['Дисциплина 1', 'Дисциплина 2'] }
-      it { should == 'Изучение дисциплины базируется на материалах таких курсов как «Дисциплина 1», «Дисциплина 2».' }
+      before { mock_disciplines :previous_disciplines, 2 }
+      it { should == 'Изучение дисциплины базируется на материалах таких курсов как «Дисциплина 1» (ЕСН.Ф.1), «Дисциплина 2» (ЕСН.Ф.2).' }
     end
   end
 
   describe '#current_disciplines' do
     subject { page.current_disciplines }
     context 'нет дисциплин' do
-      before { mock_disciplines :current_disciplines, [] }
-      it { should be nil }
+      before { mock_disciplines :current_disciplines, 0 }
+      it { should == '' }
     end
     context 'одна дисциплина' do
-      before { mock_disciplines :current_disciplines, ['Дисциплина 1'] }
-      it { should == 'При освоении данной дисциплины компетенции одновременно формируются с дисциплиной «Дисциплина 1».' }
+      before { mock_disciplines :current_disciplines, 1 }
+      it { should == 'При освоении данной дисциплины компетенции одновременно формируются с дисциплиной «Дисциплина 1» (ЕСН.Ф.1).' }
     end
     context 'две дисциплины' do
-      before { mock_disciplines :current_disciplines, ['Дисциплина 1', 'Дисциплина 2'] }
-      it { should == 'При освоении данной дисциплины компетенции одновременно формируются с дисциплинами «Дисциплина 1», «Дисциплина 2».' }
+      before { mock_disciplines :current_disciplines, 2 }
+      it { should == 'При освоении данной дисциплины компетенции одновременно формируются с дисциплинами «Дисциплина 1» (ЕСН.Ф.1), «Дисциплина 2» (ЕСН.Ф.2).' }
     end
   end
 
   describe '#subsequent_disciplines' do
     subject { page.subsequent_disciplines }
     context 'нет дисциплин' do
-      before { mock_disciplines :subsequent_disciplines, [] }
-      it { should be nil }
+      before { mock_disciplines :subsequent_disciplines, 0 }
+      it { should == '' }
     end
     context 'одна дисциплина' do
-      before { mock_disciplines :subsequent_disciplines, ['Дисциплина 1'] }
-      it { should == 'Она является основой для изучения дисциплины «Дисциплина 1».' }
+      before { mock_disciplines :subsequent_disciplines, 1 }
+      it { should == 'Она является основой для изучения дисциплины «Дисциплина 1» (ЕСН.Ф.1).' }
     end
     context 'две дисциплины' do
-      before { mock_disciplines :subsequent_disciplines, ['Дисциплина 1', 'Дисциплина 2'] }
-      it { should == 'Она является основой для изучения следующих дисциплин: «Дисциплина 1», «Дисциплина 2».' }
+      before { mock_disciplines :subsequent_disciplines, 2 }
+      it { should == 'Она является основой для изучения следующих дисциплин: «Дисциплина 1» (ЕСН.Ф.1), «Дисциплина 2» (ЕСН.Ф.2).' }
     end
   end
 end
