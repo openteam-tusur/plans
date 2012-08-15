@@ -300,15 +300,6 @@ class WorkProgramm < ActiveRecord::Base
       lecture_themes.zip(lecture_hours)
     end
 
-    def balancerirze(lecture_hours, total)
-      while (lecture_hours.sum - total).abs > 0 do
-          (1..(lecture_hours.sum - total).abs).each do
-            index = Random.rand(lecture_hours.count)
-            lecture_hours[index] += total <=> lecture_hours.sum
-          end
-      end
-    end
-
     def generate_srs
       genereated_srs = {}
       semesters = grouped_loadings(:srs).keys
@@ -325,29 +316,24 @@ class WorkProgramm < ActiveRecord::Base
         end
 
         genereated_srs[semester] = temp
-        difference = genereated_srs[semester].values.sum - srs_loading_volume
 
-        if difference != 0
+        if (genereated_srs[semester].values.sum - srs_loading_volume) != 0
           values = genereated_srs[semester].values
-          length = values.count
-
-          if difference > 0
-            (1..difference).each do |i|
-              n = array_itterator(i, length)
-              values[n-1] -= 1
-            end
-          elsif difference < 0
-            (1..difference.abs).each do |i|
-              n = array_itterator(i, length)
-              values[n-1] += 1
-            end
-          end
-
+          balancerirze(values, srs_loading_volume)
           genereated_srs[semester] = Hash[genereated_srs[semester].keys.zip(values)]
         end
       end
 
       create_srs(genereated_srs)
+    end
+
+    def balancerirze(values, total)
+      while (difference = (values.sum - total)).abs != 0 do
+        index = Random.rand(values.count)
+        values[index] += (0 <=> difference)
+        values[index] = 1 if values[index].zero?
+      end
+      values
     end
 
     def create_srs(srs)
@@ -361,12 +347,6 @@ class WorkProgramm < ActiveRecord::Base
           )
         end
       end
-    end
-
-    # (c) Iliy Manin. All rights reserved
-    def array_itterator(i, length)
-      return i - length*(i/(length+0.1)).floor if i > length
-      i
     end
 
     def calculate_volume(weight, total_volume)
