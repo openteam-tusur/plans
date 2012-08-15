@@ -262,7 +262,51 @@ class WorkProgramm < ActiveRecord::Base
 
     # Генерация рабочей программы
     def generate_work_programm
+      generate_lectures
       generate_srs
+    end
+
+    def generate_lectures
+      if subspeciality.gos? && (didactic_unit = subspeciality.gos.didactic_units.find_by_discipline discipline.title)
+        seed_lectures(didactic_unit)
+      end
+    end
+
+    def seed_lectures(didactic_unit)
+      loadings = grouped_loadings(:lecture)
+      didactic_unit.lecture_themes(loadings.values.map(&:first).map(&:value)).each_with_index do |themes, index|
+        semester = loadings.keys[index]
+        loading = loadings[semester].first.value
+        generate_lecture_hours(loading, themes).each do |title, hours|
+          exercises.create! :semester_id => semester.id, :kind => :lecture, :title => title, :volume => hours
+        end
+      end
+    end
+
+
+    def generate_lecture_hours(total, lecture_themes)
+      average = total / lecture_themes.count
+      lecture_hours = []
+      lecture_themes.each do |theme|
+        diff = Random.rand(average / 2)
+        diff = Random.rand(2) if diff.zero?
+        if Random.rand(2).zero?
+          lecture_hours << average + diff
+        else
+          lecture_hours << average - diff
+        end
+      end
+      balancerirze(lecture_hours, total)
+      lecture_themes.zip(lecture_hours)
+    end
+
+    def balancerirze(lecture_hours, total)
+      while (lecture_hours.sum - total).abs > 0 do
+          (1..(lecture_hours.sum - total).abs).each do
+            index = Random.rand(lecture_hours.count)
+            lecture_hours[index] += total <=> lecture_hours.sum
+          end
+      end
     end
 
     def generate_srs

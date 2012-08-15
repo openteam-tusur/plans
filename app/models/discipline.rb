@@ -41,9 +41,6 @@ class Discipline < ActiveRecord::Base
     semesters_with_examination.include? semester
   end
 
-  def didactic_unit
-    DidacticUnit.new(didactic_units)
-  end
 end
 
 # == Schema Information
