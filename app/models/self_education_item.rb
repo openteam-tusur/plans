@@ -14,6 +14,8 @@ class SelfEducationItem < ActiveRecord::Base
   validates_presence_of :semester, :work_programm, :hours, :kind, :control
   validates_numericality_of :hours, :greater_than => 0, :only_integer => true
 
+  default_scope order('self_education_items.weight, self_education_items.id')
+
   has_enum :control, :multiple => true
 
   FIFTH_ITEM_KINDS = %w[home_work individual_work referat test colloquium calculation]
@@ -48,7 +50,7 @@ class SelfEducationItem < ActiveRecord::Base
   end
 
   def set_weight
-    self.weight = semester.number * 100 + ALL_KINDS.index(kind)
+    self.weight = semester.number
   end
 
   def title

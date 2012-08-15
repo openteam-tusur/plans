@@ -36,6 +36,31 @@ class WorkProgramm < ActiveRecord::Base
 
   before_create :set_purpose
 
+  SRS_WEIGHTS = {
+    :lecture => {
+      :lecture => 0.3,
+      :srs     => 0.2,
+      :test    => 0.05,
+    },
+    :practice => {
+      :practice => 0.4,
+      :home_work => 0.2,
+      :referat => 0.2,
+      :colloquium => 0.3,
+    },
+    :exam => {
+      :exam => 0.7,
+      :individual_work => 0.3,
+    },
+    :lab => {
+      :lab => 0.3,
+      :calculation => 0.4,
+    },
+    :csr => {
+      :csr => 0.7
+    }
+  }
+
   def appendixes
     @appendixes ||= exercise_appendixes + self_education_item_appendixes
   end
@@ -235,8 +260,73 @@ class WorkProgramm < ActiveRecord::Base
       end
     end
 
+    # Генерация рабочей программы
     def generate_work_programm
-      # Генерация рабочей программы
+      generate_srs
+    end
+
+    def generate_srs
+      genereated_srs = {}
+      semesters = grouped_loadings(:srs).keys
+      semesters.each do |semester|
+        srs_loading_volume = semester.loadings.where(:discipline_id => discipline).where(:loading_kind => :srs).first.value
+
+        loading_kinds = (semester.loadings.where(:discipline_id => discipline).map(&:loading_kind).map(&:to_sym) & SRS_WEIGHTS.keys)
+
+        temp = {}
+        loading_kinds.each do |kind|
+          SRS_WEIGHTS[kind].each do |srs_kind, weight|
+            temp[srs_kind] = calculate_volume(weight, grouped_loadings(kind)[semester].first.value)
+          end
+        end
+
+        genereated_srs[semester] = temp
+        difference = genereated_srs[semester].values.sum - srs_loading_volume
+
+        if difference != 0
+          values = genereated_srs[semester].values
+          length = values.count
+
+          if difference > 0
+            (1..difference).each do |i|
+              n = array_itterator(i, length)
+              values[n-1] -= 1
+            end
+          elsif difference < 0
+            (1..difference.abs).each do |i|
+              n = array_itterator(i, length)
+              values[n-1] += 1
+            end
+          end
+
+          genereated_srs[semester] = Hash[genereated_srs[semester].keys.zip(values)]
+        end
+      end
+
+      create_srs(genereated_srs)
+    end
+
+    def create_srs(srs)
+      srs.each do |semester, items|
+        items.each do |kind, hours|
+          self_education_items.create(
+            :semester_id => semester.id,
+            :kind => kind,
+            :hours => hours,
+            :control => SelfEducationItem::AVAILABLE_CONTROLS[kind].sample
+          )
+        end
+      end
+    end
+
+    # (c) Iliy Manin. All rights reserved
+    def array_itterator(i, length)
+      return i - length*(i/(length+0.1)).floor if i > length
+      i
+    end
+
+    def calculate_volume(weight, total_volume)
+      (total_volume * weight).round
     end
 end
 
