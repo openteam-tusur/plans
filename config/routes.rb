@@ -1,4 +1,7 @@
 Plans::Application.routes.draw do
+  namespace :manage do
+    root :to => 'programms#index'
+  end
   resources :years, :only => []  do
     match 'statistics' => 'statistics#index'
 

@@ -14,6 +14,7 @@ group :default do
   gem 'attribute_normalizer'
   gem 'default_value_for'
   gem 'el_vfs_client'
+  gem 'esp-auth'
   gem 'has_enum'
   gem 'has_scope'
   gem 'inherited_resources'
@@ -25,11 +26,20 @@ group :default do
   gem 'russian'
   gem 'simple_form'
   gem 'wicked_pdf'
+
+  # HACK FOR HACK
+  gem 'oauth2', '0.6.1'
+  gem 'omniauth',  '1.1.0'
+  gem 'omniauth-oauth2', '1.0.2'
+  gem 'has_searcher', '< 0.0.90'
+  gem 'formtastic', '~> 2.1.0'
+
 end
 
 group :development do
   gem 'annotate',             '>= 2.5.0.pre'
   gem 'hirb',                 :require => false
+  gem 'sunspot_solr'
 end
 
 group :test do

@@ -1,5 +1,16 @@
 # encoding: utf-8
 
+Context.first || Context.create!(:title => 'ТУСУР')
+
+User.find_or_initialize_by_uid('1').tap do | user |
+  user.save(:validate => false)
+  user.permissions.new do |permission|
+    permission.context = Context.first
+    permission.role = :manager
+    permission.save!
+  end if user.permissions.empty
+end
+
 Gos.find_or_initialize_by_speciality_code('080504.65').tap do |gos|
   gos.update_attributes :code => '061000',
                         :title => 'Государственное и муниципальное управление',

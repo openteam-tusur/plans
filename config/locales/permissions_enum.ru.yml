@@ -1,0 +1,6 @@
+ru:
+  activerecord:
+    attributes:
+      permission:
+        role_enum:
+          manager:              Менеджер

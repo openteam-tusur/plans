@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120815053104) do
+ActiveRecord::Schema.define(:version => 20120820105731) do
 
   create_table "appendix_items", :force => true do |t|
     t.integer  "appendix_id"
@@ -32,6 +32,27 @@ ActiveRecord::Schema.define(:version => 20120815053104) do
 
   add_index "appendixes", ["appendixable_id", "appendixable_type"], :name => "index_appendixes_on_appendixable_id_and_appendixable_type"
 
+  create_table "audits", :force => true do |t|
+    t.integer  "auditable_id"
+    t.string   "auditable_type"
+    t.integer  "associated_id"
+    t.string   "associated_type"
+    t.integer  "user_id"
+    t.string   "user_type"
+    t.string   "username"
+    t.string   "action"
+    t.text     "audited_changes"
+    t.integer  "version",         :default => 0
+    t.string   "comment"
+    t.string   "remote_address"
+    t.datetime "created_at"
+  end
+
+  add_index "audits", ["associated_id", "associated_type"], :name => "associated_index"
+  add_index "audits", ["auditable_id", "auditable_type"], :name => "auditable_index"
+  add_index "audits", ["created_at"], :name => "index_audits_on_created_at"
+  add_index "audits", ["user_id", "user_type"], :name => "user_index"
+
   create_table "checks", :force => true do |t|
     t.integer  "semester_id"
     t.integer  "discipline_id"
@@ -43,6 +64,17 @@ ActiveRecord::Schema.define(:version => 20120815053104) do
 
   add_index "checks", ["discipline_id"], :name => "index_checks_on_discipline_id"
   add_index "checks", ["semester_id"], :name => "index_checks_on_semester_id"
+
+  create_table "contexts", :force => true do |t|
+    t.string   "title"
+    t.string   "ancestry"
+    t.string   "weight"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "contexts", ["ancestry"], :name => "index_contexts_on_ancestry"
+  add_index "contexts", ["weight"], :name => "index_contexts_on_weight"
 
   create_table "departments", :force => true do |t|
     t.string   "title"
@@ -149,6 +181,17 @@ ActiveRecord::Schema.define(:version => 20120815053104) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
+
+  create_table "permissions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "context_id"
+    t.string   "context_type"
+    t.string   "role"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "permissions", ["user_id", "role", "context_id", "context_type"], :name => "by_user_and_role_and_context"
 
   create_table "programms", :force => true do |t|
     t.integer  "with_programm_id"
@@ -257,6 +300,30 @@ ActiveRecord::Schema.define(:version => 20120815053104) do
   end
 
   add_index "subspecialities", ["speciality_id"], :name => "index_subspecialities_on_speciality_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "uid"
+    t.text     "name"
+    t.text     "email"
+    t.text     "nickname"
+    t.text     "first_name"
+    t.text     "last_name"
+    t.text     "location"
+    t.text     "description"
+    t.text     "image"
+    t.text     "phone"
+    t.text     "urls"
+    t.text     "raw_info"
+    t.integer  "sign_in_count"
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "users", ["uid"], :name => "index_users_on_uid"
 
   create_table "work_programms", :force => true do |t|
     t.integer  "year"
