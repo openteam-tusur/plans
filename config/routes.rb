@@ -37,5 +37,6 @@ Plans::Application.routes.draw do
     root :to => 'specialities#index', :defaults => { :year_id => (Date.today - 6.month).year }
   end
 
+  root :to => 'application#index'
   mount ElVfsClient::Engine => '/'
 end

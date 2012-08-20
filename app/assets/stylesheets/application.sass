@@ -16,6 +16,8 @@ $warn_color:  #F15D3C
 html, body
   font-size: 1em
   line-height: 1.62em
+  margin: 0 0 40px 0
+  height: 100%
 
 p
   margin: 0 0 0.1em 0
@@ -51,6 +53,20 @@ a
 
   &:hover
     color: $link_color_hover
+
+.need_gradient
+  +background-image(radial-gradient(color-stops(#eee, #bbb), 50% 50%))
+  height: 100%
+  position: relative
+  top: 0
+  bottom: 0
+
+  a
+    display: block
+    font-size: 28px
+    margin: 25% auto
+    text-align: center
+    width: 400px
 
 .esp_auth_header_wrapper
   position: static
