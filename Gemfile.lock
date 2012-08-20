@@ -56,7 +56,7 @@ GEM
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
     bunny (0.8.0)
-    cancan (1.6.8)
+    cancan (1.6.7)
     chronic (0.6.7)
     chunky_png (1.2.6)
     coffee-rails (3.2.2)
@@ -285,6 +285,7 @@ DEPENDENCIES
   RedCloth
   annotate (>= 2.5.0.pre)
   attribute_normalizer
+  cancan (= 1.6.7)
   coffee-rails
   compass-rails
   default_value_for

@@ -1,0 +1,23 @@
+<tr class='exercise_form'>
+  <td colspan=5>
+    <%= simple_form_for [:manage, association_chain, resource].flatten, :remote => true do |f| %>
+      <%= f.input :semester_id, :as => :hidden %>
+      <%= f.input :rating_item_kind, :as => :hidden %>
+
+      <%= f.input :title, :wrapper_html => { :style => 'float: none;' } %>
+      <%= f.input :max_begin_1kt %>
+      <%= f.input :max_1kt_2kt %>
+      <%= f.input :max_2kt_end %>
+
+      <div class="buttons">
+        <%= f.submit %>
+        <% if resource.new_record? %>
+          <%= link_to 'Отмена', '#', :class => 'cancel new_record' %>
+        <% else %>
+          <%= link_to 'Отмена', resource_path, :remote => true %>
+        <% end %>
+      </div>
+    <% end %>
+  </td>
+</tr>
+

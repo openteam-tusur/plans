@@ -1,4 +1,0 @@
-<%= link_to "Скачать файл (#{URI.decode(resource.vfs_path.match(/([^\/.]+)(\.(.{3}))?$/)[0])})", resource.vfs_path, :class => 'link' %>
-<div class='description'><%= simple_format resource.description %></div>
-<%= link_to "Редактировать программу", edit_year_speciality_subspeciality_programm_path(@year, @speciality, @subspeciality), :remote => true, :class => 'link' %>
-<%= link_to "Удалить программу", year_speciality_subspeciality_programm_path(@year, @speciality, @subspeciality), :method => :delete, :confirm => t('are_you_sure?'), :class => 'link' %>

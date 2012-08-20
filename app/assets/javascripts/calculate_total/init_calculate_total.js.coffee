@@ -27,7 +27,9 @@ calculate_total_rating_items_score = () ->
         $('.increasing_'+k, item).html(sums[k])
       prev = k
 
-    $('.increasing_total', item).html(Number($('.target_total_score', item).html())+Number($('.examination_total', item).html()))
+    result = Number($('.target_total_score', item).html())
+    result += Number($('.examination_total', item).html()) if $('.examination_total').length
+    $('.increasing_total', item).html(result)
 
 @init_calculate_total = () ->
   calculate_exam_score()

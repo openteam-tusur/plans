@@ -1,0 +1,19 @@
+<tr class='exercise_form'>
+  <td colspan=3>
+    <%= simple_form_for [:manage, association_chain, resource].flatten, :remote => true do |f| %>
+      <%= f.input :semester_id, :as => :hidden %>
+
+      <%= f.input :question_kind %>
+      <%= f.input :score %>
+
+      <div class="buttons">
+        <%= f.submit %>
+        <% if resource.new_record? %>
+          <%= link_to 'Отмена', '#', :class => 'cancel new_record' %>
+        <% else %>
+          <%= link_to 'Отмена', resource_path, :remote => true %>
+        <% end %>
+      </div>
+    <% end %>
+  </td>
+</tr>

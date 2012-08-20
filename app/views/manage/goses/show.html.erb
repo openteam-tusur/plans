@@ -1,0 +1,29 @@
+<p>
+  <%= link_to "&larr;&nbsp;К списку ГОС'ов".html_safe, manage_goses_path %>
+</p>
+
+<h1>Государственный общеобразовательный стандарт</h1>
+
+<div class="actions">
+  <%= link_to 'Редактировать', edit_resource_path %>
+  <%= link_to 'Удалить', [:manage, resource], :confirm => t('are_you_sure?'), :method => :delete %>
+</div>
+
+<h2><%= resource %></h2>
+<h3>Дата утверждения: <%= l resource.approved_on %></h3>
+<h3>Специальности: <%= resource.speciality_code %> <%= resource.speciality_title %></h3>
+
+<div class="actions">
+  <%= link_to 'Добавить', new_manage_gos_didactic_unit_path(resource) %>
+</div>
+<h4>Дидактические единицы</h4>
+
+<ul>
+  <% resource.didactic_units.each do |unit| %>
+    <h4>
+      <li class="didactic_unit">
+        <%= link_to unit, [:manage, resource, unit] %>
+      </li>
+    </h4>
+  <% end %>
+</ul>

@@ -1,0 +1,9 @@
+<h1><%= t("#{action_name}_#{resource_class.name.underscore}") %></h1>
+
+<%= simple_form_for [:manage, parent, resource] do |f| %>
+  <%= f.input :discipline %>
+  <%= f.input :content %>
+  <%= f.submit %>
+  или
+  <%= link_to 'Отмена', resource.new_record? ? parent_path : resource_path %>
+<% end %>

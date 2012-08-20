@@ -60,7 +60,7 @@
   <div>Всего часов самостоятельной работы: <%= title_page.scheduling.srs.total %></div>
   <% resource.grouped_loadings(:srs).each do |semester, loadings| %>
     <h3 class='strong indentation'><%= "2.5.#{index}" %> Самостоятельная работа для <%= semester.number %> семестра</h3>
-    <%= render :file => 'self_education_items/index', :locals => { :semester => semester, :loadings => loadings } %>
+    <%= render :file => 'manage/self_education_items/index', :locals => { :semester => semester, :loadings => loadings } %>
     <div class='table_break'></div>
     <% index += 1 %>
   <% end %>

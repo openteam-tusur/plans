@@ -1,0 +1,212 @@
+<span style='display: none;' class='resource_path'><%= resource_path %></span>
+
+<div class='top_nav'>
+  <%= link_to '&larr;&nbsp;К списку рабочих программ'.html_safe, manage_year_speciality_subspeciality_discipline_work_programms_path(@year, @speciality, @subspeciality, @discipline) %>
+</div>
+
+<h1 class='head_center'>Рабочая программа для дисциплины  &quot;<%= @discipline.title %>&quot; <%= @work_programm.year %> года</h1>
+
+<%= render :partial => 'commons/work_programm_head' %>
+
+<div class="container">
+  <h5>
+    <% if @work_programm.whole_valid? %>
+      <%= link_to "Скачать PDF рабочей программы", resource_path(:format => :pdf)  %>
+    <% else %>
+      <div class='warning'>Вы не можете скачать PDF рабочей программы, потому что не заполнили все пункты.<span></span></div>
+    <% end %>
+  </h5>
+  <h2 class='toc'>Содержание</h2>
+
+  <h3 class='<%= presentor.indicate_paragraph :purposes_and_missions_valid %>'>1. Цели и задачи дисциплины, ее место в учебном процессе<span></span></h3>
+      <h4 class='<%= presentor.indicate_paragraph :purpose_valid %> collapsible'>1.1 Цели<span></span></h4>
+      <div class="collapsible_wrapper">
+        <div class='work_programm_wrapper with_text_styles'>
+          <div class="work_programm_purpose">
+            <%= simple_format @work_programm.purpose %>
+          </div>
+          <% if @work_programm.purpose? %>
+            <%= link_to "Редактировать цели", '#', :class => 'add_text purpose' %>
+          <% else %>
+            <%= link_to "Добавить цели", '#', :class => 'add_text purpose' %>
+          <% end %>
+        </div>
+      </div>
+
+      <h4 class='<%= presentor.indicate_paragraph :missions_valid %> collapsible'>1.2 Задачи<span></span></h4>
+      <div class="collapsible_wrapper">
+        <div class='work_programm_wrapper with_text_styles missions_wrapper'>
+          <div class="work_programm_task">
+            <ol class='mission_list'>
+              <% @work_programm.missions.each do |mission| %>
+                <%= render mission %>
+              <% end %>
+            </ol>
+            <%= link_to "Добавить задачу", new_manage_year_speciality_subspeciality_discipline_work_programm_mission_path(@year, @speciality, @subspeciality, @discipline, @work_programm), :remote => true, :class => 'new' %>
+          </div>
+          <div class="work_programm_requirements">
+            <h5>По окончанию изучения дисциплины «<%= @discipline %>» студент обязан:</h5>
+            <ul class='requirement_list'>
+              <% @work_programm.requirements.each do |requirement| %>
+                <%= render requirement %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h4 class='<%= presentor.indicate_paragraph :related_disciplines_valid %> collapsible'>1.3 Место дисциплины в учебном процессе<span></span></h4>
+      <div class="collapsible_wrapper">
+        <div class="wrapper">
+          <% %w[previous_disciplines current_disciplines subsequent_disciplines].each_with_index do |name, index| %>
+            <div class="discipline_wrapper">
+              <h5>1.3.<%= index + 1 %> <%= WorkProgramm.human_attribute_name(name) %></h5>
+              <ul>
+                <% @work_programm.send(name).each do |discipline| %>
+                  <li>
+                    <%= discipline.title %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+        <%= link_to "Изменить список связанных дисциплин", edit_resource_path, :class => 'add_discipline', :remote => true %>
+      </div>
+
+    <h3 class='<%= presentor.indicate_paragraph :exercises_valid %>'>2. Содержание дисциплины<span></span></h3>
+    <div>
+      <% index = 1 %>
+      <% Exercise.enum_values(:kind).each do |kind| %>
+        <h4 class='<%= presentor.indicate_paragraph "exercises_#{kind}_valid" %> <%= @work_programm.exercises_by_kind_valid?(kind) ? 'success' : 'warning' %>'>2.<%= index %> <%= Exercise.human_attribute_name kind.pluralize %><span></span></h4>
+        <%= content_tag :div, 'Не предусмотрено учебным планом', :style => 'margin: 15px 30px;' unless resource.has_loadings_for?(kind)  %>
+        <% ex_index = 1 %>
+        <% resource.grouped_loadings(kind).each do |semester, loadings| %>
+          <h5 class='<%= "exercises_#{kind}_#{semester.number}_valid" %> <%= @work_programm.exercises_by_semester_and_kind_valid?(semester, kind) ? 'success': 'warning' %> collapsible semester'>2.<%= "#{index}.#{ex_index} #{Exercise.human_attribute_name kind.pluralize}" %> для <%= semester.number %> семестра<span></span></h5>
+          <div class="collapsible_wrapper">
+            <%= render :file => 'manage/exercises/index', :locals => { :semester => semester, :kind => kind, :loadings => loadings} %>
+          </div>
+          <% ex_index += 1 %>
+        <% end %>
+        <% index += 1 %>
+      <% end %>
+
+      <h4 class='<%= presentor.indicate_paragraph :exercises_srs_valid %>'>2.5 <%= Exercise.human_attribute_name :srs %><span></span></h4>
+      <%= content_tag :div, 'Не предусмотрено учебным планом', :style => 'margin: 15px 30px;' unless resource.has_loadings_for?(:srs) %>
+      <% index = 1 %>
+      <% resource.grouped_loadings(:srs).each do |semester, loadings| %>
+        <h5 class='<%= presentor.indicate_paragraph "exercises_srs_#{semester.number}_valid" %> collapsible semester'>2.5.<%= index %> Самостоятельная работа для <%= semester.number %> семестра<span></span></h5>
+        <div class="collapsible_wrapper">
+          <%= render :file => 'manage/self_education_items/index', :locals => { :semester => semester, :loadings => loadings, :index => index } %>
+        </div>
+        <% index += 1 %>
+      <% end %>
+    </div>
+
+    <h3 class='<%= presentor.indicate_paragraph :publications_valid %>'>3. Учебно-методические материалы по дисциплине<span></span></h3>
+      <h4 class='<%= presentor.indicate_paragraph :publications_basic_valid %> collapsible'>3.1 Основная литература<span></span></h4>
+      <div class='collapsible_wrapper'>
+        <%= render :file => 'manage/publications/index', :locals => { :kind => 'basic' } %>
+      </div>
+
+      <h4 class='<%= presentor.indicate_paragraph :publications_additional_valid %> collapsible'>3.2 Дополнительная литература<span></span></h4>
+      <div class="collapsible_wrapper">
+        <%= render :file => 'manage/publications/index', :locals => { :kind => 'additional' } %>
+      </div>
+
+      <h4 class='<%= presentor.indicate_paragraph :publications_ump_valid %>'>3.3 Перечень учебно-методических пособий<span></span></h4>
+      <% resource.ump_publication_kinds.each_with_index do |kind, index| %>
+        <h5 class='<%= presentor.indicate_paragraph "publications_ump_#{kind}_valid" %> collapsible'>3.3.<%= index + 1 %> <%= t("activerecord.attributes.publication.publication_kind_enum.ump_#{kind}") %><span></span></h5>
+        <div class="collapsible_wrapper">
+          <%= render :file => 'manage/publications/index', :locals => { :kind => "ump_#{kind}" } %>
+        </div>
+      <% end %>
+
+    <h3 class='<%= presentor.indicate_paragraph :brs_valid %>'>4. Рейтинговая система оценки качества<span></span></h3>
+      <h4 class='<%= presentor.indicate_paragraph :brs_valid %>'>4.1 Балльная раскладка отдельных элементов контроля по видам занятий<span></span></h4>
+      <% @discipline.semesters.each_with_index do |semester, index| %>
+        <h5 class='<%= presentor.indicate_paragraph "brs_#{semester.number}_valid" %> collapsible'>4.1.<%= index+1 %> Балльная раскладка для <%= "#{semester.number} семестра" %><span></span></h5>
+        <div class="collapsible_wrapper">
+          <%= render :file => 'manage/rating_items/index', :locals => { :semester => semester } %>
+        </div>
+      <% end %>
+
+      <h4 class='success collapsible'>4.2 Методика формирования пятибалльных оценок в контрольные точки<span></span></h4>
+      <div class="collapsible_wrapper">
+        <p>Оценка в контрольные точки выставляется в соответствии с объемом работы, выполненной студентом к моменту контрольной точки. Для каждого студента рассчитывается процент  набранных им рейтинговых баллов относительно предложенных к данному моменту баллов.</p>
+        <table class='exercises'>
+          <thead>
+            <tr>
+              <th>Оценка</th>
+              <th colspan=2>Процент от максимальной суммы баллов</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>отлично</td>
+              <td>от 90%</td>
+            </tr>
+            <tr>
+              <td>хорошо</td>
+              <td>70% &mdash; 89%</td>
+            </tr>
+            <tr>
+              <td>удовлетворительно</td>
+              <td>60% &mdash; 69%</td>
+            </tr>
+            <tr>
+              <td>неудовлетворительно</td>
+              <td>менее 60%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 class='success collapsible'>4.3 Методика формирования итоговой оценки по дисциплине<span></span></h4>
+      <div class="collapsible_wrapper">
+        <p>Независимо от набранной в семестре текущей суммы баллов обязательным условием перед сдачей экзамена и/или для получения зачета является выполнение студентом необходимых по рабочей программе для дисциплины видов занятий.</p>
+        <table class='exercises'>
+          <thead>
+            <tr>
+              <th>Оценка</th>
+              <th>Процент от максимальной суммы баллов</th>
+              <th>Оценка (ECTS)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>5 (отлично) (зачтено)</td>
+              <td>от 90%</td>
+              <td>А (отлично)</td>
+            </tr>
+            <tr>
+              <td rowspan=3>4 (хорошо) (зачтено)</td>
+              <td>85%-89%</td>
+              <td>B (очень хорошо)</td>
+            </tr>
+            <tr>
+              <td>75%-84%</td>
+              <td>С (хорошо)</td>
+            </tr>
+            <tr>
+              <td>70%-74%</td>
+              <td rowspan=2>D (удовлетворительно)</td>
+            </tr>
+            <tr>
+              <td rowspan=2>3 (удовлетворительно) (зачтено)</td>
+              <td>65%-69%</td>
+            </tr>
+            <tr>
+              <td>60%-64%</td>
+              <td>E (посредственно)</td>
+            </tr>
+            <tr>
+              <td>2 (неудовлетворительно) (не зачтено)</td>
+              <td>менее 60%</td>
+              <td>F (неудовлетворительно)</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Преподаватель имеет право не учитывать набранную студентом сумму баллов до ликвидации студентом текущих долгов по дисциплине (лабораторные работы, практические задания, курсовой проект(работа) и др.).</p>
+      </div>
+</div>

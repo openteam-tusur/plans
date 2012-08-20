@@ -1,0 +1,23 @@
+<tr class="exercise">
+  <td class='left'>
+    <div class='title'><%= self_education_item.title %></div>
+    <% if self_education_item.appendix %>
+      <b style='font-weight: bold'><%= self_education_item.appendix %></b>
+      <ul class='list' style='padding: 0 0 0 15px'>
+        <% self_education_item.appendix.appendix_items.each do |item| %>
+          <li><%= item.description %></li>
+        <% end %>
+      </ul>
+      <%= link_to 'править приложение', [:edit, :manage, @year, @speciality, @subspeciality, @discipline, @work_programm, self_education_item, :appendix] %>
+      <%= link_to 'удалить приложение', [:manage, @year, @speciality, @subspeciality, @discipline, @work_programm, self_education_item, :appendix], :confirm => t('are_you_sure?'), :method => :delete %>
+    <% else %>
+      <%= link_to '+ приложение', [:new, :manage, @year, @speciality, @subspeciality, @discipline, @work_programm, self_education_item, :appendix] if self_education_item.persisted? %>
+    <% end %>
+  </td>
+  <td class='hours'><%= self_education_item.hours %></td>
+  <td><%= self_education_item.human_control.join(', ') if self_education_item.human_control.present? %></td>
+  <td>
+    <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_self_education_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, self_education_item), :remote => true %>
+    <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_self_education_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, self_education_item), :method => :delete, :confirm => t('are_you_sure?') %>
+  </td>
+</tr>
