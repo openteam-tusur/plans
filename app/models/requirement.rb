@@ -2,6 +2,8 @@ class Requirement < ActiveRecord::Base
   attr_accessible :description, :work_programm_id, :requirement_kind
   validates_presence_of :work_programm_id, :requirement_kind
 
+  belongs_to :work_programm
+
   has_enum :requirement_kind
 
   def to_s

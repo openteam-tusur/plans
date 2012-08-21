@@ -2,6 +2,7 @@ class Subdepartment < ActiveRecord::Base
   attr_accessible :abbr, :title, :number
 
   belongs_to :department
+  belongs_to :context
   has_many :subspecialities
   has_many :disciplines
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120820105731) do
+ActiveRecord::Schema.define(:version => 20120821023852) do
 
   create_table "appendix_items", :force => true do |t|
     t.integer  "appendix_id"
@@ -285,6 +285,7 @@ ActiveRecord::Schema.define(:version => 20120820105731) do
     t.datetime "deleted_at"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "context_id"
   end
 
   add_index "subdepartments", ["department_id"], :name => "index_subdepartments_on_department_id"

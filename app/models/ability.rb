@@ -3,7 +3,6 @@ class Ability
 
   def initialize(user)
     return unless user
-    can :manage, :all
 
     ## common
     can :manage, Context do | context |
@@ -32,6 +31,25 @@ class Ability
 
     can :manage, :audits do
       user.manager_of? Context.first
+    end
+
+    ## methodologist
+    can :read, [Speciality, Subspeciality, Discipline, WorkProgramm]
+
+    can :manage, Programm do |programm|
+      user.methodologist_of? programm.with_programm.subdepartment.context
+    end
+
+    can :manage, WorkProgramm do |work_programm|
+      user.methodologist_of? work_programm.discipline.subdepartment.context
+    end
+
+    can :manage, WorkProgramm do |work_programm|
+      user.methodologist_of? work_programm.discipline.subspeciality.subdepartment.context
+    end
+
+    can :manage, WorkProgramm::PART_CLASSES do |part|
+      can? :manage, part.work_programm
     end
   end
 end

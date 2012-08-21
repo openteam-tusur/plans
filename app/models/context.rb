@@ -1,6 +1,7 @@
 class Context < ActiveRecord::Base
   attr_accessible :title
-  esp_auth_context
+  has_many :subdepartments
+  esp_auth_context :subcontext => false
 end
 
 # == Schema Information

@@ -1,4 +1,5 @@
 class Permission < ActiveRecord::Base
+  attr_accessible :context, :role, :user_id, :context_id, :context_type
   esp_auth_permission
 end
 

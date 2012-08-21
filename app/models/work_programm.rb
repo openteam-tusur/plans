@@ -61,6 +61,9 @@ class WorkProgramm < ActiveRecord::Base
     }
   }
 
+  PART_CLASSES = [Mission, Requirement, Exercise, SelfEducationItem,
+                  Appendix, Publication, RatingItem, ExaminationQuestion]
+
   def appendixes
     @appendixes ||= exercise_appendixes + self_education_item_appendixes
   end

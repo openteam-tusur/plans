@@ -5,6 +5,8 @@ class Appendix < ActiveRecord::Base
 
   belongs_to :appendixable, :polymorphic => true
 
+  delegate :work_programm, :work_programm=, :to => :appendixable
+
   has_many :appendix_items, :dependent => :destroy
 
   accepts_nested_attributes_for :appendix_items, :allow_destroy => true

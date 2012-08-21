@@ -34,7 +34,6 @@ group :default do
   gem 'has_searcher', '< 0.0.90'
   gem 'formtastic', '~> 2.1.0'
   gem 'cancan', '1.6.7'
-
 end
 
 group :development do

@@ -7,14 +7,18 @@
 <%= render :partial => 'commons/work_programm_head' %>
 
 <h4 class='add_work_programm_wrapper'>
-  <%= link_to "Добавить рабочую программу по дисциплине &quot;#{@discipline}&quot;".html_safe, new_manage_year_speciality_subspeciality_discipline_work_programm_path(@year, @speciality, @subspeciality, @discipline), :remote => true, :class => 'add_work_programm' %>
+  <% if can?(:manage, collection.build) %>
+    <%= link_to "Добавить рабочую программу по дисциплине &quot;#{@discipline}&quot;".html_safe, new_manage_year_speciality_subspeciality_discipline_work_programm_path(@year, @speciality, @subspeciality, @discipline), :remote => true, :class => 'add_work_programm' %>
+  <% end %>
 </h4>
 
 <ul class='work_programms list'>
   <% collection.each do |work_programm| %>
     <li>
       <%= link_to "Рабочая программа дисциплины #{work_programm.year} года", manage_year_speciality_subspeciality_discipline_work_programm_path(@year, @speciality, @subspeciality, @discipline, work_programm) %>
-      <%= link_to 'Удалить', manage_year_speciality_subspeciality_discipline_work_programm_path(@year, @speciality, @subspeciality, @discipline, work_programm), :method => :delete, :confirm => t('are_you_sure?') %>
+      <% if can?(:manage, work_programm) %>
+        <%= link_to 'Удалить', manage_year_speciality_subspeciality_discipline_work_programm_path(@year, @speciality, @subspeciality, @discipline, work_programm), :method => :delete, :confirm => t('are_you_sure?') %>
+      <% end %>
     </li>
   <% end %>
 </ul>
