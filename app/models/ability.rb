@@ -33,7 +33,9 @@ class Ability
       user.manager_of? Context.first
     end
 
-    can :manage, :goses do
+    ## specific
+
+    can :manage, :all do
       user.manager_of? Context.first
     end
 
