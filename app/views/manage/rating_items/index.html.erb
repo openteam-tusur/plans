@@ -13,7 +13,9 @@
     <%= render @work_programm.rating_items_for_semester(semester).rating_item_kind_default %>
     <tr>
       <td colspan=6 class='right add_exercise_wrapper'>
-        <%= link_to "+ элемент учебной деятельности", new_manage_year_speciality_subspeciality_discipline_work_programm_rating_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :rating_item => { :semester_id => semester.id, :rating_item_kind => :default }}), :remote => true, :class => 'new_record' %>
+        <% if can? :manage, @work_programm %>
+          <%= link_to "+ элемент учебной деятельности", new_manage_year_speciality_subspeciality_discipline_work_programm_rating_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :rating_item => { :semester_id => semester.id, :rating_item_kind => :default }}), :remote => true, :class => 'new_record' %>
+        <% end %>
       </td>
     </tr>
     <tr>
@@ -62,7 +64,9 @@
       <%= render @work_programm.rating_items_for_semester(semester).rating_item_kind_csr %>
       <tr>
         <td colspan=6 class='right add_exercise_wrapper'>
-          <%= link_to "+ элемент учебной деятельности", new_manage_year_speciality_subspeciality_discipline_work_programm_rating_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :rating_item => { :semester_id => semester.id, :rating_item_kind => :csr }}), :remote => true, :class => 'new_record' %>
+          <% if can? :manage, @work_programm %>
+            <%= link_to "+ элемент учебной деятельности", new_manage_year_speciality_subspeciality_discipline_work_programm_rating_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :rating_item => { :semester_id => semester.id, :rating_item_kind => :csr }}), :remote => true, :class => 'new_record' %>
+          <% end %>
         </td>
       </tr>
       <tr>
@@ -99,7 +103,9 @@
         <%= render @work_programm.examination_questions_for_semester(semester) %>
         <tr>
           <td colspan=3 class='noborder right add_exercise_wrapper'>
-            <%= link_to "+ тип вопроса", new_manage_year_speciality_subspeciality_discipline_work_programm_examination_question_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :examination_question => { :semester_id => semester.id }}), :remote => true, :class => 'new_record' %>
+            <% if can? :manage, @work_programm %>
+              <%= link_to "+ тип вопроса", new_manage_year_speciality_subspeciality_discipline_work_programm_examination_question_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :examination_question => { :semester_id => semester.id }}), :remote => true, :class => 'new_record' %>
+            <% end %>
           </td>
         </tr>
       </tbody>

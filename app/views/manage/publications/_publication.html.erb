@@ -6,7 +6,9 @@
   <td class='location'><%= publication.human_location %></td>
   <td class='count'><%= "#{publication.count} экз." if publication.count? %></td>
   <td>
-    <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_publication_path(@year, @speciality, @subspeciality, @discipline, @work_programm, publication), :remote => true %>
-    <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_publication_path(@year, @speciality, @subspeciality, @discipline, @work_programm, publication), :method => :delete, :confirm => t('are_you_sure?') %>
+    <% if can? :manage, @work_programm %>
+      <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_publication_path(@year, @speciality, @subspeciality, @discipline, @work_programm, publication), :remote => true %>
+      <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_publication_path(@year, @speciality, @subspeciality, @discipline, @work_programm, publication), :method => :delete, :confirm => t('are_you_sure?') %>
+    <% end %>
   </td>
 </tr>

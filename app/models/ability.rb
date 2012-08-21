@@ -33,6 +33,10 @@ class Ability
       user.manager_of? Context.first
     end
 
+    can :manage, :goses do
+      user.manager_of? Context.first
+    end
+
     ## methodologist
     can :read, [Speciality, Subspeciality, Discipline, WorkProgramm]
 

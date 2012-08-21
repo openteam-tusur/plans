@@ -11,10 +11,14 @@
             <li><%= item.description %></li>
           <% end %>
         </ul>
-        <%= link_to 'править приложение', [:edit, :manage, @year, @speciality, @subspeciality, @discipline, @work_programm, exercise, :appendix] %>
-        <%= link_to 'удалить приложение', [:manage, @year, @speciality, @subspeciality, @discipline, @work_programm, exercise, :appendix], :confirm => t('are_you_sure?'), :method => :delete %>
+        <% if can? :manage, @work_programm %>
+          <%= link_to 'править приложение', [:edit, :manage, @year, @speciality, @subspeciality, @discipline, @work_programm, exercise, :appendix] %>
+          <%= link_to 'удалить приложение', [:manage, @year, @speciality, @subspeciality, @discipline, @work_programm, exercise, :appendix], :confirm => t('are_you_sure?'), :method => :delete %>
+        <% end %>
       <% else %>
-        <%= link_to '+ приложение', [:new, :manage, @year, @speciality, @subspeciality, @discipline, @work_programm, exercise, :appendix] %>
+        <% if can? :manage, @work_programm %>
+          <%= link_to '+ приложение', [:new, :manage, @year, @speciality, @subspeciality, @discipline, @work_programm, exercise, :appendix] %>
+        <% end %>
       <% end %>
     </div>
   </td>
@@ -22,7 +26,9 @@
     <%= exercise.volume %>
   </td>
   <td>
-    <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_exercise_path(@year, @speciality, @subspeciality, @discipline, @work_programm, exercise), :remote => true %>
-    <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_exercise_path(@year, @speciality, @subspeciality, @discipline, @work_programm, exercise), :method => :delete, :confirm => t('are_you_sure?') %>
+    <% if can? :manage, @work_programm %>
+      <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_exercise_path(@year, @speciality, @subspeciality, @discipline, @work_programm, exercise), :remote => true %>
+      <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_exercise_path(@year, @speciality, @subspeciality, @discipline, @work_programm, exercise), :method => :delete, :confirm => t('are_you_sure?') %>
+    <% end %>
   </td>
 </tr>

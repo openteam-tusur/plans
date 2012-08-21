@@ -13,7 +13,9 @@
     <% end %>
     <tr>
       <td colspan='4' class='noborder right add_exercise_wrapper'>
-        <%= link_to "+ #{t("activerecord.attributes.publication.publication_kind_enum.#{kind}").mb_chars.downcase}", new_manage_year_speciality_subspeciality_discipline_work_programm_publication_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :publication => { :publication_kind => kind }}), :remote => true, :class => 'new_record' %>
+        <% if can? :manage, @work_programm %>
+          <%= link_to "+ #{t("activerecord.attributes.publication.publication_kind_enum.#{kind}").mb_chars.downcase}", new_manage_year_speciality_subspeciality_discipline_work_programm_publication_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :publication => { :publication_kind => kind }}), :remote => true, :class => 'new_record' %>
+        <% end %>
       </td>
     </tr>
   </tbody>

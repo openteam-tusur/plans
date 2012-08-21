@@ -25,10 +25,12 @@
           <div class="work_programm_purpose">
             <%= simple_format @work_programm.purpose %>
           </div>
-          <% if @work_programm.purpose? %>
-            <%= link_to "Редактировать цели", '#', :class => 'add_text purpose' %>
-          <% else %>
-            <%= link_to "Добавить цели", '#', :class => 'add_text purpose' %>
+          <% if can? :manage, @work_programm %>
+            <% if @work_programm.purpose? %>
+              <%= link_to "Редактировать цели", '#', :class => 'add_text purpose' %>
+            <% else %>
+              <%= link_to "Добавить цели", '#', :class => 'add_text purpose' %>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -42,7 +44,9 @@
                 <%= render mission %>
               <% end %>
             </ol>
-            <%= link_to "Добавить задачу", new_manage_year_speciality_subspeciality_discipline_work_programm_mission_path(@year, @speciality, @subspeciality, @discipline, @work_programm), :remote => true, :class => 'new' %>
+            <% if can? :manage, @work_programm %>
+              <%= link_to "Добавить задачу", new_manage_year_speciality_subspeciality_discipline_work_programm_mission_path(@year, @speciality, @subspeciality, @discipline, @work_programm), :remote => true, :class => 'new' %>
+            <% end %>
           </div>
           <div class="work_programm_requirements">
             <h5>По окончанию изучения дисциплины «<%= @discipline %>» студент обязан:</h5>
@@ -71,7 +75,9 @@
             </div>
           <% end %>
         </div>
-        <%= link_to "Изменить список связанных дисциплин", edit_resource_path, :class => 'add_discipline', :remote => true %>
+        <% if can? :manage, @work_programm %>
+          <%= link_to "Изменить список связанных дисциплин", edit_resource_path, :class => 'add_discipline', :remote => true %>
+        <% end %>
       </div>
 
     <h3 class='<%= presentor.indicate_paragraph :exercises_valid %>'>2. Содержание дисциплины<span></span></h3>
