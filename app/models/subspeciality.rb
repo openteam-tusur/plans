@@ -20,7 +20,15 @@ class Subspeciality < ActiveRecord::Base
   delegate :degree, :to => :speciality
   scope :actual, where(:deleted_at => nil)
 
+  scope :consumed_by, ->(user) do
+    subdepartment_ids = user.context_tree.flat_map(&:subdepartment_ids)
+    select('DISTINCT(subspecialities.id), subspecialities.*').
+      joins(:disciplines).
+      where('disciplines.subdepartment_id IN (?) OR subspecialities.subdepartment_id IN (?)', subdepartment_ids, subdepartment_ids)
+  end
+
   delegate :gos, :gos?, :to => :speciality
+  delegate :consumed_by, :to => :disciplines, :prefix => true
 
   def warnings
     warnings = []

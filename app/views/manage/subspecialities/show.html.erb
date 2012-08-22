@@ -20,7 +20,7 @@
 
 <ul class='disciplines list'>
   <% cycles = {} %>
-  <% resource.disciplines.group_by(&:cycle).each do |cycle, disciplines| %>
+  <% resource.disciplines_consumed_by(current_user).group_by(&:cycle).each do |cycle, disciplines| %>
     <% cycles[cycle] = I18n.transliterate(cycle).downcase.gsub(/[^[:alnum:]]+/, '_') %>
     <li>
       <h4 id='<%= cycles[cycle] %>'><%= cycle %></h4>

@@ -4,6 +4,7 @@ class Speciality < ActiveRecord::Base
   belongs_to :year
 
   has_many :subspecialities
+  has_many :disciplines, :through => :subspecialities
   has_many :work_programms
 
   validates_presence_of :code, :title, :degree, :year
@@ -11,6 +12,15 @@ class Speciality < ActiveRecord::Base
   after_save :move_subspeciality_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
 
   default_scope order(:code)
+
+  scope :consumed_by, ->(user) do
+    subdepartment_ids = user.context_tree.flat_map(&:subdepartment_ids)
+    select('DISTINCT(specialities.id), specialities.*').
+      joins(:disciplines).
+      where('disciplines.subdepartment_id IN (?) OR subspecialities.subdepartment_id IN (?)', subdepartment_ids, subdepartment_ids)
+  end
+
+  delegate :consumed_by, :to => :subspecialities, :prefix => true
 
   def to_param
     code
