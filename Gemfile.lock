@@ -91,7 +91,7 @@ GEM
       curb
       rails
     erubis (2.7.0)
-    esp-auth (1.3.3)
+    esp-auth (1.3.4)
       ancestry
       audited-activerecord
       cancan
