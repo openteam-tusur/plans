@@ -2,6 +2,7 @@ class Department < ActiveRecord::Base
   attr_accessible :abbr, :title, :number, :subdepartments_attributes
 
   belongs_to :year
+  belongs_to :context
 
   has_many :subdepartments, :dependent => :destroy
 

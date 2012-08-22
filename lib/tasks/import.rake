@@ -80,6 +80,7 @@ class YearImporter
   def import_departments
     YAML.load_file("data/#{year.number}/departments.yml").each do |department_attributes|
       department = year.departments.find_or_initialize_by_abbr department_attributes['abbr']
+      department.context = Context.find_by_title(department.title)
       refresh department
       subdepartments_attributes = department_attributes.delete('subdepartments')
       department_attributes.delete('chief')
@@ -89,6 +90,7 @@ class YearImporter
         subdepartment_attributes.delete('chief')
         subdepartment.attributes = subdepartment_attributes
         subdepartment.department = department
+        subdepartment.context = Context.find_by_title(subdepartment.title)
         refresh subdepartment
         subdepartment.save!
       end
