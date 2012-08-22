@@ -23,7 +23,7 @@ class Subspeciality < ActiveRecord::Base
   scope :consumed_by, ->(user) do
     subdepartment_ids = user.context_tree.flat_map(&:subdepartment_ids)
     select('DISTINCT(subspecialities.id), subspecialities.*').
-      joins(:disciplines).
+      joins('LEFT OUTER JOIN disciplines ON disciplines.subspeciality_id = subspecialities.id').
       where('disciplines.subdepartment_id IN (?) OR subspecialities.subdepartment_id IN (?)', subdepartment_ids, subdepartment_ids)
   end
 
