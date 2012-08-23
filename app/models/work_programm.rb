@@ -18,7 +18,7 @@ class WorkProgramm < ActiveRecord::Base
   has_many :self_education_item_appendixes, :through => :self_education_items,  :source => :appendix
 
   has_one :subspeciality, :through => :discipline
-
+  has_one :protocol, :dependent => :destroy
 
   has_and_belongs_to_many :related_disciplines, :class_name => Discipline
 
@@ -30,6 +30,7 @@ class WorkProgramm < ActiveRecord::Base
   delegate :has_examinations?, :semesters, :semesters_with_examination, :to => :discipline
 
   after_create :create_requirements
+  after_create :create_protocol
   after_create :generate_work_programm, :if => ->(w) { w.generate.to_i == 1 }
 
   default_value_for(:year) { Time.now.year }
@@ -61,7 +62,7 @@ class WorkProgramm < ActiveRecord::Base
     }
   }
 
-  PART_CLASSES = [Mission, Requirement, Exercise, SelfEducationItem,
+  PART_CLASSES = [Protocol, Mission, Requirement, Exercise, SelfEducationItem,
                   Appendix, Publication, RatingItem, ExaminationQuestion]
 
   def appendixes
@@ -135,6 +136,10 @@ class WorkProgramm < ActiveRecord::Base
 
   # validate methods
 
+  def protocol_valid?
+    protocol.number?
+  end
+
   def purpose_valid?
     !!(purpose.squish != default_purpose && purpose =~ /[[:alnum:]]+/)
   end
@@ -196,7 +201,7 @@ class WorkProgramm < ActiveRecord::Base
   end
 
   def whole_valid?
-    purposes_and_missions_valid? && exercises_valid? && publications_valid? && brs_valid?
+    protocol_valid? && purposes_and_missions_valid? && exercises_valid? && publications_valid? && brs_valid?
   end
 
   def as_json(*options)
@@ -210,6 +215,7 @@ class WorkProgramm < ActiveRecord::Base
   private
     def purposes_and_missions_json
       {
+        :protocol_valid => protocol_valid?,
         :purpose_valid => purpose_valid?,
         :missions_valid => missions_valid?,
         :related_disciplines_valid => related_disciplines_valid?,

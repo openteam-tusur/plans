@@ -9,13 +9,12 @@
 <%= render :partial => 'commons/work_programm_head' %>
 
 <div class="container">
-  <h5>
-    <% if @work_programm.whole_valid? %>
-      <%= link_to "Скачать PDF рабочей программы", resource_path(:format => :pdf)  %>
-    <% else %>
-      <div class='warning'>Вы не можете скачать PDF рабочей программы, потому что не заполнили все пункты.<span></span></div>
-    <% end %>
+  <h5 class='download_link'>
+    <%= link_to "Скачать PDF рабочей программы", resource_path(:format => :pdf), :class => @work_programm.whole_valid? ? 'show' : 'hide' %>
+    <div class='<%= !@work_programm.whole_valid? ? 'show' : 'hide' %> warning'>Вы не можете скачать PDF рабочей программы, потому что не заполнили все пункты.<span></span></div>
   </h5>
+  <%= render :file => 'manage/protocols/index.html.erb' %>
+
   <h2 class='toc'>Содержание</h2>
 
   <h3 class='<%= presentor.indicate_paragraph :purposes_and_missions_valid %>'>1. Цели и задачи дисциплины, ее место в учебном процессе<span></span></h3>

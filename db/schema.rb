@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120822031939) do
+ActiveRecord::Schema.define(:version => 20120822080139) do
 
   create_table "appendix_items", :force => true do |t|
     t.integer  "appendix_id"
@@ -205,6 +205,16 @@ ActiveRecord::Schema.define(:version => 20120822031939) do
 
   add_index "programms", ["with_programm_id"], :name => "index_programms_on_with_programm_id"
   add_index "programms", ["with_programm_type"], :name => "index_programms_on_with_programm_type"
+
+  create_table "protocols", :force => true do |t|
+    t.integer  "work_programm_id"
+    t.string   "number"
+    t.date     "signed_on"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "protocols", ["work_programm_id"], :name => "index_protocols_on_work_programm_id"
 
   create_table "publications", :force => true do |t|
     t.integer  "work_programm_id"

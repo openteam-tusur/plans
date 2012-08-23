@@ -1,0 +1,16 @@
+<tr class='exercise'>
+  <td colspan=2 class='left'>
+    <% if protocol.number? %>
+      <div class='success'>Утверждено на заседании кафедры, протокол №<%= protocol.number %> от <%= l protocol.signed_on %></div>
+    <% else %>
+      <div class='warning'>Не указан протокол заседания кафедры</div>
+    <% end %>
+  </td>
+  <td>
+    <div class='<%= presentor.indicate_paragraph :protocol_valid %>'>
+      <% if can? :manage, @work_programm %>
+        <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_protocol_path(@year, @speciality, @subspeciality, @discipline, @work_programm), :remote => true %>
+      <% end %>
+    </div>
+  </td>
+</tr>

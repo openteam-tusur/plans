@@ -14,7 +14,7 @@ class Manage::WorkProgrammsController < Manage::ApplicationController
     end
   end
 
-  helper_method :title_page, :sign_page, :purposes_and_tasks_page, :presentor
+  helper_method :title_page, :sign_page, :purposes_and_tasks_page
 
   def show
     show! do |format|
@@ -35,10 +35,6 @@ class Manage::WorkProgrammsController < Manage::ApplicationController
   end
 
   private
-    def presentor
-      @presentor ||= WorkProgrammPresentor.new(@work_programm)
-    end
-
     def title_page
       TitlePage.new(@work_programm)
     end

@@ -104,6 +104,10 @@ ru:
       programm:
         description: Описание основной образовательной программы
 
+      protocol:
+        number: Номер протокола
+        signed_on: Дата заседания
+
       publication:
         count: Кол-во экземпляров
         location: Где находится
@@ -186,6 +190,7 @@ ru:
       gos: Государственный образовательный стандарт
       mission: задачу
       programm: программу
+      protocol: протокол
       publication: публикацию
       rating_item: элемент учебной деятельности
       requirement: требование
