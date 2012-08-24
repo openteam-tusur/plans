@@ -1,7 +1,7 @@
 class Person < ActiveRecord::Base
   belongs_to :work_programm
   attr_accessible :academic_degree, :academic_rank, :full_name, :person_kind, :post, :short_name
-  validates_presence_of :full_name, :post, :academic_degree, :academic_rank
+  validates_presence_of :full_name, :post
   attr_accessor :short_name
 
   def self.nil

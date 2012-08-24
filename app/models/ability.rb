@@ -35,9 +35,7 @@ class Ability
 
     ## specific
 
-    can :manage, :all do
-      user.manager_of? Context.first
-    end
+    can :manage, :all if user.manager_of? Context.first
 
     ## methodologist
     can :read, [Speciality, Subspeciality, Discipline, WorkProgramm]
