@@ -8,12 +8,12 @@ describe Department do
   describe "#chief" do
     it "for department fsu in year 2012" do
       department.stub(:abbr).and_return('ФСУ')
-      department.chief(2012).name.should == "Сенченко Павел Васильевич"
+      department.chief(2012).full_name.should == "Сенченко Павел Васильевич"
     end
 
     it "for fsu, 2011" do
       department.stub(:abbr).and_return('ФСУ')
-      department.chief(2011).should == Person::NIL
+      department.chief(2011).should == Person.nil
     end
   end
 end

@@ -10,7 +10,12 @@ describe SignPage do
 
   describe '#authors_header' do
     subject { page.authors_header }
-    let(:authors) { WorkProgramm.new.authors }
+    let(:authors) do
+      [
+        Person.new(:full_name => 'Сидоров Анатолий Анатольевич', :post => 'Доцент каф. АОИ', :academic_degree => 'канд. экон. наук', :academic_rank => 'доцент'),
+        Person.new(:full_name => 'Ехлаков Юрий Поликарпович', :post => 'Зав. кафедрой АОИ', :academic_degree => 'д-р техн. наук', :academic_rank => 'профессор')
+      ]
+    end
 
     context '1 автор' do
       before { work_programm.should_receive(:authors).and_return(authors.tap(&:shift)) }
@@ -20,15 +25,6 @@ describe SignPage do
     context '2 автор' do
       before { work_programm.should_receive(:authors).and_return(authors) }
       it { should == "Разработчики" }
-    end
-  end
-
-  describe '#authors' do
-    describe '#first'  do
-      subject { page.authors.first }
-      its(:post) { should == 'Доцент каф. АОИ' }
-      its(:science_post) { should == 'канд. экон. наук' }
-      its(:short_name) { should == 'Сидоров А.А.' }
     end
   end
 

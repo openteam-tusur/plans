@@ -12,11 +12,9 @@ class Department < ActiveRecord::Base
 
   def chief(year_number)
     departments = YAML.load_file("data/#{year_number}/departments.yml")
-    department_hash = departments.select { |dep_hash| dep_hash['abbr'] == abbr }
-    return Person::NIL unless department_hash
-    department_hash = department_hash[0]
-    return Person::NIL unless department_hash
-    return Person::NIL unless department_hash['chief']
+    department_hash = departments.select { |dep_hash| dep_hash['abbr'] == abbr }.try(:first)
+    return Person.nil unless department_hash
+    return Person.nil unless department_hash['chief']
     Person.new(department_hash['chief'])
   end
 end

@@ -70,26 +70,30 @@
   title:            Факультет систем управления
   abbr:             ФСУ
   chief:
-    name: Сенченко Павел Васильевич
-    post: Декан
-    science_post: канд. техн. наук, доцент
+    full_name:        Сенченко Павел Васильевич
+    post:             Декан
+    academic_degree:  канд. техн. наук
+    academic_rank:    доцент
+
   subdepartments:
     -
-      title:          Кафедра автоматизации обработки информации
-      abbr:           АОИ
-      number:         7
+      title:            Кафедра автоматизации обработки информации
+      abbr:             АОИ
+      number:           7
       chief:
-        name:         Ехлаков Юрий Поликарпович
-        post:         Зав. кафедрой
-        science_post:    д-р техн. наук, профессор
+        full_name:        Ехлаков Юрий Поликарпович
+        post:             Зав. кафедрой
+        academic_degree:  д-р техн. наук
+        academic_rank:    профессор
     -
       title:          Кафедра автоматизированных систем управления
       abbr:           АСУ
       number:         8
       chief:
-        name:         Кориков Анатолий Михайлович
-        post:         Зав. кафедрой
-        science_post:    д-р техн. наук, профессор
+        full_name:        Кориков Анатолий Михайлович
+        post:             Зав. кафедрой
+        academic_degree:  д-р техн. наук
+        academic_rank:    профессор
     -
       title:          Кафедра математики
       abbr:           Математики
