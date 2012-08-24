@@ -8,6 +8,10 @@ class Person < ActiveRecord::Base
     @nil ||= Person.new(:full_name => '-'*10, :post => '-'*10, :short_name => '-'*10)
   end
 
+  def self.chief_of(department)
+    collection_by_department(department).first || Person.nil
+  end
+
   def self.collection_by_department(department)
     (JSON.parse(Requester.new("#{Settings['blue-pages.url']}/categories/#{department.context.id}.json").response_body)['items'] || []).map do |hash|
       Person.new :full_name => hash['person'],
@@ -24,6 +28,10 @@ class Person < ActiveRecord::Base
 
   def short_name
     @short_name ||= "#{full_name.split(' ')[0]} #{full_name.split(' ')[1][0]}.#{full_name.split(' ')[2][0]}."
+  end
+
+  def to_a
+    ["#{post}\n#{[academic_degree, academic_rank].select(&:present?).join(', ')}", "______________", short_name]
   end
 
 end
