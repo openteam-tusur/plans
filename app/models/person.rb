@@ -14,7 +14,6 @@ class Person < ActiveRecord::Base
 
   def as_json(*params)
     super(:except => [:id, :created_at, :updated_at, :work_programm_id, :person_kind, :full_name]).merge :value => full_name,
-      :label => full_name,
-      :desc => post
+      :label => "#{full_name}, #{post.mb_chars.downcase}"
   end
 end
