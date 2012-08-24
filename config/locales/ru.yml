@@ -101,6 +101,12 @@ ru:
       mission:
         description: Описание задачи
 
+      person:
+        full_name: Фамилия Имя Отчество
+        post: Занимаемая должность
+        academic_degree: Ученая степень
+        academic_rank: Ученое звание
+
       programm:
         description: Описание основной образовательной программы
 
@@ -189,6 +195,7 @@ ru:
       exercise: занятие
       gos: Государственный образовательный стандарт
       mission: задачу
+      person: автора
       programm: программу
       protocol: протокол
       publication: публикацию

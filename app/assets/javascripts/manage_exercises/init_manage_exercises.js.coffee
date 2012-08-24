@@ -27,6 +27,7 @@ $.fn.remote_hadler = () ->
       context.closest('tr').replaceWith(jqXHR.responseText)
 
     init_publication_variation() if  $('#publication_location').length
+    init_add_autocomplete() if $('.need_autocomplete').length
     tbody.count_hours()
     init_check_valid()
     init_calculate_total()

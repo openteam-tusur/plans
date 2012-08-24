@@ -1,0 +1,25 @@
+<h3>Авторы рабочей программы</h3>
+<table class='exercises'>
+  <thead>
+    <tr>
+      <th>Фамилия Имя Отчество</th>
+      <th>Должность</th>
+      <th>Ученая степень</th>
+      <th>Ученое звание</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% resource.authors.each do |author| %>
+      <%= render :partial => 'manage/authors/author', :locals => { :author => author } %>
+    <% end %>
+
+    <tr>
+      <td colspan='5' class='noborder right add_exercise_wrapper'>
+        <% if can? :manage, @work_programm %>
+          <%= link_to "+ автора программы", new_manage_year_speciality_subspeciality_discipline_work_programm_author_path(@year, @speciality, @subspeciality, @discipline, @work_programm), :remote => true, :class => 'new_record' %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>

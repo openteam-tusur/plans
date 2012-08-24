@@ -1,21 +1,20 @@
-# -*- SkipSchemaAnnotations
+class Person < ActiveRecord::Base
+  belongs_to :work_programm
+  attr_accessible :academic_degree, :academic_rank, :full_name, :person_kind, :post
+  validates_presence_of :full_name, :post, :academic_degree, :academic_rank
 
-class Person
-  attr_accessor :post, :name, :science_post, :short_name
-
-  def initialize(options)
-    options.each do |field, value|
-      self.send("#{field}=", value)
+  def self.collection_by_department(department)
+    (JSON.parse(Requester.new("#{Settings['blue-pages.url']}/categories/#{department.context.id}.json").response_body)['items'] || []).map do |hash|
+      Person.new :full_name => hash['person'],
+        :post => hash['title'],
+        :academic_degree => hash['academic_degree'],
+        :academic_rank => hash['academic_rank']
     end
   end
 
-  def short_name
-    @short_name ||= "#{name.split(' ')[0]} #{name.split(' ')[1][0]}.#{name.split(' ')[2][0]}."
+  def as_json(*params)
+    super(:except => [:id, :created_at, :updated_at, :work_programm_id, :person_kind, :full_name]).merge :value => full_name,
+      :label => full_name,
+      :desc => post
   end
-
-  def to_a
-    ["#{post}\n#{science_post}", "______________", short_name]
-  end
-
-  NIL = Person.new(:name => '-'*10, :post => '-'*10, :short_name => '-'*10)
 end

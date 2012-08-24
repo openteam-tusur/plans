@@ -6,6 +6,7 @@ class WorkProgramm < ActiveRecord::Base
 
   belongs_to :discipline
 
+  has_many :authors, :class_name => Person, :conditions => { :person_kind => 'author' }, :dependent => :destroy
   has_many :examination_questions,  :dependent => :destroy
   has_many :exercises,              :dependent => :destroy
   has_many :missions,               :dependent => :destroy
@@ -62,19 +63,11 @@ class WorkProgramm < ActiveRecord::Base
     }
   }
 
-  PART_CLASSES = [Protocol, Mission, Requirement, Exercise, SelfEducationItem,
+  PART_CLASSES = [Protocol, Person, Mission, Requirement, Exercise, SelfEducationItem,
                   Appendix, Publication, RatingItem, ExaminationQuestion]
 
   def appendixes
     @appendixes ||= exercise_appendixes + self_education_item_appendixes
-  end
-
-  # FIXME: пока просто заглушка
-  def authors
-    [
-      Person.new(:name => "Сидоров Анатолий Анатольевич", :post => "Доцент каф. АОИ", :science_post => "канд. экон. наук"),
-      Person.new(:name => "Ехлаков Юрий Поликарпович", :post => "Зав. кафедрой АОИ", :science_post => "д-р техн. наук, профессор")
-    ]
   end
 
   def self_education_items_by_semester(semester)

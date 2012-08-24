@@ -8,21 +8,20 @@ Plans::Application.routes.draw do
           resource :programm
           resources :disciplines, :only => [] do
             resources :work_programms do
-              resource :self_education,           :except => :show
-
+              resource  :protocol,                :except => :index
+              resource  :self_education,          :except => :show
               resources :appendixes,              :except => :show
+              resources :authors,                 :except => :index
               resources :dependent_disciplines
               resources :examination_questions,   :except => :index
+              resources :exercises,               :except => :index do
+                resource :appendix,               :except => [:index, :show]
+              end
               resources :missions,                :except => :index
               resources :publications,            :except => :index
-              resource  :protocol,                :except => :index
               resources :rating_items,            :except => :index
               resources :requirements,            :except => [:index, :new, :create]
               resources :self_education_items,    :except => [:index] do
-                resource :appendix,               :except => [:index, :show]
-              end
-
-              resources :exercises,               :except => :index do
                 resource :appendix,               :except => [:index, :show]
               end
             end
