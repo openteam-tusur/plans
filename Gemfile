@@ -3,7 +3,7 @@ source :rubygems
 group :assets do
   gem 'coffee-rails'
   gem 'compass-rails'
-  gem 'jquery-rails'
+  gem 'jquery-rails',         '2.0.2'
   gem 'sass-rails'
   gem 'therubyracer'
   gem 'uglifier'

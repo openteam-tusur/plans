@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class WorkProgramm < ActiveRecord::Base
-  attr_accessible :year, :purpose, :task, :related_discipline_ids, :generate
+  attr_accessible :year, :purpose, :task, :related_discipline_ids, :generate, :vfs_path
   attr_accessor :generate
 
   belongs_to :discipline

@@ -1,6 +1,10 @@
 <%= simple_form_for [:manage, @year, @speciality, @subspeciality, @discipline, @work_programm], :remote => true do | f | %>
   <%= f.input :year, :label => 'Укажите год рабочей программы' %>
   <%= f.input :generate, :as => :boolean, :label => 'Пожалуйста, предзаполните рабочую программу на основании ГОС' %>
+  <div class='add_file_wrapper'>
+    <%= link_to 'Выбрать файл', '#', :class => 'choose_file' %>
+    <%= f.input :vfs_path, :as => :hidden, :input_html => {:params => "vfs_path=/plans/#{@year.number}/#{t(@speciality.degree)}/#{@speciality.code}/#{@subspeciality.subdepartment.abbr}/#{@subspeciality.title}/рабочие программы/"} %>
+  </div>
   <div class="buttons">
     <%= f.submit  %>
     <%= link_to 'Отмена', '#', :class => 'cancel_link' %>

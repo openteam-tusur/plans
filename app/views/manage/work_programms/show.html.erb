@@ -9,6 +9,11 @@
 <%= render :partial => 'commons/work_programm_head' %>
 
 <div class="container">
+  <% if @work_programm.vfs_path? %>
+  <h5 class='download_link'>
+    <%= link_to "Скачать PDF рабочей программы", @work_programm.vfs_path %>
+  </h5>
+  <% else %>
   <h5 class='download_link'>
     <%= link_to "Скачать PDF рабочей программы", resource_path(:format => :pdf), :class => @work_programm.whole_valid? ? 'show' : 'hide' %>
     <div class='<%= !@work_programm.whole_valid? ? 'show' : 'hide' %> warning'>Вы не можете скачать PDF рабочей программы, потому что не заполнили все пункты.<span></span></div>
@@ -215,4 +220,5 @@
         </table>
         <p>Преподаватель имеет право не учитывать набранную студентом сумму баллов до ликвидации студентом текущих долгов по дисциплине (лабораторные работы, практические задания, курсовой проект(работа) и др.).</p>
       </div>
+  <% end %>
 </div>

@@ -10,6 +10,7 @@ cancel_handler = () ->
     if (link = $(evt.target)).is('a')
       link.hide()
       link.after(jqXHR.responseText)
+      init_choose_file()
       cancel_handler()
     else
       if $(jqXHR.responseText).find('.error').length

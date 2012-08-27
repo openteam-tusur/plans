@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120823100428) do
+ActiveRecord::Schema.define(:version => 20120827043149) do
 
   create_table "appendix_items", :force => true do |t|
     t.integer  "appendix_id"
@@ -356,6 +356,7 @@ ActiveRecord::Schema.define(:version => 20120823100428) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.text     "purpose"
+    t.string   "vfs_path"
   end
 
   add_index "work_programms", ["discipline_id"], :name => "index_work_programms_on_discipline_id"
