@@ -133,6 +133,10 @@ class WorkProgramm < ActiveRecord::Base
     protocol.number?
   end
 
+  def authors_valid?
+    authors.any?
+  end
+
   def purpose_valid?
     !!(purpose.squish != default_purpose && purpose =~ /[[:alnum:]]+/)
   end
@@ -194,7 +198,7 @@ class WorkProgramm < ActiveRecord::Base
   end
 
   def whole_valid?
-    protocol_valid? && purposes_and_missions_valid? && exercises_valid? && publications_valid? && brs_valid?
+    protocol_valid? && authors_valid? && purposes_and_missions_valid? && exercises_valid? && publications_valid? && brs_valid?
   end
 
   def as_json(*options)
@@ -209,6 +213,7 @@ class WorkProgramm < ActiveRecord::Base
     def purposes_and_missions_json
       {
         :protocol_valid => protocol_valid?,
+        :authors_valid => authors_valid?,
         :purpose_valid => purpose_valid?,
         :missions_valid => missions_valid?,
         :related_disciplines_valid => related_disciplines_valid?,
