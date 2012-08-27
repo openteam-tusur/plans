@@ -187,6 +187,22 @@ ru:
         current_disciplines:    Совместно идущие дисциплины
         subsequent_disciplines: Последующие дисциплины
         related_disciplines:    Связанные дисциплины
+        lecture_visiting:       Посещение лекций
+        lecture_test:           Выполнение контрольных работ
+        practice_visiting:      Посещение практических занятий
+        practice_practice:      Выполнение практических работ
+        practice_home_work:     Выполнение домашних заданий
+        practice_intime:        Своевременное выполнение практических работ
+        lab_visiting:           Посещение лабораторных занятий
+        lab_lab:                Выполнение лабораторных работ
+        lab_calculation:        Выполнение расчетных работ
+        lab_intime:             Своевременное выполнение лабораторных работ
+        csr_visiting:           Посещение занятий по курсовому проектированию / курсовой работе
+        csr_intime:             Своевременное выполнение курсового проекта / курсовой работы
+        csr_csr:                Защита курсового проекта / курсовой работы
+        exam_theoretical_question1: Теоретический вопрос №1
+        exam_theoretical_question2: Теоретический вопрос №2
+        exam_practic_question: Практический вопрос
 
     models:
       appendix: приложение

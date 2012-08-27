@@ -63,6 +63,35 @@ class WorkProgramm < ActiveRecord::Base
     }
   }
 
+  BRS_WEIGHTS = {
+    :lecture => {
+      :visiting => 4,
+      :test     => 8,
+    },
+    :practice => {
+      :visiting  => 4,
+      :practice  => 8,
+      :home_work => 8,
+      :intime    => 3
+    },
+    :lab => {
+      :visiting => 4,
+      :lab      => 8,
+      :calculation => 12,
+      :intime    => 3
+    },
+    :csr => {
+      :visiting => 5,
+      :intime   => 3,
+      :csr      => 8
+    },
+    :exam => {
+      :theoretical_question1 => 10,
+      :theoretical_question2 => 10,
+      :practic_question => 10
+    }
+  }
+
   PART_CLASSES = [Protocol, Person, Mission, Requirement, Exercise, SelfEducationItem,
                   Appendix, Publication, RatingItem, ExaminationQuestion]
 
@@ -271,6 +300,7 @@ class WorkProgramm < ActiveRecord::Base
     def generate_work_programm
       generate_lectures
       generate_srs
+      generate_brs
     end
 
     def generate_lectures
@@ -332,6 +362,26 @@ class WorkProgramm < ActiveRecord::Base
       end
 
       create_srs(genereated_srs)
+    end
+
+    def generate_brs
+      discipline.loadings.where(:loading_kind => [:lecture, :practice, :lab, :csr, :exam]).each do |loading|
+        BRS_WEIGHTS[loading.loading_kind.to_sym].each do |brs_kind, score|
+          if loading.loading_kind_exam?
+            examination_questions.create! :semester_id => loading.semester.id,
+                                          :question_kind => WorkProgramm.human_attribute_name("#{loading.loading_kind}_#{brs_kind}"),
+                                          :score => score
+
+          else
+            rating_items.create! :semester_id => loading.semester.id,
+              :title => WorkProgramm.human_attribute_name("#{loading.loading_kind}_#{brs_kind}"),
+              :max_begin_1kt => score,
+              :max_1kt_2kt => score,
+              :max_2kt_end => score,
+              :rating_item_kind => loading.loading_kind_csr? ? :csr : :default
+          end
+        end
+      end
     end
 
     def balancerirze(values, total)
