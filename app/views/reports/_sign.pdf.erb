@@ -2,7 +2,7 @@
   <div class="authors">
     <p>Рабочая программа составлена на основании ГОС ВПО
       для специальности <%= sign_page.gos.code %> «<%= sign_page.gos.title %>» утвержденного <%= sign_page.gos.localized_approved_on %>,
-      и утверждена на заседании кафедры «____» ______________ г., протокол № _______</p>
+      и утверждена на заседании кафедры <%= sign_page.protocol_date  %>, протокол № <%= sign_page.protocol_number %></p>
 
     <p class="widthout_indent"><%= sign_page.authors_header %></p>
 

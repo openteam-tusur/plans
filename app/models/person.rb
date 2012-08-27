@@ -31,7 +31,7 @@ class Person < ActiveRecord::Base
   end
 
   def to_a
-    ["#{post}\n#{[academic_degree, academic_rank].select(&:present?).join(', ')}", "______________", short_name]
+    ["#{post}\n#{[academic_degree, academic_rank].select(&:present?).join(', ').mb_chars.downcase}", "______________", short_name]
   end
 
 end
