@@ -5,7 +5,7 @@ class SignPage < Page
   delegate :gos, :to => :speciality
 
   def protocol_date
-    I18n.l(work_programm.protocol.signed_on, :format => "%d %B %Y г.")
+    I18n.l(work_programm.protocol.signed_on, :format => "%d %B %Y г.")
   end
 
   def protocol_number

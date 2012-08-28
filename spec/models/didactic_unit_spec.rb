@@ -14,6 +14,11 @@ describe DidacticUnit do
         let(:content) { "item1. item2\n item3." }
         it { should == [["item1", "item2"], ["item3"]] }
       end
+
+      describe 'by ; inside sentences' do
+        let(:content) { "item1: item2; item3. item4; item5." }
+        it { should == [["item1: item2; item3", "item4"], ["item5"]] }
+      end
     end
   end
 end

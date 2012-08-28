@@ -33,7 +33,7 @@ describe SignPage do
     context 'founded' do
       before { Gos.create! :speciality_code => page.speciality.code, :code => '000', :title => 'ГОС', :approved_on => '01.01.2012'}
       its(:title) { should == 'ГОС' }
-      its(:localized_approved_on) { should == '01.01.2012 г.' }
+      its(:localized_approved_on) { should == '01 января 2012 г.' }
     end
     context 'not founded' do
       its(:title) { should == '--------------------' }

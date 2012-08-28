@@ -9,13 +9,18 @@ class DidacticUnit < ActiveRecord::Base
   alias_attribute :to_s, :discipline
 
   def lecture_themes(totals)
-    all_lecture_themes ||= content.split(/[\n\.]+\s*/)
     lecture_counts = totals.map {|total| (total * all_lecture_themes.count / totals.sum.to_f).ceil }
     lecture_themes = []
     lecture_counts[0..-2].each do |count|
       lecture_themes << all_lecture_themes.shift(count)
     end
     lecture_themes << all_lecture_themes
+  end
+
+  def all_lecture_themes
+    @all_lecture_themes ||= content.split(/[\n\.]+\s*/).flat_map do |unit|
+      unit.match(/:/) ? unit : unit.split(/\s*;+\s*/)
+    end
   end
 end
 

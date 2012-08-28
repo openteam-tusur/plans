@@ -1,4 +1,4 @@
-#encoding: utf-8
+# encoding: utf-8
 
 class Gos < ActiveRecord::Base
   attr_accessible :code, :title, :approved_on, :speciality_code
@@ -14,7 +14,7 @@ class Gos < ActiveRecord::Base
   end
 
   def localized_approved_on
-    approved_on? ? I18n.l(approved_on, :format => '%d %B %Y г.') : '-'*10
+    approved_on? ? I18n.l(approved_on, :format => '%d %B %Y г.') : '-'*10
   end
 
   def speciality_title
