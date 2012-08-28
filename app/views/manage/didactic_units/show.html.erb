@@ -2,14 +2,17 @@
   <%= link_to "&larr;&nbsp;Назад к ГОС'у (#{parent})".html_safe, parent_path %>
 </div>
 
-<h1>Дидактическая единица</h1>
+<h1><%= resource %></h1>
 
 <div class="actions">
   <%= link_to 'Редактировать', edit_resource_path %>
   <%= link_to 'Удалить', [:manage, parent, resource], :confirm => t('are_you_sure?'), :method => :delete %>
 </div>
-<h2><%= resource %></h2>
 
-<p>
-  <%= simple_format resource.content %>
-</p>
+<h2>Дидактические единицы</h2>
+
+<ul>
+  <% resource.all_lecture_themes.each do |theme| %>
+    <li><%= theme %></li>
+  <% end %>
+</ul>
