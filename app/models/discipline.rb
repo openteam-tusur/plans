@@ -48,6 +48,13 @@ class Discipline < ActiveRecord::Base
     semesters_with_examination.include? semester
   end
 
+  def federal?
+    code.split('.').try(:second) == 'Ф'
+  end
+
+  def <=>(other)
+    title <=> other.title
+  end
 end
 
 # == Schema Information

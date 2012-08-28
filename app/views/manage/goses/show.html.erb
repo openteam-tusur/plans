@@ -13,17 +13,21 @@
 <h3>Дата утверждения: <%= l resource.approved_on %></h3>
 <h3>Специальности: <%= resource.speciality_code %> <%= resource.speciality_title %></h3>
 
-<div class="actions">
-  <%= link_to 'Добавить', new_manage_gos_didactic_unit_path(resource) %>
-</div>
 <h4>Дисциплины</h4>
 
 <ul>
-  <% resource.didactic_units.each do |unit| %>
-    <h4>
-      <li class="didactic_unit">
-        <%= link_to unit, [:manage, resource, unit] %>
+  <% Speciality.where(:code => resource.speciality_code).each do |speciality| %>
+    <% speciality.subspecialities.flat_map(&:disciplines).select(&:federal?).sort.each do |discipline| %>
+      <li>
+        <% if unit = resource.didactic_units.where(:discipline => discipline.title).first %>
+          <%= link_to discipline, [:manage, resource, unit] %>
+          <%= discipline.code %>
+        <% else %>
+          <%= discipline %>
+          <%= discipline.code %>
+          <%= link_to 'Добавить', new_manage_gos_didactic_unit_path(resource, :params => { :didactic_unit => { :discipline => discipline.title }}) %>
+        <% end %>
       </li>
-    </h4>
+    <% end %>
   <% end %>
 </ul>
