@@ -66,19 +66,14 @@ class WorkProgramm < ActiveRecord::Base
   BRS_WEIGHTS = {
     :lecture => {
       :visiting => 4,
-      :test     => 8,
     },
     :practice => {
       :visiting  => 4,
       :practice  => 8,
-      :home_work => 8,
-      :intime    => 3
     },
     :lab => {
       :visiting => 4,
       :lab      => 8,
-      :calculation => 12,
-      :intime    => 3
     },
     :csr => {
       :visiting => 5,
@@ -381,6 +376,14 @@ class WorkProgramm < ActiveRecord::Base
               :rating_item_kind => loading.loading_kind_csr? ? :csr : :default
           end
         end
+      end
+      discipline.loadings.where(:loading_kind => [:lecture, :practice, :lab]).pluck('DISTINCT semester_id').each do |semester_id|
+        rating_items.create! :semester_id => semester_id,
+          :title =>  WorkProgramm.human_attribute_name("intime"),
+          :max_begin_1kt => 4,
+          :max_1kt_2kt => 4,
+          :max_2kt_end => 4,
+          :rating_item_kind => :default
       end
     end
 
