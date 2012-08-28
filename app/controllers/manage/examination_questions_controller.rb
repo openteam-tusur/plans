@@ -14,5 +14,9 @@ class Manage::ExaminationQuestionsController < Manage::ApplicationController
   end
 
   layout false
+
+  def destroy
+    destroy! { render :nothing => true and return }
+  end
 end
 

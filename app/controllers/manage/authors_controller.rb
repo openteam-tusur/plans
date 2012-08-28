@@ -23,4 +23,8 @@ class Manage::AuthorsController < Manage::ApplicationController
   def create
     create! { manage_year_speciality_subspeciality_discipline_work_programm_author_path(@year, @speciality, @subspeciality, @discipline, @work_programm, resource) }
   end
+
+  def destroy
+    destroy! { render :nothing => true and return }
+  end
 end

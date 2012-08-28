@@ -17,4 +17,8 @@ class Manage::SelfEducationItemsController < Manage::ApplicationController
   has_scope :semester_id
 
   layout false
+
+  def destroy
+    destroy! { render :nothing => true and return }
+  end
 end

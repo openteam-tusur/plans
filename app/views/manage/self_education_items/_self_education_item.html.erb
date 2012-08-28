@@ -23,7 +23,7 @@
   <td>
     <% if can? :manage, @work_programm %>
       <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_self_education_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, self_education_item), :remote => true %>
-      <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_self_education_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, self_education_item), :method => :delete, :confirm => t('are_you_sure?') %>
+      <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_self_education_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, self_education_item), :remote => true, :method => :delete, :confirm => t('are_you_sure?') %>
     <% end %>
   </td>
 </tr>

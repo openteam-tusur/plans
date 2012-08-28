@@ -3,6 +3,6 @@
 
   <% if can? :manage, @work_programm %>
     <%= link_to "Править", edit_manage_year_speciality_subspeciality_discipline_work_programm_mission_path(@year, @speciality, @subspeciality, @discipline, @work_programm, mission), :remote => true, :class => '' %>
-    <%= link_to "Удалить", manage_year_speciality_subspeciality_discipline_work_programm_mission_path(@year, @speciality, @subspeciality, @discipline, @work_programm, mission), :method => :delete, :confirm => t('are_you_sure?'), :class => '' %>
+    <%= link_to "Удалить", manage_year_speciality_subspeciality_discipline_work_programm_mission_path(@year, @speciality, @subspeciality, @discipline, @work_programm, mission), :remote => true, :method => :delete, :confirm => t('are_you_sure?'), :class => '' %>
   <% end %>
 </li>
