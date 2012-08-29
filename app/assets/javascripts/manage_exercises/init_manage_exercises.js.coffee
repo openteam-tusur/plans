@@ -19,12 +19,20 @@ $.fn.remote_hadler = () ->
     context = $(evt.target)
     tbody = context.closest('tbody')
     new_record = context.hasClass('new_record')
+    didactic_units = context.closest('.exercises').siblings('.didactic_units_wrapper')
 
     if new_record
       context.closest('tr').before(jqXHR.responseText)
 
     else
       context.closest('tr').replaceWith(jqXHR.responseText)
+
+    if didactic_units.length && !$(jqXHR.responseText).find('input').length
+      $.ajax
+        url: window.location.pathname + '/get_didactic_units'
+        dataType: 'html'
+        success: (data, status, jqXHR) ->
+          didactic_units.html(jqXHR.responseText)
 
     init_publication_variation() if  $('#publication_location').length
     init_add_autocomplete() if $('.need_autocomplete').length

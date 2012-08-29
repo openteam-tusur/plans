@@ -8,6 +8,7 @@ Plans::Application.routes.draw do
           resource :programm
           resources :disciplines, :only => [] do
             resources :work_programms do
+              get 'get_didactic_units', :on => :member
               resource  :protocol,                :except => :index
               resource  :self_education,          :except => :show
               resources :appendixes,              :except => :show

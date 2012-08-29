@@ -1,0 +1,8 @@
+<h5>Необходимо наличие следующих дидактических единиц:</h5>
+<ul class='didactic_units'>
+  <% DidacticUnit.joins(:gos).where('goses.speciality_code = ? AND didactic_units.discipline = ?', @speciality.code, @discipline.title).first.all_lecture_themes.each do |theme| %>
+    <li class="<%= @work_programm.didactic_unit_valid?(theme) ? 'success' : 'warning' %>">
+      <%= theme %>
+    </li>
+  <% end %>
+</ul>

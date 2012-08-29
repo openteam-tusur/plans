@@ -5,6 +5,7 @@ require 'open-uri'
 require 'progress_bar'
 require 'nokogiri'
 
+desc 'Импорт дидактических единиц'
 task :parse_goses => :environment do
   goses = Gos.where(:html => nil)
   bar = ProgressBar.new(goses.count)

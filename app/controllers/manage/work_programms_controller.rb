@@ -1,6 +1,8 @@
 class Manage::WorkProgrammsController < Manage::ApplicationController
   inherit_resources
 
+  custom_actions :resource => :get_didactic_units
+
   respond_to :html, :json
   respond_to :pdf, :only => :show
 
@@ -31,6 +33,10 @@ class Manage::WorkProgrammsController < Manage::ApplicationController
                 :footer => { :html => { :template => 'reports/work_programm_footer.pdf.erb' }}
       end
     end
+  end
+
+  def get_didactic_units
+    render :partial => 'manage/work_programms/didactic_units', :layout => false
   end
 
   private

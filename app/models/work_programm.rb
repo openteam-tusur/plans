@@ -177,6 +177,14 @@ class WorkProgramm < ActiveRecord::Base
     purpose_valid? && missions_valid? && related_disciplines_valid?
   end
 
+  def lectures_themes
+    @lectures_themes ||= lectures.flat_map{|l| [l.title, l.description]}.delete_if(&:blank?).join(' ')
+  end
+
+  def didactic_unit_valid?(theme)
+    lectures_themes =~ /#{theme}/
+  end
+
   def exercises_by_semester_and_kind_valid?(semester, kind)
     if kind.to_sym == :srs
       self_education_items_by_semester(semester).map(&:hours).sum == grouped_loadings(kind)[semester].first.value
@@ -318,18 +326,25 @@ class WorkProgramm < ActiveRecord::Base
 
     def generate_lecture_hours(total, lecture_themes)
       average = total / lecture_themes.count
+      if average <= 1
+        lecture_themes = merge_count(lecture_themes, total)
+        average = total / lecture_themes.count
+      end
       lecture_hours = []
       lecture_themes.each do |theme|
-        diff = Random.rand(average / 2)
-        diff = Random.rand(2) if diff.zero?
-        if Random.rand(2).zero?
-          lecture_hours << average + diff
-        else
-          lecture_hours << average - diff
-        end
+        lecture_hours << average
       end
       balancerirze(lecture_hours, total)
       lecture_themes.zip(lecture_hours)
+    end
+
+    def merge_count(lecture_themes, total)
+      counter = lecture_themes.count / total + 1
+      new_lecture_themes = []
+      lecture_themes.each_slice(counter) do |lectures|
+        new_lecture_themes << lectures.join('; ')
+      end
+      new_lecture_themes
     end
 
     def generate_srs
