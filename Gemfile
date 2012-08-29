@@ -25,6 +25,7 @@ group :default do
   gem 'rails'
   gem 'russian'
   gem 'simple_form'
+  gem 'state_machine'
   gem 'wicked_pdf'
 
   # HACK FOR HACK
