@@ -13,15 +13,15 @@ class SelfEducationItem < ActiveRecord::Base
 
   validates_presence_of :semester, :work_programm, :hours, :kind, :control
   validates_numericality_of :hours, :greater_than => 0, :only_integer => true
-  validates_uniqueness_of :kind, :scope => [ :semester_id, :work_programm_id ]
+  validates_uniqueness_of :kind, :scope => [:semester_id, :work_programm_id]
 
   default_scope order('self_education_items.weight, self_education_items.id')
 
   has_enum :control, :multiple => true
 
   FIFTH_ITEM_KINDS = %w[home_work individual_work referat test colloquium calculation]
-
   ALL_KINDS  = %w[lecture lab practice csr home_work individual_work referat test colloquium calculation srs exam]
+
   AVAILABLE_CONTROLS = {
         lecture:          [:quiz, :test, :home_work],
         lab:              [:access, :defence],
@@ -62,7 +62,8 @@ class SelfEducationItem < ActiveRecord::Base
 
     def available_kinds
       kinds = ALL_KINDS
-      kinds -= SelfEducationItem.where(:semester_id => semester_id).where(:work_programm_id => work_programm_id).pluck('kind')
+      kinds -= SelfEducationItem.where(:semester_id => semester_id).where(:work_programm_id => work_programm_id).pluck(:kind)
+      kinds -= (Loading.enums[:loading_kind] - work_programm.discipline.loadings.where(:semester_id => semester_id).pluck(:loading_kind))
       kinds << kind if persisted?
       kinds
     end
