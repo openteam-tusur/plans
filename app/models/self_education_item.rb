@@ -13,6 +13,7 @@ class SelfEducationItem < ActiveRecord::Base
 
   validates_presence_of :semester, :work_programm, :hours, :kind, :control
   validates_numericality_of :hours, :greater_than => 0, :only_integer => true
+  validates_uniqueness_of :kind, :scope => [ :semester_id, :work_programm_id ]
 
   default_scope order('self_education_items.weight, self_education_items.id')
 
@@ -41,8 +42,8 @@ class SelfEducationItem < ActiveRecord::Base
     human_enum_values(:control).keep_if{|key, value| AVAILABLE_CONTROLS[kind.to_sym].include?(key.to_sym) }.invert
   end
 
-  def self.kind_collection_for_select
-    ALL_KINDS.map { |kind|  [self.human_attribute_name(kind), kind] }
+  def kind_collection_for_select
+    available_kinds.map { |kind|  [SelfEducationItem.human_attribute_name(kind), kind] }
   end
 
   def self.control_collection_for_select
@@ -54,8 +55,17 @@ class SelfEducationItem < ActiveRecord::Base
   end
 
   def title
-    self.class.human_attribute_name(kind)
+    SelfEducationItem.human_attribute_name(kind)
   end
+
+  private
+
+    def available_kinds
+      kinds = ALL_KINDS
+      kinds -= SelfEducationItem.where(:semester_id => semester_id).where(:work_programm_id => work_programm_id).pluck('kind')
+      kinds << kind if persisted?
+      kinds
+    end
 end
 
 # == Schema Information
