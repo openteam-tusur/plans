@@ -1,4 +1,4 @@
-<tr class="exercise">
+<tr class="exercise <%= self_education_item.item_valid? ? 'success' : 'warning' %>">
   <td class='left'>
     <div class='title'><%= self_education_item.title %></div>
     <% if self_education_item.appendix %>

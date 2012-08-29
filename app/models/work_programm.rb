@@ -187,7 +187,8 @@ class WorkProgramm < ActiveRecord::Base
 
   def exercises_by_semester_and_kind_valid?(semester, kind)
     if kind.to_sym == :srs
-      self_education_items_by_semester(semester).map(&:hours).sum == grouped_loadings(kind)[semester].first.value
+      self_education_items_by_semester(semester).map(&:hours).sum == grouped_loadings(kind)[semester].first.value &&
+        !self_education_items_by_semester(semester).map(&:item_valid?).include?(false)
     else
       exercises_by_semester_and_kind(semester, kind).map(&:volume).sum == grouped_loadings(kind)[semester].first.value
     end

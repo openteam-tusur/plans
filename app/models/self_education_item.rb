@@ -58,6 +58,10 @@ class SelfEducationItem < ActiveRecord::Base
     SelfEducationItem.human_attribute_name(kind)
   end
 
+  def item_valid?
+    (FIFTH_ITEM_KINDS.include?(kind) && appendix) || !FIFTH_ITEM_KINDS.include?(kind)
+  end
+
   private
 
     def available_kinds
