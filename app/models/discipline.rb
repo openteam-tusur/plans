@@ -55,6 +55,18 @@ class Discipline < ActiveRecord::Base
   def <=>(other)
     title <=> other.title
   end
+
+  def absolute_depth
+    5
+  end
+
+  def esp_to_s
+    "#{subdepartment.abbr} &mdash; #{esp_title}".html_safe
+  end
+
+  def esp_title
+    "#{title} &mdash; #{subspeciality.speciality.code} &mdash; #{subspeciality.title} &mdash; #{subdepartment.department.year}".html_safe
+  end
 end
 
 # == Schema Information
