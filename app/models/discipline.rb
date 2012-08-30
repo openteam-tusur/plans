@@ -67,6 +67,9 @@ class Discipline < ActiveRecord::Base
   def esp_title
     "#{title} &mdash; #{subspeciality.speciality.code} &mdash; #{subspeciality.title} &mdash; #{subdepartment.department.year}".html_safe
   end
+
+  def subdepartment_ids
+  end
 end
 
 # == Schema Information

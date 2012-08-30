@@ -1,6 +1,6 @@
 class Context < ActiveRecord::Base
   attr_accessible :title
-  has_one :subdepartments
+  has_many :subdepartments
   esp_auth_context :subcontext => Subspeciality
 
   has_many :subcontexts, :class_name => Discipline,

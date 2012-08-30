@@ -4,5 +4,4 @@ ru:
       permission:
         role_enum:
           manager:              Менеджер
-          methodologist:        Методист кафедры
           lecturer:             Преподаватель
