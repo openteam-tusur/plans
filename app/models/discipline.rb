@@ -21,10 +21,16 @@ class Discipline < ActiveRecord::Base
   after_save :move_descendants_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
 
   scope :consumed_by, ->(user) do
-    subdepartment_ids = user.context_tree.flat_map(&:subdepartment_ids)
-    select('DISTINCT(disciplines.id), disciplines.*').
-      joins(:subspeciality).
-      where('disciplines.subdepartment_id IN (?) OR subspecialities.subdepartment_id IN (?)', subdepartment_ids, subdepartment_ids)
+    if user.manager?
+      subdepartment_ids = user.context_tree.flat_map(&:subdepartment_ids)
+      select('DISTINCT(disciplines.id), disciplines.*').
+        joins(:subspeciality).
+        where('disciplines.subdepartment_id IN (?) OR subspecialities.subdepartment_id IN (?)', subdepartment_ids, subdepartment_ids)
+    elsif user.lecturer?
+      where(:id => user.disciplines)
+    else
+      where(:id => nil)
+    end
   end
 
   def move_descendants_to_trash

@@ -37,10 +37,6 @@ class Ability
 
     can :manage, :all if user.manager_of? Context.first
 
-    can :manage, Subdepartment do |subdepartment|
-      can? :manage, subdepartment.context
-    end
-
     can :manage, Permission do |permission|
       if permission.context.is_a?(Discipline)
         permission.context.is_a?(Discipline) &&
@@ -49,22 +45,34 @@ class Ability
       end
     end
 
-    can :read, [Speciality, Subspeciality, Discipline, WorkProgramm]
+    can :manage, Subdepartment do |subdepartment|
+      can? :manage, subdepartment.context
+    end
+
+    can :manage, Discipline do |discipline|
+      can? :manage, discipline.subdepartment
+    end
+
+    can :manage, Discipline do |discipline|
+      can? :manage, discipline.subspeciality.subdepartment
+    end
+
+    can :manage, Discipline do |discipline|
+      user.lecturer_of? discipline
+    end
 
     can :manage, Programm do |programm|
-      user.manager_of? programm.with_programm.subdepartment.context
+      can? :manage, programm.with_programm.subdepartment
     end
 
     can :manage, WorkProgramm do |work_programm|
-      user.manager_of? work_programm.discipline.subdepartment.context
-    end
-
-    can :manage, WorkProgramm do |work_programm|
-      user.manager_of? work_programm.discipline.subspeciality.subdepartment.context
+      can? :manage, work_programm.discipline
     end
 
     can :manage, WorkProgramm::PART_CLASSES do |part|
       can? :manage, part.work_programm
     end
+
+    can :read, [Speciality, Subspeciality, Discipline, WorkProgramm]
   end
 end

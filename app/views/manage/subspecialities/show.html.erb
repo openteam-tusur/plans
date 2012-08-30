@@ -8,7 +8,7 @@
 
 <h5 class='programm'>
   <% if resource.programm %>
-    <%= render :file => 'programms/show.html.erb', :locals => { :resource => resource.programm } %>
+    <%= render :file => 'manage/programms/show.html.erb', :locals => { :resource => resource.programm } %>
   <% else %>
     <% if can?(:manage, resource.programm || resource.build_programm) %>
       <%= link_to 'Загрузить основную образовательную программу', new_manage_year_speciality_subspeciality_programm_path(parent.year.number, parent.code, resource), :class => 'add_link', :remote => true %>

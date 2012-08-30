@@ -95,9 +95,11 @@
         <% resource.grouped_loadings(kind).each do |semester, loadings| %>
           <h5 class='<%= "exercises_#{kind}_#{semester.number}_valid" %> <%= @work_programm.exercises_by_semester_and_kind_valid?(semester, kind) ? 'success': 'warning' %> collapsible semester'>2.<%= "#{index}.#{ex_index} #{Exercise.human_attribute_name kind.pluralize}" %> для <%= semester.number %> семестра<span></span></h5>
           <div class="collapsible_wrapper">
-            <div class="didactic_units_wrapper">
-              <%= render :partial => 'manage/work_programms/didactic_units' if kind == 'lecture' %>
-            </div>
+            <% if kind == 'lecture' %>
+              <div class="didactic_units_wrapper">
+                <%= render :partial => 'manage/work_programms/didactic_units' %>
+              </div>
+            <% end %>
             <%= render :file => 'manage/exercises/index', :locals => { :semester => semester, :kind => kind, :loadings => loadings} %>
           </div>
           <% ex_index += 1 %>

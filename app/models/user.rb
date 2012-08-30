@@ -1,7 +1,14 @@
 class User < ActiveRecord::Base
   attr_accessible :id, :uid, :name, :email, :nickname, :first_name, :last_name, :location, :description, :image
   attr_accessible :phone, :urls, :raw_info
+
   esp_auth_user
+
+  def disciplines
+    Discipline.
+      joins("JOIN permissions ON permissions.context_id = disciplines.id AND permissions.context_type = 'Discipline'").
+      where(:permissions => { :user_id => self })
+  end
 end
 
 # == Schema Information

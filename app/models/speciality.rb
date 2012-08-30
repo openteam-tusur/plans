@@ -14,11 +14,17 @@ class Speciality < ActiveRecord::Base
   default_scope order(:code)
 
   scope :consumed_by, ->(user) do
-    subdepartment_ids = user.context_tree.flat_map(&:subdepartment_ids)
-    select('DISTINCT(specialities.id), specialities.*').
-      joins(:subspecialities).
-      joins('LEFT OUTER JOIN disciplines ON disciplines.subspeciality_id = subspecialities.id').
-      where('disciplines.subdepartment_id IN (?) OR subspecialities.subdepartment_id IN (?)', subdepartment_ids, subdepartment_ids)
+    if user.manager?
+      subdepartment_ids = user.context_tree.flat_map(&:subdepartment_ids)
+      select('DISTINCT(specialities.id), specialities.*').
+        joins(:subspecialities).
+        joins('LEFT OUTER JOIN disciplines ON disciplines.subspeciality_id = subspecialities.id').
+        where('disciplines.subdepartment_id IN (?) OR subspecialities.subdepartment_id IN (?)', subdepartment_ids, subdepartment_ids)
+    elsif user.lecturer?
+      where(:id => user.context_tree.map(&:subspeciality).map(&:speciality_id))
+    else
+      where(:id => nil)
+    end
   end
 
   delegate :consumed_by, :to => :subspecialities, :prefix => true
