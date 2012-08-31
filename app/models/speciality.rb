@@ -41,6 +41,14 @@ class Speciality < ActiveRecord::Base
     Gos.where(:speciality_code => code).any?
   end
 
+  def gos2?
+    gos_generation == '2'
+  end
+
+  def gos3?
+    gos_generation == '3'
+  end
+
   private
 
     def move_subspeciality_to_trash
@@ -52,13 +60,14 @@ end
 #
 # Table name: specialities
 #
-#  id         :integer          not null, primary key
-#  code       :string(255)
-#  title      :string(255)
-#  degree     :string(255)
-#  year_id    :integer
-#  deleted_at :datetime
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id             :integer          not null, primary key
+#  code           :string(255)
+#  title          :string(255)
+#  degree         :string(255)
+#  year_id        :integer
+#  deleted_at     :datetime
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  gos_generation :string(255)
 #
 

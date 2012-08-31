@@ -26,5 +26,6 @@ end
 #  max_2kt_end      :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  rating_item_kind :string(255)
 #
 

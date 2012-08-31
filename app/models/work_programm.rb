@@ -27,8 +27,13 @@ class WorkProgramm < ActiveRecord::Base
 
   validates_uniqueness_of :year, :scope => :discipline_id
 
+  validates_presence_of :vfs_path, :if => :gos3?
+
   delegate :disciplines, :to => :subspeciality
   delegate :has_examinations?, :semesters, :semesters_with_examination, :to => :discipline
+  delegate :speciality, :to => :subspeciality
+  delegate :gos2?, :to => :speciality
+  delegate :gos3?, :to => :speciality
 
   after_create :create_requirements
   after_create :create_protocol
@@ -89,6 +94,7 @@ class WorkProgramm < ActiveRecord::Base
 
   PART_CLASSES = [Protocol, Person, Mission, Requirement, Exercise, SelfEducationItem,
                   Appendix, Publication, RatingItem, ExaminationQuestion]
+
 
   def appendixes
     @appendixes ||= exercise_appendixes + self_education_item_appendixes
@@ -440,5 +446,6 @@ end
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  purpose       :text
+#  vfs_path      :string(255)
 #
 

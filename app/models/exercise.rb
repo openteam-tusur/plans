@@ -25,7 +25,7 @@ end
 # Table name: exercises
 #
 #  id               :integer          not null, primary key
-#  title            :string(255)
+#  title            :text
 #  description      :text
 #  volume           :integer
 #  work_programm_id :integer

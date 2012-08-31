@@ -35,3 +35,19 @@ class Person < ActiveRecord::Base
   end
 
 end
+
+# == Schema Information
+#
+# Table name: people
+#
+#  id               :integer          not null, primary key
+#  academic_degree  :text
+#  academic_rank    :text
+#  post             :text
+#  full_name        :text
+#  work_programm_id :integer
+#  person_kind      :string(255)
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
