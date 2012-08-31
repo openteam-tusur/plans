@@ -7,9 +7,11 @@ class Context < ActiveRecord::Base
     :finder_sql => proc { "
         SELECT disciplines.*
         FROM disciplines
-        JOIN subspecialities ON disciplines.subspeciality_id = subspecialities.id
-        JOIN subdepartments ON disciplines.subdepartment_id = subdepartments.id OR subspecialities.subdepartment_id = subdepartments.id
+          JOIN subspecialities ON disciplines.subspeciality_id = subspecialities.id
+          JOIN specialities ON subspecialities.speciality_id = specialities.id
+          JOIN subdepartments ON disciplines.subdepartment_id = subdepartments.id OR subspecialities.subdepartment_id = subdepartments.id
         WHERE subdepartments.context_id = #{id}
+          AND specialities.gos_generation = '2'
         ORDER BY disciplines.title, subspecialities.id
         " }
 end

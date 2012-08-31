@@ -7,7 +7,10 @@ class User < ActiveRecord::Base
   def disciplines
     Discipline.
       joins("JOIN permissions ON permissions.context_id = disciplines.id AND permissions.context_type = 'Discipline'").
-      where(:permissions => { :user_id => self })
+      joins(:subspecialities).
+      joins(:specialities).
+      where(:permissions => { :user_id => self }).
+      where(:specialities => { :gos_generation => '2' })
   end
 end
 
