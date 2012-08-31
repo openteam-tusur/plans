@@ -20,6 +20,8 @@ class Discipline < ActiveRecord::Base
 
   after_save :move_descendants_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
 
+  delegate :speciality, :to => :subspeciality
+
   scope :consumed_by, ->(user) do
     if user.manager?
       subdepartment_ids = user.context_tree.flat_map(&:subdepartment_ids)
@@ -75,6 +77,10 @@ class Discipline < ActiveRecord::Base
   end
 
   def subdepartment_ids
+  end
+
+  def didactic_unit
+    @didactic_unit ||= DidacticUnit.joins(:gos).where('goses.speciality_code = ? AND didactic_units.discipline = ?', speciality.code, title).first
   end
 end
 
