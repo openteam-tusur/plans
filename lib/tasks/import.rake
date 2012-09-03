@@ -25,7 +25,7 @@ module PlanImporter
       cycle_value = discipline_xml['Цикл']
       next unless cycle_value
       cycle_abbr, component = cycle_value.split('.')[0..1]
-      cycle = xml.css("АтрибутыЦиклов Цикл[Аббревиатура='#{cycle_abbr}']", "АтрибутыЦиклов Цикл[Абревиатура=#{cycle_abbr}]")[0]['Название'].squish
+      cycle = xml.css("АтрибутыЦиклов Цикл").select{|c| cycle_abbr == (c['Аббревиатура'] || c['Абревиатура']) }.first['Название'].squish
       discipline.cycle = "#{cycle_abbr}. #{cycle}"
       discipline.summ_loading = discipline_xml['ПодлежитИзучению']
       discipline.summ_srs = discipline_xml['СР']
