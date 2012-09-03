@@ -1,0 +1,35 @@
+
+    #code: "010400.62"
+    #title: "Прикладная математика и информатика"
+    #subspecialities:
+      #-
+        #subdepartment: "АСУ"
+        #title: "Без профиля"
+
+specialty:
+  -
+    code: "080504.65"
+    title: "Государственное и муниципальное управление"
+    subspecialities:
+      -
+        subdepartment: "АОИ"
+        graduate_subdepartment: "АОИ"
+        title: "Без специализации"
+  -
+    code: "230102.65"
+    title: "Автоматизированные системы обработки информации и управления"
+    subspecialities:
+      -
+        subdepartment: "АОИ"
+        graduate_subdepartment: "АСУ"
+        title: "Без специализации"
+
+#magistracy:
+  #-
+    #code: "010400.68"
+    #title: "Прикладная математика и информатика"
+    #subspecialities:
+      #-
+        #subdepartment: "АСУ"
+        #title: "Математическое и программное обеспечение вычислительных комплексов и компьютерных сетей"
+
