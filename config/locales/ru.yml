@@ -196,6 +196,7 @@ ru:
         csr_intime:             Компонент своевременности
         csr_csr:                Защита курсового проекта / курсовой работы
         intime:                 Компонент своевременности
+        editable?:              редактировать
         exam_theoretical_question1: Теоретический вопрос №1
         exam_theoretical_question2: Теоретический вопрос №2
         exam_practic_question: Практический вопрос

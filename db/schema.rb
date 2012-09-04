@@ -357,6 +357,7 @@ ActiveRecord::Schema.define(:version => 20120905070954) do
     t.datetime "updated_at",    :null => false
     t.text     "purpose"
     t.string   "vfs_path"
+    t.string   "state"
   end
 
   add_index "work_programms", ["discipline_id"], :name => "index_work_programms_on_discipline_id"

@@ -23,11 +23,10 @@ class WorkProgramm < ActiveRecord::Base
 
   has_and_belongs_to_many :related_disciplines, :class_name => Discipline
 
+  validate :editable, :unless => :state_changed?
   validates_presence_of :discipline, :year
-
-  validates_uniqueness_of :year, :scope => :discipline_id
-
   validates_presence_of :vfs_path, :if => :gos3?
+  validates_uniqueness_of :year, :scope => :discipline_id
 
   delegate :disciplines, :to => :subspeciality
   delegate :has_examinations?, :semesters, :semesters_with_examination, :to => :discipline
@@ -42,6 +41,34 @@ class WorkProgramm < ActiveRecord::Base
   default_value_for(:year) { Time.now.year }
 
   before_create :set_purpose
+
+  state_machine :initial => :draft do
+    event :shift_up do
+      transition :draft => :check_by_provided_subdivision,
+                 :redux => :check_by_provided_subdivision,
+                 :check_by_provided_subdivision => :check_by_graduated_subdivision,
+                 :check_by_graduated_subdivision => :check_by_library,
+                 :check_by_library => :check_by_methodological_office,
+                 :check_by_methodological_office => :check_by_educational_office,
+                 :check_by_educational_office => :released
+    end
+
+    event :return_to_author do
+      transition all - [:draft, :redux] => :redux
+    end
+
+    state :draft, :redux do
+      def editable
+        true
+      end
+    end
+
+    state all - [:draft, :redux] do
+      def editable
+        errors.add(:base, 'Рабочая программа защищена от изменений и находится на проверке')
+      end
+    end
+  end
 
   SRS_WEIGHTS = {
     :lecture => {
