@@ -1,7 +1,7 @@
 class Manage::WorkProgrammsController < Manage::ApplicationController
   inherit_resources
 
-  custom_actions :resource => :get_didactic_units
+  custom_actions :resource => [:get_didactic_units, :shift_up, :return_to_author]
 
   respond_to :html, :json
   respond_to :pdf, :only => :show
@@ -37,6 +37,16 @@ class Manage::WorkProgrammsController < Manage::ApplicationController
 
   def get_didactic_units
     render :partial => 'manage/work_programms/didactic_units', :layout => false
+  end
+
+  def shift_up
+    resource.shift_up!
+    redirect_to [:manage, association_chain, resource].flatten
+  end
+
+  def return_to_author
+    resource.return_to_author!
+    redirect_to [:manage, association_chain, resource].flatten
   end
 
   private

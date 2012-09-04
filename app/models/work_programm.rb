@@ -50,11 +50,12 @@ class WorkProgramm < ActiveRecord::Base
                  :check_by_graduated_subdivision => :check_by_library,
                  :check_by_library => :check_by_methodological_office,
                  :check_by_methodological_office => :check_by_educational_office,
-                 :check_by_educational_office => :released
+                 :check_by_educational_office => :released,
+                 :if => :whole_valid?
     end
 
     event :return_to_author do
-      transition all - [:draft, :redux] => :redux
+      transition all - [:draft, :redux] => :redux, :if => :whole_valid?
     end
 
     state :draft, :redux do

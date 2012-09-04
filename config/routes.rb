@@ -9,6 +9,8 @@ Plans::Application.routes.draw do
           resources :disciplines, :only => [] do
             resources :work_programms do
               get 'get_didactic_units', :on => :member
+              put 'shift_up', :on => :member
+              put 'return_to_author', :on => :member
               resource  :protocol,                :except => :index
               resource  :self_education,          :except => :show
               resources :appendixes,              :except => :show

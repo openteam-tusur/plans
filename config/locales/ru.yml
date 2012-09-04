@@ -17,6 +17,17 @@ ru:
   edit_didactic_unit: Редактирование дидактической единицы
   update_didactic_unit: Редактирование дидактической единицы
 
+  manage:
+    work_programms:
+      show:
+        check_by_educational_office: Отправить в учебное управление
+        check_by_graduated_subdivision:  Отправить на выпускающую кафедру
+        check_by_library: Отправить в библиотеку
+        check_by_methodological_office: Отправить в методический кабинет
+        check_by_provided_subdivision: Отправить на обеспечивающую кафедру
+        redux: Вернуть на доработку автору программы
+        released: Подтвердить правильность заполнения рабочей программы
+
   activerecord:
     errors:
       models:

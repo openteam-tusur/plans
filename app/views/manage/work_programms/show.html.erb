@@ -10,14 +10,25 @@
 
 <div class="container">
   <% if @work_programm.vfs_path? %>
-  <h5 class='download_link'>
-    <%= link_to "Скачать PDF рабочей программы", @work_programm.vfs_path %>
-  </h5>
+    <h5 class='download_link'>
+      <%= link_to "Скачать PDF рабочей программы", @work_programm.vfs_path %>
+    </h5>
   <% else %>
+    <div class="event_actions">
+      <% resource.state_transitions.each do |transition| %>
+        <%= link_to t(".#{transition.to}"), [transition.event, :manage, association_chain, resource].flatten, :method => :put %>
+      <% end %>
+
+      <% if resource.state_transitions.empty? %>
+        <h5 class='warning'>Вы не можете отправить программу на проверку, потому что не заполнили все пункты.<span></span></h5>
+      <% end %>
+    </div>
+
   <h5 class='download_link'>
     <%= link_to "Скачать PDF рабочей программы", resource_path(:format => :pdf), :class => @work_programm.whole_valid? ? 'show' : 'hide' %>
     <div class='<%= !@work_programm.whole_valid? ? 'show' : 'hide' %> warning'>Вы не можете скачать PDF рабочей программы, потому что не заполнили все пункты.<span></span></div>
   </h5>
+  <br/>
   <%= render :file => 'manage/protocols/index.html.erb' %>
   <%= render :file => 'manage/authors/index.html.erb' %>
 
