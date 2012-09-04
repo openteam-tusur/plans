@@ -40,6 +40,7 @@ end
 group :development do
   gem 'annotate',             '>= 2.5.0.pre'
   gem 'hirb',                 :require => false
+  gem 'ruby-graphviz'
   gem 'sunspot_solr'
 end
 

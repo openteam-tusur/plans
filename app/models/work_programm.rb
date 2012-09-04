@@ -46,16 +46,18 @@ class WorkProgramm < ActiveRecord::Base
     event :shift_up do
       transition :draft => :check_by_provided_subdivision,
                  :redux => :check_by_provided_subdivision,
-                 :check_by_provided_subdivision => :check_by_graduated_subdivision,
+                 :if => :whole_valid?
+
+      transition :check_by_provided_subdivision => :check_by_graduated_subdivision,
                  :check_by_graduated_subdivision => :check_by_library,
                  :check_by_library => :check_by_methodological_office,
                  :check_by_methodological_office => :check_by_educational_office,
                  :check_by_educational_office => :released,
-                 :if => :whole_valid?
+                 :if => :protocol_valid?
     end
 
     event :return_to_author do
-      transition all - [:draft, :redux] => :redux, :if => :whole_valid?
+      transition all - [:draft, :redux] => :redux
     end
 
     state :draft, :redux do
@@ -265,7 +267,7 @@ class WorkProgramm < ActiveRecord::Base
   end
 
   def whole_valid?
-    protocol_valid? && authors_valid? && purposes_and_missions_valid? && exercises_valid? && publications_valid? && brs_valid?
+    authors_valid? && purposes_and_missions_valid? && exercises_valid? && publications_valid? && brs_valid?
   end
 
   def as_json(*options)
