@@ -18,7 +18,7 @@ class DidacticUnit < ActiveRecord::Base
   end
 
   def all_lecture_themes
-    @all_lecture_themes ||= content.split(/[\n\.;]+\s*/).map{|lecture| lecture[0] = lecture[0].mb_chars.upcase; lecture }
+    @all_lecture_themes ||= content.split(/[\n;]+\s*|\.\s*$|\.\s*(?=[А-ЯЁA-Z])/).map{|lecture| lecture[0] = lecture[0].mb_chars.upcase; lecture }
   end
 end
 
