@@ -25,8 +25,8 @@
     </div>
 
   <h5 class='download_link'>
-    <%= link_to "Скачать PDF рабочей программы", resource_path(:format => :pdf), :class => @work_programm.whole_valid? ? 'show' : 'hide' %>
-    <div class='<%= !@work_programm.whole_valid? ? 'show' : 'hide' %> warning'>Вы не можете скачать PDF рабочей программы, потому что не заполнили все пункты.<span></span></div>
+    <%= link_to "Скачать PDF рабочей программы", resource_path(:format => :pdf), :class => @work_programm.released? ? 'show' : 'hide' %>
+    <div class='<%= !@work_programm.released? ? 'show' : 'hide' %> warning'>Вы не можете скачать PDF рабочей программы, потому что она еще не прошла проверку.<span></span></div>
   </h5>
   <br/>
   <%= render :file => 'manage/protocols/index.html.erb' %>

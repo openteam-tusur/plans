@@ -1,5 +1,9 @@
 Plans::Application.routes.draw do
   namespace :manage do
+    get '/messages/:folder' => 'messages#index',
+      :constraints => { :folder => /(drafts|reduxes|releases|checks_by_provided_subdivision|checks_by_graduated_subdivision|checks_by_library|checks_by_methodological_office|checks_by_educational_office)/ },
+      :as => :scoped_messages
+    resources :messages, :only => :show
     resources :years, :only => [] do
       match 'statistics' => 'statistics#index'
 
@@ -37,7 +41,7 @@ Plans::Application.routes.draw do
       resources :didactic_units, :except => :index
     end
 
-    root :to => 'specialities#index', :defaults => { :year_id => (Date.today - 6.month).year }
+    root :to => 'messages#index', :folder => 'drafts'
   end
 
   root :to => 'application#index'

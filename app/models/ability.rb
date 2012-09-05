@@ -73,6 +73,6 @@ class Ability
       can? :manage, part.work_programm
     end
 
-    can :read, [Speciality, Subspeciality, Discipline, WorkProgramm]
+    can :read, [Speciality, Subspeciality, Discipline, WorkProgramm, Message]
   end
 end

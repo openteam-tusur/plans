@@ -1,14 +1,16 @@
 # encoding: utf-8
 
 class WorkProgramm < ActiveRecord::Base
-  attr_accessible :year, :purpose, :task, :related_discipline_ids, :generate, :vfs_path
-  attr_accessor :generate
+  attr_accessible :year, :purpose, :task, :related_discipline_ids, :generate, :vfs_path, :creator_id
+  attr_accessor :generate, :message_text
 
   belongs_to :discipline
+  belongs_to :creator, :class_name => User
 
   has_many :authors, :class_name => Person, :conditions => { :person_kind => 'author' }, :dependent => :destroy
   has_many :examination_questions,  :dependent => :destroy
   has_many :exercises,              :dependent => :destroy
+  has_many :messages,               :dependent => :destroy
   has_many :missions,               :dependent => :destroy
   has_many :publications,           :dependent => :destroy
   has_many :rating_items,           :dependent => :destroy
@@ -37,12 +39,27 @@ class WorkProgramm < ActiveRecord::Base
   after_create :create_requirements
   after_create :create_protocol
   after_create :generate_work_programm, :if => ->(w) { w.generate.to_i == 1 }
+  after_create :create_new_message
 
   default_value_for(:year) { Time.now.year }
 
   before_create :set_purpose
 
+  scope :consumed_by, ->(user){ WorkProgramm.joins(:discipline).where(:disciplines => {:id => Discipline.consumed_by(user).map(&:id)}) }
+
+  scope :drafts,                          ->(user){ with_state(:draft).where(:creator_id => user.id) }
+  scope :reduxes,                         ->(user){ with_state(:redux).where(:creator_id => user.id) }
+  scope :releases,                        ->(user){ consumed_by(user).with_state(:released) }
+  scope :checks_by_provided_subdivision,  ->(user){ consumed_by(user).with_state(:check_by_provided_subdivision) }
+  scope :checks_by_graduated_subdivision, ->(user){ consumed_by(user).with_state(:check_by_graduated_subdivision) }
+  scope :checks_by_library,               ->(user){ consumed_by(user).with_state(:check_by_library) }
+  scope :checks_by_methodological_office, ->(user){ consumed_by(user).with_state(:check_by_methodological_office) }
+  scope :checks_by_educational_office,    ->(user){ consumed_by(user).with_state(:check_by_educational_office) }
+
   state_machine :initial => :draft do
+    after_transition :move_messages_to_archive
+    after_transition :create_new_message
+
     event :shift_up do
       transition :draft => :check_by_provided_subdivision,
                  :redux => :check_by_provided_subdivision,
@@ -187,6 +204,14 @@ class WorkProgramm < ActiveRecord::Base
     examination_questions.where(semester_id: semester)
   end
 
+  def move_messages_to_archive
+    messages.each(&:read!)
+  end
+
+  def create_new_message
+    messages.create!(:text => message_text)
+  end
+
   # validate methods
 
   def protocol_valid?
@@ -218,7 +243,7 @@ class WorkProgramm < ActiveRecord::Base
   end
 
   def didactic_unit_valid?(theme)
-    lectures_themes =~ /#{theme}/
+    lectures_themes.include? theme
   end
 
   def exercises_by_semester_and_kind_valid?(semester, kind)
@@ -276,6 +301,10 @@ class WorkProgramm < ActiveRecord::Base
                                             .merge(exercises_json)
                                             .merge(publications_json)
                                             .merge(brs_json)
+  end
+
+  def to_s
+    "Рабочая программа для дисциплины &laquo;#{discipline}&raquo; #{year} года набора".html_safe
   end
 
   private

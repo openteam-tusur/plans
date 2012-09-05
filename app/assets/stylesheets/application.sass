@@ -144,6 +144,7 @@ a
         text-align: center
 
 .main_wrapper
+  +clearfix
   padding: 25px 15px
 
   .top_nav
@@ -422,3 +423,43 @@ a
         &.success
           background: #EBF4EB
 
+  .folder_navigation
+    width: 280px
+
+    ul
+      li
+        padding: 1px 5px
+
+        span
+          float: right
+
+        &.active
+          background: #efffd5
+
+  .message_list
+    ul
+      li
+        background: #fdfdfd
+        border-top: 1px solid #e2e3e5
+        padding: 5px 10px
+
+        a
+          font-weight: bold
+
+        .state
+          display: block
+          font-size: 0.8em
+          font-style: italic
+
+        .info
+          font-size: 0.9em
+
+          span
+            display: block
+
+  .left_side
+    float: left
+
+  .right_side
+    +clearfix
+    padding: 0 40px

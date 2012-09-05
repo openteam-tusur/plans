@@ -1,0 +1,19 @@
+<div class="left_side">
+  <div class="folder_navigation">
+    <ul>
+      <% %w(drafts reduxes checks_by_provided_subdivision checks_by_graduated_subdivision checks_by_library checks_by_methodological_office checks_by_educational_office releases).each do |folder| %>
+        <li class=<%= (params[:folder] && params[:folder] == folder) ? 'active' : 'not_active' %>>
+          <%= link_to "#{t(folder)} <span>#{Message.send(folder, current_user).unreaded.size}</span>".html_safe, manage_scoped_messages_path(:folder => folder) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="right_side">
+  <div class="message_list">
+    <ul>
+      <%= render collection %>
+    </ul>
+  </div>
+</div>

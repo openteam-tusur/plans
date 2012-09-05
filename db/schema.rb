@@ -175,6 +175,16 @@ ActiveRecord::Schema.define(:version => 20120905070954) do
   add_index "loadings", ["discipline_id"], :name => "index_loadings_on_discipline_id"
   add_index "loadings", ["semester_id"], :name => "index_loadings_on_semester_id"
 
+  create_table "messages", :force => true do |t|
+    t.text     "text"
+    t.boolean  "readed"
+    t.integer  "work_programm_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "messages", ["work_programm_id"], :name => "index_messages_on_work_programm_id"
+
   create_table "missions", :force => true do |t|
     t.text     "description"
     t.integer  "work_programm_id"
@@ -358,6 +368,7 @@ ActiveRecord::Schema.define(:version => 20120905070954) do
     t.text     "purpose"
     t.string   "vfs_path"
     t.string   "state"
+    t.integer  "creator_id"
   end
 
   add_index "work_programms", ["discipline_id"], :name => "index_work_programms_on_discipline_id"

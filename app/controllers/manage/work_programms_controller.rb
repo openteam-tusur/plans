@@ -3,6 +3,8 @@ class Manage::WorkProgrammsController < Manage::ApplicationController
 
   custom_actions :resource => [:get_didactic_units, :shift_up, :return_to_author]
 
+  before_filter :set_creator, :only => :create
+
   respond_to :html, :json
   respond_to :pdf, :only => :show
 
@@ -60,5 +62,9 @@ class Manage::WorkProgrammsController < Manage::ApplicationController
 
     def purposes_and_tasks_page
       PurposesAndTasksPage.new(@work_programm)
+    end
+
+    def set_creator
+      resource.creator_id = current_user.id
     end
 end
