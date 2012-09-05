@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120831030918) do
+ActiveRecord::Schema.define(:version => 20120905070954) do
 
   create_table "appendix_items", :force => true do |t|
     t.integer  "appendix_id"
@@ -109,7 +109,6 @@ ActiveRecord::Schema.define(:version => 20120831030918) do
     t.datetime "updated_at",       :null => false
     t.integer  "summ_loading"
     t.integer  "summ_srs"
-    t.string   "code"
     t.string   "cycle_code"
   end
 

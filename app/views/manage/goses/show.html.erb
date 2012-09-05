@@ -21,10 +21,10 @@
       <li>
         <% if unit = resource.didactic_units.where(:discipline => discipline.title).first %>
           <%= link_to discipline, [:manage, resource, unit] %>
-          <%= discipline.code %>
+          <%= discipline.cycle_code %>
         <% else %>
           <%= discipline %>
-          <%= discipline.code %>
+          <%= discipline.cycle_code %>
           <%= link_to 'Добавить', new_manage_gos_didactic_unit_path(resource, :params => { :didactic_unit => { :discipline => discipline.title }}) %>
         <% end %>
       </li>

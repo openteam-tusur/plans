@@ -58,7 +58,7 @@ class Discipline < ActiveRecord::Base
   end
 
   def federal?
-    code.split('.').try(:second) == 'Ф'
+    cycle_code.split('.').try(:second) == 'Ф'
   end
 
   def <=>(other)
@@ -99,7 +99,6 @@ end
 #  updated_at       :datetime         not null
 #  summ_loading     :integer
 #  summ_srs         :integer
-#  code             :string(255)
 #  cycle_code       :string(255)
 #
 
