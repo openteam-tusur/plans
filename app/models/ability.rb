@@ -66,7 +66,15 @@ class Ability
     end
 
     can :manage, WorkProgramm do |work_programm|
-      can? :manage, work_programm.discipline
+      can?(:manage, work_programm.discipline) && (work_programm.draft? || work_programm.redux?)
+    end
+
+    can [:shift_up, :return_to_author], WorkProgramm do |work_programm|
+      can?(:manage, work_programm.discipline)
+    end
+
+    can :manage, Protocol do |protocol|
+      can?(:manage, protocol.work_programm.discipline.subdepartment) && protocol.work_programm.check_by_provided_subdivision?
     end
 
     can :manage, WorkProgramm::PART_CLASSES do |part|

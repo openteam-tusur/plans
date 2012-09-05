@@ -3,6 +3,8 @@ class Message < ActiveRecord::Base
   attr_accessible :readed, :text
   default_value_for :readed, false
 
+  before_create :set_work_programm_state
+
   scope :unreaded,                        where(:readed => false)
 
   scope :drafts,                          ->(user){ unreaded.where(:work_programm_id => WorkProgramm.drafts(user)) }
@@ -22,4 +24,9 @@ class Message < ActiveRecord::Base
     self.readed = true
     self.save!
   end
+
+  private
+    def set_work_programm_state
+      self.work_programm_state = I18n.t("message.#{work_programm.state}")
+    end
 end

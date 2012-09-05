@@ -179,8 +179,9 @@ ActiveRecord::Schema.define(:version => 20120905070954) do
     t.text     "text"
     t.boolean  "readed"
     t.integer  "work_programm_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "work_programm_state"
   end
 
   add_index "messages", ["work_programm_id"], :name => "index_messages_on_work_programm_id"

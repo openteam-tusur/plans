@@ -27,14 +27,14 @@ ru:
   releases: Утвержденные
 
   message:
-    check_by_educational_office: Рабочая прогрмма на проверке в учебном управлении
-    check_by_graduated_subdivision: Рабочая прогрмма на проверке на выпускающей кафедре
-    check_by_library: Рабочая прогрмма на проверке в библиотеке
-    check_by_methodological_office: Рабочая прогрмма на проверке в методическом кабинете
-    check_by_provided_subdivision: Рабочая прогрмма на проверке на обеспечивающей кафедре
+    check_by_educational_office: Рабочая программа на проверке в учебном управлении
+    check_by_graduated_subdivision: Рабочая программа на проверке на выпускающей кафедре
+    check_by_library: Рабочая программа на проверке в библиотеке
+    check_by_methodological_office: Рабочая программа на проверке в методическом кабинете
+    check_by_provided_subdivision: Рабочая программа на проверке на обеспечивающей кафедре
     draft: Создана новая рабочая программа
-    reduxe: Рабочая программа возвращена автору
-    release: Рабочая программа утверждена
+    redux: Рабочая программа возвращена автору
+    released: Рабочая программа утверждена
 
   manage:
     work_programms:

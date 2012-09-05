@@ -8,6 +8,14 @@
 
 <%= render :partial => 'commons/work_programm_head' %>
 
+<div>
+  <ul>
+    <% @work_programm.messages.each do |message| %>
+      <li><%= l message.created_at, :format => :short %> <%= message.work_programm_state %></li>
+    <% end %>
+  </ul>
+</div>
+
 <div class="container">
   <% if @work_programm.vfs_path? %>
     <h5 class='download_link'>
