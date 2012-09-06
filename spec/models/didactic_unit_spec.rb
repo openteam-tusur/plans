@@ -7,16 +7,20 @@ describe DidacticUnit do
     describe 'should split items' do
       describe 'by paragraph' do
         let(:content) { "item1\n \nitem2" }
-        it { should == [["Item1", "Item2"], []] }
+        it { should == [["Item1"], ["Item2"]] }
       end
 
       describe 'by . inside paragraphs' do
-        let(:content) { "item1. item2\n item3." }
+        let(:content) { "Item1. Item2\n Item3." }
         it { should == [["Item1", "Item2"], ["Item3"]] }
+        context 'sentences with abbreviated verbs must not be splitted' do
+          let(:content) { "Item1. item2\n Item3." }
+          it { should == [["Item1. item2"], ["Item3"]] }
+        end
       end
 
       describe 'by ; inside sentences' do
-        let(:content) { "item1: item2; item3. item4; item5." }
+        let(:content) { "item1: item2; item3. Item4; item5." }
         it { should == [["Item1: item2", "Item3", "Item4"], ["Item5"]] }
       end
     end

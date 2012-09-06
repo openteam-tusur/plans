@@ -10,11 +10,12 @@ class DidacticUnit < ActiveRecord::Base
 
   def lecture_themes(totals)
     lecture_counts = totals.map {|total| (total * all_lecture_themes.count / totals.sum.to_f).ceil }
-    lecture_themes = []
-    lecture_counts[0..-2].each do |count|
-      lecture_themes << all_lecture_themes.shift(count)
+    [].tap do |lecture_themes|
+      lecture_counts[0..-2].each do |count|
+        lecture_themes << all_lecture_themes.shift([count, all_lecture_themes.count - 1].min)
+      end
+      lecture_themes << all_lecture_themes
     end
-    lecture_themes << all_lecture_themes
   end
 
   def all_lecture_themes
