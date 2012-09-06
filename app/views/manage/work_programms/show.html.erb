@@ -125,6 +125,7 @@
       <% resource.grouped_loadings(:srs).each do |semester, loadings| %>
         <h5 class='<%= presentor.indicate_paragraph "exercises_srs_#{semester.number}_valid" %> collapsible semester'>2.5.<%= index %> Самостоятельная работа для <%= semester.number %> семестра<span></span></h5>
         <div class="collapsible_wrapper">
+          <div style='margin: 15px 0;'>Некоторые виды самостоятельной работы требуют наличия приложения</div>
           <%= render :file => 'manage/self_education_items/index', :locals => { :semester => semester, :loadings => loadings, :index => index } %>
         </div>
         <% index += 1 %>
