@@ -13,14 +13,14 @@ describe PurposesAndTasksPage do
     subject { page.dependencies }
 
     it { should =~ /Дисциплина «Учебная дисциплина»/ }
-    it { should =~ /цикл «ЕСН.Ф.0»/ }
+    it { should =~ /цикл «ЕСН.Ф»/ }
     it { should =~ /по направлению «Специальность подготовки»/ }
   end
 
   def mock_disciplines(kind, disciplines_count)
     disciplines = []
     (1..disciplines_count).each do |discipline_number|
-      disciplines << Fabricate(:discipline, :title => "Дисциплина #{discipline_number}", :code => "ЕСН.Ф.#{discipline_number}")
+      disciplines << Fabricate(:discipline, :title => "Дисциплина #{discipline_number}", :cycle_code => "ЕСН.Ф")
     end
     work_programm.should_receive(kind).any_number_of_times.and_return(disciplines)
   end
@@ -33,11 +33,11 @@ describe PurposesAndTasksPage do
     end
     context 'одна дисциплина' do
       before { mock_disciplines :previous_disciplines, 1 }
-      it { should == 'Изучение дисциплины базируется на материалах курса «Дисциплина 1» (ЕСН.Ф.1).' }
+      it { should == 'Изучение дисциплины базируется на материалах курса «Дисциплина 1» (ЕСН.Ф).' }
     end
     context 'две дисциплины' do
       before { mock_disciplines :previous_disciplines, 2 }
-      it { should == 'Изучение дисциплины базируется на материалах таких курсов как «Дисциплина 1» (ЕСН.Ф.1), «Дисциплина 2» (ЕСН.Ф.2).' }
+      it { should == 'Изучение дисциплины базируется на материалах таких курсов как «Дисциплина 1» (ЕСН.Ф), «Дисциплина 2» (ЕСН.Ф).' }
     end
   end
 
@@ -49,11 +49,11 @@ describe PurposesAndTasksPage do
     end
     context 'одна дисциплина' do
       before { mock_disciplines :current_disciplines, 1 }
-      it { should == 'При освоении данной дисциплины компетенции одновременно формируются с дисциплиной «Дисциплина 1» (ЕСН.Ф.1).' }
+      it { should == 'При освоении данной дисциплины компетенции одновременно формируются с дисциплиной «Дисциплина 1» (ЕСН.Ф).' }
     end
     context 'две дисциплины' do
       before { mock_disciplines :current_disciplines, 2 }
-      it { should == 'При освоении данной дисциплины компетенции одновременно формируются с дисциплинами «Дисциплина 1» (ЕСН.Ф.1), «Дисциплина 2» (ЕСН.Ф.2).' }
+      it { should == 'При освоении данной дисциплины компетенции одновременно формируются с дисциплинами «Дисциплина 1» (ЕСН.Ф), «Дисциплина 2» (ЕСН.Ф).' }
     end
   end
 
@@ -65,11 +65,11 @@ describe PurposesAndTasksPage do
     end
     context 'одна дисциплина' do
       before { mock_disciplines :subsequent_disciplines, 1 }
-      it { should == 'Она является основой для изучения дисциплины «Дисциплина 1» (ЕСН.Ф.1).' }
+      it { should == 'Она является основой для изучения дисциплины «Дисциплина 1» (ЕСН.Ф).' }
     end
     context 'две дисциплины' do
       before { mock_disciplines :subsequent_disciplines, 2 }
-      it { should == 'Она является основой для изучения следующих дисциплин: «Дисциплина 1» (ЕСН.Ф.1), «Дисциплина 2» (ЕСН.Ф.2).' }
+      it { should == 'Она является основой для изучения следующих дисциплин: «Дисциплина 1» (ЕСН.Ф), «Дисциплина 2» (ЕСН.Ф).' }
     end
   end
 end
