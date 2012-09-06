@@ -12,6 +12,10 @@
     <%= t("message.#{message.work_programm.state}") %>
   </span>
 
+  <span class="text">
+    <%= message.text %>
+  </span>
+
   <span class="info">
     <span>
       <%= message.work_programm.subspeciality.subdepartment.abbr %>
@@ -24,6 +28,4 @@
       <%= message.work_programm.subspeciality.title %>
     </span>
   </span>
-
-  <%= message.text %>
 </li>
