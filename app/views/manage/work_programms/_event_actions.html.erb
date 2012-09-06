@@ -1,0 +1,14 @@
+<% resource.state_transitions.each do |transition| %>
+  <%= semantic_form_for resource, :url => [transition.event, :manage, association_chain, resource].flatten do |f| %>
+    <%= f.inputs do %>
+      <%= f.input :message_text, :as => :text %>
+    <% end %>
+    <div class='buttons'>
+      <%= f.button t("manage.work_programm.#{transition.to}") %>
+    </div>
+  <% end %>
+<% end %>
+
+<% if resource.state_transitions.empty? %>
+  <h5 class='warning'>Вы не можете отправить программу на проверку, потому что не заполнили все пункты.<span></span></h5>
+<% end %>

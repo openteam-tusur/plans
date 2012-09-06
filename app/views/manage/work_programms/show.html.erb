@@ -23,15 +23,8 @@
     </h5>
   <% else %>
     <div class="event_actions">
-      <% resource.state_transitions.each do |transition| %>
-        <%= link_to t(".#{transition.to}"), [transition.event, :manage, association_chain, resource].flatten, :method => :put %>
-      <% end %>
-
-      <% if resource.state_transitions.empty? %>
-        <h5 class='warning'>Вы не можете отправить программу на проверку, потому что не заполнили все пункты.<span></span></h5>
-      <% end %>
+      <%= render :partial => 'event_actions' %>
     </div>
-
   <h5 class='download_link'>
     <%= link_to "Скачать PDF рабочей программы", resource_path(:format => :pdf), :class => @work_programm.released? ? 'show' : 'hide' %>
     <div class='<%= !@work_programm.released? ? 'show' : 'hide' %> warning'>Вы не можете скачать PDF рабочей программы, потому что она еще не прошла проверку.<span></span></div>

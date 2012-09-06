@@ -11,3 +11,10 @@
       else
         target.addClass('warning')
         target.removeClass('success')
+
+    $.ajax(
+      url: window.location.pathname + '/get_event_actions'
+      dataType: 'html'
+      success: (data, status, jqXHR) ->
+        $('.event_actions').html(jqXHR.responseText)
+    )

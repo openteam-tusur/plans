@@ -1,7 +1,7 @@
 class Manage::WorkProgrammsController < Manage::ApplicationController
   inherit_resources
 
-  custom_actions :resource => [:get_didactic_units, :shift_up, :return_to_author]
+  custom_actions :resource => [:get_didactic_units, :get_event_actions, :shift_up, :return_to_author]
 
   before_filter :set_creator, :only => :create
 
@@ -41,12 +41,18 @@ class Manage::WorkProgrammsController < Manage::ApplicationController
     render :partial => 'manage/work_programms/didactic_units', :layout => false
   end
 
+  def get_event_actions
+    render :partial => 'manage/work_programms/event_actions', :layout => false
+  end
+
   def shift_up
+    resource.message_text = params[:work_programm][:message_text]
     resource.shift_up!
     redirect_to [:manage, association_chain, resource].flatten
   end
 
   def return_to_author
+    resource.message_text = params[:work_programm][:message_text]
     resource.return_to_author!
     redirect_to [:manage, association_chain, resource].flatten
   end

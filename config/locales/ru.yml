@@ -37,15 +37,14 @@ ru:
     released: Рабочая программа утверждена
 
   manage:
-    work_programms:
-      show:
-        check_by_educational_office: Отправить в учебное управление
-        check_by_graduated_subdivision:  Отправить на выпускающую кафедру
-        check_by_library: Отправить в библиотеку
-        check_by_methodological_office: Отправить в методический кабинет
-        check_by_provided_subdivision: Отправить на обеспечивающую кафедру
-        redux: Вернуть на доработку автору программы
-        released: Подтвердить правильность заполнения рабочей программы
+    work_programm:
+      check_by_educational_office: Отправить в учебное управление
+      check_by_graduated_subdivision:  Отправить на выпускающую кафедру
+      check_by_library: Отправить в библиотеку
+      check_by_methodological_office: Отправить в методический кабинет
+      check_by_provided_subdivision: Отправить на обеспечивающую кафедру
+      redux: Вернуть на доработку автору программы
+      released: Подтвердить правильность заполнения рабочей программы
 
   activerecord:
     errors:
@@ -229,7 +228,8 @@ ru:
         editable?:              редактировать
         exam_theoretical_question1: Теоретический вопрос №1
         exam_theoretical_question2: Теоретический вопрос №2
-        exam_practic_question: Практический вопрос
+        exam_practic_question:  Практический вопрос
+        message_text:           Сообщение
 
     models:
       appendix: приложение
