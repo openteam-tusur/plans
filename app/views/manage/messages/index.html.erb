@@ -12,8 +12,12 @@
 
 <div class="right_side">
   <div class="message_list">
-    <ul>
-      <%= render collection %>
-    </ul>
+    <% if collection.any? %>
+      <ul>
+        <%= render collection %>
+      </ul>
+    <% else %>
+      <div style='text-align: center; margin-top: 40px; color: #999;'>Нет cообщений</div>
+    <% end %>
   </div>
 </div>
