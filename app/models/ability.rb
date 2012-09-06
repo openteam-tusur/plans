@@ -66,11 +66,19 @@ class Ability
     end
 
     can :manage, WorkProgramm do |work_programm|
-      can?(:manage, work_programm.discipline) && (work_programm.draft? || work_programm.redux?)
+      work_programm.new_record? && can?(:manage, work_programm.discipline)
+    end
+
+    can :manage, WorkProgramm do |work_programm|
+      work_programm.creator == user && work_programm.draft_or_redux?
+    end
+
+    can :shift_up, WorkProgramm do |work_programm|
+      work_programm.draft_or_redux? && work_programm.creator == user
     end
 
     can [:shift_up, :return_to_author], WorkProgramm do |work_programm|
-      can?(:manage, work_programm.discipline)
+      work_programm.check_by_provided_subdivision? && can?(:manage, work_programm.discipline.subdepartment)
     end
 
     can :manage, Protocol do |protocol|

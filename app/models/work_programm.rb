@@ -307,6 +307,10 @@ class WorkProgramm < ActiveRecord::Base
     "Рабочая программа для дисциплины &laquo;#{discipline}&raquo; #{year} года набора".html_safe
   end
 
+  def draft_or_redux?
+    draft? || redux?
+  end
+
   private
     def purposes_and_missions_json
       {
