@@ -95,10 +95,10 @@ describe Ability do
   end
 
   context 'менеджер кафедры' do
-    let(:user) { manager_of(child_1) }
+    let(:user) { manager_of(provided_context) }
 
     context 'управление ООП' do
-      let(:user) { manager_of(child_2) }
+      let(:user) { manager_of(graduated_context) }
       it { should     be_able_to(:manage, subspeciality.build_programm) }
       it { should_not be_able_to(:manage, another_subspeciality.build_programm) }
     end
@@ -141,5 +141,41 @@ describe Ability do
     it { should_not be_able_to(:return_to_author, check_by_educational_office) }
     it { should_not be_able_to(:shift_up,         released) }
     it { should_not be_able_to(:return_to_author, released) }
+  end
+
+  context 'сотрудник библиотеки' do
+    let(:user) { librarian_of(root) }
+    it { should_not be_able_to(:shift_up,         draft) }
+    it { should_not be_able_to(:shift_up,         redux) }
+    it { should_not be_able_to(:shift_up,         check_by_provided_subdivision) }
+    it { should_not be_able_to(:return_to_author, check_by_provided_subdivision) }
+    it { should_not be_able_to(:shift_up,         check_by_graduated_subdivision) }
+    it { should_not be_able_to(:return_to_author, check_by_graduated_subdivision) }
+    it { should     be_able_to(:shift_up,         check_by_library) }
+    it { should     be_able_to(:return_to_author, check_by_library) }
+    it { should_not be_able_to(:shift_up,         check_by_methodological_office) }
+    it { should_not be_able_to(:return_to_author, check_by_methodological_office) }
+    it { should_not be_able_to(:shift_up,         check_by_educational_office) }
+    it { should_not be_able_to(:return_to_author, check_by_educational_office) }
+    it { should_not be_able_to(:shift_up,         released) }
+    it { should_not be_able_to(:return_to_author, released) }
+  end
+
+  context 'сотрудник учебного управления' do
+    let(:user) { educationalist_of(root) }
+    it { should_not be_able_to(:shift_up,         draft) }
+    it { should_not be_able_to(:shift_up,         redux) }
+    it { should_not be_able_to(:shift_up,         check_by_provided_subdivision) }
+    it { should_not be_able_to(:return_to_author, check_by_provided_subdivision) }
+    it { should_not be_able_to(:shift_up,         check_by_graduated_subdivision) }
+    it { should_not be_able_to(:return_to_author, check_by_graduated_subdivision) }
+    it { should_not be_able_to(:shift_up,         check_by_library) }
+    it { should_not be_able_to(:return_to_author, check_by_library) }
+    it { should_not be_able_to(:shift_up,         check_by_methodological_office) }
+    it { should_not be_able_to(:return_to_author, check_by_methodological_office) }
+    it { should     be_able_to(:shift_up,         check_by_educational_office) }
+    it { should     be_able_to(:return_to_author, check_by_educational_office) }
+    it { should     be_able_to(:shift_up,         released) }
+    it { should     be_able_to(:return_to_author, released) }
   end
 end

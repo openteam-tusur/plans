@@ -75,16 +75,21 @@ class Ability
       work_programm.draft_or_redux? && work_programm.creator == user
     end
 
-    can :shift_up, WorkProgramm do |work_programm|
-      can? :modify, work_programm
-    end
-
     can [:shift_up, :return_to_author], WorkProgramm do |work_programm|
-      work_programm.check_by_provided_subdivision? && can?(:manage, work_programm.discipline.subdepartment)
-    end
-
-    can [:shift_up, :return_to_author], WorkProgramm do |work_programm|
-      work_programm.check_by_graduated_subdivision? && can?(:manage, work_programm.discipline.subspeciality.subdepartment)
+      case work_programm.state.to_sym
+      when :draft, :redux
+        can? :modify, work_programm
+      when :check_by_provided_subdivision
+        can? :manage, work_programm.discipline.subdepartment
+      when :check_by_graduated_subdivision
+        can? :manage, work_programm.discipline.subspeciality.subdepartment
+      when :check_by_library
+        user.librarian?
+      when :check_by_methodological_office
+        user.methodologist?
+      when :check_by_educational_office, :released
+        user.educationalist?
+      end
     end
 
     can :manage, Protocol do |protocol|
