@@ -65,28 +65,34 @@ class Ability
       can? :manage, programm.with_programm.subdepartment
     end
 
-    can :manage, WorkProgramm do |work_programm|
-      work_programm.new_record? && can?(:manage, work_programm.discipline)
+    can :create, WorkProgramm do |work_programm|
+      can?(:manage, work_programm.discipline)
     end
 
-    can :manage, WorkProgramm do |work_programm|
-      work_programm.creator == user && work_programm.draft_or_redux?
+    alias_action :update, :delete, :to => :modify
+
+    can :modify, WorkProgramm do |work_programm|
+      work_programm.draft_or_redux? && work_programm.creator == user
     end
 
     can :shift_up, WorkProgramm do |work_programm|
-      work_programm.draft_or_redux? && work_programm.creator == user
+      can? :modify, work_programm
     end
 
     can [:shift_up, :return_to_author], WorkProgramm do |work_programm|
       work_programm.check_by_provided_subdivision? && can?(:manage, work_programm.discipline.subdepartment)
     end
 
+    can [:shift_up, :return_to_author], WorkProgramm do |work_programm|
+      work_programm.check_by_graduated_subdivision? && can?(:manage, work_programm.discipline.subspeciality.subdepartment)
+    end
+
     can :manage, Protocol do |protocol|
-      can?(:manage, protocol.work_programm.discipline.subdepartment) && protocol.work_programm.check_by_provided_subdivision?
+      can?(:modify, protocol.work_programm.discipline.subdepartment) && protocol.work_programm.check_by_provided_subdivision?
     end
 
     can :manage, WorkProgramm::PART_CLASSES do |part|
-      can? :manage, part.work_programm
+      can? :modify, part.work_programm
     end
 
     can :read, [Speciality, Subspeciality, Discipline, WorkProgramm, Message]

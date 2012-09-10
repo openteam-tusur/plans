@@ -5,3 +5,5 @@ ru:
         role_enum:
           manager:              Менеджер
           lecturer:             Преподаватель
+          librarian:            Сотрудник библиотеки
+
