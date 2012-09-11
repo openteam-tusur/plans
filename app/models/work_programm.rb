@@ -38,8 +38,9 @@ class WorkProgramm < ActiveRecord::Base
 
   after_create :create_requirements
   after_create :create_protocol
-  after_create :generate_work_programm, :if => ->(w) { w.generate.to_i == 1 }
+  after_create :generate_work_programm, :if => ->(wp){ wp.generate.to_i == 1 && !wp.vfs_path? }
   after_create :create_new_message
+  after_create :set_state_to_released, :if => :vfs_path?
 
   default_value_for(:year) { Time.now.year }
 
@@ -496,6 +497,10 @@ class WorkProgramm < ActiveRecord::Base
 
     def calculate_volume(weight, total_volume)
       (total_volume * weight).round
+    end
+
+    def set_state_to_released
+      self.update_attribute :state, 'released'
     end
 end
 

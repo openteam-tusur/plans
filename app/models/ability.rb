@@ -65,7 +65,7 @@ class Ability
       can? :manage, programm.with_programm.subdepartment
     end
 
-    alias_action :update, :delete, :to => :modify
+    alias_action :update, :destroy, :to => :modify
 
     can :create, WorkProgramm do |work_programm|
       can?(:manage, work_programm.discipline)
@@ -82,6 +82,11 @@ class Ability
     can :upload_file, WorkProgramm do |work_programm|
       can? :manage, work_programm.discipline.subspeciality.subdepartment
     end
+
+    can :modify, WorkProgramm do |work_programm|
+      work_programm.vfs_path? && can?(:upload_file, work_programm)
+    end
+
 
     can [:shift_up, :return_to_author], WorkProgramm do |work_programm|
       case work_programm.state.to_sym
@@ -101,7 +106,7 @@ class Ability
     end
 
     can :manage, Protocol do |protocol|
-      can?(:modify, protocol.work_programm.discipline.subdepartment) && protocol.work_programm.check_by_provided_subdivision?
+      can?(:manage, protocol.work_programm.discipline.subdepartment) && protocol.work_programm.check_by_provided_subdivision?
     end
 
     can :manage, WorkProgramm::PART_CLASSES do |part|
