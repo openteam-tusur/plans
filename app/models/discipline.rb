@@ -36,6 +36,8 @@ class Discipline < ActiveRecord::Base
     end
   end
 
+  default_scope order('disciplines.cycle, disciplines.title')
+
   def move_descendants_to_trash
     checks.update_all(:deleted_at => Time.now)
     loadings.update_all(:deleted_at => Time.now)
