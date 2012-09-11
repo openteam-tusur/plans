@@ -510,5 +510,7 @@ end
 #  updated_at    :datetime         not null
 #  purpose       :text
 #  vfs_path      :string(255)
+#  state         :string(255)
+#  creator_id    :integer
 #
 

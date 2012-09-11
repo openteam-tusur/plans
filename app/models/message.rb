@@ -30,3 +30,17 @@ class Message < ActiveRecord::Base
       self.work_programm_state = I18n.t("message.#{work_programm.state}")
     end
 end
+
+# == Schema Information
+#
+# Table name: messages
+#
+#  id                  :integer          not null, primary key
+#  text                :text
+#  readed              :boolean
+#  work_programm_id    :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  work_programm_state :string(255)
+#
+
