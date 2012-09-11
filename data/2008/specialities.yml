@@ -13,7 +13,7 @@ specialty:
     subspecialities:
       -
         subdepartment: "АОИ"
-        graduate_subdepartment: "АОИ"
+        graduated_subdepartment: "АОИ"
         title: "Без специализации"
   -
     code: "230102.65"
@@ -21,7 +21,7 @@ specialty:
     subspecialities:
       -
         subdepartment: "АОИ"
-        graduate_subdepartment: "АСУ"
+        graduated_subdepartment: "АСУ"
         title: "Без специализации"
 
 #magistracy:

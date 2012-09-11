@@ -5,5 +5,5 @@ bachelor:
     subspecialities:
       -
         subdepartment: "АОИ"
-        graduate_subdepartment: "АОИ"
+        graduated_subdepartment: "АОИ"
         title: "Без профиля"
