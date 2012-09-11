@@ -33,7 +33,7 @@ class Ability
       user.manager_of? Context.first
     end
 
-    ## specific
+    ## app specific
 
     can :manage, :all if user.manager_of? Context.first
 
@@ -65,14 +65,22 @@ class Ability
       can? :manage, programm.with_programm.subdepartment
     end
 
+    alias_action :update, :delete, :to => :modify
+
     can :create, WorkProgramm do |work_programm|
       can?(:manage, work_programm.discipline)
     end
 
-    alias_action :update, :delete, :to => :modify
-
     can :modify, WorkProgramm do |work_programm|
       work_programm.draft_or_redux? && work_programm.creator == user
+    end
+
+    can :upload_file, WorkProgramm do |work_programm|
+      can? :manage, work_programm.discipline.subdepartment
+    end
+
+    can :upload_file, WorkProgramm do |work_programm|
+      can? :manage, work_programm.discipline.subspeciality.subdepartment
     end
 
     can [:shift_up, :return_to_author], WorkProgramm do |work_programm|
