@@ -36,6 +36,8 @@ class WorkProgramm < ActiveRecord::Base
   delegate :gos2?, :to => :speciality
   delegate :gos3?, :to => :speciality
 
+  delegate :provided_subdepartment, :profiled_subdepartment, :graduated_subdepartment, :to => :discipline
+
   after_create :create_requirements
   after_create :create_protocol
   after_create :generate_work_programm, :if => ->(wp){ wp.generate.to_i == 1 && !wp.vfs_path? }
@@ -52,6 +54,7 @@ class WorkProgramm < ActiveRecord::Base
   scope :reduxes,                         ->(user){ with_state(:redux).where(:creator_id => user.id) }
   scope :releases,                        ->(user){ consumed_by(user).with_state(:released) }
   scope :checks_by_provided_subdivision,  ->(user){ consumed_by(user).with_state(:check_by_provided_subdivision) }
+  scope :checks_by_profiled_subdivision,  ->(user){ consumed_by(user).with_state(:check_by_profiled_subdivision) }
   scope :checks_by_graduated_subdivision, ->(user){ consumed_by(user).with_state(:check_by_graduated_subdivision) }
   scope :checks_by_library,               ->(user){ consumed_by(user).with_state(:check_by_library) }
   scope :checks_by_methodological_office, ->(user){ consumed_by(user).with_state(:check_by_methodological_office) }
@@ -66,11 +69,12 @@ class WorkProgramm < ActiveRecord::Base
                  :redux => :check_by_provided_subdivision,
                  :if => :whole_valid?
 
-      transition :check_by_provided_subdivision => :check_by_graduated_subdivision,
-                 :check_by_graduated_subdivision => :check_by_library,
-                 :check_by_library => :check_by_methodological_office,
-                 :check_by_methodological_office => :check_by_educational_office,
-                 :check_by_educational_office => :released,
+      transition :check_by_provided_subdivision   => :check_by_profiled_subdivision,
+                 :check_by_profiled_subdivision   => :check_by_graduated_subdivision,
+                 :check_by_graduated_subdivision  => :check_by_library,
+                 :check_by_library                => :check_by_methodological_office,
+                 :check_by_methodological_office  => :check_by_educational_office,
+                 :check_by_educational_office     => :released,
                  :if => :protocol_valid?
     end
 

@@ -48,13 +48,13 @@ describe SignPage do
     subject { page.coordiantors }
 
     context 'выпускающая и профилирующая кафедра одинаковая' do
-      before { page.subspeciality.graduate_subdepartment = page.subspeciality.subdepartment }
+      before { page.subspeciality.graduated_subdepartment = page.subspeciality.subdepartment }
       it { should have(1).item }
       its('first.post') { should == 'Зав. профилирующей и выпускающей кафедрой КО' }
     end
 
     context 'выпускающая и профилирующая кафедры одинаковые' do
-      before { page.subspeciality.graduate_subdepartment = Fabricate(:subdepartment, :abbr => 'ЕОК') }
+      before { page.subspeciality.graduated_subdepartment = Fabricate(:subdepartment, :abbr => 'ЕОК') }
       it { should have(2).item }
       its('first.post') { should == 'Зав. профилирующей кафедрой КО' }
       its('second.post') { should == 'Зав. выпускающей кафедрой ЕОК' }

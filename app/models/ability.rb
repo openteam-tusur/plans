@@ -40,8 +40,11 @@ class Ability
     can :manage, Permission do |permission|
       if permission.context.is_a?(Discipline)
         permission.context.is_a?(Discipline) &&
-          (can?(:manage, permission.context.subdepartment) ||
-           can?(:manage, permission.context.subspeciality.subdepartment))
+          (
+            can?(:manage, permission.context.provided_subdepartment) ||
+            can?(:manage, permission.context.profiled_subdepartment) ||
+            can?(:manage, permission.context.graduated_subdepartment)
+          )
       end
     end
 
@@ -50,11 +53,15 @@ class Ability
     end
 
     can :manage, Discipline do |discipline|
-      can? :manage, discipline.subdepartment
+      can? :manage, discipline.provided_subdepartment
     end
 
     can :manage, Discipline do |discipline|
-      can? :manage, discipline.subspeciality.subdepartment
+      can? :manage, discipline.profiled_subdepartment
+    end
+
+    can :manage, Discipline do |discipline|
+      can? :manage, discipline.graduated_subdepartment
     end
 
     can :manage, Discipline do |discipline|
@@ -62,7 +69,7 @@ class Ability
     end
 
     can :manage, Programm do |programm|
-      can? :manage, programm.with_programm.subdepartment
+      can? :manage, programm.with_programm.profiled_subdepartment
     end
 
     alias_action :update, :destroy, :to => :modify
@@ -76,11 +83,15 @@ class Ability
     end
 
     can :upload_file, WorkProgramm do |work_programm|
-      can? :manage, work_programm.discipline.subdepartment
+      can? :manage, work_programm.provided_subdepartment
     end
 
     can :upload_file, WorkProgramm do |work_programm|
-      can? :manage, work_programm.discipline.subspeciality.subdepartment
+      can? :manage, work_programm.profiled_subdepartment
+    end
+
+    can :upload_file, WorkProgramm do |work_programm|
+      can? :manage, work_programm.graduated_subdepartment
     end
 
     can :modify, WorkProgramm do |work_programm|
@@ -93,9 +104,11 @@ class Ability
       when :draft, :redux
         can? :modify, work_programm
       when :check_by_provided_subdivision
-        can? :manage, work_programm.discipline.subdepartment
+        can? :manage, work_programm.provided_subdepartment
+      when :check_by_profiled_subdivision
+        can? :manage, work_programm.profiled_subdepartment
       when :check_by_graduated_subdivision
-        can? :manage, work_programm.discipline.subspeciality.subdepartment
+        can? :manage, work_programm.graduated_subdepartment
       when :check_by_library
         user.librarian?
       when :check_by_methodological_office
@@ -106,7 +119,7 @@ class Ability
     end
 
     can :manage, Protocol do |protocol|
-      can?(:manage, protocol.work_programm.discipline.subdepartment) && protocol.work_programm.check_by_provided_subdivision?
+      can?(:manage, protocol.work_programm.provided_subdepartment) && protocol.work_programm.check_by_provided_subdivision?
     end
 
     can :manage, WorkProgramm::PART_CLASSES do |part|

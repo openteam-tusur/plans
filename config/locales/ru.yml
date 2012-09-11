@@ -17,34 +17,37 @@ ru:
   edit_didactic_unit: Редактирование дидактической единицы
   update_didactic_unit: Редактирование дидактической единицы
 
-  checks_by_educational_office: В учебном управлении
-  checks_by_graduated_subdivision: На выпускающей кафедре
-  checks_by_library: В библиотеке
-  checks_by_methodological_office: В методическом кабинете
-  checks_by_provided_subdivision: На обеспечивающей кафедре
-  drafts: Черновики
-  reduxes: Полученные
-  releases: Утвержденные
+  checks_by_educational_office:     В учебном управлении
+  checks_by_graduated_subdivision:  На выпускающей кафедре
+  checks_by_library:                В библиотеке
+  checks_by_methodological_office:  В методическом кабинете
+  checks_by_profiled_subdivision:   На профилирующей кафедре
+  checks_by_provided_subdivision:   На обеспечивающей кафедре
+  drafts:                           Черновики
+  reduxes:                          Полученные
+  releases:                         Утвержденные
 
   message:
-    check_by_educational_office: Рабочая программа на проверке в учебном управлении
-    check_by_graduated_subdivision: Рабочая программа на проверке на выпускающей кафедре
-    check_by_library: Рабочая программа на проверке в библиотеке
-    check_by_methodological_office: Рабочая программа на проверке в методическом кабинете
-    check_by_provided_subdivision: Рабочая программа на проверке на обеспечивающей кафедре
-    draft: Создана новая рабочая программа
-    redux: Рабочая программа возвращена автору
-    released: Рабочая программа утверждена
+    check_by_educational_office:      Рабочая программа на проверке в учебном управлении
+    check_by_graduated_subdivision:   Рабочая программа на проверке на выпускающей кафедре
+    check_by_library:                 Рабочая программа на проверке в библиотеке
+    check_by_methodological_office:   Рабочая программа на проверке в методическом кабинете
+    check_by_profiled_subdivision:    Рабочая программа на проверке на профилирующей кафедре
+    check_by_provided_subdivision:    Рабочая программа на проверке на обеспечивающей кафедре
+    draft:                            Создана новая рабочая программа
+    redux:                            Рабочая программа возвращена автору
+    released:                         Рабочая программа утверждена
 
   manage:
     work_programm:
-      check_by_educational_office: Отправить в учебное управление
-      check_by_graduated_subdivision:  Отправить на выпускающую кафедру
-      check_by_library: Отправить в библиотеку
+      check_by_educational_office:    Отправить в учебное управление
+      check_by_graduated_subdivision: Отправить на выпускающую кафедру
+      check_by_library:               Отправить в библиотеку
       check_by_methodological_office: Отправить в методический кабинет
-      check_by_provided_subdivision: Отправить на обеспечивающую кафедру
-      redux: Вернуть на доработку автору программы
-      released: Подтвердить правильность заполнения рабочей программы
+      check_by_profiled_subdivision:  Отправить на профилирующую кафедру
+      check_by_provided_subdivision:  Отправить на обеспечивающую кафедру
+      redux:                          Вернуть на доработку автору программы
+      released:                       Подтвердить правильность заполнения рабочей программы
 
   activerecord:
     errors:

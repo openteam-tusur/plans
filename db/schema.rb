@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120905092903) do
+ActiveRecord::Schema.define(:version => 20120911073858) do
 
   create_table "appendix_items", :force => true do |t|
     t.integer  "appendix_id"
@@ -330,12 +330,14 @@ ActiveRecord::Schema.define(:version => 20120905092903) do
     t.integer  "speciality_id"
     t.integer  "subdepartment_id"
     t.datetime "deleted_at"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.integer  "graduate_subdepartment_id"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "graduated_subdepartment_id"
   end
 
+  add_index "subspecialities", ["graduated_subdepartment_id"], :name => "index_subspecialities_on_graduated_subdepartment_id"
   add_index "subspecialities", ["speciality_id"], :name => "index_subspecialities_on_speciality_id"
+  add_index "subspecialities", ["subdepartment_id"], :name => "index_subspecialities_on_subdepartment_id"
 
   create_table "users", :force => true do |t|
     t.string   "uid"

@@ -26,7 +26,7 @@ class TitlePage < Page
   end
 
   def subdepartment_title
-    subdepartment.title.gsub(/кафедра/i, '').squish.sub(/^(.)/) { $1.mb_chars.upcase }
+    provided_subdepartment.title.gsub(/кафедра/i, '').squish.sub(/^(.)/) { $1.mb_chars.upcase }
   end
 
   def courses

@@ -1,13 +1,13 @@
 # encoding: utf-8
 
 class Subspeciality < ActiveRecord::Base
-  attr_accessible :title, :subdepartment_id, :graduate_subdepartment_id
+  attr_accessible :title, :subdepartment_id, :graduated_subdepartment_id
 
   alias_attribute :deleted?, :deleted_at?
 
   belongs_to :speciality
   belongs_to :subdepartment
-  belongs_to :graduate_subdepartment, :class_name => 'Subdepartment'
+  belongs_to :graduated_subdepartment, :class_name => 'Subdepartment'
 
   has_one :programm, :as => :with_programm
   has_many :disciplines, :dependent => :destroy
@@ -19,6 +19,8 @@ class Subspeciality < ActiveRecord::Base
 
   delegate :degree, :to => :speciality
   scope :actual, where(:deleted_at => nil)
+
+  alias_method :profiled_subdepartment, :subdepartment
 
   scope :consumed_by, ->(user) do
     if user.manager?
@@ -62,13 +64,13 @@ end
 #
 # Table name: subspecialities
 #
-#  id                        :integer          not null, primary key
-#  title                     :string(255)
-#  speciality_id             :integer
-#  subdepartment_id          :integer
-#  deleted_at                :datetime
-#  created_at                :datetime         not null
-#  updated_at                :datetime         not null
-#  graduate_subdepartment_id :integer
+#  id                         :integer          not null, primary key
+#  title                      :string(255)
+#  speciality_id              :integer
+#  subdepartment_id           :integer
+#  deleted_at                 :datetime
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  graduated_subdepartment_id :integer
 #
 

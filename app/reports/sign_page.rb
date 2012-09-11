@@ -21,7 +21,7 @@ class SignPage < Page
   end
 
   def subdepartment_chief
-    adapt_chief "Зав. обеспечивающей кафедрой", discipline.subdepartment
+    adapt_chief "Зав. обеспечивающей кафедрой", provided_subdepartment
   end
 
   def department_chief
@@ -29,14 +29,14 @@ class SignPage < Page
   end
 
   def coordiantors
-    if graduate_subdepartment == subdepartment
+    if profiled_subdepartment == graduated_subdepartment
       [
-        adapt_chief("Зав. профилирующей и выпускающей кафедрой", subdepartment)
+        adapt_chief("Зав. профилирующей и выпускающей кафедрой", profiled_subdepartment)
       ]
     else
       [
-        adapt_chief("Зав. профилирующей кафедрой", subdepartment),
-        adapt_chief("Зав. выпускающей кафедрой", graduate_subdepartment)
+        adapt_chief("Зав. профилирующей кафедрой", profiled_subdepartment),
+        adapt_chief("Зав. выпускающей кафедрой", graduated_subdepartment)
       ]
     end
   end

@@ -36,6 +36,10 @@ class Discipline < ActiveRecord::Base
     end
   end
 
+  delegate :profiled_subdepartment, :graduated_subdepartment, :to => :subspeciality
+
+  alias_method :provided_subdepartment, :subdepartment
+
   default_scope order('disciplines.cycle, disciplines.title')
 
   def move_descendants_to_trash
