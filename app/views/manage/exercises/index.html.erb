@@ -13,7 +13,7 @@
 
     <tr>
       <td colspan='3' class='noborder right add_exercise_wrapper'>
-        <% if can? :manage, @work_programm %>
+        <% if can? :modify, @work_programm %>
           <%= link_to "+ #{Exercise.human_enums['kind'][kind].mb_chars.downcase}", new_manage_year_speciality_subspeciality_discipline_work_programm_exercise_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :exercise => { :semester_id => semester.id, :kind => kind }}), :remote => true, :class => 'new_record' %>
         <% end %>
       </td>

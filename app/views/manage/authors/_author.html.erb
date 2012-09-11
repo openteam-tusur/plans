@@ -4,7 +4,7 @@
   <td><%= author.academic_degree %></td>
   <td><%= author.academic_rank %></td>
   <td>
-    <% if can? :manage, @work_programm %>
+    <% if can? :modify, @work_programm %>
       <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_author_path(@year, @speciality, @subspeciality, @discipline, @work_programm, author), :remote => true %>
       <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_author_path(@year, @speciality, @subspeciality, @discipline, @work_programm, author), :remote => true, :method => :delete, :confirm => t('are_you_sure?') %>
     <% end %>

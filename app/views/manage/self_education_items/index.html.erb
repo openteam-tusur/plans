@@ -14,7 +14,7 @@
 
     <tr>
       <td colspan='5' class='noborder right add_exercise_wrapper'>
-        <% if can? :manage, @work_programm %>
+        <% if can? :modify, @work_programm %>
           <%= link_to "+ вид самостоятельной работы", new_manage_year_speciality_subspeciality_discipline_work_programm_self_education_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :self_education_item => { :semester_id => semester.id }}), :remote => true, :class => 'new_record' %>
         <% end %>
       </td>

@@ -139,7 +139,7 @@ class WorkProgramm < ActiveRecord::Base
     }
   }
 
-  PART_CLASSES = [Protocol, Person, Mission, Requirement, Exercise, SelfEducationItem,
+  PART_CLASSES = [Person, Mission, Requirement, Exercise, SelfEducationItem,
                   Appendix, Publication, RatingItem, ExaminationQuestion]
 
 

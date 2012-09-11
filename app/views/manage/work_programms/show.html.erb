@@ -42,7 +42,7 @@
           <div class="work_programm_purpose">
             <%= simple_format @work_programm.purpose %>
           </div>
-          <% if can? :manage, @work_programm %>
+          <% if can? :modify, @work_programm %>
             <% if @work_programm.purpose? %>
               <%= link_to "Редактировать цели", '#', :class => 'add_text purpose' %>
             <% else %>
@@ -61,7 +61,7 @@
                 <%= render mission %>
               <% end %>
             </ol>
-            <% if can? :manage, @work_programm %>
+            <% if can? :modify, @work_programm %>
               <%= link_to "Добавить задачу", new_manage_year_speciality_subspeciality_discipline_work_programm_mission_path(@year, @speciality, @subspeciality, @discipline, @work_programm), :remote => true, :class => 'new' %>
             <% end %>
           </div>
@@ -92,7 +92,7 @@
             </div>
           <% end %>
         </div>
-        <% if can? :manage, @work_programm %>
+        <% if can? :modify, @work_programm %>
           <%= link_to "Изменить список связанных дисциплин", edit_resource_path, :class => 'add_discipline', :remote => true %>
         <% end %>
       </div>

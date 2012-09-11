@@ -6,7 +6,7 @@
     <div class='buttons'>
       <%= f.button t("manage.work_programm.#{transition.to}") %>
     </div>
-  <% end %>
+  <% end if can?(transition.event, resource) %>
 <% end %>
 
 <% if resource.state_transitions.empty? %>

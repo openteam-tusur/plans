@@ -16,7 +16,7 @@
 
     <tr>
       <td colspan='5' class='noborder right add_exercise_wrapper'>
-        <% if can? :manage, @work_programm %>
+        <% if can? :modify, @work_programm %>
           <%= link_to "+ автора программы", new_manage_year_speciality_subspeciality_discipline_work_programm_author_path(@year, @speciality, @subspeciality, @discipline, @work_programm), :remote => true, :class => 'new_record' %>
         <% end %>
       </td>

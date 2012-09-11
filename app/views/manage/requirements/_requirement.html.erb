@@ -1,6 +1,6 @@
 <li>
   <span style='font-style: italic;'><%= requirement.human_requirement_kind %>:</span> <%= requirement.description %>
-  <% if can? :manage, @work_programm %>
+  <% if can? :modify, @work_programm %>
     <div><%= link_to "Править", edit_manage_year_speciality_subspeciality_discipline_work_programm_requirement_path(@year, @speciality, @subspeciality, @discipline, @work_programm, requirement), :remote => true %></div>
   <% end %>
 </li>

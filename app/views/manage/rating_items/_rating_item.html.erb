@@ -5,7 +5,7 @@
   <td class='max_2kt_end'><%= rating_item.max_2kt_end %></td>
   <td class='total_score'><%= rating_item.total_score %></td>
   <td>
-    <% if can? :manage, @work_programm %>
+    <% if can? :modify, @work_programm %>
       <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_rating_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, rating_item), :remote => true %>
       <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_rating_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, rating_item), :remote => true, :method => :delete, :confirm => t('are_you_sure?') %>
     <% end %>
