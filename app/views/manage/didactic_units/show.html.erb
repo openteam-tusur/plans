@@ -4,7 +4,7 @@
 
 <h1><%= resource %></h1>
 
-<div class="actions">
+<div>
   <%= link_to 'Редактировать', edit_resource_path %>
   <%= link_to 'Удалить', [:manage, parent, resource], :confirm => t('are_you_sure?'), :method => :delete %>
 </div>

@@ -1,203 +1,201 @@
 ru:
-  'are_you_sure?': Вы уверены?
-  bachelor: Бакалавриат
-  bachelor_prepare: Подготовка бакалавра
-  magistracy: Магистратура
-  magistracy_prepare: Подготовка магистра
-  specialty: Специалитет
-  specialty_prepare: Подготовка специалиста
+  are_you_sure?: Вы уверены, в том что хотите сделать?
+  enter_year:    Набор %{year} года
+  remove:        Удалить
+  site_title:    Рабочие программы ТУСУР
+  statistics:    Статистика по кафедрам
 
-  new_gos: Добавление ГОС'а
+  new_gos:    Добавление ГОС'а
   create_gos: Добавление ГОС'а
-  edit_gos: Редактирование ГОС'а
+  edit_gos:   Редактирование ГОС'а
   update_gos: Редактирование ГОС'а
 
-  new_didactic_unit: Добавление дидактической единицы
+  new_didactic_unit:    Добавление дидактической единицы
   create_didactic_unit: Добавление дидактической единицы
-  edit_didactic_unit: Редактирование дидактической единицы
+  edit_didactic_unit:   Редактирование дидактической единицы
   update_didactic_unit: Редактирование дидактической единицы
 
-  checks_by_educational_office:     В учебном управлении
-  checks_by_graduated_subdivision:  На выпускающей кафедре
-  checks_by_library:                В библиотеке
-  checks_by_methodological_office:  В методическом кабинете
-  checks_by_profiled_subdivision:   На профилирующей кафедре
-  checks_by_provided_subdivision:   На обеспечивающей кафедре
-  drafts:                           Черновики
-  reduxes:                          Полученные
-  releases:                         Утвержденные
+  manage:
+    work_programms:
+      event_actions:
+        check_by_educational_office:    Отправить в учебное управление
+        check_by_graduated_subdivision: Отправить на выпускающую кафедру
+        check_by_library:               Отправить в библиотеку
+        check_by_methodological_office: Отправить в методический кабинет
+        check_by_profiled_subdivision:  Отправить на профилирующую кафедру
+        check_by_provided_subdivision:  Отправить на обеспечивающую кафедру
+        redux:                          Вернуть на доработку автору программы
+        released:                       Подтвердить правильность заполнения рабочей программы
 
   message:
-    check_by_educational_office:      Рабочая программа на проверке в учебном управлении
-    check_by_graduated_subdivision:   Рабочая программа на проверке на выпускающей кафедре
-    check_by_library:                 Рабочая программа на проверке в библиотеке
-    check_by_methodological_office:   Рабочая программа на проверке в методическом кабинете
-    check_by_profiled_subdivision:    Рабочая программа на проверке на профилирующей кафедре
-    check_by_provided_subdivision:    Рабочая программа на проверке на обеспечивающей кафедре
-    draft:                            Создана новая рабочая программа
-    redux:                            Рабочая программа возвращена автору
-    released:                         Рабочая программа утверждена
+    check_by_educational_office:    Рабочая программа на проверке в учебном управлении
+    check_by_graduated_subdivision: Рабочая программа на проверке на выпускающей кафедре
+    check_by_library:               Рабочая программа на проверке в библиотеке
+    check_by_methodological_office: Рабочая программа на проверке в методическом кабинете
+    check_by_profiled_subdivision:  Рабочая программа на проверке на профилирующей кафедре
+    check_by_provided_subdivision:  Рабочая программа на проверке на обеспечивающей кафедре
+    draft:                          Создана новая рабочая программа
+    redux:                          Рабочая программа возвращена автору
+    released:                       Рабочая программа утверждена
 
-  manage:
-    work_programm:
-      check_by_educational_office:    Отправить в учебное управление
-      check_by_graduated_subdivision: Отправить на выпускающую кафедру
-      check_by_library:               Отправить в библиотеку
-      check_by_methodological_office: Отправить в методический кабинет
-      check_by_profiled_subdivision:  Отправить на профилирующую кафедру
-      check_by_provided_subdivision:  Отправить на обеспечивающую кафедру
-      redux:                          Вернуть на доработку автору программы
-      released:                       Подтвердить правильность заполнения рабочей программы
+  navigation:
+    main_manage_navigation:
+      goses:                Справочник ГОС'ов
+      messages:             Рабочие программы
+      specialities:         Список специальностей
+
+    manage_messages:
+      drafts:                          Черновики
+      reduxes:                         Полученные
+      checks_by_provided_subdivision:  На обеспечивающей кафедре
+      checks_by_profiled_subdivision:   На профилирующей кафедре
+      checks_by_graduated_subdivision: На выпускающей кафедре
+      checks_by_library:               В библиотеке
+      checks_by_methodological_office: В методическом кабинете
+      checks_by_educational_office:    В учебном управлении
+      releases:                        Утвержденные
 
   activerecord:
-    errors:
-      models:
-        programm:
-          attributes:
-            vfs_path:
-              blank: файл не выбран
-
     attributes:
       appendix:
-        title: Название приложения
+        title:  Название приложения
 
       appendix_item:
         description: Описание элемента
 
       check:
         check_kind_enum:
-          exam: Экзамен
-          end_of_term: Зачет
-          course_work: Курсовое проектирование / Курсовая работа
-          course_projecting: Курсовое проектирование / Курсовая работа
+          exam:               Экзамен
+          end_of_term:        Зачет
+          course_work:        Курсовое проектирование / Курсовая работа
+          course_projecting:  Курсовое проектирование / Курсовая работа
 
         check_kind_abbrs:
-          exam: Экз
-          end_of_term: Зач
-          course_work: КР
-          course_projecting: КП
+          exam:               Экз
+          end_of_term:        Зач
+          course_work:        КР
+          course_projecting:  КП
 
         check_kind_reports:
-          exam: Экзамен
-          end_of_term: Зачет
-          course_work: Диф. зачет
-          course_projecting: Диф. зачет
+          exam:               Экзамен
+          end_of_term:        Зачет
+          course_work:        Диф. зачет
+          course_projecting:  Диф. зачет
 
       didactic_unit:
         discipline: Дисциплина
-        content: Содержимое
+        content:    Содержимое
 
       examination_question:
-        question_kind: Тип вопроса
-        score: Баллы
+        question_kind:  Тип вопроса
+        score:          Баллы
 
       exercise:
-        lectures: Лекции
-        labs: Лабораторные занятия
-        srs: Самостоятельная работа
-        practices: Практические занятия
-        csrs: Курсовое проектирование / Курсовые работы
-        kind_enum:
-          lecture: Лекция
-          lab: Лабораторная работа
-          practice: Практическое занятие
-          csr: Курсовой проект / Курсовая работа
-        title: Наименование темы
+        title:       Наименование темы
+        volume:      Объем в часах
         description: Содержание
-        volume: Объем в часах
+        lectures:  Лекции
+        labs:      Лабораторные занятия
+        srs:       Самостоятельная работа
+        practices: Практические занятия
+        csrs:      Курсовое проектирование / Курсовые работы
+        kind_enum:
+          lecture:  Лекция
+          lab:      Лабораторная работа
+          practice: Практическое занятие
+          csr:      Курсовой проект / Курсовая работа
 
       gos:
-        title: Название специальности
-        code: Код специальности в ГОС
-        speciality_code: Код специальности
-        approved_on: Дата утверждения
+        title:            Название специальности
+        code:             Код специальности в ГОС
+        speciality_code:  Код специальности
+        approved_on:      Дата утверждения
 
       loading:
         loading_kind_enum:
-          # аудиторные
-          lecture: Лекции
-          lab: Лабораторные занятия
+          lecture:  Лекции
+          lab:      Лабораторные занятия
           practice: Практические занятия
-          csr: "Контроль самостоятельной работы\n(курсовой проект / курсовая работа)"
-          # самостоятельные
-          exam: Подготовка к экзамену
-          srs: Самостоятельная работа
+          csr:      "Контроль самостоятельной работы\n(курсовой проект / курсовая работа)"
+          exam:     Подготовка к экзамену
+          srs:      Самостоятельная работа
         loading_kind_abbrs:
-          csr: КСР
-          exam: ЧасЭкз
-          srs: СРС
-          lecture: Лек
-          lab: Лаб
+          csr:      КСР
+          exam:     ЧасЭкз
+          srs:      СРС
+          lecture:  Лек
+          lab:      Лаб
           practice: Пр
 
       mission:
-        description: Описание задачи
+        description:     Описание задачи
 
       person:
-        full_name: Фамилия Имя Отчество
-        post: Занимаемая должность
+        full_name:       Фамилия Имя Отчество
+        post:            Занимаемая должность
         academic_degree: Ученая степень
-        academic_rank: Ученое звание
+        academic_rank:   Ученое звание
 
       programm:
-        description: Описание основной образовательной программы
+        description:     Описание основной образовательной программы
 
       protocol:
-        number: Номер протокола
-        signed_on: Дата заседания
+        number:     Номер протокола
+        signed_on:  Дата заседания
 
       publication:
-        count: Кол-во экземпляров
-        location: Где находится
-        text: Библиографическая запись
-        url: URL
+        count:      Кол-во экземпляров
+        location:   Где находится
+        text:       Библиографическая запись
+        url:        URL
+
         location_enum:
-          lan: ЭБС "Лань"
-          library: Библиотека ТУСУР
-          portal: Портал ТУСУР
-          other: В другом месте
+          lan:      ЭБС "Лань"
+          library:  Библиотека ТУСУР
+          portal:   Портал ТУСУР
+          other:    В другом месте
 
         publication_kind_enum:
-          basic: Основная литература
-          additional: Дополнительная литература
-          ump_practice: Перечень методических указаний (УМП) по проведению практических занятий
-          ump_lab: Перечень методических указаний (УМП) по проведению лабораторных работ
-          ump_srs: Перечень методических указаний (УМП) для самостоятельной работы
-          ump_course_work: Перечень методических указаний (УМП) для курсового проектирования / курсовых работ
-          ump_csr: Перечень методических указаний (УМП) для курсового проектирования / курсовых работ
+          basic:            Основная литература
+          additional:       Дополнительная литература
+          ump_practice:     Перечень методических указаний (УМП) по проведению практических занятий
+          ump_lab:          Перечень методических указаний (УМП) по проведению лабораторных работ
+          ump_srs:          Перечень методических указаний (УМП) для самостоятельной работы
+          ump_course_work:  Перечень методических указаний (УМП) для курсового проектирования / курсовых работ
+          ump_csr:          Перечень методических указаний (УМП) для курсового проектирования / курсовых работ
 
       rating_item:
-        title: Элемент учебной деятельности
-        max_begin_1kt: Максимальный балл за период между началом семестра и 1КТ
-        max_1kt_2kt: Максимальный балл за период между 1КТ и 2КТ
-        max_2kt_end: Максимальный балл за период между 2КТ и концом семестра
+        title:          Элемент учебной деятельности
+        max_begin_1kt:  Максимальный балл за период между началом семестра и 1КТ
+        max_1kt_2kt:    Максимальный балл за период между 1КТ и 2КТ
+        max_2kt_end:    Максимальный балл за период между 2КТ и концом семестра
 
         rating_item_kind:
-          csr: Курсовой проект / Курсовая работа
-          default: По умолчанию
+          csr:      Курсовой проект / Курсовая работа
+          default:  По умолчанию
 
       requirement:
         requirement_kind_enum:
-          know: знать
-          be_able_to: уметь
-          have: владеть
+          know:           знать
+          be_able_to:     уметь
+          have:           владеть
 
       self_education_item:
-        kind:             Вид самостоятельной работы
-        hours:            Часы
         control:          Формы контроля
+        hours:            Часы
+        kind:             Вид самостоятельной работы
 
         control_enum:
-          quiz:             опрос
-          test:             тест
-          home_work:        домашнее задание
-          access:           допуск
-          defence:          защита отчета
-          check:            контрольная работа
-          report:           устный отчет
-          mark:             оценка качества выполненных работ
-          check_summary:    проверка конспектов самостоятельного изучения тем
-          exam:             сдача экзамена
+          quiz:           опрос
+          test:           тест
+          home_work:      домашнее задание
+          access:         допуск
+          defence:        защита отчета
+          check:          контрольная работа
+          report:         устный отчет
+          mark:           оценка качества выполненных работ
+          check_summary:  проверка конспектов самостоятельного изучения тем
+          exam:           сдача экзамена
 
         lecture:          Проработка лекционного материала
         lab:              Подготовка к лабораторным работам и оформление отчетов по ЛР
@@ -212,48 +210,76 @@ ru:
         srs:              Изучение тем (вопросов) теоретической части курса, отводимых на самостоятельную проработку
         exam:             Подготовка к экзамену
 
-
       work_programm:
-        year:                   Год
-        previous_disciplines:   Предшествующие дисциплины
-        current_disciplines:    Совместно идущие дисциплины
-        subsequent_disciplines: Последующие дисциплины
-        related_disciplines:    Связанные дисциплины
-        lecture_visiting:       Посещение лекций
-        practice_visiting:      Посещение практических занятий
-        practice_practice:      Выполнение практических работ
-        lab_visiting:           Посещение лабораторных занятий
-        lab_lab:                Выполнение лабораторных работ
-        csr_visiting:           Посещение занятий по курсовому проектированию / курсовой работе
-        csr_intime:             Компонент своевременности
         csr_csr:                Защита курсового проекта / курсовой работы
-        intime:                 Компонент своевременности
+        csr_intime:             Компонент своевременности
+        csr_visiting:           Посещение занятий по курсовому проектированию / курсовой работе
+        current_disciplines:    Совместно идущие дисциплины
         editable?:              редактировать
+        exam_practic_question:  Практический вопрос
         exam_theoretical_question1: Теоретический вопрос №1
         exam_theoretical_question2: Теоретический вопрос №2
-        exam_practic_question:  Практический вопрос
+        intime:                 Компонент своевременности
+        lab_lab:                Выполнение лабораторных работ
+        lab_visiting:           Посещение лабораторных занятий
+        lecture_visiting:       Посещение лекций
         message_text:           Сообщение
+        practice_practice:      Выполнение практических работ
+        practice_visiting:      Посещение практических занятий
+        previous_disciplines:   Предшествующие дисциплины
+        purpose:                Цели
+        related_disciplines:    Связанные дисциплины
+        subsequent_disciplines: Последующие дисциплины
+        year:                   Год
+
+    errors:
+      models:
+        programm:
+          attributes:
+            vfs_path:
+              blank: файл не выбран
 
     models:
-      appendix: приложение
-      didactic_unit: Дидактическая единица
+      ability:              Права
+      appendix:             приложение
+      appendix_item:        Содержимое приложения
+      check:                Проверка
+      context:              Контекст
+      department:           Факультет
+      didactic_unit:        Дидактическая единица
+      discipline:           Дисциплина
       examination_question: экзаменационный вопрос
-      exercise: занятие
-      gos: Государственный образовательный стандарт
-      mission: задачу
-      person: автора
-      programm: программу
-      protocol: протокол
-      publication: публикацию
-      rating_item: элемент учебной деятельности
-      requirement: требование
-      semester: семестр
-      work_programm: рабочую программу
+      exercise:             занятие
+      gos:                  Государственный образовательный стандарт
+      loading:              Нагрузка
+      message:              Сообщение
+      mission:              задачу
+      permission:           Разрешение
+      person:               автора
+      programm:             основную образовательную программу
+      protocol:             протокол заседания кафедры
+      publication:          публикацию
+      rating_item:          элемент учебной деятельности
+      requirement:          требование
+      self_education_item:  Самостоятельная работа
+      semester:             семестр
+      speciality:           Специальность
+      subdepartment:        Кафедра
+      subspeciality:        Профиль обучения
+      user:                 Пользователь
+      work_programm:        рабочую программу
+      year:                 Год
+
+    values:
+      speciality:
+        bachelor:           Бакалавриат
+        magistracy:         Магистратура
+        specialty:          Специалитет
 
   pluralize:
     author:
-      one: Разработчик
-      few: Разработчики
+      one:  Разработчик
+      few:  Разработчики
       many: Разработчики
 
     work_programm:
@@ -275,4 +301,3 @@ ru:
         one:    "Она является основой для изучения дисциплины %{disciplines}."
         few:    "Она является основой для изучения следующих дисциплин: %{disciplines}."
         many:   "Она является основой для изучения следующих дисциплин: %{disciplines}."
-

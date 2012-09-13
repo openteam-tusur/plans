@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  layout 'blank', :only => :index
+  layout 'public'
 
   def index
   end

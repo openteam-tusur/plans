@@ -1,5 +1,5 @@
-<tr class='exercise_form'>
-  <td colspan=3>
+<tr class='ajaxed_item'>
+  <td>
     <%= simple_form_for [:manage, association_chain, resource].flatten, :remote => true do |f| %>
       <%= f.input :semester_id, :as => :hidden %>
       <%= f.input :kind, :as => :hidden %>

@@ -1,20 +1,18 @@
-<table class='exercises'>
+<table class="ajaxed">
   <thead>
     <tr>
-      <th class='theme'>Название</th>
-      <th class='location'>Где находится</th>
-      <th class='count'>Кол-во экземпляров</th>
-      <th class='actions'></th>
+      <th>Название</th>
+      <th>Где находится</th>
+      <th>Кол-во экземпляров</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
-    <% resource.publications_by_kind(kind).each do |item| %>
-      <%= render item %>
-    <% end %>
+    <%= render collection %>
     <tr>
-      <td colspan='4' class='noborder right add_exercise_wrapper'>
+      <td colspan='4'>
         <% if can? :modify, @work_programm %>
-          <%= link_to "+ #{t("activerecord.attributes.publication.publication_kind_enum.#{kind}").mb_chars.downcase}", new_manage_year_speciality_subspeciality_discipline_work_programm_publication_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :publication => { :publication_kind => kind }}), :remote => true, :class => 'new_record' %>
+          <%= link_to "+ #{t("activerecord.attributes.publication.publication_kind_enum.#{kind}").mb_chars.downcase}", new_manage_year_speciality_subspeciality_discipline_work_programm_publication_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :publication => { :publication_kind => kind }}), :remote => true, :class => 'new_record in_table' %>
         <% end %>
       </td>
     </tr>

@@ -16,6 +16,7 @@ class WorkProgramm < ActiveRecord::Base
   has_many :rating_items,           :dependent => :destroy
   has_many :requirements,           :dependent => :destroy
   has_many :self_education_items,   :dependent => :destroy
+  alias_method :people, :authors
 
   has_many :exercise_appendixes,            :through => :exercises,             :source => :appendix
   has_many :self_education_item_appendixes, :through => :self_education_items,  :source => :appendix
@@ -167,15 +168,15 @@ class WorkProgramm < ActiveRecord::Base
   end
 
   def previous_disciplines
-    related_disciplines.select{ |d| d.semesters.map(&:number).max < discipline.semesters.map(&:number).min } - [discipline.title]
+    (related_disciplines.select{ |d| d.semesters.map(&:number).max < discipline.semesters.map(&:number).min } - [discipline.title]).sort
   end
 
   def current_disciplines
-    related_disciplines.select{ |d| (d.semesters.map(&:number) & discipline.semesters.map(&:number)).any? } - [discipline.title]
+    (related_disciplines.select{ |d| (d.semesters.map(&:number) & discipline.semesters.map(&:number)).any? } - [discipline.title]).sort
   end
 
   def subsequent_disciplines
-    related_disciplines.select{ |d| d.semesters.map(&:number).min > discipline.semesters.map(&:number).max } - [discipline.title]
+    (related_disciplines.select{ |d| d.semesters.map(&:number).min > discipline.semesters.map(&:number).max } - [discipline.title]).sort
   end
 
   def available_exercise_kinds
@@ -301,7 +302,7 @@ class WorkProgramm < ActiveRecord::Base
   end
 
   def as_json(*options)
-    super(*options).merge :validations => { :whole_valid => whole_valid? }
+    super(:only => []).merge :validations => { :whole_valid => whole_valid? }
                                             .merge(purposes_and_missions_json)
                                             .merge(exercises_json)
                                             .merge(publications_json)
@@ -309,7 +310,7 @@ class WorkProgramm < ActiveRecord::Base
   end
 
   def to_s
-    "Рабочая программа для дисциплины &laquo;#{discipline}&raquo; #{year} года набора".html_safe
+    "Рабочая программа для дисциплины &laquo;#{discipline}&raquo; #{year} года".html_safe
   end
 
   def draft_or_redux?

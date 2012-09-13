@@ -1,0 +1,9 @@
+<div class="ajaxed_item">
+  <%= simple_form_for [:manage, association_chain, resource].flatten, :remote => true do |f| %>
+    <%= f.input :purpose %>
+    <div class="buttons">
+      <%= f.submit 'Сохранить цели' %>
+      <%= link_to "Отмена", [:get_purpose, :manage, association_chain, resource].flatten, :remote => true %>
+    </div>
+  <% end %>
+</div>

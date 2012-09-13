@@ -1,9 +1,0 @@
-<div class='sub_menu'>
-  <ul>
-    <% year = @year ? @year.number : Date.today.year %>
-    <li><%= link_to "Статистика по кафедрам за #{year}", manage_year_statistics_path(year) %></li>
-    <% if can? :manage, :goses %>
-      <li><%= link_to "Справочник ГОС'ов", manage_goses_path %></li>
-    <% end %>
-  </ul>
-</div>

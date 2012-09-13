@@ -1,18 +1,16 @@
-<div class='top_nav'>
-  <%= link_to '&larr;&nbsp;К списку специальностей'.html_safe, manage_root_path  %>
+<div class="list">
+  <% if collection.any? %>
+    <ul>
+      <%= render collection %>
+    </ul>
+  <% else %>
+    <div class="empty">Нет ГОС`ов</div>
+  <% end %>
 </div>
 
-<h1 class='head_center'>Государственные общеобразовательные стандарты</h1>
+<%= content_for :bottom_left_side_additions do %>
+  <div class="comment">
+    Здесь вы можете управлять справочником ГОС`ов.
+  </div>
+<% end %>
 
-<%= link_to '+ Добавить ГОС', new_manage_gos_path %>
-
-<ul class='list'>
-  <% collection.each do |item| %>
-    <h4>
-      <li class="gos">
-        <%= link_to item, [:manage, item] %>
-        <h6>Специальность: <%= item.speciality_code %> <%= item.speciality_title %></h6>
-      </li>
-    </h4>
-  <% end %>
-</ul>

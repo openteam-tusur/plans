@@ -1,10 +1,14 @@
-<tr class='exercise'>
-  <td class='left'>
-    <div class='title'><%= publication.text %></div>
-    <div class='description'><%= simple_format publication.url %></div>
+<tr class="ajaxed_item">
+  <td>
+    <%= publication.text %>
+    <%= publication.url %>
   </td>
-  <td class='location'><%= publication.human_location %></td>
-  <td class='count'><%= "#{publication.count} экз." if publication.count? %></td>
+  <td>
+    <%= publication.human_location %>
+  </td>
+  <td>
+    <%= "#{publication.count} экз." if publication.count? %>
+  </td>
   <td>
     <% if can? :modify, @work_programm %>
       <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_publication_path(@year, @speciality, @subspeciality, @discipline, @work_programm, publication), :remote => true %>

@@ -1,0 +1,28 @@
+<div class='<%= indicate_validity :purpose_valid %>'>
+  <h5>1.1 Цели</h5>
+  <div class="ajaxed">
+    <%= render :partial => 'purpose', :locals => { :purpose => @work_programm.purpose } %>
+  </div>
+</div>
+
+<div class='<%= indicate_validity :missions_valid %>'>
+  <h5>1.2 Задачи</h5>
+  <div class="ajaxed">
+    <%= render @work_programm.missions %>
+    <% if can? :manage, @work_programm %>
+      <%= link_to "добавить задачу", new_manage_year_speciality_subspeciality_discipline_work_programm_mission_path(@year, @speciality, @subspeciality, @discipline, @work_programm), :remote => true, :class => 'new_record' %>
+    <% end %>
+  </div>
+
+  <h6>По окончанию изучения дисциплины «<%= @discipline %>» студент обязан:</h6>
+  <div class="ajaxed">
+    <%= render @work_programm.requirements %>
+  </div>
+</div>
+
+<div class='<%= indicate_validity :related_disciplines_valid %>'>
+  <h5>1.3 Место дисциплины в учебном процессе</h5>
+  <div class="ajaxed">
+    <%= render :file => 'manage/related_disciplines/index', :locals => { :collection => @work_programm.related_disciplines } %>
+  </div>
+</div>

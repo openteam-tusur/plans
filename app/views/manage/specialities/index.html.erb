@@ -1,23 +1,10 @@
-<% degrees = {} %>
-<% collection.group_by(&:degree).each do |degree, specialities| %>
-  <% degrees[t(degree)] = degree %>
-  <h2 class='head_degree' id='<%= degree %>'><%= t degree %></h2>
-  <ul class='list specialities'>
-    <% specialities.each do |speciality| %>
-      <li>
-        <h4 class='speciality'><%= speciality.code %> &mdash; <%= speciality.title %></h4>
-        <ul class='sub_list'>
-          <% speciality.subspecialities_consumed_by(current_user).each do |subspeciality| %>
-            <li class='subspeciality <%= "success" if subspeciality.warnings.empty? %> <%= "deleted" if subspeciality.deleted? %>'>
-              <%= link_to "#{subspeciality.title}", manage_year_speciality_subspeciality_path(@year.number, speciality.code, subspeciality) %>
-              <%= content_tag :span, "(#{subspeciality.warnings.join(", ")})", :class => 'warnings' if subspeciality.warnings.any? %>
-              <span class='subdepartment'><%= subspeciality.subdepartment.abbr %></span>
-            </li>
-          <% end %>
-        </ul>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-
-<%= render :partial => 'commons/nav_menu', :locals => { :nav_collection => degrees, :title => 'Степени обучения' } %>
+<div class="speciality_list">
+  <h2><%= t("activerecord.values.speciality.#{params[:degree]}") %>, <%= t('enter_year', :year => @year.number).mb_chars.downcase %></h2>
+  <% if collection.any? %>
+    <ul>
+      <%= render collection %>
+    </ul>
+  <% else %>
+    <div class="empty">Нет специальностей</div>
+  <% end %>
+</div>

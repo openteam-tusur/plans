@@ -1,15 +1,1 @@
-<li>
-  <%= simple_form_for [:manage, association_chain, resource].flatten, :remote => true do |f| %>
-    <%= f.input :description, :label => "#{f.object.human_requirement_kind}:" %>
-
-    <div class="buttons">
-      <%= f.submit %>
-      <% if resource.new_record? %>
-        <%= link_to 'Отмена', '#', :class => 'cancel new_record' %>
-      <% else %>
-        <%= link_to 'Отмена', resource_path, :remote => true %>
-      <% end %>
-    </div>
-  <% end %>
-</li>
-
+<%= render 'form' %>

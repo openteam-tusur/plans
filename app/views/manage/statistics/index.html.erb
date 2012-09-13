@@ -1,5 +1,5 @@
 <div class='top_nav'>
-  <%= link_to '&larr;&nbsp;К списку специальностей'.html_safe, manage_year_specialities_path(@year.number)  %>
+  <%= link_to '&larr;&nbsp; назад к списку специальностей'.html_safe, manage_year_scoped_specialities_path(@year.number, :degree => @year.specialities.pluck(:degree).uniq.sort.first)  %>
 </div>
 
 <h1 class='head_center'>Статистика по кафедрам</h1>

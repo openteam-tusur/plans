@@ -1,33 +1,29 @@
-<table class="exercises">
+<table class='ajaxed exercises'>
   <thead>
     <tr>
       <th>Наименование работы</th>
-      <th><%= SelfEducationItem.human_attribute_name :hours  %></th>
-      <th><%= SelfEducationItem.human_attribute_name :control  %></th>
+      <th>Объем, часов</th>
+      <th>Форма контроля</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-    <% resource.self_education_items_by_semester(semester).each do |self_education_item| %>
-      <%= render self_education_item %>
-    <% end %>
-
+    <%= render collection %>
     <tr>
-      <td colspan='5' class='noborder right add_exercise_wrapper'>
+      <td colspan='4'>
         <% if can? :modify, @work_programm %>
-          <%= link_to "+ вид самостоятельной работы", new_manage_year_speciality_subspeciality_discipline_work_programm_self_education_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :self_education_item => { :semester_id => semester.id }}), :remote => true, :class => 'new_record' %>
+          <%= link_to "+ вид самостоятельной работы", new_manage_year_speciality_subspeciality_discipline_work_programm_self_education_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :self_education_item => { :semester_id => semester.id }}), :remote => true, :class => 'new_record in_table' %>
         <% end %>
       </td>
     </tr>
-
     <tr class='total_hours'>
-      <% sum = resource.self_education_items.semester_id(semester).map(&:hours).map(&:to_i).sum %>
-      <td colspan='5' class='noborder right <%= 'warning' if sum != loadings.first.value %>'>
+      <% sum = collection.map(&:hours).map(&:to_i).sum %>
+      <td colspan='4' class='noborder right <%= 'warning' if sum != loadings.first.value %>'>
         Всего часов добавленных занятий: <span><%= sum %></span>
       </td>
     </tr>
     <tr class='rup_hours'>
-      <td colspan='5' class='noborder right'>Необходимо часов по РУП: <span><%= loadings.first.value %></span></td>
+      <td colspan='4' class='noborder right'>Необходимо часов по РУП: <span><%= loadings.first.value %></span></td>
     </tr>
   </tbody>
 </table>

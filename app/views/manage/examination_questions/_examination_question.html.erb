@@ -1,5 +1,5 @@
-<tr>
-  <td class='left'><%= examination_question.question_kind %></td>
+<tr class='ajaxed_item'>
+  <td><%= examination_question.question_kind %></td>
   <td><%= examination_question.score %></td>
   <td>
     <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_examination_question_path(@year, @speciality, @subspeciality, @discipline, @work_programm, examination_question), :remote => true %>

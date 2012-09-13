@@ -1,26 +1,7 @@
-<tr class='exercise'>
-  <td class='left'>
-    <div class='title'><%= exercise.title %></div>
-    <div class='description'><%= simple_format exercise.description %></div>
-
-    <div class="description">
-      <% if exercise.appendix %>
-        <b style='font-weight: bold;'><%= exercise.appendix %></b>
-        <ul class='list' style='padding: 0 0 0 15px'>
-          <% exercise.appendix.appendix_items.each do |item| %>
-            <li><%= item.description %></li>
-          <% end %>
-        </ul>
-        <% if can? :modify, @work_programm %>
-          <%= link_to 'править приложение', [:edit, :manage, @year, @speciality, @subspeciality, @discipline, @work_programm, exercise, :appendix] %>
-          <%= link_to 'удалить приложение', [:manage, @year, @speciality, @subspeciality, @discipline, @work_programm, exercise, :appendix], :confirm => t('are_you_sure?'), :method => :delete %>
-        <% end %>
-      <% else %>
-        <% if can? :modify, @work_programm %>
-          <%= link_to '+ приложение', [:new, :manage, @year, @speciality, @subspeciality, @discipline, @work_programm, exercise, :appendix] %>
-        <% end %>
-      <% end %>
-    </div>
+<tr class="ajaxed_item">
+  <td>
+    <%= exercise.title %>
+    <%= render :partial => 'manage/work_programms/appendixes', :locals => { :appendix => exercise.appendix, :parent => exercise } %>
   </td>
   <td class='hours'>
     <%= exercise.volume %>

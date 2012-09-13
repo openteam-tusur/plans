@@ -1,23 +1,15 @@
-<div class="left_side">
-  <div class="folder_navigation">
+<div class="list">
+  <% if collection.any? %>
     <ul>
-      <% %w(drafts reduxes checks_by_provided_subdivision checks_by_graduated_subdivision checks_by_library checks_by_methodological_office checks_by_educational_office releases).each do |folder| %>
-        <li class=<%= (params[:folder] && params[:folder] == folder) ? 'active' : 'not_active' %>>
-          <%= link_to "#{t(folder)} <span>#{Message.send(folder, current_user).unreaded.size}</span>".html_safe, manage_scoped_messages_path(:folder => folder) %>
-        </li>
-      <% end %>
+      <%= render collection %>
     </ul>
-  </div>
+  <% else %>
+    <div class="empty">Нет сообщений</div>
+  <% end %>
 </div>
 
-<div class="right_side">
-  <div class="message_list">
-    <% if collection.any? %>
-      <ul>
-        <%= render collection %>
-      </ul>
-    <% else %>
-      <div style='text-align: center; margin-top: 40px; color: #999;'>Нет cообщений</div>
-    <% end %>
+<%= content_for :bottom_left_side_additions do %>
+  <div class="comment">
+    Здесь вы увидите список сообщений, которые показывают движение рабочей программы.
   </div>
-</div>
+<% end %>

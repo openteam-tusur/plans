@@ -1,6 +1,6 @@
-<li>
+<div class="ajaxed_item">
   <span style='font-style: italic;'><%= requirement.human_requirement_kind %>:</span> <%= requirement.description %>
   <% if can? :modify, @work_programm %>
-    <div><%= link_to "Править", edit_manage_year_speciality_subspeciality_discipline_work_programm_requirement_path(@year, @speciality, @subspeciality, @discipline, @work_programm, requirement), :remote => true %></div>
+    <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_requirement_path(@year, @speciality, @subspeciality, @discipline, @work_programm, requirement), :remote => true %>
   <% end %>
-</li>
+</div>

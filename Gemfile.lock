@@ -1,7 +1,6 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    RedCloth (4.2.9)
     actionmailer (3.2.8)
       actionpack (= 3.2.8)
       mail (~> 2.4.4)
@@ -48,7 +47,6 @@ GEM
     annotate (2.5.0)
       rake
     arel (3.0.2)
-    attribute_normalizer (1.1.0)
     audited (3.0.0.rc2)
     audited-activerecord (3.0.0.rc2)
       activerecord (~> 3.0)
@@ -161,7 +159,7 @@ GEM
     mime-types (1.19)
     multi_json (1.3.6)
     multipart-post (1.1.5)
-    nested_form (0.2.2)
+    nested_form (0.2.3)
     nokogiri (1.5.5)
     oauth2 (0.6.1)
       faraday (~> 0.7)
@@ -241,6 +239,8 @@ GEM
       tilt (~> 1.3)
     shoulda-matchers (1.2.0)
       activesupport (>= 3.0.0)
+    simple-navigation (3.9.0)
+      activesupport (>= 2.3.2)
     simple_form (2.0.2)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -285,9 +285,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  RedCloth
   annotate (>= 2.5.0.pre)
-  attribute_normalizer
   cancan (= 1.6.7)
   coffee-rails
   compass-rails
@@ -316,6 +314,7 @@ DEPENDENCIES
   russian
   sass-rails
   shoulda-matchers
+  simple-navigation
   simple_form
   sqlite3
   state_machine

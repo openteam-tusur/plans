@@ -1,14 +1,14 @@
-<tr class="exercise_form">
-  <td colspan='4'>
-    <%= simple_form_for [:manage, association_chain, resource].flatten, :html => {:remote => true} do |form| %>
-      <%= form.input :semester_id, :as => :hidden %>
+<tr class="ajaxed_item">
+  <td>
+    <%= simple_form_for [:manage, association_chain, resource].flatten, :remote => true do |f| %>
+      <%= f.input :semester_id, :as => :hidden %>
 
-      <%= form.input :kind, :as => :select, :collection => resource.kind_collection_for_select %>
-      <%= form.input :hours %>
-      <%= form.input :control, :as => :check_boxes, :collection => SelfEducationItem.control_collection_for_select  %>
+      <%= f.input :kind, :as => :select, :collection => resource.kind_collection_for_select %>
+      <%= f.input :hours %>
+      <%= f.input :control, :as => :check_boxes, :collection => SelfEducationItem.control_collection_for_select  %>
 
       <div class="buttons">
-        <%= form.submit 'Сохранить' %>
+        <%= f.submit 'Сохранить' %>
         <% if resource.new_record? %>
           <%= link_to 'Отмена', '#', :class => 'cancel new_record' %>
         <% else %>

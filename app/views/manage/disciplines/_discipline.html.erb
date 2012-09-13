@@ -1,0 +1,13 @@
+<li>
+  <%= discipline %>
+  <% if controller_name =~ /subspecialities/ %>
+    <ul class='ajaxed'>
+      <% if discipline.work_programms.any? %>
+        <%= render discipline.work_programms %>
+      <% end %>
+      <li>
+        <%= link_to "Добавить рабочую программу по дисциплине &quot;#{discipline}&quot;".html_safe, new_manage_year_speciality_subspeciality_discipline_work_programm_path(@year, @speciality, @subspeciality, discipline), :remote => true, :class => 'new_record' %>
+      </li>
+    </ul>
+  <% end %>
+</li>

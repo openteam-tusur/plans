@@ -1,26 +1,22 @@
-<table class='exercises'>
+<table class='ajaxed exercises'>
   <thead>
     <tr>
-      <th class='theme'>Тема и содержание</th>
-      <th class='volume'>Объем, часов</th>
-      <th class='actions'></th>
+      <th>Тема и содержание</th>
+      <th>Объем, часов</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
-    <% resource.exercises_by_semester_and_kind(semester, kind).each do |exercise| %>
-      <%= render exercise %>
-    <% end %>
-
+    <%= render collection %>
     <tr>
-      <td colspan='3' class='noborder right add_exercise_wrapper'>
+      <td colspan='3'>
         <% if can? :modify, @work_programm %>
-          <%= link_to "+ #{Exercise.human_enums['kind'][kind].mb_chars.downcase}", new_manage_year_speciality_subspeciality_discipline_work_programm_exercise_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :exercise => { :semester_id => semester.id, :kind => kind }}), :remote => true, :class => 'new_record' %>
+          <%= link_to "+ #{Exercise.human_enums['kind'][kind].mb_chars.downcase}", new_manage_year_speciality_subspeciality_discipline_work_programm_exercise_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :exercise => { :semester_id => semester.id, :kind => kind }}), :remote => true, :class => 'new_record in_table' %>
         <% end %>
       </td>
     </tr>
-
     <tr class='total_hours'>
-      <% sum = resource.exercises_by_semester_and_kind(semester, kind).map(&:volume).sum %>
+      <% sum = collection.map(&:volume).sum %>
       <td colspan='3' class='noborder right <%= 'warning' if sum != loadings.first.value %>'>
         Всего часов добавленных занятий: <span><%= sum %></span>
       </td>

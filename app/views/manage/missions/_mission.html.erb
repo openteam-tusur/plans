@@ -1,8 +1,7 @@
-<li>
-  <%= mission %>
-
+<div class="ajaxed_item">
+  <%= mission.description %>
   <% if can? :modify, @work_programm %>
-    <%= link_to "Править", edit_manage_year_speciality_subspeciality_discipline_work_programm_mission_path(@year, @speciality, @subspeciality, @discipline, @work_programm, mission), :remote => true, :class => '' %>
-    <%= link_to "Удалить", manage_year_speciality_subspeciality_discipline_work_programm_mission_path(@year, @speciality, @subspeciality, @discipline, @work_programm, mission), :remote => true, :method => :delete, :confirm => t('are_you_sure?'), :class => '' %>
+    <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_mission_path(@year, @speciality, @subspeciality, @discipline, @work_programm, mission), :remote => true %>
+    <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_mission_path(@year, @speciality, @subspeciality, @discipline, @work_programm, mission), :remote => true, :method => :delete, :confirm => t('are_you_sure?') %>
   <% end %>
-</li>
+</div>

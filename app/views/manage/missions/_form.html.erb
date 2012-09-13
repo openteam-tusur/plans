@@ -1,4 +1,4 @@
-<li>
+<div class="ajaxed_item">
   <%= simple_form_for [:manage, association_chain, resource].flatten, :remote => true do |f| %>
     <%= f.input :description %>
 
@@ -11,4 +11,4 @@
       <% end %>
     </div>
   <% end %>
-</li>
+</div>

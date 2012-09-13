@@ -10,8 +10,6 @@ group :assets do
 end
 
 group :default do
-  gem 'RedCloth'
-  gem 'attribute_normalizer'
   gem 'default_value_for'
   gem 'el_vfs_client'
   gem 'esp-auth'
@@ -24,6 +22,7 @@ group :default do
   gem 'progress_bar',         :require => false
   gem 'rails'
   gem 'russian'
+  gem 'simple-navigation'
   gem 'simple_form'
   gem 'state_machine'
   gem 'wicked_pdf'

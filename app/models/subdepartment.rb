@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Subdepartment < ActiveRecord::Base
   attr_accessible :abbr, :title, :number
 
@@ -15,6 +17,10 @@ class Subdepartment < ActiveRecord::Base
     return Person.nil unless subdepartment_hash
     return Person.nil unless subdepartment_hash['chief']
     Person.new(subdepartment_hash['chief'])
+  end
+
+  def to_s
+    "Кафедра #{abbr}"
   end
 end
 

@@ -1,4 +1,4 @@
-<tr class='exercise_form'>
+<tr class='ajaxed_item'>
   <td colspan=3>
     <%= simple_form_for [:manage, association_chain, resource].flatten, :remote => true do |f| %>
       <%= f.input :publication_kind, :as => :hidden %>
@@ -9,7 +9,7 @@
       <%= f.input :count, :wrapper_html => { :style => "display: #{f.object.location_library? ? 'block' : 'none'}" } %>
 
       <div class="buttons">
-        <%= f.submit %>
+        <%= f.submit 'Сохранить публикацию' %>
         <% if resource.new_record? %>
           <%= link_to 'Отмена', '#', :class => 'cancel new_record' %>
         <% else %>

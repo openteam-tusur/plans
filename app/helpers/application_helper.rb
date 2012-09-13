@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def presentor
-    @presentor ||= WorkProgrammPresentor.new(@work_programm)
+  def indicate_validity(item)
+    "#{item} " << (@work_programm.as_json[:validations].key?(item) ? 'success' : 'warning')
   end
 end

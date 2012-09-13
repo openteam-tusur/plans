@@ -1,38 +1,37 @@
-<div class='top_nav'>
-  <%= link_to '&larr;&nbsp;К списку специальностей'.html_safe, manage_year_specialities_path(resource.speciality.year.number) %>
+<%= t('enter_year', :year => @year.number) %>
+<br/>
+<%= @speciality %>
+<br/>
+<%= t("activerecord.values.speciality.#{@speciality.degree}") %>
+<br/>
+<%= @subspeciality.subdepartment %>
+<br/>
+<%= @subspeciality %>
+<br/>
+
+<div class='ajaxed'>
+  <%= render :file => 'manage/programms/show', :locals => { :resource => resource.programm } %>
 </div>
 
-<h1 class='head_center'>Образовательная программа</h1>
-
-<%= render :partial => 'commons/work_programm_head' %>
-
-<h5 class='programm'>
-  <% if resource.programm %>
-    <%= render :file => 'manage/programms/show.html.erb', :locals => { :resource => resource.programm } %>
-  <% else %>
-    <% if can?(:manage, resource.programm || resource.build_programm) %>
-      <%= link_to 'Загрузить основную образовательную программу', new_manage_year_speciality_subspeciality_programm_path(parent.year.number, parent.code, resource), :class => 'add_link', :remote => true %>
-    <% end %>
-  <% end %>
-</h5>
-
-<h3 class='head_center'>Список изучаемых дисциплин</h3>
-
-<ul class='disciplines list'>
+<div class="discilpine_wrapper">
   <% cycles = {} %>
-  <% resource.disciplines_consumed_by(current_user).group_by(&:cycle).each do |cycle, disciplines| %>
-    <% cycles[cycle] = I18n.transliterate(cycle).downcase.gsub(/[^[:alnum:]]+/, '_') %>
-    <li>
-      <h4 id='<%= cycles[cycle] %>'><%= cycle %></h4>
-      <ul class='sub_list'>
-        <% disciplines.sort_by{|obj| obj.title}.each do |discipline| %>
-          <li <%= " class='deleted'" if discipline.deleted? %>>
-            <%= link_to discipline.title, manage_year_speciality_subspeciality_discipline_work_programms_path(@year, @speciality, resource, discipline)  %>
-          </li>
-        <% end %>
-      </ul>
-    </li>
-  <% end %>
-</ul>
+  <ul id='toc'>
+    <% @subspeciality.disciplines_consumed_by(current_user).group_by(&:cycle).sort.each do |cycle, disciplines| %>
+      <% cycles[cycle] = disciplines.first.translited_cycle %>
+      <li id='<%= cycles[cycle] %>'>
+        <h5><%= cycle %></h5>
+        <ul>
+          <%= render disciplines.sort %>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+</div>
 
-<%= render :partial => 'commons/nav_menu', :locals => { :nav_collection => cycles, :title => 'Циклы обучения' } %>
+<%= content_for :top_left_side_additions do %>
+  <ul class="navigation toc">
+    <% cycles.each do |title, anchor| %>
+      <li><%= link_to title, "##{anchor}" %></li>
+    <% end %>
+  </ul>
+<% end %>

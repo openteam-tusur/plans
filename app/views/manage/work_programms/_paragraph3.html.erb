@@ -1,0 +1,16 @@
+<% %w[basic additional].each_with_index do |kind, index| %>
+  <div class='<%= indicate_validity "publications_#{kind}_valid".to_sym %>'>
+    <h5><%= "3.#{index+1} #{Publication.human_enum_values(:publication_kind)[kind]}" %></h5>
+    <%= render :file => 'manage/publications/index', :locals => { :kind => kind, :collection => resource.publications_by_kind(kind) } %>
+  </div>
+<% end %>
+
+<div class='<%= indicate_validity :publications_ump_valid %>'>
+  <h5><%= "3.3 Перечень учебно-методических пособий" %></h5>
+  <% resource.ump_publication_kinds.each_with_index do |kind, index| %>
+    <div class='<%= indicate_validity "publications_ump_#{kind}_valid".to_sym %>'>
+      <h6><%= "3.3.#{index+1} #{Publication.human_enum_values(:publication_kind)['ump_'+kind]}" %> </h6>
+      <%= render :file => 'manage/publications/index', :locals => { :kind => 'ump_'+kind, :collection => resource.publications_by_kind('ump_'+kind) } %>
+    </div>
+  <% end %>
+</div>

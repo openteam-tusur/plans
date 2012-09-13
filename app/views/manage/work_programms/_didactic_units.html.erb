@@ -1,4 +1,4 @@
-<h5>Необходимо наличие следующих дидактических единиц:</h5>
+<h6>Необходимо наличие следующих дидактических единиц:</h6>
 <ul class='didactic_units'>
   <% @discipline.didactic_unit.all_lecture_themes.each do |theme| %>
     <li class="<%= @work_programm.didactic_unit_valid?(theme) ? 'success' : 'warning' %>">

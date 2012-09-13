@@ -3,34 +3,37 @@ Plans::Application.routes.draw do
     get '/messages/:folder' => 'messages#index',
       :constraints => { :folder => /(drafts|reduxes|releases|checks_by_provided_subdivision|checks_by_graduated_subdivision|checks_by_library|checks_by_methodological_office|checks_by_educational_office)/ },
       :as => :scoped_messages
-    resources :messages, :only => :show
+
     resources :years, :only => [] do
       match 'statistics' => 'statistics#index'
+      get '/specialities/:degree' => 'specialities#index',
+        :constraints => { :degree => /(bachelor|magistracy|specialty)/ },
+        :as => :scoped_specialities
 
-      resources :specialities, :speciality_id => /.*/, :only => :index do
+      resources :specialities, :speciality_id => /.*/, :only => [] do
         resources :subspecialities, :only => :show do
           resource :programm
-          resources :disciplines, :only => [] do
-            resources :work_programms do
-              get 'get_didactic_units', :on => :member
-              get 'get_event_actions', :on => :member
-              put 'shift_up', :on => :member
-              put 'return_to_author', :on => :member
-              resource  :protocol,                :except => :index
-              resource  :self_education,          :except => :show
-              resources :appendixes,              :except => :show
-              resources :authors,                 :except => :index
-              resources :dependent_disciplines
-              resources :examination_questions,   :except => :index
-              resources :exercises,               :except => :index do
-                resource :appendix,               :except => [:index, :show]
+          resources :discipline, :only => [] do
+            resources :work_programms, :except => :index do
+              get 'edit_purpose',                :on => :member
+              get 'get_didactic_units',          :on => :member
+              get 'get_event_actions',           :on => :member
+              get 'get_purpose',                 :on => :member
+              get 'get_related_disciplines',     :on => :member
+              put 'return_to_author',            :on => :member
+              put 'shift_up',                    :on => :member
+              resource  :protocol,               :except => :index
+              resources :examination_questions,  :except => :index
+              resources :exercises,              :except => :index do
+                resource :appendix,              :except => [:index, :show]
               end
-              resources :missions,                :except => :index
-              resources :publications,            :except => :index
-              resources :rating_items,            :except => :index
-              resources :requirements,            :except => [:index, :new, :create]
-              resources :self_education_items,    :except => [:index] do
-                resource :appendix,               :except => [:index, :show]
+              resources :missions,               :except => :index
+              resources :people,                 :except => :index
+              resources :publications,           :except => :index
+              resources :rating_items,           :except => :index
+              resources :requirements,           :except => [:create, :index, :new]
+              resources :self_education_items,   :except => :index do
+                resource :appendix,              :except => [:index, :show]
               end
             end
           end

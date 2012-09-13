@@ -1,4 +1,4 @@
-<tr>
+<tr class='ajaxed_item'>
   <td class='left'><%= rating_item.title %></td>
   <td class='max_begin_1kt'><%= rating_item.max_begin_1kt %></td>
   <td class='max_1kt_2kt'><%= rating_item.max_1kt_2kt %></td>
@@ -6,9 +6,10 @@
   <td class='total_score'><%= rating_item.total_score %></td>
   <td>
     <% if can? :modify, @work_programm %>
-      <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_rating_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, rating_item), :remote => true %>
-      <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_rating_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, rating_item), :remote => true, :method => :delete, :confirm => t('are_you_sure?') %>
+      <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_rating_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, rating_item),
+          :remote => true %>
+      <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_rating_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, rating_item),
+          :remote => true, :method => :delete, :confirm => t('are_you_sure?') %>
     <% end %>
   </td>
 </tr>
-

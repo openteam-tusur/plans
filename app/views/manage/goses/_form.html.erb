@@ -5,9 +5,9 @@
   <%= f.input :code %>
   <%= f.input :speciality_code %>
   <%= f.input :approved_on, :as => :date, :start_year => 2000, :end_year => Date.today.year %>
+
   <div class="buttons">
     <%= f.submit %>
     <%= link_to 'Отмена', smart_resource_url, :class => 'cancel_link' %>
   </div>
 <% end %>
-

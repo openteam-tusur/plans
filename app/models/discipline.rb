@@ -51,6 +51,10 @@ class Discipline < ActiveRecord::Base
     title
   end
 
+  def translited_cycle
+    I18n.transliterate(cycle).downcase.gsub(/[^[:alnum:]]+/, '_')
+  end
+
   def semesters_with_examination
     checks.where(check_kind: 'exam').map(&:semester)
   end

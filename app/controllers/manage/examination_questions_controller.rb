@@ -19,4 +19,3 @@ class Manage::ExaminationQuestionsController < Manage::ApplicationController
     destroy! { render :nothing => true and return }
   end
 end
-

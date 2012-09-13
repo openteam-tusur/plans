@@ -1,0 +1,13 @@
+<div class="ajaxed">
+  <div class="ajaxed_item">
+    <% %w[previous_disciplines current_disciplines subsequent_disciplines].each_with_index do |name, index| %>
+      <h6>1.3.<%= index+1 %> <%= WorkProgramm.human_attribute_name(name) %></h6>
+      <ul>
+        <%= render @work_programm.send(name) %>
+      </ul>
+    <% end %>
+    <% if can? :manage, @work_programm %>
+      <%= link_to "Изменить список связанных дисциплин", edit_resource_path, :remote => true %>
+    <% end %>
+  </div>
+</div>

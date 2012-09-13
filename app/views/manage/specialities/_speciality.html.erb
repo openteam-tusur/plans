@@ -1,0 +1,13 @@
+<li>
+  <div class="warpper">
+    <%= speciality %>
+    <ul>
+      <% speciality.subspecialities.each do |subspeciality| %>
+        <li>
+          <%= link_to subspeciality, manage_year_speciality_subspeciality_path(@year.number, speciality.code, subspeciality) %>
+          <%= subspeciality.subdepartment %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</li>

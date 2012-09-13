@@ -1,0 +1,15 @@
+<% if appendix %>
+  <%= appendix %>
+  <ul>
+    <%= render appendix.appendix_items %>
+  </ul>
+  <% if can? :manage, @work_programm %>
+    <%= link_to 'править приложение', [:edit, :manage, @year, @speciality, @subspeciality, @discipline, @work_programm, parent, :appendix] %>
+    <%= link_to 'удалить приложение', [:manage, @year, @speciality, @subspeciality, @discipline, @work_programm, parent, :appendix], :confirm => t('are_you_sure?'), :method => :delete %>
+  <% end %>
+<% else %>
+  <% if can? :manage, @work_programm %>
+    <%= link_to '+ приложение', [:new, :manage, @year, @speciality, @subspeciality, @discipline, @work_programm, parent, :appendix] if parent.persisted? %>
+  <% end %>
+<% end %>
+

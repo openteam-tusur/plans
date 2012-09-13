@@ -1,4 +1,4 @@
-<table class="exercises rating_items">
+<table class='ajaxed rating_items'>
   <thead>
     <tr>
       <th>Элементы учебной деятельности</th>
@@ -12,9 +12,11 @@
   <tbody>
     <%= render @work_programm.rating_items_for_semester(semester).rating_item_kind_default %>
     <tr>
-      <td colspan=6 class='right add_exercise_wrapper'>
+      <td colspan=6>
         <% if can? :modify, @work_programm %>
-          <%= link_to "+ элемент учебной деятельности", new_manage_year_speciality_subspeciality_discipline_work_programm_rating_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :rating_item => { :semester_id => semester.id, :rating_item_kind => :default }}), :remote => true, :class => 'new_record' %>
+          <%= link_to "+ элемент учебной деятельности", new_manage_year_speciality_subspeciality_discipline_work_programm_rating_item_path(
+            @year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :rating_item => { :semester_id => semester.id, :rating_item_kind => :default }}),
+            :remote => true, :class => 'new_record in_table' %>
         <% end %>
       </td>
     </tr>
@@ -48,8 +50,8 @@
 </table>
 
 <% if @work_programm.grouped_loadings(:csr)[semester] %>
-  <h5 class='head_center'>Балльная раскладка для курсового проекта / курсовой работы</h5>
-  <table class="exercises rating_items">
+  <h6>Балльная раскладка для курсового проекта / курсовой работы</h6>
+  <table class='ajaxed rating_items'>
     <thead>
       <tr>
         <th>Элементы учебной деятельности</th>
@@ -63,9 +65,11 @@
     <tbody>
       <%= render @work_programm.rating_items_for_semester(semester).rating_item_kind_csr %>
       <tr>
-        <td colspan=6 class='right add_exercise_wrapper'>
+        <td colspan=6>
           <% if can? :modify, @work_programm %>
-            <%= link_to "+ элемент учебной деятельности", new_manage_year_speciality_subspeciality_discipline_work_programm_rating_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :rating_item => { :semester_id => semester.id, :rating_item_kind => :csr }}), :remote => true, :class => 'new_record' %>
+            <%= link_to "+ элемент учебной деятельности", new_manage_year_speciality_subspeciality_discipline_work_programm_rating_item_path(
+              @year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :rating_item => { :semester_id => semester.id, :rating_item_kind => :csr }}),
+              :remote => true, :class => 'new_record in_table' %>
           <% end %>
         </td>
       </tr>
@@ -90,21 +94,24 @@
 <% end %>
 
 <% if @discipline.has_exam_at_semester?(semester) %>
-  <div class='with_text_styles'>
-    <h5 style='margin: 35px 0 0 0;'>Экзаменационные билеты содержат:</h5>
-    <table class="exercises examination_questions">
+  <div>
+    <h6>Экзаменационные билеты содержат:</h6>
+    <table class='ajaxed examination_questions'>
       <thead>
         <tr>
           <th>Вид вопроса</th>
           <th>Кол-во баллов</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <%= render @work_programm.examination_questions_for_semester(semester) %>
         <tr>
-          <td colspan=3 class='noborder right add_exercise_wrapper'>
+          <td colspan=3>
             <% if can? :modify, @work_programm %>
-              <%= link_to "+ тип вопроса", new_manage_year_speciality_subspeciality_discipline_work_programm_examination_question_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :examination_question => { :semester_id => semester.id }}), :remote => true, :class => 'new_record' %>
+              <%= link_to "+ тип вопроса", new_manage_year_speciality_subspeciality_discipline_work_programm_examination_question_path(
+                @year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :examination_question => { :semester_id => semester.id }}),
+                :remote => true, :class => 'new_record in_table' %>
             <% end %>
           </td>
         </tr>

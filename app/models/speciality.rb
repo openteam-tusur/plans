@@ -13,6 +13,10 @@ class Speciality < ActiveRecord::Base
 
   default_scope order(:code)
 
+  scope :bachelor,    where(:degree => 'bachelor')
+  scope :magistracy,  where(:degree => 'magistracy')
+  scope :specialty,   where(:degree => 'specialty')
+
   scope :consumed_by, ->(user) do
     if user.manager?
       subdepartment_ids = user.context_tree.flat_map(&:subdepartment_ids)
@@ -47,6 +51,10 @@ class Speciality < ActiveRecord::Base
 
   def gos3?
     gos_generation == '3'
+  end
+
+  def to_s
+    "#{code} &mdash; #{title}".html_safe
   end
 
   private

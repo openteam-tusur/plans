@@ -1,9 +1,0 @@
-<div class='top_menu'>
-  <ul>
-    <% Year.order(:number).each do |year| %>
-      <li <%= 'class=active' if year.number.to_s == params[:year_id] %>>
-        <%= link_to year.number, manage_year_specialities_path(year.number) %>
-      </li>
-    <% end %>
-  </ul>
-</div>

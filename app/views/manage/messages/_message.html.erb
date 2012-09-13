@@ -1,31 +1,33 @@
-<li class='<%= message.readed? ? 'readed' : 'unreaded' %>'>
-  <%= link_to message.work_programm,
-    manage_year_speciality_subspeciality_discipline_work_programm_path(
-      message.work_programm.subspeciality.speciality.year,
-      message.work_programm.subspeciality.speciality,
-      message.work_programm.subspeciality,
-      message.work_programm.discipline,
-      message.work_programm
-  ) %>
+<li>
+  <div class='wrapper'>
+    <%= link_to message.work_programm,
+      manage_year_speciality_subspeciality_discipline_work_programm_path(
+        message.work_programm.subspeciality.speciality.year,
+        message.work_programm.subspeciality.speciality,
+        message.work_programm.subspeciality,
+        message.work_programm.discipline,
+        message.work_programm
+    ) %>
 
-  <span class="state">
-    <%= t("message.#{message.work_programm.state}") %>
-  </span>
+    <span class="state">
+      <%= t("message.#{message.work_programm.state}") %>
+    </span>
 
-  <span class="text">
-    <%= message.text %>
-  </span>
+    <span class="text">
+      <%= message.text %>
+    </span>
 
-  <span class="info">
-    <span>
-      <%= message.work_programm.subspeciality.subdepartment.abbr %>
+    <span class="info">
+      <span>
+        <%= message.work_programm.subspeciality.subdepartment.abbr %>
+      </span>
+      <span>
+        <%= message.work_programm.subspeciality.speciality.code %>
+        <%= message.work_programm.subspeciality.speciality.title %>
+      </span>
+      <span>
+        <%= message.work_programm.subspeciality.title %>
+      </span>
     </span>
-    <span>
-      <%= message.work_programm.subspeciality.speciality.code %>
-      <%= message.work_programm.subspeciality.speciality.title %>
-    </span>
-    <span>
-      <%= message.work_programm.subspeciality.title %>
-    </span>
-  </span>
+  </div>
 </li>

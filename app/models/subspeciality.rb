@@ -17,6 +17,8 @@ class Subspeciality < ActiveRecord::Base
 
   after_save :move_descendants_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
 
+  default_scope order(:title)
+
   delegate :degree, :to => :speciality
   scope :actual, where(:deleted_at => nil)
 
@@ -57,6 +59,10 @@ class Subspeciality < ActiveRecord::Base
     semester.deleted_at = nil
     semester.save!
     semester
+  end
+
+  def to_s
+    title
   end
 end
 
