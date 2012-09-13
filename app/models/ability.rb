@@ -72,7 +72,7 @@ class Ability
       can? :manage, programm.with_programm.profiled_subdepartment
     end
 
-    alias_action :update, :destroy, :to => :modify
+    alias_action :update, :destroy, :edit_purpose, :get_purpose, :get_related_disciplines, :get_event_actions, :to => :modify
 
     can :create, WorkProgramm do |work_programm|
       can?(:manage, work_programm.discipline)

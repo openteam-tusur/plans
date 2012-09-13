@@ -4,6 +4,8 @@
   <%= person.academic_degree %>
   <%= person.academic_rank %>
 
-  <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_person_path(@year, @speciality, @subspeciality, @discipline, @work_programm, person), :remote => true %>
-  <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_person_path(@year, @speciality, @subspeciality, @discipline, @work_programm, person), :remote => true, :method => :delete, :confirm => t('are_you_sure?') %>
+  <% if can? :modify, @work_programm %>
+    <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_person_path(@year, @speciality, @subspeciality, @discipline, @work_programm, person), :remote => true %>
+    <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_person_path(@year, @speciality, @subspeciality, @discipline, @work_programm, person), :remote => true, :method => :delete, :confirm => t('are_you_sure?') %>
+  <% end %>
 </div>

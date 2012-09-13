@@ -1,3 +1,7 @@
-<li>
-  <%= link_to t(".#{transition.to}"), [transition.event, :manage, association_chain, resource].flatten, :method => :put %>
-</li>
+<% resource.state_transitions.each do |transition| %>
+  <% if can? transition.event, resource %>
+    <li>
+      <%= link_to t(".#{transition.to}"), [transition.event, :manage, association_chain, resource].flatten, :method => :put %>
+    </li>
+  <% end %>
+<% end %>

@@ -1,4 +1,6 @@
 <div class="ajaxed_item">
   <%= purpose %>
-  <%= link_to "Редактировать цели", [:edit_purpose, :manage, association_chain, resource].flatten, :remote => true %>
+  <% if can? :modify, @work_programm %>
+    <%= link_to "Редактировать цели", [:edit_purpose, :manage, association_chain, resource].flatten, :remote => true %>
+  <% end %>
 </div>

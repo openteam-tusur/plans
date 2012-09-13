@@ -1,6 +1,6 @@
 <div class="ajaxed">
   <%= render @work_programm.authors %>
-  <% if can? :manage, @work_programm %>
+  <% if can? :modify, @work_programm %>
     <%= link_to "добавить автора программы", new_manage_year_speciality_subspeciality_discipline_work_programm_person_path(@year, @speciality, @subspeciality, @discipline, @work_programm), :remote => true, :class => 'new_record' %>
   <% end %>
 </div>

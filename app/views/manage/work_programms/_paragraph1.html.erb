@@ -9,7 +9,7 @@
   <h5>1.2 Задачи</h5>
   <div class="ajaxed">
     <%= render @work_programm.missions %>
-    <% if can? :manage, @work_programm %>
+    <% if can? :modify, @work_programm %>
       <%= link_to "добавить задачу", new_manage_year_speciality_subspeciality_discipline_work_programm_mission_path(@year, @speciality, @subspeciality, @discipline, @work_programm), :remote => true, :class => 'new_record' %>
     <% end %>
   </div>

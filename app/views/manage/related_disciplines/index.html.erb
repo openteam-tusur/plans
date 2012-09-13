@@ -6,7 +6,7 @@
         <%= render @work_programm.send(name) %>
       </ul>
     <% end %>
-    <% if can? :manage, @work_programm %>
+    <% if can? :modify, @work_programm %>
       <%= link_to "Изменить список связанных дисциплин", edit_resource_path, :remote => true %>
     <% end %>
   </div>
