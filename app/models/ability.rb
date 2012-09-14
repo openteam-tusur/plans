@@ -104,11 +104,11 @@ class Ability
       case work_programm.state.to_sym
       when :draft, :redux
         can? :modify, work_programm
-      when :check_by_provided_subdivision
+      when :check_by_provided_subdepartment
         can? :manage, work_programm.provided_subdepartment
-      when :check_by_profiled_subdivision
+      when :check_by_profiled_subdepartment
         can? :manage, work_programm.profiled_subdepartment
-      when :check_by_graduated_subdivision
+      when :check_by_graduated_subdepartment
         can? :manage, work_programm.graduated_subdepartment
       when :check_by_library
         user.librarian?
@@ -120,7 +120,7 @@ class Ability
     end
 
     can :manage, Protocol do |protocol|
-      can?(:manage, protocol.work_programm.provided_subdepartment) && protocol.work_programm.check_by_provided_subdivision?
+      can?(:manage, protocol.work_programm.provided_subdepartment) && protocol.work_programm.check_by_provided_subdepartment?
     end
 
     can :manage, WorkProgramm::PART_CLASSES do |part|

@@ -52,16 +52,16 @@ describe Ability do
   let(:discipline)              { Fabricate(:discipline, :subdepartment => provided_subdepartment, :subspeciality => subspeciality) }
   let(:another_discipline)      { Fabricate(:discipline) }
 
-  let(:work_programm)                   { Fabricate(:work_programm, :discipline => discipline, :creator_id => lecturer_of(discipline)) }
-  let(:draft)                           { work_programm }
-  let(:redux)                           { work_programm.tap{|p| p.state = 'redux'} }
-  let(:check_by_provided_subdivision)   { work_programm.tap{|p| p.state = 'check_by_provided_subdivision'} }
-  let(:check_by_profiled_subdivision)   { work_programm.tap{|p| p.state = 'check_by_profiled_subdivision'} }
-  let(:check_by_graduated_subdivision)  { work_programm.tap{|p| p.state = 'check_by_graduated_subdivision'} }
-  let(:check_by_library)                { work_programm.tap{|p| p.state = 'check_by_library'} }
-  let(:check_by_methodological_office)  { work_programm.tap{|p| p.state = 'check_by_methodological_office'} }
-  let(:check_by_educational_office)     { work_programm.tap{|p| p.state = 'check_by_educational_office'} }
-  let(:released)                        { work_programm.tap{|p| p.state = 'released'} }
+  let(:work_programm)                     { Fabricate(:work_programm, :discipline => discipline, :creator_id => lecturer_of(discipline)) }
+  let(:draft)                             { work_programm }
+  let(:redux)                             { work_programm.tap{|p| p.state = 'redux'} }
+  let(:check_by_provided_subdepartment)   { work_programm.tap{|p| p.state = 'check_by_provided_subdepartment'} }
+  let(:check_by_profiled_subdepartment)   { work_programm.tap{|p| p.state = 'check_by_profiled_subdepartment'} }
+  let(:check_by_graduated_subdepartment)  { work_programm.tap{|p| p.state = 'check_by_graduated_subdepartment'} }
+  let(:check_by_library)                  { work_programm.tap{|p| p.state = 'check_by_library'} }
+  let(:check_by_methodological_office)    { work_programm.tap{|p| p.state = 'check_by_methodological_office'} }
+  let(:check_by_educational_office)       { work_programm.tap{|p| p.state = 'check_by_educational_office'} }
+  let(:released)                          { work_programm.tap{|p| p.state = 'released'} }
 
   subject { ability_for(user) }
 
@@ -73,10 +73,10 @@ describe Ability do
       it { should     be_able_to(:read,             another_discipline.work_programms.new) }
       it { should     be_able_to(:shift_up,         draft) }
       it { should     be_able_to(:shift_up,         redux) }
-      it { should_not be_able_to(:shift_up,         check_by_provided_subdivision) }
-      it { should_not be_able_to(:return_to_author, check_by_provided_subdivision) }
-      it { should_not be_able_to(:shift_up,         check_by_graduated_subdivision) }
-      it { should_not be_able_to(:return_to_author, check_by_graduated_subdivision) }
+      it { should_not be_able_to(:shift_up,         check_by_provided_subdepartment) }
+      it { should_not be_able_to(:return_to_author, check_by_provided_subdepartment) }
+      it { should_not be_able_to(:shift_up,         check_by_graduated_subdepartment) }
+      it { should_not be_able_to(:return_to_author, check_by_graduated_subdepartment) }
       it { should_not be_able_to(:shift_up,         check_by_library) }
       it { should_not be_able_to(:return_to_author, check_by_library) }
       it { should_not be_able_to(:shift_up,         check_by_methodological_office) }
@@ -112,12 +112,12 @@ describe Ability do
       it { should     be_able_to(:read,             another_discipline.work_programms.new) }
       it { should_not be_able_to(:shift_up,         draft) }
       it { should_not be_able_to(:shift_up,         redux) }
-      it { should     be_able_to(:shift_up,         check_by_provided_subdivision) }
-      it { should     be_able_to(:return_to_author, check_by_provided_subdivision) }
-      it { should_not be_able_to(:shift_up,         check_by_profiled_subdivision) }
-      it { should_not be_able_to(:return_to_author, check_by_profiled_subdivision) }
-      it { should_not be_able_to(:shift_up,         check_by_graduated_subdivision) }
-      it { should_not be_able_to(:return_to_author, check_by_graduated_subdivision) }
+      it { should     be_able_to(:shift_up,         check_by_provided_subdepartment) }
+      it { should     be_able_to(:return_to_author, check_by_provided_subdepartment) }
+      it { should_not be_able_to(:shift_up,         check_by_profiled_subdepartment) }
+      it { should_not be_able_to(:return_to_author, check_by_profiled_subdepartment) }
+      it { should_not be_able_to(:shift_up,         check_by_graduated_subdepartment) }
+      it { should_not be_able_to(:return_to_author, check_by_graduated_subdepartment) }
       it { should_not be_able_to(:shift_up,         check_by_library) }
       it { should_not be_able_to(:return_to_author, check_by_library) }
       it { should_not be_able_to(:shift_up,         check_by_methodological_office) }
@@ -133,12 +133,12 @@ describe Ability do
     let(:user) { manager_of(profiled_context) }
     it { should_not be_able_to(:shift_up,         draft) }
     it { should_not be_able_to(:shift_up,         redux) }
-    it { should_not be_able_to(:shift_up,         check_by_provided_subdivision) }
-    it { should_not be_able_to(:return_to_author, check_by_provided_subdivision) }
-    it { should     be_able_to(:shift_up,         check_by_profiled_subdivision) }
-    it { should     be_able_to(:return_to_author, check_by_profiled_subdivision) }
-    it { should_not be_able_to(:shift_up,         check_by_graduated_subdivision) }
-    it { should_not be_able_to(:return_to_author, check_by_graduated_subdivision) }
+    it { should_not be_able_to(:shift_up,         check_by_provided_subdepartment) }
+    it { should_not be_able_to(:return_to_author, check_by_provided_subdepartment) }
+    it { should     be_able_to(:shift_up,         check_by_profiled_subdepartment) }
+    it { should     be_able_to(:return_to_author, check_by_profiled_subdepartment) }
+    it { should_not be_able_to(:shift_up,         check_by_graduated_subdepartment) }
+    it { should_not be_able_to(:return_to_author, check_by_graduated_subdepartment) }
     it { should_not be_able_to(:shift_up,         check_by_library) }
     it { should_not be_able_to(:return_to_author, check_by_library) }
     it { should_not be_able_to(:shift_up,         check_by_methodological_office) }
@@ -153,12 +153,12 @@ describe Ability do
     let(:user) { manager_of(graduated_context) }
     it { should_not be_able_to(:shift_up,         draft) }
     it { should_not be_able_to(:shift_up,         redux) }
-    it { should_not be_able_to(:shift_up,         check_by_provided_subdivision) }
-    it { should_not be_able_to(:return_to_author, check_by_provided_subdivision) }
-    it { should_not be_able_to(:shift_up,         check_by_profiled_subdivision) }
-    it { should_not be_able_to(:return_to_author, check_by_profiled_subdivision) }
-    it { should     be_able_to(:shift_up,         check_by_graduated_subdivision) }
-    it { should     be_able_to(:return_to_author, check_by_graduated_subdivision) }
+    it { should_not be_able_to(:shift_up,         check_by_provided_subdepartment) }
+    it { should_not be_able_to(:return_to_author, check_by_provided_subdepartment) }
+    it { should_not be_able_to(:shift_up,         check_by_profiled_subdepartment) }
+    it { should_not be_able_to(:return_to_author, check_by_profiled_subdepartment) }
+    it { should     be_able_to(:shift_up,         check_by_graduated_subdepartment) }
+    it { should     be_able_to(:return_to_author, check_by_graduated_subdepartment) }
     it { should_not be_able_to(:shift_up,         check_by_library) }
     it { should_not be_able_to(:return_to_author, check_by_library) }
     it { should_not be_able_to(:shift_up,         check_by_methodological_office) }
@@ -173,10 +173,10 @@ describe Ability do
     let(:user) { librarian_of(root) }
     it { should_not be_able_to(:shift_up,         draft) }
     it { should_not be_able_to(:shift_up,         redux) }
-    it { should_not be_able_to(:shift_up,         check_by_provided_subdivision) }
-    it { should_not be_able_to(:return_to_author, check_by_provided_subdivision) }
-    it { should_not be_able_to(:shift_up,         check_by_graduated_subdivision) }
-    it { should_not be_able_to(:return_to_author, check_by_graduated_subdivision) }
+    it { should_not be_able_to(:shift_up,         check_by_provided_subdepartment) }
+    it { should_not be_able_to(:return_to_author, check_by_provided_subdepartment) }
+    it { should_not be_able_to(:shift_up,         check_by_graduated_subdepartment) }
+    it { should_not be_able_to(:return_to_author, check_by_graduated_subdepartment) }
     it { should     be_able_to(:shift_up,         check_by_library) }
     it { should     be_able_to(:return_to_author, check_by_library) }
     it { should_not be_able_to(:shift_up,         check_by_methodological_office) }
@@ -191,10 +191,10 @@ describe Ability do
     let(:user) { educationalist_of(root) }
     it { should_not be_able_to(:shift_up,         draft) }
     it { should_not be_able_to(:shift_up,         redux) }
-    it { should_not be_able_to(:shift_up,         check_by_provided_subdivision) }
-    it { should_not be_able_to(:return_to_author, check_by_provided_subdivision) }
-    it { should_not be_able_to(:shift_up,         check_by_graduated_subdivision) }
-    it { should_not be_able_to(:return_to_author, check_by_graduated_subdivision) }
+    it { should_not be_able_to(:shift_up,         check_by_provided_subdepartment) }
+    it { should_not be_able_to(:return_to_author, check_by_provided_subdepartment) }
+    it { should_not be_able_to(:shift_up,         check_by_graduated_subdepartment) }
+    it { should_not be_able_to(:return_to_author, check_by_graduated_subdepartment) }
     it { should_not be_able_to(:shift_up,         check_by_library) }
     it { should_not be_able_to(:return_to_author, check_by_library) }
     it { should_not be_able_to(:shift_up,         check_by_methodological_office) }

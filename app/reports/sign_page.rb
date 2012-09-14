@@ -42,9 +42,9 @@ class SignPage < Page
   end
 
   private
-    def adapt_chief(post, subdivision)
-      subdivision.chief(work_programm.year).dup.tap do |chief|
-        chief.post = "#{post} #{subdivision.abbr}"
+    def adapt_chief(post, subdepartment)
+      subdepartment.chief(work_programm.year).dup.tap do |chief|
+        chief.post = "#{post} #{subdepartment.abbr}"
       end
     end
 end

@@ -51,31 +51,31 @@ class WorkProgramm < ActiveRecord::Base
 
   scope :consumed_by, ->(user){ WorkProgramm.joins(:discipline).where(:disciplines => {:id => Discipline.consumed_by(user).map(&:id)}) }
 
-  scope :drafts,                          ->(user){ with_state(:draft).where(:creator_id => user.id) }
-  scope :reduxes,                         ->(user){ with_state(:redux).where(:creator_id => user.id) }
-  scope :releases,                        ->(user){ consumed_by(user).with_state(:released) }
-  scope :checks_by_provided_subdivision,  ->(user){ consumed_by(user).with_state(:check_by_provided_subdivision) }
-  scope :checks_by_profiled_subdivision,  ->(user){ consumed_by(user).with_state(:check_by_profiled_subdivision) }
-  scope :checks_by_graduated_subdivision, ->(user){ consumed_by(user).with_state(:check_by_graduated_subdivision) }
-  scope :checks_by_library,               ->(user){ consumed_by(user).with_state(:check_by_library) }
-  scope :checks_by_methodological_office, ->(user){ consumed_by(user).with_state(:check_by_methodological_office) }
-  scope :checks_by_educational_office,    ->(user){ consumed_by(user).with_state(:check_by_educational_office) }
+  scope :drafts,                            ->(user){ with_state(:draft).where(:creator_id => user.id) }
+  scope :reduxes,                           ->(user){ with_state(:redux).where(:creator_id => user.id) }
+  scope :releases,                          ->(user){ consumed_by(user).with_state(:released) }
+  scope :checks_by_provided_subdepartment,  ->(user){ consumed_by(user).with_state(:check_by_provided_subdepartment) }
+  scope :checks_by_profiled_subdepartment,  ->(user){ consumed_by(user).with_state(:check_by_profiled_subdepartment) }
+  scope :checks_by_graduated_subdepartment, ->(user){ consumed_by(user).with_state(:check_by_graduated_subdepartment) }
+  scope :checks_by_library,                 ->(user){ consumed_by(user).with_state(:check_by_library) }
+  scope :checks_by_methodological_office,   ->(user){ consumed_by(user).with_state(:check_by_methodological_office) }
+  scope :checks_by_educational_office,      ->(user){ consumed_by(user).with_state(:check_by_educational_office) }
 
   state_machine :initial => :draft do
     after_transition :move_messages_to_archive
     after_transition :create_new_message
 
     event :shift_up do
-      transition :draft => :check_by_provided_subdivision,
-                 :redux => :check_by_provided_subdivision,
+      transition :draft => :check_by_provided_subdepartment,
+                 :redux => :check_by_provided_subdepartment,
                  :if => :whole_valid?
 
-      transition :check_by_provided_subdivision   => :check_by_profiled_subdivision,
-                 :check_by_profiled_subdivision   => :check_by_graduated_subdivision,
-                 :check_by_graduated_subdivision  => :check_by_library,
-                 :check_by_library                => :check_by_methodological_office,
-                 :check_by_methodological_office  => :check_by_educational_office,
-                 :check_by_educational_office     => :released,
+      transition :check_by_provided_subdepartment   => :check_by_profiled_subdepartment,
+                 :check_by_profiled_subdepartment   => :check_by_graduated_subdepartment,
+                 :check_by_graduated_subdepartment  => :check_by_library,
+                 :check_by_library                  => :check_by_methodological_office,
+                 :check_by_methodological_office    => :check_by_educational_office,
+                 :check_by_educational_office       => :released,
                  :if => :protocol_valid?
     end
 

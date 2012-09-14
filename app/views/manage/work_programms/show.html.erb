@@ -52,7 +52,7 @@
   <% unless @work_programm.vfs_path? %>
     <h6>Содержание рабочей программы</h6>
     <ul class='navigation toc'>
-      <% if @work_programm.protocol_valid? || @work_programm.check_by_provided_subdivision? %>
+      <% if @work_programm.protocol_valid? || @work_programm.check_by_provided_subdepartment? %>
         <li class='<%= indicate_validity :protocol_valid %>'><a href='#protocol'>Протокол заседания</a></li>
       <% end %>
       <li class='<%= indicate_validity :authors_valid %>'><a href='#authors'>Авторы рабочей программы</a></li>
