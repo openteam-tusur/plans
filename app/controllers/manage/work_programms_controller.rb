@@ -104,13 +104,13 @@ class Manage::WorkProgrammsController < Manage::ApplicationController
   end
 
   def shift_up
-    #resource.message_text = params[:work_programm][:message_text]
+    resource.message_text = params[:work_programm][:message_text]
     resource.shift_up!
     redirect_to [:manage, association_chain, resource].flatten
   end
 
   def return_to_author
-    #resource.message_text = params[:work_programm][:message_text]
+    resource.message_text = params[:work_programm][:message_text]
     resource.return_to_author!
     redirect_to [:manage, association_chain, resource].flatten
   end

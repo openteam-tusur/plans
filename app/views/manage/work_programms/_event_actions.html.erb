@@ -1,7 +1,16 @@
 <% if (transitions = resource.state_transitions.select{|t| can?(t.event, resource)}).any? %>
   <% transitions.each do |transition| %>
     <li>
-      <%= link_to t(".#{transition.to}"), [transition.event, :manage, association_chain, resource].flatten, :method => :put %>
+      <%= link_to t(".#{transition.to}"), '#', :class => "dialog_#{transition.to}" %>
+
+      <div id='<%= "dialog_#{transition.to}" %>'>
+        <%= simple_form_for resource, :url => [transition.event, :manage, association_chain, resource].flatten do |f| %>
+          <%= f.input :message_text, :as => :text %>
+          <div class='buttons'>
+            <%= f.submit t(".#{transition.to}") %>
+          </div>
+        <% end %>
+      </div>
     </li>
   <% end %>
 <% else %>

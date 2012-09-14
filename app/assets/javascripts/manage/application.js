@@ -9,4 +9,5 @@
 // = require ./publication_variation
 // = require ./toc_navigation
 // = require ./ajaxed
+// = require ./actions_handlers
 // = require ./main
