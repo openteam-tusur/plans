@@ -81,11 +81,11 @@ class Discipline < ActiveRecord::Base
   end
 
   def esp_to_s
-    "#{subdepartment.abbr} &mdash; #{esp_title}".html_safe
+    "#{profiled_subdepartment.abbr} &mdash; #{esp_title}".html_safe
   end
 
   def esp_title
-    "#{title} &mdash; #{subspeciality.speciality.code} &mdash; #{subspeciality.title} &mdash; #{subdepartment.department.year}".html_safe
+    "#{title} &mdash; #{subspeciality.speciality.code} &mdash; #{subspeciality.title} &mdash; #{profiled_subdepartment.department.year}".html_safe
   end
 
   def subdepartment_ids
