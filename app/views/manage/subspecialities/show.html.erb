@@ -29,6 +29,7 @@
 </div>
 
 <%= content_for :top_left_side_additions do %>
+  <%= link_to "&larr; назад к списку специальностей".html_safe, manage_year_scoped_specialities_path(@year.number, :degree => @speciality.degree), :class => 'back_link' %>
   <ul class="navigation toc">
     <% cycles.each do |title, anchor| %>
       <li><%= link_to title, "##{anchor}" %></li>
