@@ -9,6 +9,27 @@
 <%= content_for :content do %>
   <%= render :partial => "esp_auth/shared/header" %>
   <div class="header">
+    <%= link_to "Как создать рабочую программу?", '#', :class => 'how_to' %>
+    <div id='how_to'>
+      Создать новую рабочую программы вы можете:
+      <ul>
+        <li>
+          1. Перейти на список специальностей
+        </li>
+        <li>
+          2. Выбрать нужный год набора
+        </li>
+        <li>
+          3. Выбрать уровень подготовки (бакалавриат, специалитет, магистратура)
+        </li>
+        <li>
+          4. Выбрать специальность и направление подготовки
+        </li>
+        <li>
+          5. Выбрать нужную дисциплину
+        </li>
+      </ul>
+    </div>
     <div class="main_navigation">
       <%= render_navigation :context => 'main_manage' %>
     </div>
