@@ -17,7 +17,7 @@ class Subspeciality < ActiveRecord::Base
 
   after_save :move_descendants_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
 
-  default_scope order(:title)
+  default_scope order('subspecialities.title')
 
   delegate :degree, :to => :speciality
   scope :actual, where(:deleted_at => nil)
