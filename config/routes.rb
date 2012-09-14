@@ -45,7 +45,7 @@ Plans::Application.routes.draw do
       resources :didactic_units, :except => :index
     end
 
-    root :to => 'messages#index', :folder => 'drafts'
+    root :to => 'messages#index', :folder => 'reduxes'
   end
 
   root :to => 'application#index'

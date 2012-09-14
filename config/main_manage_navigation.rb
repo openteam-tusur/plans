@@ -13,6 +13,6 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :goses,
                  t('navigation.main_manage_navigation.goses'),
                  manage_goses_path,
-                 :highlights_on => /gos/
+                 :highlights_on => /gos/ if can? :manage, Gos
   end
 end

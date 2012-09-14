@@ -40,7 +40,7 @@ class WorkProgramm < ActiveRecord::Base
   delegate :provided_subdepartment, :profiled_subdepartment, :graduated_subdepartment, :to => :discipline
 
   after_create :create_requirements
-  after_create :create_protocol
+  after_create :create_protocol!
   after_create :generate_work_programm, :if => ->(wp){ wp.generate.to_i == 1 && !wp.vfs_path? }
   after_create :create_new_message
   after_create :set_state_to_released, :if => :vfs_path?
@@ -302,11 +302,13 @@ class WorkProgramm < ActiveRecord::Base
   end
 
   def as_json(*options)
-    super(:only => []).merge :validations => { :whole_valid => whole_valid? }
-                                            .merge(purposes_and_missions_json)
-                                            .merge(exercises_json)
-                                            .merge(publications_json)
-                                            .merge(brs_json)
+    @json ||= {
+                :validations => { :whole_valid => whole_valid?}
+                 .merge(purposes_and_missions_json)
+                 .merge(exercises_json)
+                 .merge(publications_json)
+                 .merge(brs_json)
+              }
   end
 
   def to_s
@@ -506,6 +508,8 @@ class WorkProgramm < ActiveRecord::Base
 
     def set_state_to_released
       self.update_attribute :state, 'released'
+      move_messages_to_archive
+      create_new_message
     end
 end
 

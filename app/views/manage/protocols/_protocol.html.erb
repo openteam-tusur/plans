@@ -6,7 +6,7 @@
     <% end %>
   <% else %>
     <div class='warning'>Не указан протокол заседания кафедры</div>
-    <% if can? :manage, @work_programm.build_protocol %>
+    <% if can? :manage, protocol %>
       <%= link_to "Добавить протокол", edit_manage_year_speciality_subspeciality_discipline_work_programm_protocol_path(@year, @speciality, @subspeciality, @discipline, @work_programm), :remote => true %>
     <% end %>
   <% end %>

@@ -41,7 +41,7 @@ class Manage::WorkProgrammsController < Manage::ApplicationController
 
   def create
     create! do |success, failure|
-      success.html { redirect_to [:manage, association_chain, resource].flatten and return }
+      success.html { render :text => resource_path and return }
       failure.html { render :new and return }
     end
   end

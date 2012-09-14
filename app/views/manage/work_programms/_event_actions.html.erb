@@ -1,7 +1,9 @@
-<% resource.state_transitions.each do |transition| %>
-  <% if can? transition.event, resource %>
+<% if (transitions = resource.state_transitions.select{|t| can?(t.event, resource)}).any? %>
+  <% transitions.each do |transition| %>
     <li>
       <%= link_to t(".#{transition.to}"), [transition.event, :manage, association_chain, resource].flatten, :method => :put %>
     </li>
   <% end %>
+<% else %>
+  <li class='empty'>У вас нет возможности отправить рабочую программу на проверку, потому что не заполнены необходимые пункты.</li>
 <% end %>

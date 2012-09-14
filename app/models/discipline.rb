@@ -28,9 +28,10 @@ class Discipline < ActiveRecord::Base
       subdepartment_ids = user.context_tree.flat_map(&:subdepartment_ids)
       select('DISTINCT(disciplines.id), disciplines.*').
         joins(:subspeciality).
-        where('disciplines.subdepartment_id IN (?) OR subspecialities.subdepartment_id IN (?)', subdepartment_ids, subdepartment_ids)
+        where('disciplines.subdepartment_id IN (?) OR subspecialities.subdepartment_id IN (?)', subdepartment_ids, subdepartment_ids).
+        where('disciplines.deleted_at' => nil)
     elsif user.lecturer?
-      where(:id => user.disciplines)
+      where(:id => user.disciplines.actual)
     else
       where(:id => nil)
     end

@@ -1,5 +1,4 @@
 <h5><%= @work_programm %></h5>
-<span style='display: none;' class='resource_path'><%= resource_path %></span>
 
 <%= t('enter_year', :year => @year.number) %>
 <br/>
@@ -12,60 +11,73 @@
 <%= @subspeciality %>
 <br/>
 
-<div class='work_programm_wrapper'>
-  <ul id='toc'>
-    <li id='protocol' class='<%= indicate_validity :protocol_valid %>'>
-      <h5>Протокол заседания</h5>
-      <%= render :partial => 'protocol' %>
-    </li>
+<% unless @work_programm.vfs_path? %>
+  <div class='work_programm_wrapper'>
+    <ul id='toc'>
+      <li id='protocol' class='<%= indicate_validity :protocol_valid %>'>
+        <h5>Протокол заседания</h5>
+        <%= render :partial => 'protocol' %>
+      </li>
 
-    <li id='authors' class='<%= indicate_validity :authors_valid %>'>
-      <h5>Авторы рабочей программы</h5>
-      <%= render :partial => 'authors' %>
-    </li>
+      <li id='authors' class='<%= indicate_validity :authors_valid %>'>
+        <h5>Авторы рабочей программы</h5>
+        <%= render :partial => 'authors' %>
+      </li>
 
-    <li id='paragraph1' class='<%= indicate_validity :purposes_and_missions_valid %>'>
-      <h5>1. Цели и задачи дисциплины, ее место в учебном процессе</h5>
-      <%= render :partial => 'paragraph1' %>
-    </li>
+      <li id='paragraph1' class='<%= indicate_validity :purposes_and_missions_valid %>'>
+        <h5>1. Цели и задачи дисциплины, ее место в учебном процессе</h5>
+        <%= render :partial => 'paragraph1' %>
+      </li>
 
-    <li id='paragraph2' class='<%= indicate_validity :exercises_valid %>'>
-      <h5>2. Содержание дисциплины</h5>
-      <%= render :partial => 'paragraph2' %>
-    </li>
+      <li id='paragraph2' class='<%= indicate_validity :exercises_valid %>'>
+        <h5>2. Содержание дисциплины</h5>
+        <%= render :partial => 'paragraph2' %>
+      </li>
 
-    <li id='paragraph3' class='<%= indicate_validity :publications_valid %>'>
-      <h5>3. Учебно-методические материалы по дисциплине</h5>
-      <%= render :partial => 'paragraph3' %>
-    </li>
+      <li id='paragraph3' class='<%= indicate_validity :publications_valid %>'>
+        <h5>3. Учебно-методические материалы по дисциплине</h5>
+        <%= render :partial => 'paragraph3' %>
+      </li>
 
-    <li id='paragraph4' class='<%= indicate_validity :brs_valid %>'>
-      <h5>4. Рейтинговая система оценки качества</h5>
-      <%= render :partial => 'paragraph4' %>
-    </li>
-  </ul>
-</div>
+      <li id='paragraph4' class='<%= indicate_validity :brs_valid %>'>
+        <h5>4. Рейтинговая система оценки качества</h5>
+        <%= render :partial => 'paragraph4' %>
+      </li>
+    </ul>
+  </div>
+<% end %>
 
 <%= content_for :top_left_side_additions do %>
   <%= link_to "&larr; назад к специальности".html_safe, manage_year_speciality_subspeciality_path(@year.number, @speciality.code, @subspeciality, :anchor => @discipline.translited_cycle), :class => 'back_link' %>
-  <h6>Содержание рабочей программы</h6>
-  <ul class='navigation toc'>
-    <li class='<%= indicate_validity :protocol_valid %>'><a href='#protocol'>Протокол заседания</a></li>
-    <li class='<%= indicate_validity :authors_valid %>'><a href='#authors'>Авторы рабочей программы</a></li>
-    <li class='<%= indicate_validity :purposes_and_missions_valid %>'><a href='#paragraph1'>1. Цели и задачи дисциплины, ее место в учебном процессе</a></li>
-    <li class='<%= indicate_validity :exercises_valid %>'><a href='#paragraph2'>2. Содержание дисциплины</a></li>
-    <li class='<%= indicate_validity :publications_valid %>'><a href='#paragraph3'>3. Учебно-методические материалы по дисциплине</a></li>
-    <li class='<%= indicate_validity :brs_valid %>'><a href='#paragraph4'>4. Рейтинговая система оценки качества</a></li>
-  </ul>
-
-  <% if @work_programm.vfs_path? %>
-    <%= link_to "Скачать PDF рабочей программы", @work_programm.vfs_path, :class => 'download_link' %>
+  <% unless @work_programm.vfs_path? %>
+    <h6>Содержание рабочей программы</h6>
+    <ul class='navigation toc'>
+      <li class='<%= indicate_validity :protocol_valid %>'><a href='#protocol'>Протокол заседания</a></li>
+      <li class='<%= indicate_validity :authors_valid %>'><a href='#authors'>Авторы рабочей программы</a></li>
+      <li class='<%= indicate_validity :purposes_and_missions_valid %>'><a href='#paragraph1'>1. Цели и задачи дисциплины, ее место в учебном процессе</a></li>
+      <li class='<%= indicate_validity :exercises_valid %>'><a href='#paragraph2'>2. Содержание дисциплины</a></li>
+      <li class='<%= indicate_validity :publications_valid %>'><a href='#paragraph3'>3. Учебно-методические материалы по дисциплине</a></li>
+      <li class='<%= indicate_validity :brs_valid %>'><a href='#paragraph4'>4. Рейтинговая система оценки качества</a></li>
+    </ul>
   <% end %>
 
-  <h6>Действия</h6>
-  <ul class='actions'>
-    <%= render 'event_actions' %>
-  </ul>
+  <h6>PDF рабочей программы</h6>
+  <% if resource.released? %>
+    <% if @work_programm.vfs_path? %>
+      <%= link_to "Скачать PDF рабочей программы", @work_programm.vfs_path, :class => 'download_link' %>
+    <% else %>
+      <%= link_to "Скачать PDF рабочей программы", resource_path(:format => :pdf), :class => 'download_link' %>
+    <% end %>
+  <% else %>
+    Вы не можете скачать PDF рабочей программы, потому что она не прошла проверку.
+  <% end %>
+
+  <% unless @work_programm.vfs_path? %>
+    <h6>Действия</h6>
+    <ul class='actions'>
+      <%= render 'event_actions' %>
+    </ul>
+  <% end %>
 <% end %>
 
 <%= content_for :bottom_left_side_additions do %>

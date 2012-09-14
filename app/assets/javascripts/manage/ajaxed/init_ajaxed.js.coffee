@@ -17,7 +17,8 @@ cancel_handler = () ->
       context.before(jqXHR.responseText)
     else
       if context.hasClass('new_work_programm') && !$(jqXHR.responseText).find('.error').length
-        window.location = $(jqXHR.responseText).find('.resource_path').html()
+        window.location = jqXHR.responseText
+        return
 
       ajaxed_item = context.closest('.ajaxed_item')
       ajaxed_item.replaceWith(jqXHR.responseText)
@@ -33,5 +34,5 @@ cancel_handler = () ->
     init_publication_variation() if $('#publication_location').length
     init_calculate_total()
     init_choose_file()
-    init_check_valid()
+    init_check_valid()           if $('.work_programm_wrapper').length
     cancel_handler()

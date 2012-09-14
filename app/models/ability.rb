@@ -72,14 +72,10 @@ class Ability
       can? :manage, programm.with_programm.profiled_subdepartment
     end
 
-    alias_action :update, :destroy, :edit_purpose, :get_purpose, :get_related_disciplines, :get_event_actions, :to => :modify
+    alias_action :update, :destroy, :edit_purpose, :get_purpose, :get_related_disciplines, :to => :modify
 
     can :create, WorkProgramm do |work_programm|
       can?(:manage, work_programm.discipline)
-    end
-
-    can :modify, WorkProgramm do |work_programm|
-      work_programm.draft_or_redux? && work_programm.creator == user
     end
 
     can :upload_file, WorkProgramm do |work_programm|
@@ -98,6 +94,11 @@ class Ability
       work_programm.vfs_path? && can?(:upload_file, work_programm)
     end
 
+    can :modify, WorkProgramm do |work_programm|
+      work_programm.draft_or_redux? && work_programm.creator == user
+    end
+
+    can :get_event_actions, WorkProgramm
 
     can [:shift_up, :return_to_author], WorkProgramm do |work_programm|
       case work_programm.state.to_sym
