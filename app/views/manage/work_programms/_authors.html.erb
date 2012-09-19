@@ -1,6 +1,11 @@
 <div class="ajaxed">
+  <% if @work_programm.authors.empty? %>
+    <div class="notice warning">
+      Нет ни одного автора рабочей программы. Необходимо добавить хотя бы одного.
+    </div>
+  <% end %>
   <%= render @work_programm.authors %>
   <% if can? :modify, @work_programm %>
-    <%= link_to "добавить автора программы", new_manage_year_speciality_subspeciality_discipline_work_programm_person_path(@year, @speciality, @subspeciality, @discipline, @work_programm), :remote => true, :class => 'new_record' %>
+    <%= link_to "добавить автора программы", new_manage_year_speciality_subspeciality_discipline_work_programm_person_path(@year, @speciality, @subspeciality, @discipline, @work_programm), :remote => true, :class => 'new_record new_link' %>
   <% end %>
 </div>

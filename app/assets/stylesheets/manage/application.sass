@@ -3,23 +3,27 @@
 @import 'compass/css3'
 @import url(http://fonts.googleapis.com/css?family=Jura&subset=cyrillic)
 @import 'esp_auth/shared'
+@import './tipsy'
 
 $border_color:       #CCC9C7
 $button_hover_color: #DEDEDE
 $link_color:         #14526A
 $link_color_hover:   #218AB2
 $message_border:     #A7E8BE
+$information_bg:     #FDF6E3
 $sub_menu_bg:        #F3F3F3
 $top_menu_bg:        #E7E7E9
-$warn_color:         #F15D3C
+$warn_color:         #F7A998
+$light_warn_color:   #FBD5CC
 
 html, body
+  +min-width(1276px)
   font-size: 1em
   line-height: 1.62em
   margin: 0 0 40px 0
   height: 100%
 
-html, body, input, a, p
+html, body, input, textarea, select, button, a, p
   font-family: 'Jura', sans-serif
   font-weight: normal
 
@@ -54,6 +58,28 @@ a
   &:hover
     color: $link_color_hover
 
+.edit_link
+  background: image_url('edit.png') no-repeat left center
+  padding: 0 0 0 18px
+
+.remove_link
+  background: image_url('remove.png') no-repeat left center
+  padding: 0 0 0 18px
+
+.new_link
+  background: image_url('new.png') no-repeat left center
+  padding: 0 0 0 18px
+
+.download_link
+  background: image_url('download.png') no-repeat left center
+  padding: 0 0 0 18px
+
+.noborder
+  border: none !important
+
+  li
+    border: none !important
+
 .esp_auth_header_wrapper
   +clearfix
   position: static
@@ -63,6 +89,15 @@ a
 
 .autocomplete_data
   display: none
+
+.header
+  position: relative
+
+.how_to
+  left: 15px
+  position: absolute
+  top: 10px
+  z-index: 2
 
 .main_navigation
   font-size: 1.1em
@@ -96,38 +131,49 @@ a
 
 .main_wrapper
   +clearfix
+  padding: 0 0 20px 0
 
 .left_side
   float: left
   width: 280px
 
   h6
+    margin: 15px 0 0 0
     text-align: center
 
-  .download_link, .back_link
+  .download_link, .back_link, .show_more
     display: block
+    margin: 0 0 10px 0
     text-align: center
-    width: 100%
 
   .comment
     background: #acfca5
     color: #333
+    margin: 10px 0 0 0
     padding: 15px
+
+  .information
+    background: $information_bg
+    font-size: 0.8em
+    padding: 15px
+
+    span
+      display: block
 
 .right_side
   +clearfix
+  padding: 0 15px 15px 15px
 
-.message_folders, .manage_specialities, .cycles_navigation, .message_history, .toc, .actions
-  padding: 10px
-
+.message_folders, .manage_specialities, .cycles_navigation, .message_history, .toc, .actions, .links
   li
     background: $top_menu_bg
     border-top: 1px solid $border_color
+    padding: 5px 15px
 
     a
       +clearfix
       display: block
-      padding: 2px 5px
+      padding: 2px 0px
 
       span
         float: right
@@ -148,16 +194,179 @@ a
   .date
     display: block
 
+  .hide
+    display: none
+
+  .visible
+    display: block
+
 .actions
+  font-size: 0.8em
+
   li
     div
       display: none
+
+    a
+      background: image_url('next.png') no-repeat left center
+      padding: 0 0 0 18px
+      text-align: center
+
+      &.dialog_redux
+        background-image: image_url('return.png')
+
+.appendix
+  font-size: 0.8em
+
+  a
+    +inline-block
+    height: 16px
+    line-height: 16px
+
+.toc_no_selected
+  background: image_url('arrow.png') no-repeat 0px 25px
+  color: #CCC
+  font-size: 2em
+  height: 115px
+  margin-top: 15%
+  text-align: center
+
+.toc
+  .warning
+    background-color: $light_warn_color
+
+    a
+      background: image_url('warning.png') no-repeat right center
+      padding-right: 18px
+
+  .success
+    background-color: #D1FCCD
+    a
+      background: image_url('success.png') no-repeat right center
+      padding: 0 18px 0 0
+
+.toc, .manage_specialities
+  li
+    background-image: image_url('item.png')
+    background-repeat: no-repeat
+    background-position: left 10px
+
+    &.selected
+      background: #fff image_url('active_item.png')
+      background-repeat: no-repeat
+      background-position: left 10px
+
+#toc
+  h5, h6
+    margin: 1.2em 0
+
+  .notice.warning
+    display: none
+
+  .warning
+    .notice
+      display: block
+
+    .success
+      .notice.warning
+        display: none
+
+      .wrapper
+        border-bottom: 2px solid #A7E8BE !important
+
+  .form
+    border-top: 1px solid $border_color
+    margin: 25px auto
+    padding: 20px 0 0 0
+
+  #protocol
+    .protocol
+      background: image_url('protocol.png') no-repeat left center
+      font-size: 1.1em
+      padding: 0 0 0 18px
+
+    .new_link
+      border-top: 1px solid $border_color
+      display: block
+      margin: 15px 0 0 0
+
+  #authors
+    .full_name
+      background: image_url('person.png')  no-repeat left center
+      display: block
+      font-size: 1.1em
+      padding: 0 0 0 18px
+
+    .post
+      display: block
+
+    .new_link
+      border-top: 1px solid $border_color
+      display: block
+      margin: 15px 0 0 0
+
+    .ajaxed_item
+      margin: 0 0 20px 0
+
+  #paragraph1
+    .new_link
+      border-top: 1px solid $border_color
+      display: block
+      margin: 15px 0 0 0
+
+    .ajaxed
+      margin: 0 15px
+
+      .ajaxed
+        margin: 0
+
+    .purpose_valid
+      .edit_link
+        display: block
+
+  #paragraph2, #paragraph3, #paragraph4
+    table
+      border: 1px solid $border_color
+      border-collapse: collapse
+      margin: 0 0 25px 0
+      width: 100%
+
+      thead
+        tr
+          th
+            border: 1px solid $border_color
+            color: #797979
+            text-align: center
+
+          .ud_actions
+            width: 100px
+
+      tbody
+        tr
+          td
+            border: 1px solid $border_color
+            padding: 5px 15px
+
+          .centered
+            text-align: center
+
+        .total_hours, .rup_hours
+          td
+            text-align: right
 
 #how_to
   display: none
 
 .list
+  .empty
+    color: #ccc
+    font-size: 2em
+    margin-top: 15%
+    text-align: center
+
   ul
+    +clearfix
+
     li
       +border-radius(5px)
       border: 1px solid $border_color
@@ -169,5 +378,255 @@ a
         border-bottom: 2px solid $message_border
         padding: 5px 15px
 
+      .text
+        display: inline
+        font-style: italic
+        text-align: center
+
+        &:after
+          content: '\BB'
+
+        &:before
+          content: '\AB'
+
+      .remove_link
+        float: right
+        margin: 0 0 0 10px
+
+      .subdepartment
+        float: right
+        margin: 0 0 0 10px
+
       span
         display: block
+
+      .list
+        .wrapper
+          +single-box-shadow(#fff)
+          border: none
+          border-left: 2px solid $message_border
+
+.notice
+  +border-radius(5px)
+  background: $information_bg no-repeat 99% center
+  border: 1px solid #aaa
+  font-size: 0.9em
+  margin: 0 0 25px 0
+  padding: 6px 30px 6px 15px
+
+.warning
+  .wrapper
+    border-color: $warn_color !important
+
+  &.comment
+    background: #F7A998
+    color: #141414
+
+  &.notice
+    background: $light_warn_color image_url('warning.png') no-repeat 98% center
+    color: #141414
+
+  &.noborder
+    background: $light_warn_color image_url('warning.png') no-repeat 99% center
+    padding-right: 35px !important
+
+form
+  +clearfix
+  margin: 0 auto
+  width: 900px
+
+  .input
+    .error
+      color: #BB4F47
+
+      &:before
+        content: '\2b11'
+        margin: 0 5px 0 0
+
+    label
+      display: block
+
+      abbr
+        display: none
+
+    input, textarea
+      border: 1px solid $border_color
+      line-height: 18px
+      padding: 4px 5px
+      width: 880px
+
+    .appendix_description
+      height: 40px
+
+    textarea
+      height: 180px
+
+    &.boolean
+      input
+        width: 20px
+
+    &.check_boxes
+      .control-label
+        font-size: 1.2em
+
+      input
+        width: 20px
+
+  .buttons
+    float: right
+    margin: 10px 0
+
+    input, a
+      +border-radius(5px)
+      +single-box-shadow(#999, 1px, 1px, 8px)
+      +single-text-shadow(#333, 1px, 1px)
+      background: none
+      border: 1px solid #aaa
+      color: #fafafa
+      font-size: 16px
+      margin: 0 5px
+      padding: 8px 20px
+      position: relative
+      text-decoration: none
+
+      &:hover
+        cursor: pointer
+
+      &:active
+        +single-box-shadow(#aaa, -1px, -1px, 8px)
+        left: -1px
+        top: 1px
+
+    input
+      +background(linear-gradient(#A8D466, #8ABB55, #669D3E))
+
+      &:active
+        +background(linear-gradient(#669D3E, #8ABB55, #A8D466))
+
+    a
+      +background(linear-gradient(#DA5453, #BB4F47, #A04C3E))
+
+      &:active
+        +background(linear-gradient(#A04C3E, #BB4F47, #DA5453))
+
+.how_to
+  background: image_url('help.png') no-repeat center left
+  padding: 0 0 0 20px
+
+.ui-widget-overlay
+  background: image_url('blur.png') repeat
+  bottom: 0
+  display: block
+  left: 0
+  position: absolute
+  right: 0
+  top: 0
+
+.ui-dialog
+  +border-radius(5px)
+  +background(linear-gradient(#fefefe, #f2f2f2, #e4e4e4))
+  border: 1px solid #222
+  color: #272727
+  padding: 25px
+
+  .ui-dialog-titlebar
+    +clearfix
+    border-bottom: 1px solid #777
+    margin: 0 0 10px 0
+    padding: 0 0 10px 0
+
+    .ui-dialog-title
+      float: left
+      font-size: 1.4em
+
+    .ui-dialog-titlebar-close
+      +clearfix
+      display: block
+      float: right
+      height: 24px
+      width: 24px
+
+      .ui-icon-closethick
+        background: image_url('close.png') no-repeat
+        display: block
+        height: 24px
+        text-indent: -9999px
+        width: 24px
+
+  .comment
+    font-size: 0.9em
+    margin: 15px 0 0 0
+    text-align: center
+    font-style: italic
+
+  .ui-dialog-buttonpane
+    .ui-dialog-buttonset
+      button
+        +background(linear-gradient(#DA5453, #BB4F47, #A04C3E))
+        +border-radius(5px)
+        +single-box-shadow(#999, 1px, 1px, 8px)
+        +single-text-shadow(#333, 1px, 1px)
+        border: 1px solid #aaa
+        color: #fafafa
+        font-size: 16px
+        margin: 0 5px
+        padding: 8px 20px
+        position: relative
+        text-decoration: none
+        width: 441px
+
+        &:hover
+          cursor: pointer
+
+        &:active
+          +background(linear-gradient(#A04C3E, #BB4F47, #DA5453))
+          +single-box-shadow(#aaa, -1px, -1px, 8px)
+          left: -1px
+          top: 1px
+
+  form
+    width: 450px
+
+    input
+      width: 440px
+
+    textarea
+      width: 437px
+
+.ui-autocomplete
+  background: #fff
+  border-left: 1px solid $border_color
+  border-right: 1px solid $border_color
+  border-bottom: 1px solid $border_color
+  width: 598px
+
+  .ui-menu-item
+    padding: 3px 10px
+
+    &:hover
+      background: #f9f9f9
+      cursor: pointer
+
+.statistics_wrapper
+  h4
+    text-align: center
+
+  table
+    border: 1px solid $border_color
+    border-collapse: collapse
+    margin: 0 0 25px 0
+    width: 100%
+
+    td, th
+      border: 1px solid $border_color
+      text-align: center
+      padding: 5px 15px
+
+    .department_title
+      font-size: 1.2em
+
+    .subdepartment_title
+      text-align: left
+
+.work_programm_wrapper
+  +clearfix

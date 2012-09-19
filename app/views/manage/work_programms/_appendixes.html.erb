@@ -1,15 +1,21 @@
-<% if appendix %>
-  <%= appendix %>
-  <ul>
-    <%= render appendix.appendix_items %>
-  </ul>
-  <% if can? :modify, @work_programm %>
-    <%= link_to 'править приложение', [:edit, :manage, @year, @speciality, @subspeciality, @discipline, @work_programm, parent, :appendix] %>
-    <%= link_to 'удалить приложение', [:manage, @year, @speciality, @subspeciality, @discipline, @work_programm, parent, :appendix], :confirm => t('are_you_sure?'), :method => :delete %>
+<div class="appendix">
+  <% if appendix %>
+    <%= appendix %>
+    <ul>
+      <%= render appendix.appendix_items %>
+    </ul>
+    <% if can? :modify, @work_programm %>
+      <%= link_to 'править приложение', [:edit, :manage, @year, @speciality, @subspeciality, @discipline, @work_programm, parent, :appendix], :class => 'edit_link' %>
+      <%= link_to 'удалить приложение', [:manage, @year, @speciality, @subspeciality, @discipline, @work_programm, parent, :appendix], :confirm => t('are_you_sure?'), :method => :delete, :class => 'remove_link' %>
+    <% end %>
+  <% else %>
+    <% if parent.is_a?(SelfEducationItem) && !parent.item_valid? %>
+      <div class="notice warning">
+        Необходимо добавить приложение для данного вида самостоятельной работы.
+      </div>
+    <% end %>
+    <% if can? :modify, @work_programm %>
+      <%= link_to 'добавить приложение', [:new, :manage, @year, @speciality, @subspeciality, @discipline, @work_programm, parent, :appendix], :class => 'new_link' if parent.persisted? %>
+    <% end %>
   <% end %>
-<% else %>
-  <% if can? :modify, @work_programm %>
-    <%= link_to '+ приложение', [:new, :manage, @year, @speciality, @subspeciality, @discipline, @work_programm, parent, :appendix] if parent.persisted? %>
-  <% end %>
-<% end %>
-
+</div>

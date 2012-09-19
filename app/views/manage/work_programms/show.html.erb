@@ -1,18 +1,10 @@
-<h5><%= @work_programm %></h5>
-
-<%= t('enter_year', :year => @year.number) %>
-<br/>
-<%= @speciality %>
-<br/>
-<%= t("activerecord.values.speciality.#{@speciality.degree}") %>
-<br/>
-<%= @work_programm.profiled_subdepartment %>
-<br/>
-<%= @subspeciality %>
-<br/>
+<h4><%= @work_programm %></h4>
 
 <% unless @work_programm.vfs_path? %>
   <div class='work_programm_wrapper'>
+    <div class="toc_no_selected">
+      Выберите пункт рабочей программы.
+    </div>
     <ul id='toc'>
       <li id='protocol' class='<%= indicate_validity :protocol_valid %>'>
         <h5>Протокол заседания</h5>
@@ -49,6 +41,14 @@
 
 <%= content_for :top_left_side_additions do %>
   <%= link_to "&larr; назад к специальности".html_safe, manage_year_speciality_subspeciality_path(@year.number, @speciality.code, @subspeciality, :anchor => @discipline.translited_cycle), :class => 'back_link' %>
+  <h6>Информация о рабочей программе</h6>
+  <div class="information">
+    <span><%= t('enter_year', :year => @year.number) %></span>
+    <span><%= @speciality %></span>
+    <span><%= t("activerecord.values.speciality.#{@speciality.degree}") %></span>
+    <span><%= @work_programm.profiled_subdepartment %></span>
+    <span><%= @subspeciality %></span>
+  </div>
   <% unless @work_programm.vfs_path? %>
     <h6>Содержание рабочей программы</h6>
     <ul class='navigation toc'>
@@ -65,13 +65,17 @@
 
   <h6>PDF рабочей программы</h6>
   <% if resource.released? %>
-    <% if @work_programm.vfs_path? %>
-      <%= link_to "Скачать PDF рабочей программы", @work_programm.vfs_path, :class => 'download_link' %>
-    <% else %>
-      <%= link_to "Скачать PDF рабочей программы", resource_path(:format => :pdf), :class => 'download_link' %>
-    <% end %>
+    <div class="information">
+      <% if @work_programm.vfs_path? %>
+        <%= link_to "Скачать PDF рабочей программы", @work_programm.vfs_path, :class => 'download_link' %>
+      <% else %>
+        <%= link_to "Скачать PDF рабочей программы", resource_path(:format => :pdf), :class => 'download_link' %>
+      <% end %>
+    </div>
   <% else %>
-    Вы не можете скачать PDF рабочей программы, потому что она не прошла проверку.
+    <div class="warning comment">
+      Вы не можете скачать PDF рабочей программы, потому что она не прошла проверку.
+    </div>
   <% end %>
 
   <% unless @work_programm.vfs_path? %>
@@ -85,11 +89,12 @@
 <%= content_for :bottom_left_side_additions do %>
   <h6>История изменений</h6>
   <ul class='message_history'>
-    <% @work_programm.messages.order('created_at DESC').each do |message| %>
-      <li>
+    <% @work_programm.messages.order('created_at DESC').each_with_index do |message, index| %>
+      <li class='<%= index > 2 ? 'hide' : 'visible' %>'>
         <span class='date'><%= l message.created_at, :format => "%d %b %Y, %H:%M" %></span>
         <span class='message'><%= message.work_programm_state %></span>
       </li>
     <% end %>
   </ul>
+  <%= link_to "&darr; показать еще &darr;".html_safe, '#', :class => 'show_more' if @work_programm.messages.size > 3 %>
 <% end %>

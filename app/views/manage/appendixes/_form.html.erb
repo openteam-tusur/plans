@@ -4,14 +4,15 @@
   <%= f.input :title %>
 
   <%= f.fields_for :appendix_items do |item_form| %>
-    <%= item_form.input :description %>
-    <%= item_form.link_to_remove 'удалить' %>
+    <%= item_form.input :description, :input_html => { :class => 'appendix_description' } %>
+    <%= item_form.link_to_remove 'удалить', :class => 'remove_link' %>
+    <hr />
   <% end %>
 
-  <%= f.link_to_add '+ элемент', :appendix_items %>
+  <%= f.link_to_add 'добавить элемент списка', :appendix_items, :class => 'new_link' %>
 
   <div class="buttons">
     <%= f.submit %>
-    <%= link_to 'Отмена', :back %>
+    <%= link_to 'Отмена', polymorphic_url([:manage, @year, @speciality, @subspeciality, @discipline, @work_programm], :anchor => 'paragraph2') %>
   </div>
 <% end %>

@@ -1,11 +1,23 @@
 <li>
-  <div class="warpper">
-    <%= speciality %>
+  <div class="list">
+    <h5><%= speciality %></h5>
     <ul>
       <% speciality.subspecialities.each do |subspeciality| %>
-        <li>
-          <%= link_to subspeciality, manage_year_speciality_subspeciality_path(@year.number, speciality.code, subspeciality) %>
-          <%= subspeciality.subdepartment %>
+        <% if subspeciality.warnings.empty? && !subspeciality.deleted? %>
+          <li>
+        <% else %>
+          <% title = subspeciality.warnings %>
+          <% if subspeciality.deleted? %>
+            <% title << 'Специальность была удалена' %>
+          <% end %>
+          <li class='warning with_tip' title='<%= title.join(', ') %>'>
+        <% end %>
+          <%= "deleted" if subspeciality.deleted? %>
+
+          <div class="wrapper">
+            <%= link_to subspeciality, manage_year_speciality_subspeciality_path(@year.number, speciality.code, subspeciality) %>
+            <span class='subdepartment'><%= subspeciality.subdepartment.abbr %></span>
+          </div>
         </li>
       <% end %>
     </ul>

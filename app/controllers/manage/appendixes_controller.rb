@@ -16,14 +16,14 @@ class Manage::AppendixesController < Manage::ApplicationController
   end
 
   def create
-    create! { [:manage, @year, @speciality, @subspeciality, @discipline, @work_programm] }
+    create! { polymorphic_url([:manage, @year, @speciality, @subspeciality, @discipline, @work_programm], :anchor => 'paragraph2') }
   end
 
   def update
-    update! { [:manage, @year, @speciality, @subspeciality, @discipline, @work_programm] }
+    update! { polymorphic_url([:manage, @year, @speciality, @subspeciality, @discipline, @work_programm], :anchor => 'paragraph2') }
   end
 
   def destroy
-    destroy! { [:manage, @year, @speciality, @subspeciality, @discipline, @work_programm] }
+    destroy! { polymorphic_url([:manage, @year, @speciality, @subspeciality, @discipline, @work_programm], :anchor => 'paragraph2') }
   end
 end

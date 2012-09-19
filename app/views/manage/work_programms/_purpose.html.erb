@@ -1,6 +1,15 @@
 <div class="ajaxed_item">
-  <%= purpose %>
-  <% if can? :modify, @work_programm %>
-    <%= link_to "Редактировать цели", [:edit_purpose, :manage, association_chain, resource].flatten, :remote => true %>
+  <% unless @work_programm.purpose_valid? %>
+    <div class="notice warning">
+      Пункт "Цели" должен начинаться со слов: "Целью изучения дисциплины «<%= @discipline %>» является"; и содержать описание целей обучения данной дисциплине.
+    </div>
+    <% if can? :modify, @work_programm %>
+      <%= link_to "добавить цели", [:edit_purpose, :manage, association_chain, resource].flatten, :remote => true, :class => 'new_link' %>
+    <% end %>
+  <% else %>
+    <%= purpose %>
+    <% if can? :modify, @work_programm %>
+      <%= link_to "редактировать цели", [:edit_purpose, :manage, association_chain, resource].flatten, :remote => true, :class => 'edit_link' %>
+    <% end %>
   <% end %>
 </div>

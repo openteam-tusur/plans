@@ -1,4 +1,5 @@
 $.fn.show_target = (target) ->
+  $('.toc_no_selected').hide()
   $('.selected', '.toc').removeClass('selected')
   $('a[href='+target+']', $('.toc')).parent().addClass('selected')
   target_item = $(target)

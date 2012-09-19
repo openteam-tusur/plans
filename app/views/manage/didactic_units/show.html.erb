@@ -1,18 +1,29 @@
-<div class='top_nav'>
-  <%= link_to "&larr;&nbsp;Назад к ГОС'у (#{parent})".html_safe, parent_path %>
-</div>
-
-<h1><%= resource %></h1>
-
-<div>
-  <%= link_to 'Редактировать', edit_resource_path %>
-  <%= link_to 'Удалить', [:manage, parent, resource], :confirm => t('are_you_sure?'), :method => :delete %>
-</div>
-
-<h2>Дидактические единицы</h2>
+<h4>Дидактические единицы для дисциплины &laquo;<%= resource %>&raquo;</h4>
 
 <ul>
   <% resource.all_lecture_themes.each do |theme| %>
     <li><%= theme %></li>
   <% end %>
 </ul>
+
+<%= content_for :bottom_left_side_additions do %>
+  <%= link_to "&larr;&nbsp;Назад к ГОС'у".html_safe, parent_path, :class => 'back_link' %>
+
+  <div class="information">
+    <span><%= parent %></span>
+  </div>
+
+  <h6>Действия</h6>
+  <ul class='links'>
+    <li>
+      <%= link_to 'Редактировать', edit_resource_path %>
+    </li>
+    <li>
+      <%= link_to 'Удалить', [:manage, parent, resource], :confirm => t('are_you_sure?'), :method => :delete %>
+    </li>
+  </ul>
+
+  <div class="comment">
+    Здесь вы видите список дидактических единиц для дисциплины.
+  </div>
+<% end %>

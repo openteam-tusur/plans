@@ -1,4 +1,4 @@
-<li>
+<li class='with_tip' title='<%= t("message.#{message.work_programm.state}") %>'>
   <div class='wrapper'>
     <%= link_to message.work_programm,
       manage_year_speciality_subspeciality_discipline_work_programm_path(
@@ -9,28 +9,20 @@
         message.work_programm
     ) %>
 
-    <span class="state">
-      <%= t("message.#{message.work_programm.state}") %>
-    </span>
-
-    <span class="text">
-      <%= message.text %>
-    </span>
-
     <span class="info">
-      <span>
+      <span class='subdepartment'>
         <%= message.work_programm.profiled_subdepartment.abbr %>
       </span>
       <span>
         <%= message.work_programm.subspeciality.speciality.code %>
         <%= message.work_programm.subspeciality.speciality.title %>
-      </span>
-      <span>
         <%= message.work_programm.subspeciality.title %>
       </span>
       <span>
         <%= message.work_programm.creator %>
+        <% if message.text? %>&nbsp;&mdash;&nbsp;<span class="text"><%= message.text %></span><% end %>
       </span>
     </span>
+
   </div>
 </li>

@@ -1,14 +1,17 @@
 <div class="ajaxed_item">
   <% if resource %>
-    <%= link_to "Скачать файл (#{URI.decode(resource.vfs_path.match(/([^\/.]+)(\.(.{3}))?$/)[0])})", resource.vfs_path, :class => 'link' %>
+    <%= link_to "Скачать файл (#{URI.decode(resource.vfs_path.match(/([^\/.]+)(\.(.{3}))?$/)[0])})", resource.vfs_path, :class => 'download_link' %>
     <div class='description'><%= simple_format resource.description %></div>
     <% if can? :manage, resource %>
-      <%= link_to "Редактировать программу", edit_manage_year_speciality_subspeciality_programm_path(@year, @speciality, @subspeciality), :remote => true %>
-      <%= link_to "Удалить программу", manage_year_speciality_subspeciality_programm_path(@year, @speciality, @subspeciality), :method => :delete, :confirm => t('are_you_sure?'), :remote => true %>
+      <%= link_to "Редактировать программу", edit_manage_year_speciality_subspeciality_programm_path(@year, @speciality, @subspeciality), :remote => true, :class => 'edit_link' %>
+      <%= link_to "Удалить программу", manage_year_speciality_subspeciality_programm_path(@year, @speciality, @subspeciality), :method => :delete, :confirm => t('are_you_sure?'), :remote => true, :class => 'remove_link' %>
     <% end %>
   <% else %>
+    <div class="warning notice">
+      Необходимо загрузить основную образовательную программу.
+    </div>
     <% if can?(:manage, resource || @subspeciality.build_programm) %>
-      <%= link_to 'Загрузить основную образовательную программу', new_manage_year_speciality_subspeciality_programm_path(@year, @speciality, @subspeciality), :class => 'add_link', :remote => true %>
+      <%= link_to 'Загрузить основную образовательную программу', new_manage_year_speciality_subspeciality_programm_path(@year, @speciality, @subspeciality), :class => 'add_link new_link', :remote => true %>
     <% end %>
   <% end %>
 </div>

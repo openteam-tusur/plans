@@ -1,12 +1,16 @@
 <% Exercise.enum_values(:kind).each_with_index do |kind, index| %>
   <div class='<%= indicate_validity "exercises_#{kind}_valid".to_sym %>'>
     <h5><%= "2.#{index+1} #{Exercise.human_attribute_name kind.pluralize}" %></h5>
-    <%= content_tag :div, "#{Exercise.human_attribute_name kind.pluralize} не предусмотрены учебным планом", :class => 'empty' unless resource.has_loadings_for?(kind)  %>
+    <%= content_tag :div, "#{Exercise.human_attribute_name kind.pluralize} не предусмотрены учебным планом", :class => 'empty notice' unless resource.has_loadings_for?(kind)  %>
     <% ext_index = 1 %>
     <% resource.grouped_loadings(kind).each do |semester, loadings| %>
       <div class='<%= indicate_validity "exercises_#{kind}_#{semester.number}_valid".to_sym %>'>
         <h6><%= "2.#{index+1}.#{ext_index} #{Exercise.human_attribute_name kind.pluralize} для #{semester.number} семестра" %></h6>
         <% ext_index += 1 %>
+
+        <div class="notice warning">
+          Нет ни одного занятия данного типа и/или нагрузка в часах не совпадает с требованием РУП.
+        </div>
 
         <% if kind == 'lecture' && @discipline.didactic_unit %>
           <div class="didactic_units_wrapper">
@@ -28,6 +32,12 @@
     <div class='<%= indicate_validity "exercises_srs_#{semester.number}_valid".to_sym %>'>
       <h6><%= "2.5.#{ext_index} #{Exercise.human_attribute_name 'srs'.pluralize} для #{semester.number} семестра" %></h6>
       <% ext_index += 1 %>
+
+      <div class="notice warning">
+        Нет ни одного занятия данного типа и/или нагрузка в часах не совпадает с требованием РУП. Также для некоторых видов работы необходимо добавить приложение со списком тем.
+      </div>
+
+
       <%= render :file => 'manage/self_education_items/index', :locals => { :semester => semester, :kind => :srs, :loadings => loadings, :collection => @work_programm.self_education_items_by_semester(semester)} %>
     </div>
   <% end %>

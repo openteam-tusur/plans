@@ -3,13 +3,13 @@
     <%= exercise.title %>
     <%= render :partial => 'manage/work_programms/appendixes', :locals => { :appendix => exercise.appendix, :parent => exercise } %>
   </td>
-  <td class='hours'>
+  <td class='hours centered'>
     <%= exercise.volume %>
   </td>
-  <td>
+  <td class='centered'>
     <% if can? :modify, @work_programm %>
-      <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_exercise_path(@year, @speciality, @subspeciality, @discipline, @work_programm, exercise), :remote => true %>
-      <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_exercise_path(@year, @speciality, @subspeciality, @discipline, @work_programm, exercise), :remote => true, :method => :delete, :confirm => t('are_you_sure?') %>
+      <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_exercise_path(@year, @speciality, @subspeciality, @discipline, @work_programm, exercise), :remote => true, :class => 'edit_link' %>
+      <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_exercise_path(@year, @speciality, @subspeciality, @discipline, @work_programm, exercise), :remote => true, :method => :delete, :confirm => t('are_you_sure?'), :class => 'remove_link' %>
     <% end %>
   </td>
 </tr>

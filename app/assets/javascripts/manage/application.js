@@ -11,4 +11,6 @@
 // = require ./ajaxed
 // = require ./actions_handlers
 // = require ./how_to_handlers
+// = require ./tipsy
+// = require ./history
 // = require ./main

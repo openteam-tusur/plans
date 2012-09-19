@@ -1,11 +1,14 @@
 <div class="ajaxed_item">
-  <%= person.full_name  %>
-  <%= person.post %>
-  <%= person.academic_degree %>
-  <%= person.academic_rank %>
+  <span class='full_name'>
+    <%= person.full_name %>
+    <%= content_tag :span, ", #{person.academic_degree.mb_chars.downcase}", :class => 'academic_degree' if person.academic_degree? %><%= content_tag :span, ", #{person.academic_rank.mb_chars.downcase}", :class => 'academic_rank' if person.academic_rank? %>
+  </span>
+  <% if person.post? %>
+    <span class='post'><%= person.post %></span>
+  <% end %>
 
   <% if can? :modify, @work_programm %>
-    <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_person_path(@year, @speciality, @subspeciality, @discipline, @work_programm, person), :remote => true %>
-    <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_person_path(@year, @speciality, @subspeciality, @discipline, @work_programm, person), :remote => true, :method => :delete, :confirm => t('are_you_sure?') %>
+    <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_person_path(@year, @speciality, @subspeciality, @discipline, @work_programm, person), :remote => true, :class => 'edit_link' %>
+    <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_person_path(@year, @speciality, @subspeciality, @discipline, @work_programm, person), :remote => true, :method => :delete, :confirm => t('are_you_sure?'), :class => 'remove_link' %>
   <% end %>
 </div>

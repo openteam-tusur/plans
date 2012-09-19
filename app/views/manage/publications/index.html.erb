@@ -4,15 +4,15 @@
       <th>Название</th>
       <th>Где находится</th>
       <th>Кол-во экземпляров</th>
-      <th></th>
+      <th class='ud_actions'></th>
     </tr>
   </thead>
   <tbody>
     <%= render collection %>
     <tr>
-      <td colspan='4'>
+      <td colspan='4' class='centered'>
         <% if can? :modify, @work_programm %>
-          <%= link_to "+ #{t("activerecord.attributes.publication.publication_kind_enum.#{kind}").mb_chars.downcase}", new_manage_year_speciality_subspeciality_discipline_work_programm_publication_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :publication => { :publication_kind => kind }}), :remote => true, :class => 'new_record in_table' %>
+          <%= link_to t("activerecord.attributes.publication.add_#{kind}").mb_chars.downcase, new_manage_year_speciality_subspeciality_discipline_work_programm_publication_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :publication => { :publication_kind => kind }}), :remote => true, :class => 'new_record in_table new_link' %>
         <% end %>
       </td>
     </tr>

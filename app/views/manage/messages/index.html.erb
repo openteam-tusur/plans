@@ -4,12 +4,10 @@
       <%= render collection %>
     </ul>
   <% else %>
-    <div class="empty">Нет сообщений</div>
+    <div class="empty">Нет рабочих программ в данном состоянии</div>
   <% end %>
 </div>
 
 <%= content_for :bottom_left_side_additions do %>
-  <div class="comment">
-    Здесь вы увидите список сообщений, которые показывают движение рабочей программы.
-  </div>
+  <div class="comment">Здесь вы видите все рабочие программы, которые имеют к вам отношение.</div>
 <% end %>

@@ -1,6 +1,11 @@
-<li>
+<% if gos.didactic_units_complete? %>
+  <li class='success'>
+<% else %>
+  <li class='warning with_tip' title='Не все дидактические единицы заполнены '>
+<% end %>
+
   <div class="wrapper">
     <%= link_to gos, [:manage, gos] %>
-    <span class='text'>Специальность: <%= gos.speciality_code %> <%= gos.speciality_title %></span>
+    <span class='text'><%= gos.speciality_code %> <%= gos.speciality_title %></span>
   </div>
 </li>

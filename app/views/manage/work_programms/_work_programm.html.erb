@@ -1,4 +1,5 @@
 <li class='ajaxed_item'>
+  <div class="wrapper">
   <%= link_to work_programm,
               manage_year_speciality_subspeciality_discipline_work_programm_path(@year.number, @speciality.code, @subspeciality, work_programm.discipline, work_programm) %>
 
@@ -6,5 +7,7 @@
               manage_year_speciality_subspeciality_discipline_work_programm_path(@year.number, @speciality.code, @subspeciality, work_programm.discipline, work_programm),
               :method => :delete,
               :remote => true,
+              :class => 'remove_link',
               :confirm => t('are_you_sure?') %>
+  </div>
 </li>

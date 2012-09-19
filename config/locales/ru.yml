@@ -1,7 +1,7 @@
 ru:
   are_you_sure?: Вы уверены, в том что хотите сделать?
   enter_year:    Набор %{year} года
-  remove:        Удалить
+  remove:        удалить
   site_title:    Рабочие программы ТУСУР
   statistics:    Статистика по кафедрам
 
@@ -18,25 +18,25 @@ ru:
   manage:
     work_programms:
       event_actions:
-        check_by_educational_office:    Отправить в учебное управление
-        check_by_graduated_subdivision: Отправить на выпускающую кафедру
-        check_by_library:               Отправить в библиотеку
-        check_by_methodological_office: Отправить в методический кабинет
-        check_by_profiled_subdivision:  Отправить на профилирующую кафедру
-        check_by_provided_subdivision:  Отправить на обеспечивающую кафедру
-        redux:                          Вернуть на доработку автору программы
-        released:                       Подтвердить правильность заполнения рабочей программы
+        check_by_educational_office:      Отправить в учебное управление
+        check_by_graduated_subdepartment: Отправить на выпускающую кафедру
+        check_by_library:                 Отправить в библиотеку
+        check_by_methodological_office:   Отправить в методический кабинет
+        check_by_profiled_subdepartment:  Отправить на профилирующую кафедру
+        check_by_provided_subdepartment:  Отправить на обеспечивающую кафедру
+        redux:                            Вернуть на доработку автору программы
+        released:                         Подтвердить правильность заполнения рабочей программы
 
   message:
-    check_by_educational_office:    Рабочая программа на проверке в учебном управлении
-    check_by_graduated_subdivision: Рабочая программа на проверке на выпускающей кафедре
-    check_by_library:               Рабочая программа на проверке в библиотеке
-    check_by_methodological_office: Рабочая программа на проверке в методическом кабинете
-    check_by_profiled_subdivision:  Рабочая программа на проверке на профилирующей кафедре
-    check_by_provided_subdivision:  Рабочая программа на проверке на обеспечивающей кафедре
-    draft:                          Создана новая рабочая программа
-    redux:                          Рабочая программа возвращена автору
-    released:                       Рабочая программа утверждена
+    check_by_educational_office:      Рабочая программа на проверке в учебном управлении
+    check_by_graduated_subdepartment: Рабочая программа на проверке на выпускающей кафедре
+    check_by_library:                 Рабочая программа на проверке в библиотеке
+    check_by_methodological_office:   Рабочая программа на проверке в методическом кабинете
+    check_by_profiled_subdepartment:  Рабочая программа на проверке на профилирующей кафедре
+    check_by_provided_subdepartment:  Рабочая программа на проверке на обеспечивающей кафедре
+    draft:                            Создана новая рабочая программа
+    redux:                            Рабочая программа возвращена автору
+    released:                         Рабочая программа утверждена
 
   navigation:
     main_manage_navigation:
@@ -45,15 +45,15 @@ ru:
       specialities:         Список специальностей
 
     manage_messages:
-      drafts:                          Черновики
-      reduxes:                         Полученные
-      checks_by_provided_subdivision:  На обеспечивающей кафедре
-      checks_by_profiled_subdivision:   На профилирующей кафедре
-      checks_by_graduated_subdivision: На выпускающей кафедре
-      checks_by_library:               В библиотеке
-      checks_by_methodological_office: В методическом кабинете
-      checks_by_educational_office:    В учебном управлении
-      releases:                        Утвержденные
+      drafts:                             Черновики
+      reduxes:                            Полученные
+      checks_by_provided_subdepartment:   На обеспечивающей кафедре
+      checks_by_profiled_subdepartment:   На профилирующей кафедре
+      checks_by_graduated_subdepartment:  На выпускающей кафедре
+      checks_by_library:                  В библиотеке
+      checks_by_methodological_office:    В методическом кабинете
+      checks_by_educational_office:       В учебном управлении
+      releases:                           Утвержденные
 
   activerecord:
     attributes:
@@ -99,6 +99,10 @@ ru:
         srs:       Самостоятельная работа
         practices: Практические занятия
         csrs:      Курсовое проектирование / Курсовые работы
+        add_lecture:  добавить лекцию
+        add_lab:      добавить лабораторную работу
+        add_practice: добавить практическое занятие
+        add_csr:      добавить курсовой проект / курсовую работу
         kind_enum:
           lecture:  Лекция
           lab:      Лабораторная работа
@@ -148,6 +152,13 @@ ru:
         location:   Где находится
         text:       Библиографическая запись
         url:        URL
+        add_basic:            добавить основную литературу
+        add_additional:       добавить дополнительную литературу
+        add_ump_practice:     добавить методические указания (УМП) по проведению практических занятий
+        add_ump_lab:          добавить методические указания (УМП) по проведению лабораторных работ
+        add_ump_srs:          добавить методические указания (УМП) для самостоятельной работы
+        add_ump_course_work:  добавить методические указания (УМП) для курсового проектирования / курсовых работ
+        add_ump_csr:          добавить методические указания (УМП) для курсового проектирования / курсовых работ
 
         location_enum:
           lan:      ЭБС "Лань"
@@ -246,7 +257,7 @@ ru:
       check:                Проверка
       context:              Контекст
       department:           Факультет
-      didactic_unit:        Дидактическая единица
+      didactic_unit:        дидактическую единицу
       discipline:           Дисциплина
       examination_question: экзаменационный вопрос
       exercise:             занятие

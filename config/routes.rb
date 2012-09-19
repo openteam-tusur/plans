@@ -1,7 +1,7 @@
 Plans::Application.routes.draw do
   namespace :manage do
     get '/messages/:folder' => 'messages#index',
-      :constraints => { :folder => /(drafts|reduxes|releases|checks_by_provided_subdivision|checks_by_profiled_subdivision|checks_by_graduated_subdivision|checks_by_library|checks_by_methodological_office|checks_by_educational_office)/ },
+      :constraints => { :folder => /(drafts|reduxes|releases|checks_by_provided_subdepartment|checks_by_profiled_subdepartment|checks_by_graduated_subdepartment|checks_by_library|checks_by_methodological_office|checks_by_educational_office)/ },
       :as => :scoped_messages
 
     resources :years, :only => [] do
@@ -41,7 +41,7 @@ Plans::Application.routes.draw do
       end
     end
 
-    resources :goses do
+    resources :goses, :only => [:index, :show] do
       resources :didactic_units, :except => :index
     end
 

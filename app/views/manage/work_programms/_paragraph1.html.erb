@@ -8,11 +8,16 @@
 <div class='<%= indicate_validity :missions_valid %>'>
   <h5>1.2 Задачи</h5>
   <div class="ajaxed">
+    <div class="notice warning">
+      Нет ни одной задачи изучения дисциплины и не добавлены требования к студенту, окончившему обучение данной дисциплине.
+    </div>
     <%= render @work_programm.missions %>
     <% if can? :modify, @work_programm %>
-      <%= link_to "добавить задачу", new_manage_year_speciality_subspeciality_discipline_work_programm_mission_path(@year, @speciality, @subspeciality, @discipline, @work_programm), :remote => true, :class => 'new_record' %>
+      <%= link_to "добавить задачу", new_manage_year_speciality_subspeciality_discipline_work_programm_mission_path(@year, @speciality, @subspeciality, @discipline, @work_programm), :remote => true, :class => 'new_record new_link' %>
     <% end %>
   </div>
+
+  <br />
 
   <h6>По окончанию изучения дисциплины «<%= @discipline %>» студент обязан:</h6>
   <div class="ajaxed">
@@ -23,6 +28,9 @@
 <div class='<%= indicate_validity :related_disciplines_valid %>'>
   <h5>1.3 Место дисциплины в учебном процессе</h5>
   <div class="ajaxed">
+    <div class="notice warning">
+      Нет зависимых/зависящих дисциплин. Необходимо добавить хотя бы одну.
+    </div>
     <%= render :file => 'manage/related_disciplines/index', :locals => { :collection => @work_programm.related_disciplines } %>
   </div>
 </div>

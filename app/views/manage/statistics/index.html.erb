@@ -2,67 +2,13 @@
   <%= link_to '&larr;&nbsp; назад к списку специальностей'.html_safe, manage_year_scoped_specialities_path(@year.number, :degree => @year.specialities.pluck(:degree).uniq.sort.first)  %>
 </div>
 
-<h1 class='head_center'>Статистика по кафедрам</h1>
+<div class="statistics_wrapper">
+  <h4>Статистика по кафедрам за <%= @year %></h4>
 
-<table class='statistics'>
-  <thead>
-    <tr>
-      <th rowspan=2>Кафедра</th>
-      <th rowspan=2>ООП</th>
-      <th rowspan=2>УП</th>
-      <th colspan=2>Бакалавриат</th>
-      <th colspan=2>Специалитет</th>
-      <th colspan=2>Магистратура</th>
-    </tr>
-    <tr>
-      <th>ООП</th>
-      <th>УП</th>
-      <th>ООП</th>
-      <th>УП</th>
-      <th>ООП</th>
-      <th>УП</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @departments.each do |department| %>
-      <tr>
-        <td colspan=9 class='department_title'>
-          <%= department.title %>
-        </td>
-      </tr>
-      <% department.subdepartments.actual.each do |subdepartment| %>
-        <% subspecialities = subdepartment.subspecialities.actual %>
-        <% grouped_subspecialities = subspecialities.group_by(&:degree) %>
-        <tr>
-          <td class='subdepartment_title'>
-            <%= "#{subdepartment.title} (#{subdepartment.abbr})" %>
-          </td>
-          <td <%= 'class=warnings' unless (subspecialities.count - subspecialities.map(&:programm).compact.count).zero? %>>
-            <%= subspecialities.count %>/<%= subspecialities.map(&:programm).compact.count %>
-          </td>
-          <td <%= 'class=warnings' unless (subspecialities.count - subspecialities.select{|s| s.disciplines.actual.any? }.count).zero? %>>
-            <%= subspecialities.count %>/<%= subspecialities.select{|s| s.disciplines.actual.any? }.count %>
-          </td>
-          <% %w(bachelor specialty magistracy).each do |degree| %>
-            <% subspecialities = grouped_subspecialities[degree] %>
-            <% if subspecialities.nil? %>
-              <td></td>
-              <td></td>
-              <% next %>
-            <% end %>
-            <td <%= 'class=warnings' unless (subspecialities.count - subspecialities.map(&:programm).compact.count).zero? %>>
-              <%= subspecialities.count %>/<%= subspecialities.map(&:programm).compact.count %>
-            </td>
-            <td <%= 'class=warnings' unless (subspecialities.count - subspecialities.select{|s| s.disciplines.actual.any? }.count).zero? %>>
-              <%= subspecialities.count %>/<%= subspecialities.select{|s| s.disciplines.actual.any? }.count %>
-            </td>
-          <% end %>
-        </tr>
-      <% end %>
-    <% end %>
+  <table class='statistics'>
     <thead>
       <tr>
-        <th rowspan=3>Итого</th>
+        <th rowspan=2>Кафедра</th>
         <th rowspan=2>ООП</th>
         <th rowspan=2>УП</th>
         <th colspan=2>Бакалавриат</th>
@@ -77,10 +23,65 @@
         <th>ООП</th>
         <th>УП</th>
       </tr>
-      <tr>
-        <th><%= @year.subspecialities.actual.count %> / <%= @year.subspecialities.actual.map(&:programm).compact.count %></th>
-        <th><%= @year.subspecialities.actual.count %> / <%= @year.subspecialities.actual.select{|s| s.disciplines.actual.any? }.count %> </th>
-        <% grouped_subspecialities = @year.subspecialities.actual.group_by(&:degree) %>
+    </thead>
+    <tbody>
+      <% @departments.each do |department| %>
+        <tr>
+          <td colspan=9 class='department_title'>
+            <%= department.title %>
+          </td>
+        </tr>
+        <% department.subdepartments.actual.each do |subdepartment| %>
+          <% subspecialities = subdepartment.subspecialities.actual %>
+          <% grouped_subspecialities = subspecialities.group_by(&:degree) %>
+          <tr>
+            <td class='subdepartment_title'>
+              <%= "#{subdepartment.title} (#{subdepartment.abbr})" %>
+            </td>
+            <td <%= 'class=warnings' unless (subspecialities.count - subspecialities.map(&:programm).compact.count).zero? %>>
+              <%= subspecialities.count %>/<%= subspecialities.map(&:programm).compact.count %>
+            </td>
+            <td <%= 'class=warnings' unless (subspecialities.count - subspecialities.select{|s| s.disciplines.actual.any? }.count).zero? %>>
+              <%= subspecialities.count %>/<%= subspecialities.select{|s| s.disciplines.actual.any? }.count %>
+            </td>
+            <% %w(bachelor specialty magistracy).each do |degree| %>
+              <% subspecialities = grouped_subspecialities[degree] %>
+              <% if subspecialities.nil? %>
+                <td></td>
+                <td></td>
+                <% next %>
+              <% end %>
+              <td <%= 'class=warnings' unless (subspecialities.count - subspecialities.map(&:programm).compact.count).zero? %>>
+                <%= subspecialities.count %>/<%= subspecialities.map(&:programm).compact.count %>
+              </td>
+              <td <%= 'class=warnings' unless (subspecialities.count - subspecialities.select{|s| s.disciplines.actual.any? }.count).zero? %>>
+                <%= subspecialities.count %>/<%= subspecialities.select{|s| s.disciplines.actual.any? }.count %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+      <thead>
+        <tr>
+          <th rowspan=3>Итого</th>
+          <th rowspan=2>ООП</th>
+          <th rowspan=2>УП</th>
+          <th colspan=2>Бакалавриат</th>
+          <th colspan=2>Специалитет</th>
+          <th colspan=2>Магистратура</th>
+        </tr>
+        <tr>
+          <th>ООП</th>
+          <th>УП</th>
+          <th>ООП</th>
+          <th>УП</th>
+          <th>ООП</th>
+          <th>УП</th>
+        </tr>
+        <tr>
+          <th><%= @year.subspecialities.actual.count %> / <%= @year.subspecialities.actual.map(&:programm).compact.count %></th>
+          <th><%= @year.subspecialities.actual.count %> / <%= @year.subspecialities.actual.select{|s| s.disciplines.actual.any? }.count %> </th>
+          <% grouped_subspecialities = @year.subspecialities.actual.group_by(&:degree) %>
           <% %w(bachelor specialty magistracy).each do |degree| %>
             <% subspecialities = grouped_subspecialities[degree] %>
             <% if subspecialities.nil? %>
@@ -95,7 +96,8 @@
               <%= subspecialities.count %>/<%= subspecialities.select{|s| s.disciplines.actual.any? }.count %>
             </th>
           <% end %>
-      </tr>
-    </thead>
-  </tbody>
-</table>
+        </tr>
+      </thead>
+    </tbody>
+  </table>
+</div>

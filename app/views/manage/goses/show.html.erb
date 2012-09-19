@@ -1,33 +1,35 @@
-<p>
-  <%= link_to "&larr;&nbsp;К списку ГОС'ов".html_safe, manage_goses_path %>
-</p>
+<h4><%= resource %></h4>
 
-<h1>Государственный общеобразовательный стандарт</h1>
-
-<div>
-  <%= link_to 'Редактировать', edit_resource_path %>
-  <%= link_to 'Удалить', [:manage, resource], :confirm => t('are_you_sure?'), :method => :delete %>
+<div class="list">
+  <ul>
+    <% resource.disciplines.sort.each do |discipline| %>
+      <% if unit = resource.didactic_units.where(:discipline => discipline.title).first %>
+        <li>
+          <div class="wrapper">
+            <%= link_to discipline, [:manage, resource, unit] %>
+            <%= discipline.cycle_code %>
+          </div>
+        </li>
+      <% else %>
+        <li class='warning with_tip' title='Нет дидактических единиц'>
+          <div class="wrapper">
+            <%= link_to discipline, new_manage_gos_didactic_unit_path(resource, :params => { :didactic_unit => { :discipline => discipline.title }}) %>
+            <%= discipline.cycle_code %>
+          </div>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
 </div>
 
-<h2><%= resource %></h2>
-<h3>Дата утверждения: <%= l resource.approved_on %></h3>
-<h3>Специальности: <%= resource.speciality_code %> <%= resource.speciality_title %></h3>
+<%= content_for :bottom_left_side_additions do %>
+  <%= link_to "&larr;&nbsp;К списку ГОС'ов".html_safe, manage_goses_path, :class => 'back_link' %>
+  <div class='information'>
+    <span>Дата утверждения: <%= l resource.approved_on, :format => "%d %b %Y" %></span>
+    <span>Специальности: <%= resource.speciality_code %> <%= resource.speciality_title %></span>
+  </div>
 
-<h4>Дисциплины</h4>
-
-<ul>
-  <% Speciality.where(:code => resource.speciality_code).each do |speciality| %>
-    <% speciality.subspecialities.flat_map(&:disciplines).select(&:federal?).sort.each do |discipline| %>
-      <li>
-        <% if unit = resource.didactic_units.where(:discipline => discipline.title).first %>
-          <%= link_to discipline, [:manage, resource, unit] %>
-          <%= discipline.cycle_code %>
-        <% else %>
-          <%= discipline %>
-          <%= discipline.cycle_code %>
-          <%= link_to 'Добавить', new_manage_gos_didactic_unit_path(resource, :params => { :didactic_unit => { :discipline => discipline.title }}) %>
-        <% end %>
-      </li>
-    <% end %>
-  <% end %>
-</ul>
+  <div class="comment">
+    Здесь вы можете добавить дидактические единицы для дисциплин федерального компонента.
+  </div>
+<% end %>

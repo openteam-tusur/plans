@@ -1,5 +1,5 @@
 <div class="speciality_list">
-  <h2><%= t("activerecord.values.speciality.#{params[:degree]}") %>, <%= t('enter_year', :year => @year.number).mb_chars.downcase %></h2>
+  <h4><%= t("activerecord.values.speciality.#{params[:degree]}") %>, <%= t('enter_year', :year => @year.number).mb_chars.downcase %></h4>
   <% if collection.any? %>
     <ul>
       <%= render collection %>
@@ -8,3 +8,9 @@
     <div class="empty">Нет специальностей</div>
   <% end %>
 </div>
+
+<%= content_for :bottom_left_side_additions do %>
+  <div class="comment">
+    Здесь вы видите список всех специальностей и направлений подготовки.
+  </div>
+<% end %>

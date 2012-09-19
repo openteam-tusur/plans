@@ -4,15 +4,15 @@
       <th>Наименование работы</th>
       <th>Объем, часов</th>
       <th>Форма контроля</th>
-      <th></th>
+      <th class='ud_actions'></th>
     </tr>
   </thead>
   <tbody>
     <%= render collection %>
     <tr>
-      <td colspan='4'>
+      <td colspan='4' class='centered'>
         <% if can? :modify, @work_programm %>
-          <%= link_to "+ вид самостоятельной работы", new_manage_year_speciality_subspeciality_discipline_work_programm_self_education_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :self_education_item => { :semester_id => semester.id }}), :remote => true, :class => 'new_record in_table' %>
+          <%= link_to "добавить самостоятельную работу", new_manage_year_speciality_subspeciality_discipline_work_programm_self_education_item_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :self_education_item => { :semester_id => semester.id }}), :remote => true, :class => 'new_record in_table new_link' %>
         <% end %>
       </td>
     </tr>

@@ -11,7 +11,7 @@
   <div class="header">
     <%= link_to "Как создать рабочую программу?", '#', :class => 'how_to' %>
     <div id='how_to'>
-      Создать новую рабочую программы вы можете:
+      Для того, чтобы создать новую рабочую программу необходимо:
       <ul>
         <li>
           1. Перейти на список специальностей
@@ -29,6 +29,8 @@
           5. Выбрать нужную дисциплину
         </li>
       </ul>
+
+      <p class="comment">Данная справочная информация доступна на любой странице.</p>
     </div>
     <div class="main_navigation">
       <%= render_navigation :context => 'main_manage' %>
@@ -39,7 +41,7 @@
     <div class="left_side">
       <%= yield :top_left_side_additions %>
       <%= render_navigation :context => 'manage_messages'     if controller_name =~ /messages/ %>
-      <%= render_navigation :context => 'manage_specialities' if controller_name =~ /specialities/ %>
+      <%= render_navigation :context => 'manage_specialities' if controller_name =~ /\bspecialities/ %>
       <%= yield :bottom_left_side_additions %>
     </div>
     <div class="right_side">

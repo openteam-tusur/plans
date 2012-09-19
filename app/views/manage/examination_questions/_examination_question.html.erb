@@ -1,10 +1,10 @@
 <tr class='ajaxed_item'>
   <td><%= examination_question.question_kind %></td>
-  <td><%= examination_question.score %></td>
-  <td>
+  <td class='centered'><%= examination_question.score %></td>
+  <td class='centered'>
     <% if can? :modify, @work_programm %>
-      <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_examination_question_path(@year, @speciality, @subspeciality, @discipline, @work_programm, examination_question), :remote => true %>
-      <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_examination_question_path(@year, @speciality, @subspeciality, @discipline, @work_programm, examination_question), :remote => true, :method => :delete, :confirm => t('are_you_sure?') %>
+      <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_examination_question_path(@year, @speciality, @subspeciality, @discipline, @work_programm, examination_question), :remote => true, :class => 'edit_link' %>
+      <%= link_to "удалить", manage_year_speciality_subspeciality_discipline_work_programm_examination_question_path(@year, @speciality, @subspeciality, @discipline, @work_programm, examination_question), :remote => true, :method => :delete, :confirm => t('are_you_sure?'), :class => 'remove_link' %>
     <% end %>
   </td>
 </tr>

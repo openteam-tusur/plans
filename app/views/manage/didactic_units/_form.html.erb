@@ -1,4 +1,4 @@
-<h1><%= t("#{action_name}_#{resource_class.name.underscore}") %></h1>
+<h4><%= t("#{action_name}_#{resource_class.name.underscore}") %></h4>
 
 <%= simple_form_for [:manage, parent, resource] do |f| %>
   <%= f.input :discipline %>
@@ -7,5 +7,15 @@
   <div class="buttons">
     <%= f.submit %>
     <%= link_to 'Отмена', resource.new_record? ? parent_path : resource_path %>
+  </div>
+<% end %>
+
+<%= content_for :bottom_left_side_additions do %>
+  <div class="information">
+    <%= parent %>
+  </div>
+
+  <div class="comment">
+    Здесь вы можете добавить/отредактировать дидактические единицы для дисциплины.
   </div>
 <% end %>

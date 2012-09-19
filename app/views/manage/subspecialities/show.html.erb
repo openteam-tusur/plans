@@ -1,28 +1,25 @@
-<%= t('enter_year', :year => @year.number) %>
-<br/>
-<%= @speciality %>
-<br/>
-<%= t("activerecord.values.speciality.#{@speciality.degree}") %>
-<br/>
-<%= @subspeciality.profiled_subdepartment %>
-<br/>
-<%= @subspeciality %>
-<br/>
-
+<h4>Основная образовательная программа</h4>
 <div class='ajaxed'>
   <%= render :file => 'manage/programms/show', :locals => { :resource => resource.programm } %>
 </div>
 
+<hr />
+
 <div class="discilpine_wrapper">
   <% cycles = {} %>
+  <div class="toc_no_selected">
+    Выберите цикл дисциплин
+  </div>
   <ul id='toc'>
     <% @subspeciality.disciplines_consumed_by(current_user).group_by(&:cycle).sort.each do |cycle, disciplines| %>
       <% cycles[cycle] = disciplines.first.translited_cycle %>
       <li id='<%= cycles[cycle] %>'>
         <h5><%= cycle %></h5>
-        <ul>
-          <%= render disciplines.sort %>
-        </ul>
+        <div class="list">
+          <ul>
+            <%= render disciplines.sort %>
+          </ul>
+        </div>
       </li>
     <% end %>
   </ul>
@@ -30,9 +27,24 @@
 
 <%= content_for :top_left_side_additions do %>
   <%= link_to "&larr; назад к списку специальностей".html_safe, manage_year_scoped_specialities_path(@year.number, :degree => @speciality.degree), :class => 'back_link' %>
+
+  <h6>Информация о специальности</h6>
+  <div class="information">
+    <span><%= t('enter_year', :year => @year.number) %></span>
+    <span><%= @speciality %></span>
+    <span><%= t("activerecord.values.speciality.#{@speciality.degree}") %></span>
+    <span><%= @subspeciality.profiled_subdepartment %></span>
+    <span><%= @subspeciality %></span>
+  </div>
+
+  <h6>Циклы дисциплин</h6>
   <ul class="navigation toc">
     <% cycles.each do |title, anchor| %>
       <li><%= link_to title, "##{anchor}" %></li>
     <% end %>
   </ul>
+
+  <div class="comment">
+    Здесь вы видите список дисциплин для данной специальности, а так же основную образовательную программу.
+  </div>
 <% end %>

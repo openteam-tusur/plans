@@ -1,4 +1,4 @@
-<div class="ajaxed_item">
+<div class="ajaxed_item form">
   <% url = resource.new_record? ? [:manage, association_chain, :people].flatten : manage_year_speciality_subspeciality_discipline_work_programm_person_path(@year, @speciality, @subspeciality, @discipline, @work_programm, resource) %>
   <div class='hide autocomplete_data'>
     <%= resource.class.collection_by_department(@discipline.subdepartment).to_json %>
