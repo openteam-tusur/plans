@@ -37,6 +37,8 @@ group :default do
 end
 
 group :development do
+  gem 'capistrano'
+  gem 'rvm-capistrano'
   gem 'annotate',             '>= 2.5.0.pre'
   gem 'hirb',                 :require => false
   gem 'ruby-graphviz'

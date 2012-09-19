@@ -3,3 +3,19 @@ app:
 
 storage:
   url:      http://esp-storage.openteam.ru
+
+blue-pages:
+  url:      http://blue-pages
+
+sso:
+  url:      http://esp-sso
+  key:      KEY
+  secret:   SECRET
+
+solr:
+  url:      http://localhost:8982/solr
+
+deploy:
+  application:          appname.ru
+  domain:               user@host
+  port:                 port
