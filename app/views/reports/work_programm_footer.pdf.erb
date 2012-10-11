@@ -17,9 +17,8 @@
                y[j].textContent = vars[x[i]];
           }
           /* if this is the first page, just remove the footer element from the Document */
-          if(vars['page'] != 1){
-            var elt = document.getElementById("pdfFooter");
-            elt.parentNode.removeChild(elt);
+          if(vars['page'] == 1){
+            $('#pdfFooter').remove()
           }
         }
       }
@@ -27,7 +26,12 @@
   </head>
   <body class='title_page_body' onload="subst()">
     <div id="pdfFooter">
-      <p class='center' style='text-align:center; font-family: "Times New Roman"'><%= title_page.year_line %> г.</p>
+      <p class='center' style='text-align:right; font-family: "Times New Roman"'>
+        <span class="page"></span>
+      </p>
+    </div>
+    <div class="year" style='text-align:center; font-family: "Times New Roman"'>
+      <span id='year'><%= title_page.year_line %> г.</span>
     </div>
   </body>
 </html>
