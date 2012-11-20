@@ -26,14 +26,6 @@ group :default do
   gem 'simple_form'
   gem 'state_machine'
   gem 'wicked_pdf'
-
-  # HACK FOR HACK
-  gem 'oauth2', '0.6.1'
-  gem 'omniauth',  '1.1.0'
-  gem 'omniauth-oauth2', '1.0.2'
-  gem 'has_searcher', '< 0.0.90'
-  gem 'formtastic', '~> 2.1.0'
-  gem 'cancan', '1.6.7'
 end
 
 group :development do
