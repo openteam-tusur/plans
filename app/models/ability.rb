@@ -22,7 +22,7 @@ class Ability
     end
 
     can :manage, :application do
-      user.have_permissions?
+      user.permissions.any?
     end
 
     can :manage, :permissions do
