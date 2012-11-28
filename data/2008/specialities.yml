@@ -8,6 +8,14 @@
 
 specialty:
   -
+    code: "210405"
+    title: "Радиосвязь, радиовещание и телевидение"
+    subspecialities:
+      -
+        subdepartment: "ТОР"
+        graduated_subdepartment: "ТОР"
+        title: "Без специализации"
+  -
     code: "080504.65"
     title: "Государственное и муниципальное управление"
     subspecialities:

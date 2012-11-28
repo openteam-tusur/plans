@@ -11,10 +11,10 @@ module PlanImporter
     year_number = title_node['ГодНачалаПодготовки'].to_i
     raise "Год не совпадает #{year_number} != #{year.number}!!!" if year_number != year.number
     speciality_full_name = xml.css('Специальность').map{|speciality_node| speciality_node['Название']}.join(' ')
-    speciality_code = speciality_full_name.scan(/\d{6}.\d{2}/).first
+    speciality_code = speciality_full_name.scan(/\d{6}(?:.\d{2})?/).first
     speciality = year.specialities.find_by_code(speciality_code)
+    raise "нет специальности с кодом #{speciality_code} в #{year_number} году" unless speciality
     speciality.update_attribute :gos_generation, title_node['ТипГОСа'] || 2
-    raise "нет специальности с кодом #{speciality_code} в year_number году" unless speciality
     subspeciality_title = speciality_full_name.match(/"(.*)"/) ? speciality_full_name.match(/"(.*)"/)[1].squish : speciality.degree == 'specialty' ? "Без специализации" : "Без профиля"
     subspeciality = speciality.subspecialities.find_by_title(subspeciality_title)
     subspeciality.move_descendants_to_trash
