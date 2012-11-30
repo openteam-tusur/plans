@@ -1,4 +1,19 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: specialities
+#
+#  id             :integer          not null, primary key
+#  code           :string(255)
+#  title          :string(255)
+#  degree         :string(255)
+#  year_id        :integer
+#  deleted_at     :datetime
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  gos_generation :string(255)
+#
+
 
 require 'spec_helper'
 

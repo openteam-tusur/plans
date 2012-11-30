@@ -1,19 +1,36 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: subspecialities
+#
+#  id                         :integer          not null, primary key
+#  title                      :string(255)
+#  speciality_id              :integer
+#  subdepartment_id           :integer
+#  deleted_at                 :datetime
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  graduated_subdepartment_id :integer
+#  department_id              :integer
+#  education_form             :string(255)
+#
+
 
 class Subspeciality < ActiveRecord::Base
-  attr_accessible :title, :subdepartment_id, :graduated_subdepartment_id
+  attr_accessible :title, :subdepartment_id, :graduated_subdepartment_id, :education_form, :department_id
 
   alias_attribute :deleted?, :deleted_at?
 
   belongs_to :speciality
   belongs_to :subdepartment
   belongs_to :graduated_subdepartment, :class_name => 'Subdepartment'
+  belongs_to :department
 
   has_one :programm, :as => :with_programm
   has_many :disciplines, :dependent => :destroy
   has_many :semesters, :dependent => :destroy
 
-  validates_presence_of :title, :speciality, :subdepartment
+  validates_presence_of :title, :speciality, :subdepartment, :department, :education_form
 
   after_save :move_descendants_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
 
@@ -23,6 +40,8 @@ class Subspeciality < ActiveRecord::Base
   scope :actual, where(:deleted_at => nil)
 
   alias_method :profiled_subdepartment, :subdepartment
+
+  has_enum :education_form
 
   scope :consumed_by, ->(user) do
     if user.manager?
@@ -62,21 +81,6 @@ class Subspeciality < ActiveRecord::Base
   end
 
   def to_s
-    title
+    "#{title} #{human_education_form}"
   end
 end
-
-# == Schema Information
-#
-# Table name: subspecialities
-#
-#  id                         :integer          not null, primary key
-#  title                      :string(255)
-#  speciality_id              :integer
-#  subdepartment_id           :integer
-#  deleted_at                 :datetime
-#  created_at                 :datetime         not null
-#  updated_at                 :datetime         not null
-#  graduated_subdepartment_id :integer
-#
-

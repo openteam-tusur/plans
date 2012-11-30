@@ -12,8 +12,6 @@
           <% end %>
           <li class='warning with_tip' title='<%= title.join(', ') %>'>
         <% end %>
-          <%= "deleted" if subspeciality.deleted? %>
-
           <div class="wrapper">
             <%= link_to subspeciality, manage_year_speciality_subspeciality_path(@year.number, speciality.code, subspeciality) %>
             <span class='subdepartment'><%= subspeciality.subdepartment.abbr %></span>

@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: subspecialities
+#
+#  id                         :integer          not null, primary key
+#  title                      :string(255)
+#  speciality_id              :integer
+#  subdepartment_id           :integer
+#  deleted_at                 :datetime
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  graduated_subdepartment_id :integer
+#  department_id              :integer
+#  education_form             :string(255)
+#
+
 require 'spec_helper'
 
 describe Subspeciality do

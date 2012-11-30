@@ -194,6 +194,11 @@ ru:
           know:           знать
           be_able_to:     уметь
           have:           владеть
+      subspeciality:
+        education_form_enum:
+          full-time: очная
+          part-time: очно-заочная
+          postal:    заочная
 
       self_education_item:
         control:          Формы контроля

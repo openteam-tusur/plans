@@ -1,4 +1,19 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: work_programms
+#
+#  id            :integer          not null, primary key
+#  year          :integer
+#  discipline_id :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  purpose       :text
+#  vfs_path      :string(255)
+#  state         :string(255)
+#  creator_id    :integer
+#
+
 
 require 'spec_helper'
 

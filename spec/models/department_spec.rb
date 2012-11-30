@@ -1,4 +1,19 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: departments
+#
+#  id         :integer          not null, primary key
+#  title      :string(255)
+#  abbr       :string(255)
+#  number     :integer
+#  year_id    :integer
+#  deleted_at :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  context_id :integer
+#
+
 
 require 'spec_helper'
 

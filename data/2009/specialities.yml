@@ -1,9 +1,1 @@
 bachelor:
-  -
-    code:   "080700.62"
-    title:  "Бизнес-информатика"
-    subspecialities:
-      -
-        subdepartment: "АОИ"
-        graduated_subdepartment: "АОИ"
-        title: "Без профиля"

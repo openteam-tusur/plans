@@ -17,8 +17,8 @@ module PlanImporter
     speciality.update_attribute :gos_generation, title_node['ТипГОСа'] || 2
     subspeciality_title = speciality_full_name.match(/"(.*)"/) ? speciality_full_name.match(/"(.*)"/)[1].squish : speciality.degree == 'specialty' ? "Без специализации" : "Без профиля"
     subspeciality = speciality.subspecialities.find_by_title(subspeciality_title)
-    subspeciality.move_descendants_to_trash
     raise "нет профиля #{subspeciality_title} для специальности #{speciality_code} в #{year_number} года" unless subspeciality
+    subspeciality.move_descendants_to_trash
     xml.css('СтрокиПлана Строка').each do |discipline_xml|
       discipline = subspeciality.disciplines.find_or_initialize_by_title(discipline_xml['Дис'].squish)
       discipline.subdepartment = year.subdepartments.find_by_number((discipline_xml['Кафедра'] || title_node['КодКафедры']))
@@ -101,6 +101,7 @@ class YearImporter
 
   def import_specialities
     YAML.load_file("data/#{year.number}/specialities.yml").each do |degree, specialities_attributes|
+      next unless specialities_attributes
       specialities_attributes.each do |speciality_attributes|
         subspecialities_attributes = speciality_attributes.delete('subspecialities')
         speciality = year.specialities.find_or_initialize_by_code(speciality_attributes['code'])
@@ -109,11 +110,17 @@ class YearImporter
         subspecialities_attributes.each do |subspeciality_attributes|
           subdepartment = year.subdepartments.find_by_abbr(subspeciality_attributes['subdepartment'])
           graduated_subdepartment = year.subdepartments.find_by_abbr(subspeciality_attributes['graduated_subdepartment'] || subspeciality_attributes['subdepartment'])
-          subspeciality = speciality.subspecialities.find_or_initialize_by_title_and_subdepartment_id(:title => subspeciality_attributes['title'].squish,
-                                                                                                      :subdepartment_id => subdepartment.id)
+          education_form = subspeciality_attributes['education_form'] || 'full-time'
+          department = year.departments.find_by_abbr(subspeciality_attributes['department']) || subdepartment.department
+          subspeciality = speciality.subspecialities.find_or_initialize_by_title_and_subdepartment_id_and_education_form(
+            :title => subspeciality_attributes['title'].squish,
+            :subdepartment_id => subdepartment.id,
+            :education_form => education_form
+          )
           subspeciality.graduated_subdepartment = graduated_subdepartment
+          subspeciality.department = department
           refresh subspeciality
-          subspeciality.save! rescue p subspeciality_attributes['subdepartment']
+          subspeciality.save! #rescue p subspeciality_attributes['subdepartment']
         end
       end
     end

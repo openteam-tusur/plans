@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: years
+#
+#  id         :integer          not null, primary key
+#  number     :integer
+#  deleted_at :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'spec_helper'
 
 describe Year do
