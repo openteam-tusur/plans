@@ -7,6 +7,13 @@ specialty:
         subdepartment: "РЭТЭМ"
         title: "Мониторинг окружающей среды с применением компьютерных технологий"
   -
+    code: "090103.65"
+    title: "Организация и технология защиты информации"
+    subspecialities:
+      -
+        subdepartment: "РЗИ"
+        title: "Без специализации"
+  -
     code: "210201.65"
     title: "Проектирование и технология радиоэлектронных средств"
     subspecialities:
@@ -22,6 +29,9 @@ specialty:
         title: "Без специализации"
         education_form: 'part-time'
         department: 'ЗиВФ'
+      -
+        subdepartment: "РЗИ"
+        title: "Без специализации"
   -
     code: "210401.65"
     title: "Физика и техника оптической связи"
