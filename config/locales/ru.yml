@@ -15,6 +15,10 @@ ru:
   edit_didactic_unit:   Редактирование дидактической единицы
   update_didactic_unit: Редактирование дидактической единицы
 
+  bachelor:           Бакалавриат
+  magistracy:         Магистратура
+  specialty:          Специалитет
+
   manage:
     work_programms:
       event_actions:
