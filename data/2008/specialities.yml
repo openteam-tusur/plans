@@ -1,3 +1,11 @@
+bachelor:
+  -
+    code: "210100.62"
+    title: "Электроника и микроэлектроника"
+    subspecialities:
+      -
+        subdepartment: "ПрЭ"
+        title: "Без профиля"
 specialty:
   -
     code: "020801"
@@ -14,6 +22,13 @@ specialty:
         subdepartment: "РЗИ"
         title: "Без специализации"
   -
+    code: "210106.65"
+    title: "Промышленная электроника"
+    subspecialities:
+      -
+        subdepartment: "ПрЭ"
+        title: "Без специализации"
+  -
     code: "210201.65"
     title: "Проектирование и технология радиоэлектронных средств"
     subspecialities:
@@ -25,11 +40,6 @@ specialty:
     title: "Радиотехника"
     subspecialities:
       -
-        subdepartment: "СВЧиКР"
-        title: "Без специализации"
-        education_form: 'part-time'
-        department: 'ЗиВФ'
-      -
         subdepartment: "РЗИ"
         title: "Без специализации"
   -
@@ -39,11 +49,6 @@ specialty:
       -
         subdepartment: "СВЧиКР"
         title: "Без специализации"
-      -
-        subdepartment: "СВЧиКР"
-        title: "Без специализации"
-        education_form: 'postal'
-        department: 'ЗиВФ'
   -
     code: "210402.65"
     title: "Радиосвязь, радиовещание и телевидение"

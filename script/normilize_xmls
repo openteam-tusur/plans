@@ -1,0 +1,7 @@
+#!/bin/bash
+
+dir=`pwd`
+cd $1
+for i in `ls`; do n=`echo $i | sed 's/xml/originxml/g'`; mv $i $n; done
+for i in `ls`; do n=`echo $i | sed 's/origin//g'`; xmllint --format --encode utf-8 --output $n $i; done
+cd $dir
