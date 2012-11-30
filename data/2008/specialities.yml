@@ -1,5 +1,19 @@
 specialty:
   -
+    code: "020801"
+    title: "Экология"
+    subspecialities:
+      -
+        subdepartment: "РЭТЭМ"
+        title: "Мониторинг окружающей среды с применением компьютерных технологий"
+  -
+    code: "210201.65"
+    title: "Проектирование и технология радиоэлектронных средств"
+    subspecialities:
+      -
+        subdepartment: "РЭТЭМ"
+        title: "Технология радиоэлектронных средств"
+  -
     code: "210302.65"
     title: "Радиотехника"
     subspecialities:
