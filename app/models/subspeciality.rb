@@ -81,6 +81,6 @@ class Subspeciality < ActiveRecord::Base
   end
 
   def to_s
-    "#{title} #{human_education_form}"
+    "#{title}, #{human_education_form}"
   end
 end

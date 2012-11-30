@@ -13,11 +13,13 @@ module PlanImporter
     speciality_full_name = xml.css('Специальность').map{|speciality_node| speciality_node['Название']}.join(' ')
     speciality_code = speciality_full_name.scan(/\d{6}(?:.\d{2})?/).first
     speciality = year.specialities.find_by_code(speciality_code)
-    raise "нет специальности с кодом #{speciality_code} в #{year_number} году" unless speciality
+    raise "нет специальности с кодом #{speciality_code} в #{year_number} году #{file_path}" unless speciality
     speciality.update_attribute :gos_generation, title_node['ТипГОСа'] || 2
     subspeciality_title = speciality_full_name.match(/"(.*)"/) ? speciality_full_name.match(/"(.*)"/)[1].squish : speciality.degree == 'specialty' ? "Без специализации" : "Без профиля"
-    subspeciality = speciality.subspecialities.find_by_title(subspeciality_title)
-    raise "нет профиля #{subspeciality_title} для специальности #{speciality_code} в #{year_number} года" unless subspeciality
+    education_form = speciality_full_name.match(/(очно-заочная|очная|заочная)/).try(:[], 1)  || 'очная'
+    education_form = Subspeciality.human_enum_values(:education_form).invert["#{education_form} форма"]
+    subspeciality = speciality.subspecialities.find_by_title_and_education_form(subspeciality_title, education_form)
+    raise "нет профиля #{subspeciality_title} для #{education_form} для специальности #{speciality_code} в #{year_number} года #{file_path}" unless subspeciality
     subspeciality.move_descendants_to_trash
     xml.css('СтрокиПлана Строка').each do |discipline_xml|
       discipline = subspeciality.disciplines.find_or_initialize_by_title(discipline_xml['Дис'].squish)
@@ -94,7 +96,7 @@ class YearImporter
         subdepartment.context = Context.find_by_title(subdepartment.title)
         refresh subdepartment
         subdepartment.save!
-      end
+      end if subdepartments_attributes
     end
     bar.increment!
   end

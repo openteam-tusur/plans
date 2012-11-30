@@ -11,7 +11,7 @@ SimpleNavigation::Configuration.run do |navigation|
           sub_menu.dom_class = 'sub_menu'
         end
           sub_menu.item :statistic, t('statistics'), manage_year_statistics_path(year)
-      end
+      end if year.specialities.any?
     end
     primary.dom_class = 'manage_specialities'
   end

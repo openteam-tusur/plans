@@ -1,5 +1,26 @@
 specialty:
   -
+    code: "210302.65"
+    title: "Радиотехника"
+    subspecialities:
+      -
+        subdepartment: "СВЧиКР"
+        title: "Без специализации"
+        education_form: 'part-time'
+        department: 'ЗиВФ'
+  -
+    code: "210401.65"
+    title: "Физика и техника оптической связи"
+    subspecialities:
+      -
+        subdepartment: "СВЧиКР"
+        title: "Без специализации"
+      -
+        subdepartment: "СВЧиКР"
+        title: "Без специализации"
+        education_form: 'postal'
+        department: 'ЗиВФ'
+  -
     code: "210402.65"
     title: "Радиосвязь, радиовещание и телевидение"
     subspecialities:
