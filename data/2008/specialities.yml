@@ -152,6 +152,20 @@ specialty:
         subdepartment: "ЭСАУ"
         title: "Без специализации"
   -
+    code: "220501"
+    title: "Управление качеством"
+    subspecialities:
+      -
+        subdepartment: "УИ"
+        title: "Без специализации"
+  -
+    code: "220601.65"
+    title: "Управление инновациями"
+    subspecialities:
+      -
+        subdepartment: "УИ"
+        title: "Без специализации"
+  -
     code: "230102.65"
     title: "Автоматизированные системы обработки информации и управления"
     subspecialities:
