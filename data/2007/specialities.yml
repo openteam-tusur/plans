@@ -1,5 +1,14 @@
 specialty:
   -
+    code: "040101.65"
+    title: "Социальная работа"
+    subspecialities:
+      -
+        subdepartment: "ИСР"
+        title: "Без специализации"
+        education_form: 'postal'
+        department: 'ЗиВФ'
+  -
     code: "160905.65"
     title: "Техническая эксплуатация транспортного радиооборудования"
     subspecialities:

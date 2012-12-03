@@ -15,6 +15,13 @@ specialty:
         subdepartment: "РЭТЭМ"
         title: "Мониторинг окружающей среды с применением компьютерных технологий"
   -
+    code: "040101.65"
+    title: "Социальная работа"
+    subspecialities:
+      -
+        subdepartment: "ИСР"
+        title: "Без специализации"
+  -
     code: "090103.65"
     title: "Организация и технология защиты информации"
     subspecialities:
