@@ -1,5 +1,12 @@
 bachelor:
   -
+    code: "010500.62"
+    title: "Прикладная математика и информатика"
+    subspecialities:
+      -
+        subdepartment: "АСУ"
+        title: "Без профиля"
+  -
     code: "210100.62"
     title: "Электроника и микроэлектроника"
     subspecialities:
@@ -20,6 +27,13 @@ specialty:
     subspecialities:
       -
         subdepartment: "ИСР"
+        title: "Без специализации"
+  -
+    code: "080801.65"
+    title: "Прикладная  информатика (в экономике)"
+    subspecialities:
+      -
+        subdepartment: "АСУ"
         title: "Без специализации"
   -
     code: "090103.65"

@@ -9,6 +9,15 @@ specialty:
         education_form: 'postal'
         department: 'ЗиВФ'
   -
+    code: "080801.65"
+    title: "Прикладная  информатика (в экономике)"
+    subspecialities:
+      -
+        subdepartment: "АСУ"
+        title: "Без специализации"
+        education_form: 'postal'
+        department: 'ЗиВФ'
+  -
     code: "160905.65"
     title: "Техническая эксплуатация транспортного радиооборудования"
     subspecialities:
@@ -84,3 +93,12 @@ specialty:
         title: "Без специализации"
         education_form: 'postal-with-dist'
         department: 'ФДО'
+  -
+    code: "230105.65"
+    title: "Программное обеспечение вычислительной техники и автоматизированных систем"
+    subspecialities:
+      -
+        subdepartment: "АСУ"
+        title: "Без специализации"
+        education_form: 'postal'
+        department: 'ЗиВФ'
