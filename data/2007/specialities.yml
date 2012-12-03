@@ -1,5 +1,19 @@
 specialty:
   -
+    code: "030501.65"
+    title: "Юриспруденция"
+    subspecialities:
+      -
+        subdepartment: "ИП"
+        title: "Защита прав интеллектуальной собственности"
+        education_form: 'postal'
+        department: 'ЗиВФ'
+      -
+        subdepartment: "ИП"
+        title: "Без специализации"
+        education_form: 'postal-with-dist'
+        department: 'ФДО'
+  -
     code: "040101.65"
     title: "Социальная работа"
     subspecialities:
