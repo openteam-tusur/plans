@@ -14,11 +14,12 @@
 #  department_id              :integer
 #  education_form             :string(255)
 #  file_path                  :text
+#  plan_digest                :string(255)
 #
 
 
 class Subspeciality < ActiveRecord::Base
-  attr_accessible :title, :subdepartment_id, :graduated_subdepartment_id, :education_form, :department_id
+  attr_accessible :title, :subdepartment_id, :graduated_subdepartment_id, :education_form, :department_id, :plan_digest, :file_path
 
   alias_attribute :deleted?, :deleted_at?
 

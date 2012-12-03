@@ -13,6 +13,7 @@
 #  department_id              :integer
 #  education_form             :string(255)
 #  file_path                  :text
+#  plan_digest                :string(255)
 #
 
 require 'spec_helper'
