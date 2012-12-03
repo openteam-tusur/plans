@@ -22,6 +22,13 @@ specialty:
         subdepartment: "РЗИ"
         title: "Без специализации"
   -
+    code: "090105"
+    title: "Комплексное обеспечение информационной безопасности автоматизированных систем"
+    subspecialities:
+      -
+        subdepartment: "КИБЭВС"
+        title: "Без специализации"
+  -
     code: "210106.65"
     title: "Промышленная электроника"
     subspecialities:
@@ -41,6 +48,13 @@ specialty:
       -
         subdepartment: "КИПР"
         title: "Компьютерное проектирование РЭС"
+  -
+    code: "210202"
+    title: "Проектирование и технология электронно-вычислительных средств"
+    subspecialities:
+      -
+        subdepartment: "КИБЭВС"
+        title: "Без специализации"
   -
     code: "210302.65"
     title: "Радиотехника"
