@@ -20,6 +20,7 @@ module PlanImporter
     education_form = Subspeciality.human_enum_values(:education_form).invert["#{education_form} форма"]
     subspeciality = speciality.subspecialities.find_by_title_and_education_form(subspeciality_title, education_form)
     raise "нет профиля #{subspeciality_title} для #{education_form} для специальности #{speciality_code} в #{year_number} года #{file_path}" unless subspeciality
+    subspeciality.update_attribute(:file_path, file_path)
     subspeciality.move_descendants_to_trash
     xml.css('СтрокиПлана Строка').each do |discipline_xml|
       discipline = subspeciality.disciplines.find_or_initialize_by_title(discipline_xml['Дис'].squish)

@@ -12,6 +12,7 @@
 #  graduated_subdepartment_id :integer
 #  department_id              :integer
 #  education_form             :string(255)
+#  file_path                  :text
 #
 
 require 'spec_helper'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121130031951) do
+ActiveRecord::Schema.define(:version => 20121203043348) do
 
   create_table "appendix_items", :force => true do |t|
     t.integer  "appendix_id"
@@ -335,6 +335,7 @@ ActiveRecord::Schema.define(:version => 20121130031951) do
     t.integer  "graduated_subdepartment_id"
     t.integer  "department_id"
     t.string   "education_form"
+    t.text     "file_path"
   end
 
   add_index "subspecialities", ["graduated_subdepartment_id"], :name => "index_subspecialities_on_graduated_subdepartment_id"

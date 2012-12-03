@@ -1,5 +1,12 @@
 specialty:
   -
+    code: "160905.65"
+    title: "Техническая эксплуатация транспортного радиооборудования"
+    subspecialities:
+      -
+        subdepartment: "КИПР"
+        title: "Без специализации"
+  -
     code: "210106.65"
     title: "Промышленная электроника"
     subspecialities:
@@ -19,6 +26,15 @@ specialty:
         education_form: 'postal-with-dist'
         department: 'ФДО'
   -
+    code: "210201.65"
+    title: "Проектирование и технология радиоэлектронных средств"
+    subspecialities:
+      -
+        subdepartment: "КИПР"
+        title: "Компьютерное проектирование РЭС"
+        education_form: 'postal'
+        department: 'ЗиВФ'
+  -
     code: "210302.65"
     title: "Радиотехника"
     subspecialities:
@@ -36,3 +52,12 @@ specialty:
         title: "Без специализации"
         education_form: 'postal'
         department: 'ЗиВФ'
+  -
+    code: "230104.65"
+    title: "Системы автоматизированного проектирования"
+    subspecialities:
+      -
+        subdepartment: "КСУП"
+        title: "Без специализации"
+        education_form: 'postal-with-dist'
+        department: 'ФДО'
