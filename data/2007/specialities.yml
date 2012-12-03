@@ -46,6 +46,15 @@ specialty:
         education_form: 'postal-with-dist'
         department: 'ФДО'
   -
+    code: "080503.65"
+    title: "Антикризисное управление"
+    subspecialities:
+      -
+        subdepartment: "ТУ"
+        title: "Без специализации"
+        education_form: 'part-time'
+        department: 'ЗиВФ'
+  -
     code: "080801.65"
     title: "Прикладная  информатика (в экономике)"
     subspecialities:
@@ -112,6 +121,15 @@ specialty:
         title: "Без специализации"
         education_form: 'part-time'
         department: 'ЗиВФ'
+  -
+    code: "210312"
+    title: "Аудиовизуальная техника"
+    subspecialities:
+      -
+        subdepartment: "ТУ"
+        title: "Без специализации"
+        education_form: 'postal-with-dist'
+        department: 'ФДО'
   -
     code: "210401.65"
     title: "Физика и техника оптической связи"

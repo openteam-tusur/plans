@@ -62,6 +62,13 @@ specialty:
         subdepartment: "Экономики"
         title: "Без специализации"
   -
+    code: "080503.65"
+    title: "Антикризисное управление"
+    subspecialities:
+      -
+        subdepartment: "ТУ"
+        title: "Без специализации"
+  -
     code: "080504.65"
     title: "Государственное и муниципальное управление"
     subspecialities:
@@ -88,6 +95,13 @@ specialty:
     subspecialities:
       -
         subdepartment: "КИБЭВС"
+        title: "Без специализации"
+  -
+    code: "100101.65"
+    title: "Сервис электронных систем безопасности"
+    subspecialities:
+      -
+        subdepartment: "ТУ"
         title: "Без специализации"
   -
     code: "210106.65"
@@ -122,6 +136,20 @@ specialty:
     subspecialities:
       -
         subdepartment: "РЗИ"
+        title: "Без специализации"
+  -
+    code: "210303.65"
+    title: "Бытовая радиоэлектронная аппаратура"
+    subspecialities:
+      -
+        subdepartment: "ТУ"
+        title: "Без специализации"
+  -
+    code: "210312.65"
+    title: "Аудиовизуальная техника"
+    subspecialities:
+      -
+        subdepartment: "ТУ"
         title: "Без специализации"
   -
     code: "210401.65"
