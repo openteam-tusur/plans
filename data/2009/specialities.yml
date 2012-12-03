@@ -1,9 +1,23 @@
 bachelor:
   -
+    code: "220200.62"
+    title: "Автоматизация и управление"
+    subspecialities:
+      -
+        subdepartment: "СА"
+        title: "Без профиля"
+  -
     code: "220600.62"
     title: "Инноватика"
     subspecialities:
       -
         subdepartment: "УИ"
+        title: "Без профиля"
+  -
+    code: "230100.62"
+    title: "Информатика и вычислительная техника"
+    subspecialities:
+      -
+        subdepartment: "ЭМИС"
         title: "Без профиля"
 specialty:
