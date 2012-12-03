@@ -9,6 +9,29 @@ specialty:
         education_form: 'postal'
         department: 'ЗиВФ'
   -
+    code: "080105.65"
+    title: "Финансы и кредит"
+    subspecialities:
+      -
+        subdepartment: "Экономики"
+        title: "Без специализации"
+        education_form: 'postal'
+        department: 'ЗиВФ'
+      -
+        subdepartment: "Экономики"
+        title: "Без специализации"
+        education_form: 'postal-with-dist'
+        department: 'ФДО'
+  -
+    code: "080502.65"
+    title: "Экономика и управление на предприятии (в машиностроении)"
+    subspecialities:
+      -
+        subdepartment: "Экономики"
+        title: "Без специализации"
+        education_form: 'postal-with-dist'
+        department: 'ФДО'
+  -
     code: "080801.65"
     title: "Прикладная  информатика (в экономике)"
     subspecialities:

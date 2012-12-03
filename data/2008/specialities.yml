@@ -7,6 +7,25 @@ bachelor:
         subdepartment: "АСУ"
         title: "Без профиля"
   -
+    code: "080100.62"
+    title: "Экономика"
+    subspecialities:
+      -
+        subdepartment: "Экономики"
+        title: "Без профиля"
+  -
+    code: "080500.62"
+    title: "Менеджмент"
+    subspecialities:
+      -
+        subdepartment: "Экономики"
+        title: "Без профиля"
+      -
+        subdepartment: "Экономики"
+        title: "Без профиля"
+        education_form: 'postal-with-dist'
+        department: 'ФДО'
+  -
     code: "210100.62"
     title: "Электроника и микроэлектроника"
     subspecialities:
@@ -27,6 +46,20 @@ specialty:
     subspecialities:
       -
         subdepartment: "ИСР"
+        title: "Без специализации"
+  -
+    code: "080105.65"
+    title: "Финансы и кредит"
+    subspecialities:
+      -
+        subdepartment: "Экономики"
+        title: "Без специализации"
+  -
+    code: "080502.65"
+    title: "Экономика и управление на предприятии (в машиностроении)"
+    subspecialities:
+      -
+        subdepartment: "Экономики"
         title: "Без специализации"
   -
     code: "080504.65"
