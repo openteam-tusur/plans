@@ -16,7 +16,7 @@ module PlanImporter
     raise "нет специальности с кодом #{speciality_code} в #{year_number} году #{file_path}" unless speciality
     speciality.update_attribute :gos_generation, title_node['ТипГОСа'] || 2
     subspeciality_title = speciality_full_name.match(/"(.*)"/) ? speciality_full_name.match(/"(.*)"/)[1].squish : speciality.degree == 'specialty' ? "Без специализации" : "Без профиля"
-    education_form = speciality_full_name.match(/(очно-заочная|очная|заочная)/).try(:[], 1)  || 'очная'
+    education_form = speciality_full_name.match(/(заочная с дистанционной технологией|очно-заочная|очная|заочная)/).try(:[], 1)  || 'очная'
     education_form = Subspeciality.human_enum_values(:education_form).invert["#{education_form} форма"]
     subspeciality = speciality.subspecialities.find_by_title_and_education_form(subspeciality_title, education_form)
     raise "нет профиля #{subspeciality_title} для #{education_form} для специальности #{speciality_code} в #{year_number} года #{file_path}" unless subspeciality

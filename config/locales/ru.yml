@@ -196,9 +196,10 @@ ru:
           have:           владеть
       subspeciality:
         education_form_enum:
-          full-time: очная форма
-          part-time: очно-заочная форма
-          postal:    заочная форма
+          full-time: 'очная форма'
+          part-time: 'очно-заочная форма'
+          postal:    'заочная форма'
+          postal-with-dist:    'заочная с дистанционной технологией форма'
 
       self_education_item:
         control:          Формы контроля
