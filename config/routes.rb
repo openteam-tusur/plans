@@ -4,6 +4,8 @@ Plans::Application.routes.draw do
       :constraints => { :folder => /(drafts|reduxes|releases|checks_by_provided_subdepartment|checks_by_profiled_subdepartment|checks_by_graduated_subdepartment|checks_by_library|checks_by_methodological_office|checks_by_educational_office)/ },
       :as => :scoped_messages
 
+    get 'rups' => 'rups#index'
+
     resources :years, :only => [] do
       match 'statistics' => 'statistics#index'
       get '/specialities/:degree' => 'specialities#index',
