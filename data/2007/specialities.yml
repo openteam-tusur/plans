@@ -45,6 +45,11 @@ specialty:
         title: "Без специализации"
         education_form: 'postal-with-dist'
         department: 'ФДО'
+      -
+        subdepartment: "Экономики"
+        title: "Без специализации"
+        education_form: 'postal'
+        department: 'ЗиВФ'
   -
     code: "080503.65"
     title: "Антикризисное управление"
@@ -54,6 +59,29 @@ specialty:
         title: "Без специализации"
         education_form: 'part-time'
         department: 'ЗиВФ'
+      -
+        subdepartment: "ТУ"
+        title: "Без специализации"
+        education_form: 'postal-with-dist'
+        department: 'ФДО'
+  -
+    code: "080504.65"
+    title: "Государственное и муниципальное управление"
+    subspecialities:
+      -
+        subdepartment: "АОИ"
+        title: "Без специализации"
+        education_form: 'postal'
+        department: 'ЗиВФ'
+  -
+    code: "080700.62"
+    title: "Бизнес-информатика"
+    subspecialities:
+      -
+        subdepartment: "АОИ"
+        title: "Без специализации"
+        education_form: 'postal-with-dist'
+        department: 'ФДО'
   -
     code: "080801.65"
     title: "Прикладная  информатика (в экономике)"
@@ -64,12 +92,35 @@ specialty:
         education_form: 'postal'
         department: 'ЗиВФ'
   -
+    code: "090105.65"
+    title: "Комплексное обеспечение информационной безопасности автоматизированных систем"
+    subspecialities:
+      -
+        subdepartment: "КИБЭВС"
+        title: "Без специализации"
+  -
+    code: "090106.65"
+    title: "Информационная безопасность телекоммуникационных систем"
+    subspecialities:
+      -
+        subdepartment: "РТС"
+        title: "Без специализации"
+  -
     code: "160905.65"
     title: "Техническая эксплуатация транспортного радиооборудования"
     subspecialities:
       -
         subdepartment: "КИПР"
         title: "Без специализации"
+  -
+    code: "210105.65"
+    title: "Электронные приборы и устройства"
+    subspecialities:
+      -
+        subdepartment: "ЭП"
+        title: "Без специализации"
+        education_form: 'postal'
+        department: 'ЗиВФ'
   -
     code: "210106.65"
     title: "Промышленная электроника"
@@ -99,9 +150,12 @@ specialty:
         education_form: 'postal'
         department: 'ЗиВФ'
   -
-    code: "210202"
+    code: "210202.65"
     title: "Проектирование и технология электронно-вычислительных средств"
     subspecialities:
+      -
+        subdepartment: "КИБЭВС"
+        title: "Без специализации"
       -
         subdepartment: "КИБЭВС"
         title: "Без специализации"
@@ -121,8 +175,22 @@ specialty:
         title: "Без специализации"
         education_form: 'part-time'
         department: 'ЗиВФ'
+      -
+        subdepartment: "ТОР"
+        title: "Без специализации"
+        education_form: 'postal'
+        department: 'ЗиВФ'
   -
-    code: "210312"
+    code: "210303.65"
+    title: "Бытовая радиоэлектронная аппаратура"
+    subspecialities:
+      -
+        subdepartment: "ТУ"
+        title: "Без специализации"
+        education_form: 'postal-with-dist'
+        department: 'ФДО'
+  -
+    code: "210312.65"
     title: "Аудиовизуальная техника"
     subspecialities:
       -
@@ -136,6 +204,33 @@ specialty:
     subspecialities:
       -
         subdepartment: "СВЧиКР"
+        title: "Без специализации"
+        education_form: 'postal'
+        department: 'ЗиВФ'
+  -
+    code: "210405.65"
+    title: "Радиосвязь, радиовещание и телевидение"
+    subspecialities:
+      -
+        subdepartment: "ТОР"
+        title: "Без специализации"
+        education_form: 'postal-with-dist'
+        department: 'ФДО'
+  -
+    code: "220201.65"
+    title: "Управление и информатика в технических системах"
+    subspecialities:
+      -
+        subdepartment: "КСУП"
+        title: "Без специализации"
+        education_form: 'postal-with-dist'
+        department: 'ФДО'
+  -
+    code: "230102.65"
+    title: "Автоматизированные системы обработки информации и управления"
+    subspecialities:
+      -
+        subdepartment: "АОИ"
         title: "Без специализации"
         education_form: 'postal'
         department: 'ЗиВФ'
