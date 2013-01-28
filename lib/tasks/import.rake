@@ -134,7 +134,7 @@ class YearImporter
   end
 
   def import_plans
-    Dir.glob("data/#{year.number}/plans/*/*/*.xml") do |file_path|
+    Dir.glob("data/#{year.number}/plans/*.xml") do |file_path|
       PlanImporter.import_plan_from_file(file_path, year)
       bar.increment!
     end
