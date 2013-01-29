@@ -22,7 +22,6 @@ module PlanImporter
     raise "нет профиля #{subspeciality_title} для #{education_form} для специальности #{speciality_code} в #{year_number} года #{file_path}" unless subspeciality
     plan_digest = Digest::SHA1.hexdigest open(file_path).read
     return if plan_digest.eql?(subspeciality.plan_digest)
-    subspeciality.update_attributes(file_path: file_path, plan_digest: plan_digest)
     subspeciality.move_descendants_to_trash
     xml.css('СтрокиПлана Строка').each do |discipline_xml|
       discipline = subspeciality.disciplines.find_or_initialize_by_title(discipline_xml['Дис'].squish)
@@ -30,7 +29,13 @@ module PlanImporter
       cycle_value = discipline_xml['Цикл']
       next unless cycle_value
       cycle_abbr, component = cycle_value.split('.')[0..1]
+      begin
       cycle = xml.css("АтрибутыЦиклов Цикл").select{|c| cycle_abbr == (c['Аббревиатура'] || c['Абревиатура']) }.first['Название'].squish
+      rescue => e
+        p file_path
+        p discipline
+        return
+      end
       discipline.cycle = "#{cycle_abbr}. #{cycle}"
       discipline.summ_loading = discipline_xml['ПодлежитИзучению']
       discipline.summ_srs = discipline_xml['СР']
@@ -63,6 +68,7 @@ module PlanImporter
         end
       end
     end
+    subspeciality.update_attributes(file_path: file_path, plan_digest: plan_digest)
   end
 
   def self.refresh(object)

@@ -1,5 +1,44 @@
 bachelor:
   -
+    code: "080100.62"
+    title: "Экономика"
+    subspecialities:
+      -
+        subdepartment: "Экономики"
+        title: "Без профиля"
+        education_form: 'postal-with-dist'
+        department: 'ФДО'
+  -
+    code: "080500.62"
+    title: "Менеджмент"
+    subspecialities:
+      -
+        subdepartment: "Экономики"
+        title: "Без профиля"
+        education_form: 'postal-with-dist'
+        department: 'ФДО'
+  -
+    code: "210600.62"
+    title: "Нанотехнология"
+    subspecialities:
+      -
+        subdepartment: "ФЭ"
+        title: "Без профиля"
+  -
+    code: "080700.62"
+    title: "Бизнес-информатика"
+    subspecialities:
+      -
+        subdepartment: "АОИ"
+        title: "Без профиля"
+  -
+    code: "220100.62"
+    title: "Системный анализ и управление"
+    subspecialities:
+      -
+        subdepartment: "СА"
+        title: "Без профиля"
+  -
     code: "220200.62"
     title: "Автоматизация и управление"
     subspecialities:
@@ -16,6 +55,13 @@ bachelor:
   -
     code: "230100.62"
     title: "Информатика и вычислительная техника"
+    subspecialities:
+      -
+        subdepartment: "ЭМИС"
+        title: "Без профиля"
+  -
+    code: "230200.62"
+    title: "Информационные системы"
     subspecialities:
       -
         subdepartment: "ЭМИС"
