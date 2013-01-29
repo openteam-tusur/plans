@@ -13,6 +13,8 @@ group :default do
   gem 'default_value_for'
   gem 'el_vfs_client'
   gem 'esp-auth'
+  gem 'grape'
+  gem 'grape-entity'
   gem 'has_enum'
   gem 'has_scope'
   gem 'inherited_resources'
@@ -29,11 +31,12 @@ group :default do
 end
 
 group :development do
-  gem 'capistrano'
-  gem 'rvm-capistrano'
   gem 'annotate',             '>= 2.5.0.pre'
+  gem 'capistrano'
   gem 'hirb',                 :require => false
+  gem 'rails-erd'
   gem 'ruby-graphviz'
+  gem 'rvm-capistrano'
   gem 'sunspot_solr'
 end
 

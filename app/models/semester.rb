@@ -6,6 +6,8 @@ class Semester < ActiveRecord::Base
   has_many :exercises
   has_many :loadings, :dependent => :destroy
 
+  has_many :disciplines, :through => :loadings, :uniq => true
+
   validates_presence_of :subspeciality, :number
 
   default_scope :order => :number

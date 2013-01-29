@@ -51,6 +51,7 @@ GEM
     audited-activerecord (3.0.0)
       activerecord (~> 3.0)
       audited (= 3.0.0)
+    backports (2.6.7)
     bcrypt-ruby (3.0.1)
     builder (3.0.4)
     bunny (0.8.0)
@@ -61,6 +62,7 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
+    choice (0.1.6)
     chronic (0.6.7)
     chunky_png (1.2.6)
     coffee-rails (3.2.2)
@@ -82,6 +84,7 @@ GEM
     curb (0.8.1)
     daemons (1.1.9)
     default_value_for (2.0.1)
+    descendants_tracker (0.0.1)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -134,6 +137,19 @@ GEM
     formtastic (2.2.1)
       actionpack (>= 3.0)
     fssm (0.2.9)
+    grape (0.2.6)
+      activesupport
+      builder
+      hashie (~> 1.2)
+      multi_json (>= 1.3.2)
+      multi_xml (>= 0.5.2)
+      rack
+      rack-accept
+      rack-mount
+      virtus
+    grape-entity (0.2.0)
+      activesupport
+      multi_json (>= 1.3.2)
     has_enum (0.10.1)
       rails (> 3.0.0)
     has_scope (0.5.1)
@@ -166,6 +182,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.19)
     multi_json (1.3.7)
+    multi_xml (0.5.2)
     multipart-post (1.1.5)
     nested_form (0.2.3)
     net-scp (1.0.4)
@@ -204,8 +221,12 @@ GEM
       highline (~> 1.6.1)
       options (~> 2.3.0)
     rack (1.4.1)
+    rack-accept (0.4.5)
+      rack (>= 0.4)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-mount (0.8.3)
+      rack (>= 1.0.0)
     rack-ssl (1.3.2)
       rack
     rack-test (0.6.2)
@@ -218,6 +239,11 @@ GEM
       activesupport (= 3.2.8)
       bundler (~> 1.0)
       railties (= 3.2.8)
+    rails-erd (1.1.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      choice (~> 0.1.6)
+      ruby-graphviz (~> 1.0.4)
     railties (3.2.8)
       actionpack (= 3.2.8)
       activesupport (= 3.2.8)
@@ -299,6 +325,9 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    virtus (0.5.4)
+      backports (~> 2.6.1)
+      descendants_tracker (~> 0.0.1)
     warden (1.2.1)
       rack (>= 1.0)
     whenever (0.7.3)
@@ -318,6 +347,8 @@ DEPENDENCIES
   el_vfs_client
   esp-auth
   fabrication
+  grape
+  grape-entity
   has_enum
   has_scope
   hirb
@@ -329,6 +360,7 @@ DEPENDENCIES
   pg
   progress_bar
   rails
+  rails-erd
   rspec-rails
   ruby-graphviz
   russian
