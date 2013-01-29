@@ -1,7 +1,11 @@
 class API::Entities::Discipline < Grape::Entity
   expose :id
   expose :title
+  expose :cycle_code
   expose :cycle
+  expose :subfaculty_abbr do |object|
+    object.provided_subdepartment.abbr
+  end
 
   expose :loadings do |object, options|
     API::Entities::Loading.represent object.loadings
