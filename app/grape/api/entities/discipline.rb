@@ -5,9 +5,8 @@ class API::Entities::Discipline < Grape::Entity
   expose :cycle do |object|
     { :code => object.cycle_code, :title => object.cycle }
   end
-  expose :subfaculty do |object|
-    { :abbr => object.provided_subdepartment.abbr, :title => object.provided_subdepartment.title }
-  end
+
+  expose :subdepartment, :using => API::Entities::Subdepartment
 
   expose :loadings do |object, options|
     API::Entities::Loading.represent object.loadings
