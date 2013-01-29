@@ -12,11 +12,11 @@ class API::Plans < Grape::API
   namespace :disciplines do
     helpers do
       def subspeciality
-        @subspeciality ||= Subspeciality.find(params[:supspeciality_id])
+        @subspeciality ||= Subspeciality.actual.find(params[:supspeciality_id])
       end
 
       def semester
-        subspeciality.semesters.find_by_number(params[:semester])
+        subspeciality.semesters.actual.find_by_number(params[:semester])
       end
     end
 
@@ -30,7 +30,7 @@ class API::Plans < Grape::API
         requires :semester, :type => Integer, :desc => "number of semester"
       end
       get ":semester" do
-        present semester.disciplines, :with => API::Entities::Discipline, :semester => semester
+        present semester.disciplines.actual, :with => API::Entities::Discipline, :semester => semester
       end
     end
   end

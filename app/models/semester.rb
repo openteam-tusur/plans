@@ -12,6 +12,8 @@ class Semester < ActiveRecord::Base
 
   default_scope :order => :number
 
+  scope :actual, ->() { where(:deleted_at => nil) }
+
   def to_s
     "#{number} #{self.class.model_name.human}"
   end

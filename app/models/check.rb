@@ -4,6 +4,8 @@ class Check < ActiveRecord::Base
   attr_accessible :check_kind, :semester
   validates_presence_of :semester, :discipline, :check_kind
 
+  scope :actual, ->() { where(:deleted_at => nil) }
+
   has_enum :check_kind
 
   def report_kind_value

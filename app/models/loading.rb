@@ -5,6 +5,8 @@ class Loading < ActiveRecord::Base
 
   has_enum :loading_kind
 
+  scope :actual, ->() { where(:deleted_at => nil) }
+
   def self.classroom_kinds
     enum_values(:loading_kind) - srs_kinds
   end

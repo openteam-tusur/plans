@@ -10,6 +10,7 @@ class API::Entities::Discipline < Grape::Entity
 
   expose :loadings do |object, options|
     API::Entities::Loading.represent object.loadings
+                                       .actual
                                        .where(:semester_id => options[:semester])
                                        .where(:loading_kind => %w[lecture lab practice csr])
                                        .order(:loading_kind)
@@ -17,6 +18,7 @@ class API::Entities::Discipline < Grape::Entity
 
   expose :checks do |object, options|
     API::Entities::Check.represent object.checks
+                                     .actual
                                      .where(:semester_id => options[:semester])
                                      .order(:check_kind)
   end
