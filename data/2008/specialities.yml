@@ -1,5 +1,12 @@
 bachelor:
   -
+    code: "020801.65"
+    title: "Экология"
+    subspecialities:
+      -
+        subdepartment: "РЭТЭМ"
+        title: "Мониторинг окружающей среды с применением компьютерных технологий"
+  -
     code: "010500.62"
     title: "Прикладная математика и информатика"
     subspecialities:
@@ -26,15 +33,26 @@ bachelor:
         education_form: 'postal-with-dist'
         department: 'ФДО'
   -
+    code: "200600.62"
+    title: "Фотоника и оптоинформатика"
+    subspecialities:
+      -
+        subdepartment: "ЭП"
+        title: "Без профиля"
+  -
     code: "210100.62"
     title: "Электроника и микроэлектроника"
     subspecialities:
       -
         subdepartment: "ПрЭ"
         title: "Без профиля"
+      -
+        subdepartment: "ФЭ"
+        title: "Микроэлектроника и твердотельная элекроника"
+
 specialty:
   -
-    code: "020801"
+    code: "020801.65"
     title: "Экология"
     subspecialities:
       -
@@ -46,6 +64,13 @@ specialty:
     subspecialities:
       -
         subdepartment: "ИСР"
+        title: "Без специализации"
+  -
+    code: "040104.65"
+    title: "Организация работы с молодежью"
+    subspecialities:
+      -
+        subdepartment: "ФС"
         title: "Без специализации"
   -
     code: "080105.65"
@@ -90,7 +115,14 @@ specialty:
         subdepartment: "РЗИ"
         title: "Без специализации"
   -
-    code: "090105"
+    code: "090104.65"
+    title: "Комплексная защита объектов информатизации"
+    subspecialities:
+      -
+        subdepartment: "РЗИ"
+        title: "Без специализации"
+  -
+    code: "090105.65"
     title: "Комплексное обеспечение информационной безопасности автоматизированных систем"
     subspecialities:
       -
@@ -98,11 +130,25 @@ specialty:
         title: "Без специализации"
   -
     code: "100101.65"
-    title: "Сервис электронных систем безопасности"
+    title: "Сервис"
     subspecialities:
       -
         subdepartment: "ТУ"
+        title: "Сервис электронных систем безопасности"
+  -
+    code: "210104.65"
+    title: "Микроэлектроника и твердотельная электроника"
+    subspecialities:
+      -
+        subdepartment: "ФЭ"
         title: "Без специализации"
+  -
+    code: "210105.65"
+    title: "Электронные приборы и устройства"
+    subspecialities:
+      -
+        subdepartment: "ЭП"
+        title: "Информационные технологии в электронике"
   -
     code: "210106.65"
     title: "Промышленная электроника"
@@ -124,7 +170,7 @@ specialty:
         subdepartment: "КИПР"
         title: "Компьютерное проектирование РЭС"
   -
-    code: "210202"
+    code: "210202.65"
     title: "Проектирование и технология электронно-вычислительных средств"
     subspecialities:
       -
@@ -143,6 +189,13 @@ specialty:
     subspecialities:
       -
         subdepartment: "ТУ"
+        title: "Без специализации"
+  -
+    code: "210304.65"
+    title: "Радиоэлектронные системы"
+    subspecialities:
+      -
+        subdepartment: "СВЧиКР"
         title: "Без специализации"
   -
     code: "210312.65"
@@ -166,21 +219,28 @@ specialty:
         subdepartment: "СРС"
         title: "Без специализации"
   -
-    code: "210405"
+    code: "210405.65"
     title: "Радиосвязь, радиовещание и телевидение"
     subspecialities:
       -
         subdepartment: "ТОР"
         title: "Без специализации"
   -
-    code: "220301"
+    code: "220201.65"
+    title: "Управление и информатика в технических системах"
+    subspecialities:
+      -
+        subdepartment: "КСУП"
+        title: "Без специализации"
+  -
+    code: "220301.65"
     title: "Автоматизация технологических процесов и производств (в приборостроении)"
     subspecialities:
       -
         subdepartment: "ЭСАУ"
         title: "Без специализации"
   -
-    code: "220501"
+    code: "220501.65"
     title: "Управление качеством"
     subspecialities:
       -
@@ -200,3 +260,25 @@ specialty:
       -
         subdepartment: "АОИ"
         title: "Без специализации"
+  -
+    code: "230104.65"
+    title: "Системы автоматизированного проектирования"
+    subspecialities:
+      -
+        subdepartment: "КСУП"
+        title: "Без специализации"
+  -
+    code: "230105.65"
+    title: "Программное обеспечение вычислительной техники и автоматизированных систем"
+    subspecialities:
+      -
+        subdepartment: "АСУ"
+        title: "Без специализации"
+  -
+    code: "280101.65"
+    title: "Безопасность жизнедеятельности в техносфере"
+    subspecialities:
+      -
+        subdepartment: "РЭТЭМ"
+        title: "Без специализации"
+
