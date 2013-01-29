@@ -156,16 +156,6 @@ specialty:
       -
         subdepartment: "КИБЭВС"
         title: "Без специализации"
-      -
-        subdepartment: "КИБЭВС"
-        title: "Без специализации"
-        education_form: 'postal'
-        department: 'ЗиВФ'
-      -
-        subdepartment: "КИБЭВС"
-        title: "Без специализации"
-        education_form: 'postal-with-dist'
-        department: 'ФДО'
   -
     code: "210302.65"
     title: "Радиотехника"
