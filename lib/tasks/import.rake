@@ -9,7 +9,10 @@ module PlanImporter
     xml = Nokogiri::XML(File.new(file_path))
     title_node = xml.css('Титул').first
     year_number = title_node['ГодНачалаПодготовки'].to_i
-    raise "Год не совпадает #{year_number} != #{year.number}!!!" if year_number != year.number
+    if year_number != year.number
+      p file_path
+      raise "Год не совпадает #{year_number} != #{year.number}!!!"
+    end
     speciality_full_name = xml.css('Специальность').map{|speciality_node| speciality_node['Название']}.join(' ')
     speciality_code = speciality_full_name.scan(/\d{6}(?:.\d{2})?/).first
     speciality = year.specialities.find_by_code(speciality_code)
@@ -30,8 +33,9 @@ module PlanImporter
       next unless cycle_value
       cycle_abbr, component = cycle_value.split('.')[0..1]
       begin
-      cycle = xml.css("АтрибутыЦиклов Цикл").select{|c| cycle_abbr == (c['Аббревиатура'] || c['Абревиатура']) }.first['Название'].squish
+        cycle = xml.css("АтрибутыЦиклов Цикл").select{|c| cycle_abbr == (c['Аббревиатура'] || c['Абревиатура']) }.first['Название'].squish
       rescue => e
+        p "не указан цикл для дисциплины"
         p file_path
         p discipline
         return
@@ -41,7 +45,15 @@ module PlanImporter
       discipline.summ_srs = discipline_xml['СР']
       discipline.cycle_code = discipline_xml['Цикл']
       refresh discipline
-      discipline.save!
+      begin
+        discipline.save!
+      rescue => e
+        p "не удалось сохранить дисциплину"
+        p file_path
+        p discipline
+        p discipline.errors
+        return
+      end
       Check.enum_values(:check_kind).each do |check_kind|
         kind_abbr = I18n.t check_kind, :scope => "activerecord.attributes.check.check_kind_abbrs"
         semester_numbers = discipline_xml["Сем#{kind_abbr}"]

@@ -205,6 +205,13 @@ specialty:
         subdepartment: "СРС"
         title: "Без специализации"
   -
+    code: "210403.65"
+    title: "Защищенные системы связи"
+    subspecialities:
+      -
+        subdepartment: "РТС"
+        title: "Без специализации"
+  -
     code: "210405.65"
     title: "Радиосвязь, радиовещание и телевидение"
     subspecialities:
