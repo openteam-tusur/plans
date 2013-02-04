@@ -11,7 +11,6 @@ end
 
 group :default do
   gem 'default_value_for'
-  gem 'el_vfs_client'
   gem 'esp-auth'
   gem 'grape'
   gem 'grape-entity'
@@ -21,6 +20,7 @@ group :default do
   gem 'nested_form'
   gem 'nokogiri',             :require => false
   gem 'openteam-commons',     '>= 0.2.3'
+  gem 'paperclip-elvfs'
   gem 'progress_bar',         :require => false
   gem 'rails'
   gem 'russian'

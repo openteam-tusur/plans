@@ -51,6 +51,5 @@ Plans::Application.routes.draw do
   end
 
   root :to => 'application#index'
-  mount ElVfsClient::Engine => '/'
   mount API::Plans => '/api'
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121203061524) do
+ActiveRecord::Schema.define(:version => 20130204030711) do
 
   create_table "appendix_items", :force => true do |t|
     t.integer  "appendix_id"
@@ -224,6 +224,11 @@ ActiveRecord::Schema.define(:version => 20121203061524) do
     t.string   "vfs_path"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.text     "file_url"
   end
 
   add_index "programms", ["with_programm_id"], :name => "index_programms_on_with_programm_id"
@@ -370,12 +375,17 @@ ActiveRecord::Schema.define(:version => 20121203061524) do
   create_table "work_programms", :force => true do |t|
     t.integer  "year"
     t.integer  "discipline_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.text     "purpose"
     t.string   "vfs_path"
     t.string   "state"
     t.integer  "creator_id"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.text     "file_url"
   end
 
   add_index "work_programms", ["discipline_id"], :name => "index_work_programms_on_discipline_id"

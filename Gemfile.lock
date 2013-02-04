@@ -65,6 +65,7 @@ GEM
     choice (0.1.6)
     chronic (0.6.7)
     chunky_png (1.2.6)
+    cocaine (0.4.2)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -93,10 +94,6 @@ GEM
     devise-russian (2.0.1.1)
       devise
     diff-lcs (1.1.3)
-    el_vfs_client (0.3.5)
-      configliere
-      curb
-      rails
     erubis (2.7.0)
     esp-auth (1.4.0.1)
       ancestry
@@ -214,6 +211,15 @@ GEM
     options (2.3.0)
       fattr
     orm_adapter (0.4.0)
+    paperclip (3.4.0)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.4.0)
+      mime-types
+    paperclip-elvfs (0.0.5.2)
+      curb
+      paperclip
     pg (0.14.0)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
@@ -344,7 +350,6 @@ DEPENDENCIES
   coffee-rails
   compass-rails
   default_value_for
-  el_vfs_client
   esp-auth
   fabrication
   grape
@@ -357,6 +362,7 @@ DEPENDENCIES
   nested_form
   nokogiri
   openteam-commons (>= 0.2.3)
+  paperclip-elvfs
   pg
   progress_bar
   rails
