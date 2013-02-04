@@ -2,13 +2,8 @@
   <%= simple_form_for resource, :url => resource_path, :remote => true do |f| %>
     <%= f.input :description %>
     <div class='add_file_wrapper'>
-      <% if f.object.vfs_path? %>
-        <%= link_to "Скачать файл (#{URI.decode(f.object.vfs_path.match(/([^\/.]+)(\.(.{3}))?$/)[0])})", f.object.vfs_path, :class => 'link' %>
-        <%= link_to "Удалить", '#', :class => 'link remove_file' %>
-      <% else %>
-        <%= link_to 'Выбрать файл', '#', :class => 'choose_file' %>
-      <% end %>
-      <%= f.input :vfs_path, :as => :hidden, :input_html => {:params => "vfs_path=/plans/#{@year.number}/#{t(@speciality.degree)}/#{@speciality.code}/#{@subspeciality.profiled_subdepartment.abbr}/#{@subspeciality.title}/ООП"} %>
+      <%= link_to "Скачать файл (#{f.object.file_file_name})", f.object.file_url, :class => 'link' %>
+      <%= f.input :file, :label => false %>
     </div>
     <div class="buttons">
       <%= f.submit %>

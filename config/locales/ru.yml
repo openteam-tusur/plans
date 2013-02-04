@@ -257,7 +257,7 @@ ru:
       models:
         programm:
           attributes:
-            vfs_path:
+            file:
               blank: файл не выбран
 
     models:

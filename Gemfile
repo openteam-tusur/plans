@@ -33,6 +33,7 @@ end
 group :development do
   gem 'annotate',             '>= 2.5.0.pre'
   gem 'capistrano'
+  gem 'debugger'
   gem 'hirb',                 :require => false
   gem 'rails-erd'
   gem 'ruby-graphviz'

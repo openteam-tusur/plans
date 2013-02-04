@@ -4,8 +4,7 @@
     <%= f.input :generate, :as => :boolean, :label => 'Пожалуйста, предзаполните рабочую программу на основании ГОС' if resource.gos2? %>
     <% if can? :upload_file, @work_programm %>
       <div class='add_file_wrapper'>
-        <%= link_to 'Выбрать файл (если у вас уже есть рабочая программа и вы не хотите составлять новую)', '#', :class => 'choose_file' %>
-        <%= f.input :vfs_path, :as => :hidden, :input_html => {:params => "vfs_path=/plans/#{@year.number}/#{t(@speciality.degree)}/#{@speciality.code}/#{@subspeciality.profiled_subdepartment.abbr}/#{@subspeciality.title}/рабочие программы/"} %>
+        <%= f.input :file, :hint => 'если у вас уже есть рабочая программа и вы не хотите составлять новую', :label => false %>
       </div>
     <% end %>
     <div class="buttons">

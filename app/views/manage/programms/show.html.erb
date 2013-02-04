@@ -1,6 +1,6 @@
 <div class="ajaxed_item">
   <% if resource %>
-    <%= link_to "Скачать файл (#{URI.decode(resource.vfs_path.match(/([^\/.]+)(\.(.{3}))?$/)[0])})", resource.vfs_path, :class => 'download_link' %>
+    <%= link_to "Скачать файл (#{resource.file_file_name})", resource.file_url, :class => 'download_link' %>
     <div class='description'><%= simple_format resource.description %></div>
     <% if can? :manage, resource %>
       <%= link_to "Редактировать программу", edit_manage_year_speciality_subspeciality_programm_path(@year, @speciality, @subspeciality), :remote => true, :class => 'edit_link' %>

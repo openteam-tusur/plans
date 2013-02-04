@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class WorkProgramm < ActiveRecord::Base
-  attr_accessible :year, :purpose, :task, :related_discipline_ids, :generate, :vfs_path, :creator_id, :message_text
+  attr_accessible :year, :purpose, :task, :related_discipline_ids, :generate, :creator_id, :message_text, :file
   attr_accessor :generate, :message_text
 
   belongs_to :discipline
@@ -28,8 +28,8 @@ class WorkProgramm < ActiveRecord::Base
 
   validate :editable, :unless => :state_changed?
   validates_presence_of :discipline, :year
-  validates_presence_of :vfs_path, :if => :gos3?
   validates_uniqueness_of :year, :scope => :discipline_id
+
 
   delegate :disciplines, :to => :subspeciality
   delegate :has_examinations?, :semesters, :semesters_with_examination, :to => :discipline
@@ -41,9 +41,9 @@ class WorkProgramm < ActiveRecord::Base
 
   after_create :create_requirements
   after_create :create_protocol!
-  after_create :generate_work_programm, :if => ->(wp){ wp.generate.to_i == 1 && !wp.vfs_path? }
+  after_create :generate_work_programm, :if => ->(wp){ wp.generate.to_i == 1 && !wp.file_url? }
   after_create :create_new_message
-  after_create :set_state_to_released, :if => :vfs_path?
+  after_create :set_state_to_released, :if => :file_url?
 
   default_value_for(:year) { Time.now.year }
 
@@ -62,6 +62,7 @@ class WorkProgramm < ActiveRecord::Base
   scope :checks_by_educational_office,      ->(user){ consumed_by(user).with_state(:check_by_educational_office) }
 
   has_attached_file :file, :storage => :elvfs, :elvfs_url => Settings['storage.url']
+  validates :file, :attachment_presence => true, :if => :gos3?
 
   state_machine :initial => :draft do
     after_transition :move_messages_to_archive

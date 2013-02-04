@@ -91,7 +91,7 @@ class Ability
     end
 
     can :modify, WorkProgramm do |work_programm|
-      work_programm.vfs_path? && can?(:upload_file, work_programm)
+      work_programm.file_url? && can?(:upload_file, work_programm)
     end
 
     can :modify, WorkProgramm do |work_programm|

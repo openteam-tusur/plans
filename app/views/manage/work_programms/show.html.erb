@@ -1,6 +1,6 @@
 <h4><%= @work_programm %></h4>
 
-<% unless @work_programm.vfs_path? %>
+<% unless @work_programm.file_url? %>
   <div class='work_programm_wrapper'>
     <div class="toc_no_selected">
       Выберите пункт рабочей программы.
@@ -49,7 +49,7 @@
     <span><%= @work_programm.profiled_subdepartment %></span>
     <span><%= @subspeciality %></span>
   </div>
-  <% unless @work_programm.vfs_path? %>
+  <% unless @work_programm.file_url? %>
     <h6>Содержание рабочей программы</h6>
     <ul class='navigation toc'>
       <% if @work_programm.protocol_valid? || @work_programm.check_by_provided_subdepartment? %>
@@ -66,8 +66,8 @@
   <h6>PDF рабочей программы</h6>
   <% if resource.released? %>
     <div class="information">
-      <% if @work_programm.vfs_path? %>
-        <%= link_to "Скачать PDF рабочей программы", @work_programm.vfs_path, :class => 'download_link' %>
+      <% if @work_programm.file_url? %>
+        <%= link_to "Скачать PDF рабочей программы", @work_programm.file_url, :class => 'download_link' %>
       <% else %>
         <%= link_to "Скачать PDF рабочей программы", resource_path(:format => :pdf), :class => 'download_link' %>
       <% end %>
@@ -78,7 +78,7 @@
     </div>
   <% end %>
 
-  <% unless @work_programm.vfs_path? %>
+  <% unless @work_programm.file_url? %>
     <h6>Действия</h6>
     <ul class='actions'>
       <%= render 'event_actions' %>
