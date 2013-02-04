@@ -7,7 +7,7 @@ cancel_handler = () ->
     false
 
 @init_ajaxed = () ->
-  $('.ajaxed ').on 'ajax:success', (evt, data, status, jqXHR) ->
+  $('.ajaxed').on 'ajax:complete', (evt, jqXHR, status) ->
     context = $(evt.target)
     didactic_units = context.closest('.ajaxed').siblings('.didactic_units_wrapper')
 
@@ -33,6 +33,5 @@ cancel_handler = () ->
     init_authors_autocomplete()  if $('.need_autocomplete').length
     init_publication_variation() if $('#publication_location').length
     init_calculate_total()
-    init_choose_file()
     init_check_valid()           if $('.work_programm_wrapper').length
     cancel_handler()

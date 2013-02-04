@@ -13,3 +13,4 @@
 /tmp
 log/sunspot-solr-development.log*
 public/assets/
+config/deploy.yml

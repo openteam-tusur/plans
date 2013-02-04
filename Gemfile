@@ -23,6 +23,7 @@ group :default do
   gem 'paperclip-elvfs'
   gem 'progress_bar',         :require => false
   gem 'rails'
+  gem 'remotipart'
   gem 'russian'
   gem 'simple-navigation'
   gem 'simple_form'
