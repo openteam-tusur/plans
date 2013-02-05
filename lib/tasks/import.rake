@@ -54,29 +54,64 @@ module PlanImporter
         p discipline.errors
         return
       end
-      Check.enum_values(:check_kind).each do |check_kind|
-        kind_abbr = I18n.t check_kind, :scope => "activerecord.attributes.check.check_kind_abbrs"
-        semester_numbers = discipline_xml["Сем#{kind_abbr}"]
-        next unless semester_numbers
-        semester_numbers.each_char do |semester_number|
+      if file_path =~ /pli\.xml/ # очная, очно-заочная
+        Check.enum_values(:check_kind).each do |check_kind|
+          kind_abbr = I18n.t check_kind, :scope => "activerecord.attributes.check.check_kind_abbrs"
+          semester_numbers = discipline_xml["Сем#{kind_abbr}"]
+          next unless semester_numbers
+          semester_numbers.each_char do |semester_number|
+            semester = subspeciality.create_or_refresh_semester(semester_number)
+            next unless semester
+            check = discipline.checks.where(:semester_id => semester, :check_kind => check_kind).first || discipline.checks.build(:semester => semester, :check_kind => check_kind)
+            refresh check
+            check.save
+          end
+        end
+        discipline_xml.css('Сем').each do |loading_xml|
+          semester = subspeciality.create_or_refresh_semester(loading_xml['Ном'])
+          next unless semester
+          Loading.enum_values(:loading_kind).each do |loading_kind|
+            kind_abbr = I18n.t loading_kind, :scope => "activerecord.attributes.loading.loading_kind_abbrs"
+            value = loading_xml[kind_abbr]
+            next unless value
+            loading = discipline.loadings.where(:semester_id => semester, :loading_kind => loading_kind).first || discipline.loadings.build(:semester => semester, :loading_kind => loading_kind)
+            refresh loading
+            loading.value = value
+            loading.save
+          end
+        end
+      else # заочная
+        discipline_xml.css("Курс/Сессия").each do |loading_xml|
+          course_number = loading_xml.parent['Ном'].to_i
+          session_number = loading_xml['Ном'].to_i
+          semester_number = course_number * 2 - 1 # осенний семестр
+          case course_number
+          when 1
+            semester_number += 1 if session_number >= 2
+          when 2..5
+            semester_number += 1 if session_number >= 3
+          when 6
+          else raise "unknown course #{loading_xml.parent['Ном']}"
+          end
           semester = subspeciality.create_or_refresh_semester(semester_number)
           next unless semester
-          check = discipline.checks.where(:semester_id => semester, :check_kind => check_kind).first || discipline.checks.build(:semester => semester, :check_kind => check_kind)
-          refresh check
-          check.save
-        end
-      end
-      discipline_xml.css('Сем').each do |loading_xml|
-        semester = subspeciality.create_or_refresh_semester(loading_xml['Ном'])
-        next unless semester
-        Loading.enum_values(:loading_kind).each do |loading_kind|
-          kind_abbr = I18n.t loading_kind, :scope => "activerecord.attributes.loading.loading_kind_abbrs"
-          value = loading_xml[kind_abbr]
-          next unless value
-          loading = discipline.loadings.where(:semester_id => semester, :loading_kind => loading_kind).first || discipline.loadings.build(:semester => semester, :loading_kind => loading_kind)
-          refresh loading
-          loading.value = value
-          loading.save
+          Loading.enum_values(:loading_kind).each do |loading_kind|
+            kind_abbr = I18n.t loading_kind, :scope => "activerecord.attributes.loading.loading_kind_abbrs"
+            value = loading_xml[kind_abbr]
+            next unless value
+            loading = discipline.loadings.where(:semester_id => semester, :loading_kind => loading_kind).first || discipline.loadings.build(:semester => semester, :loading_kind => loading_kind)
+            refresh loading
+            loading.value = loading.value.to_i + value.to_i
+            loading.save
+          end
+          Check.enum_values(:check_kind).each do |check_kind|
+            kind_abbr = I18n.t check_kind, :scope => "activerecord.attributes.check.check_kind_abbrs"
+            if loading_xml[kind_abbr]
+              check = discipline.checks.where(:semester_id => semester, :check_kind => check_kind).first || discipline.checks.build(:semester => semester, :check_kind => check_kind)
+              refresh check
+              check.save
+            end
+          end
         end
       end
     end
