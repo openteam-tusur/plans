@@ -1,5 +1,5 @@
 <div class="ajaxed_item">
-  <%= simple_form_for [:manage, association_chain, resource].flatten, :remote => true do |form| %>
+  <%= simple_form_for [:manage, association_chain, resource].flatten, :remote => true, :html => { :multipart => true } do |form| %>
     <% resource.disciplines.group_by(&:cycle).each do |cycle, disciplines| %>
       <%= form.association :related_disciplines, :collection => disciplines.sort - [resource.discipline], :as => :check_boxes, :label => cycle %>
     <% end %>

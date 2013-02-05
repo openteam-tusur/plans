@@ -17,7 +17,7 @@ cancel_handler = () ->
       context.before(jqXHR.responseText)
     else
       if context.hasClass('new_work_programm') && !$(jqXHR.responseText).find('.error').length
-        window.location = jqXHR.responseText
+        window.location = $("<div>").html(jqXHR.responseText).html()
         return
 
       ajaxed_item = context.closest('.ajaxed_item')

@@ -40,8 +40,6 @@ class Manage::WorkProgrammsController < Manage::ApplicationController
   end
 
   def create
-    p "*" * 1000
-    debugger
     create! do |success, failure|
       success.html { render :text => resource_path and return }
       failure.html { render :new and return }

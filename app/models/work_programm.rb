@@ -62,7 +62,6 @@ class WorkProgramm < ActiveRecord::Base
   scope :checks_by_educational_office,      ->(user){ consumed_by(user).with_state(:check_by_educational_office) }
 
   has_attached_file :file, :storage => :elvfs, :elvfs_url => Settings['storage.url']
-  validates :file, :attachment_presence => true, :if => :gos3?
 
   state_machine :initial => :draft do
     after_transition :move_messages_to_archive
