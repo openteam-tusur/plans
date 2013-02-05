@@ -4,7 +4,7 @@
     <%= f.input :generate, :as => :boolean, :label => 'Пожалуйста, предзаполните рабочую программу на основании ГОС' if resource.gos2? %>
     <% if can? :upload_file, @work_programm %>
       <div class='add_file_wrapper'>
-        <%= f.input :file, :hint => 'если у вас уже есть рабочая программа и вы не хотите составлять новую', :label => false %>
+        <%= f.input :file, :hint => 'Загрузите файл, если у вас уже есть рабочая программа и вы не хотите составлять новую', :label => false %>
       </div>
     <% end %>
     <div class="buttons">
