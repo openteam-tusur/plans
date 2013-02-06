@@ -25,6 +25,9 @@ module PlanImporter
     raise "нет профиля #{subspeciality_title} для #{education_form} для специальности #{speciality_code} в #{year_number} года #{file_path}" unless subspeciality
     plan_digest = Digest::SHA1.hexdigest open(file_path).read
     return if plan_digest.eql?(subspeciality.plan_digest)
+    %w[disciplines checks loadings semesters].each do |association_name|
+      subspeciality.send(association_name).update_all(:deleted_at => time_of_sync)
+    end
     subspeciality.move_descendants_to_trash
     xml.css('СтрокиПлана Строка').each do |discipline_xml|
       discipline = subspeciality.disciplines.find_or_initialize_by_title(discipline_xml['Дис'].squish)
@@ -117,10 +120,6 @@ module PlanImporter
     end
     subspeciality.update_attributes(file_path: file_path, plan_digest: plan_digest)
   end
-
-  def self.refresh(object)
-    object.deleted_at = nil
-  end
 end
 
 class YearImporter
@@ -192,22 +191,20 @@ class YearImporter
       bar.increment!
     end
   end
+end
 
+def refresh(object)
+  object.deleted_at = nil
+end
 
-  def refresh(object)
-    object.deleted_at = nil
-  end
+def time_of_sync
+  @time_of_sync ||= DateTime.now
 end
 
 def move_all_to_trash
-  begin
-    time_of_sync = DateTime.now
-    Dir.glob('app/models/**/*.rb') do |model|
-      klass = File.basename(model, '.rb').classify.constantize
-      klass.update_all(:deleted_at => time_of_sync) if klass.respond_to?(:attribute_method?) && klass.attribute_method?(:deleted_at)
-    end
-  rescue => e
-    p e
+  %w[department speciality subdepartment subspeciality year].each do |model_name|
+    klass = model_name.classify.constantize
+    klass.update_all(:deleted_at => time_of_sync)
   end
 end
 
@@ -218,7 +215,8 @@ task :sync => :environment do
   Dir.glob("data/*").each do |folder|
     year_number = File.basename(folder)
     year = Year.find_or_initialize_by_number(year_number)
-    year.update_attribute :deleted_at, nil
+    refresh year
+    year.save!
     YearImporter.new(year, bar).import
   end
 end

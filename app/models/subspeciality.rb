@@ -30,6 +30,8 @@ class Subspeciality < ActiveRecord::Base
 
   has_one :programm, :as => :with_programm
   has_many :disciplines, :dependent => :destroy
+  has_many :checks, :through => :disciplines
+  has_many :loadings, :through => :disciplines
   has_many :actual_disciplines, :class_name => 'Discipline', :conditions => { :deleted_at => nil }
   has_many :semesters, :dependent => :destroy
 
