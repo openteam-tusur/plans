@@ -14,6 +14,7 @@
         <% end %>
           <div class="wrapper">
             <%= link_to subspeciality, manage_year_speciality_subspeciality_path(@year.number, speciality.code, subspeciality) %>
+            <%= subspeciality.id if subspeciality.has_actual_disciplines? %>
             <span class='subdepartment'><%= subspeciality.subdepartment.abbr %></span>
           </div>
         </li>

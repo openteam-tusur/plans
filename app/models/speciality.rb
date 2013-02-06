@@ -5,6 +5,9 @@ class Speciality < ActiveRecord::Base
 
   has_many :subspecialities
   has_many :disciplines, :through => :subspecialities
+  has_many :actual_disciplines, :through => :subspecialities
+  has_many :programms, :through => :subspecialities
+  has_many :subdepartments, :through => :subspecialities
   has_many :work_programms
 
   validates_presence_of :code, :title, :degree, :year

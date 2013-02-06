@@ -30,6 +30,7 @@ class Subspeciality < ActiveRecord::Base
 
   has_one :programm, :as => :with_programm
   has_many :disciplines, :dependent => :destroy
+  has_many :actual_disciplines, :class_name => 'Discipline', :conditions => { :deleted_at => nil }
   has_many :semesters, :dependent => :destroy
 
   validates_presence_of :title, :speciality, :subdepartment, :department, :education_form
@@ -61,10 +62,14 @@ class Subspeciality < ActiveRecord::Base
   delegate :gos, :gos?, :to => :speciality
   delegate :consumed_by, :to => :disciplines, :prefix => true
 
+  def has_actual_disciplines?
+    actual_disciplines.length > 0
+  end
+
   def warnings
     warnings = []
     warnings << "нет ООП" unless programm
-    warnings << "нет УП" unless disciplines.actual.any?
+    warnings << "нет УП" unless has_actual_disciplines?
     warnings
   end
 

@@ -12,4 +12,8 @@ class Manage::SpecialitiesController < Manage::ApplicationController
   has_scope :degree do |controller, scope, value|
     scope.send value
   end
+
+  has_scope :eager_load_associations, :default => 1, :only => :index do |controller, scope|
+    scope.includes(:actual_disciplines).includes(:programms).includes(:subdepartments)
+  end
 end
