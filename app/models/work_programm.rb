@@ -1,4 +1,24 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: work_programms
+#
+#  id                :integer          not null, primary key
+#  year              :integer
+#  discipline_id     :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  purpose           :text
+#  vfs_path          :string(255)
+#  state             :string(255)
+#  creator_id        :integer
+#  file_file_name    :string(255)
+#  file_content_type :string(255)
+#  file_file_size    :integer
+#  file_updated_at   :datetime
+#  file_url          :text
+#
+
 
 class WorkProgramm < ActiveRecord::Base
   attr_accessible :year, :purpose, :task, :related_discipline_ids, :generate, :creator_id, :message_text, :file
@@ -514,19 +534,3 @@ class WorkProgramm < ActiveRecord::Base
       create_new_message
     end
 end
-
-# == Schema Information
-#
-# Table name: work_programms
-#
-#  id            :integer          not null, primary key
-#  year          :integer
-#  discipline_id :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  purpose       :text
-#  vfs_path      :string(255)
-#  state         :string(255)
-#  creator_id    :integer
-#
-
