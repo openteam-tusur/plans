@@ -29,6 +29,7 @@ class Subspeciality < ActiveRecord::Base
   belongs_to :department
 
   has_one :programm
+  has_one :work_plan
   has_many :disciplines, :dependent => :destroy
   has_many :checks, :through => :disciplines
   has_many :loadings, :through => :disciplines
@@ -71,6 +72,7 @@ class Subspeciality < ActiveRecord::Base
   def warnings
     warnings = []
     warnings << "нет ООП" unless programm
+    warnings << "нет РУП" unless work_plan
     warnings << "нет УП" unless has_actual_disciplines?
     warnings
   end

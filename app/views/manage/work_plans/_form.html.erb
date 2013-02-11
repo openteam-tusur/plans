@@ -1,0 +1,12 @@
+<div class="ajaxed_item">
+  <%= simple_form_for resource, :url => resource_path, :remote => true, :html => {:multipart => true} do |f| %>
+    <div class='add_file_wrapper'>
+      <%= link_to "Скачать файл (#{f.object.file_file_name})", f.object.file_url, :class => 'link' if f.object.file? %>
+      <%= f.input :file, :label => false %>
+    </div>
+    <div class="buttons">
+      <%= f.submit %>
+      <%= link_to "Отмена", resource_path, :remote => true %>
+    </div>
+  <% end %>
+</div>

@@ -15,6 +15,7 @@ Plans::Application.routes.draw do
       resources :specialities, :speciality_id => /.*/, :only => [] do
         resources :subspecialities, :only => :show do
           resource :programm
+          resource :work_plan
           resources :discipline, :only => [] do
             resources :work_programms, :except => :index do
               get 'edit_purpose',                :on => :member
