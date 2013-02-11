@@ -1,9 +1,11 @@
 <div class="ajaxed_item">
   <% if resource %>
-    <%= link_to "Скачать файл (#{resource.file_file_name})", resource.file_url, :class => 'download_link' %>
+    <%= work_plan_api_url resource %>
     <% if can? :manage, resource %>
-      <%= link_to "Редактировать РУП", edit_manage_year_speciality_subspeciality_work_plan_path(@year, @speciality, @subspeciality), :remote => true, :class => 'edit_link' %>
-      <%= link_to "Удалить РУП", manage_year_speciality_subspeciality_work_plan_path(@year, @speciality, @subspeciality), :method => :delete, :confirm => t('are_you_sure?'), :remote => true, :class => 'remove_link' %>
+      <div class 'links'>
+        <%= link_to "Редактировать РУП", edit_manage_year_speciality_subspeciality_work_plan_path(@year, @speciality, @subspeciality), :remote => true, :class => 'edit_link' %>
+        <%= link_to "Удалить РУП", manage_year_speciality_subspeciality_work_plan_path(@year, @speciality, @subspeciality), :method => :delete, :confirm => t('are_you_sure?'), :remote => true, :class => 'remove_link' %>
+      </div>
     <% end %>
   <% else %>
     <div class="warning notice">
