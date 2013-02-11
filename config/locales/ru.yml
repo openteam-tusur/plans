@@ -323,3 +323,10 @@ ru:
         one:    "Она является основой для изучения дисциплины %{disciplines}."
         few:    "Она является основой для изучения следующих дисциплин: %{disciplines}."
         many:   "Она является основой для изучения следующих дисциплин: %{disciplines}."
+
+  grape:
+    errors:
+      messages:
+        coerce: 'invalid parameter: %{attribute}'
+        presence: 'missing parameter: %{attribute}'
+        regexp: 'invalid parameter: %{attribute}'
