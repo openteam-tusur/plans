@@ -7,6 +7,7 @@ class Speciality < ActiveRecord::Base
   has_many :disciplines, :through => :subspecialities
   has_many :actual_disciplines, :through => :subspecialities
   has_many :programms, :through => :subspecialities
+  has_many :work_plans, :through => :subspecialities
   has_many :subdepartments, :through => :subspecialities
   has_many :work_programms
 

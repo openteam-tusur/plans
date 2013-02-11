@@ -16,6 +16,9 @@
             <%= link_to subspeciality, manage_year_speciality_subspeciality_path(@year.number, speciality.code, subspeciality) %>
             <%= subspeciality.id if subspeciality.has_actual_disciplines? %>
             <span class='subdepartment'><%= subspeciality.subdepartment.abbr %></span>
+            <%= content_tag :div, :class => :work_plan_link do %>
+              <%= root_url %>/api/v1/work_plans/<%= subspeciality.id %>
+            <% end if subspeciality.work_plan %>
           </div>
         </li>
       <% end %>
