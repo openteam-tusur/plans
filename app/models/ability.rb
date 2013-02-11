@@ -69,7 +69,7 @@ class Ability
     end
 
     can :manage, Programm do |programm|
-      can? :manage, programm.with_programm.profiled_subdepartment
+      can? :manage, programm.subspeciality.profiled_subdepartment
     end
 
     alias_action :update, :destroy, :edit_purpose, :get_purpose, :get_related_disciplines, :to => :modify

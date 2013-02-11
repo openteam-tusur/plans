@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130204030711) do
+ActiveRecord::Schema.define(:version => 20130211044338) do
 
   create_table "appendix_items", :force => true do |t|
     t.integer  "appendix_id"
@@ -218,12 +218,11 @@ ActiveRecord::Schema.define(:version => 20130204030711) do
   add_index "permissions", ["user_id", "role", "context_id", "context_type"], :name => "by_user_and_role_and_context"
 
   create_table "programms", :force => true do |t|
-    t.integer  "with_programm_id"
-    t.string   "with_programm_type"
+    t.integer  "subspeciality_id"
     t.text     "description"
     t.string   "vfs_path"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "file_file_name"
     t.string   "file_content_type"
     t.integer  "file_file_size"
@@ -231,8 +230,7 @@ ActiveRecord::Schema.define(:version => 20130204030711) do
     t.text     "file_url"
   end
 
-  add_index "programms", ["with_programm_id"], :name => "index_programms_on_with_programm_id"
-  add_index "programms", ["with_programm_type"], :name => "index_programms_on_with_programm_type"
+  add_index "programms", ["subspeciality_id"], :name => "index_programms_on_subspeciality_id"
 
   create_table "protocols", :force => true do |t|
     t.integer  "work_programm_id"

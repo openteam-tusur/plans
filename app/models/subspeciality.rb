@@ -28,7 +28,7 @@ class Subspeciality < ActiveRecord::Base
   belongs_to :graduated_subdepartment, :class_name => 'Subdepartment'
   belongs_to :department
 
-  has_one :programm, :as => :with_programm
+  has_one :programm
   has_many :disciplines, :dependent => :destroy
   has_many :checks, :through => :disciplines
   has_many :loadings, :through => :disciplines

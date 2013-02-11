@@ -6,7 +6,6 @@ class Discipline < ActiveRecord::Base
   belongs_to :subspeciality
   belongs_to :subdepartment
 
-  has_one :programm, :as => :with_programm
   has_one :speciality, :through => :subspeciality
   has_many :checks, :dependent => :destroy
   has_many :loadings, :dependent => :destroy
