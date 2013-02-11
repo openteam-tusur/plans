@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130211044338) do
+ActiveRecord::Schema.define(:version => 20130211045905) do
 
   create_table "appendix_items", :force => true do |t|
     t.integer  "appendix_id"
@@ -369,6 +369,19 @@ ActiveRecord::Schema.define(:version => 20130211044338) do
   end
 
   add_index "users", ["uid"], :name => "index_users_on_uid"
+
+  create_table "work_plans", :force => true do |t|
+    t.integer  "subspeciality_id"
+    t.text     "file_file_name"
+    t.text     "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.text     "file_url"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "work_plans", ["subspeciality_id"], :name => "index_work_plans_on_subspeciality_id"
 
   create_table "work_programms", :force => true do |t|
     t.integer  "year"
