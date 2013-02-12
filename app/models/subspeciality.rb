@@ -35,14 +35,13 @@ class Subspeciality < ActiveRecord::Base
   has_many :loadings, :through => :disciplines
   has_many :actual_disciplines, :class_name => 'Discipline', :conditions => { :deleted_at => nil }
   has_many :semesters, :dependent => :destroy
+  has_one :year, :through => :speciality
 
   validates_presence_of :title, :speciality, :subdepartment, :department, :education_form
 
   after_save :move_descendants_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
 
-  default_scope order('subspecialities.title')
-
-  delegate :degree, :to => :speciality
+  delegate :degree, :gos_generation, :to => :speciality
   scope :actual, where(:deleted_at => nil)
 
   alias_method :profiled_subdepartment, :subdepartment

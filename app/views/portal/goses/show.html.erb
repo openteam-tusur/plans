@@ -1,0 +1,34 @@
+<% if params[:gos_generation] == 2 %>
+  <h1>Cписок специальностей ГОС-2</h1>
+<% else %>
+  <h1>Cписок специальностей ФГОС-3</h1>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <td>Код</td>
+      <td>Наименование</td>
+      <td>Профиль</td>
+      <td>Степень подготовки</td>
+      <td>Год</td>
+      <td>Кафедра</td>
+      <td>Форма обучения</td>
+      <td>Просмотр</td>
+      <td>PDF</td>
+    </tr>
+    <% subspecialities.each do |subspeciality| %>
+      <tr>
+        <td><%= subspeciality.speciality.code %></td>
+        <td><%= subspeciality.speciality.title %></td>
+        <td><%= subspeciality.title %></td>
+        <td><%= subspeciality.speciality.degree %></td>
+        <td><%= subspeciality.year %></td>
+        <td><%= subspeciality.graduated_subdepartment %></td>
+        <td><%= subspeciality.education_form %></td>
+        <td><%= link_to "смотреть", [:portal, subspeciality] %></td>
+        <td><%= link_to "скачать", work_plan_api_url(subspeciality.work_plan) if subspeciality.work_plan %></td>
+      </tr>
+    <% end %>
+  </thead>
+</table>

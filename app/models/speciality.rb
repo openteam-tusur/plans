@@ -21,6 +21,8 @@ class Speciality < ActiveRecord::Base
   scope :magistracy,  where(:degree => 'magistracy')
   scope :specialty,   where(:degree => 'specialty')
 
+  scope :actual, -> { where(:deleted_at => nil) }
+
   scope :consumed_by, ->(user) do
     if user.manager?
       subdepartment_ids = user.context_tree.flat_map(&:subdepartment_ids)
