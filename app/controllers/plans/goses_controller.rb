@@ -1,4 +1,6 @@
-class Portal::GosesController < ApplicationController
+class Plans::GosesController < ApplicationController
+  layout 'portal'
+
   expose(:subspecialities) do
     Subspeciality.includes(:speciality)
                  .includes(:year)

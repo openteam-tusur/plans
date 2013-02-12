@@ -51,7 +51,7 @@ Plans::Application.routes.draw do
     root :to => 'messages#index', :folder => 'reduxes'
   end
 
-  namespace :portal do
+  namespace :plans do
     get '/gos/:gos_generation' => 'goses#show', :constraints => { :gos_generation => /(2|3)/}, :as => :gos
     resources :subspecialities, :only => :show
   end

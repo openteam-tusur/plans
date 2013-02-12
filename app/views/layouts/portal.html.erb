@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+  <title>Помощь | Научно-образовательный портал</title>
+  <link href="http://edu.tusur.ru/favicon.ico?1298967731" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+  <link href="http://edu.tusur.ru/stylesheets/screen.css?1341904850" media="screen" rel="stylesheet" type="text/css" />
+  <script src="http://edu.tusur.ru/javascripts/jquery.min.js?1315287707" type="text/javascript"></script>
+  <script src="http://edu.tusur.ru/javascripts/jquery.ui.min.js?1298967731" type="text/javascript"></script>
+  <script src="http://edu.tusur.ru/javascripts/jquery.ui.datepicker.ru.js?1298967731" type="text/javascript"></script>
+  <script src="http://edu.tusur.ru/javascripts/jquery.tipsy.min.js?1298967731" type="text/javascript"></script>
+  <script src="http://edu.tusur.ru/javascripts/jquery_ujs.js?1315287707" type="text/javascript"></script>
+  <script src="http://edu.tusur.ru/javascripts/formtastic_cocoon.js?1303888564" type="text/javascript"></script>
+  <script src="http://edu.tusur.ru/javascripts/application.js?1321599018" type="text/javascript"></script>
+  <!--[if IE 6]>
+    <link href="http://edu.tusur.ru/stylesheets/ie6.css?1298967770" media="screen" rel="stylesheet" type="text/css" />
+  <![endif]-->
+  <!--[if IE 7]>
+    <link href="http://edu.tusur.ru/stylesheets/ie7.css?1298967770" media="screen" rel="stylesheet" type="text/css" />
+  <![endif]-->
+</head>
+<body>
+  <div class='header_wrapper'>
+    <div class='header'>
+      <a href="http://www.tusur.ru" class="tusur" title="Томский государственный университет систем управления и радиоэлектроники">Томский государственный университет систем управления и радиоэлектроники</a>
+
+      <h1 class='site_name'><a href="http://edu.tusur.ru/">Научно-образовательный портал</a></h1>
+    </div>
+  </div>
+  <div class='content_wrapper'>
+      <div class='main_menu'>
+    <ul><li id="training"><a href="http://edu.tusur.ru/training/publications"><span class="decreased">для</span> учёбы</a></li><li id="science"><a href="http://edu.tusur.ru/records"><span class="decreased">для</span> науки</a></li><li id="subfaculties"><a href="http://edu.tusur.ru/chairs"><span class="decreased">наши</span> кафедры</a></li><li id="humans"><a href="http://edu.tusur.ru/plans" class='selected'><span class="decreased">наши</span> специальности</a></li><li id="library"><a href="http://lib.tusur.ru/"><span class="decreased">наша</span> библиотека</a></li><li class="selected" id="help"><a href="http://edu.tusur.ru/help"><span class="decreased">наша</span> помощь</a></li></ul>
+  </div>
+
+    <div class='content'>
+      <%= yield %>
+    </div>
+  </div>
+  <div class='footer_wrapper'>
+    <div class='footer'>
+      <ul class='site_map'>
+        <li>
+          <h1>учёба</h1>
+          <ul>
+            <li><a href="http://edu.tusur.ru/training/publications">учебные материалы</a></li>
+            <li><a href='http://timetable.tusur.ru' class="target_blank" rel='nofollow noreferrer' target='_blank'>расписание</a></li>
+            <li><a href='http://ocenka.tusur.ru' class="target_blank" rel='nofollow noreferrer' target='_blank'>успеваемость</a></li>
+          </ul>
+        </li>
+        <li>
+          <h1>наука</h1>
+          <ul>
+            <li><a href="http://edu.tusur.ru/records">реферативные журналы</a></li>
+            <li><a href='#' class='need_tipsy' title='Раздел находится в разработке'>публикации</a></li>
+            <li><a href='#' class='need_tipsy' title='Раздел находится в разработке'>периодические издания</a></li>
+            <li><a href='#' class='need_tipsy' title='Раздел находится в разработке'>конференции</a></li>
+            <li><a href='#' class='need_tipsy' title='Раздел находится в разработке'>конкурсы, гранты</a></li>
+          </ul>
+        </li>
+        <li>
+          <h1>специальности</h1>
+          <ul>
+            <li><a href="/plans/gos/2">ГОС 2</a></li>
+            <li><a href="/plans/gos/3">ФГОС 3</a></li>
+          </ul>
+        </li>
+        <li>
+          <h1>библиотека</h1>
+          <ul>
+            <li><a class="target_blank" rel='nofollow noreferrer' target='_blank' href="http://lib.tusur.ru/category/cat" target="_blank">электронный каталог</a></li>
+            <li><a class="target_blank" rel='nofollow noreferrer' target='_blank' href="http://lib.tusur.ru/article/periodika-10" target="_blank">периодические издания</a></li>
+            <li><a class="target_blank" rel='nofollow noreferrer' target='_blank' href="http://lib.tusur.ru/category/bd" target="_blank">внешние базы данных</a></li>
+            <li><a class="target_blank" rel='nofollow noreferrer' target='_blank' href="http://lib.tusur.ru/about/k-inform" target="_blank">контактная информация</a></li>
+            <li><a class="target_blank" rel='nofollow noreferrer' target='_blank' href="http://lib.tusur.ru/books" target="_blank">новые книги</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="copyright">
+        <p class="openteam"><a href="http://openteam.ru/" title="Сделано с любовью OpenTeam" rel="tipsy" target="_blank">OpenTeam</a></p>
+        <p class="tusur"><a href="http://www.tusur.ru/" title="Томский государственный университет систем управления и радиоэлектроники" rel="tipsy" target="_blank">Томский государственный университет систем управления и радиоэлектроники</a></p>
+        <p class="copy">&copy; Томский государственный университет систем управления и радиоэлектроники, <span class="nowrap">2010 &ndash; 2013</span></p>
+
+        <p class="issue"><a href="mailto:openteam@tusur.ru">Высказать пожелание или сообщить об ошибке</a></p>
+      </div>
+    </div>
+  </div>
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var pkBaseURL = (("https:" == document.location.protocol) ? "https://stat.openteam.ru/" : "http://stat.openteam.ru/");
+      document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+      try {
+        var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 10);
+        piwikTracker.trackPageView();
+        piwikTracker.enableLinkTracking();
+      } catch( err ) {}
+    </script>
+    <noscript><p><img src="http://stat.openteam.ru/piwik.php?idsite=10" style="border:0" alt="" /></p></noscript>
+    <!-- End Piwik Tracking Code -->
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+    (function (d, w, c) {
+      (w[c] = w[c] || []).push(function() {
+        try {
+          w.yaCounter15036772 = new Ya.Metrika({id:15036772, enableAll: true, webvisor:true});
+        } catch(e) {}
+      });
+
+      var n = d.getElementsByTagName("script")[0],
+          s = d.createElement("script"),
+          f = function () { n.parentNode.insertBefore(s, n); };
+      s.type = "text/javascript";
+      s.async = true;
+      s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+      if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f);
+      } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+    </script>
+    <noscript><div><img src="http://mc.yandex.ru/watch/15036772" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+</body>
+</html>
