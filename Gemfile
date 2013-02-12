@@ -11,6 +11,8 @@ end
 
 group :default do
   gem 'default_value_for'
+  gem 'decent_exposure'
+  gem 'draper'
   gem 'esp-auth'
   gem 'grape'
   gem 'grape-entity'

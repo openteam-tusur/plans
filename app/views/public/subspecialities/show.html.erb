@@ -1,0 +1,37 @@
+<table>
+  <thead>
+    <tr>
+      <% subspeciality.headers.each do |header| %>
+        <th><%= header %></th>
+      <% end %>
+    </tr>
+    <% subspeciality.cycles_with_disciplines.each do |cycle, disciplines| %>
+      <tr>
+        <td colspan='<%= subspeciality.columns_count %>' class='cycle'>
+          <%= cycle %>
+        </td>
+      </tr>
+      <% disciplines.each do |discipline| %>
+        <tr>
+          <td>
+            <%= discipline.title %>
+          </td>
+          <td>
+            <%= discipline.exam_semesters %>
+          </td>
+          <td>
+            <%= discipline.end_of_term_semesters %>
+          </td>
+          <td>
+            <%= discipline.end_of_course_semesters %>
+          </td>
+          <% subspeciality.semesters.each do |semester| %>
+            <td>
+              <%= '+' if discipline.loadings_in_semester?(semester) %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+  </thead>
+</table>

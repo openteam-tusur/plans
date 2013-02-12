@@ -51,6 +51,10 @@ Plans::Application.routes.draw do
     root :to => 'messages#index', :folder => 'reduxes'
   end
 
+  scope :module => :public do
+    resources :subspecialities, :only => :show
+  end
+
   root :to => 'application#index'
   mount API::Plans => '/api'
 end
