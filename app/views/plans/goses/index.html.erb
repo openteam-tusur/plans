@@ -1,9 +1,0 @@
-<% content_for :breadcrumbs do %>
-  <a href="/">Главная страница</a>
-  <span class="black">→</span>
-  <a href="/plans">Наши специальности</a>
-<% end %>
-
-<h1>Наши специальности</h1>
-<h2><%= link_to "ФГОС-3", plans_gos_path(:gos_generation => 3) %></h2>
-<h2><%= link_to "ГОС-2", plans_gos_path(:gos_generation => 2) %></h2>

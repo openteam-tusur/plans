@@ -1,5 +1,5 @@
-class Plans::GosesController < ApplicationController
-  layout 'portal'
+class Edu::GosesController < ApplicationController
+  layout 'edu'
 
   expose(:subspecialities) do
     Subspeciality.actual
