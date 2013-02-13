@@ -37,10 +37,7 @@ module PlanImporter
       begin
         cycle = xml.css("АтрибутыЦиклов Цикл").select{|c| cycle_abbr == (c['Аббревиатура'] || c['Абревиатура']) }.first['Название'].squish
       rescue => e
-        p "не указан цикл для дисциплины"
-        p file_path
-        p discipline
-        return
+        raise "не указан цикл для дисциплины '#{discipline.title}'"
       end
       discipline.cycle = "#{cycle_abbr}. #{cycle}"
       discipline.summ_loading = discipline_xml['ПодлежитИзучению']
@@ -50,18 +47,15 @@ module PlanImporter
       begin
         discipline.save!
       rescue => e
-        p "не удалось сохранить дисциплину"
-        p file_path
-        p discipline
         p discipline.errors
-        return
+        raise "не удалось сохранить дисциплину '#{discipline.title}'"
       end
       if file_path !~ /plz\.xml/ # очная, очно-заочная
         Check.enum_values(:check_kind).each do |check_kind|
           kind_abbr = I18n.t check_kind, :scope => "activerecord.attributes.check.check_kind_abbrs"
           semester_numbers = discipline_xml["Сем#{kind_abbr}"]
           next unless semester_numbers
-          semester_numbers.each_char do |semester_number|
+          semester_numbers.gsub(/р/, '').each_char do |semester_number|
             semester = subspeciality.create_or_refresh_semester(semester_number)
             next unless semester
             check = discipline.checks.where(:semester_id => semester, :check_kind => check_kind).first || discipline.checks.build(:semester => semester, :check_kind => check_kind)
@@ -186,7 +180,12 @@ class YearImporter
 
   def import_plans
     Dir.glob("data/#{year.number}/plans/*.xml") do |file_path|
-      PlanImporter.import_plan_from_file(file_path, year)
+      begin
+        PlanImporter.import_plan_from_file(file_path, year)
+      rescue => e
+        puts file_path
+        p e.message
+      end
       bar.increment!
     end
   end
@@ -223,7 +222,7 @@ desc "Синхронизация справочников"
 task :sync => :environment do
   bar = ProgressBar.new Dir.glob("data/**/*.{xml,yml}").count
   move_all_to_trash
-  Dir.glob("data/*").each do |folder|
+  Dir.glob("data/*").sort.each do |folder|
     year_number = File.basename(folder)
     year = Year.find_or_initialize_by_number(year_number)
     refresh year

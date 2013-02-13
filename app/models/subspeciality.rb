@@ -99,9 +99,13 @@ class Subspeciality < ActiveRecord::Base
 
   def semester_number_from_string(string)
     case string
+    when Fixnum
+      string
     when 'A'..'F'
       string.ord - 55 # A.ord => 65
-    when /\A\d+\Z/
+    when '1'..'9'
+      string.to_i
+    when /1([0123])/
       string.to_i
     else
       raise "incorrect semester number #{string} (#{string.ord})"
