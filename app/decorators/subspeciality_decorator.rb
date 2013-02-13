@@ -29,9 +29,12 @@ class SubspecialityDecorator < Draper::Decorator
     model.human_education_form.gsub /форма$/, ''
   end
 
+  def has_disciplines?
+    model.actual_disciplines.length > 0
+  end
+
   def disciplines
-    @disciplines ||= model.disciplines
-                          .actual
+    @disciplines ||= model.actual_disciplines
                           .includes(:checks)
                           .includes(:loadings)
                           .includes(:semesters)

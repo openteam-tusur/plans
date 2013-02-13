@@ -2,12 +2,16 @@ class Plans::GosesController < ApplicationController
   layout 'portal'
 
   expose(:subspecialities) do
-    Subspeciality.includes(:speciality)
-                 .includes(:year)
+    Subspeciality.actual
+                 .includes(:actual_disciplines)
                  .includes(:graduated_subdepartment)
+                 .includes(:speciality)
                  .includes(:work_plan)
+                 .includes(:year)
+                 .joins(:graduated_subdepartment)
+                 .joins(:speciality)
+                 .joins(:year)
                  .where('specialities.gos_generation' => params[:gos_generation])
-                 .actual
                  .order('specialities.code, subspecialities.title, years.number, subdepartments.abbr')
                  .decorate
   end
