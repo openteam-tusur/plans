@@ -201,11 +201,23 @@ def time_of_sync
   @time_of_sync ||= DateTime.now
 end
 
+def move_to_trash(model_name)
+  klass = model_name.classify.constantize
+  klass.update_all(:deleted_at => time_of_sync)
+end
+
 def move_all_to_trash
   %w[department speciality subdepartment subspeciality year].each do |model_name|
-    klass = model_name.classify.constantize
-    klass.update_all(:deleted_at => time_of_sync)
+    move_to_trash(model_name)
   end
+end
+
+desc "Форсировать полный повторный импорт"
+task :force_sync => :environment do
+  %w[department speciality subdepartment subspeciality year discipline check loading].each do |model_name|
+    move_to_trash(model_name)
+  end
+  Subspeciality.update_all :plan_digest => nil
 end
 
 desc "Синхронизация справочников"
