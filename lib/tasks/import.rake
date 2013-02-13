@@ -28,7 +28,6 @@ module PlanImporter
     %w[disciplines checks loadings semesters].each do |association_name|
       subspeciality.send(association_name).update_all(:deleted_at => time_of_sync)
     end
-    subspeciality.move_descendants_to_trash
     xml.css('СтрокиПлана Строка').each do |discipline_xml|
       discipline = subspeciality.disciplines.find_or_initialize_by_title(discipline_xml['Дис'].squish)
       discipline.subdepartment = year.subdepartments.find_by_number((discipline_xml['Кафедра'] || title_node['КодКафедры']))
@@ -65,6 +64,7 @@ module PlanImporter
           semester_numbers.each_char do |semester_number|
             semester = subspeciality.create_or_refresh_semester(semester_number)
             next unless semester
+            p semester_number
             check = discipline.checks.where(:semester_id => semester, :check_kind => check_kind).first || discipline.checks.build(:semester => semester, :check_kind => check_kind)
             refresh check
             check.save
@@ -214,7 +214,7 @@ end
 
 desc "Форсировать полный повторный импорт"
 task :force_sync => :environment do
-  %w[department speciality subdepartment subspeciality year discipline check loading].each do |model_name|
+  %w[department speciality subdepartment subspeciality year discipline check loading semester].each do |model_name|
     move_to_trash(model_name)
   end
   Subspeciality.update_all :plan_digest => nil

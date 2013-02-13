@@ -1,12 +1,12 @@
 # encoding: utf-8
-
+Semester
 class SubspecialityDecorator < Draper::Decorator
-  delegate :title, :semesters, :work_plan, :gos_generation, :graduated_subdepartment, :human_education_form, :year
+  delegate :title, :actual_semesters, :work_plan, :gos_generation, :graduated_subdepartment, :human_education_form, :year
 
   decorates_association :speciality
 
   def headers
-    @headers ||= ["№<br/>п/п".html_safe, "Название дисциплины", "Экз", "Зач", "КрР/<br/>КрПр".html_safe] + semesters.map(&:number)
+    @headers ||= ["№<br/>п/п".html_safe, "Название дисциплины", "Экз", "Зач", "КрР/<br/>КрПр".html_safe] + actual_semesters.map(&:number)
   end
 
   def full_title

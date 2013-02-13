@@ -50,7 +50,7 @@
           <td>
             <%= discipline.end_of_course_semesters %>
           </td>
-          <% subspeciality.semesters.each do |semester| %>
+          <% subspeciality.actual_semesters.each do |semester| %>
             <td>
               <%= '+' if discipline.loadings_in_semester?(semester) %>
             </td>

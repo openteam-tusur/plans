@@ -35,6 +35,7 @@ class Subspeciality < ActiveRecord::Base
   has_many :loadings, :through => :disciplines
   has_many :actual_disciplines, :class_name => 'Discipline', :conditions => { :deleted_at => nil }
   has_many :semesters, :dependent => :destroy
+  has_many :actual_semesters, :class_name => 'Semester', :conditions => { :deleted_at => nil }
   has_one :year, :through => :speciality
 
   validates_presence_of :title, :speciality, :subdepartment, :department, :education_form
@@ -77,6 +78,8 @@ class Subspeciality < ActiveRecord::Base
   end
 
   def move_descendants_to_trash
+    checks.update_all(:deleted_at => Time.now)
+    loadings.update_all(:deleted_at => Time.now)
     disciplines.update_all(:deleted_at => Time.now)
     semesters.update_all(:deleted_at => Time.now)
   end
