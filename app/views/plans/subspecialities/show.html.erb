@@ -5,16 +5,16 @@
   <a href="/plans">Наши специальности</a>
 
   <span class="black">→</span>
-  <% if subspeciality.speciality.model.gos_generation == '2' %>
+  <% if speciality.gos2? %>
     <%= link_to "ГОС-2", plans_gos_path(:gos_generation => 2) %>
   <% else %>
     <%= link_to "ФГОС-3", plans_gos_path(:gos_generation => 3) %>
   <% end %>
 
   <span class="black">→</span>
-  <%= link_to "#{subspeciality.speciality.code} #{subspeciality.speciality.title} (#{subspeciality.title})", plans_subspeciality_path(subspeciality) %>
+  <%= link_to "#{speciality.code} #{speciality.title} (#{subspeciality.title})", plans_subspeciality_path(subspeciality) %>
 <% end %>
-<h1><%= "#{subspeciality.speciality.code} #{subspeciality.speciality.title} (#{subspeciality.title})" %></h1>
+<h1><%= "#{speciality.code} #{speciality.title} (#{subspeciality.title})" %></h1>
 <table class='curriculum_table'>
   <thead>
     <tr>
