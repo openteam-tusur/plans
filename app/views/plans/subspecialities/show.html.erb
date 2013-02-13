@@ -1,14 +1,16 @@
 <% content_for :breadcrumbs do %>
   <a href="/">Главная страница</a>
+
   <span class="black">→</span>
   <a href="/plans">Наши специальности</a>
-  <span class="black">→</span>
 
+  <span class="black">→</span>
   <% if params[:gos_generation] == 2 %>
     <%= link_to "ГОС-2", plans_gos_path(:gos_generation => 2) %>
   <% else %>
     <%= link_to "ФГОС-3", plans_gos_path(:gos_generation => 3) %>
   <% end %>
+
   <span class="black">→</span>
   <%= link_to "#{subspeciality.speciality.code} #{subspeciality.speciality.title} (#{subspeciality.title})", plans_subspeciality_path(subspeciality) %>
 <% end %>
