@@ -5,7 +5,7 @@
   <a href="/plans">Наши специальности</a>
 
   <span class="black">→</span>
-  <% if params[:gos_generation] == 2 %>
+  <% if subspeciality.speciality.model.gos_generation == '2' %>
     <%= link_to "ГОС-2", plans_gos_path(:gos_generation => 2) %>
   <% else %>
     <%= link_to "ФГОС-3", plans_gos_path(:gos_generation => 3) %>
