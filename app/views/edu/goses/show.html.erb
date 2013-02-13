@@ -36,8 +36,8 @@
         <td><%= subspeciality.speciality.title %></td>
         <td><%= subspeciality.title %></td>
         <td><%= subspeciality.speciality.degree %></td>
-        <td><%= subspeciality.year %></td>
-        <td><%= subspeciality.graduated_subdepartment %></td>
+        <td><%= subspeciality.year_number %></td>
+        <td><%= subspeciality.subdepartment %></td>
         <td><%= subspeciality.education_form %></td>
         <td><%= link_to "смотреть", [:edu, subspeciality] if subspeciality.has_disciplines? %></td>
         <td><%= link_to "скачать", work_plan_api_url(subspeciality.work_plan) if subspeciality.work_plan %></td>

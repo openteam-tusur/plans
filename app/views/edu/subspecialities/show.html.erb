@@ -14,11 +14,11 @@
   <span class="black">→</span>
   <%= link_to "#{speciality.code} #{speciality.title} (#{subspeciality.title})", edu_subspeciality_path(subspeciality) %>
 <% end %>
-<h1><%= speciality.degree %> <%= "#{speciality.code} #{speciality.title} (#{subspeciality.title})" %></h1>
+<h1><%= subspeciality.full_title %></h1>
 
 <%= link_to("скачать", work_plan_api_url(subspeciality.work_plan), :class => :download_work_plan_pdf) if subspeciality.work_plan %>
 
-<h2><%= subspeciality.graduated_subdepartment %> <%= speciality.year %> <%= subspeciality.education_form %></h2>
+<h2><%= subspeciality.extra_info %></h2>
 <table class='curriculum_table'>
   <thead>
     <tr>

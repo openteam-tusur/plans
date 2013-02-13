@@ -1,12 +1,20 @@
 # encoding: utf-8
 
 class SubspecialityDecorator < Draper::Decorator
-  delegate :title, :semesters, :work_plan, :gos_generation
+  delegate :title, :semesters, :work_plan, :gos_generation, :graduated_subdepartment, :human_education_form, :year
 
   decorates_association :speciality
 
   def headers
     @headers ||= ["№<br/>п/п".html_safe, "Название дисциплины", "Экз", "Зач", "КрР/<br/>КрПр".html_safe] + semesters.map(&:number)
+  end
+
+  def full_title
+    "#{speciality.gos}. #{speciality.full_title} (#{title})"
+  end
+
+  def extra_info
+    "#{speciality.degree}. #{graduated_subdepartment}. #{year} начала подготовки. #{capitalized_education_form} обучения."
   end
 
   def cycles_with_disciplines
@@ -17,16 +25,22 @@ class SubspecialityDecorator < Draper::Decorator
     @columns_count ||= headers.length
   end
 
-  def year
-    model.year.number
+  def year_number
+    year.number
   end
 
-  def graduated_subdepartment
-    model.graduated_subdepartment.abbr
+  def subdepartment
+    graduated_subdepartment.abbr
   end
 
   def education_form
-    model.human_education_form.gsub /форма$/, ''
+    human_education_form.gsub /форма$/, ''
+  end
+
+  def capitalized_education_form
+    human_education_form.tap do |string|
+      string[0] = string[0].mb_chars.capitalize!
+    end
   end
 
   def has_disciplines?
