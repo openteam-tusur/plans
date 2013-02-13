@@ -1,3 +1,16 @@
+<% content_for :breadcrumbs do %>
+  <a href="/">Главная страница</a>
+  <span class="black">→</span>
+  <a href="/plans">Наши специальности</a>
+  <span class="black">→</span>
+
+  <% if params[:gos_generation] == 2 %>
+    <%= link_to "ГОС-2", plans_gos_path(:gos_generation => 2) %>
+  <% else %>
+    <%= link_to "ФГОС-3", plans_gos_path(:gos_generation => 3) %>
+  <% end %>
+<% end %>
+
 <% if params[:gos_generation] == 2 %>
   <h1>Cписок специальностей ГОС-2</h1>
 <% else %>
@@ -26,7 +39,7 @@
         <td><%= subspeciality.year %></td>
         <td><%= subspeciality.graduated_subdepartment %></td>
         <td><%= subspeciality.education_form %></td>
-        <td><%= link_to "смотреть", [:portal, subspeciality] %></td>
+        <td><%= link_to "смотреть", [:plans, subspeciality] %></td>
         <td><%= link_to "скачать", work_plan_api_url(subspeciality.work_plan) if subspeciality.work_plan %></td>
       </tr>
     <% end %>

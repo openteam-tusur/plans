@@ -54,6 +54,7 @@ Plans::Application.routes.draw do
   namespace :plans do
     get '/gos/:gos_generation' => 'goses#show', :constraints => { :gos_generation => /(2|3)/}, :as => :gos
     resources :subspecialities, :only => :show
+    root :to => 'goses#index'
   end
 
   root :to => 'application#index'
