@@ -11,7 +11,11 @@ class Discipline < ActiveRecord::Base
   has_many :loadings, :dependent => :destroy
   has_many :work_programms, :dependent => :destroy
   has_many :semesters, :through => :loadings, :uniq => true
-  has_many :check_semesters, :class_name => 'Check', :through => :checks, :source => :semester
+
+  has_many :actual_checks,    :class_name => 'Check', :conditions => { :deleted_at => nil }
+  has_many :actual_loadings,  :class_name => 'Loading', :conditions => { :deleted_at => nil }
+  has_many :actual_semesters, :class_name => 'Semester', :through => :actual_loadings, :uniq => true, :source => :semester
+
 
   scope :actual, where(:deleted_at => nil)
 
