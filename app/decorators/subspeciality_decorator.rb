@@ -34,7 +34,7 @@ class SubspecialityDecorator < Draper::Decorator
   end
 
   def education_form
-    human_education_form.gsub /форма$/, ''
+    capitalized_education_form.gsub(/форма$/, '')
   end
 
   def capitalized_education_form

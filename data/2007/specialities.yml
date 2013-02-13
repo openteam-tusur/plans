@@ -1,3 +1,14 @@
+bachelor:
+  -
+    code: "080700.62"
+    title: "Бизнес-информатика"
+    subspecialities:
+      -
+        subdepartment: "АОИ"
+        title: "Без профиля"
+        education_form: 'postal-with-dist'
+        department: 'ФДО'
+
 specialty:
   -
     code: "030501.65"
@@ -73,15 +84,6 @@ specialty:
         title: "Без специализации"
         education_form: 'postal'
         department: 'ЗиВФ'
-  -
-    code: "080700.62"
-    title: "Бизнес-информатика"
-    subspecialities:
-      -
-        subdepartment: "АОИ"
-        title: "Без специализации"
-        education_form: 'postal-with-dist'
-        department: 'ФДО'
   -
     code: "080801.65"
     title: "Прикладная  информатика (в экономике)"
