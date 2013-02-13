@@ -64,7 +64,6 @@ module PlanImporter
           semester_numbers.each_char do |semester_number|
             semester = subspeciality.create_or_refresh_semester(semester_number)
             next unless semester
-            p semester_number
             check = discipline.checks.where(:semester_id => semester, :check_kind => check_kind).first || discipline.checks.build(:semester => semester, :check_kind => check_kind)
             refresh check
             check.save
