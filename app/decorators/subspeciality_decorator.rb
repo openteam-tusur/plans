@@ -47,6 +47,10 @@ class SubspecialityDecorator < Draper::Decorator
     model.actual_disciplines.length > 0
   end
 
+  def degree
+    speciality.degree
+  end
+
   def disciplines
     @disciplines ||= model.actual_disciplines
                           .includes(:actual_checks)

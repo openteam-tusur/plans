@@ -17,31 +17,32 @@
   <h1>Cписок специальностей ФГОС-3</h1>
 <% end %>
 
-<table>
+<table class='curriculum_table'>
   <thead>
     <tr>
       <th>Код</td>
       <th>Наименование</td>
       <th>Профиль</td>
-      <th>Степень подготовки</td>
       <th>Год</td>
       <th>Кафедра</td>
       <th>Форма обучения</td>
       <th>Просмотр</td>
       <th>PDF</td>
     </tr>
-    <% subspecialities.each do |subspeciality| %>
-      <tr>
-        <td><%= subspeciality.speciality.code %></td>
-        <td><%= subspeciality.speciality.title %></td>
-        <td><%= subspeciality.title %></td>
-        <td><%= subspeciality.speciality.degree %></td>
-        <td><%= subspeciality.year_number %></td>
-        <td><%= subspeciality.subdepartment %></td>
-        <td><%= subspeciality.education_form %></td>
-        <td><%= link_to "смотреть", [:edu, subspeciality] if subspeciality.has_disciplines? %></td>
-        <td><%= link_to "скачать", work_plan_api_url(subspeciality.work_plan) if subspeciality.work_plan %></td>
-      </tr>
+    <% subspecialities.group_by(&:degree).each do |degree, subspecialities| %>
+      <tr class='cycle'><td colspan='8'><%= degree %></td></tr>
+      <% subspecialities.each do |subspeciality| %>
+        <tr>
+          <td><%= subspeciality.speciality.code %></td>
+          <td><%= subspeciality.speciality.title %></td>
+          <td><%= subspeciality.title %></td>
+          <td><%= subspeciality.year_number %></td>
+          <td><%= subspeciality.subdepartment %></td>
+          <td><%= subspeciality.education_form %></td>
+          <td><%= link_to "смотреть", [:edu, subspeciality] if subspeciality.has_disciplines? %></td>
+          <td><%= link_to "скачать", work_plan_api_url(subspeciality.work_plan) if subspeciality.work_plan %></td>
+        </tr>
+      <% end %>
     <% end %>
   </thead>
 </table>
