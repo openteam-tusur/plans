@@ -57,7 +57,7 @@ module PlanImporter
         p discipline.errors
         return
       end
-      if file_path =~ /pli\.xml/ # очная, очно-заочная
+      if file_path !~ /plz\.xml/ # очная, очно-заочная
         Check.enum_values(:check_kind).each do |check_kind|
           kind_abbr = I18n.t check_kind, :scope => "activerecord.attributes.check.check_kind_abbrs"
           semester_numbers = discipline_xml["Сем#{kind_abbr}"]
