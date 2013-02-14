@@ -1,12 +1,5 @@
 bachelor:
   -
-    code: "020801.65"
-    title: "Экология"
-    subspecialities:
-      -
-        subdepartment: "РЭТЭМ"
-        title: "Мониторинг окружающей среды с применением компьютерных технологий"
-  -
     code: "010500.62"
     title: "Прикладная математика и информатика"
     subspecialities:
@@ -20,6 +13,11 @@ bachelor:
       -
         subdepartment: "Экономики"
         title: "Без профиля"
+      -
+        subdepartment: "Экономики"
+        title: "Без профиля"
+        education_form: 'postal-with-dist'
+        department: 'ФДО'
   -
     code: "080500.62"
     title: "Менеджмент"
@@ -29,6 +27,15 @@ bachelor:
         title: "Без профиля"
       -
         subdepartment: "Экономики"
+        title: "Без профиля"
+        education_form: 'postal-with-dist'
+        department: 'ФДО'
+  -
+    code: "080700.62"
+    title: "Бизнес-информатика"
+    subspecialities:
+      -
+        subdepartment: "АОИ"
         title: "Без профиля"
         education_form: 'postal-with-dist'
         department: 'ФДО'
