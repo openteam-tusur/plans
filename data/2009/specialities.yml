@@ -9,15 +9,6 @@ bachelor:
         education_form: 'postal-with-dist'
         department: 'ФДО'
   -
-    code: "080500.62"
-    title: "Менеджмент"
-    subspecialities:
-      -
-        subdepartment: "Экономики"
-        title: "Без профиля"
-        education_form: 'postal-with-dist'
-        department: 'ФДО'
-  -
     code: "210600.62"
     title: "Нанотехнология"
     subspecialities:
