@@ -131,6 +131,15 @@ specialty:
         subdepartment: "ТУ"
         title: "Сервис электронных систем безопасности"
   -
+    code: "160905.65"
+    title: "Техническая эксплуатация транспортного радиооборудования"
+    subspecialities:
+      -
+        subdepartment: "КИПР"
+        title: "Без специализации"
+        education_form: "postal"
+        department: "ЗиВФ"
+  -
     code: "210104.65"
     title: "Микроэлектроника и твердотельная электроника"
     subspecialities:
