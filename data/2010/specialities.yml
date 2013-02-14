@@ -1,1 +1,25 @@
 specialty:
+  -
+    code: "030501.65"
+    title: "Юриспруденция"
+    subspecialities:
+      -
+        subdepartment: "ИП"
+        title: "Защита прав интеллектуальной собственности"
+      -
+        subdepartment: "ИП"
+        title: "Правовое обеспечение защиты информации"
+  -
+    code: "210106.65"
+    title: "Промышленная электроника"
+    subspecialities:
+      -
+        subdepartment: "ПрЭ"
+        title: "Без специализации"
+        education_form: 'part-time'
+        department: 'ЗиВФ'
+      -
+        subdepartment: "ПрЭ"
+        title: "Без специализации"
+        education_form: 'postal'
+        department: 'ЗиВФ'
