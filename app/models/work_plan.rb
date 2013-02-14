@@ -18,6 +18,7 @@ class WorkPlan < ActiveRecord::Base
 
   belongs_to :subspeciality
   validates_presence_of :subspeciality
+  has_one :specialty, :through => :subspeciality
 
   has_attached_file :file, :storage => :elvfs, :elvfs_url => Settings['storage.url']
   validates :file, :attachment_presence => true
