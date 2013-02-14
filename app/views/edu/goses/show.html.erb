@@ -1,3 +1,11 @@
+<% content_for :head_title do %>
+  <% if params[:gos_generation] == '2' %>
+    Cписок специальностей ГОС-2
+  <% else %>
+    Cписок специальностей ФГОС-3
+  <% end %>
+<% end %>
+
 <% content_for :breadcrumbs do %>
   <a href="/">Главная страница</a>
   <span class="black">→</span>
