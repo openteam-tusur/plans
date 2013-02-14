@@ -155,6 +155,7 @@ class YearImporter
       specialities_attributes.each do |speciality_attributes|
         subspecialities_attributes = speciality_attributes.delete('subspecialities')
         speciality = year.specialities.find_or_initialize_by_code(speciality_attributes['code'])
+        speciality.gos_generation ||= (year.number >= 2011 ? 3 : 2)
         refresh speciality
         speciality.update_attributes! speciality_attributes.merge(:degree => degree)
         subspecialities_attributes.each do |subspeciality_attributes|
