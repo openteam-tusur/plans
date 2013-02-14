@@ -191,6 +191,15 @@ specialty:
         subdepartment: "ТУ"
         title: "Без специализации"
   -
+    code: "210303.65"
+    title: "Бытовая радиоэлектронная аппаратура"
+    subspecialities:
+      -
+        subdepartment: "ТУ"
+        title: "Без специализации"
+        education_form: 'part-time'
+        department: 'ЗиВФ'
+  -
     code: "210304.65"
     title: "Радиоэлектронные системы"
     subspecialities:
