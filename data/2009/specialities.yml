@@ -66,4 +66,32 @@ bachelor:
       -
         subdepartment: "ЭМИС"
         title: "Без профиля"
+
 specialty:
+  -
+    code: "030501.65"
+    title: "Юриспруденция"
+    subspecialities:
+      -
+        subdepartment: "ИП"
+        title: "Без специализации"
+        education_form: 'postal-with-dist'
+        department: 'ФДО'
+  -
+    code: "080105.65"
+    title: "Финансы и кредит"
+    subspecialities:
+      -
+        subdepartment: "Экономики"
+        title: "Без специализации"
+        education_form: 'part-time'
+        department: 'ЗиВФ'
+  -
+    code: "080502.65"
+    title: "Экономика и управление на предприятии (в машиностроении)"
+    subspecialities:
+      -
+        subdepartment: "Экономики"
+        title: "Без специализации"
+        education_form: 'part-time'
+        department: 'ЗиВФ'
