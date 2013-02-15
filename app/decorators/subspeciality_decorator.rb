@@ -34,7 +34,9 @@ class SubspecialityDecorator < Draper::Decorator
   end
 
   def education_form
-    capitalized_education_form.gsub(/форма$/, '')
+    capitalized_education_form.gsub(/форма$/, '').tap do |education_form|
+      education_form << ' (сокращённая)' if model.reduced?
+    end
   end
 
   def capitalized_education_form
