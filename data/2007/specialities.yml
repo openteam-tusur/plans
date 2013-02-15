@@ -218,14 +218,20 @@ specialty:
         education_form: 'postal-with-dist'
         department: 'ФДО'
   -
-    code: "220201.65"
-    title: "Управление и информатика в технических системах"
+    code:   '220201.65'
+    title:  'Управление и информатика в технических системах'
     subspecialities:
       -
-        subdepartment: "КСУП"
-        title: "Без специализации"
+        subdepartment:  'КСУП'
+        title:          'Без специализации'
         education_form: 'postal-with-dist'
-        department: 'ФДО'
+        department:     'ФДО'
+      -
+        subdepartment:  'КСУП'
+        title:          'Без специализации'
+        education_form: 'postal-with-dist'
+        department:     'ФДО'
+        reduced:        true
   -
     code: "230102.65"
     title: "Автоматизированные системы обработки информации и управления"
