@@ -237,6 +237,12 @@ specialty:
         title: "Без специализации"
         education_form: 'postal-with-dist'
         department: 'ФДО'
+      -
+        subdepartment:   ТУ
+        title:           Без специализации
+        education_form:  postal-with-dist
+        department:      ФДО
+        reduced:         true
   -
     code: "210401.65"
     title: "Физика и техника оптической связи"
