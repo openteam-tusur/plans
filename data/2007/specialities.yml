@@ -315,3 +315,9 @@ specialty:
         title: "Без специализации"
         education_form: 'postal'
         department: 'ЗиВФ'
+      -
+        subdepartment:  АСУ
+        title:          Без специализации
+        education_form: postal-with-dist
+        department:     ЗиВФ
+        reduced:        true
