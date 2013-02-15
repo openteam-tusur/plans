@@ -4,11 +4,12 @@ class Speciality < ActiveRecord::Base
   belongs_to :year
 
   has_many :subspecialities
+  has_many :actual_subspecialities, :class_name => 'Subspeciality', :conditions => { :deleted_at => nil }
   has_many :disciplines, :through => :subspecialities
-  has_many :actual_disciplines, :through => :subspecialities
-  has_many :programms, :through => :subspecialities
-  has_many :work_plans, :through => :subspecialities
-  has_many :subdepartments, :through => :subspecialities
+  has_many :actual_disciplines, :through => :actual_subspecialities
+  has_many :programms, :through => :actual_subspecialities
+  has_many :work_plans, :through => :actual_subspecialities
+  has_many :subdepartments, :through => :actual_subspecialities
   has_many :work_programms
 
   validates_presence_of :code, :title, :degree, :year
