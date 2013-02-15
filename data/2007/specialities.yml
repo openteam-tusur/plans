@@ -302,10 +302,16 @@ specialty:
     title: "Системы автоматизированного проектирования"
     subspecialities:
       -
-        subdepartment: "КСУП"
-        title: "Без специализации"
+        subdepartment:  "КСУП"
+        title:          "Без специализации"
         education_form: 'postal-with-dist'
-        department: 'ФДО'
+        department:     'ФДО'
+      -
+        subdepartment:  "КСУП"
+        title:          "Без специализации"
+        education_form: 'postal-with-dist'
+        department:     'ФДО'
+        reduced:        true
   -
     code: "230105.65"
     title: "Программное обеспечение вычислительной техники и автоматизированных систем"
