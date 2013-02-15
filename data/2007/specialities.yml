@@ -291,6 +291,12 @@ specialty:
         title: "Без специализации"
         education_form: 'postal'
         department: 'ЗиВФ'
+      -
+        subdepartment:  АОИ
+        title:          Без специализации
+        education_form: postal-with-dist
+        department:     ФДО
+        reduced:        true
   -
     code: "230104.65"
     title: "Системы автоматизированного проектирования"
