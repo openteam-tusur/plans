@@ -90,6 +90,12 @@ specialty:
         title: "Без специализации"
         education_form: 'postal'
         department: 'ЗиВФ'
+      -
+        title:          'Без специализации'
+        subdepartment:  'АОИ'
+        education_form: 'postal-with-dist'
+        department:     'ФДО'
+        reduced:        true
   -
     code: "080801.65"
     title: "Прикладная  информатика (в экономике)"

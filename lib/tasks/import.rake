@@ -187,6 +187,7 @@ class YearImporter
       rescue => e
         puts file_path
         p e.message
+        exit
       end
       bar.increment!
     end
