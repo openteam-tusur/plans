@@ -14,6 +14,7 @@
 #  education_form             :string(255)
 #  file_path                  :text
 #  plan_digest                :string(255)
+#  reduced                    :boolean
 #
 
 require 'spec_helper'

@@ -15,11 +15,12 @@
 #  education_form             :string(255)
 #  file_path                  :text
 #  plan_digest                :string(255)
+#  reduced                    :boolean
 #
 
 
 class Subspeciality < ActiveRecord::Base
-  attr_accessible :title, :subdepartment_id, :graduated_subdepartment_id, :education_form, :department_id, :plan_digest, :file_path
+  attr_accessible :title, :subdepartment_id, :graduated_subdepartment_id, :education_form, :department_id, :plan_digest, :file_path, :reduced
 
   alias_attribute :deleted?, :deleted_at?
 

@@ -21,8 +21,9 @@ module PlanImporter
     subspeciality_title = speciality_full_name.match(/"(.*)"/) ? speciality_full_name.match(/"(.*)"/)[1].squish : speciality.degree == 'specialty' ? "Без специализации" : "Без профиля"
     education_form = speciality_full_name.match(/(заочная с дистанционной технологией|очно-заочная|очная|заочная)/).try(:[], 1)  || 'очная'
     education_form = Subspeciality.human_enum_values(:education_form).invert["#{education_form} форма"]
-    subspeciality = speciality.subspecialities.find_by_title_and_education_form(subspeciality_title, education_form)
-    raise "нет профиля #{subspeciality_title} для #{education_form} для специальности #{speciality_code} в #{year_number} года #{file_path}" unless subspeciality
+    reduced = !!(speciality_full_name =~ /Сокращенный/)
+    subspeciality = speciality.subspecialities.find_by_title_and_education_form_and_reduced(subspeciality_title, education_form, reduced)
+    raise "нет профиля #{subspeciality_title} для #{education_form} для специальности #{speciality_code} #{'(сокращенная)' if reduced} в #{year_number} года #{file_path}" unless subspeciality
     plan_digest = Digest::SHA1.hexdigest open(file_path).read
     return if plan_digest.eql?(subspeciality.plan_digest)
     %w[disciplines checks loadings semesters].each do |association_name|
@@ -162,12 +163,12 @@ class YearImporter
           subdepartment = year.subdepartments.find_by_abbr(subspeciality_attributes['subdepartment'])
           raise "Нет кафедры #{subspeciality_attributes['subdepartment']}" unless subdepartment
           graduated_subdepartment = year.subdepartments.find_by_abbr(subspeciality_attributes['graduated_subdepartment'] || subspeciality_attributes['subdepartment'])
-          education_form = subspeciality_attributes['education_form'] || 'full-time'
           department = year.departments.find_by_abbr(subspeciality_attributes['department']) || subdepartment.department
-          subspeciality = speciality.subspecialities.find_or_initialize_by_title_and_subdepartment_id_and_education_form(
-            :title => subspeciality_attributes['title'].squish,
+          subspeciality = speciality.subspecialities.find_or_initialize_by_title_and_subdepartment_id_and_education_form_and_reduced(
+            :title            => subspeciality_attributes['title'].squish,
             :subdepartment_id => subdepartment.id,
-            :education_form => education_form
+            :education_form   => subspeciality_attributes['education_form'] || 'full-time',
+            :reduced          => !!subspeciality_attributes['reduced']
           )
           subspeciality.graduated_subdepartment = graduated_subdepartment
           subspeciality.department = department

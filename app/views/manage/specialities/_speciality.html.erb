@@ -2,18 +2,16 @@
   <div class="list">
     <h5><%= speciality %></h5>
     <ul>
-      <% speciality.subspecialities.each do |subspeciality| %>
-        <% if subspeciality.warnings.empty? && !subspeciality.deleted? %>
+      <% speciality.actual_subspecialities.each do |subspeciality| %>
+        <% if subspeciality.warnings.empty? %>
           <li>
         <% else %>
           <% title = subspeciality.warnings %>
-          <% if subspeciality.deleted? %>
-            <% title << 'Специальность была удалена' %>
-          <% end %>
           <li class='warning with_tip' title='<%= title.join(', ') %>'>
         <% end %>
           <div class="wrapper">
             <%= link_to subspeciality, manage_year_speciality_subspeciality_path(@year.number, speciality.code, subspeciality) %>
+            <%= '(сокращённая)' if subspeciality.reduced? %>
             <%= subspeciality.id if subspeciality.has_actual_disciplines? %>
             <span class='subdepartment'><%= subspeciality.subdepartment.abbr %></span>
             <%= content_tag :div, :class => :work_plan_link do %>
