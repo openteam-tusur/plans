@@ -207,6 +207,12 @@ specialty:
         title: "Без специализации"
         education_form: 'postal'
         department: 'ЗиВФ'
+      -
+        subdepartment:  РЗИ
+        title:          Без специализации
+        education_form: postal-with-dist
+        department:     ФДО
+        reduced:        true
   -
     code: "210303.65"
     title: "Бытовая радиоэлектронная аппаратура"
