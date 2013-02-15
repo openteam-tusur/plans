@@ -162,6 +162,12 @@ specialty:
         title: "Без специализации"
         education_form: 'postal-with-dist'
         department: 'ФДО'
+      -
+        subdepartment:  ПрЭ
+        title:          Без специализации
+        education_form: postal-with-dist
+        department:     ФДО
+        reduced:        true
   -
     code: "210201.65"
     title: "Проектирование и технология радиоэлектронных средств"
