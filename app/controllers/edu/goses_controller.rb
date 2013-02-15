@@ -19,6 +19,9 @@ class Edu::GosesController < ApplicationController
   def show
   end
 
+  def show_by_year
+  end
+
   def index
   end
 end

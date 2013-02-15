@@ -1,0 +1,57 @@
+<% content_for :head_title do %>
+  <% if params[:gos_generation] == '2' %>
+    Cписок специальностей ГОС-2
+  <% else %>
+    Cписок специальностей ФГОС-3
+  <% end %>
+<% end %>
+
+<% content_for :breadcrumbs do %>
+  <a href="/">Главная страница</a>
+  <span class="black">→</span>
+  <a href="/edu">Наши специальности</a>
+  <span class="black">→</span>
+
+  <% if params[:gos_generation] == '2' %>
+    <%= link_to "ГОС-2", edu_gos_path(:gos_generation => 2) %>
+  <% else %>
+    <%= link_to "ФГОС-3", edu_gos_path(:gos_generation => 3) %>
+  <% end %>
+<% end %>
+
+<% if params[:gos_generation] == '2' %>
+  <h1>Cписок специальностей ГОС-2</h1>
+<% else %>
+  <h1>Cписок специальностей ФГОС-3</h1>
+<% end %>
+
+<% subspecialities.group_by(&:year_number).sort.each do |year, subspecialities| %>
+  <h2><%= year %></h2>
+  <table class='curriculum_table'>
+    <thead>
+      <tr>
+        <th>Код</th>
+        <th>Наименование</th>
+        <th>Профиль</th>
+        <th>Кафедра</th>
+        <th>Форма обучения</th>
+        <th>PDF</th>
+        <th>Просмотр</th>
+      </tr>
+      <% subspecialities.group_by(&:degree).each do |degree, subspecialities| %>
+        <tr class='cycle'><td colspan='7'><%= degree %></td></tr>
+        <% subspecialities.each do |subspeciality| %>
+          <tr>
+            <td><%= subspeciality.speciality.code %></td>
+            <td><%= subspeciality.speciality.title %></td>
+            <td><%= subspeciality.title %></td>
+            <td><%= subspeciality.subdepartment %></td>
+            <td><%= subspeciality.education_form %></td>
+            <td><%= link_to "скачать", work_plan_api_url(subspeciality.work_plan) if subspeciality.work_plan %></td>
+            <td><%= link_to "смотреть", [:edu, subspeciality] if subspeciality.has_disciplines? %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </thead>
+  </table>
+<% end %>
