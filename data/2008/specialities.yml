@@ -34,6 +34,7 @@ bachelor:
         title: "Без профиля"
         education_form: 'postal-with-dist'
         department: 'ФДО'
+        reduced: true
   -
     code: "200600.62"
     title: "Фотоника и оптоинформатика"
