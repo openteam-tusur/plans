@@ -47,6 +47,7 @@ specialty:
         title: "Без специализации"
         education_form: 'postal-with-dist'
         department: 'ФДО'
+        reduced: true
   -
     code: "080502.65"
     title: "Экономика и управление на предприятии (в машиностроении)"
@@ -56,6 +57,7 @@ specialty:
         title: "Без специализации"
         education_form: 'postal-with-dist'
         department: 'ФДО'
+        reduced: true
       -
         subdepartment: "Экономики"
         title: "Без специализации"
