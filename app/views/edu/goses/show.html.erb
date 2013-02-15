@@ -31,7 +31,6 @@
       <th>Код</th>
       <th>Наименование</th>
       <th>Профиль</th>
-      <th>Год</th>
       <th>Кафедра</th>
       <th>Форма обучения</th>
       <th>Просмотр</th>
@@ -43,7 +42,6 @@
           <td><%= subspeciality.speciality.code %></td>
           <td><%= subspeciality.speciality.title %></td>
           <td><%= subspeciality.title %></td>
-          <td><%= subspeciality.year_number %></td>
           <td><%= subspeciality.subdepartment %></td>
           <td><%= subspeciality.education_form %></td>
           <td><%= link_to "смотреть", [:edu, subspeciality] if subspeciality.has_disciplines? %></td>
