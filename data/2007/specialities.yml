@@ -99,14 +99,20 @@ specialty:
         department:     'ФДО'
         reduced:        true
   -
-    code: "080801.65"
-    title: "Прикладная  информатика (в экономике)"
+    code:             "080801.65"
+    title:            Прикладная  информатика (в экономике)
     subspecialities:
       -
-        subdepartment: "АСУ"
-        title: "Без специализации"
-        education_form: 'postal'
-        department: 'ЗиВФ'
+        subdepartment:  АСУ
+        title:          Без специализации
+        education_form: postal
+        department:     ЗиВФ
+      -
+        subdepartment:  АСУ
+        title:          Без специализации
+        education_form: postal-with-dist
+        department:     ФДО
+        reduced:        true
   -
     code: "090105.65"
     title: "Комплексное обеспечение информационной безопасности автоматизированных систем"
