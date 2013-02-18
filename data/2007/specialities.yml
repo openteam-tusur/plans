@@ -95,6 +95,12 @@ specialty:
         education_form: 'postal-with-dist'
         department: 'ФДО'
         reduced: secondary_unspecialized
+      -
+        subdepartment: "ТУ"
+        title: "Без специализации"
+        education_form: 'postal-with-dist'
+        department: 'ФДО'
+        reduced: higher_unspecialized
   -
     code: "080504.65"
     title: "Государственное и муниципальное управление"
