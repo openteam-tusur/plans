@@ -1,0 +1,6 @@
+ru:
+  enumerize:
+    subspeciality:
+      reduced:
+        based_on_secondary_education:  "(сокращённая на базе СПО)"
+        based_on_higher_education:     "(сокращённая на базе ВПО)"

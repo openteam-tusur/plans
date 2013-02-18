@@ -15,11 +15,13 @@
 #  education_form             :string(255)
 #  file_path                  :text
 #  plan_digest                :string(255)
-#  reduced                    :boolean
+#  reduced                    :string(255)
 #
 
 
 class Subspeciality < ActiveRecord::Base
+  extend Enumerize
+
   attr_accessible :title, :subdepartment_id, :graduated_subdepartment_id, :education_form, :department_id, :plan_digest, :file_path, :reduced
 
   alias_attribute :deleted?, :deleted_at?
@@ -49,6 +51,8 @@ class Subspeciality < ActiveRecord::Base
   alias_method :profiled_subdepartment, :subdepartment
 
   has_enum :education_form
+
+  enumerize :reduced, :in => [:based_on_secondary_education, :based_on_higher_education]
 
   scope :consumed_by, ->(user) do
     if user.manager?
