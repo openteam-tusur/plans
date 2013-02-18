@@ -18,10 +18,10 @@ specialty:
         title: "Без специализации"
         education_form: 'part-time'
         department: 'ЗиВФ'
-        reduced: based_on_secondary_education
+        reduced: secondary_unspecialized
       -
         subdepartment: "ПрЭ"
         title: "Без специализации"
         education_form: 'postal'
         department: 'ЗиВФ'
-        reduced: based_on_secondary_education
+        reduced: secondary_unspecialized
