@@ -47,13 +47,13 @@ specialty:
         title:           Без специализации
         education_form:  postal-with-dist
         department:      ФДО
-        reduced:         based_on_secondary_education
+        reduced:         secondary_unspecialized
       -
         subdepartment:   Экономики
         title:           Без специализации
         education_form:  postal-with-dist
         department:      ФДО
-        reduced:         based_on_higher_education
+        reduced:         higher_specialized
   -
     code: "080502.65"
     title: "Экономика и управление на предприятии (в машиностроении)"
@@ -63,7 +63,7 @@ specialty:
         title: "Без специализации"
         education_form: 'postal-with-dist'
         department: 'ФДО'
-        reduced: based_on_secondary_education
+        reduced: secondary_unspecialized
       -
         subdepartment: "Экономики"
         title: "Без специализации"
@@ -74,7 +74,7 @@ specialty:
         title:           Без специализации
         education_form:  postal-with-dist
         department:      ФДО
-        reduced:         based_on_higher_education
+        reduced:         higher_specialized
   -
     code: "080503.65"
     title: "Антикризисное управление"
@@ -94,7 +94,7 @@ specialty:
         title: "Без специализации"
         education_form: 'postal-with-dist'
         department: 'ФДО'
-        reduced: based_on_secondary_education
+        reduced: secondary_unspecialized
   -
     code: "080504.65"
     title: "Государственное и муниципальное управление"
@@ -109,7 +109,7 @@ specialty:
         subdepartment:  'АОИ'
         education_form: 'postal-with-dist'
         department:     'ФДО'
-        reduced:        based_on_secondary_education
+        reduced:        secondary_specialized
   -
     code:             "080801.65"
     title:            Прикладная  информатика (в экономике)
@@ -124,7 +124,7 @@ specialty:
         title:          Без специализации
         education_form: postal-with-dist
         department:     ФДО
-        reduced:        based_on_secondary_education
+        reduced:        secondary_unspecialized
   -
     code: "090105.65"
     title: "Комплексное обеспечение информационной безопасности автоматизированных систем"
@@ -174,13 +174,13 @@ specialty:
         title: "Без специализации"
         education_form: 'postal-with-dist'
         department: 'ФДО'
-        reduced:        based_on_higher_education
+        reduced:        higher_unspecialized
       -
         subdepartment:  ПрЭ
         title:          Без специализации
         education_form: postal-with-dist
         department:     ФДО
-        reduced:        based_on_secondary_education
+        reduced:        secondary_unspecialized
   -
     code: "210201.65"
     title: "Проектирование и технология радиоэлектронных средств"
@@ -225,19 +225,19 @@ specialty:
         title:          Без специализации
         education_form: postal-with-dist
         department:     ФДО
-        reduced:        based_on_secondary_education
+        reduced:        secondary_unspecialized
       -
         subdepartment:  ТОР
         title:          Без специализации
         education_form: postal
         department:     ЗиВФ
-        reduced:        based_on_higher_education
+        reduced:        higher_unspecialized
       -
         subdepartment:  РЗИ
         title:          Без специализации
         education_form: postal-with-dist
         department:     ФДО
-        reduced:        based_on_higher_education
+        reduced:        higher_unspecialized
   -
     code: "210303.65"
     title: "Бытовая радиоэлектронная аппаратура"
@@ -252,7 +252,7 @@ specialty:
         title:           Без специализации
         education_form:  postal-with-dist
         department:      ФДО
-        reduced:         based_on_secondary_education
+        reduced:         secondary_unspecialized
   -
     code: "210312.65"
     title: "Аудиовизуальная техника"
@@ -267,7 +267,7 @@ specialty:
         title:           Без специализации
         education_form:  postal-with-dist
         department:      ФДО
-        reduced:         based_on_secondary_education
+        reduced:         secondary_unspecialized
   -
     code: "210401.65"
     title: "Физика и техника оптической связи"
@@ -291,13 +291,13 @@ specialty:
         title:            Без специализации
         education_form:   postal-with-dist
         department:       ФДО
-        reduced:          based_on_secondary_education
+        reduced:          secondary_unspecialized
       -
         subdepartment:    ТОР
         title:            Без специализации
         education_form:   postal-with-dist
         department:       ФДО
-        reduced:          based_on_higher_education
+        reduced:          higher_unspecialized
   -
     code:   '220201.65'
     title:  'Управление и информатика в технических системах'
@@ -312,13 +312,13 @@ specialty:
         title:          'Без специализации'
         education_form: 'postal-with-dist'
         department:     'ФДО'
-        reduced:        based_on_secondary_education
+        reduced:        secondary_specialized
       -
         subdepartment:  'КСУП'
         title:          'Без специализации'
         education_form: 'postal-with-dist'
         department:     'ФДО'
-        reduced:        based_on_higher_education
+        reduced:        higher_specialized
   -
     code: "230102.65"
     title: "Автоматизированные системы обработки информации и управления"
@@ -333,13 +333,13 @@ specialty:
         title:          Без специализации
         education_form: postal-with-dist
         department:     ФДО
-        reduced:        based_on_secondary_education
+        reduced:        secondary_specialized
       -
         subdepartment:  АОИ
         title:          Без специализации
         education_form: postal-with-dist
         department:     ФДО
-        reduced:        based_on_higher_education
+        reduced:        higher_specialized
   -
     code: "230104.65"
     title: "Системы автоматизированного проектирования"
@@ -354,7 +354,7 @@ specialty:
         title:          "Без специализации"
         education_form: 'postal-with-dist'
         department:     'ФДО'
-        reduced:        based_on_secondary_education
+        reduced:        secondary_specialized
   -
     code: "230105.65"
     title: "Программное обеспечение вычислительной техники и автоматизированных систем"
@@ -369,10 +369,10 @@ specialty:
         title:          Без специализации
         education_form: postal-with-dist
         department:     ФДО
-        reduced:        based_on_secondary_education
+        reduced:        secondary_unspecialized
       -
         subdepartment:  АСУ
         title:          Без специализации
         education_form: postal-with-dist
         department:     ФДО
-        reduced:        based_on_higher_education
+        reduced:        higher_unspecialized
