@@ -43,11 +43,17 @@ specialty:
         education_form: 'postal'
         department: 'ЗиВФ'
       -
-        subdepartment: "Экономики"
-        title: "Без специализации"
-        education_form: 'postal-with-dist'
-        department: 'ФДО'
-        reduced: based_on_secondary_education
+        subdepartment:   Экономики
+        title:           Без специализации
+        education_form:  postal-with-dist
+        department:      ФДО
+        reduced:         based_on_secondary_education
+      -
+        subdepartment:   Экономики
+        title:           Без специализации
+        education_form:  postal-with-dist
+        department:      ФДО
+        reduced:         based_on_higher_education
   -
     code: "080502.65"
     title: "Экономика и управление на предприятии (в машиностроении)"
