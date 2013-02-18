@@ -210,21 +210,33 @@ specialty:
     title: "Радиотехника"
     subspecialities:
       -
-        subdepartment: "СВЧиКР"
-        title: "Без специализации"
-        education_form: 'part-time'
-        department: 'ЗиВФ'
+        subdepartment:  СВЧиКР
+        title:          Без специализации
+        education_form: part-time
+        department:     ЗиВФ
       -
-        subdepartment: "ТОР"
-        title: "Без специализации"
-        education_form: 'postal'
-        department: 'ЗиВФ'
+        subdepartment:  ТОР
+        title:          Без специализации
+        education_form: postal
+        department:     ЗиВФ
       -
         subdepartment:  РЗИ
         title:          Без специализации
         education_form: postal-with-dist
         department:     ФДО
         reduced:        based_on_secondary_education
+      -
+        subdepartment:  ТОР
+        title:          Без специализации
+        education_form: postal
+        department:     ЗиВФ
+        reduced:        based_on_higher_education
+      -
+        subdepartment:  РЗИ
+        title:          Без специализации
+        education_form: postal-with-dist
+        department:     ФДО
+        reduced:        based_on_higher_education
   -
     code: "210303.65"
     title: "Бытовая радиоэлектронная аппаратура"
