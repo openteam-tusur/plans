@@ -279,6 +279,12 @@ specialty:
         education_form:   postal-with-dist
         department:       ФДО
         reduced:          based_on_secondary_education
+      -
+        subdepartment:    ТОР
+        title:            Без специализации
+        education_form:   postal-with-dist
+        department:       ФДО
+        reduced:          based_on_higher_education
   -
     code:   '220201.65'
     title:  'Управление и информатика в технических системах'
