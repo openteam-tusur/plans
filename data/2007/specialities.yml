@@ -69,6 +69,12 @@ specialty:
         title: "Без специализации"
         education_form: 'postal'
         department: 'ЗиВФ'
+      -
+        subdepartment:   Экономики
+        title:           Без специализации
+        education_form:  postal-with-dist
+        department:      ФДО
+        reduced:         based_on_higher_education
   -
     code: "080503.65"
     title: "Антикризисное управление"
