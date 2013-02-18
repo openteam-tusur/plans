@@ -36,7 +36,7 @@
     <span><%= @speciality %></span>
     <span><%= t("activerecord.values.speciality.#{@speciality.degree}") %></span>
     <span><%= @subspeciality.profiled_subdepartment %></span>
-    <span><%= @subspeciality %><%= ' (сокращённая)' if @subspeciality.reduced? %></span>
+    <span><%= @subspeciality.reduced_text %></span>
   </div>
 
   <h6>Циклы дисциплин</h6>

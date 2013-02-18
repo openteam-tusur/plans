@@ -43,7 +43,7 @@
           <td><%= subspeciality.speciality.title %></td>
           <td><%= subspeciality.title %></td>
           <td><%= subspeciality.subdepartment %></td>
-          <td><%= subspeciality.education_form %></td>
+          <td><%= subspeciality.education_form %><%= subspeciality.reduced %></td>
           <td><%= link_to "смотреть", [:edu, subspeciality] if subspeciality.has_disciplines? %></td>
         </tr>
       <% end %>
