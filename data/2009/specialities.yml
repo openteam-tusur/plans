@@ -68,7 +68,7 @@ specialty:
         title: "Без специализации"
         education_form: 'postal-with-dist'
         department: 'ФДО'
-        reduced: true
+        reduced: based_on_secondary_education
   -
     code: "080105.65"
     title: "Финансы и кредит"
@@ -78,7 +78,7 @@ specialty:
         title: "Без специализации"
         education_form: 'part-time'
         department: 'ЗиВФ'
-        reduced: true
+        reduced: based_on_secondary_education
   -
     code: "080502.65"
     title: "Экономика и управление на предприятии (в машиностроении)"
@@ -88,4 +88,4 @@ specialty:
         title: "Без специализации"
         education_form: 'part-time'
         department: 'ЗиВФ'
-        reduced: true
+        reduced: based_on_secondary_education

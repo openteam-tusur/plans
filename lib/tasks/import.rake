@@ -21,9 +21,14 @@ module PlanImporter
     subspeciality_title = speciality_full_name.match(/"(.*)"/) ? speciality_full_name.match(/"(.*)"/)[1].squish : speciality.degree == 'specialty' ? "Без специализации" : "Без профиля"
     education_form = speciality_full_name.match(/(заочная с дистанционной технологией|очно-заочная|очная|заочная)/).try(:[], 1)  || 'очная'
     education_form = Subspeciality.human_enum_values(:education_form).invert["#{education_form} форма"]
-    reduced = !!(speciality_full_name =~ /Сокращенный/)
+    reduced = case speciality_full_name
+              when /на базе(\s+\w+)*\s+(ВПО|высшего(\s+\w+)*\s+образования)/ then 'based_on_higher_education'
+              when /на базе(\s+\w+)*\s+(СПО|среднего(\s+\w+)*\s+образования)/ then 'based_on_secondary_education'
+              when /на базе/ then puts speciality_full_name.scan(/(на базе .*?)\./).first
+              else nil
+              end
     subspeciality = speciality.subspecialities.find_by_title_and_education_form_and_reduced(subspeciality_title, education_form, reduced)
-    raise "нет профиля #{subspeciality_title} для #{education_form} для специальности #{speciality_code} #{'(сокращенная)' if reduced} в #{year_number} года #{file_path}" unless subspeciality
+    raise "нет профиля #{subspeciality_title} для #{education_form} для специальности #{speciality_code} #{reduced_text} в #{year_number} года #{file_path}" unless subspeciality
     plan_digest = Digest::SHA1.hexdigest open(file_path).read
     return if plan_digest.eql?(subspeciality.plan_digest)
     %w[disciplines checks loadings semesters].each do |association_name|
@@ -168,7 +173,7 @@ class YearImporter
             :title            => subspeciality_attributes['title'].squish,
             :subdepartment_id => subdepartment.id,
             :education_form   => subspeciality_attributes['education_form'] || 'full-time',
-            :reduced          => !!subspeciality_attributes['reduced']
+            :reduced          => subspeciality_attributes['reduced']
           )
           subspeciality.graduated_subdepartment = graduated_subdepartment
           subspeciality.department = department
