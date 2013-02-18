@@ -2,5 +2,7 @@ ru:
   enumerize:
     subspeciality:
       reduced:
-        based_on_secondary_education:  "(сокращённая на базе СПО)"
-        based_on_higher_education:     "(сокращённая на базе ВПО)"
+        higher_specialized:       (сокращённая на базе ВПО соответствующего профиля)
+        higher_unspecialized:     (сокращённая на базе ВПО)
+        secondary_specialized:    (сокращённая на базе СПО соответствующего профиля)
+        secondary_unspecialized:  (сокращённая на базе СПО)

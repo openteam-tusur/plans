@@ -22,9 +22,14 @@ module PlanImporter
     education_form = speciality_full_name.match(/(заочная с дистанционной технологией|очно-заочная|очная|заочная)/).try(:[], 1)  || 'очная'
     education_form = Subspeciality.human_enum_values(:education_form).invert["#{education_form} форма"]
     reduced = case speciality_full_name
-              when /на базе(\s+\w+)*\s+(ВПО|высшего(\s+\w+)*\s+образования)/ then 'based_on_higher_education'
-              when /на базе(\s+\w+)*\s+(СПО|среднего(\s+\w+)*\s+образования)/ then 'based_on_secondary_education'
-              when /на базе/ then puts speciality_full_name.scan(/(на базе .*?)\./).first
+              when /на базе (([а-я]+ )*(ВПО|высшего( [а-я]+)* образования)( [а-я]+)*)/
+                $1 =~ / профил/ ? :higher_specialized : :higher_unspecialized
+                break
+              when /на базе (([а-я]+ )*(СПО|CПО|среднего( [а-я]+)* образования)( [а-я]+)*)/ # СПО бывает первая латинская
+                $1 =~ / профил/ ? :secondary_specialized : :secondary_unspecialized
+                break
+              when /на базе (.*)$/
+                raise "невозможно вычислить тип сокращённой программы для '#{$1}'"
               else nil
               end
     subspeciality = speciality.subspecialities.find_by_title_and_education_form_and_reduced(subspeciality_title, education_form, reduced)

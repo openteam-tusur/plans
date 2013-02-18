@@ -52,7 +52,7 @@ class Subspeciality < ActiveRecord::Base
 
   has_enum :education_form
 
-  enumerize :reduced, :in => [:based_on_secondary_education, :based_on_higher_education]
+  enumerize :reduced, :in => %w[higher_specialized higher_unspecialized secondary_specialized secondary_unspecialized]
 
   scope :consumed_by, ->(user) do
     if user.manager?
