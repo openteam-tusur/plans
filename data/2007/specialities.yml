@@ -333,3 +333,9 @@ specialty:
         education_form: postal-with-dist
         department:     ЗиВФ
         reduced:        based_on_secondary_education
+      -
+        subdepartment:  АСУ
+        title:          Без специализации
+        education_form: postal-with-dist
+        department:     ЗиВФ
+        reduced:        based_on_higher_education
