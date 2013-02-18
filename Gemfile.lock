@@ -107,6 +107,8 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       request_store (~> 1.0.3)
+    enumerize (0.5.1)
+      activesupport (>= 3.2)
     erubis (2.7.0)
     esp-auth (1.4.0.1)
       ancestry
@@ -369,6 +371,7 @@ DEPENDENCIES
   decent_exposure
   default_value_for
   draper
+  enumerize
   esp-auth
   fabrication
   grape
