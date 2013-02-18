@@ -294,6 +294,12 @@ specialty:
         education_form: 'postal-with-dist'
         department:     'ФДО'
         reduced:        based_on_secondary_education
+      -
+        subdepartment:  'КСУП'
+        title:          'Без специализации'
+        education_form: 'postal-with-dist'
+        department:     'ФДО'
+        reduced:        based_on_higher_education
   -
     code: "230102.65"
     title: "Автоматизированные системы обработки информации и управления"
