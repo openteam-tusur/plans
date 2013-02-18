@@ -309,6 +309,12 @@ specialty:
         education_form: postal-with-dist
         department:     ФДО
         reduced:        based_on_secondary_education
+      -
+        subdepartment:  АОИ
+        title:          Без специализации
+        education_form: postal-with-dist
+        department:     ФДО
+        reduced:        based_on_higher_education
   -
     code: "230104.65"
     title: "Системы автоматизированного проектирования"
@@ -337,11 +343,11 @@ specialty:
         subdepartment:  АСУ
         title:          Без специализации
         education_form: postal-with-dist
-        department:     ЗиВФ
+        department:     ФДО
         reduced:        based_on_secondary_education
       -
         subdepartment:  АСУ
         title:          Без специализации
         education_form: postal-with-dist
-        department:     ЗиВФ
+        department:     ФДО
         reduced:        based_on_higher_education
