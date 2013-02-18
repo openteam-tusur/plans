@@ -105,11 +105,17 @@ specialty:
         education_form: 'postal'
         department: 'ЗиВФ'
       -
-        title:          'Без специализации'
-        subdepartment:  'АОИ'
-        education_form: 'postal-with-dist'
-        department:     'ФДО'
+        title:          Без специализации
+        subdepartment:  АОИ
+        education_form: postal-with-dist
+        department:     ФДО
         reduced:        secondary_specialized
+      -
+        title:          Без специализации
+        subdepartment:  АОИ
+        education_form: postal-with-dist
+        department:     ФДО'
+        reduced:        higher_specialized
   -
     code:             "080801.65"
     title:            Прикладная  информатика (в экономике)
