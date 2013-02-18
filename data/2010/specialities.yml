@@ -9,6 +9,12 @@ specialty:
       -
         subdepartment: "ИП"
         title: "Правовое обеспечение защиты информации"
+      -
+        subdepartment:   ИП
+        title:           Без специализации
+        education_form:  postal-with-dist
+        department:      ФДО
+        reduced:         higher_specialized
   -
     code: "210106.65"
     title: "Промышленная электроника"
