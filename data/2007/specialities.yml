@@ -75,6 +75,12 @@ specialty:
         education_form:  postal-with-dist
         department:      ФДО
         reduced:         higher_specialized
+      -
+        subdepartment:   Экономики
+        title:           Без специализации
+        education_form:  postal-with-dist
+        department:      ФДО
+        reduced:         higher_unspecialized
   -
     code: "080503.65"
     title: "Антикризисное управление"
