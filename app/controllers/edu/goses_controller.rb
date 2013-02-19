@@ -10,9 +10,8 @@ class Edu::GosesController < ApplicationController
                  .includes(:year)
                  .joins(:graduated_subdepartment)
                  .joins(:speciality)
-                 .joins(:year)
                  .where('specialities.gos_generation' => params[:gos_generation])
-                 .order('specialities.code, subspecialities.title, years.number, subdepartments.abbr')
+                 .order('specialities.code, subspecialities.title, subdepartments.abbr, subspecialities.education_form, subspecialities.reduced')
                  .decorate
   end
 

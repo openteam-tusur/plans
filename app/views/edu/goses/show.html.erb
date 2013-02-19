@@ -25,27 +25,29 @@
   <h1>Cписок специальностей ФГОС-3</h1>
 <% end %>
 
-<table class='curriculum_table'>
+<table class='curriculum_table specialities'>
   <thead>
     <tr>
-      <th>Код</th>
-      <th>Наименование</th>
-      <th>Профиль</th>
-      <th>Кафедра</th>
-      <th>Форма обучения</th>
-      <th>Просмотр</th>
+      <th class='code'>код</th>
+      <th class='name'>наименование</th>
+      <th class='profile'>профиль</th>
+      <th class='subfaculty'>кафедра</th>
+      <th class='education_form'>форма обучения</th>
+      <th class='plans'>план</th>
     </tr>
-    <% subspecialities.group_by(&:degree).each do |degree, subspecialities| %>
-      <tr class='cycle'><td colspan='7'><%= degree %></td></tr>
-      <% subspecialities.each do |subspeciality| %>
-        <tr>
-          <td><%= subspeciality.speciality.code %></td>
-          <td><%= subspeciality.speciality.title %></td>
-          <td><%= subspeciality.title %></td>
-          <td><%= subspeciality.subdepartment %></td>
-          <td><%= subspeciality.education_form %><%= subspeciality.reduced %></td>
-          <td><%= link_to "смотреть", [:edu, subspeciality] if subspeciality.has_disciplines? %></td>
-        </tr>
+    <% %w[Бакалавриат Специалитет Магистратура].each do |degree| %>
+      <% if degree_subspecialities = subspecialities.group_by(&:degree)[degree] %>
+        <tr class='cycle'><td colspan='6'><%= degree %></td></tr>
+        <% degree_subspecialities.each do |subspeciality| %>
+          <tr>
+            <td><%= subspeciality.speciality.code %></td>
+            <td><%= subspeciality.speciality.title %></td>
+            <td><%= subspeciality.title %></td>
+            <td><%= subspeciality.subdepartment %></td>
+            <td><%= subspeciality.education_form %><%= subspeciality.reduced %></td>
+            <td><%= link_to "смотреть", [:edu, subspeciality] if subspeciality.has_disciplines? %></td>
+          </tr>
+        <% end %>
       <% end %>
     <% end %>
   </thead>

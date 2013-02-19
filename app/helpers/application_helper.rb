@@ -1,6 +1,6 @@
 module ApplicationHelper
   def work_plan_api_url(work_plan)
-    "#{root_url}api/v1/work_plans/#{work_plan.subspeciality.id}"
+    "#{root_url}api/v1/work_plans/#{work_plan.subspeciality_id}"
   end
 
   def indicate_validity(item)
