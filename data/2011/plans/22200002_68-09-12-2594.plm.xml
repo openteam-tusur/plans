@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Документ Тип="рабочий учебный план">
   <План ПодТип="рабочий учебный план" Шифр=".PLM.XML" ОбразовательнаяПрограмма="подготовка магистров" ФормаОбучения="очная" УровеньОбразования="ВПО">
-    <Титул ПолноеИмяПлана="22200003_68-09-12-2594" ИмяПлана="22200003_68-09-12-2594" НомерПользователя="303186" Пользователь="Семёнов Евгений" ИмяВуза="Федеральное государственное бюджетное образовательное учреждение высшего профессионального образования &quot;Томский государственный университет систем управления и радиоэлектроники&quot;" ИмяВуза2="Кафедра &quot;Управление инновациями&quot;" Головная="Министерство образования и науки РФ" КодКафедры="37" Факультет="Инновационных технологий" ПоследнийШифр="222000" ГодНачалаПодготовки="2011" ВключатьЭкВСуммуЧасов="1" ДвИГА="1" ГвИГА="1" КСР_ИЗ="КСР" ИГА_ЗЕТвНеделе="1,5" ИГА_ЧасовВЗЕТ="36" ООПет="125" Интер="44,6" Лекц="20" ДВВ="34,4" МаксНагр="51,6" ВидПлана="2" КодУровня="M" СеместровНаКурсе="2" ЭлементовВНеделе="6" ДатаГОСа="18.11.2009 0:00:00" ДокументГОСа="629" ТипГОСа="3" Приложение="UpVpo" ДатаПриложения="11.03.2012" ВерсияПриложения="2062">
+    <Титул ПолноеИмяПлана="22200002_68-09-12-2594" ИмяПлана="22200002_68-09-12-2594" НомерПользователя="303186" Пользователь="Семёнов Евгений" ИмяВуза="Федеральное государственное бюджетное образовательное учреждение высшего профессионального образования &quot;Томский государственный университет систем управления и радиоэлектроники&quot;" ИмяВуза2="Кафедра &quot;Управление инновациями&quot;" Головная="Министерство образования и науки РФ" КодКафедры="37" Факультет="Инновационных технологий" ПоследнийШифр="222000" ГодНачалаПодготовки="2011" ВключатьЭкВСуммуЧасов="1" ДвИГА="1" ГвИГА="1" КСР_ИЗ="КСР" ИГА_ЗЕТвНеделе="1,5" ИГА_ЧасовВЗЕТ="36" ООПет="125" Интер="44,6" Лекц="20" ДВВ="34,4" МаксНагр="51,6" ВидПлана="2" КодУровня="M" СеместровНаКурсе="2" ЭлементовВНеделе="6" ДатаГОСа="18.11.2009 0:00:00" ДокументГОСа="629" ТипГОСа="3" Приложение="UpVpo" ДатаПриложения="11.03.2012" ВерсияПриложения="2062">
       <АтрибутыЦикловНов>
         <Цикл Ном="1" Аббревиатура="М1" Название="Общенаучный цикл"/>
         <Цикл Ном="2" Аббревиатура="М2" Название="Профессиональный цикл"/>
@@ -21,7 +21,7 @@
       </АтрибутыЦиклов>
       <Утверждение Дата="27.10.2010" НомПротокола="8"/>
       <Специальности>
-        <Специальность Ном="1" Название="Направление 222000.68 Инноватика"/>
+        <Специальность Ном="1" Название="Направление 222000.68 &quot;Инноватика&quot;"/>
         <Специальность Ном="2" Название="Магистерская программа &quot;Управление инновациями в электронной технике&quot;"/>
       </Специальности>
       <Квалификации>
@@ -178,7 +178,7 @@
       <Строка Дис="Основы проектирования систем на кристалле" НовЦикл="ФТД" НовИдДисциплины="ФТД.3" Цикл="ФТД.Ф" ИдетификаторДисциплины="ФТД.3" ГОС="72" СР="18" КомпетенцииКоды="4&amp;18&amp;28" Компетенции="ОК-4, ПСК-1, ПСК-11" Кафедра="37" ПодлежитИзучению="72" КредитовНаДисциплину="2" ЧасовВЗЕТ="36" СемЗач="1">
         <Сем Ном="1" Лек="9" Лаб="18" Пр="27" СРС="18" ЗЕТ="2" Зач="1"/>
       </Строка>
-      <Строка ТипПрактики="8" Дис="Научно-исследовательская работа в семестре" Цикл="М3.Ф" ИдетификаторДисциплины="М3.Б.1" ГОС="1296" Компетенции="ПК-6, ПК-8, ПК-10, ПК-11, ПК-4, ПК-5, ПК-2, ПК-9, ОК-3, ПК-3, ОК-4" ПодлежитИзучению="1296" КредитовНаДисциплину="36">
+      <Строка ТипПрактики="8" Дис="Научно-исследовательская работа в семестре" Цикл="М3.Ф" ИдетификаторДисциплины="М3.Б.1" ГОС="1296" Компетенции="ОК-3, ОК-4, ПК-2, ПК-3, ПК-4, ПК-5, ПК-6, ПК-7, ПК-8, ПК-9, ПК-10, ПК-11" ПодлежитИзучению="1296" КредитовНаДисциплину="36">
         <Сем Ном="2" Пр="144" СРС="180"/>
         <Сем Ном="3" Пр="96" СРС="120"/>
         <Сем Ном="4" Пр="336" СРС="420"/>
@@ -259,7 +259,7 @@
     </СпецВидыРабот>
     <СпецВидыРаботНов>
       <НИР>
-        <ПрочаяПрактика Тип="2" Наименование="Научно-исследовательская работа в семестре" ЧасовВЗЕТ="36" ЗЕТвНеделе="1,5" ЗЕТэкспертное="36" Компетенции="12&amp;14&amp;16&amp;17&amp;10&amp;11&amp;8&amp;15&amp;3&amp;9&amp;4">
+        <ПрочаяПрактика Тип="2" Наименование="Научно-исследовательская работа в семестре" ЧасовВЗЕТ="36" ЗЕТвНеделе="1,5" ЗЕТэкспертное="36" Компетенции="3&amp;4&amp;8&amp;9&amp;10&amp;11&amp;12&amp;13&amp;14&amp;15&amp;16&amp;17">
           <Семестр Ном="2" ПланНед="6" ПланЧасов="324" ПланЧасовАуд="144" ПланЧасовСРС="180" ПланЗЕТ="9" ЗачО="1">
             <Кафедра Код="37" Нед="6" Суммировать="1"/>
           </Семестр>
@@ -343,7 +343,7 @@
         <Семестр Ном="2"/>
       </Курс>
     </АПП>
-    <ПараметрыПроверки count="23" Flag_FillTitle="1" Flag_SrokO="1" SrokOYear="2" Flag_OOPItog="1" OOPItog="120" Flag_OOPyear="1" OOPyear="60" Flag_ZETdelta="1" Flag_DVVpersent="1" Flag_DVVpersent1p3="1" DVVpersent30Min="30" DVVpersent30Max="100" BasePartMax="50" Flag_ZETDiscMin="1" ZETDiscMin="2" Flag_DiscZETIsInt="1" Flag_DiscZETYearIsInt="1" Flag_ZETExpertTrue="1" Flag_DiscZETExpertTrue="1" Flag_HinW54="1" HinW54="54" Flag_HinWAudit="1" HinWAuditMax="24" Flag_HinWAuditSr="1" HinWAuditSrMax="24" Flag_Lect="1" LectMax="20" Flag_Inter="1" InterMin="40" InterMax="100" Flag_ZETAndHoursIsTrue="1" Flag_DiscZETAndHoursIsTrue="1" Flag_DiscSemZETAndHoursIsTrue="1" AudetAllMax="24" Flag_EqZET36="1" Flag_CntrlEx="1" CntrlExMax="10" CntrlExSemMax="5" Flag_CntrlZach="1" CntrlZachMax="12" CntrlZachSemMax="6" Flag_CntrlExHours="1" CntrlExHoursMin="27" CntrlExHoursMax="63" Flag_CntrlHasHours="1" Flag_CntrlHasHoursItogS="1" HoursKSRForKRMax="10" HoursKSRForKPMax="10" HoursKSRpSRSMax="10" Flag_PracticsWeeksCorrrect="1" Flag_HolidaysWeeks="1" HolidaysWeeksMin="7" HolidaysWeeksMax="10" Flag_HolidaysWinterWeeks="1" HolidaysWinterWeeksMin="2" HolidaysWinterWeeksMax="10" Flag_DiscAltTrue="1" Flag_DiscCompTrue="1" Flag_DiscCompHandMadeTrue="1" DiscCompHandMadeOK="6" DiscCompHandMadePK="11" Flag_DiscFatalCoincidence="1" Flag_DiscKafTrue="1" DiscPhysCZET="2" DiscPhysCHours="400" DiscPhysCHoursPractices="360" DiscJustificationZETLocationForCoursesPosition="1" DiscJustificationZETLocationForCoursesOneZET="200" Flag_HoursKratNedFirstPos="1">
+    <ПараметрыПроверки count="24" Flag_FillTitle="1" Flag_SrokO="1" SrokOYear="2" Flag_OOPItog="1" OOPItog="120" Flag_OOPyear="1" OOPyear="60" Flag_ZETdelta="1" Flag_DVVpersent="1" Flag_DVVpersent1p3="1" DVVpersent30Min="30" DVVpersent30Max="100" BasePartMax="50" Flag_ZETDiscMin="1" ZETDiscMin="2" Flag_DiscZETIsInt="1" Flag_DiscZETYearIsInt="1" Flag_ZETExpertTrue="1" Flag_DiscZETExpertTrue="1" Flag_HinW54="1" HinW54="54" Flag_HinWAudit="1" HinWAuditMax="24" Flag_HinWAuditSr="1" HinWAuditSrMax="24" Flag_Lect="1" LectMax="20" Flag_Inter="1" InterMin="40" InterMax="100" Flag_ZETAndHoursIsTrue="1" Flag_DiscZETAndHoursIsTrue="1" Flag_DiscSemZETAndHoursIsTrue="1" AudetAllMax="24" Flag_EqZET36="1" Flag_CntrlEx="1" CntrlExMax="10" CntrlExSemMax="5" Flag_CntrlZach="1" CntrlZachMax="12" CntrlZachSemMax="6" Flag_CntrlExHours="1" CntrlExHoursMin="27" CntrlExHoursMax="63" Flag_CntrlHasHours="1" Flag_CntrlHasHoursItogS="1" HoursKSRForKRMax="10" HoursKSRForKPMax="10" HoursKSRpSRSMax="10" Flag_PracticsWeeksCorrrect="1" Flag_HolidaysWeeks="1" HolidaysWeeksMin="7" HolidaysWeeksMax="10" Flag_HolidaysWinterWeeks="1" HolidaysWinterWeeksMin="2" HolidaysWinterWeeksMax="10" Flag_DiscAltTrue="1" Flag_DiscCompTrue="1" Flag_DiscCompHandMadeTrue="1" DiscCompHandMadeOK="6" DiscCompHandMadePK="11" Flag_DiscFatalCoincidence="1" Flag_DiscKafTrue="1" DiscPhysCZET="2" DiscPhysCHours="400" DiscPhysCHoursPractices="360" DiscJustificationZETLocationForCoursesPosition="1" DiscJustificationZETLocationForCoursesOneZET="200" Flag_HoursKratNedFirstPos="1">
       <ArrKratNed>
         <item value="1"/>
         <item num="9" value="16"/>

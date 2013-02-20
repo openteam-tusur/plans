@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Документ Тип="рабочий учебный план">
   <План ПодТип="рабочий учебный план" Шифр=".PLM.XML" ОбразовательнаяПрограмма="подготовка магистров" ФормаОбучения="очная" УровеньОбразования="ВПО">
-    <Титул ПолноеИмяПлана="080200_68-09-12-2594" ИмяПлана="080200_68-09-12-2594" НомерПользователя="303206" Пользователь="Семёнов Евгений" ИмяВуза="ФГБОУ ВПО &quot;Томский университет систем управления и радиоэлектроники&quot;" ИмяВуза2="Экономический факультет, кафедра Экономики" Головная="Министерство образования и науки Российской федерации" КодКафедры="9" Факультет="ЭФ" ПоследнийШифр="080200" ГодНачалаПодготовки="2011" ВключатьЭкВСуммуЧасов="1" ДвИГА="2" ГвИГА="1" КСР_ИЗ="КСР" ИГА_ЗЕТвНеделе="1,5" ИГА_ЧасовВЗЕТ="36" ООПет="120" Интер="50,2" Лекц="29,9" ДВВ="42,2" МаксНагр="45" ВидПлана="2" КодУровня="M" Уровень="3" СеместровНаКурсе="2" ЭлементовВНеделе="6" ДатаГОСа="10.05.2011 0:00:00" ДокументГОСа="636" ТипГОСа="3" Приложение="UpVpo" ДатаПриложения="13.12.2012" ВерсияПриложения="2088">
+    <Титул ПолноеИмяПлана="080200ПОСЛЕД_68-09-12-2594" ИмяПлана="080200ПОСЛЕД_68-09-12-2594" НомерПользователя="303204" Пользователь="Семёнов Евгений" ИмяВуза="ФГБОУ ВПО &quot;Томский университет систем управления и радиоэлектроники&quot;" ИмяВуза2="Экономический факультет, кафедра Экономики" Головная="Министерство образования и науки Российской федерации" КодКафедры="9" Факультет="ЭФ" ПоследнийШифр="080200" ГодНачалаПодготовки="2011" ВключатьЭкВСуммуЧасов="1" ДвИГА="2" ГвИГА="1" КСР_ИЗ="КСР" ИГА_ЗЕТвНеделе="1,5" ИГА_ЧасовВЗЕТ="36" ООПет="120" Интер="50,2" Лекц="29,9" ДВВ="42,2" МаксНагр="45" ВидПлана="2" КодУровня="M" Уровень="3" СеместровНаКурсе="2" ЭлементовВНеделе="6" ДатаГОСа="10.05.2011 0:00:00" ДокументГОСа="636" ТипГОСа="3" Приложение="UpVpo" ДатаПриложения="13.12.2012" ВерсияПриложения="2088">
       <АтрибутыЦикловНов>
         <Цикл Ном="1" Аббревиатура="М1" Название="Общенаучный цикл"/>
         <Цикл Ном="2" Аббревиатура="М2" Название="Профессиональный цикл"/>
@@ -22,7 +22,7 @@
       <Утверждение Дата="27.10.2010" НомПротокола="8"/>
       <Специальности>
         <Специальность Ном="1" Название="Направление 080200.68 Менеджмент"/>
-        <Специальность Ном="2" Название="Магистерская программа &quot;Управление проектами&quot;"/>
+        <Специальность Ном="2" Название="Магистерская программа Управление проектами"/>
         <Специальность Ном="3" Название="Набор  2011 года и последующих лет"/>
       </Специальности>
       <Квалификации>
@@ -166,7 +166,7 @@
       <Строка Код="19" Индекс="ПК-13" Содержание="Способность применять современные методы и методики преподавания управленческих дисциплин."/>
       <Строка Код="20" Индекс="ПК-14" Содержание="Способность разрабатывать учебные программы и методическое обеспечение для преподавания управленческих дисциплин."/>
     </Компетенции>
-    <ДопКомпетенции/>
+    <ДопКомпетенции ИГА="3&amp;6&amp;15&amp;16&amp;17&amp;18" ВКРиГЭК="3&amp;6&amp;15&amp;16&amp;17&amp;18|3&amp;6&amp;15&amp;16&amp;17&amp;18" ДисМаг="3&amp;6&amp;15&amp;16&amp;17&amp;18"/>
     <СпецВидыРабот>
       <ПрочиеПрактики>
         <ПрочаяПрактика Вид="педагогическая практика" Сем="2" ЗЕТЭксп="6" Суммировать="1" Кафедра="9"/>
@@ -295,7 +295,7 @@
         <Семестр Ном="2"/>
       </Курс>
     </АПП>
-    <ПараметрыПроверки count="13" Flag_FillTitle="1" Flag_SrokO="1" SrokOYear="2" Flag_OOPItog="1" OOPItog="120" Flag_OOPyear="1" OOPyear="60" Flag_ZETdelta="1" Flag_DVVpersent="1" Flag_DVVpersent1p3="1" DVVpersent30Min="30" DVVpersent30Max="100" Flag_BasePart="1" BasePartMax="50" Flag_ZETDiscMin="1" ZETDiscMin="2" Flag_DiscZETIsInt="1" Flag_DiscZETYearIsInt="1" Flag_ZETExpertTrue="1" Flag_DiscZETExpertTrue="1" Flag_HinW54="1" HinW54="54" Flag_HinWAudit="1" HinWAuditMax="21" Flag_HinWAuditSr="1" HinWAuditSrMax="21" Flag_Lect="1" LectMax="30" Flag_Inter="1" InterMin="20" InterMax="100" Flag_ZETAndHoursIsTrue="1" Flag_DiscZETAndHoursIsTrue="1" Flag_DiscSemZETAndHoursIsTrue="1" AudetAllMax="50" Flag_EqZET36="1" Flag_CntrlEx="1" CntrlExMax="10" Flag_CntrlExSem="1" CntrlExSemMax="5" Flag_CntrlZach="1" CntrlZachMax="12" Flag_CntrlZachSem="1" CntrlZachSemMax="6" Flag_CntrlExHours="1" CntrlExHoursMin="36" CntrlExHoursMax="63" Flag_CntrlHasHours="1" Flag_CntrlHasHoursItogS="1" Flag_HoursCouple="1" Flag_HoursKSRForKR="1" HoursKSRForKRMax="10" Flag_HoursKSRForKP="1" HoursKSRForKPMax="10" HoursKSRpSRSMax="10" Flag_HoursAudSemTrue="1" Flag_HoursSRSSemTrue="1" Flag_PracticsWeeksCorrrect="1" Flag_HolidaysWeeks="1" HolidaysWeeksMin="7" HolidaysWeeksMax="10" Flag_HolidaysWinterWeeks="1" HolidaysWinterWeeksMin="2" HolidaysWinterWeeksMax="2" Flag_DiscAltTrue="1" Flag_DiscCompTrue="1" Flag_DiscCompDBTrue="1" DiscCompHandMadeOK="10" DiscCompHandMadePK="15" Flag_DiscFatalCoincidence="1" Flag_DiscKafTrue="1" DiscPhysCZET="2" DiscPhysCHours="400" DiscPhysCHoursPractices="360" DiscJustificationZETLocationForCoursesPosition="1" DiscJustificationZETLocationForCoursesOneZET="200" Flag_HoursKratNedFirstPos="1">
+    <ПараметрыПроверки count="14" Flag_FillTitle="1" Flag_SrokO="1" SrokOYear="2" Flag_OOPItog="1" OOPItog="120" Flag_OOPyear="1" OOPyear="60" Flag_ZETdelta="1" Flag_DVVpersent="1" Flag_DVVpersent1p3="1" DVVpersent30Min="30" DVVpersent30Max="100" Flag_BasePart="1" BasePartMax="50" Flag_ZETDiscMin="1" ZETDiscMin="2" Flag_DiscZETIsInt="1" Flag_DiscZETYearIsInt="1" Flag_ZETExpertTrue="1" Flag_DiscZETExpertTrue="1" Flag_HinW54="1" HinW54="54" Flag_HinWAudit="1" HinWAuditMax="21" Flag_HinWAuditSr="1" HinWAuditSrMax="21" Flag_Lect="1" LectMax="30" Flag_Inter="1" InterMin="20" InterMax="100" Flag_ZETAndHoursIsTrue="1" Flag_DiscZETAndHoursIsTrue="1" Flag_DiscSemZETAndHoursIsTrue="1" AudetAllMax="50" Flag_EqZET36="1" Flag_CntrlEx="1" CntrlExMax="10" Flag_CntrlExSem="1" CntrlExSemMax="5" Flag_CntrlZach="1" CntrlZachMax="12" Flag_CntrlZachSem="1" CntrlZachSemMax="6" Flag_CntrlExHours="1" CntrlExHoursMin="36" CntrlExHoursMax="63" Flag_CntrlHasHours="1" Flag_CntrlHasHoursItogS="1" Flag_HoursCouple="1" Flag_HoursKSRForKR="1" HoursKSRForKRMax="10" Flag_HoursKSRForKP="1" HoursKSRForKPMax="10" HoursKSRpSRSMax="10" Flag_HoursAudSemTrue="1" Flag_HoursSRSSemTrue="1" Flag_PracticsWeeksCorrrect="1" Flag_HolidaysWeeks="1" HolidaysWeeksMin="7" HolidaysWeeksMax="10" Flag_HolidaysWinterWeeks="1" HolidaysWinterWeeksMin="2" HolidaysWinterWeeksMax="2" Flag_DiscAltTrue="1" Flag_DiscCompTrue="1" Flag_DiscCompDBTrue="1" DiscCompHandMadeOK="10" DiscCompHandMadePK="15" Flag_DiscFatalCoincidence="1" Flag_DiscKafTrue="1" DiscPhysCZET="2" DiscPhysCHours="400" DiscPhysCHoursPractices="360" DiscJustificationZETLocationForCoursesPosition="1" DiscJustificationZETLocationForCoursesOneZET="200" Flag_HoursKratNedFirstPos="1">
       <ArrKratNed>
         <item value="1"/>
         <item num="1" value="26"/>
