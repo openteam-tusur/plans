@@ -100,6 +100,10 @@ class Subspeciality < ActiveRecord::Base
     "#{title}, #{human_education_form}"
   end
 
+  def import_to_s
+    "#{year.number} / #{speciality.code} / '#{title}' #{education_form} #{reduced}"
+  end
+
   private
 
   def semester_number_from_string(string)

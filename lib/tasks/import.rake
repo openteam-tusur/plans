@@ -2,10 +2,19 @@
 
 require 'progress_bar'
 require 'nokogiri'
+require 'timecop'
 
 module PlanImporter
 
+  SPECIALITY_CODE = '\d{6}(?:\.(?:62|65|68))?'
+
   def self.import_plan_from_file(file_path, year)
+    Timecop.freeze(time_of_sync) do
+      realy_import_plan_from_file(file_path, year)
+    end
+  end
+
+  def self.realy_import_plan_from_file(file_path, year)
     xml = Nokogiri::XML(File.new(file_path))
     title_node = xml.css('Титул').first
     year_number = title_node['ГодНачалаПодготовки'].to_i
@@ -13,12 +22,18 @@ module PlanImporter
       p file_path
       raise "Год не совпадает #{year_number} != #{year.number}!!!"
     end
-    speciality_full_name = xml.css('Специальность').map{|speciality_node| speciality_node['Название']}.join(' ')
-    speciality_code = speciality_full_name.scan(/\d{6}(?:.\d{2})?/).first
+
+    speciality_full_name = xml.css('Специальность').map{|speciality_node| speciality_node['Название']}.join(' ').squish
+    speciality_full_name.gsub! /(#{SPECIALITY_CODE}) "(.*?)"/, '\1 \2'
+
+    speciality_code = speciality_full_name.scan(/#{SPECIALITY_CODE}/).first
+    speciality_code = "#{speciality_code}.65" if speciality_code !~ /\.(62|65|68)/
+
     speciality = year.specialities.find_by_code(speciality_code)
     raise "нет специальности с кодом #{speciality_code} в #{year_number} году #{file_path}" unless speciality
     speciality.update_attribute :gos_generation, title_node['ТипГОСа'] || 2
     subspeciality_title = speciality_full_name.match(/"(.*)"/) ? speciality_full_name.match(/"(.*)"/)[1].squish : speciality.degree == 'specialty' ? "Без специализации" : "Без профиля"
+    speciality_full_name.gsub! 'заочная с применением дистанционной технологии', 'заочная с дистанционной технологией'
     education_form = speciality_full_name.match(/(заочная с дистанционной технологией|очно-заочная|очная|заочная)/).try(:[], 1)  || 'очная'
     education_form = Subspeciality.human_enum_values(:education_form).invert["#{education_form} форма"]
     reduced = case speciality_full_name
@@ -30,8 +45,12 @@ module PlanImporter
                 raise "невозможно вычислить тип сокращённой программы для '#{$1}'"
               else nil
               end
-    subspeciality = speciality.subspecialities.find_by_title_and_education_form_and_reduced(subspeciality_title, education_form, reduced)
-    raise "нет профиля #{subspeciality_title} для #{education_form} для специальности #{speciality_code} #{reduced_text} в #{year_number} года #{file_path}" unless subspeciality
+    subspeciality = speciality.subspecialities.find_by_title_and_education_form_and_reduced!(subspeciality_title, education_form, reduced)
+    if subspeciality.updated_at == time_of_sync
+      raise "#{speciality.import_to_s} уже обновлялась"
+    else
+      subspeciality.update_column :updated_at, time_of_sync
+    end
     plan_digest = Digest::SHA1.hexdigest open(file_path).read
     return if plan_digest.eql?(subspeciality.plan_digest)
     %w[disciplines checks loadings semesters].each do |association_name|
@@ -194,7 +213,7 @@ class YearImporter
         PlanImporter.import_plan_from_file(file_path, year)
       rescue => e
         puts file_path
-        p e.message
+        puts e.message
         exit
       end
       bar.increment!
