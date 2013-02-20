@@ -10,8 +10,8 @@ group :assets do
 end
 
 group :default do
-  gem 'default_value_for'
   gem 'decent_exposure'
+  gem 'default_value_for'
   gem 'draper'
   gem 'enumerize'
   gem 'esp-auth'
@@ -31,6 +31,7 @@ group :default do
   gem 'simple-navigation'
   gem 'simple_form'
   gem 'state_machine'
+  gem 'timecop'
   gem 'wicked_pdf'
 end
 

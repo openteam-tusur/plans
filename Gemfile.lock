@@ -403,5 +403,6 @@ DEPENDENCIES
   sunspot_matchers
   sunspot_solr
   therubyracer
+  timecop
   uglifier
   wicked_pdf
