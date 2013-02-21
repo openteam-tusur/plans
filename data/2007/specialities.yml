@@ -56,20 +56,20 @@ specialty:
         department:      ФДО
         reduced:         higher_unspecialized
   -
-    code: "080502.65"
-    title: "Экономика и управление на предприятии (в машиностроении)"
+    code:             "080502.65"
+    title:            Экономика и управление на предприятии (в машиностроении)
     subspecialities:
       -
-        subdepartment: "Экономики"
-        title: "Без специализации"
-        education_form: 'postal-with-dist'
-        department: 'ФДО'
-        reduced: secondary_unspecialized
+        subdepartment:   Экономики
+        title:           Без специализации
+        education_form:  postal
+        department:      ЗиВФ
       -
-        subdepartment: "Экономики"
-        title: "Без специализации"
-        education_form: 'postal'
-        department: 'ЗиВФ'
+        subdepartment:   Экономики
+        title:           Без специализации
+        education_form:  postal-with-dist
+        department:      ФДО
+        reduced:         secondary_unspecialized
       -
         subdepartment:   Экономики
         title:           Без специализации
