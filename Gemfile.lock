@@ -192,6 +192,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memoist (0.2.0)
     mime-types (1.21)
     multi_json (1.6.0)
     multi_xml (0.5.2)
@@ -381,6 +382,7 @@ DEPENDENCIES
   hirb
   inherited_resources
   jquery-rails (= 2.0.2)
+  memoist
   nested_form
   nokogiri
   openteam-commons (>= 0.2.3)

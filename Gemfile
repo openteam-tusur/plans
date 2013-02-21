@@ -20,6 +20,7 @@ group :default do
   gem 'has_enum'
   gem 'has_scope'
   gem 'inherited_resources'
+  gem 'memoist'
   gem 'nested_form'
   gem 'nokogiri',             :require => false
   gem 'openteam-commons',     '>= 0.2.3'
