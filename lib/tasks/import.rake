@@ -4,6 +4,7 @@ require 'progress_bar'
 require 'nokogiri'
 require 'timecop'
 require 'memoist'
+require 'fileutils'
 
 class PlanImporter
   SPECIALITY_CODE = '\d{6}(?:\.(?:62|65|68))?'
@@ -278,7 +279,7 @@ class YearImporter
       rescue => e
         puts file_path
         puts e.message
-        exit
+        FileUtils.rm file_path
       end
       bar.increment!
     end
