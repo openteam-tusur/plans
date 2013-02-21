@@ -26,29 +26,6 @@
 <% end %>
 
 <table class='curriculum_table specialities'>
-  <thead>
-    <tr>
-      <th class='code'>код</th>
-      <th class='name'>наименование</th>
-      <th class='profile'>профиль</th>
-      <th class='subfaculty'>кафедра</th>
-      <th class='education_form'>форма обучения</th>
-      <th class='plans'>план</th>
-    </tr>
-    <% %w[Бакалавриат Специалитет Магистратура].each do |degree| %>
-      <% if degree_subspecialities = subspecialities.group_by(&:degree)[degree] %>
-        <tr class='cycle'><td colspan='6'><%= degree %></td></tr>
-        <% degree_subspecialities.each do |subspeciality| %>
-          <tr>
-            <td><%= subspeciality.speciality.code %></td>
-            <td><%= subspeciality.speciality.title %></td>
-            <td><%= subspeciality.title %></td>
-            <td><%= subspeciality.subdepartment %></td>
-            <td><%= subspeciality.education_form %><%= subspeciality.reduced %></td>
-            <td><%= link_to "смотреть", [:edu, subspeciality] if subspeciality.has_disciplines? %></td>
-          </tr>
-        <% end %>
-      <% end %>
-    <% end %>
-  </thead>
+  <%= render :partial => 'table_header' %>
+  <%= render :partial => 'subspecialities', :object =>  subspecialities %>
 </table>
