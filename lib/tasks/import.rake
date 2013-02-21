@@ -119,8 +119,6 @@ class PlanImporter
   def really_import
     reset_acuality_of_associations
 
-    return
-
     xml.css('СтрокиПлана Строка').each do |discipline_xml|
       discipline = subspeciality.disciplines.find_or_initialize_by_title(discipline_xml['Дис'].squish)
       discipline.subdepartment = year.subdepartments.find_by_number((discipline_xml['Кафедра'] || title_node['КодКафедры']))
@@ -204,7 +202,7 @@ class PlanImporter
         end
       end
     end
-    subspeciality.update_attributes(file_path: file_path, plan_digest: plan_digest)
+    subspeciality.update_attributes(file_path: file_path, plan_digest: file_path_digest)
   end
 end
 
