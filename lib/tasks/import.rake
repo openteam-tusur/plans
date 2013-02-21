@@ -327,16 +327,15 @@ task :sync => :environment do
 end
 
 desc "Синхронизация года"
-task :sync_year => :environment do
-  year_number = ENV['year']
-  bar = ProgressBar.new Dir.glob("data/#{year_number}/**/*.{xml,yml}").count
-  year = Year.find_or_create_by_number(year_number)
+task :sync_year, [:year] => :environment do |task, args|
+  bar = ProgressBar.new Dir.glob("data/#{args.year}/**/*.{xml,yml}").count
+  year = Year.find_or_create_by_number(args.year)
   year.move_descendants_to_trash
   YearImporter.new(year, bar).import
 end
 
 
 desc "Загрузка учебного плана"
-task :import_plan => :environment do
-  PlanImporter.new(ENV['FILE_PATH']).import
+task :import_plan, [:path]=> :environment do |task, args|
+  PlanImporter.new(args.path).import
 end
