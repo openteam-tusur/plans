@@ -104,6 +104,10 @@ class Subspeciality < ActiveRecord::Base
     "#{year.number} / #{speciality.code} / '#{title}' #{education_form} #{reduced}"
   end
 
+  def postal?
+    @postal ||= !!(education_form =~ /postal/)
+  end
+
   private
 
   def semester_number_from_string(string)
