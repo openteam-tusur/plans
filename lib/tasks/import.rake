@@ -117,8 +117,8 @@ class DisciplineImporter
       next unless semester
       loading_abbrs.each do |kind, abbr|
         if value = course_xml[abbr]
-          loading = discipline.loadings.find_by_semester_id_and_loading_kind(:semester_id => semester.id, :loading_kind => kind)
-          import_loading(semester, kind, loading.value.to_i + value.to_i)
+          existed_value = discipline.loadings.find_by_semester_id_and_loading_kind(semester.id, kind).try(:value)
+          import_loading(semester, kind, existed_value.to_i + value.to_i)
         end
       end
       check_abbrs.each do |kind, abbr|
@@ -138,18 +138,21 @@ end
 class PlanImporter
   SPECIALITY_CODE = '\d{6}(?:\.(?:62|65|68))?'
 
-  attr_accessor :file_path
+  attr_accessor :file_path, :options
 
   delegate :postal?, :to => :subspeciality, :prefix => true
 
-  def initialize(file_path)
+  def initialize(file_path, options={})
     self.file_path = file_path
+    self.options = options
   end
 
   def import
     Timecop.freeze(time_of_sync) do
       check_year
-      really_import unless subspeciality.plan_digest == file_path_digest
+      if options[:force] || subspeciality.plan_digest != file_path_digest
+        really_import
+      end
     end
   end
 
@@ -400,5 +403,5 @@ end
 
 desc "Загрузка учебного плана"
 task :import_plan, [:path]=> :environment do |task, args|
-  PlanImporter.new(args.path).import
+  PlanImporter.new(args.path, :force => true).import
 end
