@@ -208,7 +208,7 @@ class PlanImporter
   end
 
   def subspeciality_title
-    speciality_full_name.match(/"(.*)"/).try(:[], 1) || default_subspeciality_title
+    speciality_full_name.match(/"(.*?)"/).try(:[], 1) || default_subspeciality_title
   end
 
   def education_form
