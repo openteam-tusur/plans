@@ -15,7 +15,7 @@ class Manage::SpecialitiesController < Manage::ApplicationController
     scope.send value
   end
 
-  has_scope :eager_load_associations, :default => 1, :only => :index do |controller, scope|
+  has_scope :eager_load_associations, :default => true, :type => :boolean, :only => :index do |controller, scope|
     scope.includes(:actual_disciplines).includes(:programms).includes(:work_plans).includes(:subdepartments).includes(:actual_subspecialities)
   end
 end
