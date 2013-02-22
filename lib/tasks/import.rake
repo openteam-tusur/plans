@@ -6,10 +6,140 @@ require 'timecop'
 require 'memoist'
 require 'fileutils'
 
+class DisciplineImporter
+  attr_accessor :plan_importer, :xml
+
+  delegate :subspeciality, :file_path, :year, :cycle_node, :subspeciality_postal?, :to => :plan_importer
+
+  def initialize(plan_importer, xml)
+    self.plan_importer = plan_importer
+    self.xml = xml
+  end
+
+  def discipline_title
+    xml['Дис'].squish
+  end
+
+  def discipline_subdepartment
+    year.subdepartments.find_by_number((xml['Кафедра'] || title_node['КодКафедры'])) || subspeciality.graduated_subdepartment
+  end
+
+  def discipline
+    subspeciality.disciplines.find_or_initialize_by_title(discipline_title).tap do |discipline|
+      discipline.subdepartment = discipline_subdepartment
+      discipline.cycle = "#{cycle_abbr}. #{cycle_name}"
+      discipline.summ_loading = xml['ПодлежитИзучению']
+      discipline.summ_srs = xml['СР']
+      discipline.cycle_code = cycle_value
+      refresh discipline
+    end
+  end
+
+  def cycle_value
+    xml['Цикл']
+  end
+
+  def cycle_abbr
+    cycle_value.split('.').first
+  end
+
+  def cycle_name
+    cycle_node(cycle_abbr)['Название'].squish
+  rescue => e
+    raise "не могу найти расшифровку цикла '#{cycle_abbr}' для дисциплины '#{discipline_title}'"
+  end
+
+  extend Memoist
+
+  memoize :discipline_title, :discipline
+  memoize :cycle_abbr, :cycle_value
+
+  def check_abbrs
+    Check.enum_values(:check_kind).map do |kind|
+      { kind => I18n.t(kind, :scope => 'activerecord.attributes.check.check_kind_abbrs') }
+    end
+  end
+
+  def loading_abbrs
+    Loading.enum_values(:loading_kind).map do |kind|
+      { kind => I18n.t(kind, :scope => 'activerecord.attributes.loading.loading_loading_abbrs') }
+    end
+  end
+
+  def import_check(semester, kind)
+    discipline.checks.find_or_initialize_by_semester_id_and_check_kind(semester.id, kind).tap do |check|
+      refresh check
+      check.save!
+    end
+  end
+
+  def import_loading(semester, kind, value)
+    discipline.loadings.find_or_initialize_by_semester_id_and_loading_kind(semester.id, kind).tap do |loading|
+      refresh loading
+      loading.value = value
+      loading.save!
+    end if value
+  end
+
+  def import_nonpostal
+    check_abbrs.each do |kind, abbr|
+      semester_numbers = xml["Сем#{abbr}"]
+      next unless semester_numbers
+      semester_numbers.gsub(/р/, '').each_char do |semester_number|
+        semester = subspeciality.create_or_refresh_semester(semester_number)
+        next unless semester
+        import_check(semester, kind)
+      end
+    end
+    xml.css('Сем').each do |loading_xml|
+      semester = subspeciality.create_or_refresh_semester(loading_xml['Ном'])
+      loading_abbrs.each do |kind, abbr|
+        import_loading(semester, kind, loading_xml[abbr])
+      end
+    end
+  end
+
+  def import_postal
+    xml.css("Курс/Сессия").each do |course_xml|
+      course_number = course_xml.parent['Ном'].to_i
+      session_number = course_xml['Ном'].to_i
+      semester_number = course_number * 2 - 1 # осенний семестр
+      case course_number
+      when 1
+        semester_number += 1 if session_number >= 2
+      when 2..5
+        semester_number += 1 if session_number >= 3
+      when 6
+      else raise "unknown course #{course_xml.parent['Ном']}"
+      end
+      semester = subspeciality.create_or_refresh_semester(semester_number)
+      next unless semester
+      loading_abbrs.each do |kind, abbr|
+        if value = course_xml[abbr]
+          loading = discipline.loadings.find_by_semester_id_and_loading_kind(:semester_id => semester.id, :loading_kind => kind)
+          import_loading(semester, kind, loading.value.to_i + value.to_i)
+        end
+      end
+      check_abbrs.each do |kind, abbr|
+        import_check(semester, kind) if course_xml[abbr]
+      end
+    end
+  end
+
+  def import
+    if cycle_value
+      discipline.save!
+      subspeciality_postal? ? import_postal : import_nonpostal
+    end
+  end
+end
+
 class PlanImporter
   SPECIALITY_CODE = '\d{6}(?:\.(?:62|65|68))?'
 
   attr_accessor :file_path
+
+  delegate :postal?, :to => :subspeciality, :prefix => true
 
   def initialize(file_path)
     self.file_path = file_path
@@ -20,6 +150,11 @@ class PlanImporter
       check_year
       really_import unless subspeciality.plan_digest == file_path_digest
     end
+  end
+
+  def cycle_node(cycle_abbr)
+    xml.at_css("АтрибутыЦиклов Цикл[Аббревиатура='#{cycle_abbr}']") ||
+      xml.at_css("АтрибутыЦиклов Цикл[Абревиатура='#{cycle_abbr}']") # это было бы смешно, если б не было так грустно
   end
 
   private
@@ -120,87 +255,7 @@ class PlanImporter
     reset_acuality_of_associations
 
     xml.css('СтрокиПлана Строка').each do |discipline_xml|
-      discipline = subspeciality.disciplines.find_or_initialize_by_title(discipline_xml['Дис'].squish)
-      discipline.subdepartment = year.subdepartments.find_by_number((discipline_xml['Кафедра'] || title_node['КодКафедры']))
-      cycle_value = discipline_xml['Цикл']
-      next unless cycle_value
-      cycle_abbr, component = cycle_value.split('.')[0..1]
-      begin
-        cycle = xml.css("АтрибутыЦиклов Цикл").select{|c| cycle_abbr == (c['Аббревиатура'] || c['Абревиатура']) }.first['Название'].squish
-      rescue => e
-        raise "не указан цикл для дисциплины '#{discipline.title}'"
-      end
-      discipline.cycle = "#{cycle_abbr}. #{cycle}"
-      discipline.summ_loading = discipline_xml['ПодлежитИзучению']
-      discipline.summ_srs = discipline_xml['СР']
-      discipline.cycle_code = discipline_xml['Цикл']
-      refresh discipline
-      begin
-        discipline.save!
-      rescue => e
-        p discipline.errors
-        raise "не удалось сохранить дисциплину '#{discipline.title}'"
-      end
-      if file_path !~ /plz\.xml/ # очная, очно-заочная
-        Check.enum_values(:check_kind).each do |check_kind|
-          kind_abbr = I18n.t check_kind, :scope => "activerecord.attributes.check.check_kind_abbrs"
-          semester_numbers = discipline_xml["Сем#{kind_abbr}"]
-          next unless semester_numbers
-          semester_numbers.gsub(/р/, '').each_char do |semester_number|
-            semester = subspeciality.create_or_refresh_semester(semester_number)
-            next unless semester
-            check = discipline.checks.where(:semester_id => semester, :check_kind => check_kind).first || discipline.checks.build(:semester => semester, :check_kind => check_kind)
-            refresh check
-            check.save
-          end
-        end
-        discipline_xml.css('Сем').each do |loading_xml|
-          semester = subspeciality.create_or_refresh_semester(loading_xml['Ном'])
-          next unless semester
-          Loading.enum_values(:loading_kind).each do |loading_kind|
-            kind_abbr = I18n.t loading_kind, :scope => "activerecord.attributes.loading.loading_kind_abbrs"
-            value = loading_xml[kind_abbr]
-            next unless value
-            loading = discipline.loadings.where(:semester_id => semester, :loading_kind => loading_kind).first || discipline.loadings.build(:semester => semester, :loading_kind => loading_kind)
-            refresh loading
-            loading.value = value
-            loading.save
-          end
-        end
-      else # заочная
-        discipline_xml.css("Курс/Сессия").each do |loading_xml|
-          course_number = loading_xml.parent['Ном'].to_i
-          session_number = loading_xml['Ном'].to_i
-          semester_number = course_number * 2 - 1 # осенний семестр
-          case course_number
-          when 1
-            semester_number += 1 if session_number >= 2
-          when 2..5
-            semester_number += 1 if session_number >= 3
-          when 6
-          else raise "unknown course #{loading_xml.parent['Ном']}"
-          end
-          semester = subspeciality.create_or_refresh_semester(semester_number)
-          next unless semester
-          Loading.enum_values(:loading_kind).each do |loading_kind|
-            kind_abbr = I18n.t loading_kind, :scope => "activerecord.attributes.loading.loading_kind_abbrs"
-            value = loading_xml[kind_abbr]
-            next unless value
-            loading = discipline.loadings.where(:semester_id => semester, :loading_kind => loading_kind).first || discipline.loadings.build(:semester => semester, :loading_kind => loading_kind)
-            refresh loading
-            loading.value = loading.value.to_i + value.to_i
-            loading.save
-          end
-          Check.enum_values(:check_kind).each do |check_kind|
-            kind_abbr = I18n.t check_kind, :scope => "activerecord.attributes.check.check_kind_abbrs"
-            if loading_xml[kind_abbr]
-              check = discipline.checks.where(:semester_id => semester, :check_kind => check_kind).first || discipline.checks.build(:semester => semester, :check_kind => check_kind)
-              refresh check
-              check.save
-            end
-          end
-        end
-      end
+      DisciplineImporter.new(self, discipline_xml).import
     end
     subspeciality.update_attributes(file_path: file_path, plan_digest: file_path_digest)
   end
