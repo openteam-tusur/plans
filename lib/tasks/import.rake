@@ -211,8 +211,16 @@ class PlanImporter
     File.basename(file_path).match(/^\d{6,}_(62|65|68)/)[1]
   end
 
+  def speciality_code_from_speciality_subtitle
+    speciality_full_name.match(/специальност(?:ь|и) (#{SPECIALITY_CODE})/i).try :[], 1
+  end
+
+  def speciality_code_from_full_name
+    speciality_full_name.scan(/#{SPECIALITY_CODE}/).first
+  end
+
   def speciality_code
-    speciality_full_name.scan(/#{SPECIALITY_CODE}/).first.tap do |code|
+    (speciality_code_from_speciality_subtitle || speciality_code_from_full_name).tap do |code|
       code << ".#{code_from_file_name}" if code !~ /\.(62|65|68)/
     end
   end
@@ -244,10 +252,11 @@ class PlanImporter
   end
 
   def find_subspeciality
-    speciality.subspecialities.find_by_title_and_subdepartment_id_and_education_form_and_reduced!(subspeciality_title,
-                                                                                                  find_subdepartment(subdepartment_number),
-                                                                                                  education_form,
-                                                                                                  reduced)
+    speciality.subspecialities
+      .find_by_title_and_subdepartment_id_and_education_form_and_reduced!(subspeciality_title,
+                                                                          find_subdepartment(subdepartment_number),
+                                                                          education_form,
+                                                                          reduced)
   end
 
   def subspeciality
