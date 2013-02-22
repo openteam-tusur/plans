@@ -243,8 +243,15 @@ class PlanImporter
     end
   end
 
+  def find_subspeciality
+    speciality.subspecialities.find_by_title_and_subdepartment_id_and_education_form_and_reduced!(subspeciality_title,
+                                                                                                  find_subdepartment(subdepartment_number),
+                                                                                                  education_form,
+                                                                                                  reduced)
+  end
+
   def subspeciality
-    speciality.subspecialities.find_by_title_and_subdepartment_id_and_education_form_and_reduced!(subspeciality_title, find_subdepartment(subdepartment_number).id, education_form, reduced).tap do |subspeciality|
+    find_subspeciality.tap do |subspeciality|
       if subspeciality.updated_at == time_of_sync
         raise "#{speciality.import_to_s} уже обновлялась"
       else
