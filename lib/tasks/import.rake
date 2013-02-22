@@ -234,9 +234,9 @@ class PlanImporter
   def reduced
     case speciality_full_name
     when /на базе (([а-я]+ )*(ВПО|высшего( [а-я]+)* образования)( [а-я]+)*)/
-      $1 =~ / профил/ ? :higher_specialized : :higher_unspecialized
+      $1 =~ /\bпрофил/ ? :higher_specialized : :higher_unspecialized
     when /на базе (([а-я]+ )*(СПО|CПО|среднего( [а-я]+)* образования)( [а-я]+)*)/ # СПО бывает первая латинская
-      $1 =~ / профил/ ? :secondary_specialized : :secondary_unspecialized
+      $1 =~ /\bпрофил/ ? :secondary_specialized : :secondary_unspecialized
     when /на базе (.*)$/
       raise "невозможно вычислить тип сокращённой программы для '#{$1}'"
     else nil
