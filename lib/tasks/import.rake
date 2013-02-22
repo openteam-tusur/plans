@@ -202,26 +202,13 @@ class PlanImporter
   def speciality_full_name
     xml.css('Специальность').map{|node| node['Название']}.join(' ').tap do |name|
       name.squish!
-      name.gsub! /(#{SPECIALITY_CODE})[[:punct:][:space:]]+"(.*?)"/, '\1 \2'
       name.gsub! 'заочная с применением дистанционной технологии', 'заочная с дистанционной технологией'
     end
   end
 
-  def code_from_file_name
-    File.basename(file_path).match(/^\d{6,}_(62|65|68)/)[1]
-  end
-
-  def speciality_code_from_speciality_subtitle
-    speciality_full_name.match(/специальност(?:ь|и) (#{SPECIALITY_CODE})/i).try :[], 1
-  end
-
-  def speciality_code_from_full_name
-    speciality_full_name.scan(/#{SPECIALITY_CODE}/).first
-  end
-
   def speciality_code
-    (speciality_code_from_speciality_subtitle || speciality_code_from_full_name).tap do |code|
-      code << ".#{code_from_file_name}" if code !~ /\.(62|65|68)/
+    File.basename(file_path).match(/^(\d{6})(?:\d{2})?_(62|65|68)/) do
+      "#{$1}.#{$2}"
     end
   end
 
@@ -231,8 +218,24 @@ class PlanImporter
     end
   end
 
+  def subspeciality_node
+    case speciality.degree
+    when 'bachelor'
+      xml.at_css('Специальность[Название^="профиль"]')
+    when 'magistracy'
+      xml.at_css('Специальность[Название^="магистерская программа"]') ||
+        xml.at_css('Специальность[Название^="Магистерская программа"]')
+    when 'specialty'
+      xml.at_css('Специальность[Название^="Специализация"]')
+    end
+  end
+
   def subspeciality_title
-    speciality_full_name.match(/"(.*?)"/).try(:[], 1) || default_subspeciality_title
+    if subspeciality_node
+      subspeciality_node['Название'].match(/"(.*?)"/)[1]
+    else
+      default_subspeciality_title
+    end
   end
 
   def education_form
@@ -276,14 +279,21 @@ class PlanImporter
   extend Memoist
   memoize :xml, :title_node, :year, :year_number, :speciality_full_name, :speciality_code
   memoize :speciality, :subspeciality_title, :education_form, :reduced, :subspeciality, :file_path_digest
-  memoize :find_subdepartment
+  memoize :find_subdepartment, :subspeciality_node
 
   def human_education_form
     speciality_full_name.match(/(заочная с дистанционной технологией|очно-заочная|очная|заочная)/).try(:[], 1)  || 'очная'
   end
 
   def default_subspeciality_title
-    speciality.degree.specialty? ? "Без специализации" : "Без профиля"
+    case speciality.degree
+    when 'bachelor'
+      'Без профиля'
+    when 'magistracy'
+      throw 'у магистров должен быть указан профиль'
+    when 'specialty'
+      'Без специализации'
+    end
   end
 
   def check_year
