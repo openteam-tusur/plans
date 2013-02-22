@@ -9,8 +9,18 @@ class Year < ActiveRecord::Base
   has_many :specialities, :dependent => :destroy
   has_many :subspecialities, :through => :specialities
 
+  has_many :actual_specialities, :class_name => 'Speciality'
+  has_many :actual_subspecialities, :through => :actual_specialities
+
   validates_presence_of :number
   after_save :move_descendants_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
+
+  scope :actual, -> { where(:deleted_at => nil).order(:number) }
+
+
+  def degrees
+    @degrees ||= actual_specialities.map(&:degree).uniq.sort
+  end
 
   def to_param
     number
