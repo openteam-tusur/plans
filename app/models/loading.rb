@@ -3,6 +3,8 @@ class Loading < ActiveRecord::Base
   belongs_to :discipline
   attr_accessible :deleted_at, :loading_kind, :value, :semester
 
+  validates_presence_of :semester, :discipline, :loading_kind, :value
+
   has_enum :loading_kind
 
   scope :actual, ->() { where(:deleted_at => nil) }
