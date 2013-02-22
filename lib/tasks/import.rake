@@ -388,7 +388,6 @@ class YearImporter
       rescue => e
         puts file_path
         puts e.message
-        FileUtils.rm file_path
       end
       bar.increment!
     end
