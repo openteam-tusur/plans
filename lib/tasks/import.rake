@@ -10,7 +10,7 @@ class DisciplineImporter
   attr_accessor :plan_importer, :xml
 
   delegate :subspeciality, :file_path, :year, :cycle_node, :subspeciality_postal?, :to => :plan_importer
-  delegate :find_subdepartment, :to => :plan_importer
+  delegate :find_subdepartment, :warn, :to => :plan_importer
 
   def initialize(plan_importer, xml)
     self.plan_importer = plan_importer
@@ -25,8 +25,12 @@ class DisciplineImporter
     find_subdepartment(xml['Кафедра']) || subspeciality.subdepartment
   end
 
+  def find_discipline
+    subspeciality.disciplines.find_or_initialize_by_title(discipline_title)
+  end
+
   def discipline
-    subspeciality.disciplines.find_or_initialize_by_title(discipline_title).tap do |discipline|
+    find_discipline.tap do |discipline|
       discipline.subdepartment = discipline_subdepartment
       discipline.cycle = "#{cycle_abbr}. #{cycle_name}"
       discipline.summ_loading = xml['ПодлежитИзучению']
@@ -46,7 +50,7 @@ class DisciplineImporter
 
   def cycle_name
     cycle_node(cycle_abbr)['Название'].squish
-  rescue => e
+  rescue
     raise "не могу найти расшифровку цикла '#{cycle_abbr}' для дисциплины '#{discipline_title}'"
   end
 
@@ -128,9 +132,11 @@ class DisciplineImporter
   end
 
   def import
-    if cycle_value
+    if cycle_value && cycle_abbr.present?
       discipline.save!
       subspeciality_postal? ? import_postal : import_nonpostal
+    else
+      warn("у дисциплины '#{discipline_title}' не указан цикл")
     end
   end
 end
@@ -159,6 +165,12 @@ class PlanImporter
   def cycle_node(cycle_abbr)
     xml.at_css("АтрибутыЦиклов Цикл[Аббревиатура='#{cycle_abbr}']") ||
       xml.at_css("АтрибутыЦиклов Цикл[Абревиатура='#{cycle_abbr}']") # это было бы смешно, если б не было так грустно
+  end
+
+  def warn(message)
+    log_message = "[WARN] import #{file_path}: #{message}"
+    STDERR.puts log_message
+    Rails.logger.warn(log_message)
   end
 
   private
@@ -190,14 +202,18 @@ class PlanImporter
   def speciality_full_name
     xml.css('Специальность').map{|node| node['Название']}.join(' ').tap do |name|
       name.squish!
-      name.gsub! /(#{SPECIALITY_CODE}) "(.*?)"/, '\1 \2'
+      name.gsub! /(#{SPECIALITY_CODE})[[:punct:][:space:]]+"(.*?)"/, '\1 \2'
       name.gsub! 'заочная с применением дистанционной технологии', 'заочная с дистанционной технологией'
     end
   end
 
+  def code_from_file_name
+    File.basename(file_path).match(/^\d{6,}_(62|65|68)/)[1]
+  end
+
   def speciality_code
     speciality_full_name.scan(/#{SPECIALITY_CODE}/).first.tap do |code|
-      code << ".65" if code !~ /\.(62|65|68)/
+      code << ".#{code_from_file_name}" if code !~ /\.(62|65|68)/
     end
   end
 
