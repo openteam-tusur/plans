@@ -10,6 +10,7 @@ class DisciplineImporter
   attr_accessor :plan_importer, :xml
 
   delegate :subspeciality, :file_path, :year, :cycle_node, :subspeciality_postal?, :to => :plan_importer
+  delegate :find_subdepartment, :to => :plan_importer
 
   def initialize(plan_importer, xml)
     self.plan_importer = plan_importer
@@ -21,7 +22,7 @@ class DisciplineImporter
   end
 
   def discipline_subdepartment
-    year.subdepartments.find_by_number((xml['Кафедра'] || title_node['КодКафедры'])) || subspeciality.graduated_subdepartment
+    find_subdepartment(xml['Кафедра']) || subspeciality.subdepartment
   end
 
   def discipline
@@ -175,6 +176,14 @@ class PlanImporter
     title_node['ГодНачалаПодготовки']
   end
 
+  def subdepartment_number
+    title_node['КодКафедры']
+  end
+
+  def find_subdepartment(number)
+    year.subdepartments.find_by_number!(number) if number
+  end
+
   def speciality_full_name
     xml.css('Специальность').map{|node| node['Название']}.join(' ').tap do |name|
       name.squish!
@@ -216,7 +225,7 @@ class PlanImporter
   end
 
   def subspeciality
-    speciality.subspecialities.find_by_title_and_education_form_and_reduced!(subspeciality_title, education_form, reduced).tap do |subspeciality|
+    speciality.subspecialities.find_by_title_and_subdepartment_id_and_education_form_and_reduced!(subspeciality_title, find_subdepartment(subdepartment_number).id, education_form, reduced).tap do |subspeciality|
       if subspeciality.updated_at == time_of_sync
         raise "#{speciality.import_to_s} уже обновлялась"
       else
@@ -232,6 +241,7 @@ class PlanImporter
   extend Memoist
   memoize :xml, :title_node, :year, :year_number, :speciality_full_name, :speciality_code
   memoize :speciality, :subspeciality_title, :education_form, :reduced, :subspeciality, :file_path_digest
+  memoize :find_subdepartment
 
   def human_education_form
     speciality_full_name.match(/(заочная с дистанционной технологией|очно-заочная|очная|заочная)/).try(:[], 1)  || 'очная'
