@@ -232,7 +232,8 @@ class PlanImporter
 
   def subspeciality_title
     if subspeciality_node
-      subspeciality_node['Название'].match(/"(.*?)"/)[1]
+      subspeciality_node['Название'].match(/"(.*?)"/).try(:[], 1) ||
+        subspeciality_node['Название'].match(/Специализация - (.*)/)[1]
     else
       default_subspeciality_title
     end
