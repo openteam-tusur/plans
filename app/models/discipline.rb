@@ -15,6 +15,7 @@ class Discipline < ActiveRecord::Base
   has_many :actual_checks,    :class_name => 'Check', :conditions => { :deleted_at => nil }
   has_many :actual_loadings,  :class_name => 'Loading', :conditions => { :deleted_at => nil }
   has_many :actual_semesters, :class_name => 'Semester', :through => :actual_loadings, :uniq => true, :source => :semester
+  has_many :actual_checks_semesters, :class_name => 'Semester', :through => :actual_checks, :uniq => true, :source => :semester
 
 
   scope :actual, where(:deleted_at => nil)
