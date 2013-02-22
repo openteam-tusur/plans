@@ -41,6 +41,7 @@ group :development do
   gem 'capistrano'
   gem 'debugger'
   gem 'hirb',                 :require => false
+  gem 'quiet_assets'
   gem 'rails-erd'
   gem 'ruby-graphviz'
   gem 'rvm-capistrano'
