@@ -57,13 +57,13 @@ class DisciplineImporter
 
   def check_abbrs
     Check.enum_values(:check_kind).map do |kind|
-      { kind => I18n.t(kind, :scope => 'activerecord.attributes.check.check_kind_abbrs') }
+      [kind, I18n.t(kind, :scope => 'activerecord.attributes.check.check_kind_abbrs')]
     end
   end
 
   def loading_abbrs
     Loading.enum_values(:loading_kind).map do |kind|
-      { kind => I18n.t(kind, :scope => 'activerecord.attributes.loading.loading_loading_abbrs') }
+      [kind, I18n.t(kind, :scope => 'activerecord.attributes.loading.loading_kind_abbrs')]
     end
   end
 
