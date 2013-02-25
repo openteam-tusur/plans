@@ -213,7 +213,7 @@ class PlanImporter
   end
 
   def speciality
-    year.specialities.find_by_code!(speciality_code) do |speciality|
+    year.specialities.actual.find_by_code!(speciality_code) do |speciality|
       speciality.update_attribute :gos_generation, title_node['ТипГОСа'] || 2
     end
   end
@@ -267,7 +267,7 @@ class PlanImporter
   end
 
   def find_subspeciality
-    speciality.subspecialities
+    speciality.subspecialities.actual
       .find_by_title_and_subdepartment_id_and_education_form_and_reduced!(subspeciality_title,
                                                                           find_subdepartment(subdepartment_number),
                                                                           education_form,
