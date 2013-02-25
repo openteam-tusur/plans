@@ -73,8 +73,8 @@ specialty:
       -
         subdepartment:   Экономики
         title:           Без специализации
-        education_form:  postal-with-dist
-        department:      ФДО
+        education_form:  postal
+        department:      ЗиВФ
         reduced:         higher_specialized
       -
         subdepartment:   Экономики
