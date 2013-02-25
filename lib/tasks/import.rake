@@ -276,7 +276,7 @@ class PlanImporter
 
   def subspeciality
     find_subspeciality.tap do |subspeciality|
-      raise "#{subspeciality.import_to_s} уже обновлялась" if subspeciality.file_path?
+      raise "#{subspeciality.import_to_s} уже обновлялась (#{subspeciality.file_path})" if subspeciality.file_path?
       subspeciality.update_attribute :file_path, file_path
     end
   end
