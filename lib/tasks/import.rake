@@ -218,25 +218,36 @@ class PlanImporter
     end
   end
 
+  SUBSPECIALITY_PREFIX_BY_DEGREE = {
+    'bachelor'   => 'Профиль',
+    'magistracy' => 'Магистерская программа',
+    'specialty'  => 'Специализация',
+  }
+
+  def subspeciality_prefix
+    SUBSPECIALITY_PREFIX_BY_DEGREE[speciality.degree]
+  end
+
   def subspeciality_node
-    case speciality.degree
-    when 'bachelor'
-      xml.at_css('Специальность[Название^="профиль"]')
-    when 'magistracy'
-      xml.at_css('Специальность[Название^="магистерская программа"]') ||
-        xml.at_css('Специальность[Название^="Магистерская программа"]')
-    when 'specialty'
-      xml.at_css('Специальность[Название^="Специализация"]')
+    xml.at_css("Специальность[Название^='#{subspeciality_prefix}']") ||
+      xml.at_css("Специальность[Название^='#{subspeciality_prefix.mb_chars.downcase}']")
+  end
+
+  def subspeciality_node_title
+    subspeciality_node['Название'].squish
+  end
+
+  def get_subspeciality_title
+    if subspeciality_node
+      prefix = "#{subspeciality_prefix}(?: -)?"
+      match = subspeciality_node_title.match(/"(.*?)"/) ||
+        subspeciality_node_title.gsub(/"/, '').match(/^#{prefix} (.*?)$/i)
+      match.try(:captures).try(:first)
     end
   end
 
   def subspeciality_title
-    if subspeciality_node
-      subspeciality_node['Название'].match(/"(.*?)"/).try(:[], 1) ||
-        subspeciality_node['Название'].match(/Специализация - (.*)/)[1]
-    else
-      default_subspeciality_title
-    end
+    get_subspeciality_title || default_subspeciality_title
   end
 
   def education_form
@@ -283,7 +294,7 @@ class PlanImporter
   memoize :find_subdepartment, :subspeciality_node
 
   def human_education_form
-    speciality_full_name.match(/(заочная с дистанционной технологией|очно-заочная|очная|заочная)/).try(:[], 1)  || 'очная'
+    speciality_full_name.match(/(заочная с дистанционной технологией|очно-заочная|очная|заочная)/).try(:captures).try(:first)  || 'очная'
   end
 
   def default_subspeciality_title
