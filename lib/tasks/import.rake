@@ -276,11 +276,8 @@ class PlanImporter
 
   def subspeciality
     find_subspeciality.tap do |subspeciality|
-      if subspeciality.updated_at == time_of_sync
-        raise "#{speciality.import_to_s} уже обновлялась"
-      else
-        subspeciality.update_column :updated_at, time_of_sync
-      end
+      raise "#{subspeciality.import_to_s} уже обновлялась" if subspeciality.file_path?
+      subspeciality.update_attribute :file_path, file_path
     end
   end
 
@@ -324,7 +321,7 @@ class PlanImporter
     xml.css('СтрокиПлана Строка').each do |discipline_xml|
       DisciplineImporter.new(self, discipline_xml).import
     end
-    subspeciality.update_attributes(file_path: file_path, plan_digest: file_path_digest)
+    subspeciality.update_column(:plan_digest, file_path_digest)
   end
 end
 
@@ -384,6 +381,7 @@ class YearImporter
           )
           subspeciality.graduated_subdepartment = graduated_subdepartment
           subspeciality.department = department
+          subspeciality.file_path = nil
           refresh subspeciality
           subspeciality.save! #rescue p subspeciality_attributes['subdepartment']
         end
@@ -429,7 +427,7 @@ task :force_sync => :environment do
   %w[department speciality subdepartment subspeciality year discipline check loading semester].each do |model_name|
     move_to_trash(model_name)
   end
-  Subspeciality.update_all :plan_digest => nil
+  Subspeciality.update_all :plan_digest => nil, :file_path => nil
 end
 
 desc "Синхронизация справочников"
