@@ -43,6 +43,8 @@ class Subspeciality < ActiveRecord::Base
 
   validates_presence_of :title, :speciality, :subdepartment, :department, :education_form
 
+  validates_uniqueness_of :title, :scope => [:speciality_id, :subdepartment_id, :education_form, :reduced]
+
   after_save :move_descendants_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
 
   delegate :degree, :gos_generation, :to => :speciality

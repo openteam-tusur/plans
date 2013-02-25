@@ -383,7 +383,12 @@ class YearImporter
           subspeciality.department = department
           subspeciality.file_path = nil
           refresh subspeciality
-          subspeciality.save! #rescue p subspeciality_attributes['subdepartment']
+          begin
+            subspeciality.save!
+          rescue => e
+            puts subspeciality.import_to_s
+            raise e
+          end
         end
       end
     end
