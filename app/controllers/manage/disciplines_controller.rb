@@ -7,7 +7,7 @@ class Manage::DisciplinesController < Manage::ApplicationController
 
   has_scope :eager_load_associations, :default => true, :type => :boolean do |controller, scope, value|
     scope
-      .includes(:subspeciality, :speciality, :work_programms)
+      .includes(:work_programms, :subspeciality => :speciality)
       .order('specialities.code, subspecialities.title, subspecialities.education_form, subspecialities.reduced desc, disciplines.cycle, disciplines.title')
   end
 
