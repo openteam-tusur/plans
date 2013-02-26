@@ -1,0 +1,18 @@
+<h1>Дисциплины, обеспечиваемые кафедрой <%= subdepartment.abbr %></h1>
+<% subspecialities_with_disciplines.each do |subspeciality, disciplines| %>
+  <% subspeciality = subspeciality.decorate %>
+  <h2>
+      <%= subspeciality.speciality.code %>
+      <%= subspeciality.speciality.title %>
+      (<%= subspeciality.title %>)
+  </h2>
+  <h4><%= subspeciality.education_form_text %> <%= subspeciality.reduced_text %></h4>
+  <ul>
+    <% disciplines.each do |discipline| %>
+      <li>
+        <%= discipline.title %>
+      </li>
+    <% end %>
+  </ul>
+  <p>&nbsp;</p>
+<% end %>

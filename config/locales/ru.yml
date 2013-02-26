@@ -44,9 +44,10 @@ ru:
 
   navigation:
     main_manage_navigation:
-      goses:                Справочник ГОС'ов
+      goses:                ГОС'ы
       messages:             Рабочие программы
-      specialities:         Список специальностей
+      specialities:         Специальности
+      disciplines:          Дисциплины
 
     manage_messages:
       drafts:                             Черновики

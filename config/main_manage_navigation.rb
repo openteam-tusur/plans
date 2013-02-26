@@ -14,5 +14,10 @@ SimpleNavigation::Configuration.run do |navigation|
                  t('navigation.main_manage_navigation.goses'),
                  manage_goses_path,
                  :highlights_on => /gos/ if can? :manage, Gos
+
+    primary.item :disciplines,
+                 t('navigation.main_manage_navigation.disciplines'),
+                 manage_subdepartment_disciplines_path(Subdepartment.actual.first),
+                 :highlights_on => /disciplines/
   end
 end

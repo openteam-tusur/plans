@@ -48,6 +48,10 @@ Plans::Application.routes.draw do
       resources :didactic_units, :except => :index
     end
 
+    resources :subdepartments, :only => [] do
+      resources :disciplines, :only => :index
+    end
+
     root :to => 'messages#index', :folder => 'reduxes'
   end
 
