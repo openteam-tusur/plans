@@ -48,8 +48,6 @@ class Discipline < ActiveRecord::Base
 
   alias_method :provided_subdepartment, :subdepartment
 
-  default_scope order('disciplines.cycle, disciplines.title')
-
   def move_descendants_to_trash
     checks.update_all(:deleted_at => Time.now)
     loadings.update_all(:deleted_at => Time.now)
