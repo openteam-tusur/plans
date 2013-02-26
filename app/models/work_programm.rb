@@ -69,7 +69,13 @@ class WorkProgramm < ActiveRecord::Base
 
   before_create :set_purpose
 
-  scope :consumed_by, ->(user){ WorkProgramm.joins(:discipline).where(:disciplines => {:id => Discipline.consumed_by(user).map(&:id)}) }
+  scope :consumed_by, ->(user) do
+    if user.manager_of?(Context.first)
+      scoped
+    else
+      WorkProgramm.joins(:discipline).where(:disciplines => {:id => Discipline.consumed_by(user).map(&:id)})
+    end
+  end
 
   scope :drafts,                            ->(user){ with_state(:draft).where(:creator_id => user.id) }
   scope :reduxes,                           ->(user){ with_state(:redux).where(:creator_id => user.id) }
