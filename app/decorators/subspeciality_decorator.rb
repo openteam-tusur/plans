@@ -37,8 +37,12 @@ class SubspecialityDecorator < Draper::Decorator
     h.content_tag :p, reduced_text, :class => 'reduced' if reduced_text
   end
 
+  def education_form_text
+    capitalized_education_form.gsub(/форма$/, '')
+  end
+
   def education_form
-    h.content_tag :p, capitalized_education_form.gsub(/форма$/, '')
+    h.content_tag :p, education_form_text
   end
 
   def capitalized_education_form
