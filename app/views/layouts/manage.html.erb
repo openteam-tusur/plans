@@ -42,6 +42,7 @@
       <%= yield :top_left_side_additions %>
       <%= render_navigation :context => 'manage_messages'     if controller_name =~ /messages/ %>
       <%= render_navigation :context => 'manage_specialities' if controller_name =~ /\bspecialities/ %>
+      <%= render_navigation :context => 'manage_disciplines'  if controller_name =~ /disciplines/ %>
       <%= yield :bottom_left_side_additions %>
     </div>
     <div class="right_side">

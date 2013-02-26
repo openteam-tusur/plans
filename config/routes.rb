@@ -48,9 +48,7 @@ Plans::Application.routes.draw do
       resources :didactic_units, :except => :index
     end
 
-    resources :subdepartments, :only => [] do
-      resources :disciplines, :only => :index
-    end
+    get '/:subdepartment_abbr/disciplines' => 'disciplines#index', :as => 'subdepartment_abbr_disciplines'
 
     root :to => 'messages#index', :folder => 'reduxes'
   end

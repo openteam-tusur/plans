@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
     primary.item :messages,
@@ -17,7 +19,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
     primary.item :disciplines,
                  t('navigation.main_manage_navigation.disciplines'),
-                 manage_subdepartment_disciplines_path(Subdepartment.actual.first),
+                 manage_subdepartment_abbr_disciplines_path('АОИ'),
                  :highlights_on => /disciplines/
   end
 end

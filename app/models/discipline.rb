@@ -44,6 +44,8 @@ class Discipline < ActiveRecord::Base
 
   scope :federal, where('specialities.cycle_code LIKE ?', '%.Ф')
 
+  scope :subdepartment_abbr, ->(abbr) { joins(:subdepartment).where(:subdepartments => {:abbr => abbr}) }
+
   delegate :profiled_subdepartment, :graduated_subdepartment, :to => :subspeciality
 
   alias_method :provided_subdepartment, :subdepartment

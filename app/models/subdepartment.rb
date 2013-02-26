@@ -7,6 +7,7 @@ class Subdepartment < ActiveRecord::Base
   belongs_to :context
   has_many :subspecialities
   has_many :disciplines
+  has_many :actual_disciplines, :class_name => 'Discipline', :conditions => { :deleted_at => nil }
 
   validates_presence_of :title, :abbr, :number, :department
   scope :actual, where(:deleted_at => nil)
