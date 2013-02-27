@@ -61,5 +61,6 @@ Plans::Application.routes.draw do
   end
 
   root :to => 'application#index'
+  resources :rpz, :only => [:index, :show]
   mount API::Plans => '/api'
 end

@@ -15,7 +15,7 @@ class Year < ActiveRecord::Base
   validates_presence_of :number
   after_save :move_descendants_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
 
-  scope :actual, -> { where(:deleted_at => nil).order(:number) }
+  scope :actual, -> { where(:deleted_at => nil).order('years.number') }
 
 
   def degrees

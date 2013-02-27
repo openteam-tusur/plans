@@ -1,0 +1,17 @@
+<% @grouped_subspecialities.each do |year, subspecialities| %>
+  <h1><%= year %></h1>
+  <ul>
+    <% subspecialities.group_by(&:speciality).each do |speciality, subspecialities| %>
+      <li>
+        <h2><%= speciality %></h2>
+        <ul>
+          <% subspecialities.each do |subspeciality| %>
+            <li>
+              <%= link_to [subspeciality, subspeciality.reduced_text, subspeciality.graduated_subdepartment].delete_if(&:blank?).join(', '), rpz_path(subspeciality)  %>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

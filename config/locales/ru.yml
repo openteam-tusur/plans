@@ -1,4 +1,28 @@
 ru:
+  exam:
+    one: "1 экзамен"
+    many: "%{count} экзаменов"
+    few: "%{count} экзамена"
+    other: "%{count} экзамена"
+
+  end_of_term:
+    one: "1 зачет"
+    many: "%{count} зачетов"
+    few: "%{count} зачета"
+    other: "%{count} зачета"
+
+  course_work:
+    one: "1 курс. пр./курс.раб."
+    many: "%{count} курс. пр./курс.раб.в"
+    few: "%{count} курс. пр./курс.раб."
+    other: "%{count} курс. пр./курс.раб."
+
+  course_projecting:
+    one: "1 курс. пр./курс.раб."
+    many: "%{count} курс. пр./курс.раб.в"
+    few: "%{count} курс. пр./курс.раб."
+    other: "%{count} курс. пр./курс.раб."
+
   are_you_sure?: Вы уверены, в том что хотите сделать?
   enter_year:    Набор %{year} года
   remove:        удалить

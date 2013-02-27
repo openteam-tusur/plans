@@ -5,6 +5,7 @@ class Semester < ActiveRecord::Base
 
   has_many :exercises
   has_many :loadings, :dependent => :destroy
+  has_many :checks
 
   has_many :disciplines, :through => :loadings, :uniq => true
 
