@@ -16,8 +16,14 @@ cancel_handler = () ->
     else if context.hasClass('new_record')
       context.before(jqXHR.responseText)
     else
-      if context.hasClass('new_work_programm') && !$(jqXHR.responseText).find('.error').length
-        window.location = $("<div>").html(jqXHR.responseText).html()
+      if context.hasClass('new_work_programm')
+        if $(jqXHR.responseText).find('.error').length
+          context.closest('.ajaxed_item').replaceWith(jqXHR.responseText)
+        else if $(jqXHR.responseText).hasClass('ajaxed_item')
+          context.closest('li.noborder').before(jqXHR.responseText)
+          context.closest('li.noborder .ajaxed_item').remove()
+        else
+          window.location = $("<div>").html(jqXHR.responseText).html()
         return
 
       ajaxed_item = context.closest('.ajaxed_item')

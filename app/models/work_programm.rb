@@ -340,7 +340,7 @@ class WorkProgramm < ActiveRecord::Base
   end
 
   def to_s
-    "Рабочая программа для дисциплины &laquo;#{discipline}&raquo; #{year} года".html_safe
+    "Рабочая программа за #{year} год"
   end
 
   def draft_or_redux?

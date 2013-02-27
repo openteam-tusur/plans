@@ -41,7 +41,14 @@ class Manage::WorkProgrammsController < Manage::ApplicationController
 
   def create
     create! do |success, failure|
-      success.html { render :text => resource_path and return }
+      success.html do
+        if resource.file_url
+          render resource, :layout => false
+        else
+          render :text => resource_path
+        end
+        return
+      end
       failure.html { render :new and return }
     end
   end
