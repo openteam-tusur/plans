@@ -1,10 +1,14 @@
 <li class='ajaxed_item'>
   <div class="wrapper">
-  <%= link_to work_programm,
-              manage_year_speciality_subspeciality_discipline_work_programm_path(@year.number, @speciality.code, @subspeciality, work_programm.discipline, work_programm) %>
+    <% if work_programm.file_url %>
+      <%= link_to work_programm, work_programm.file_url %>
+    <% else %>
+      <%= link_to work_programm,
+        manage_year_speciality_subspeciality_discipline_work_programm_path(work_programm.speciality.year.number, work_programm.speciality.code, work_programm.subspeciality, work_programm.discipline, work_programm) %>
+    <% end %>
 
   <%= link_to t('remove'),
-              manage_year_speciality_subspeciality_discipline_work_programm_path(@year.number, @speciality.code, @subspeciality, work_programm.discipline, work_programm),
+              manage_year_speciality_subspeciality_discipline_work_programm_path(work_programm.speciality.year.number, work_programm.speciality.code, work_programm.subspeciality, work_programm.discipline, work_programm),
               :method => :delete,
               :remote => true,
               :class => 'remove_link',
