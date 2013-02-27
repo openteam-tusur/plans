@@ -11,6 +11,6 @@ class Manage::DisciplinesController < Manage::ApplicationController
       .order('specialities.code, subspecialities.title, subspecialities.education_form, subspecialities.reduced desc, disciplines.title')
   end
 
-  expose(:subspecialities_with_disciplines) { collection.decorate.group_by(&:subspeciality) }
+  expose(:subspecialities_with_disciplines) { collection.group_by(&:subspeciality) }
   expose(:subdepartment_abbrs) { Subdepartment.joins(:actual_disciplines).actual.pluck(:abbr).uniq.sort }
 end
