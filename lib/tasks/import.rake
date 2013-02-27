@@ -310,9 +310,10 @@ class PlanImporter
   end
 
   def reset_acuality_of_associations
-    %w[disciplines checks loadings semesters].each do |association_name|
+    %w[disciplines semesters checks].each do |association_name|
       subspeciality.send(association_name).update_all(:deleted_at => time_of_sync)
     end
+    subspeciality.loadings.update_all(:deleted_at => time_of_sync, :value => 0)
   end
 
   def really_import
