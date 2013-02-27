@@ -1,15 +1,15 @@
 <li>
   <div class="wrapper">
     <%= discipline %>
-    <% if controller_name =~ /subspecialities/ %>
-      <span class="subdepartment"><%= discipline.subdepartment.abbr %></span>
+    <% if controller_name =~ /subspecialities/ || controller_name =~ /disciplines/ %>
+      <%= content_tag :span, discipline.subdepartment.abbr, :class => :subdepartment if controller_name =~ /subspecialities/ %>
       <div class="list">
         <ul class='ajaxed'>
           <% if discipline.work_programms.any? %>
             <%= render discipline.work_programms %>
           <% end %>
           <li class='noborder'>
-            <%= link_to "Добавить рабочую программу по дисциплине &quot;#{discipline}&quot;".html_safe, new_manage_year_speciality_subspeciality_discipline_work_programm_path(@year, @speciality, @subspeciality, discipline), :remote => true, :class => 'new_record' %>
+            <%= link_to "Добавить рабочую программу", new_manage_work_programm_path(discipline), :remote => true, :class => 'new_record' %>
           </li>
         </ul>
       </div>

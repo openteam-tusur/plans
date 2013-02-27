@@ -7,12 +7,11 @@
       (<%= subspeciality.title %>)
   </h2>
   <h4><%= subspeciality.education_form_text %> <%= subspeciality.reduced_text %></h4>
-  <ul>
-    <% disciplines.each do |discipline| %>
-      <li>
-        <%= discipline.title %>
-      </li>
-    <% end %>
-  </ul>
-  <p>&nbsp;</p>
+  <div class='list'>
+    <ul class='disciplines'>
+      <% disciplines.each do |discipline| %>
+        <%= render discipline %>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
