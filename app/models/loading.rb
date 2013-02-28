@@ -1,9 +1,9 @@
 class Loading < ActiveRecord::Base
   belongs_to :semester
   belongs_to :discipline
-  attr_accessible :deleted_at, :loading_kind, :value, :semester
+  attr_accessible :loading_kind, :value, :semester_id
 
-  validates_presence_of :semester, :discipline, :loading_kind, :value
+  validates_presence_of :semester_id, :discipline_id, :loading_kind, :value
 
   has_enum :loading_kind
 
