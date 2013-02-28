@@ -24,8 +24,6 @@ class Discipline < ActiveRecord::Base
 
   alias_attribute :deleted?, :deleted_at?
 
-  after_save :move_descendants_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
-
   delegate :speciality, :to => :subspeciality
 
   # TODO: only permitted for non managers
@@ -40,11 +38,6 @@ class Discipline < ActiveRecord::Base
   delegate :profiled_subdepartment, :graduated_subdepartment, :to => :subspeciality
 
   alias_method :provided_subdepartment, :subdepartment
-
-  def move_descendants_to_trash
-    checks.update_all(:deleted_at => Time.now)
-    loadings.update_all(:deleted_at => Time.now)
-  end
 
   def to_s
     title

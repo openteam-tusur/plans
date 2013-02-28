@@ -13,7 +13,6 @@ class Year < ActiveRecord::Base
   has_many :actual_subspecialities, :through => :actual_specialities
 
   validates_presence_of :number
-  after_save :move_descendants_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
 
   scope :actual, -> { where(:deleted_at => nil).order('years.number') }
 
@@ -24,13 +23,6 @@ class Year < ActiveRecord::Base
 
   def to_param
     number
-  end
-
-  def move_descendants_to_trash
-    departments.update_all(:deleted_at =>  Time.now)
-    specialities.update_all(:deleted_at => Time.now)
-    subdepartments.update_all(:deleted_at => Time.now)
-    subspecialities.update_all(:deleted_at => Time.now)
   end
 
   def to_s

@@ -45,8 +45,6 @@ class Subspeciality < ActiveRecord::Base
 
   validates_uniqueness_of :title, :scope => [:speciality_id, :subdepartment_id, :education_form, :reduced]
 
-  after_save :move_descendants_to_trash, :if => [:deleted_at_changed?, :deleted_at?]
-
   delegate :degree, :gos_generation, :to => :speciality
   scope :actual, where(:deleted_at => nil)
 
@@ -74,13 +72,6 @@ class Subspeciality < ActiveRecord::Base
     warnings << "нет РУП" unless work_plan
     warnings << "нет УП" unless has_actual_disciplines?
     warnings
-  end
-
-  def move_descendants_to_trash
-    checks.update_all(:deleted_at => Time.now)
-    loadings.update_all(:deleted_at => Time.now)
-    disciplines.update_all(:deleted_at => Time.now)
-    semesters.update_all(:deleted_at => Time.now)
   end
 
   def create_or_refresh_semester(number_str)
