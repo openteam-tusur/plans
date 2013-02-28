@@ -69,12 +69,9 @@ class WorkProgramm < ActiveRecord::Base
 
   before_create :set_purpose
 
+  # TODO: only permitted for non managers
   scope :consumed_by, ->(user) do
-    if user.manager_of?(Context.first)
-      scoped
-    else
-      WorkProgramm.joins(:discipline).where(:disciplines => {:id => Discipline.consumed_by(user).map(&:id)})
-    end
+    scoped
   end
 
   scope :drafts,                            ->(user){ with_state(:draft).where(:creator_id => user.id) }

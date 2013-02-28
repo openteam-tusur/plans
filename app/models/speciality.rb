@@ -24,20 +24,9 @@ class Speciality < ActiveRecord::Base
 
   scope :actual, -> { where(:deleted_at => nil) }
 
+  # TODO: only permitted for non managers
   scope :consumed_by, ->(user) do
-    if user.manager_of?(Context.first)
-      scoped
-    elsif user.manager?
-      subdepartment_ids = user.context_tree.flat_map(&:subdepartment_ids).uniq
-      select('DISTINCT(specialities.id), specialities.*').
-        joins(:subspecialities).
-        joins('LEFT OUTER JOIN disciplines ON disciplines.subspeciality_id = subspecialities.id').
-        where('disciplines.subdepartment_id IN (?) OR subspecialities.subdepartment_id IN (?)', subdepartment_ids, subdepartment_ids)
-    elsif user.lecturer?
-      where(:id => user.context_tree.map(&:subspeciality).map(&:speciality_id).uniq)
-    else
-      where(:id => nil)
-    end
+    scoped
   end
 
   delegate :consumed_by, :to => :subspecialities, :prefix => true

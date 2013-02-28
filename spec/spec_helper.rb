@@ -4,7 +4,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'shoulda-matchers'
-require 'esp_auth/spec_helper'
+require 'sso_auth/spec_helper'
 require 'cancan/matchers'
 require 'sunspot_matchers'
 

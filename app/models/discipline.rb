@@ -28,18 +28,9 @@ class Discipline < ActiveRecord::Base
 
   delegate :speciality, :to => :subspeciality
 
+  # TODO: only permitted for non managers
   scope :consumed_by, ->(user) do
-    if user.manager?
-      subdepartment_ids = user.context_tree.flat_map(&:subdepartment_ids)
-      select('DISTINCT(disciplines.id), disciplines.*').
-        joins(:subspeciality).
-        where('disciplines.subdepartment_id IN (?) OR subspecialities.subdepartment_id IN (?)', subdepartment_ids, subdepartment_ids).
-        where('disciplines.deleted_at' => nil)
-    elsif user.lecturer?
-      where(:id => user.disciplines.actual)
-    else
-      where(:id => nil)
-    end
+    scoped
   end
 
   scope :federal, where('specialities.cycle_code LIKE ?', '%.Ф')
@@ -81,18 +72,6 @@ class Discipline < ActiveRecord::Base
 
   def <=>(other)
     title <=> other.title
-  end
-
-  def absolute_depth
-    5
-  end
-
-  def esp_to_s
-    "#{profiled_subdepartment.abbr} &mdash; #{esp_title}".html_safe
-  end
-
-  def esp_title
-    "#{title} &mdash; #{subspeciality.speciality.code} &mdash; #{subspeciality.title} &mdash; #{profiled_subdepartment.department.year}".html_safe
   end
 
   def subdepartment_ids

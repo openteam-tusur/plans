@@ -2,6 +2,11 @@
 
 SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
+    primary.item :disciplines,
+                 t('navigation.main_manage_navigation.disciplines'),
+                 manage_subdepartment_abbr_disciplines_path('АОИ'),
+                 :highlights_on => /disciplines/
+
     primary.item :messages,
                  t('navigation.main_manage_navigation.messages'),
                  manage_root_path,
@@ -17,9 +22,5 @@ SimpleNavigation::Configuration.run do |navigation|
                  manage_goses_path,
                  :highlights_on => /gos/ if can? :manage, Gos
 
-    primary.item :disciplines,
-                 t('navigation.main_manage_navigation.disciplines'),
-                 manage_subdepartment_abbr_disciplines_path('АОИ'),
-                 :highlights_on => /disciplines/
   end
 end

@@ -2,14 +2,11 @@ class User < ActiveRecord::Base
   attr_accessible :id, :uid, :name, :email, :nickname, :first_name, :last_name, :location, :description, :image
   attr_accessible :phone, :urls, :raw_info
 
-  esp_auth_user
+  sso_auth_user
 
+  # TODO show only permitted disciplines for non managers
   def disciplines
-    Discipline.
-      joins("JOIN permissions ON permissions.context_id = disciplines.id AND permissions.context_type = 'Discipline'").
-      joins(:speciality).
-      where(:permissions => { :user_id => self }).
-      where(:specialities => { :gos_generation => '2' })
+    Discipline.scoped
   end
 end
 

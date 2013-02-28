@@ -1,6 +1,8 @@
 class Permission < ActiveRecord::Base
+  extend Enumerize
   attr_accessible :context, :role, :user_id, :context_id, :context_type, :user_uid, :user_name, :user_email, :user_search, :polymorphic_context
-  esp_auth_permission
+  sso_auth_permission :roles => %w[manager methodologist]
+  enumerize :role, :in => %w[manager methodologist]
 end
 
 # == Schema Information

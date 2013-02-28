@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130218022207) do
+ActiveRecord::Schema.define(:version => 20130228032520) do
 
   create_table "appendix_items", :force => true do |t|
     t.integer  "appendix_id"
@@ -65,17 +65,6 @@ ActiveRecord::Schema.define(:version => 20130218022207) do
   add_index "checks", ["discipline_id"], :name => "index_checks_on_discipline_id"
   add_index "checks", ["semester_id"], :name => "index_checks_on_semester_id"
 
-  create_table "contexts", :force => true do |t|
-    t.string   "title"
-    t.string   "ancestry"
-    t.string   "weight"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "contexts", ["ancestry"], :name => "index_contexts_on_ancestry"
-  add_index "contexts", ["weight"], :name => "index_contexts_on_weight"
-
   create_table "departments", :force => true do |t|
     t.string   "title"
     t.string   "abbr"
@@ -84,7 +73,6 @@ ActiveRecord::Schema.define(:version => 20130218022207) do
     t.datetime "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "context_id"
   end
 
   add_index "departments", ["year_id"], :name => "index_departments_on_year_id"
@@ -323,7 +311,6 @@ ActiveRecord::Schema.define(:version => 20130218022207) do
     t.datetime "deleted_at"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.integer  "context_id"
   end
 
   add_index "subdepartments", ["department_id"], :name => "index_subdepartments_on_department_id"

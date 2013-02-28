@@ -56,17 +56,9 @@ class Subspeciality < ActiveRecord::Base
 
   enumerize :reduced, :in => %w[higher_specialized higher_unspecialized secondary_specialized secondary_unspecialized]
 
+  # TODO: only permitted for non managers
   scope :consumed_by, ->(user) do
-    if user.manager?
-      subdepartment_ids = user.context_tree.flat_map(&:subdepartment_ids)
-      select('DISTINCT(subspecialities.id), subspecialities.*').
-        joins('LEFT OUTER JOIN disciplines ON disciplines.subspeciality_id = subspecialities.id').
-        where('disciplines.subdepartment_id IN (?) OR subspecialities.subdepartment_id IN (?)', subdepartment_ids, subdepartment_ids)
-    elsif user.lecturer?
-      joins(:disciplines).where(:disciplines => {:id => user.context_tree.select{|c| c.is_a?(Discipline)}})
-    else
-      where(:id => nil)
-    end
+    scoped
   end
 
   delegate :gos, :gos?, :to => :speciality

@@ -9,17 +9,14 @@ class Person < ActiveRecord::Base
     @nil ||= Person.new(:full_name => '-'*10, :post => '-'*10, :short_name => '-'*10)
   end
 
+  # TODO выпилить
   def self.chief_of(department)
-    collection_by_department(department).first || Person.nil
+    Person.nil
   end
 
+  # TODO выпилить
   def self.collection_by_department(department)
-    (JSON.parse(Requester.new("#{Settings['blue-pages.url']}/categories/#{department.context.id}.json").response_body)['items'] || []).map do |hash|
-      Person.new :full_name => hash['person'],
-        :post => hash['title'],
-        :academic_degree => hash['academic_degree'],
-        :academic_rank => hash['academic_rank']
-    end
+    []
   end
 
   def as_json(*params)
