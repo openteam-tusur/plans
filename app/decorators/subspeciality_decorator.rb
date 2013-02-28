@@ -61,7 +61,7 @@ class SubspecialityDecorator < Draper::Decorator
 
   def disciplines
     @disciplines ||= model.actual_disciplines
-                          .includes(:actual_checks, :actual_loadings, :actual_semesters, :actual_checks_semesters)
+                          .includes(:checks, :loadings, :semesters, :checks)
                           .decorate
   end
 end

@@ -74,13 +74,6 @@ class Subspeciality < ActiveRecord::Base
     warnings
   end
 
-  def create_or_refresh_semester(number_str)
-    semester = semesters.find_or_initialize_by_number(semester_number_from_string(number_str))
-    semester.deleted_at = nil
-    semester.save!
-    semester
-  end
-
   def to_s
     "#{title}, #{human_education_form}"
   end
@@ -93,20 +86,4 @@ class Subspeciality < ActiveRecord::Base
     @postal ||= !!(education_form =~ /postal/)
   end
 
-  private
-
-  def semester_number_from_string(string)
-    case string
-    when Fixnum
-      string
-    when 'A'..'F'
-      string.ord - 55 # A.ord => 65
-    when '1'..'9'
-      string.to_i
-    when /1([0123])/
-      string.to_i
-    else
-      raise "incorrect semester number #{string} (#{string.ord})"
-    end
-  end
 end

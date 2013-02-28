@@ -1,5 +1,5 @@
 class DisciplineDecorator < Draper::Decorator
-  delegate :cycle, :title, :actual_checks, :actual_semesters, :subspeciality
+  delegate :cycle, :title, :checks, :semesters, :subspeciality
 
   def exam_semesters
     check_semesters(&:check_kind_exam?)
@@ -14,12 +14,12 @@ class DisciplineDecorator < Draper::Decorator
   end
 
   def loadings_in_semester?(semester)
-    actual_semesters.detect{|s| s == semester }
+    semesters.detect{|s| s == semester }
   end
 
   private
 
   def check_semesters(&block)
-    actual_checks.select(&block).map(&:semester).map(&:number).uniq.join(', ')
+    checks.select(&block).map(&:semester).map(&:number).uniq.join(', ')
   end
 end
