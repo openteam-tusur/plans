@@ -6,7 +6,7 @@ class SubspecialityDecorator < Draper::Decorator
   decorates_association :speciality
 
   def headers
-    @headers ||= ["№<br/>п/п".html_safe, "Название дисциплины", "Экз", "Зач", "КрР/<br/>КрПр".html_safe] + actual_semesters.map(&:number)
+    @headers ||= ["№<br/>п/п".html_safe, "Цикл", "Название дисциплины", "Экз", "Зач", "КрР/<br/>КрПр".html_safe] + actual_semesters.map(&:number)
   end
 
   def full_title
@@ -61,7 +61,8 @@ class SubspecialityDecorator < Draper::Decorator
 
   def disciplines
     @disciplines ||= model.actual_disciplines
-                          .includes(:checks, :loadings, :semesters, :checks)
+                          .includes(:loadings, :semesters, :checks => :semester)
+                          .order('cycle_code, title')
                           .decorate
   end
 end
