@@ -1,7 +1,9 @@
 class Permission < ActiveRecord::Base
-  extend Enumerize
   attr_accessible :context, :role, :user_id, :context_id, :context_type
+
   sso_auth_permission :roles => %w[manager methodologist]
+
+  extend Enumerize
   enumerize :role, :in => %w[manager methodologist]
 end
 

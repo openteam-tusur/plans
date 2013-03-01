@@ -12,6 +12,8 @@ class Discipline < ActiveRecord::Base
   has_many :work_programms, :dependent => :destroy
   has_many :semesters, :through => :loadings, :uniq => true
 
+  has_many :methodologists, :through => :subdepartment
+
   scope :actual, where(:deleted_at => nil)
 
   validates_presence_of :title, :subspeciality, :subdepartment
@@ -20,10 +22,7 @@ class Discipline < ActiveRecord::Base
 
   delegate :speciality, :to => :subspeciality
 
-  # TODO: only permitted for non managers
-  scope :consumed_by, ->(user) do
-    scoped
-  end
+  scope :consumed_by, ->(user) { joins(:subdepartment).merge(Subdepartment.consumed_by(user)) }
 
   scope :federal, where('specialities.cycle_code LIKE ?', '%.Ф')
 

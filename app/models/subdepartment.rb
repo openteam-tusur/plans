@@ -7,11 +7,23 @@ class Subdepartment < ActiveRecord::Base
   has_many :subspecialities
   has_many :disciplines
   has_many :actual_disciplines, :class_name => 'Discipline', :conditions => { :deleted_at => nil }
+  has_many :permissions, :as => :context
+  has_many :methodologists, :through => :permissions, :source => :user
 
   validates_presence_of :title, :abbr, :number, :department
   scope :actual, where(:deleted_at => nil)
 
   scope :ordered, -> { order(:abbr) }
+
+  scope :consumed_by, ->(user) do
+    if user.manager?
+      scoped
+    elsif user.methodologist?
+      joins(:methodologists).where(:permissions => {:user_id => user})
+    else
+      where(:id => nil)
+    end
+  end
 
   def chief(year_number)
     subdepartments = YAML.load_file("data/#{year_number}/departments.yml").map { |dep| dep['subdepartments'] }.flatten

@@ -4,10 +4,10 @@ class User < ActiveRecord::Base
 
   sso_auth_user
 
-  # TODO show only permitted disciplines for non managers
-  def disciplines
-    Discipline.scoped
-  end
+  has_many :methodologist_subdepartments, :through => :permissions, :source => :context, :source_type => 'Subdepartment', :conditions => { :permissions => { :role => :methodologist } }
+
+  #extend Memoist
+  #memoize :disciplines
 end
 
 # == Schema Information
