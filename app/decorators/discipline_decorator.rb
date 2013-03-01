@@ -1,5 +1,9 @@
 class DisciplineDecorator < Draper::Decorator
-  delegate :cycle, :title, :checks, :semesters, :subspeciality, :cycle_code
+  delegate :cycle, :title, :checks, :semesters, :subspeciality, :cycle_code, :work_programms
+
+  def work_programm
+    work_programms.first if work_programms.length > 0
+  end
 
   def exam_semesters
     check_semesters(&:check_kind_exam?)

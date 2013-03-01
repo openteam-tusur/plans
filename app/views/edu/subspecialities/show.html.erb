@@ -45,7 +45,11 @@
             <%= discipline.cycle_code %>
           </td>
           <td class='discipline_name'>
-            <%= discipline.title %>
+            <% if discipline.work_programm %>
+              <%= link_to discipline.title, discipline.work_programm.file_url %>
+            <% else %>
+              <%= discipline.title %>
+            <% end %>
           </td>
           <td>
             <%= discipline.exam_semesters %>

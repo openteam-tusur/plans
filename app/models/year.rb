@@ -12,7 +12,7 @@ class Year < ActiveRecord::Base
   validates_presence_of :number
 
   scope :actual, -> { where(:deleted_at => nil).order('years.number') }
-
+  scope :ordered, -> { order(:number) }
 
   def degrees
     @degrees ||= actual_specialities.map(&:degree).uniq.sort
