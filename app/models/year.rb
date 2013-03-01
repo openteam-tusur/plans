@@ -3,9 +3,6 @@
 class Year < ActiveRecord::Base
   attr_accessible :number
 
-  has_many :departments, :dependent => :destroy
-  has_many :subdepartments, :through => :departments
-
   has_many :specialities, :dependent => :destroy
   has_many :subspecialities, :through => :specialities
 

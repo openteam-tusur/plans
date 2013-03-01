@@ -11,6 +11,8 @@ class Subdepartment < ActiveRecord::Base
   validates_presence_of :title, :abbr, :number, :department
   scope :actual, where(:deleted_at => nil)
 
+  scope :ordered, -> { order(:abbr) }
+
   def chief(year_number)
     subdepartments = YAML.load_file("data/#{year_number}/departments.yml").map { |dep| dep['subdepartments'] }.flatten
     subdepartment_hash = subdepartments.select { |subdep_hash| subdep_hash['number'] == number }.try(:first)

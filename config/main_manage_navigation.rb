@@ -4,7 +4,7 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
     primary.item :disciplines,
                  t('navigation.main_manage_navigation.disciplines'),
-                 manage_subdepartment_abbr_disciplines_path('АОИ'),
+                 manage_subdepartment_disciplines_path(Subdepartment.order(:abbr).first),
                  :highlights_on => /disciplines/
 
     primary.item :messages,

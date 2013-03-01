@@ -10,9 +10,11 @@ end
 class UnbindYearFromFaculties < ActiveRecord::Migration
   def up
     first_subdepartments.each do |subdepartment|
-      similar_ids = similar_subdepartments(subdepartment).map(&:id)
+      similar = similar_subdepartments(subdepartment)
+      similar_ids = similar.map(&:id)
       Discipline.where(:subdepartment_id => similar_ids).update_all(:subdepartment_id => subdepartment.id)
       Subspeciality.where(:subdepartment_id => similar_ids).update_all(:subdepartment_id => subdepartment.id)
+      similar.map(&:destroy)
     end
     Department.where('year_id <> ?', year_2007).destroy_all
     remove_column :departments, :year_id

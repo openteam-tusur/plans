@@ -1,4 +1,4 @@
-<h1>Дисциплины, обеспечиваемые кафедрой <%= params[:subdepartment_abbr] %></h1>
+<h1>Дисциплины, обеспечиваемые кафедрой <%= subdepartment.abbr %></h1>
 <% subspecialities_with_disciplines.each do |subspeciality, disciplines| %>
   <% subspeciality = subspeciality.decorate %>
   <h2>

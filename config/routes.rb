@@ -48,9 +48,12 @@ Plans::Application.routes.draw do
       resources :didactic_units, :except => :index
     end
 
-    get '/:subdepartment_abbr/disciplines' => 'disciplines#index', :as => 'subdepartment_abbr_disciplines'
 
-    root :to => 'messages#index', :folder => 'reduxes'
+    resources :subdepartments, :only => [] do
+      resources :disciplines, :only => :index
+    end
+
+    match '/' => redirect("/manage/subdepartments/#{Subdepartment.ordered.first.id}/disciplines"), :as => :root
   end
 
   namespace :edu do

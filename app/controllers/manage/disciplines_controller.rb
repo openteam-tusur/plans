@@ -1,6 +1,8 @@
 class Manage::DisciplinesController < Manage::ApplicationController
   inherit_resources
 
+  belongs_to :subdepartment
+
   actions :index
 
   has_scope :actual, :default => true, :type => :boolean
@@ -12,5 +14,6 @@ class Manage::DisciplinesController < Manage::ApplicationController
   end
 
   expose(:subspecialities_with_disciplines) { collection.group_by(&:subspeciality) }
-  expose(:subdepartment_abbrs) { Subdepartment.joins(:actual_disciplines).actual.pluck(:abbr).uniq.sort }
+  expose(:subdepartments) { Subdepartment.joins(:actual_disciplines).actual.uniq.order(:abbr) }
+  expose(:subdepartment) { parent }
 end
