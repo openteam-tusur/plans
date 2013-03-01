@@ -39,6 +39,7 @@ end
 
 group :development do
   gem 'annotate',             '>= 2.5.0.pre'
+  gem 'brakeman'
   gem 'capistrano'
   gem 'debugger'
   gem 'hirb',                 :require => false
@@ -46,7 +47,6 @@ group :development do
   gem 'rails-erd'
   gem 'ruby-graphviz'
   gem 'rvm-capistrano'
-  gem 'sunspot_solr'
 end
 
 group :test do
@@ -54,7 +54,6 @@ group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers',                          :require => false
   gem 'sqlite3'
-  gem 'sunspot_matchers'
 end
 
 group :production do
