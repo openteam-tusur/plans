@@ -65,7 +65,7 @@ class WorkProgramm < ActiveRecord::Base
   after_create :create_new_message
   after_create :set_state_to_released, :if => :file_url?
 
-  default_value_for(:year) { Time.now.year }
+  default_value_for(:year) { Date.today.year - 1 }
 
   before_create :set_purpose
 
