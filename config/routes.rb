@@ -48,12 +48,11 @@ Plans::Application.routes.draw do
       resources :didactic_units, :except => :index
     end
 
-
     resources :subdepartments, :only => [] do
       resources :disciplines, :only => :index
     end
 
-    match '/' => redirect("/manage/subdepartments/#{Subdepartment.ordered.first.id}/disciplines"), :as => :root
+    root :to => 'disciplines#index', :subdepartment_id => Subdepartment.ordered.first.id
   end
 
   namespace :edu do

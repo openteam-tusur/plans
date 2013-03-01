@@ -4,13 +4,13 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
     primary.item :disciplines,
                  t('navigation.main_manage_navigation.disciplines'),
-                 manage_subdepartment_disciplines_path(Subdepartment.order(:abbr).first),
-                 :highlights_on => /disciplines/
+                 manage_root_path,
+                 :highlights_on => /disciplines|manage$/
 
     primary.item :messages,
                  t('navigation.main_manage_navigation.messages'),
-                 manage_root_path,
-                 :highlights_on => /messages|manage$/
+                 manage_scoped_messages_path(:folder => :reduxes),
+                 :highlights_on => /messages/
 
     primary.item :specialities,
                  t('navigation.main_manage_navigation.specialities'),

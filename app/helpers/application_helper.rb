@@ -9,10 +9,10 @@ module ApplicationHelper
 
   def manage_work_programm_path(work_programm)
     discipline = work_programm.discipline
-    manage_year_speciality_subspeciality_discipline_work_programm_path(discipline.speciality.year, discipline.speciality, discipline.subspeciality, discipline, work_programm)
+    manage_year_speciality_subspeciality_discipline_work_programm_path(discipline.subspeciality.speciality.year, discipline.subspeciality.speciality, discipline.subspeciality, discipline, work_programm)
   end
 
   def new_manage_work_programm_path(discipline)
-    new_manage_year_speciality_subspeciality_discipline_work_programm_path(discipline.speciality.year, discipline.speciality, discipline.subspeciality, discipline)
+    new_manage_year_speciality_subspeciality_discipline_work_programm_path(discipline.subspeciality.speciality.year, discipline.subspeciality.speciality, discipline.subspeciality, discipline)
   end
 end
