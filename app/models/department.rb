@@ -1,11 +1,9 @@
 class Department < ActiveRecord::Base
   attr_accessible :abbr, :title, :number
 
-  belongs_to :year
-
   has_many :subdepartments, :dependent => :destroy
 
-  validates_presence_of :title, :abbr, :year
+  validates_presence_of :title, :abbr
 
   scope :actual, where(:deleted_at => nil)
 

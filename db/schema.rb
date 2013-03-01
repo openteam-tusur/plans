@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228032520) do
+ActiveRecord::Schema.define(:version => 20130228095427) do
 
   create_table "appendix_items", :force => true do |t|
     t.integer  "appendix_id"
@@ -69,13 +69,10 @@ ActiveRecord::Schema.define(:version => 20130228032520) do
     t.string   "title"
     t.string   "abbr"
     t.integer  "number"
-    t.integer  "year_id"
     t.datetime "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  add_index "departments", ["year_id"], :name => "index_departments_on_year_id"
 
   create_table "didactic_units", :force => true do |t|
     t.integer  "gos_id"

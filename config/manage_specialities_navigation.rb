@@ -10,7 +10,7 @@ SimpleNavigation::Configuration.run do |navigation|
                         :highlights_on => ->(){ @year == year && ((@speciality.present? && @speciality.degree == degree) || (params[:degree] == degree)) }
           sub_menu.dom_class = 'sub_menu'
         end
-        sub_menu.item :statistic, t('statistics'), manage_year_statistics_path(year)
+        #sub_menu.item :statistic, t('statistics'), manage_year_statistics_path(year)
       end unless year.actual_subspecialities.length.zero?
     end
     primary.dom_class = 'manage_specialities'
