@@ -75,7 +75,7 @@ class PlanImporter
   end
 
   def find_subdepartment(number)
-    year.subdepartments.find_by_number!(number) if number
+    Subdepartment.find_by_number!(number)
   end
 
   def speciality_full_name

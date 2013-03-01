@@ -16,7 +16,7 @@ class DisciplineImporter
   end
 
   def discipline_subdepartment
-    find_subdepartment(xml['Кафедра']) || subspeciality.subdepartment
+    xml['Кафедра'] ? find_subdepartment(xml['Кафедра']) : subspeciality.subdepartment
   end
 
   def find_discipline

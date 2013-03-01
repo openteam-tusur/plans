@@ -19,13 +19,13 @@ class YearImporter
 
   def import_departments
     YAML.load_file("data/#{year.number}/departments.yml").each do |department_attributes|
-      department = year.departments.find_or_initialize_by_abbr department_attributes['abbr']
+      department = Department.find_or_initialize_by_abbr department_attributes['abbr']
       refresh department
       subdepartments_attributes = department_attributes.delete('subdepartments')
       department_attributes.delete('chief')
       department.update_attributes! department_attributes
       subdepartments_attributes.each do |subdepartment_attributes|
-        subdepartment = year.subdepartments.find_or_initialize_by_number(subdepartment_attributes['number'])
+        subdepartment = Subdepartment.find_or_initialize_by_number(subdepartment_attributes['number'])
         subdepartment_attributes.delete('chief')
         subdepartment.attributes = subdepartment_attributes
         subdepartment.department = department
@@ -46,10 +46,10 @@ class YearImporter
         refresh speciality
         speciality.update_attributes! speciality_attributes.merge(:degree => degree)
         subspecialities_attributes.each do |subspeciality_attributes|
-          subdepartment = year.subdepartments.find_by_abbr(subspeciality_attributes['subdepartment'])
+          subdepartment = Subdepartment.find_by_abbr(subspeciality_attributes['subdepartment'])
           raise "Нет кафедры #{subspeciality_attributes['subdepartment']}" unless subdepartment
-          graduated_subdepartment = year.subdepartments.find_by_abbr(subspeciality_attributes['graduated_subdepartment'] || subspeciality_attributes['subdepartment'])
-          department = year.departments.find_by_abbr(subspeciality_attributes['department']) || subdepartment.department
+          graduated_subdepartment = Subdepartment.find_by_abbr(subspeciality_attributes['graduated_subdepartment'] || subspeciality_attributes['subdepartment'])
+          department = Department.find_by_abbr(subspeciality_attributes['department']) || subdepartment.department
           subspeciality = speciality.subspecialities.find_or_initialize_by_title_and_subdepartment_id_and_education_form_and_reduced(
             :title            => subspeciality_attributes['title'].squish,
             :subdepartment_id => subdepartment.id,
