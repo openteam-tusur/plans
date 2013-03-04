@@ -1,8 +1,8 @@
 Plans::Application.routes.draw do
   namespace :manage do
-    get '/messages/:folder' => 'messages#index',
-      :constraints => { :folder => /(drafts|reduxes|releases|checks_by_provided_subdepartment|checks_by_profiled_subdepartment|checks_by_graduated_subdepartment|checks_by_library|checks_by_methodological_office|checks_by_educational_office)/ },
-      :as => :scoped_messages
+    #get '/messages/:folder' => 'messages#index',
+      #:constraints => { :folder => /(drafts|reduxes|releases|checks_by_provided_subdepartment|checks_by_profiled_subdepartment|checks_by_graduated_subdepartment|checks_by_library|checks_by_methodological_office|checks_by_educational_office)/ },
+      #:as => :scoped_messages
 
     get 'rups' => 'rups#index'
 
@@ -52,7 +52,7 @@ Plans::Application.routes.draw do
       resources :disciplines, :only => :index
     end
 
-    root :to => 'disciplines#index', :subdepartment_id => Subdepartment.ordered.first.id
+    root :to => 'disciplines#redirect_to_available_subdepartment'
   end
 
   namespace :edu do

@@ -7,10 +7,10 @@ SimpleNavigation::Configuration.run do |navigation|
                  manage_root_path,
                  :highlights_on => /disciplines|manage$/ if Subdepartment.consumed_by(current_user).any?
 
-    primary.item :messages,
-                 t('navigation.main_manage_navigation.messages'),
-                 manage_scoped_messages_path(:folder => :reduxes),
-                 :highlights_on => /messages/ if current_user.manager?
+    #primary.item :messages,
+                 #t('navigation.main_manage_navigation.messages'),
+                 #manage_scoped_messages_path(:folder => :reduxes),
+                 #:highlights_on => /messages/ if current_user.manager?
 
     primary.item :specialities,
                  t('navigation.main_manage_navigation.specialities'),
