@@ -166,7 +166,7 @@ class PlanImporter
   end
 
   def find_or_create_semester(number_str)
-    number = SEMESTER_NUMBERS[number_str.to_s] or raise "incorrect semester number #{string} (#{string.ord})"
+    number = SEMESTER_NUMBERS[number_str.to_s] or raise "incorrect semester number #{number_str} (#{number_str.ord})"
     subspeciality.semesters.find_or_initialize_by_number(number).tap do |semester|
       semester.deleted_at = nil
       semester.save!

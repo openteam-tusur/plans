@@ -99,12 +99,6 @@ ru:
           course_work:        Курсовое проектирование / Курсовая работа
           course_projecting:  Курсовое проектирование / Курсовая работа
 
-        check_kind_abbrs:
-          exam:               Экз
-          end_of_term:        Зач
-          course_work:        КР
-          course_projecting:  КП
-
         check_kind_reports:
           exam:               Экзамен
           end_of_term:        Зачет
@@ -152,13 +146,6 @@ ru:
           csr:      "Контроль самостоятельной работы\n(курсовой проект / курсовая работа)"
           exam:     Подготовка к экзамену
           srs:      Самостоятельная работа
-        loading_kind_abbrs:
-          csr:      КСР
-          exam:     ЧасЭкз
-          srs:      СРС
-          lecture:  Лек
-          lab:      Лаб
-          practice: Пр
 
       mission:
         description:     Описание задачи
