@@ -11,6 +11,7 @@ class Discipline < ActiveRecord::Base
   has_many :loadings, :dependent => :destroy
   has_many :work_programms, :dependent => :destroy
   has_many :semesters, :through => :loadings, :uniq => true
+  has_many :check_semesters, :through => :checks, :uniq => true, :source => :semester
 
   has_many :methodologists, :through => :subdepartment
 
@@ -31,6 +32,14 @@ class Discipline < ActiveRecord::Base
   delegate :profiled_subdepartment, :graduated_subdepartment, :to => :subspeciality
 
   alias_method :provided_subdepartment, :subdepartment
+
+  def all_semesters
+    semesters + check_semesters
+  end
+
+  def semester_numbers
+    @semester_numbers ||= all_semesters.map(&:number).uniq
+  end
 
   def to_s
     title

@@ -44,7 +44,7 @@ class WorkProgramm < ActiveRecord::Base
   has_one :subspeciality, :through => :discipline
   has_one :protocol, :dependent => :destroy
 
-  has_and_belongs_to_many :related_disciplines, :class_name => Discipline
+  has_and_belongs_to_many :related_disciplines, :class_name => Discipline, :order => 'disciplines.title'
 
   validate :editable, :unless => :state_changed?
   validates_presence_of :discipline, :year
@@ -193,15 +193,15 @@ class WorkProgramm < ActiveRecord::Base
   end
 
   def previous_disciplines
-    (related_disciplines.select{ |d| d.semesters.map(&:number).max < discipline.semesters.map(&:number).min } - [discipline.title]).sort
+    related_disciplines.select{ |d| d.semester_numbers.max.to_i < discipline.semester_numbers.min.to_i }
   end
 
   def current_disciplines
-    (related_disciplines.select{ |d| (d.semesters.map(&:number) & discipline.semesters.map(&:number)).any? } - [discipline.title]).sort
+    related_disciplines.select{ |d| (d.semester_numbers & discipline.semester_numbers).any? }
   end
 
   def subsequent_disciplines
-    (related_disciplines.select{ |d| d.semesters.map(&:number).min > discipline.semesters.map(&:number).max } - [discipline.title]).sort
+    related_disciplines.select{ |d| d.semester_numbers.min.to_i > discipline.semester_numbers.max.to_i }
   end
 
   def available_exercise_kinds
