@@ -9,6 +9,7 @@ require 'fileutils'
 require File.expand_path '../../importer/year_importer', __FILE__
 require File.expand_path '../../importer/plan_importer', __FILE__
 require File.expand_path '../../importer/discipline_importer', __FILE__
+require File.expand_path '../../importer/discipline_xml', __FILE__
 
 def refresh(object)
   object.deleted_at = nil

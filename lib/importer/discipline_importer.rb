@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class DisciplineImporter
-  attr_accessor :plan_importer, :xml, :imported
+  attr_accessor :plan_importer, :xml, :imported, :discipline_xml
 
   delegate :subspeciality, :file_path, :year, :cycle_node, :subspeciality_postal?, :to => :plan_importer
   delegate :find_subdepartment, :find_or_create_semester, :warn, :to => :plan_importer
@@ -9,47 +9,26 @@ class DisciplineImporter
   def initialize(plan_importer, xml)
     self.plan_importer = plan_importer
     self.xml = xml
-  end
-
-  def discipline_title
-    xml['Дис'].squish
+    self.discipline_xml = DisciplineXML.new(xml, self)
   end
 
   def discipline_subdepartment
-    xml['Кафедра'] ? find_subdepartment(xml['Кафедра']) : subspeciality.subdepartment
+    discipline_xml.subdepartment_number ? find_subdepartment(discipline_xml.subdepartment_number) : subspeciality.subdepartment
   end
 
   def find_discipline
-    subspeciality.disciplines.find_or_initialize_by_title(discipline_title)
+    subspeciality.disciplines.find_or_initialize_by_title(discipline_xml.title)
   end
 
   def discipline
     find_discipline.tap do |discipline|
       discipline.subdepartment = discipline_subdepartment
-      discipline.cycle = "#{cycle_abbr}. #{cycle_name}"
-      discipline.summ_loading = xml['ПодлежитИзучению']
-      discipline.summ_srs = xml['СР']
-      discipline.cycle_code = cycle_value
+      discipline.cycle = discipline_xml.cycle
+      discipline.summ_loading = discipline_xml.summ_loading
+      discipline.summ_srs = discipline_xml.summ_srs
+      discipline.cycle_code = discipline_xml.cycle_code
       refresh discipline
     end
-  end
-
-  def cycle_value
-    xml['Цикл']
-  end
-
-  def cycle_abbr
-    cycle_value.split('.').first
-  end
-
-  def cycle_name
-    cycle_node(cycle_abbr)['Название'].squish
-  rescue
-    raise "не могу найти расшифровку цикла '#{cycle_abbr}' для дисциплины '#{discipline_title}'"
-  end
-
-  def xml_with_sessions?
-    xml.at_css("Курс/Сессия")
   end
 
   def imported?
@@ -73,8 +52,8 @@ class DisciplineImporter
   end
   extend Memoist
 
-  memoize :discipline_title, :discipline
-  memoize :cycle_abbr, :cycle_value, :postal_semester_number
+  memoize :discipline
+  memoize :postal_semester_number
 
   CHECK_ABBRS = {
     exam:               'Экз',
@@ -150,7 +129,7 @@ class DisciplineImporter
       LOADING_ABBRS.each do |kind, abbr|
         if loading = course_xml[abbr]
           loading_value = loading.to_i
-          warn("'#{discipline_title}' #{course_xml['Ном']} курс: #{kind}(#{loading_value}) не распределен по семестрам")
+          warn("'#{discipline_xml.title}' #{course_xml['Ном']} курс: #{kind}(#{loading_value}) не распределен по семестрам")
           create_loading (course_xml['Ном'].to_i * 2 - 1), kind, (loading_value/2)
           create_loading (course_xml['Ном'].to_i * 2), kind, (loading_value - loading_value/2)
         end
@@ -159,7 +138,7 @@ class DisciplineImporter
   end
 
   def import
-    if cycle_value && cycle_abbr.present?
+    if discipline_xml.valid?
       discipline.save!
       if subspeciality_postal?
         import_postal_from_xml_with_sessions
@@ -168,10 +147,10 @@ class DisciplineImporter
         import_nonpostal
       end
     else
-      warn("у дисциплины '#{discipline_title}' не указан цикл")
+      warn("у дисциплины '#{discipline_xml.title}' не указан цикл")
     end
   rescue => e
-    warn("не могу импорировать дисциплину #{discipline_title}")
+    warn("не могу импорировать дисциплину #{discipline_xml.title}")
     raise e
   end
 end
