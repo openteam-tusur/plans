@@ -198,8 +198,8 @@ class PlanImporter
   end
 
   def reset_acuality_of_associations
-    Check.where(:id => Check.joins(:discipline).where('disciplines.subspeciality_id' => subspeciality.id).pluck('disciplines.id')).delete_all
-    Loading.where(:id => Loading.joins(:discipline).where('disciplines.subspeciality_id' => subspeciality.id).pluck('disciplines.id')).delete_all
+    subspeciality.checks.all.map(&:delete)
+    subspeciality.loadings.all.map(&:delete)
     move_to_trash(:disciplines, :semesters, :object => subspeciality)
   end
 

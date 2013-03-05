@@ -31,91 +31,25 @@ class DisciplineImporter
     end
   end
 
-  def imported?
-    !!imported
-  end
-
-  def postal_semester_number(course_number, session_number)
-    raise "empty course_number" unless course_number
-    raise "empty session_number" unless session_number
-    session_number = session_number.to_i
-    semester_number = course_number.to_i * 2 - 1 # осенний семестр
-    case course_number.to_i
-    when 1
-      semester_number += 1 if session_number >= 2
-    when 2..5
-      semester_number += 1 if session_number >= 3
-    when 6
-    else raise "unknown course #{course_number}"
-    end
-    semester_number
-  end
   extend Memoist
 
   memoize :discipline
-  memoize :postal_semester_number
 
-  CHECK_ABBRS = {
-    exam:               'Экз',
-    end_of_term:        'Зач',
-    course_work:        'КР',
-    course_projecting:  'КП',
-  }
-
-  LOADING_ABBRS = {
-    csr:      'КСР',
-    exam:     'ЧасЭкз',
-    srs:      'СРС',
-    lecture:  'Лек',
-    lab:      'Лаб',
-    practice: 'Пр',
-  }
-
-  def create_check(semester, kind)
-    discipline.checks.create!(:semester_id => semester.id, :check_kind => kind)
-  end
-
-  def create_check(semester_number, kind, value)
-    if value
-      discipline.checks.create!(:semester_id => find_or_create_semester(semester_number).id, :check_kind => kind)
-      self.imported = true
-    end
-  end
-
-  def create_loading(semester_number, kind, value)
-    if value
+  def create_checks
+    discipline_xml.checks.each do |semester_number, checks|
       semester = find_or_create_semester(semester_number)
-      discipline.loadings.find_or_initialize_by_semester_id_and_loading_kind(semester.id, kind) do |loading|
-        loading.update_attributes! :value => loading.value.to_i + value.to_i
+      checks.keys.each do |kind|
+        discipline.checks.create! :semester => semester, :check_kind => kind
       end
-      self.imported = true
     end
   end
 
-  def import_loadings(loading_xml, semester_number)
-    semester = find_or_create_semester(semester_number)
-    LOADING_ABBRS.each do |kind, abbr|
-      create_loading semester_number, kind, loading_xml[abbr]
-    end
-  end
-
-  def import_checks(check_xml, semester_number)
-    CHECK_ABBRS.each do |kind, abbr|
-      create_check(semester_number, kind, check_xml[abbr])
-    end
-  end
-
-  def import_nonpostal
-    xml.css('Сем').each do |semester_xml|
-      import_loadings(semester_xml, semester_xml['Ном'])
-      import_checks(semester_xml, semester_xml['Ном'])
-    end
-  end
-
-  def import_postal_from_xml_with_sessions
-    xml.css("Курс/Сессия").each do |session_xml|
-      import_loadings(session_xml, postal_semester_number(session_xml.parent['Ном'], session_xml['Ном']))
-      import_checks(session_xml, postal_semester_number(session_xml.parent['Ном'], session_xml['Ном']))
+  def create_loadings
+    discipline_xml.loadings.each do |semester_number, loadings|
+      semester = find_or_create_semester(semester_number)
+      loadings.each do |kind, value|
+        discipline.loadings.create! :semester => semester, :loading_kind => kind, :value => value
+      end
     end
   end
 
@@ -140,12 +74,9 @@ class DisciplineImporter
   def import
     if discipline_xml.valid?
       discipline.save!
-      if subspeciality_postal?
-        import_postal_from_xml_with_sessions
-        import_postal_from_xml_without_sessions unless imported?
-      else
-        import_nonpostal
-      end
+      discipline_xml.parse
+      create_loadings
+      create_checks
     else
       warn("у дисциплины '#{discipline_xml.title}' не указан цикл")
     end

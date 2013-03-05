@@ -1,7 +1,7 @@
 class Loading < ActiveRecord::Base
   belongs_to :semester
   belongs_to :discipline
-  attr_accessible :loading_kind, :value, :semester_id
+  attr_accessible :loading_kind, :value, :semester
 
   validates_presence_of :semester_id, :discipline_id, :loading_kind, :value
 

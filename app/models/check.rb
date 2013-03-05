@@ -1,7 +1,7 @@
 class Check < ActiveRecord::Base
   belongs_to :semester
   belongs_to :discipline
-  attr_accessible :check_kind, :semester_id
+  attr_accessible :check_kind, :semester
   validates_presence_of :discipline_id, :check_kind, :semester_id
 
   scope :actual, ->() { where(:deleted_at => nil) }
