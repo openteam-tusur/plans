@@ -1,14 +1,14 @@
 # encoding: utf-8
 
 class DisciplineXML
-  attr_accessor :xml, :importer
+  attr_accessor :xml, :plan_importer
   attr_accessor :loadings, :checks
 
-  delegate :subspeciality, :cycle_node, :warn, :to => :importer
+  delegate :cycle_node, :warn, :to => :plan_importer
 
-  def initialize(xml, importer)
+  def initialize(xml, plan_importer)
     self.xml = xml
-    self.importer = importer
+    self.plan_importer = plan_importer
     self.loadings = {}
     self.checks = {}
   end
@@ -33,6 +33,10 @@ class DisciplineXML
     xml['Цикл']
   end
 
+  def cycle_id
+    xml['ИдетификаторДисциплины']
+  end
+
   def cycle_name
     cycle_node(cycle_abbr)['Название'].squish
   rescue
@@ -52,8 +56,10 @@ class DisciplineXML
   end
 
   def parse
-    parse_postal
-    parse_nonpostal
+    unless @parsed
+      xml.at_css('>Сем') ? parse_nonpostal : parse_postal
+      @parsed = true
+    end
   end
 
   private
@@ -92,15 +98,16 @@ class DisciplineXML
     checks[semester] ||= {}
   end
 
-  def update_loadings(semester, xml)
+  def update_loadings(semester, xml_or_hash)
     LOADING_ABBRS.each do |kind, abbr|
-      loading(semester)[kind] += xml[abbr].to_i if xml[abbr]
+      value = (xml_or_hash[abbr] || xml_or_hash[kind]).to_i
+      loading(semester)[kind] += value if value > 0
     end
   end
 
-  def update_checks(semester, xml)
+  def update_checks(semester, xml_or_hash)
     CHECK_ABBRS.each do |kind, abbr|
-      check(semester)[kind] ||= true if xml[abbr]
+      check(semester)[kind] = true if xml_or_hash[abbr] || xml_or_hash[kind]
     end
   end
 
@@ -112,16 +119,55 @@ class DisciplineXML
   end
 
   def parse_postal
-    xml.css('>Курс').each do |course_xml|
-      if course_xml.at_css('>Сессия')
-        course_xml.css('>Сессия').each do |session_xml|
-          semester = POSTAL_SEMESTER_NUMBER[course_xml['Ном']][session_xml['Ном']]
-          update_loadings(semester, session_xml)
-          update_checks(semester, session_xml)
+    if has_subdisciplines?
+      fill_checks_and_loadings_from_subdisciplines
+    else
+      xml.css('>Курс').each do |course_xml|
+        if course_xml.at_css('>Сессия')
+          course_xml.css('>Сессия').each do |session_xml|
+            semester = POSTAL_SEMESTER_NUMBER[course_xml['Ном']][session_xml['Ном']]
+            update_loadings(semester, session_xml)
+            update_checks(semester, session_xml)
+          end
+        else
+          fill_checks_from(course_xml)
         end
-      else
-        warn("'#{title}' #{course_xml['Ном']} курс не разбит по сессиям")
       end
     end
   end
+
+  def fill_checks_and_loadings_from_subdisciplines
+    subdisciplines.each do |subdiscipline|
+      subdiscipline.parse
+      subdiscipline.loadings.each do |semester, loadings|
+        update_loadings(semester, loadings)
+      end
+      subdiscipline.checks.each do |semester, checks|
+        update_checks(semester, checks)
+      end
+    end
+  end
+
+  def fill_checks_from(course_xml)
+    CHECK_ABBRS.each do |kind, abbr|
+      if session = course_xml[abbr]
+        semester = POSTAL_SEMESTER_NUMBER[course_xml['Ном']][session]
+        check(semester)[kind] = true
+      end
+    end
+    LOADING_ABBRS.each do |kind, abbr|
+      warn("'#{title}' #{course_xml['Ном']} курс #{kind} не разбиты по сессиям") if course_xml[abbr]
+    end
+  end
+
+  def has_subdisciplines?
+    subdisciplines.any?
+  end
+
+  def subdisciplines
+    plan_importer.subdisciplines(cycle_id)
+  end
+
+  extend Memoist
+  memoize :subdisciplines
 end

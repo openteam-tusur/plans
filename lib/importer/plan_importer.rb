@@ -52,6 +52,12 @@ class PlanImporter
     Rails.logger.warn(log_message)
   end
 
+  def subdisciplines(cycle_id)
+    xml.css("СтрокиПлана Строка[ИдетификаторДисциплины^='#{cycle_id}.']").map do |discipline_xml|
+      DisciplineXML.new(discipline_xml, self)
+    end
+  end
+
   private
 
   def xml
@@ -176,7 +182,7 @@ class PlanImporter
   extend Memoist
   memoize :xml, :title_node, :year, :year_number, :speciality_full_name, :speciality_code
   memoize :speciality, :subspeciality_title, :education_form, :reduced, :subspeciality, :file_path_digest
-  memoize :find_subdepartment, :subspeciality_node, :find_or_create_semester
+  memoize :find_subdepartment, :subspeciality_node, :find_or_create_semester, :subdisciplines
 
   def human_education_form
     speciality_full_name.match(/(заочная с дистанционной технологией|очно-заочная|очная|заочная)/).try(:captures).try(:first)  || 'очная'
@@ -207,7 +213,7 @@ class PlanImporter
     reset_acuality_of_associations
 
     xml.css('СтрокиПлана Строка').each do |discipline_xml|
-      DisciplineImporter.new(self, discipline_xml).import
+      DisciplineImporter.new(self, DisciplineXML.new(discipline_xml, self)).import
     end
     subspeciality.update_column(:plan_digest, file_path_digest)
   end
