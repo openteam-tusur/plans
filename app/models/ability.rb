@@ -17,5 +17,13 @@ class Ability
     can :manage, WorkProgramm do |work_programm|
       can? :manage, work_programm.discipline
     end
+
+    can :manage, Protocol do |protocol|
+      can?(:manage, protocol.work_programm)
+    end
+
+    can :manage, WorkProgramm::PART_CLASSES do |part|
+      can? :manage, part.work_programm
+    end
   end
 end
