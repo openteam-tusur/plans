@@ -18,6 +18,9 @@ class Manage::WorkProgrammsController < Manage::ApplicationController
 
   before_filter :set_creator, :only => :create
 
+  expose(:subspeciality) { resource.subspeciality.decorate }
+  expose(:speciality)    { subspeciality.speciality }
+
   def get_layout
     return false if params[:action] != 'show'
     'manage'

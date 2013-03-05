@@ -43,11 +43,11 @@
   <%= link_to "&larr; назад к специальности".html_safe, manage_year_speciality_subspeciality_path(@year.number, @speciality.code, @subspeciality, :anchor => @discipline.translited_cycle), :class => 'back_link' %>
   <h6>Информация о рабочей программе</h6>
   <div class="information">
+    <span><%= subspeciality.graduated_subdepartment %></span>
     <span><%= t('enter_year', :year => @year.number) %></span>
-    <span><%= @speciality %></span>
-    <span><%= t("activerecord.values.speciality.#{@speciality.degree}") %></span>
-    <span><%= @work_programm.profiled_subdepartment %></span>
-    <span><%= @subspeciality %></span>
+    <span><%= speciality.degree %></span>
+    <span><%= speciality.full_title %> (<%= speciality.title %>)</span>
+    <span><%= subspeciality.education_form_text %> <%= subspeciality.reduced_text %></span>
   </div>
   <% unless @work_programm.file_url? %>
     <h6>Содержание рабочей программы</h6>
