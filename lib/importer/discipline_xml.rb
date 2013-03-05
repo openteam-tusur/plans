@@ -40,7 +40,7 @@ class DisciplineXML
   def cycle_name
     cycle_node(cycle_abbr)['Название'].squish
   rescue
-    raise "не могу найти расшифровку цикла '#{cycle_abbr}' для дисциплины '#{discipline_xml.title}'"
+    raise "не могу найти расшифровку цикла '#{cycle_abbr}' для дисциплины '#{title}'"
   end
 
   def cycle
@@ -55,10 +55,13 @@ class DisciplineXML
     cycle_code && cycle_abbr.present?
   end
 
+  def kind
+    has_subdisciplines? ? 'meta' : 'common'
+  end
+
   def parse
-    unless @parsed
+    if kind.inquiry.common?
       xml.at_css('>Сем') ? parse_nonpostal : parse_postal
-      @parsed = true
     end
   end
 
@@ -119,31 +122,15 @@ class DisciplineXML
   end
 
   def parse_postal
-    if has_subdisciplines?
-      fill_checks_and_loadings_from_subdisciplines
-    else
-      xml.css('>Курс').each do |course_xml|
-        if course_xml.at_css('>Сессия')
-          course_xml.css('>Сессия').each do |session_xml|
-            semester = POSTAL_SEMESTER_NUMBER[course_xml['Ном']][session_xml['Ном']]
-            update_loadings(semester, session_xml)
-            update_checks(semester, session_xml)
-          end
-        else
-          fill_checks_from(course_xml)
+    xml.css('>Курс').each do |course_xml|
+      if course_xml.at_css('>Сессия')
+        course_xml.css('>Сессия').each do |session_xml|
+          semester = POSTAL_SEMESTER_NUMBER[course_xml['Ном']][session_xml['Ном']]
+          update_loadings(semester, session_xml)
+          update_checks(semester, session_xml)
         end
-      end
-    end
-  end
-
-  def fill_checks_and_loadings_from_subdisciplines
-    subdisciplines.each do |subdiscipline|
-      subdiscipline.parse
-      subdiscipline.loadings.each do |semester, loadings|
-        update_loadings(semester, loadings)
-      end
-      subdiscipline.checks.each do |semester, checks|
-        update_checks(semester, checks)
+      else
+        fill_checks_from(course_xml)
       end
     end
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228095427) do
+ActiveRecord::Schema.define(:version => 20130305074426) do
 
   create_table "appendix_items", :force => true do |t|
     t.integer  "appendix_id"
@@ -95,6 +95,8 @@ ActiveRecord::Schema.define(:version => 20130228095427) do
     t.integer  "summ_loading"
     t.integer  "summ_srs"
     t.string   "cycle_code"
+    t.string   "cycle_id"
+    t.string   "kind"
   end
 
   add_index "disciplines", ["subdepartment_id"], :name => "index_disciplines_on_subdepartment_id"

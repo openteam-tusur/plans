@@ -33,6 +33,9 @@ class Discipline < ActiveRecord::Base
 
   alias_method :provided_subdepartment, :subdepartment
 
+  extend Enumerize
+  enumerize :kind, :in => %w[common meta]
+
   def all_semesters
     semesters + check_semesters
   end

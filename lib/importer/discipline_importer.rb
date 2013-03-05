@@ -24,9 +24,11 @@ class DisciplineImporter
     find_discipline.tap do |discipline|
       discipline.subdepartment = discipline_subdepartment
       discipline.cycle = discipline_xml.cycle
+      discipline.cycle_id = discipline_xml.cycle_id
       discipline.summ_loading = discipline_xml.summ_loading
       discipline.summ_srs = discipline_xml.summ_srs
       discipline.cycle_code = discipline_xml.cycle_code
+      discipline.kind = discipline_xml.kind
       refresh discipline
     end
   end
