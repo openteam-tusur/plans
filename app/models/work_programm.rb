@@ -44,7 +44,7 @@ class WorkProgramm < ActiveRecord::Base
   has_one :subspeciality, :through => :discipline
   has_one :protocol, :dependent => :destroy
 
-  has_and_belongs_to_many :related_disciplines, :class_name => Discipline, :order => 'discipline.cycle_id, disciplines.title', :conditions => { :kind => :common }
+  has_and_belongs_to_many :related_disciplines, :class_name => Discipline, :order => 'disciplines.cycle_id, disciplines.title', :conditions => { :kind => :common }
 
   validate :editable, :unless => :state_changed?
   validates_presence_of :discipline, :year
