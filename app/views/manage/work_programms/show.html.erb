@@ -64,7 +64,7 @@
   <% end %>
 
   <h6>PDF рабочей программы</h6>
-  <% if resource.released? %>
+  <% if resource.released? || resource.protocol_valid? %>
     <div class="information">
       <% if @work_programm.file_url? %>
         <%= link_to "Скачать PDF рабочей программы", @work_programm.file_url, :class => 'download_link' %>
