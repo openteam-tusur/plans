@@ -3,16 +3,22 @@
     <%= discipline %>
     <% if controller_name =~ /subspecialities/ || controller_name =~ /disciplines/ %>
       <%= content_tag :span, discipline.subdepartment.abbr, :class => :subdepartment if controller_name =~ /subspecialities/ %>
-      <div class="list">
-        <ul class='ajaxed'>
-          <% if discipline.work_programms.any? %>
-            <%= render discipline.work_programms %>
-          <% end %>
-          <li class='noborder'>
-            <%= link_to "Добавить рабочую программу", new_manage_work_programm_path(discipline), :remote => true, :class => 'new_record' %>
-          </li>
-        </ul>
-      </div>
+      <% if discipline.kind.common? %>
+        <div class="list">
+          <ul class='ajaxed'>
+            <% if discipline.work_programms.any? %>
+              <%= render discipline.work_programms %>
+            <% end %>
+            <li class='noborder'>
+              <%= link_to "Добавить рабочую программу", new_manage_work_programm_path(discipline), :remote => true, :class => 'new_record' %>
+            </li>
+          </ul>
+        </div>
+      <% else %>
+        <div>
+          Невозможно создать рабочую программу для метадисциплины
+        </div>
+      <% end %>
     <% end %>
   </div>
 </li>

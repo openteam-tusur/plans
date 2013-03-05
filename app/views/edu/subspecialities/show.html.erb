@@ -38,11 +38,11 @@
       </tr>
       <% disciplines.each do |discipline| %>
         <tr class='discipline'>
-          <td>
+          <td class='discipline_name'>
             <%= i += 1 %>
           </td>
-          <td>
-            <%= discipline.cycle_code %>
+          <td class='discipline_name'>
+            <%= discipline.cycle_id %>
           </td>
           <td class='discipline_name'>
             <% if discipline.work_programm %>
