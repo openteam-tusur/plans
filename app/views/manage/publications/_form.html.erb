@@ -1,7 +1,7 @@
 <tr class='ajaxed_item'>
   <td colspan=3>
     <%= simple_form_for [:manage, association_chain, resource].flatten, :remote => true do |f| %>
-      <%= f.input :publication_kind, :as => :hidden %>
+      <%= f.input :kind, :as => :hidden %>
 
       <%= f.input :location %>
       <%= f.input :text %>

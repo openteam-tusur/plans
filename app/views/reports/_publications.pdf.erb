@@ -20,8 +20,8 @@
   <% end %>
 
   <h2 class='strong'>3.3 Перечень учебно-методических пособий (УМП)</h2>
-  <% resource.ump_publication_kinds.each_with_index do |kind, index| %>
-    <h4 class="strong">3.3.<%= index + 1 %> <%= Publication.publication_kind.find_value("ump_#{kind}").text %></h4>
+  <% resource.ump_kinds.each_with_index do |kind, index| %>
+    <h4 class="strong">3.3.<%= index + 1 %> <%= Publication.kind.find_value("ump_#{kind}").text %></h4>
 
     <% if resource.publications_by_kind("ump_#{kind}").any? %>
       <ol>

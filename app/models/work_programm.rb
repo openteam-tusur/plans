@@ -205,12 +205,12 @@ class WorkProgramm < ActiveRecord::Base
     res
   end
 
-  def ump_publication_kinds
+  def ump_kinds
     available_exercise_kinds - ['lecture']
   end
 
   def publications_by_kind(kind)
-    publications.where publication_kind: kind
+    publications.where kind: kind
   end
 
   def has_loadings_for?(kind)
@@ -293,7 +293,7 @@ class WorkProgramm < ActiveRecord::Base
   end
 
   def publications_ump_valid?
-    !ump_publication_kinds.map{ |kind| publications_by_kind_valid?("ump_#{kind}") }.include?(false)
+    !ump_kinds.map{ |kind| publications_by_kind_valid?("ump_#{kind}") }.include?(false)
   end
 
   def publications_valid?
@@ -364,7 +364,7 @@ class WorkProgramm < ActiveRecord::Base
         :publications_additional_valid => publications_by_kind_valid?(:additional),
         :publications_ump_valid => publications_ump_valid?,
       }
-      ump_publication_kinds.each do |kind|
+      ump_kinds.each do |kind|
         json[:"publications_ump_#{kind}_valid"] = publications_by_kind_valid?("ump_#{kind}")
       end
       json

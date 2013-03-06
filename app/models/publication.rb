@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class Publication < ActiveRecord::Base
-  attr_accessible :publication_kind, :text, :url, :work_programm_id, :location, :count
+  attr_accessible :kind, :text, :url, :work_programm_id, :location, :count
 
   belongs_to :work_programm
 
@@ -12,8 +12,8 @@ class Publication < ActiveRecord::Base
   validates_format_of :url, :with => /\A#{URI::regexp(%w[http htps])}\Z/, :if => :url?
 
   extend Enumerize
-  enumerize :publication_kind,      :in => %w[basic additional ump_practice ump_lab ump_srs ump_course_work ump_csr]
-  enumerize :publication_kind_add,  :in => %w[basic additional ump_practice ump_lab ump_srs ump_course_work ump_csr]
+  enumerize :kind,      :in => %w[basic additional ump_practice ump_lab ump_srs ump_course_work ump_csr]
+  enumerize :kind_add,  :in => %w[basic additional ump_practice ump_lab ump_srs ump_course_work ump_csr]
   enumerize :location,  :in => %w[lan library portal other], :predicates => { :prefix => true }
 
   def to_s
@@ -30,7 +30,7 @@ end
 #
 #  id               :integer          not null, primary key
 #  work_programm_id :integer
-#  publication_kind :string(255)
+#  kind :string(255)
 #  text             :text
 #  url              :text
 #  created_at       :datetime         not null

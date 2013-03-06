@@ -12,7 +12,7 @@
     <tr>
       <td colspan='4' class='centered'>
         <% if can? :modify, @work_programm %>
-          <%= link_to Publication.publication_kind_add.find_value(kind).text, new_manage_year_speciality_subspeciality_discipline_work_programm_publication_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :publication => { :publication_kind => kind }}), :remote => true, :class => 'new_record in_table new_link' %>
+          <%= link_to Publication.kind_add.find_value(kind).text, new_manage_year_speciality_subspeciality_discipline_work_programm_publication_path(@year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :publication => { :kind => kind }}), :remote => true, :class => 'new_record in_table new_link' %>
         <% end %>
       </td>
     </tr>
