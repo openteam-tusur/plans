@@ -1,5 +1,5 @@
 <div class="ajaxed_item">
-  <span style='font-style: italic;'><%= requirement.requirement_kind_text %>:</span> <%= requirement.description %>
+  <span style='font-style: italic;'><%= requirement.kind_text %>:</span> <%= requirement.description %>
   <% if can? :modify, @work_programm %>
     <%= link_to "править", edit_manage_year_speciality_subspeciality_discipline_work_programm_requirement_path(@year, @speciality, @subspeciality, @discipline, @work_programm, requirement), :remote => true, :class => 'edit_link' %>
   <% end %>

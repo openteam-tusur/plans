@@ -387,8 +387,8 @@ class WorkProgramm < ActiveRecord::Base
     end
 
     def create_requirements
-      Requirement.requirement_kind.values.each do |kind|
-        requirements.create(requirement_kind: kind)
+      Requirement.kind.values.each do |kind|
+        requirements.create(kind: kind)
       end
     end
 

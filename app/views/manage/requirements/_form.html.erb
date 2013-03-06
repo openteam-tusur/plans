@@ -1,6 +1,6 @@
 <div class="ajaxed_item form">
   <%= simple_form_for [:manage, association_chain, resource].flatten, :remote => true do |f| %>
-    <%= f.input :description, :label => "#{f.object.requirement_kind_text}:" %>
+    <%= f.input :description, :label => "#{f.object.kind_text}:" %>
 
     <div class="buttons">
       <%= f.submit %>

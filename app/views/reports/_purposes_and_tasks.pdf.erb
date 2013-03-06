@@ -15,7 +15,7 @@
     <% @work_programm.requirements.each do |requirement| %>
       <% next unless requirement.description %>
       <li>
-        <span style='font-style: italic;'><%= requirement.requirement_kind_text %>:</span> <%= requirement.description %>
+        <span style='font-style: italic;'><%= requirement.kind_text %>:</span> <%= requirement.description %>
       </li>
     <% end %>
   </ul>

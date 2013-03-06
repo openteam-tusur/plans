@@ -77,7 +77,7 @@ ru:
         ump_csr:          добавить методические указания (УМП) для курсового проектирования / курсовых работ
 
     requirement:
-      requirement_kind:
+      kind:
         know:           знать
         be_able_to:     уметь
         have:           владеть
