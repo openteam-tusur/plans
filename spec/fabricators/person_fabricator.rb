@@ -8,7 +8,7 @@
 #  post             :text
 #  full_name        :text
 #  work_programm_id :integer
-#  person_kind      :string(255)
+#  kind      :string(255)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
@@ -19,5 +19,5 @@ Fabricator(:person) do
   post            "MyText"
   full_name       "MyText"
   work_programm   nil
-  person_kind     "MyString"
+  kind     "MyString"
 end

@@ -38,8 +38,8 @@ describe TitlePage do
     end
   end
 
-  describe '#speciality_kind' do
-    subject { page.speciality_kind }
+  describe '#kind' do
+    subject { page.kind }
     context 'специалитет' do
       before { page.speciality.degree = 'specialty' }
       it { should == 'Специальность' }
@@ -102,10 +102,10 @@ describe TitlePage do
   describe '#scheduling' do
     let(:scheduling) { page.scheduling }
     subject { scheduling }
-    before { loadings.create(:loading_kind => 'practice', :semester => semester, :value => 36) }
-    before { loadings.create(:loading_kind => 'lecture', :semester => semester, :value => 24) }
-    before { loadings.create(:loading_kind => 'exam', :semester => semester, :value => 10) }
-    before { loadings.create(:loading_kind => 'srs', :semester => semester, :value => 10) }
+    before { loadings.create(:kind => 'practice', :semester => semester, :value => 36) }
+    before { loadings.create(:kind => 'lecture', :semester => semester, :value => 24) }
+    before { loadings.create(:kind => 'exam', :semester => semester, :value => 10) }
+    before { loadings.create(:kind => 'srs', :semester => semester, :value => 10) }
 
     its(:loaded_semesters) { should == [1] }
 
@@ -115,7 +115,7 @@ describe TitlePage do
         its(:hours) { should == { 1 => 24 } }
         its(:total) { should == 24 }
         describe '#to_a' do
-          before { loadings.create(:loading_kind => 'crs', :semester => semester2, :value => 7) }
+          before { loadings.create(:kind => 'crs', :semester => semester2, :value => 7) }
           subject { scheduling.lecture.to_a }
           it { should == ["Лекции", 24, 24, "-"] }
         end
@@ -155,12 +155,12 @@ describe TitlePage do
   describe '#checks' do
     subject { page.checks }
     context 'зачёт в 1 семестре' do
-      before { checks.create :check_kind => 'end_of_term', :semester => semester}
+      before { checks.create :kind => 'end_of_term', :semester => semester}
       it { should == {"Зачет" => "1 семестр"}}
     end
     context 'курсовой проект в 1, 2 семестре' do
-      before { checks.create :check_kind => 'course_projecting', :semester => semester }
-      before { checks.create :check_kind => 'course_work', :semester => semester2 }
+      before { checks.create :kind => 'course_projecting', :semester => semester }
+      before { checks.create :kind => 'course_work', :semester => semester2 }
       it { should == {'Диф. зачет' => '1, 2 семестр'}}
     end
   end
