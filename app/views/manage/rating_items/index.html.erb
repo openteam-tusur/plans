@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <%= render @work_programm.rating_items_for_semester(semester).rating_item_kind_default %>
+    <%= render @work_programm.rating_items_for_semester(semester).with_rating_item_kind('default') %>
     <tr>
       <td colspan=6 class='centered'>
         <% if can? :modify, @work_programm %>
@@ -63,7 +63,7 @@
       </tr>
     </thead>
     <tbody>
-      <%= render @work_programm.rating_items_for_semester(semester).rating_item_kind_csr %>
+      <%= render @work_programm.rating_items_for_semester(semester).with_rating_item_kind('csr') %>
       <tr>
         <td colspan=6 class='centered'>
           <% if can? :modify, @work_programm %>

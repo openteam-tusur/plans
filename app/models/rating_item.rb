@@ -6,7 +6,8 @@ class RatingItem < ActiveRecord::Base
 
   validates_presence_of :max_1kt_2kt, :max_2kt_end, :max_begin_1kt, :title
 
-  has_enum :rating_item_kind, [:default, :csr], :scopes => true
+  extend Enumerize
+  enumerize :rating_item_kind, :in => %w[default csr], :scope => true
 
   def total_score
     [max_begin_1kt, max_1kt_2kt, max_2kt_end].sum

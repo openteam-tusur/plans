@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <% resource.rating_items_for_semester(semester).rating_item_kind_default.each do |rating_item| %>
+          <% resource.rating_items_for_semester(semester).with_rating_item_kind('default').each do |rating_item| %>
             <tr>
               <td><%= rating_item.title %></td>
               <td class='max_begin_1kt'><%= rating_item.max_begin_1kt %></td>
@@ -68,7 +68,7 @@
             </tr>
           </thead>
           <tbody>
-            <% resource.rating_items_for_semester(semester).rating_item_kind_csr.each do |rating_item| %>
+            <% resource.rating_items_for_semester(semester).with_rating_item_kind('csr').each do |rating_item| %>
               <tr>
                 <td><%= rating_item.title %></td>
                 <td class='max_begin_1kt'><%= rating_item.max_begin_1kt %></td>

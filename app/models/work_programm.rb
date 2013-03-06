@@ -302,8 +302,8 @@ class WorkProgramm < ActiveRecord::Base
 
   def brs_by_semester_valid?(semester)
     res = []
-    res << rating_items_for_semester(semester).rating_item_kind_default.any?
-    res << rating_items_for_semester(semester).rating_item_kind_csr.any? if grouped_loadings(:csr)[semester]
+    res << rating_items_for_semester(semester).with_rating_item_kind('default').any?
+    res << rating_items_for_semester(semester).with_rating_item_kind('csr').any? if grouped_loadings(:csr)[semester]
     res << examination_questions_for_semester(semester).any? if grouped_loadings(:exam)[semester]
     !res.include?(false)
   end
