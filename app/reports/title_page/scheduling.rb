@@ -25,7 +25,7 @@ class TitlePage::Scheduling
     end
 
     def title
-      @title ||= Loading.human_enum_values(:loading_kind)[loading_kind]
+      @title ||= Loading.loading_kind.find_value(loading_kind).text
     end
 
     def to_a
@@ -48,7 +48,10 @@ class TitlePage::Scheduling
     self.discipline = discipline
   end
 
-  Loading.enum_values(:loading_kind).each do |kind|
+  CLASSROOM_KINDS = %w[lecture lab practice csr]
+  ALL_KINDS       = %w[lecture lab practice csr classroom srs exam total]
+
+  Loading.loading_kind.values.each do |kind|
     define_method "#{kind}" do
       Row.new(:scheduling => self, :loading_kind => kind)
     end
@@ -65,11 +68,11 @@ class TitlePage::Scheduling
   end
 
   def classroom
-    Row.new(:scheduling => self, :loading_kind => Loading.classroom_kinds, :title => 'Всего аудиторных занятий')
+    Row.new(:scheduling => self, :loading_kind => CLASSROOM_KINDS, :title => 'Всего аудиторных занятий')
   end
 
   def total
-    Row.new(:scheduling => self, :loading_kind => Loading.enum_values(:loading_kind), :title => 'Общая трудоемкость')
+    Row.new(:scheduling => self, :loading_kind => Loading.loading_kind.values, :title => 'Общая трудоемкость')
   end
 
   def header
@@ -85,9 +88,10 @@ class TitlePage::Scheduling
     end
   end
 
+
   def to_a
     result = []
-    (Loading.classroom_kinds + ['classroom'] + Loading.srs_kinds + ['total']).each do |name|
+    ALL_KINDS.each do |name|
       row = self.send(name)
       result << row.to_a unless row.total.zero?
     end

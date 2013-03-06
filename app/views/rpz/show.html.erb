@@ -25,7 +25,7 @@
               </tr>
               <% loadings.select{|l| ['lecture', 'lab', 'practice', 'csr'].include?(l.loading_kind)}.each do |loading| %>
                 <tr class='loading'>
-                  <td><%= loading.human_loading_kind %></td>
+                  <td><%= loading.loading_kind_text %></td>
                   <td><%= loading.value %></td>
                   <td></td>
                   <td></td>

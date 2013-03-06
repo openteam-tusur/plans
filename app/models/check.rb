@@ -11,11 +11,9 @@ class Check < ActiveRecord::Base
   extend Enumerize
 
   enumerize :kind, :in => %w[exam end_of_term course_work course_projecting], :scope => true, :predicates => {:prefix => true}
-  delegate :text, :to => :kind, :prefix => true
 
   alias_attribute :kind_report, :kind
   enumerize :kind_report, :in => %w[exam end_of_term course_work course_projecting]
-  delegate :text, :to => :kind_report, :prefix => true
 end
 
 # == Schema Information

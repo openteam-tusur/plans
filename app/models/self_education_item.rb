@@ -67,7 +67,7 @@ class SelfEducationItem < ActiveRecord::Base
     def available_kinds
       kinds = ALL_KINDS
       kinds -= SelfEducationItem.where(:semester_id => semester_id).where(:work_programm_id => work_programm_id).pluck(:kind)
-      kinds -= (Loading.enums[:loading_kind] - work_programm.discipline.loadings.where(:semester_id => semester_id).pluck(:loading_kind))
+      kinds -= (Loading.loading_kind.values - work_programm.discipline.loadings.where(:semester_id => semester_id).pluck(:loading_kind))
       kinds << kind if persisted?
       kinds
     end

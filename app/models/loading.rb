@@ -5,17 +5,10 @@ class Loading < ActiveRecord::Base
 
   validates_presence_of :semester_id, :discipline_id, :loading_kind, :value
 
-  has_enum :loading_kind
+  extend Enumerize
+  enumerize :loading_kind, :in => %w[lecture lab practice csr exam srs], :predicates => { :prefix => true }
 
   scope :actual, ->() { where(:deleted_at => nil) }
-
-  def self.classroom_kinds
-    enum_values(:loading_kind) - srs_kinds
-  end
-
-  def self.srs_kinds
-    %w(srs exam)
-  end
 end
 
 # == Schema Information
