@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130306070115) do
+ActiveRecord::Schema.define(:version => 20130306085138) do
 
   create_table "appendix_items", :force => true do |t|
     t.integer  "appendix_id"
@@ -337,14 +337,8 @@ ActiveRecord::Schema.define(:version => 20130306070115) do
     t.string   "uid"
     t.text     "name"
     t.text     "email"
-    t.text     "nickname"
     t.text     "first_name"
     t.text     "last_name"
-    t.text     "location"
-    t.text     "description"
-    t.text     "image"
-    t.text     "phone"
-    t.text     "urls"
     t.text     "raw_info"
     t.integer  "sign_in_count"
     t.datetime "current_sign_in_at"
