@@ -1,4 +1,23 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: disciplines
+#
+#  id               :integer          not null, primary key
+#  title            :string(255)
+#  cycle            :string(255)
+#  subspeciality_id :integer
+#  subdepartment_id :integer
+#  deleted_at       :datetime
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  summ_loading     :integer
+#  summ_srs         :integer
+#  cycle_code       :string(255)
+#  cycle_id         :string(255)
+#  kind             :string(255)
+#
+
 
 class Discipline < ActiveRecord::Base
   attr_accessible :title
@@ -79,21 +98,3 @@ class Discipline < ActiveRecord::Base
     @didactic_unit ||= DidacticUnit.joins(:gos).where('goses.speciality_code = ? AND didactic_units.discipline = ?', speciality.code, title).first
   end
 end
-
-# == Schema Information
-#
-# Table name: disciplines
-#
-#  id               :integer          not null, primary key
-#  title            :string(255)
-#  cycle            :string(255)
-#  subspeciality_id :integer
-#  subdepartment_id :integer
-#  deleted_at       :datetime
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  summ_loading     :integer
-#  summ_srs         :integer
-#  cycle_code       :string(255)
-#
-

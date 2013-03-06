@@ -1,4 +1,18 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: subdepartments
+#
+#  id            :integer          not null, primary key
+#  title         :string(255)
+#  abbr          :string(255)
+#  number        :integer
+#  department_id :integer
+#  deleted_at    :datetime
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 
 class Subdepartment < ActiveRecord::Base
   attr_accessible :abbr, :title, :number
@@ -37,19 +51,3 @@ class Subdepartment < ActiveRecord::Base
     "Кафедра #{abbr}"
   end
 end
-
-# == Schema Information
-#
-# Table name: subdepartments
-#
-#  id            :integer          not null, primary key
-#  title         :string(255)
-#  abbr          :string(255)
-#  number        :integer
-#  department_id :integer
-#  deleted_at    :datetime
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  context_id    :integer
-#
-

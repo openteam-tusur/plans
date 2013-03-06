@@ -8,7 +8,7 @@
 #  post             :text
 #  full_name        :text
 #  work_programm_id :integer
-#  kind      :string(255)
+#  person_kind      :string(255)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #

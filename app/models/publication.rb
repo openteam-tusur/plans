@@ -1,4 +1,19 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: publications
+#
+#  id               :integer          not null, primary key
+#  work_programm_id :integer
+#  kind             :string(255)
+#  text             :text
+#  url              :text
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  location         :string(255)
+#  count            :integer
+#
+
 
 class Publication < ActiveRecord::Base
   attr_accessible :kind, :text, :url, :work_programm_id, :location, :count
@@ -23,19 +38,3 @@ class Publication < ActiveRecord::Base
     end
   end
 end
-
-# == Schema Information
-#
-# Table name: publications
-#
-#  id               :integer          not null, primary key
-#  work_programm_id :integer
-#  kind :string(255)
-#  text             :text
-#  url              :text
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  location         :string(255)
-#  count            :integer
-#
-

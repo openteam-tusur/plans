@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: departments
+#
+#  id         :integer          not null, primary key
+#  title      :string(255)
+#  abbr       :string(255)
+#  number     :integer
+#  deleted_at :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Department < ActiveRecord::Base
   attr_accessible :abbr, :title, :number
 
@@ -15,19 +28,3 @@ class Department < ActiveRecord::Base
     Person.new(department_hash['chief'])
   end
 end
-
-# == Schema Information
-#
-# Table name: departments
-#
-#  id         :integer          not null, primary key
-#  title      :string(255)
-#  abbr       :string(255)
-#  number     :integer
-#  year_id    :integer
-#  deleted_at :datetime
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  context_id :integer
-#
-

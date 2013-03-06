@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: requirements
+#
+#  id               :integer          not null, primary key
+#  work_programm_id :integer
+#  kind             :string(255)
+#  description      :text
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
 class Requirement < ActiveRecord::Base
   attr_accessible :description, :work_programm_id, :kind
   validates_presence_of :work_programm_id, :kind
@@ -11,16 +23,3 @@ class Requirement < ActiveRecord::Base
     description
   end
 end
-
-# == Schema Information
-#
-# Table name: requirements
-#
-#  id               :integer          not null, primary key
-#  work_programm_id :integer
-#  kind :string(255)
-#  description      :text
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#
-

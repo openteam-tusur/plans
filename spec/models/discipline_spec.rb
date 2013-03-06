@@ -14,6 +14,8 @@
 #  summ_loading     :integer
 #  summ_srs         :integer
 #  cycle_code       :string(255)
+#  cycle_id         :string(255)
+#  kind             :string(255)
 #
 
 

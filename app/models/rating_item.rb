@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: rating_items
+#
+#  id               :integer          not null, primary key
+#  work_programm_id :integer
+#  semester_id      :integer
+#  title            :string(255)
+#  max_begin_1kt    :integer
+#  max_1kt_2kt      :integer
+#  max_2kt_end      :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  kind             :string(255)
+#
+
 class RatingItem < ActiveRecord::Base
   attr_accessible :max_1kt_2kt, :max_2kt_end, :max_begin_1kt, :title, :semester_id, :kind
 
@@ -13,20 +29,3 @@ class RatingItem < ActiveRecord::Base
     [max_begin_1kt, max_1kt_2kt, max_2kt_end].sum
   end
 end
-
-# == Schema Information
-#
-# Table name: rating_items
-#
-#  id               :integer          not null, primary key
-#  work_programm_id :integer
-#  semester_id      :integer
-#  title            :string(255)
-#  max_begin_1kt    :integer
-#  max_1kt_2kt      :integer
-#  max_2kt_end      :integer
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  kind :string(255)
-#
-

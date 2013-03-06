@@ -4,7 +4,7 @@
 #
 #  id               :integer          not null, primary key
 #  work_programm_id :integer
-#  kind :string(255)
+#  kind             :string(255)
 #  text             :text
 #  url              :text
 #  created_at       :datetime         not null
