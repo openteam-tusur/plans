@@ -3,7 +3,7 @@
     <%= simple_form_for [:manage, association_chain, resource].flatten, :remote => true do |f| %>
       <%= f.input :publication_kind, :as => :hidden %>
 
-      <%= f.input :location, :collection => Publication.human_enum_values(:location).invert %>
+      <%= f.input :location %>
       <%= f.input :text %>
       <%= f.input :url, :as => :string, :wrapper_html => { :style => "display: #{f.object.location_lan? || f.object.location_portal? ? 'block' : 'none'}" } %>
       <%= f.input :count, :wrapper_html => { :style => "display: #{f.object.location_library? ? 'block' : 'none'}" } %>

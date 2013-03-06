@@ -11,7 +11,10 @@ class Publication < ActiveRecord::Base
   validates_numericality_of :count, :greater_than => 0, :only_integer => true, :if => :location_library?
   validates_format_of :url, :with => /\A#{URI::regexp(%w[http htps])}\Z/, :if => :url?
 
-  has_enum :publication_kind, :location
+  extend Enumerize
+  enumerize :publication_kind,      :in => %w[basic additional ump_practice ump_lab ump_srs ump_course_work ump_csr]
+  enumerize :publication_kind_add,  :in => %w[basic additional ump_practice ump_lab ump_srs ump_course_work ump_csr]
+  enumerize :location,  :in => %w[lan library portal other], :predicates => { :prefix => true }
 
   def to_s
     text.tap do |s|

@@ -1,6 +1,6 @@
 <% %w[basic additional].each_with_index do |kind, index| %>
   <div class='<%= indicate_validity "publications_#{kind}_valid".to_sym %>'>
-    <h5><%= "3.#{index+1} #{Publication.human_enum_values(:publication_kind)[kind]}" %></h5>
+    <h5><%= "3.#{index+1} #{Publication.publication_kind.find_value(kind).text}" %></h5>
     <div class="notice warning">
       Нет ни одной публикации данного вида. Необходимо добавить хотя бы одну.
     </div>
@@ -12,7 +12,7 @@
   <h5><%= "3.3 Перечень учебно-методических пособий" %></h5>
   <% resource.ump_publication_kinds.each_with_index do |kind, index| %>
     <div class='<%= indicate_validity "publications_ump_#{kind}_valid".to_sym %>'>
-      <h6><%= "3.3.#{index+1} #{Publication.human_enum_values(:publication_kind)['ump_'+kind]}" %> </h6>
+      <h6><%= "3.3.#{index+1} #{Publication.publication_kind.find_value('ump_'+kind).text}" %> </h6>
       <div class="notice warning">
         Нет ни одной публикации данного вида. Необходимо добавить хотя бы одну.
       </div>
