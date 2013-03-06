@@ -41,7 +41,7 @@ class DisciplineImporter
     discipline_xml.checks.each do |semester_number, checks|
       semester = find_or_create_semester(semester_number)
       checks.keys.each do |kind|
-        discipline.checks.create! :semester => semester, :check_kind => kind
+        discipline.checks.create! :semester => semester, :kind => kind
       end
     end
   end

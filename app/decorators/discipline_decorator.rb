@@ -6,15 +6,15 @@ class DisciplineDecorator < Draper::Decorator
   end
 
   def exam_semesters
-    check_semesters(&:check_kind_exam?)
+    check_semesters(&:kind_exam?)
   end
 
   def end_of_term_semesters
-    check_semesters(&:check_kind_end_of_term?)
+    check_semesters(&:kind_end_of_term?)
   end
 
   def end_of_course_semesters
-    check_semesters{ |c| c.check_kind_course_work? || c.check_kind_course_projecting? }
+    check_semesters{ |c| c.kind_course_work? || c.kind_course_projecting? }
   end
 
   def loadings_in_semester?(semester)

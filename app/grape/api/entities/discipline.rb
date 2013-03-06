@@ -20,7 +20,7 @@ class API::Entities::Discipline < Grape::Entity
     API::Entities::Check.represent object.checks
                                      .actual
                                      .where(:semester_id => options[:semester])
-                                     .order(:check_kind)
+                                     .order(:kind)
   end
 end
 

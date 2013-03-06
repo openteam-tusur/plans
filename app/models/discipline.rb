@@ -53,7 +53,7 @@ class Discipline < ActiveRecord::Base
   end
 
   def semesters_with_examination
-    checks.with_check_kind('exam').map(&:semester)
+    checks.with_kind('exam').map(&:semester)
   end
 
   def has_examinations?

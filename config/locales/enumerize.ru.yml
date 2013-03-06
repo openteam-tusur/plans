@@ -14,7 +14,7 @@ ru:
         secondary_unspecialized:  (сокращённая на базе СПО)
 
     check:
-      check_kind:
+      kind:
         exam:               Экзамен
         end_of_term:        Зачет
         course_work:        Курсовое проектирование / Курсовая работа

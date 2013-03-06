@@ -1,4 +1,4 @@
 class API::Entities::Check < Grape::Entity
-  expose :check_kind
-  expose :check_kind_text
+  expose :kind
+  expose :kind_text
 end
