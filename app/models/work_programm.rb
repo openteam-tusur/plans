@@ -387,7 +387,7 @@ class WorkProgramm < ActiveRecord::Base
     end
 
     def create_requirements
-      Requirement.enums['requirement_kind'].each do |kind|
+      Requirement.requirement_kind.values.each do |kind|
         requirements.create(requirement_kind: kind)
       end
     end

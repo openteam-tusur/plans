@@ -136,11 +136,6 @@ ru:
         max_1kt_2kt:    Максимальный балл за период между 1КТ и 2КТ
         max_2kt_end:    Максимальный балл за период между 2КТ и концом семестра
 
-      requirement:
-        requirement_kind_enum:
-          know:           знать
-          be_able_to:     уметь
-          have:           владеть
       subspeciality:
         education_form_enum:
           full-time: 'очная форма'

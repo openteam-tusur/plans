@@ -4,7 +4,8 @@ class Requirement < ActiveRecord::Base
 
   belongs_to :work_programm
 
-  has_enum :requirement_kind
+  extend Enumerize
+  enumerize :requirement_kind, :in => %w[know be_able_to have]
 
   def to_s
     description
