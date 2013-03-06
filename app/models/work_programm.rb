@@ -200,8 +200,8 @@ class WorkProgramm < ActiveRecord::Base
 
   def available_exercise_kinds
     res = []
-    res = discipline.loadings.pluck(:loading_kind) & Exercise.kind.values
-    res << 'srs' if discipline.loadings.pluck(:loading_kind).include?('srs')
+    res = discipline.loadings.pluck(:kind) & Exercise.kind.values
+    res << 'srs' if discipline.loadings.pluck(:kind).include?('srs')
     res
   end
 
@@ -214,11 +214,11 @@ class WorkProgramm < ActiveRecord::Base
   end
 
   def has_loadings_for?(kind)
-    discipline.loadings.where(loading_kind: kind).any? || SelfEducationItem::FIFTH_ITEM_KINDS.include?(kind)
+    discipline.loadings.where(kind: kind).any? || SelfEducationItem::FIFTH_ITEM_KINDS.include?(kind)
   end
 
   def grouped_loadings(kind)
-    Hash[discipline.loadings.where(:loading_kind => kind).group_by(&:semester).sort{|a,b| a[0].number <=> b[0].number}]
+    Hash[discipline.loadings.where(:kind => kind).group_by(&:semester).sort{|a,b| a[0].number <=> b[0].number}]
   end
 
   def rating_items_for_semester(semester)
@@ -444,9 +444,9 @@ class WorkProgramm < ActiveRecord::Base
       genereated_srs = {}
       semesters = grouped_loadings(:srs).keys
       semesters.each do |semester|
-        srs_loading_volume = semester.loadings.where(:discipline_id => discipline).where(:loading_kind => :srs).first.value
+        srs_loading_volume = semester.loadings.where(:discipline_id => discipline).where(:kind => :srs).first.value
 
-        loading_kinds = (semester.loadings.where(:discipline_id => discipline).map(&:loading_kind).map(&:to_sym) & SRS_WEIGHTS.keys)
+        loading_kinds = (semester.loadings.where(:discipline_id => discipline).map(&:kind).map(&:to_sym) & SRS_WEIGHTS.keys)
 
         temp = {}
         loading_kinds.each do |kind|
@@ -468,24 +468,24 @@ class WorkProgramm < ActiveRecord::Base
     end
 
     def generate_brs
-      discipline.loadings.where(:loading_kind => [:lecture, :practice, :lab, :csr, :exam]).each do |loading|
-        BRS_WEIGHTS[loading.loading_kind.to_sym].each do |brs_kind, score|
-          if loading.loading_kind_exam?
+      discipline.loadings.where(:kind => [:lecture, :practice, :lab, :csr, :exam]).each do |loading|
+        BRS_WEIGHTS[loading.kind.to_sym].each do |brs_kind, score|
+          if loading.kind_exam?
             examination_questions.create! :semester_id => loading.semester.id,
-                                          :question_kind => WorkProgramm.human_attribute_name("#{loading.loading_kind}_#{brs_kind}"),
+                                          :question_kind => WorkProgramm.human_attribute_name("#{loading.kind}_#{brs_kind}"),
                                           :score => score
 
           else
             rating_items.create! :semester_id => loading.semester.id,
-              :title => WorkProgramm.human_attribute_name("#{loading.loading_kind}_#{brs_kind}"),
+              :title => WorkProgramm.human_attribute_name("#{loading.kind}_#{brs_kind}"),
               :max_begin_1kt => score,
               :max_1kt_2kt => score,
               :max_2kt_end => score,
-              :rating_item_kind => loading.loading_kind_csr? ? :csr : :default
+              :rating_item_kind => loading.kind_csr? ? :csr : :default
           end
         end
       end
-      discipline.loadings.where(:loading_kind => [:lecture, :practice, :lab]).pluck('DISTINCT semester_id').each do |semester_id|
+      discipline.loadings.where(:kind => [:lecture, :practice, :lab]).pluck('DISTINCT semester_id').each do |semester_id|
         rating_items.create! :semester_id => semester_id,
           :title =>  WorkProgramm.human_attribute_name("intime"),
           :max_begin_1kt => 4,

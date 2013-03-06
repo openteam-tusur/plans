@@ -50,7 +50,7 @@ class DisciplineImporter
     discipline_xml.loadings.each do |semester_number, loadings|
       semester = find_or_create_semester(semester_number)
       loadings.each do |kind, value|
-        discipline.loadings.create! :semester => semester, :loading_kind => kind, :value => value
+        discipline.loadings.create! :semester => semester, :kind => kind, :value => value
       end
     end
   end

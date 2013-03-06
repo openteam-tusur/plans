@@ -43,7 +43,7 @@ ru:
         csr:                      Курсовые проекты / Курсовые работы
 
     loading:
-      loading_kind:
+      kind:
         lecture:                  Лекции
         lab:                      Лабораторные занятия
         practice:                 Практические занятия

@@ -24,7 +24,7 @@ class Semester < ActiveRecord::Base
   end
 
   def planning_exercise_loading_for_discipline(discipline)
-    loadings.where(:loading_kind => 'lecture', :discipline_id => discipline).map(&:value).sum
+    loadings.where(:kind => 'lecture', :discipline_id => discipline).map(&:value).sum
   end
 end
 

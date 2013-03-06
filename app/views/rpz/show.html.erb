@@ -23,9 +23,9 @@
                 <td colspan=3><%= discipline.checks.select{|c| c.semester == semester}.map(&:kind_text).join(', ') %></td>
                 <td colspan=1 title='<%= discipline.subdepartment.title %>'><%= discipline.subdepartment.abbr %></td>
               </tr>
-              <% loadings.select{|l| ['lecture', 'lab', 'practice', 'csr'].include?(l.loading_kind)}.each do |loading| %>
+              <% loadings.select{|l| ['lecture', 'lab', 'practice', 'csr'].include?(l.kind)}.each do |loading| %>
                 <tr class='loading'>
-                  <td><%= loading.loading_kind_text %></td>
+                  <td><%= loading.kind_text %></td>
                   <td><%= loading.value %></td>
                   <td></td>
                   <td></td>
@@ -36,7 +36,7 @@
             <% end %>
           </tbody>
         </table>
-        <% semester_loadings = semester.loadings.actual.select{|l| ['lecture', 'lab', 'practice', 'csr'].include?(l.loading_kind)} %>
+        <% semester_loadings = semester.loadings.actual.select{|l| ['lecture', 'lab', 'practice', 'csr'].include?(l.kind)} %>
         <table>
           <thead>
             <tr>
@@ -50,10 +50,10 @@
           <tbody>
             <tr>
               <td><%= semester_loadings.map(&:value).sum %></td>
-              <td><%= semester_loadings.select(&:loading_kind_lecture?).map(&:value).sum %></td>
-              <td><%= semester_loadings.select(&:loading_kind_lab?).map(&:value).sum %></td>
-              <td><%= semester_loadings.select(&:loading_kind_practice?).map(&:value).sum %></td>
-              <td><%= semester_loadings.select(&:loading_kind_csr?).map(&:value).sum %></td>
+              <td><%= semester_loadings.select(&:kind_lecture?).map(&:value).sum %></td>
+              <td><%= semester_loadings.select(&:kind_lab?).map(&:value).sum %></td>
+              <td><%= semester_loadings.select(&:kind_practice?).map(&:value).sum %></td>
+              <td><%= semester_loadings.select(&:kind_csr?).map(&:value).sum %></td>
             </tr>
           </tbody>
         </table>

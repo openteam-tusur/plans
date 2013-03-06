@@ -2,7 +2,7 @@
 
 class TitlePage::Scheduling
   class Row
-    attr_accessor :scheduling, :hours, :loading_kind, :title
+    attr_accessor :scheduling, :hours, :kind, :title
 
     delegate :discipline, :to => :scheduling
 
@@ -13,7 +13,7 @@ class TitlePage::Scheduling
     end
 
     def hours
-      @hours ||= discipline.loadings.where(:loading_kind => loading_kind).inject({}) do |hash, loading|
+      @hours ||= discipline.loadings.where(:kind => kind).inject({}) do |hash, loading|
         hash[loading.semester.number] ||= 0
         hash[loading.semester.number] += loading.value
         hash
@@ -25,7 +25,7 @@ class TitlePage::Scheduling
     end
 
     def title
-      @title ||= Loading.loading_kind.find_value(loading_kind).text
+      @title ||= Loading.kind.find_value(kind).text
     end
 
     def to_a
@@ -51,9 +51,9 @@ class TitlePage::Scheduling
   CLASSROOM_KINDS = %w[lecture lab practice csr]
   ALL_KINDS       = %w[lecture lab practice csr classroom srs exam total]
 
-  Loading.loading_kind.values.each do |kind|
+  Loading.kind.values.each do |kind|
     define_method "#{kind}" do
-      Row.new(:scheduling => self, :loading_kind => kind)
+      Row.new(:scheduling => self, :kind => kind)
     end
   end
 
@@ -63,16 +63,16 @@ class TitlePage::Scheduling
     if discipline.summ_loading == total.total
       old_exam
     else
-      Row.new(:scheduling => self, :loading_kind => 'exam', :hours => {})
+      Row.new(:scheduling => self, :kind => 'exam', :hours => {})
     end
   end
 
   def classroom
-    Row.new(:scheduling => self, :loading_kind => CLASSROOM_KINDS, :title => 'Всего аудиторных занятий')
+    Row.new(:scheduling => self, :kind => CLASSROOM_KINDS, :title => 'Всего аудиторных занятий')
   end
 
   def total
-    Row.new(:scheduling => self, :loading_kind => Loading.loading_kind.values, :title => 'Общая трудоемкость')
+    Row.new(:scheduling => self, :kind => Loading.kind.values, :title => 'Общая трудоемкость')
   end
 
   def header
