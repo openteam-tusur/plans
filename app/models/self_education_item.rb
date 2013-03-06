@@ -17,7 +17,10 @@ class SelfEducationItem < ActiveRecord::Base
 
   default_scope order('self_education_items.weight, self_education_items.id')
 
-  has_enum :control, :multiple => true
+  extend Enumerize
+
+  serialize :control, Array
+  enumerize :control, :in => %w[quiz test home_work access defence check report mark check_summary exam], :multiple => true
 
   FIFTH_ITEM_KINDS = %w[home_work individual_work referat test colloquium calculation]
   ALL_KINDS  = %w[lecture lab practice csr home_work individual_work referat test colloquium calculation srs exam]
@@ -38,16 +41,12 @@ class SelfEducationItem < ActiveRecord::Base
   }
   CONTROL_TYPES = %[quiz test home_work access defence check report mark check_summary pass]
 
-  def self.available_human_control_values(kind)
-    human_enum_values(:control).keep_if{|key, value| AVAILABLE_CONTROLS[kind.to_sym].include?(key.to_sym) }.invert
-  end
-
   def kind_collection_for_select
     available_kinds.map { |kind|  [SelfEducationItem.human_attribute_name(kind), kind] }
   end
 
   def self.control_collection_for_select
-    human_enum_values(:control).invert
+    control.options
   end
 
   def set_weight
@@ -60,6 +59,10 @@ class SelfEducationItem < ActiveRecord::Base
 
   def item_valid?
     (FIFTH_ITEM_KINDS.include?(kind) && appendix) || !FIFTH_ITEM_KINDS.include?(kind)
+  end
+
+  def human_control
+    control.map(&:text).join(', ')
   end
 
   private

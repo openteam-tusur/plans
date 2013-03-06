@@ -7,7 +7,7 @@
     <%= self_education_item.hours %>
   </td>
   <td class='centered'>
-    <%= self_education_item.human_control.join(', ') if self_education_item.human_control.present? %>
+    <%= self_education_item.human_control %>
   </td>
   <td class='centered'>
     <% if can? :modify, @work_programm %>

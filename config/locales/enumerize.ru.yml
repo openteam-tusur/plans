@@ -81,3 +81,16 @@ ru:
         know:           знать
         be_able_to:     уметь
         have:           владеть
+
+    self_education_item:
+      control:
+        quiz:           опрос
+        test:           тест
+        home_work:      домашнее задание
+        access:         допуск
+        defence:        защита отчета
+        check:          контрольная работа
+        report:         устный отчет
+        mark:           оценка качества выполненных работ
+        check_summary:  проверка конспектов самостоятельного изучения тем
+        exam:           сдача экзамена

@@ -21,7 +21,7 @@
               <%= content_tag :em, item.appendix if item.appendix.present? %>
             </div>
           </td>
-          <td class='description'><%= item.human_control.join(', ') if item.human_control.present?  %></td>
+          <td class='description'><%= item.human_control.join(', ') %></td>
           <td class='hours'> <%= item.hours %></td>
         </tr>
       </tbody>
