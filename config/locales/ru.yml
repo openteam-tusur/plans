@@ -88,13 +88,6 @@ ru:
       appendix_item:
         description: Описание элемента
 
-      check:
-        check_kind_enum:
-          exam:               Экзамен
-          end_of_term:        Зачет
-          course_work:        Курсовое проектирование / Курсовая работа
-          course_projecting:  Курсовое проектирование / Курсовая работа
-
       didactic_unit:
         discipline:           Дисциплина
         content:              Содержимое

@@ -8,18 +8,14 @@ class Check < ActiveRecord::Base
 
   scope :actual, ->() { where(:deleted_at => nil) }
 
-  has_enum :check_kind
+  extend Enumerize
 
-  REPORT_KINDS = {
-    exam:               'Экзамен',
-    end_of_term:        'Зачет',
-    course_work:        'Диф. зачет',
-    course_projecting:  'Диф. зачет',
-  }
+  enumerize :check_kind, :in => %w[exam end_of_term course_work course_projecting], :scope => true
+  delegate :text, :to => :check_kind, :prefix => true
 
-  def report_kind_value
-    REPORT_KINDS[check_kind]
-  end
+  alias_attribute :kind_report, :check_kind
+  enumerize :kind_report, :in => %w[exam end_of_term course_work course_projecting]
+  delegate :text, :to => :kind_report, :prefix => true
 end
 
 # == Schema Information

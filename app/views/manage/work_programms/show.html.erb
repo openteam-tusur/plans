@@ -1,4 +1,4 @@
-<h4><%= @work_programm %></h4>
+<h4>Рабочая программа по дисциплине &quot;<%= @work_programm.discipline.title %>&quot; за <%= @year.number %> год</h4>
 
 <% unless @work_programm.file_url? %>
   <div class='work_programm_wrapper'>

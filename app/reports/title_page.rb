@@ -43,8 +43,8 @@ class TitlePage < Page
 
   def checks
     hash = {}
-    discipline.checks.group_by(&:report_kind_value).each do |check_kind, checks|
-      hash[check_kind] =  "#{checks.map(&:semester).map(&:number).sort.join(', ')} семестр"
+    discipline.checks.group_by(&:kind_report_text).each do |kind, checks|
+      hash[kind] =  "#{checks.map(&:semester).map(&:number).sort.join(', ')} семестр"
     end
     hash
   end
