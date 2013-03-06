@@ -302,8 +302,8 @@ class WorkProgramm < ActiveRecord::Base
 
   def brs_by_semester_valid?(semester)
     res = []
-    res << rating_items_for_semester(semester).with_rating_item_kind('default').any?
-    res << rating_items_for_semester(semester).with_rating_item_kind('csr').any? if grouped_loadings(:csr)[semester]
+    res << rating_items_for_semester(semester).with_kind('default').any?
+    res << rating_items_for_semester(semester).with_kind('csr').any? if grouped_loadings(:csr)[semester]
     res << examination_questions_for_semester(semester).any? if grouped_loadings(:exam)[semester]
     !res.include?(false)
   end
@@ -481,7 +481,7 @@ class WorkProgramm < ActiveRecord::Base
               :max_begin_1kt => score,
               :max_1kt_2kt => score,
               :max_2kt_end => score,
-              :rating_item_kind => loading.kind_csr? ? :csr : :default
+              :kind => loading.kind_csr? ? :csr : :default
           end
         end
       end
@@ -491,7 +491,7 @@ class WorkProgramm < ActiveRecord::Base
           :max_begin_1kt => 4,
           :max_1kt_2kt => 4,
           :max_2kt_end => 4,
-          :rating_item_kind => :default
+          :kind => :default
       end
     end
 

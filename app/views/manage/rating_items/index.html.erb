@@ -10,12 +10,12 @@
     </tr>
   </thead>
   <tbody>
-    <%= render @work_programm.rating_items_for_semester(semester).with_rating_item_kind('default') %>
+    <%= render @work_programm.rating_items_for_semester(semester).with_kind('default') %>
     <tr>
       <td colspan=6 class='centered'>
         <% if can? :modify, @work_programm %>
           <%= link_to "добавить элемент учебной деятельности", new_manage_year_speciality_subspeciality_discipline_work_programm_rating_item_path(
-            @year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :rating_item => { :semester_id => semester.id, :rating_item_kind => :default }}),
+            @year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :rating_item => { :semester_id => semester.id, :kind => :default }}),
             :remote => true, :class => 'new_record in_table new_link' %>
         <% end %>
       </td>
@@ -63,12 +63,12 @@
       </tr>
     </thead>
     <tbody>
-      <%= render @work_programm.rating_items_for_semester(semester).with_rating_item_kind('csr') %>
+      <%= render @work_programm.rating_items_for_semester(semester).with_kind('csr') %>
       <tr>
         <td colspan=6 class='centered'>
           <% if can? :modify, @work_programm %>
             <%= link_to "добавить элемент учебной деятельности", new_manage_year_speciality_subspeciality_discipline_work_programm_rating_item_path(
-              @year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :rating_item => { :semester_id => semester.id, :rating_item_kind => :csr }}),
+              @year, @speciality, @subspeciality, @discipline, @work_programm, :params => { :rating_item => { :semester_id => semester.id, :kind => :csr }}),
               :remote => true, :class => 'new_record in_table new_link' %>
           <% end %>
         </td>

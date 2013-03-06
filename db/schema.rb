@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130306063733) do
+ActiveRecord::Schema.define(:version => 20130306065126) do
 
   create_table "appendix_items", :force => true do |t|
     t.integer  "appendix_id"
@@ -251,7 +251,7 @@ ActiveRecord::Schema.define(:version => 20130306063733) do
     t.integer  "max_2kt_end"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
-    t.string   "rating_item_kind"
+    t.string   "kind"
   end
 
   add_index "rating_items", ["semester_id"], :name => "index_rating_items_on_semester_id"
