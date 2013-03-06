@@ -35,8 +35,8 @@
     <span><%= subspeciality.graduated_subdepartment %></span>
     <span><%= t('enter_year', :year => @year.number) %></span>
     <span><%= speciality.degree %></span>
-    <span><%= speciality.full_title %> (<%= speciality.title %>)</span>
-    <span><%= subspeciality.education_form_text %> <%= subspeciality.reduced_text %></span>
+    <span><%= speciality.full_title %> (<%= subspeciality.title %>)</span>
+    <span><%= subspeciality.capitalized_education_form %> форма <%= subspeciality.reduced_text %></span>
   </div>
 
   <h6>Циклы дисциплин</h6>

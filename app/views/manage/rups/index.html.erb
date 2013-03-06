@@ -2,7 +2,7 @@
   <h2><%= year.number %></h2>
   <% education_forms.each do |edu_forms| %>
     <% edu_forms.each do |edu_form| %>
-      <h3><%= Subspeciality.human_enum_values(:education_form)[edu_form[0]] %></h3>
+      <h3><%= Subspeciality.education_form.find_value(edu_form[0]).text %></h3>
       <table border=1>
         <% edu_form[1].each do |speciality, subspecialities| %>
           <tr>

@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class SubspecialityDecorator < Draper::Decorator
-  delegate :title, :actual_semesters, :work_plan, :gos_generation, :graduated_subdepartment, :human_education_form, :year, :reduced_text
+  delegate :title, :actual_semesters, :work_plan, :gos_generation, :graduated_subdepartment, :year, :reduced_text, :education_form_text
 
   decorates_association :speciality
 
@@ -14,7 +14,7 @@ class SubspecialityDecorator < Draper::Decorator
   end
 
   def extra_info
-    "#{speciality.degree}. #{graduated_subdepartment}. #{year} начала подготовки. #{capitalized_education_form} #{reduced_text} обучения."
+    "#{speciality.degree}. #{graduated_subdepartment}. #{year} начала подготовки. #{capitalized_education_form} форма #{reduced_text} обучения."
   end
 
   def cycles_with_disciplines
@@ -37,16 +37,12 @@ class SubspecialityDecorator < Draper::Decorator
     h.content_tag :p, reduced_text, :class => 'reduced' if reduced_text
   end
 
-  def education_form_text
-    capitalized_education_form.gsub(/форма$/, '')
-  end
-
   def education_form
-    h.content_tag :p, education_form_text
+    h.content_tag :p, capitalized_education_form
   end
 
   def capitalized_education_form
-    human_education_form.tap do |string|
+    education_form_text.tap do |string|
       string[0] = string[0].mb_chars.capitalize!
     end
   end

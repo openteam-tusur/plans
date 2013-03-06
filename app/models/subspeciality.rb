@@ -20,7 +20,6 @@
 
 
 class Subspeciality < ActiveRecord::Base
-  extend Enumerize
 
   attr_accessible :title, :subdepartment_id, :graduated_subdepartment_id, :education_form, :department_id, :plan_digest, :file_path, :reduced
 
@@ -50,9 +49,9 @@ class Subspeciality < ActiveRecord::Base
 
   alias_method :profiled_subdepartment, :subdepartment
 
-  has_enum :education_form
-
-  enumerize :reduced, :in => %w[higher_specialized higher_unspecialized secondary_specialized secondary_unspecialized]
+  extend Enumerize
+  enumerize :education_form, :in => %w[full-time part-time postal postal-with-dist]
+  enumerize :reduced,        :in => %w[higher_specialized higher_unspecialized secondary_specialized secondary_unspecialized]
 
   # TODO: only permitted for non managers
   scope :consumed_by, ->(user) do
@@ -75,7 +74,7 @@ class Subspeciality < ActiveRecord::Base
   end
 
   def to_s
-    "#{title}, #{human_education_form}"
+    "#{title}, #{education_form_text} форма"
   end
 
   def import_to_s
