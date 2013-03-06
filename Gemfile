@@ -19,7 +19,6 @@ group :default do
   gem 'esp-views'
   gem 'grape'
   gem 'grape-entity'
-  gem 'has_enum'
   gem 'has_scope'
   gem 'inherited_resources'
   gem 'memoist'
