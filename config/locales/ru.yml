@@ -96,37 +96,24 @@ ru:
           course_projecting:  Курсовое проектирование / Курсовая работа
 
       didactic_unit:
-        discipline: Дисциплина
-        content:    Содержимое
+        discipline:           Дисциплина
+        content:              Содержимое
 
       examination_question:
-        question_kind:  Тип вопроса
-        score:          Баллы
+        question_kind:        Тип вопроса
+        score:                Баллы
 
       exercise:
-        title:       Наименование темы
-        volume:      Объем в часах
-        description: Содержание
-        lectures:  Лекции
-        labs:      Лабораторные занятия
-        srs:       Самостоятельная работа
-        practices: Практические занятия
-        csrs:      Курсовое проектирование / Курсовые работы
-        add_lecture:  добавить лекцию
-        add_lab:      добавить лабораторную работу
-        add_practice: добавить практическое занятие
-        add_csr:      добавить курсовой проект / курсовую работу
-        kind_enum:
-          lecture:  Лекция
-          lab:      Лабораторная работа
-          practice: Практическое занятие
-          csr:      Курсовой проект / Курсовая работа
+        title:                Наименование темы
+        volume:               Объем в часах
+        description:          Содержание
+        srs:                  Самостоятельная работа
 
       gos:
-        title:            Название специальности
-        code:             Код специальности в ГОС
-        speciality_code:  Код специальности
-        approved_on:      Дата утверждения
+        title:                Название специальности
+        code:                 Код специальности в ГОС
+        speciality_code:      Код специальности
+        approved_on:          Дата утверждения
 
       loading:
         loading_kind_enum:

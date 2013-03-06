@@ -13,10 +13,15 @@ class Exercise < ActiveRecord::Base
 
   before_create :set_weight
 
-  has_enum :kind
+  extend Enumerize
+  enumerize :kind, :in => %w[lecture lab practice csr], :scope => true
+  enumerize :add_kind, :in => %w[lecture lab practice csr]
+  enumerize :pluralize_kind, :in => %w[lecture lab practice csr srs]
+
+  WORK_PROGRAMM_KINDS = kind.values + ['srs']
 
   def set_weight
-    self.weight = Exercise.enum_values(:kind).index(kind)
+    self.weight = Exercise.kind.values.index(kind)
   end
 end
 

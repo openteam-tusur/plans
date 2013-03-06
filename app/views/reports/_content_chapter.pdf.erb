@@ -1,12 +1,12 @@
 <div class='content_chapter_page'>
   <h1 class='uppercase strong'>2. Содержание дисциплины</h1>
-  <% Exercise.enum_values(:kind).each_with_index do |kind, index| %>
-  <h2 class='strong indentation'>2.<%= index+1 %> <%= Exercise.human_attribute_name kind.pluralize %></h2>
+  <% Exercise.kind.values.each_with_index do |kind, index| %>
+  <h2 class='strong indentation'>2.<%= index+1 %> <%= Exercise.pluralize_kind.find_value(kind).text %></h2>
   <% if resource.has_loadings_for?(kind) %>
     <div>Всего часов: <%= title_page.scheduling.send(kind).total %></div>
     <% ex_index = 1 %>
     <% resource.grouped_loadings(kind).each do |semester, loadings| %>
-      <h3 class='strong indentation'><%= "2.#{index+1}.#{ex_index} #{Exercise.human_attribute_name kind.pluralize}" %> для <%= semester.number %> семестра</h3>
+      <h3 class='strong indentation'><%= "2.#{index+1}.#{ex_index} #{Exercise.pluralize_kind.find_value(kind).text}" %> для <%= semester.number %> семестра</h3>
       <div class='split_table'>
         <table class='exercises'>
           <tbody>

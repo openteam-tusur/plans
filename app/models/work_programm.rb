@@ -182,14 +182,8 @@ class WorkProgramm < ActiveRecord::Base
     self_education_items.where(:semester_id => semester)
   end
 
-  Exercise.enums['kind'].each do |kind|
-    define_method kind.pluralize do
-      exercises.where(:kind => kind)
-    end
-  end
-
   def exercises_by_semester_and_kind(semester, kind)
-    send(kind.pluralize).where(:semester_id => semester)
+    exercises.with_kind(kind).where(:semester_id => semester)
   end
 
   def previous_disciplines
@@ -206,7 +200,7 @@ class WorkProgramm < ActiveRecord::Base
 
   def available_exercise_kinds
     res = []
-    res = discipline.loadings.pluck(:loading_kind) & Exercise.enum_values(:kind)
+    res = discipline.loadings.pluck(:loading_kind) & Exercise.kind.values
     res << 'srs' if discipline.loadings.pluck(:loading_kind).include?('srs')
     res
   end
@@ -290,12 +284,8 @@ class WorkProgramm < ActiveRecord::Base
     !grouped_loadings(kind).keys.map{ |semester| exercises_by_semester_and_kind_valid?(semester, kind) }.include?(false)
   end
 
-  def self_education_items_by_semester_valid?(semester)
-    exercises_by_semester_and_kind_valid?(semester, :srs)
-  end
-
   def exercises_valid?
-    !(Exercise.enum_values(:kind) + [:srs]).map{|kind| exercises_by_kind_valid?(kind) }.include?(false)
+    !Exercise::WORK_PROGRAMM_KINDS.map{|kind| exercises_by_kind_valid?(kind) }.include?(false)
   end
 
   def publications_by_kind_valid?(kind)
@@ -358,7 +348,7 @@ class WorkProgramm < ActiveRecord::Base
 
     def exercises_json
       json = { :exercises_valid => exercises_valid? }
-      (Exercise.enum_values(:kind) + [:srs]).each do |kind|
+      Exercise::WORK_PROGRAMM_KINDS.each do |kind|
         json[:"exercises_#{kind}_valid"] = exercises_by_kind_valid?(kind)
         grouped_loadings(kind).keys.each do |semester|
           json[:"exercises_#{kind}_#{semester.number}_valid"] = exercises_by_semester_and_kind_valid?(semester, kind)
