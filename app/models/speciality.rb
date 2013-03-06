@@ -18,10 +18,6 @@ class Speciality < ActiveRecord::Base
 
   default_scope order(:code)
 
-  scope :bachelor,    where(:degree => 'bachelor')
-  scope :magistracy,  where(:degree => 'magistracy')
-  scope :specialty,   where(:degree => 'specialty')
-
   scope :actual, -> { where(:deleted_at => nil) }
 
   # TODO: only permitted for non managers
@@ -32,7 +28,7 @@ class Speciality < ActiveRecord::Base
   delegate :consumed_by, :to => :subspecialities, :prefix => true
 
   extend Enumerize
-  enumerize :degree, :in => %w[bachelor magistracy specialty]
+  enumerize :degree, :in => %w[bachelor magistracy specialty], :scope => true
 
   def to_param
     code

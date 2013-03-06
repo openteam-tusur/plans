@@ -1,5 +1,5 @@
 <div class="speciality_list">
-  <h4><%= t("activerecord.values.speciality.#{params[:degree]}") %>, <%= t('enter_year', :year => @year.number).mb_chars.downcase %></h4>
+  <h4><%= Speciality.degree.find_value(params[:degree]).text %>, <%= t('enter_year', :year => @year.number).mb_chars.downcase %></h4>
   <% if collection.any? %>
     <ul>
       <%= render collection %>

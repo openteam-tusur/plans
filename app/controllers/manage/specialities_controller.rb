@@ -12,7 +12,7 @@ class Manage::SpecialitiesController < Manage::ApplicationController
   has_scope :actual, :default => true, :type => :boolean
 
   has_scope :degree do |controller, scope, value|
-    scope.send value
+    scope.with_degree value
   end
 
   has_scope :eager_load_associations, :default => true, :type => :boolean, :only => :index do |controller, scope|

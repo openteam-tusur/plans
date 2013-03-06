@@ -1,5 +1,11 @@
 ru:
   enumerize:
+    speciality:
+      degree:
+        bachelor:           Бакалавриат
+        magistracy:         Магистратура
+        specialty:          Специалитет
+
     subspeciality:
       reduced:
         higher_specialized:       (сокращённая на базе ВПО соответствующего профиля)

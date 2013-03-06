@@ -12,6 +12,6 @@ class SpecialityDecorator < Draper::Decorator
   end
 
   def degree
-    I18n.t model.degree, :scope => 'activerecord.values.speciality'
+    model.degree.text
   end
 end

@@ -5,7 +5,7 @@ SimpleNavigation::Configuration.run do |navigation|
       primary.item year.number, t('enter_year', :year => year.number), manage_year_scoped_specialities_path(year, year.degrees.first), :highlights_on => ->(){ @year == year } do |sub_menu|
         year.degrees.each do |degree|
           sub_menu.item degree,
-                        t("activerecord.values.speciality.#{degree}"),
+                        Speciality.degree.find_value(degree).text,
                         manage_year_scoped_specialities_path(year, :degree => degree),
                         :highlights_on => ->(){ @year == year && ((@speciality.present? && @speciality.degree == degree) || (params[:degree] == degree)) }
           sub_menu.dom_class = 'sub_menu'

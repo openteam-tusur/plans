@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Check < ActiveRecord::Base
   belongs_to :semester
   belongs_to :discipline
@@ -8,8 +10,15 @@ class Check < ActiveRecord::Base
 
   has_enum :check_kind
 
+  REPORT_KINDS = {
+    exam:               'Экзамен',
+    end_of_term:        'Зачет',
+    course_work:        'Диф. зачет',
+    course_projecting:  'Диф. зачет',
+  }
+
   def report_kind_value
-    I18n.t check_kind, :scope => 'activerecord.attributes.check.check_kind_reports'
+    REPORT_KINDS[check_kind]
   end
 end
 

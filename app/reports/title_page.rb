@@ -18,7 +18,7 @@ class TitlePage < Page
   end
 
   def speciality_kind
-    speciality.degree == 'specialty' ? 'Специальность' : 'Направление'
+    speciality.degree.specialty? ? 'Специальность' : 'Направление'
   end
 
   def department_title

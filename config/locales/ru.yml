@@ -39,10 +39,6 @@ ru:
   edit_didactic_unit:   Редактирование дидактической единицы
   update_didactic_unit: Редактирование дидактической единицы
 
-  bachelor:           Бакалавриат
-  magistracy:         Магистратура
-  specialty:          Специалитет
-
   manage:
     work_programms:
       event_actions:
@@ -98,12 +94,6 @@ ru:
           end_of_term:        Зачет
           course_work:        Курсовое проектирование / Курсовая работа
           course_projecting:  Курсовое проектирование / Курсовая работа
-
-        check_kind_reports:
-          exam:               Экзамен
-          end_of_term:        Зачет
-          course_work:        Диф. зачет
-          course_projecting:  Диф. зачет
 
       didactic_unit:
         discipline: Дисциплина
@@ -302,12 +292,6 @@ ru:
       work_programm:        рабочую программу
       work_plan:            рабочий учебный план
       year:                 Год
-
-    values:
-      speciality:
-        bachelor:           Бакалавриат
-        magistracy:         Магистратура
-        specialty:          Специалитет
 
   pluralize:
     author:

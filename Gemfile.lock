@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/brainspec/enumerize
+  revision: d07fda637ae07dcb17b37e0128767aa2eebbf9b3
+  specs:
+    enumerize (0.5.1)
+      activesupport (>= 3.2)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -96,8 +103,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       request_store (~> 1.0.3)
-    enumerize (0.5.1)
-      activesupport (>= 3.2)
     erubis (2.7.0)
     esp-views (0.0.2)
       sso-auth
@@ -327,7 +332,7 @@ DEPENDENCIES
   decent_exposure
   default_value_for
   draper
-  enumerize
+  enumerize!
   esp-views
   fabrication
   grape

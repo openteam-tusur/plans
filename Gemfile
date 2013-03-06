@@ -13,7 +13,9 @@ group :default do
   gem 'decent_exposure'
   gem 'default_value_for'
   gem 'draper'
-  gem 'enumerize'
+  # NOTE: need for scopes support
+  # TODO: remove git after v0.5.2 release
+  gem 'enumerize',            :git => 'git://github.com/brainspec/enumerize'
   gem 'esp-views'
   gem 'grape'
   gem 'grape-entity'
