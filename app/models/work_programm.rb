@@ -59,7 +59,7 @@ class WorkProgramm < ActiveRecord::Base
 
   delegate :provided_subdepartment, :profiled_subdepartment, :graduated_subdepartment, :to => :discipline
 
-  after_create :create_requirements
+  after_create :create_requirements!
   after_create :create_protocol!
   after_create :generate_work_programm, :if => ->(wp){ wp.generate.to_i == 1 && !wp.file_url? }
   after_create :create_new_message
@@ -386,9 +386,9 @@ class WorkProgramm < ActiveRecord::Base
       self.purpose = default_purpose
     end
 
-    def create_requirements
+    def create_requirements!
       Requirement.kind.values.each do |kind|
-        requirements.create(kind: kind)
+        requirements.create!(kind: kind)
       end
     end
 
@@ -522,7 +522,7 @@ class WorkProgramm < ActiveRecord::Base
     end
 
     def set_state_to_released
-      self.update_attribute :state, 'released'
+      self.update_column :state, 'released'
       move_messages_to_archive
       create_new_message
     end
