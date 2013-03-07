@@ -1,0 +1,28 @@
+<p>
+  Форма обучения:
+  <% Subspeciality.education_form.values.each do |education_form| %>
+    <% if params[:education_form] == education_form %>
+      <%= education_form.text %>
+    <% else %>
+      <%= link_to education_form.text, rpz_subspecialities_path(:education_form => education_form) %>
+    <% end %>
+  <% end %>
+</p>
+<% grouped_subspecialities.each do |year, subspecialities| %>
+  <h1><%= year %></h1>
+  <ul>
+    <% subspecialities.group_by(&:speciality).each do |speciality, subspecialities| %>
+      <li>
+        <h2><%= speciality %></h2>
+        <ul>
+          <% subspecialities.each do |subspeciality| %>
+            <li>
+              <%= link_to [subspeciality.title, subspeciality.subdepartment.abbr].join(', '), rpz_subspeciality_path(subspeciality) %>
+              <%= subspeciality.reduced_text %>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

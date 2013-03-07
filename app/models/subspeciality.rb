@@ -50,12 +50,24 @@ class Subspeciality < ActiveRecord::Base
   alias_method :profiled_subdepartment, :subdepartment
 
   extend Enumerize
-  enumerize :education_form, :in => %w[full-time part-time postal postal-with-dist]
+  enumerize :education_form, :in => %w[full-time part-time postal postal-with-dist], :scope => true
   enumerize :reduced,        :in => %w[higher_specialized higher_unspecialized secondary_specialized secondary_unspecialized]
 
   # TODO: only permitted for non managers
   scope :consumed_by, ->(user) do
     scoped
+  end
+
+  scope :ordered, -> do
+    joins(:speciality)
+    .joins(:year)
+    .joins(:subdepartment)
+    .order('years.number',
+           'specialities.code',
+           'subspecialities.title',
+           'subdepartments.abbr',
+           'subspecialities.education_form',
+           'subspecialities.reduced desc')
   end
 
   delegate :gos, :gos?, :to => :speciality
