@@ -62,8 +62,6 @@ Plans::Application.routes.draw do
     root :to => 'goses#index'
   end
 
-  root :to => 'application#index'
-
   namespace :rpz do
     resources :years, :only => [] do
       get '/:degree/:education_form' => 'subspecialities#index',
@@ -76,6 +74,8 @@ Plans::Application.routes.draw do
     resources :subspecialities, :only => :show
     root :to => 'subspecialities#index', :year_id => '2007', :degree => 'specialty', :education_form => 'full-time'
   end
+
+  root :to => 'application#index'
 
   mount API::Plans => '/api'
 end

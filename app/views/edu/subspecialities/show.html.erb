@@ -45,7 +45,7 @@
             <%= discipline.cycle_id %>
           </td>
           <td class='discipline_name'>
-            <% if discipline.work_programm %>
+            <% if discipline.work_programm.try(&:file_url) %>
               <%= link_to discipline.title, discipline.work_programm.file_url %>
             <% else %>
               <%= discipline.title %>
