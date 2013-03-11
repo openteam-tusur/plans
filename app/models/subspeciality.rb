@@ -98,7 +98,6 @@ class Subspeciality < ActiveRecord::Base
   end
 
   def postal?
-    @postal ||= !!(education_form =~ /postal/)
+    !!(education_form =~ /^postal/)
   end
-
 end

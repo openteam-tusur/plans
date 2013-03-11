@@ -26,6 +26,15 @@ class Semester < ActiveRecord::Base
   def planning_exercise_loading_for_discipline(discipline)
     loadings.where(:kind => 'lecture', :discipline_id => discipline).map(&:value).sum
   end
+
+  def weeks
+    @weeks ||=
+      if subspeciality.postal?
+        []
+      else
+        number.odd? ? 1.upto(20) : 25.upto(44)
+      end
+  end
 end
 
 # == Schema Information

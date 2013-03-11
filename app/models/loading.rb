@@ -22,5 +22,19 @@ class Loading < ActiveRecord::Base
   extend Enumerize
   enumerize :kind, :in => %w[lecture lab practice csr exam srs], :predicates => { :prefix => true }
 
+  enumerize :abbr_kind, :in => %w[lecture lab practice csr]
+
   scope :actual, ->() { where(:deleted_at => nil) }
+
+  CLASSROOM_KINDS = %w[lecture lab practice csr]
+
+  def classroom?
+    CLASSROOM_KINDS.include?(kind)
+  end
+
+  def abbr_kind
+    Loading.abbr_kind.find_value(kind)
+  end
+
+  delegate :text, :to => :abbr_kind, :prefix => true
 end

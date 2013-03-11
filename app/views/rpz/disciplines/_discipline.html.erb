@@ -1,0 +1,20 @@
+<% rowspan = discipline.classroom_loadings_in_semester(semester).count + 1 %>
+<tr>
+  <td rowspan='<%= rowspan %>'><%= discipline.cycle_id %></td>
+  <td class='discipline' colspan='<%= semester.weeks.count + 3 %>'><%= discipline %></td>
+  <td rowspan='<%= rowspan %>'>
+    <%= safe_join(discipline.checks_in_semester(semester).map(&:kind_report_text), "<br/>\n".html_safe) %>
+  </td>
+  <td rowspan='<%= rowspan %>'><%= discipline.subdepartment.abbr %></td>
+  <td rowspan='<%= rowspan %>'></td>
+</tr>
+<% discipline.classroom_loadings_in_semester(semester).each do |loading| %>
+  <tr>
+    <td class='loading_kind'><%= loading.abbr_kind.text %></td>
+    <td><%= loading.value %></td>
+    <td></td>
+    <% semester.weeks.each do %>
+      <td></td>
+    <% end %>
+  </tr>
+<% end %>

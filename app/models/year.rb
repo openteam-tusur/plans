@@ -11,11 +11,11 @@ class Year < ActiveRecord::Base
 
   validates_presence_of :number
 
-  scope :actual, -> { where(:deleted_at => nil).order('years.number') }
-  scope :ordered, -> { order(:number) }
+  scope :actual, -> { where(:deleted_at => nil).ordered }
+  scope :ordered, -> { order('years.number') }
 
   def degrees(education_form)
-    actual_specialities.joins(:actual_subspecialities).where(:subspecialities => {:education_form => education_form}).pluck('distinct degree')
+    actual_subspecialities.select{|ss| ss.education_form == education_form}.map(&:speciality).map(&:degree).uniq.sort
   end
 
   def to_param

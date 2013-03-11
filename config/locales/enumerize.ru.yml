@@ -30,6 +30,11 @@ ru:
         csr:                      Курсовые проекты / Курсовые работы
 
     loading:
+      abbr_kind:
+        lecture:                  Лекции
+        lab:                      Лаб. раб.
+        practice:                 Практ. раб.
+        csr:                      Кр. пр.
       kind:
         lecture:                  Лекции
         lab:                      Лабораторные занятия

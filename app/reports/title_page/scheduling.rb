@@ -48,7 +48,6 @@ class TitlePage::Scheduling
     self.discipline = discipline
   end
 
-  CLASSROOM_KINDS = %w[lecture lab practice csr]
   ALL_KINDS       = %w[lecture lab practice csr classroom srs exam total]
 
   Loading.kind.values.each do |kind|
@@ -68,7 +67,7 @@ class TitlePage::Scheduling
   end
 
   def classroom
-    Row.new(:scheduling => self, :kind => CLASSROOM_KINDS, :title => 'Всего аудиторных занятий')
+    Row.new(:scheduling => self, :kind => Loading::CLASSROOM_KINDS, :title => 'Всего аудиторных занятий')
   end
 
   def total

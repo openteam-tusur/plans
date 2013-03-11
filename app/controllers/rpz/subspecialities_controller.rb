@@ -27,6 +27,8 @@ class Rpz::SubspecialitiesController < ApplicationController
   expose(:subspeciality)          { resource.decorate }
   expose(:speciality)             { subspeciality.speciality }
 
-  expose(:available_years)        { Year.actual.ordered.joins(:actual_subspecialities).where('subspecialities.education_form' => current_education_form).uniq }
+  expose(:available_years) do
+    Year.actual.ordered.includes(:actual_subspecialities => :speciality).where('subspecialities.education_form' => current_education_form).uniq
+  end
 end
 

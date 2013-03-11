@@ -65,4 +65,8 @@ class SubspecialityDecorator < Draper::Decorator
                           .order('cycle_id, title')
                           .decorate
   end
+
+  def semesters
+    actual_semesters.includes(:loadings, :checks, :disciplines => [:loadings, :checks, :subdepartment])
+  end
 end

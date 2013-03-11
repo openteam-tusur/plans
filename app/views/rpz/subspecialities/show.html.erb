@@ -2,11 +2,11 @@
 <%= content_tag :h2, subspeciality.reduced_text if subspeciality.model.reduced? %>
 <h3>Кафедра: <%= subspeciality.subdepartment %></h3>
 <ul>
-  <% subspeciality.actual_semesters.each do |semester| %>
+  <% subspeciality.semesters.each do |semester| %>
     <li>
       <h3><%= semester %></h3>
       <div class="collapsed_item">
-        <%= render :partial => 'postal', :object => semester, :as => :semester %>
+        <%= render semester %>
       </div>
     </li>
   <% end %>
