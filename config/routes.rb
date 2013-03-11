@@ -74,7 +74,7 @@ Plans::Application.routes.draw do
         :as => :subspecialities
     end
     resources :subspecialities, :only => :show
-    root :to => 'subspecialities#index', :year_id => '2007', :degree => 'bachelor', :education_form => 'full-time'
+    root :to => 'subspecialities#index', :year_id => '2007', :degree => 'specialty', :education_form => 'full-time'
   end
 
   mount API::Plans => '/api'
