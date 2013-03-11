@@ -1,5 +1,5 @@
-<h1 class='margined'><%= subspeciality.full_title %></h1>
-<h2 class='margined'><%= subspeciality.extra_info %></h2>
+<h1><%= subspeciality.full_title %></h1>
+<h2><%= subspeciality.extra_info %></h2>
 <ul>
   <% @subspeciality.actual_semesters.each do |semester| %>
     <li>
@@ -10,14 +10,3 @@
     </li>
   <% end %>
 </ul>
-<script type="text/javascript">
-  $('.collapsed_item').hide();
-  $('li>h3').on('click', function(){
-    if ($(this).siblings('.collapsed_item').is(':visible')) {
-      return false;
-    }
-    $('.collapsed_item:visible').slideToggle();
-    $(this).siblings('.collapsed_item').slideToggle();
-    return false;
-  });
-</script>
