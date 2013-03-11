@@ -1,28 +1,24 @@
-<p>
-  Форма обучения:
-  <% Subspeciality.education_form.values.each do |education_form| %>
-    <% if params[:education_form] == education_form %>
-      <%= education_form.text %>
-    <% else %>
-      <%= link_to education_form.text, rpz_subspecialities_path(:education_form => education_form) %>
-    <% end %>
-  <% end %>
-</p>
-<% grouped_subspecialities.each do |year, subspecialities| %>
-  <h1><%= year %></h1>
+<div class="speciality_list">
+<% subspecialities.group_by(&:degree).each do |degree, specialities| %>
+  <h4><%= degree.text %></h4>
   <ul>
     <% subspecialities.group_by(&:speciality).each do |speciality, subspecialities| %>
       <li>
-        <h2><%= speciality %></h2>
-        <ul>
-          <% subspecialities.each do |subspeciality| %>
-            <li>
-              <%= link_to [subspeciality.title, subspeciality.subdepartment.abbr].join(', '), rpz_subspeciality_path(subspeciality) %>
-              <%= subspeciality.reduced_text %>
-            </li>
-          <% end %>
-        </ul>
+        <div class='list'>
+          <h5><%= speciality %></h5>
+          <ul>
+            <% subspecialities.each do |subspeciality| %>
+              <li>
+                <div class='wrapper'>
+                  <%= link_to [subspeciality.title, subspeciality.subdepartment.abbr].join(', '), rpz_subspeciality_path(subspeciality) %>
+                  <%= subspeciality.reduced_text %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
       </li>
     <% end %>
   </ul>
 <% end %>
+</div>

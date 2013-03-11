@@ -1,71 +1,11 @@
-<%= link_to "&larr; назад к списку".html_safe, rpz_index_path %>
-<h1><%= [@subspeciality.speciality, @subspeciality, @subspeciality.reduced_text, @subspeciality.graduated_subdepartment].delete_if(&:blank?).join(', ').html_safe %></h1>
+<h1 class='margined'><%= subspeciality.full_title %></h1>
+<h2 class='margined'><%= subspeciality.extra_info %></h2>
 <ul>
   <% @subspeciality.actual_semesters.each do |semester| %>
     <li>
-      <h3><%= semester %></h2>
+      <h3><%= semester %></h3>
       <div class="collapsed_item">
-        <table>
-          <thead>
-            <tr>
-              <th>Дисциплина</th>
-              <th>Кол-во часов</th>
-              <th>Форма учета</th>
-              <th>Фамилия преподавателя</th>
-              <th>Совместно с группами</th>
-              <th>Кафедра</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% semester.loadings.actual.group_by(&:discipline).each do |discipline, loadings| %>
-              <tr>
-                <td colspan=2 class='discipline'><%= discipline %></td>
-                <td colspan=3><%= discipline.checks.select{|c| c.semester == semester}.map(&:kind_text).join(', ') %></td>
-                <td colspan=1 title='<%= discipline.subdepartment.title %>'><%= discipline.subdepartment.abbr %></td>
-              </tr>
-              <% loadings.select{|l| ['lecture', 'lab', 'practice', 'csr'].include?(l.kind)}.each do |loading| %>
-                <tr class='loading'>
-                  <td><%= loading.kind_text %></td>
-                  <td><%= loading.value %></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              <% end %>
-            <% end %>
-          </tbody>
-        </table>
-        <% semester_loadings = semester.loadings.actual.select{|l| ['lecture', 'lab', 'practice', 'csr'].include?(l.kind)} %>
-        <table>
-          <thead>
-            <tr>
-              <th>Всего</th>
-              <th>Лекции</th>
-              <th>Лаб. раб.</th>
-              <th>Практики</th>
-              <th>Курс. раб./Курс. пр.</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><%= semester_loadings.map(&:value).sum %></td>
-              <td><%= semester_loadings.select(&:kind_lecture?).map(&:value).sum %></td>
-              <td><%= semester_loadings.select(&:kind_lab?).map(&:value).sum %></td>
-              <td><%= semester_loadings.select(&:kind_practice?).map(&:value).sum %></td>
-              <td><%= semester_loadings.select(&:kind_csr?).map(&:value).sum %></td>
-            </tr>
-          </tbody>
-        </table>
-        <table>
-          <tr>
-            <% semester.checks.actual.group_by(&:kind).each do |kind, checks| %>
-              <td>
-                <%= t kind, :count => checks.count %>
-              </td>
-            <% end %>
-          </tr>
-        </table>
+        <%= render :partial => 'postal', :object => semester, :as => :semester %>
       </div>
     </li>
   <% end %>

@@ -59,8 +59,7 @@ class Subspeciality < ActiveRecord::Base
   end
 
   scope :ordered, -> do
-    joins(:speciality)
-    .joins(:year)
+    joins(:year)
     .joins(:subdepartment)
     .order('years.number',
            'specialities.code',
