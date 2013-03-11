@@ -19,9 +19,9 @@ class Rpz::SubspecialitiesController < ApplicationController
 
   has_scope :ordered, :default => true, :type => :boolean, :only => :index
 
-  expose(:current_education_form) { params[:education_form] }
   expose(:current_year)           { @year || speciality.year }
-  expose(:current_degree)         { params[:degree] || speciality.degree }
+  expose(:current_education_form) { params[:education_form] || subspeciality.model.education_form }
+  expose(:current_degree)         { params[:degree] || speciality.model.degree }
 
   expose(:subspecialities)        { collection }
   expose(:subspeciality)          { resource.decorate }

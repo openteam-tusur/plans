@@ -1,7 +1,8 @@
 <h1><%= subspeciality.full_title %></h1>
-<h2><%= subspeciality.extra_info %></h2>
+<%= content_tag :h2, subspeciality.reduced_text if subspeciality.model.reduced? %>
+<h3>Кафедра: <%= subspeciality.subdepartment %></h3>
 <ul>
-  <% @subspeciality.actual_semesters.each do |semester| %>
+  <% subspeciality.actual_semesters.each do |semester| %>
     <li>
       <h3><%= semester %></h3>
       <div class="collapsed_item">
