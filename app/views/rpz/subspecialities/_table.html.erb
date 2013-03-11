@@ -1,0 +1,9 @@
+<table>
+  <%= render :partial => 'table_header', :locals => {:semester => semester} %>
+  <tbody>
+    <% disciplines.select{|d| (d.loadings.map(&:semester_id) + d.checks.map(&:semester_id)).include?(semester.id)}.each do |discipline| %>
+      <%= render :partial => 'table_row', :locals => {:discipline => discipline, :semester => semester} %>
+    <% end %>
+  </tbody>
+  <%= render :partial => 'table_footer', :locals => {:semester => semester} %>
+</table>

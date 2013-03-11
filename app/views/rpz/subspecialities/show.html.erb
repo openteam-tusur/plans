@@ -6,7 +6,7 @@
     <li>
       <h3><%= semester %></h3>
       <div class="collapsed_item">
-        <%= render semester %>
+        <%= render :partial => 'table', :locals => {:semester => semester} %>
       </div>
     </li>
   <% end %>

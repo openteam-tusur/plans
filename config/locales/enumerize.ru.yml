@@ -9,8 +9,11 @@ ru:
       kind_report:
         exam:                     Экзамен
         end_of_term:              Зачет
-        course_work:              Диф. зачет
-        course_projecting:        Диф. зачет
+        end_of_term_diff:         Диф. зачет
+      plural_kind_report:
+        exam:                     Экзаменов
+        end_of_term:              Зачетов
+        end_of_term_diff:         Диф. зачетов
 
     exercise:
       kind:

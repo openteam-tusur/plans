@@ -67,6 +67,6 @@ class SubspecialityDecorator < Draper::Decorator
   end
 
   def semesters
-    actual_semesters.includes(:loadings, :checks, :disciplines => [:loadings, :checks, :subdepartment])
+    actual_semesters.includes(:loadings, :checks, :subspeciality)
   end
 end

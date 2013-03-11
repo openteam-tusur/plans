@@ -9,11 +9,11 @@ class Rpz::SubspecialitiesController < ApplicationController
 
   has_scope :actual, :default => true, :type => :boolean
 
-  has_scope :education_form do |controller, scope, value|
+  has_scope :education_form, :only => :index do |controller, scope, value|
     scope.with_education_form(value)
   end
 
-  has_scope :degree do |controller, scope, value|
+  has_scope :degree, :only => :index do |controller, scope, value|
     scope.with_degree(value)
   end
 
@@ -26,6 +26,7 @@ class Rpz::SubspecialitiesController < ApplicationController
   expose(:subspecialities)        { collection }
   expose(:subspeciality)          { resource.decorate }
   expose(:speciality)             { subspeciality.speciality }
+  expose(:disciplines)            { resource.disciplines.ordered.includes(:loadings, :checks, :subdepartment) }
 
   expose(:available_years) do
     Year.actual.ordered.includes(:actual_subspecialities => :speciality).where('subspecialities.education_form' => current_education_form).uniq

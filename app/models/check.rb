@@ -24,10 +24,15 @@ class Check < ActiveRecord::Base
   extend Enumerize
 
   enumerize :kind, :in => %w[exam end_of_term course_work course_projecting], :scope => true, :predicates => {:prefix => true}
-  enumerize :kind_report, :in => %w[exam end_of_term course_work course_projecting]
+  enumerize :kind_report, :in => %w[exam end_of_term end_of_term_diff]
+  enumerize :plural_kind_report, :in => %w[exam end_of_term end_of_term_diff]
 
   def kind_report
-    Check.kind_report.find_value(kind)
+    Check.kind_report.find_value(kind) || Check.kind_report.find_value('end_of_term_diff')
+  end
+
+  def plural_kind_report
+    Check.plural_kind_report.find_value(kind) || Check.plural_kind_report.find_value('end_of_term_diff')
   end
 
   delegate :text, :to => :kind_report, :prefix => true
