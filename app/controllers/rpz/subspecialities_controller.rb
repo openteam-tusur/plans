@@ -13,19 +13,20 @@ class Rpz::SubspecialitiesController < ApplicationController
     scope.with_education_form(value)
   end
 
-  #has_scope :load_associations, :default => true, :type => :boolean, :only => :index do |controller, scope|
-    #scope.includes(:speciality, :subdepartment, :year)
-  #end
+  has_scope :degree do |controller, scope, value|
+    scope.with_degree(value)
+  end
 
   has_scope :ordered, :default => true, :type => :boolean, :only => :index
 
   expose(:current_education_form) { params[:education_form] }
-  expose(:current_year) { @year || @subspeciality.year }
+  expose(:current_year)           { @year || speciality.year }
+  expose(:current_degree)         { params[:degree] || speciality.degree }
 
-  expose(:subspecialities)  { collection }
-  expose(:subspeciality)    { resource.decorate }
+  expose(:subspecialities)        { collection }
+  expose(:subspeciality)          { resource.decorate }
+  expose(:speciality)             { subspeciality.speciality }
 
-  expose(:available_years) { Year.actual.ordered.joins(:subspecialities).where('subspecialities.education_form' => current_education_form).uniq }
-  expose(:available_degrees) { current_year.subspecialities.with_education_form(current_education_form).pluck('distinct degree') }
+  expose(:available_years)        { Year.actual.ordered.joins(:actual_subspecialities).where('subspecialities.education_form' => current_education_form).uniq }
 end
 

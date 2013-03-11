@@ -66,13 +66,15 @@ Plans::Application.routes.draw do
 
   namespace :rpz do
     resources :years, :only => [] do
-      get '/:education_form' => 'subspecialities#index',
-        :constraints => {:education_form => /(full-time|part-time|postal|postal-with-dist)/},
-        :default => {:education_form => 'full-time'},
+      get '/:degree/:education_form' => 'subspecialities#index',
+        :constraints => {
+          :degree         => /(bachelor|magistracy|specialty)/,
+          :education_form => /(full-time|part-time|postal|postal-with-dist)/
+        },
         :as => :subspecialities
     end
     resources :subspecialities, :only => :show
-    root :to => 'subspecialities#index', :education_form => 'full-time', :year_id => '2007'
+    root :to => 'subspecialities#index', :year_id => '2007', :degree => 'bachelor', :education_form => 'full-time'
   end
 
   mount API::Plans => '/api'

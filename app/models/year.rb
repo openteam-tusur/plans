@@ -14,8 +14,8 @@ class Year < ActiveRecord::Base
   scope :actual, -> { where(:deleted_at => nil).order('years.number') }
   scope :ordered, -> { order(:number) }
 
-  def degrees
-    @degrees ||= actual_specialities.map(&:degree).uniq.sort
+  def degrees(education_form)
+    actual_specialities.joins(:actual_subspecialities).where(:subspecialities => {:education_form => education_form}).pluck('distinct degree')
   end
 
   def to_param

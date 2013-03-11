@@ -69,6 +69,11 @@ class Subspeciality < ActiveRecord::Base
            'subspecialities.reduced desc')
   end
 
+  scope :with_degree, ->(degree) do
+    joins(:speciality).
+      where(:specialities => {:degree => degree})
+  end
+
   delegate :gos, :gos?, :to => :speciality
   delegate :consumed_by, :to => :disciplines, :prefix => true
 
