@@ -1,9 +1,8 @@
 SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
     Year.actual.includes(:actual_specialities, :actual_subspecialities).each do |year|
-
-      primary.item year.number, t('enter_year', :year => year.number), manage_year_scoped_specialities_path(year, year.degrees.first), :highlights_on => ->(){ @year == year } do |sub_menu|
-        year.degrees.each do |degree|
+      primary.item year.number, t('enter_year', :year => year.number), manage_year_scoped_specialities_path(year, year.all_degrees.first), :highlights_on => ->(){ @year == year } do |sub_menu|
+        year.all_degrees.each do |degree|
           sub_menu.item degree,
                         Speciality.degree.find_value(degree).text,
                         manage_year_scoped_specialities_path(year, :degree => degree),
