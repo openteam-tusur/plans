@@ -18,8 +18,6 @@ class Department < ActiveRecord::Base
 
   validates_presence_of :title, :abbr
 
-  scope :actual, where(:deleted_at => nil)
-
   def chief(year_number)
     departments = YAML.load_file("data/#{year_number}/departments.yml")
     department_hash = departments.select { |dep_hash| dep_hash['abbr'] == abbr }.try(:first)

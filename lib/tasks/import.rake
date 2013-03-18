@@ -33,7 +33,7 @@ end
 
 desc "Форсировать полный повторный импорт"
 task :force_sync => :environment do
-  move_to_trash :year, :department, :subdepartment, :speciality, :subspeciality, :semester, :discipline
+  move_to_trash :year, :speciality, :subspeciality, :semester, :discipline
   Subspeciality.update_all :plan_digest => nil, :file_path => nil
   Loading.delete_all
   Check.delete_all
@@ -41,7 +41,7 @@ end
 
 desc "Синхронизация справочников"
 task :sync => :environment do
-  move_to_trash :year, :department, :subdepartment, :speciality, :subspeciality
+  move_to_trash :year, :speciality, :subspeciality
   Dir.glob("data/*").sort.each do |folder|
     year_number = File.basename(folder)
     YearImporter.new(year_number).import

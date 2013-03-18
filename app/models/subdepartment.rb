@@ -25,7 +25,6 @@ class Subdepartment < ActiveRecord::Base
   has_many :methodologists, :through => :permissions, :source => :user
 
   validates_presence_of :title, :abbr, :number, :department
-  scope :actual, where(:deleted_at => nil)
 
   scope :ordered, -> { order(:abbr) }
 
