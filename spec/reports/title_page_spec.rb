@@ -38,22 +38,6 @@ describe TitlePage do
     end
   end
 
-  describe '#kind' do
-    subject { page.kind }
-    context 'специалитет' do
-      before { page.speciality.degree = 'specialty' }
-      it { should == 'Специальность' }
-    end
-    context 'бакалвриат' do
-      before { page.speciality.degree = 'benchor' }
-      it { should == 'Направление' }
-    end
-    context 'магистратура' do
-      before { page.speciality.degree = 'magistracy' }
-      it { should == 'Направление' }
-    end
-  end
-
   its(:speciality_title) { should == '123123 Специальность подготовки' }
 
   describe '#department_title' do

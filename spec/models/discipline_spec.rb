@@ -29,14 +29,4 @@ describe Discipline do
   it { should validate_presence_of :subdepartment }
   it { should belong_to :subspeciality }
   it { should belong_to :subdepartment }
-
-  let(:check) { Fabricate(:check) }
-
-  it "when set deleted_at" do
-    loading = check.discipline.loadings.create(:semester => check.semester, :value => 10, :kind => 'lecture')
-    check.discipline.update_attribute(:deleted_at, Time.now)
-    check.reload.deleted_at.should_not be_nil
-    loading.reload.deleted_at.should_not be_nil
-  end
-
 end

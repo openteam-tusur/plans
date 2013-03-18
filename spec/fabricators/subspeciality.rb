@@ -4,5 +4,6 @@ Fabricator(:subspeciality) do
   speciality
   title "Направление обучения"
   subdepartment
-  speciality
+  department
+  education_form 'full-time'
 end
