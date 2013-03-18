@@ -4,7 +4,7 @@ class DisciplineXML
   attr_accessor :xml, :plan_importer
   attr_accessor :loadings, :checks
 
-  delegate :cycle_node, :warn, :to => :plan_importer
+  delegate :cycle_node, :warn, :subspeciality_postal?, :speciality_magistracy?, :speciality_gos3?, :to => :plan_importer
 
   def initialize(xml, plan_importer)
     self.xml = xml
@@ -61,7 +61,19 @@ class DisciplineXML
 
   def parse
     if kind.inquiry.common?
-      xml.at_css('>Сем') ? parse_nonpostal : parse_postal
+      if subspeciality_postal?
+        parse_postal
+      else
+        if xml.at_css('>Сем')
+          parse_nonpostal
+        else
+          if speciality_gos3? && speciality_magistracy? && have_alternatives?
+            parse_nonpostal_first_alternative_discipline
+          else
+            warn("Дисциплина #{title} без нагрузки")
+          end
+        end
+      end
     end
   end
 
@@ -121,6 +133,12 @@ class DisciplineXML
     end
   end
 
+  def parse_nonpostal_first_alternative_discipline
+    first_alternative_discipline.parse
+    self.loadings = first_alternative_discipline.loadings
+    self.checks   = first_alternative_discipline.checks
+  end
+
   def parse_postal
     xml.css('>Курс').each do |course_xml|
       if course_xml.at_css('>Сессия')
@@ -155,6 +173,15 @@ class DisciplineXML
     plan_importer.subdisciplines(cycle_id)
   end
 
+  def first_alternative_discipline
+    plan_importer.discipline(cycle_id.gsub /\d+$/, '1')
+  end
+
+  def have_alternatives?
+    cycle, discipline, id = cycle_id.split('.')
+    discipline =~ /^ДВ\d+$/ && id.to_i > 1
+  end
+
   extend Memoist
-  memoize :subdisciplines
+  memoize :subdisciplines, :first_alternative_discipline
 end

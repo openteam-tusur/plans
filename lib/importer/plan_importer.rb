@@ -26,6 +26,7 @@ class PlanImporter
   attr_accessor :file_path, :options
 
   delegate :postal?, :to => :subspeciality, :prefix => true
+  delegate :gos3?, :magistracy?, :to => :speciality, :prefix => true
 
   def initialize(file_path, options={})
     self.file_path = file_path
@@ -56,6 +57,10 @@ class PlanImporter
     xml.css("СтрокиПлана Строка[ИдетификаторДисциплины^='#{cycle_id}.']").map do |discipline_xml|
       DisciplineXML.new(discipline_xml, self)
     end
+  end
+
+  def discipline(cycle_id)
+    DisciplineXML.new(xml.at_css("СтрокиПлана Строка[ИдетификаторДисциплины='#{cycle_id}']"), self)
   end
 
   private

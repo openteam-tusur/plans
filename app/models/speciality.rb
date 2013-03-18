@@ -27,7 +27,7 @@ class Speciality < ActiveRecord::Base
   delegate :consumed_by, :to => :subspecialities, :prefix => true
 
   extend Enumerize
-  enumerize :degree, :in => %w[bachelor magistracy specialty], :scope => true
+  enumerize :degree, :in => %w[bachelor magistracy specialty], :scope => true, :predicates => true
 
   def to_param
     code
