@@ -53,14 +53,20 @@ class PlanImporter
     Rails.logger.warn(log_message)
   end
 
+  def discipline_xml(xml_node)
+    DisciplineXML.new(xml_node, self)
+  end
+
+  def discipline_xmls(xml_node_set)
+    xml_node_set.map{|xml_node| discipline_xml(xml_node)}
+  end
+
   def subdisciplines(cycle_id)
-    xml.css("СтрокиПлана Строка[ИдетификаторДисциплины^='#{cycle_id}.']").map do |discipline_xml|
-      DisciplineXML.new(discipline_xml, self)
-    end
+    discipline_xmls xml.css("СтрокиПлана Строка[ИдетификаторДисциплины^='#{cycle_id}.']")
   end
 
   def discipline(cycle_id)
-    DisciplineXML.new(xml.at_css("СтрокиПлана Строка[ИдетификаторДисциплины='#{cycle_id}']"), self)
+    discipline_xml xml.at_css("СтрокиПлана Строка[ИдетификаторДисциплины='#{cycle_id}']")
   end
 
   private
@@ -192,6 +198,7 @@ class PlanImporter
   memoize :xml, :title_node, :year, :year_number, :speciality_full_name, :speciality_code
   memoize :speciality, :subspeciality_title, :human_education_form, :education_form, :reduced, :subspeciality, :file_path_digest
   memoize :find_subdepartment, :subspeciality_node, :find_or_create_semester, :subdisciplines
+  memoize :discipline_xml
 
   def default_subspeciality_title
     case speciality.degree
@@ -216,10 +223,11 @@ class PlanImporter
 
   def really_import
     reset_acuality_of_associations
-
-    xml.css('СтрокиПлана Строка').each do |discipline_xml|
-      DisciplineImporter.new(self, DisciplineXML.new(discipline_xml, self)).import
-    end
+    discipline_importers(xml.css('СтрокиПлана Строка')).each(&:import)
     subspeciality.update_column(:plan_digest, file_path_digest)
+  end
+
+  def discipline_importers(xml_node_set)
+    discipline_xmls(xml_node_set).map{|discipline_xml| DisciplineImporter.new(self, discipline_xml)}
   end
 end

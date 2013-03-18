@@ -183,5 +183,5 @@ class DisciplineXML
   end
 
   extend Memoist
-  memoize :subdisciplines, :first_alternative_discipline
+  memoize :subdisciplines, :first_alternative_discipline, :parse
 end
