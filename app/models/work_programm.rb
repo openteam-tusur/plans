@@ -59,10 +59,11 @@ class WorkProgramm < ActiveRecord::Base
 
   delegate :provided_subdepartment, :profiled_subdepartment, :graduated_subdepartment, :to => :discipline
 
-  after_create :create_requirements!
-  after_create :create_protocol!
+  after_create :create_requirements!, :unless => :file_url?
+  after_create :create_protocol!, :unless => :file_url?
   after_create :generate_work_programm, :if => ->(wp){ wp.generate.to_i == 1 && !wp.file_url? }
   after_create :create_new_message
+
   after_create :set_state_to_released, :if => :file_url?
 
   default_value_for(:year) { Date.today.year - 1 }
@@ -85,6 +86,8 @@ class WorkProgramm < ActiveRecord::Base
   scope :checks_by_educational_office,      ->(user){ consumed_by(user).with_state(:check_by_educational_office) }
 
   has_attached_file :file, :storage => :elvfs, :elvfs_url => Settings['storage.url']
+
+  validates_attachment :file, :presence => true, :content_type => {:content_type => 'application/pdf'}
 
   state_machine :initial => :draft do
     after_transition :move_messages_to_archive

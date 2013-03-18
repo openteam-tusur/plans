@@ -154,10 +154,10 @@ ru:
 
     errors:
       models:
-        programm:
+        work_programm:
           attributes:
-            file:
-              blank: файл не выбран
+            file_content_type:
+              invalid:          файл рабочей программы должен быть в формате PDF
 
     models:
       ability:              Права
