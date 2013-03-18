@@ -136,7 +136,7 @@ class PlanImporter
   end
 
   def education_form
-    Subspeciality.human_enum_values(:education_form).invert["#{human_education_form} форма"]
+    Subspeciality.education_form.values.detect{|f| f.text == human_education_form }
   end
 
   def reduced
@@ -179,14 +179,14 @@ class PlanImporter
     end
   end
 
-  extend Memoist
-  memoize :xml, :title_node, :year, :year_number, :speciality_full_name, :speciality_code
-  memoize :speciality, :subspeciality_title, :education_form, :reduced, :subspeciality, :file_path_digest
-  memoize :find_subdepartment, :subspeciality_node, :find_or_create_semester, :subdisciplines
-
   def human_education_form
     speciality_full_name.match(/(заочная с дистанционной технологией|очно-заочная|очная|заочная)/).try(:captures).try(:first)  || 'очная'
   end
+
+  extend Memoist
+  memoize :xml, :title_node, :year, :year_number, :speciality_full_name, :speciality_code
+  memoize :speciality, :subspeciality_title, :human_education_form, :education_form, :reduced, :subspeciality, :file_path_digest
+  memoize :find_subdepartment, :subspeciality_node, :find_or_create_semester, :subdisciplines
 
   def default_subspeciality_title
     case speciality.degree
