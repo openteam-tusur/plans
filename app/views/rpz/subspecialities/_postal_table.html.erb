@@ -1,0 +1,62 @@
+<table>
+  <thead>
+    <tr>
+      <th rowspan='2'>Дисциплина</th>
+      <th rowspan='2'>Всего часов</th>
+      <th rowspan='2'>Итог</th>
+      <% if semester.weeks.any? %>
+        <th colspan='<%= semester.weeks.count %>'>Распределение занятий по неделям</th>
+      <% end %>
+      <th rowspan='2'>Форма учёта</th>
+      <th>Кафедра</th>
+      <th rowspan='2'>Поток</th>
+    </tr>
+    <tr>
+      <% semester.weeks.each do |week| %>
+        <th class='week'><%= week %></th>
+      <% end %>
+      <th>Препод.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% disciplines.select{|d| (d.loadings.map(&:semester_id) + d.checks.map(&:semester_id)).include?(semester.id)}.each do |discipline| %>
+      <% rowspan = discipline.classroom_loadings_in_semester(semester).count + 1 %>
+      <tr>
+        <td class='discipline' colspan='<%= semester.weeks.count + 3 %>'><%= discipline %></td>
+        <td rowspan='<%= rowspan %>'>
+          <%= safe_join(discipline.checks_in_semester(semester).map(&:kind_report_text), "<br/>\n".html_safe) %>
+        </td>
+        <td rowspan='<%= rowspan %>'><%= discipline.subdepartment.abbr %></td>
+        <td rowspan='<%= rowspan %>'></td>
+      </tr>
+      <% discipline.classroom_loadings_in_semester(semester).each do |loading| %>
+        <tr>
+          <td class='loading_kind'><%= loading.abbr_kind.text %></td>
+          <td><%= loading.value %></td>
+          <td></td>
+          <% semester.weeks.each do %>
+            <td></td>
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>Итого:</th>
+      <th><%= semester.loadings.select(&:classroom?).map(&:value).sum %></th>
+      <th></th>
+      <% semester.weeks.each do %>
+        <th></th>
+      <% end %>
+      <th colspan='3'>
+        <dl>
+          <% semester.checks.group_by(&:plural_kind_report).sort.each do |kind, checks| %>
+            <dt><%= kind.text %></dt>
+            <dd><%= checks.count %></dd>
+          <% end %>
+        </dl>
+      </th>
+    </tr>
+  </tfoot>
+</table>
