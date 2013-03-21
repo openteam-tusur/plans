@@ -27,7 +27,7 @@ group :default do
   gem 'openteam-commons',     '>= 0.2.3'
   gem 'paperclip-elvfs'
   gem 'progress_bar',         :require => false
-  gem 'rails'
+  gem 'rails',                '~> 3.2.13'
   gem 'remotipart'
   gem 'russian'
   gem 'simple-navigation'
