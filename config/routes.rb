@@ -71,7 +71,9 @@ Plans::Application.routes.draw do
         },
         :as => :subspecialities
     end
-    resources :subspecialities, :only => :show
+    resources :subspecialities, :only => :show do
+      resources :semesters, only: :show
+    end
     root :to => 'subspecialities#index', :year_id => '2007', :degree => 'specialty', :education_form => 'full-time'
   end
 

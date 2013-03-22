@@ -4,10 +4,7 @@
 <ul>
   <% subspeciality.semesters.each do |semester| %>
     <li>
-      <h3><%= semester %></h3>
-      <div class="collapsed_item">
-        <%= render :partial => "#{subspeciality.source.education_form}_table", locals: {semester: semester} %>
-      </div>
+      <h3><%= link_to semester, rpz_subspeciality_semester_path(subspeciality, semester) %></h3>
     </li>
   <% end %>
 </ul>

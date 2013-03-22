@@ -1,0 +1,15 @@
+<%= content_for :stylesheets do %>
+  <%= stylesheet_link_tag "print/application", :media => "all" %>
+  <%= stylesheet_link_tag "print/print", :media => "print" %>
+<% end %>
+
+<%= content_for :content do %>
+  <div class='header'>
+  </div>
+
+  <div class="main_wrapper">
+    <%= yield %>
+  </div>
+<% end %>
+
+<%= render :file => 'layouts/base' %>

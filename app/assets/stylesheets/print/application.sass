@@ -1,0 +1,56 @@
+@import 'compass/reset'
+@import 'compass/utilities'
+@import 'compass/css3'
+@import '../manage/application'
+
+div.main_wrapper
+  margin: 20px 20px 20px 70px
+
+p.head
+  text-align: center
+
+table
+  border: 1px solid #888
+  border-collapse: collapse
+  margin: 0 0 50px 0
+
+  td, th
+    border: 1px solid #888
+    padding: 2px 4px
+
+  th
+    font-weight: bold
+    text-align: center
+
+  th.week
+    padding: 1px 1px
+    width: 3%
+    max-width: 3%
+    overflow: hidden
+
+  td.discipline
+    font-weight: bold
+
+  td.subdepartment
+    vertical-align: top
+
+  td.loading_kind
+    white-space: nowrap
+
+  dl
+    width: 100%
+
+    dt
+      width: 80%
+      float: left
+      text-align: right
+
+    dd
+      width: 20%
+      text-align: right
+      +clearfix
+
+ul
+  li
+    h3
+      text-decoration: underline
