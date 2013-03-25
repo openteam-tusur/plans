@@ -15,6 +15,30 @@ bachelor:
         subdepartment: "УИ"
         title: "Управление качеством в информационных системах"
 
+  -
+    code: "221000.62"
+    title: "Мехатроника и робототехника"
+    subspecialities:
+      -
+        subdepartment: "УИ"
+        title: "Компьютерные технологии управления в мехатронике и робототехнике"
+
+  -
+    code: "221400.62"
+    title: "Управление качеством"
+    subspecialities:
+      -
+        subdepartment: "УИ"
+        title: "Управление качеством в информационных системах"
+
+  -
+    code: "222000.62"
+    title: "Инноватика"
+    subspecialities:
+      -
+        subdepartment: "УИ"
+        title: "Управление инновациями в электронной технике"
+
 magistracy:
   -
     code: "221000.68"
