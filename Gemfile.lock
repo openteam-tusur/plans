@@ -5,6 +5,19 @@ GIT
     enumerize (0.5.1)
       activesupport (>= 3.2)
 
+GIT
+  remote: git://github.com/openteam/capistrano-db-tasks
+  revision: b6b81df2d6965c456e8ca4cf3aa325c95a542b36
+  specs:
+    capistrano-db-tasks (0.2)
+
+GIT
+  remote: git://github.com/sosedoff/capistrano-unicorn
+  revision: dc49187df68e92bc04b7b0fa42da1e24f70d69f5
+  specs:
+    capistrano-unicorn (0.1.7)
+      capistrano
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -56,12 +69,14 @@ GEM
       terminal-table (~> 1.4)
     builder (3.0.4)
     cancan (1.6.8)
-    capistrano (2.14.1)
+    capistrano (2.14.2)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
+    capistrano-ext (1.2.1)
+      capistrano (>= 1.0.0)
     choice (0.1.6)
     chronic (0.6.7)
     chunky_png (1.2.6)
@@ -158,13 +173,13 @@ GEM
     multi_xml (0.5.2)
     multipart-post (1.1.5)
     nested_form (0.2.3)
-    net-scp (1.0.4)
-      net-ssh (>= 1.99.1)
-    net-sftp (2.0.5)
-      net-ssh (>= 2.0.9)
-    net-ssh (2.6.3)
-    net-ssh-gateway (1.1.0)
-      net-ssh (>= 1.99.1)
+    net-scp (1.1.0)
+      net-ssh (>= 2.6.5)
+    net-sftp (2.1.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.6.6)
+    net-ssh-gateway (1.2.0)
+      net-ssh (>= 2.6.5)
     nokogiri (1.5.5)
     oauth2 (0.8.0)
       faraday (~> 0.8)
@@ -178,6 +193,11 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
+    openteam-capistrano (0.0.3)
+      capistrano-db-tasks
+      capistrano-ext
+      capistrano-unicorn
+      rvm-capistrano
     openteam-commons (0.2.3)
       airbrake
       configliere
@@ -324,7 +344,8 @@ PLATFORMS
 DEPENDENCIES
   annotate (>= 2.5.0.pre)
   brakeman
-  capistrano
+  capistrano-db-tasks!
+  capistrano-unicorn!
   coffee-rails
   compass-rails
   debugger
@@ -343,6 +364,7 @@ DEPENDENCIES
   memoist
   nested_form
   nokogiri
+  openteam-capistrano
   openteam-commons (>= 0.2.3)
   paperclip-elvfs
   pg
@@ -354,7 +376,6 @@ DEPENDENCIES
   rspec-rails
   ruby-graphviz
   russian
-  rvm-capistrano
   sass-rails
   shoulda-matchers
   simple-navigation

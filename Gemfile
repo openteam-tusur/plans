@@ -41,13 +41,14 @@ end
 group :development do
   gem 'annotate',             '>= 2.5.0.pre'
   gem 'brakeman'
-  gem 'capistrano'
   gem 'debugger'
   gem 'hirb',                 :require => false
   gem 'quiet_assets'
   gem 'rails-erd'
   gem 'ruby-graphviz'
-  gem 'rvm-capistrano'
+  gem 'openteam-capistrano'
+  gem 'capistrano-db-tasks', :git => 'git://github.com/openteam/capistrano-db-tasks'
+  gem 'capistrano-unicorn',  :git => 'git://github.com/sosedoff/capistrano-unicorn'
 end
 
 group :test do
