@@ -58,8 +58,9 @@
 <table>
   <thead>
     <tr>
-      <th>Зачетов: <%= semester.checks.actual.where(kind: :exam).count  %></th>
-      <th>Экзаменов: <%= semester.checks.actual.where(kind: :end_of_term).count  %></th>
+      <th>Зачетов: <%= semester.checks.actual.where(kind: :end_of_term).count  %></th>
+      <th>Экзаменов: <%= semester.checks.actual.where(kind: :exam).count  %></th>
+      <th>Диф.зачетов: <%= semester.checks.actual.where(kind: [:course_work, :course_projecting]).count  %></th>
     </tr>
   </thead>
 </table>

@@ -46,7 +46,7 @@ group :development do
   gem 'quiet_assets'
   gem 'rails-erd'
   gem 'ruby-graphviz'
-  gem 'openteam-capistrano'
+  gem 'openteam-capistrano',  :require => false
   gem 'capistrano-db-tasks', :git => 'git://github.com/openteam/capistrano-db-tasks'
   gem 'capistrano-unicorn',  :git => 'git://github.com/sosedoff/capistrano-unicorn'
 end
