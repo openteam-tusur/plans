@@ -12,7 +12,7 @@ bachelor:
     subspecialities:
       -
         subdepartment: "Экономики"
-        title: "Без профиля"
+        title: "Финансы и кредит"
   -
     code: "080500.62"
     title: "Менеджмент"
