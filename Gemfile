@@ -47,8 +47,8 @@ group :development do
   gem 'rails-erd'
   gem 'ruby-graphviz'
   gem 'openteam-capistrano',  :require => false
-  gem 'capistrano-db-tasks', :git => 'git://github.com/openteam/capistrano-db-tasks'
-  gem 'capistrano-unicorn',  :git => 'git://github.com/sosedoff/capistrano-unicorn'
+  gem 'capistrano-db-tasks', :git => 'git://github.com/sgruhier/capistrano-db-tasks'
+  gem 'capistrano-unicorn'
 end
 
 group :test do
