@@ -1,3 +1,2 @@
+require 'openteam/capistrano/recipes'
 set :default_stage, :tusur
-
-require 'openteam/capistrano'
