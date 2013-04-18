@@ -8,6 +8,7 @@ require 'fileutils'
 
 require File.expand_path '../../importer/year_importer', __FILE__
 require File.expand_path '../../importer/plan_importer', __FILE__
+require File.expand_path '../../importer/departments_importer', __FILE__
 require File.expand_path '../../importer/discipline_importer', __FILE__
 require File.expand_path '../../importer/discipline_xml', __FILE__
 
@@ -44,6 +45,7 @@ task :sync => :environment do
   move_to_trash :year, :speciality, :subspeciality
   Dir.glob("data/*").sort.each do |folder|
     year_number = File.basename(folder)
+    next if year_number.to_i == 0
     YearImporter.new(year_number).import
   end
 end
@@ -51,4 +53,9 @@ end
 desc "Загрузка учебного плана"
 task :import_plan, [:path]=> :environment do |task, args|
   PlanImporter.new(args.path, :force => true).import
+end
+
+desc "Синхронизация справочника факультетов и кафедр"
+task :sync_departments => :environment do
+  DepartmentsImporter.new.import_departments
 end

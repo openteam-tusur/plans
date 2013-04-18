@@ -10,7 +10,7 @@ class YearImporter
   def import
     year.save!
     puts year.number
-    self.bar = ProgressBar.new(Dir["data/#{year.number}/**/*.{xml,yml}"].count - 1)
+    self.bar = ProgressBar.new(Dir["data/#{year.number}/**/*.{xml,yml}"].count)
     import_specialities
     import_plans
     puts
