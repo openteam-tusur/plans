@@ -1,5 +1,4 @@
 <% number = 0 %>
-<% p subspecialities.group_by(&:degree_value) %>
 <% subspecialities.group_by(&:degree_value).each do |degree, subspecialities| %>
   <tr class='cycle'><td colspan='8'><%= Speciality.degree.find_value(degree).text %></td></tr>
   <% subspecialities.each do |subspeciality| %>
@@ -12,6 +11,7 @@
       <td><%= subspeciality.education_form %><%= subspeciality.reduced %></td>
       <td><%= link_to "смотреть", [:edu, subspeciality] if subspeciality.has_disciplines? %></td>
       <td><%= link_to "скачать", work_plan_api_url(subspeciality.work_plan) if subspeciality.work_plan %></td>
+      <td><%= link_to "скачать", programm_api_url(subspeciality.programm) if subspeciality.programm %></td>
     </tr>
   <% end %>
 <% end %>

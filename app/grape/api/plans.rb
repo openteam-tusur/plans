@@ -46,4 +46,13 @@ class API::Plans < Grape::API
       redirect subspeciality.work_plan.try :file_url
     end
   end
+
+  namespace :programms do
+    params do
+      requires :subspeciality_id, :type => Integer, :desc => 'id of subspeciality'
+    end
+    get ":subspeciality_id" do
+      redirect subspeciality.programm.try :file_url
+    end
+  end
 end

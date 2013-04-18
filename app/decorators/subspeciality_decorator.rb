@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class SubspecialityDecorator < Draper::Decorator
-  delegate :title, :actual_semesters, :work_plan, :gos_generation, :graduated_subdepartment, :year, :reduced_text, :education_form_text
+  delegate :title, :actual_semesters, :work_plan, :programm, :gos_generation, :graduated_subdepartment, :year, :reduced_text, :education_form_text
 
   decorates_association :speciality
 
