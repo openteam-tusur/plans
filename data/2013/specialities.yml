@@ -1,1 +1,10 @@
+bachelor:
+  -
+    code: "080500.62"
+    title: "Бизнес-информатика"
+    subspecialities:
+      -
+        subdepartment: "АОИ"
+        title: "Без профиля"
+
 magistracy:
