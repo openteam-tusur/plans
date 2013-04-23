@@ -38,6 +38,7 @@ class YearImporter
           )
           subspeciality.graduated_subdepartment = graduated_subdepartment
           subspeciality.department = department
+          subspeciality.group_index = subspeciality_attributes['group_index']
           subspeciality.file_path = nil
           refresh subspeciality
           begin

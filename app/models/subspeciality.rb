@@ -69,6 +69,10 @@ class Subspeciality < ActiveRecord::Base
            'subspecialities.reduced desc')
   end
 
+  scope :ordered_by_year_desc, -> do
+    joins(:year).order('years.number desc')
+  end
+
   scope :with_degree, ->(degree) do
     joins(:speciality).
       where(:specialities => {:degree => degree})
