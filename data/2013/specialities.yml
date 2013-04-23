@@ -6,6 +6,6 @@ bachelor:
       -
         subdepartment: "АОИ"
         title: "Без профиля"
-        group_index: '^40\d'
+        group_index: '^403$'
 
 magistracy:

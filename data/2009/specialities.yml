@@ -22,6 +22,7 @@ bachelor:
       -
         subdepartment: "АОИ"
         title: "Без профиля"
+        group_index: "^400$"
   -
     code: "220100.62"
     title: "Системный анализ и управление"

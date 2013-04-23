@@ -74,7 +74,7 @@ bachelor:
       -
         subdepartment: "АОИ"
         title: "Без профиля"
-        group_index: '^40\d'
+        group_index: '^40[1|2]$'
 
   -
     code: "081100.62"
@@ -83,6 +83,7 @@ bachelor:
       -
         subdepartment: "АОИ"
         title: "Без профиля"
+        group_index: '^47[1|2|3]-\d$'
 
   -
     code: "090900.62"
@@ -251,6 +252,7 @@ bachelor:
       -
         subdepartment: "АОИ"
         title: "Без профиля"
+        group_index: '^42[1|2|3]-\d$'
 
   -
     code: "230700.62"
@@ -333,6 +335,7 @@ magistracy:
       -
         subdepartment: "АОИ"
         title: "Предпринимательство и организация бизнеса в сфере информационных технологий"
+        group_index: "^40[2|3]-М$"
 
   -
     code: "081100.68"
@@ -341,6 +344,7 @@ magistracy:
       -
         subdepartment: "АОИ"
         title: "Информатизация государственного и муниципального управления"
+        group_index: '^473-М$'
 
   -
     code: "200700.68"
