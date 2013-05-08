@@ -116,15 +116,19 @@ bachelor:
       -
         subdepartment: "ФЭ"
         title: "Микроэлектроника и твердотельная электроника"
+        group_index: '^31[1|2|3]-\d$'
       -
         subdepartment: "ЭП"
         title: "Электронные приборы и устройства"
+        group_index: '^34[1|2|3](-\d)?$'
       -
         subdepartment: "ЭП"
         title: "Квантовая и оптическая электроника"
+        group_index: '^35[1|2|3](-\d)?$'
       -
         subdepartment: "ПрЭ"
         title: "Промышленная электроника"
+        group_index: '^36[1|2]-\d$'
 
   -
     code: "211000.62"
@@ -219,6 +223,7 @@ bachelor:
       -
         subdepartment: "ФЭ"
         title: "Нанотехнологии и микросистемная техника"
+        group_index: '^32[1|2|3](-\d)?$'
 
   -
     code: "230100.62"

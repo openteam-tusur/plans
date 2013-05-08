@@ -14,5 +14,6 @@ bachelor:
       -
         subdepartment: "ПрЭ"
         title: "Промышленная электроника"
+        group_index: '^363-\d$'
 
 magistracy:
