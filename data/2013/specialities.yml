@@ -7,5 +7,12 @@ bachelor:
         subdepartment: "АОИ"
         title: "Без профиля"
         group_index: '^403$'
+  -
+    code: "210100.62"
+    title: "Электроника и наноэлектроника"
+    subspecialities:
+      -
+        subdepartment: "ПрЭ"
+        title: "Промышленная электроника"
 
 magistracy:
