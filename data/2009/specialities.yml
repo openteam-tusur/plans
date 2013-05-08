@@ -15,6 +15,7 @@ bachelor:
       -
         subdepartment: "ФЭ"
         title: "Без профиля"
+        group_index: '^32[9|0]$'
   -
     code: "080700.62"
     title: "Бизнес-информатика"

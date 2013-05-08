@@ -42,6 +42,7 @@ bachelor:
       -
         subdepartment: "ЭП"
         title: "Без профиля"
+        group_index: '^34[9|0]$'
   -
     code: "210100.62"
     title: "Электроника и микроэлектроника"
@@ -49,9 +50,11 @@ bachelor:
       -
         subdepartment: "ПрЭ"
         title: "Без профиля"
+        group_index: '^37[9|0]-1$'
       -
         subdepartment: "ФЭ"
         title: "Микроэлектроника и твердотельная элекроника"
+        group_index: '^37[9|0]-3$'
 
 specialty:
   -
@@ -148,6 +151,7 @@ specialty:
       -
         subdepartment: "ФЭ"
         title: "Без специализации"
+        group_index: '^31[9|0]$'
   -
     code: "210105.65"
     title: "Электронные приборы и устройства"
@@ -158,6 +162,7 @@ specialty:
       -
         subdepartment: "ЭП"
         title: "Квантовые, оптоэлектронные и акустооптические приборы и устройства"
+        group_index: '^35[9|0]-1$'
   -
     code: "210106.65"
     title: "Промышленная электроника"
@@ -165,6 +170,7 @@ specialty:
       -
         subdepartment: "ПрЭ"
         title: "Без специализации"
+        group_index: '^36[9|0]-\d$'
   -
     code: "210201.65"
     title: "Проектирование и технология радиоэлектронных средств"
