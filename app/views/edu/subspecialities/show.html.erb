@@ -17,11 +17,14 @@
   <%= link_to "#{speciality.code} #{speciality.title} (#{subspeciality.title})", edu_subspeciality_path(subspeciality) %>
 <% end %>
 
-<h1><%= subspeciality.full_title %></h1>
+<h1><%= speciality.code %> <%= speciality.title %></h1>
 
-<%= link_to("скачать в формате pdf", work_plan_api_url(subspeciality.work_plan), :class => :download_work_plan_pdf) if subspeciality.work_plan %>
+<%= link_to("скачать РУП", work_plan_api_url(subspeciality.work_plan), :class => :download_work_plan_pdf) if subspeciality.work_plan %>
+<%= link_to("скачать ООП", programm_api_url(subspeciality.programm), class: :download_work_plan_pdf) if subspeciality.programm %>
 
-<h2><%= subspeciality.extra_info %></h2>
+<h2><%= subspeciality.degree %></h2>
+<h2><%= subspeciality.title %></h2>
+<h2><%= subspeciality.title_with_edu_form_and_year %></h2>
 <table class='curriculum_table'>
   <thead>
     <tr>

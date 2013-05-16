@@ -39,7 +39,6 @@ class SubspecialityDecorator < Draper::Decorator
     content += " #{reduced_text}" unless reduced_text.blank?
     content += ", план набора #{year_number} г. и последующих лет"
     content = h.content_tag :p, content
-    link_to_show(content)
   end
 
   def linked_title

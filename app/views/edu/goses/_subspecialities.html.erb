@@ -8,7 +8,7 @@
       <td rowspan='<%= subspecialities.size %>'><%= speciality[:title] %></td>
       <% subspeciality = subspecialities.shift %>
       <td>
-        <%= subspeciality.title_with_edu_form_and_year %>
+        <%= subspeciality.link_to_show(subspeciality.title_with_edu_form_and_year) %>
         <%= subspeciality.linked_title %>
       </td>
       <td><%= subspeciality.subdepartment %></td>
