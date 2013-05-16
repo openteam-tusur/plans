@@ -11,6 +11,6 @@ class API::Entities::ProvidedDiscipline < Grape::Entity
       hash[discipline.speciality.gos_generation]["#{discipline.speciality.code} #{discipline.speciality.title} (#{discipline.speciality.degree_text})"]["Набор #{discipline.speciality.year.number} года и последующих лет, #{discipline.subspeciality.education_form_text} форма обучения #{discipline.subspeciality.reduced_text}".strip] ||= {}
       hash[discipline.speciality.gos_generation]["#{discipline.speciality.code} #{discipline.speciality.title} (#{discipline.speciality.degree_text})"]["Набор #{discipline.speciality.year.number} года и последующих лет, #{discipline.subspeciality.education_form_text} форма обучения #{discipline.subspeciality.reduced_text}".strip][title] = discipline.work_programms.last.try(:file_url)
     end
-    hash
+    hash.sort
   }
 end
