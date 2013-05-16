@@ -41,7 +41,6 @@ end
 group :development do
   gem 'annotate',             '>= 2.5.0.pre'
   gem 'brakeman'
-  gem 'debugger'
   gem 'hirb',                 :require => false
   gem 'quiet_assets'
   gem 'rails-erd'

@@ -18,6 +18,7 @@ class Subdepartment < ActiveRecord::Base
   attr_accessible :abbr, :title, :number
 
   belongs_to :department
+  has_many :specialities, :through => :subspecialities, :order => 'specialities.title ASC'
   has_many :subspecialities
   has_many :disciplines
   has_many :actual_disciplines, :class_name => 'Discipline', :conditions => { :deleted_at => nil }

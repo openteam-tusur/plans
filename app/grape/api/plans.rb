@@ -27,6 +27,10 @@ class API::Plans < Grape::API
     def semester
       subspeciality.semesters.actual.find_by_number!(params[:semester])
     end
+
+    def subdepartment
+      Subdepartment.find_by_abbr(params[:subdepartment])
+    end
   end
 
   namespace :disciplines do
@@ -42,6 +46,15 @@ class API::Plans < Grape::API
       get ":semester" do
         present semester.disciplines.actual, :with => API::Entities::Discipline, :semester => semester
       end
+    end
+  end
+
+  namespace :disciplines_provided_by do
+    params do
+      requires :subdepartment, :type => String, :desc => 'Name of subdepartment'
+    end
+    get ':subdepartment' do
+      present subdepartment, :with => API::Entities::ProvidedDiscipline
     end
   end
 
