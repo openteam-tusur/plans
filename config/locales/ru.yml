@@ -216,6 +216,12 @@ ru:
         few:    "Она является основой для изучения следующих дисциплин: %{disciplines}."
         many:   "Она является основой для изучения следующих дисциплин: %{disciplines}."
 
+  degree:
+    profile:
+     bachelor: Профиль
+     specialty: Специализация
+     magistracy: Программа
+
   grape:
     errors:
       messages:

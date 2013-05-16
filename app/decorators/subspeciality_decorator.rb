@@ -1,12 +1,17 @@
 # encoding: utf-8
 
 class SubspecialityDecorator < Draper::Decorator
-  delegate :title, :actual_semesters, :work_plan, :programm, :gos_generation, :graduated_subdepartment, :year, :reduced_text, :education_form_text
+  delegate :title, :actual_semesters, :work_plan, :programm, :gos_generation, :graduated_subdepartment, :year, :reduced_text, :education_form_text,
+    :speciality_code, :speciality_title
 
   decorates_association :speciality
 
   def headers
     @headers ||= ["№<br/>п/п".html_safe, "Цикл", "Название дисциплины", "Экз", "Зач", "КрР/<br/>КрПр".html_safe] + actual_semesters.map(&:number)
+  end
+
+  def speciality_code_with_title
+    { code: speciality_code, title: speciality_title }
   end
 
   def full_title
@@ -29,6 +34,23 @@ class SubspecialityDecorator < Draper::Decorator
     year.number
   end
 
+  def title_with_edu_form_and_year
+    content = "#{capitalized_education_form} форма обучения"
+    content += " #{reduced_text}" unless reduced_text.blank?
+    content += ", план набора #{year_number} г. и последующих лет"
+    content = h.content_tag :p, content
+    link_to_show(content)
+  end
+
+  def linked_title
+    return "" if title.match /^Без (профиля|специализации)$/
+    h.content_tag :p, "#{I18n.t("degree.profile.#{degree_value}")}: #{link_to_show(title)}".html_safe unless title.match(/^Без/)
+  end
+
+  def link_to_show(text)
+    has_disciplines? ? h.link_to(text.html_safe, [:edu, model]) : text.html_safe
+  end
+
   def subdepartment
     graduated_subdepartment.abbr
   end
@@ -48,7 +70,7 @@ class SubspecialityDecorator < Draper::Decorator
   end
 
   def has_disciplines?
-    model.actual_disciplines.length > 0
+    model.actual_disciplines.count > 0
   end
 
   def degree

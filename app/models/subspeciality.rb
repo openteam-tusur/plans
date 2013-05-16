@@ -45,6 +45,7 @@ class Subspeciality < ActiveRecord::Base
   validates_uniqueness_of :title, :scope => [:speciality_id, :subdepartment_id, :education_form, :reduced]
 
   delegate :degree, :gos_generation, :to => :speciality
+  delegate :code, :title, to: :speciality, prefix: true
   scope :actual, where(:deleted_at => nil)
 
   alias_method :profiled_subdepartment, :subdepartment

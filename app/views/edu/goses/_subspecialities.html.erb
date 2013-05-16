@@ -1,17 +1,26 @@
 <% number = 0 %>
 <% subspecialities.group_by(&:degree_value).each do |degree, subspecialities| %>
-  <tr class='cycle'><td colspan='8'><%= Speciality.degree.find_value(degree).text %></td></tr>
-  <% subspecialities.each do |subspeciality| %>
+  <tr class='cycle'><td colspan='5'><%= Speciality.degree.find_value(degree).text %></td></tr>
+  <% subspecialities.group_by(&:speciality_code_with_title).each do |speciality, subspecialities| %>
     <tr>
-      <td><%= number += 1 %></td>
-      <td><%= subspeciality.speciality.code %></td>
-      <td><%= subspeciality.speciality.title %></td>
-      <td><%= subspeciality.title %></td>
+      <td rowspan='<%= subspecialities.size %>'><%= number += 1 %></td>
+      <td rowspan='<%= subspecialities.size %>'><%= speciality[:code] %></td>
+      <td rowspan='<%= subspecialities.size %>'><%= speciality[:title] %></td>
+      <% subspeciality = subspecialities.shift %>
+      <td>
+        <%= subspeciality.title_with_edu_form_and_year %>
+        <%= subspeciality.linked_title %>
+      </td>
       <td><%= subspeciality.subdepartment %></td>
-      <td><%= subspeciality.education_form %><%= subspeciality.reduced %></td>
-      <td><%= link_to "смотреть", [:edu, subspeciality] if subspeciality.has_disciplines? %></td>
-      <td><%= link_to "скачать", work_plan_api_url(subspeciality.work_plan) if subspeciality.work_plan %></td>
-      <td><%= link_to "скачать", programm_api_url(subspeciality.programm) if subspeciality.programm %></td>
     </tr>
+    <% subspecialities.each do |subspeciality| %>
+      <tr>
+        <td>
+          <%= subspeciality.title_with_edu_form_and_year %>
+          <%= subspeciality.linked_title %>
+        </td>
+        <td><%= subspeciality.subdepartment %></td>
+      </tr>
+    <% end %>
   <% end %>
 <% end %>
