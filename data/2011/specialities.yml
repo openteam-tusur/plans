@@ -21,10 +21,7 @@ bachelor:
     subspecialities:
       -
         subdepartment: "ИП"
-        title: "Юриспруденция"
-      -
-        subdepartment: "ИП"
-        title: "Юриспруденция"
+        title: "Без профиля"
 
   -
     code: "040400.62"
@@ -40,7 +37,7 @@ bachelor:
     subspecialities:
       -
         subdepartment: "ФС"
-        title: "Организация работы с молодежью"
+        title: "Без профиля"
 
   -
     code: "080100.62"
@@ -84,6 +81,11 @@ bachelor:
         subdepartment: "АОИ"
         title: "Без профиля"
         group_index: '^47[1|2|3]-\d$'
+      -
+        subdepartment: "АОИ"
+        title: "Без профиля"
+        education_form: 'postal'
+
 
   -
     code: "090900.62"
@@ -129,6 +131,14 @@ bachelor:
         subdepartment: "ПрЭ"
         title: "Промышленная электроника"
         group_index: '^36[1|2]-\d$'
+      -
+        subdepartment: "ПрЭ"
+        title: "Промышленная электроника"
+        education_form: 'postal-with-dist'
+      -
+        subdepartment: "ПрЭ"
+        title: "Промышленная электроника"
+        education_form: 'postal'
 
   -
     code: "211000.62"
@@ -157,6 +167,10 @@ bachelor:
       -
         subdepartment: "СВЧиКР"
         title: "Радиотехника"
+      -
+        subdepartment: "СВЧиКР"
+        title: "Радиотехнические средства передачи, приема и обработки сигналов"
+        education_form: 'part-time'
       -
         subdepartment: "ТОР"
         title: "Радиотехника"
@@ -207,6 +221,10 @@ bachelor:
       -
         subdepartment: "КСУП"
         title: "Информационные технологии в управлении"
+      -
+        subdepartment: "КСУП"
+        title: "Без профиля"
+        education_form: 'postal-with-dist'
 
   -
     code: "220700.62"
@@ -241,6 +259,10 @@ bachelor:
       -
         subdepartment: "АСУ"
         title: "Программное обеспечение средств вычислительной техники и автоматизированных систем"
+      -
+        subdepartment: "АСУ"
+        title: "Программное обеспечение средств вычислительной техники и автоматизированных систем"
+        education_form: 'postal'
 
   -
     code: "230400.62"
@@ -258,6 +280,10 @@ bachelor:
         subdepartment: "АОИ"
         title: "Без профиля"
         group_index: '^42[1|2|3]-\d$'
+      -
+        subdepartment: "АОИ"
+        title: "Без профиля"
+        education_form: 'postal'
 
   -
     code: "230700.62"
@@ -266,6 +292,10 @@ bachelor:
       -
         subdepartment: "АСУ"
         title: "Без профиля"
+      -
+        subdepartment: "АСУ"
+        title: "Без профиля"
+        education_form: 'postal'
 
   -
     code: "280700.62"
@@ -290,7 +320,7 @@ specialty:
     subspecialities:
       -
         subdepartment: "КИБЭВС"
-        title: "Информационная безопасность автоматизированных систем"
+        title: "Информационная безопасность автоматизированных банковских систем"
 
   -
     code: "090305.65"
@@ -350,7 +380,6 @@ magistracy:
         subdepartment: "АОИ"
         title: "Информатизация государственного и муниципального управления"
         group_index: '^473-М$'
-
   -
     code: "200700.68"
     title: "Фотоника и оптоинформатика"
