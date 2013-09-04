@@ -17,3 +17,11 @@ bachelor:
         group_index: '^363-\d$'
 
 magistracy:
+  -
+    code: "231000.68"
+    title: "Программная инженерия"
+    subspecialities:
+      -
+        subdepartment: "АОИ"
+        title: "Промышленные технологии разработки программного обеспечения"
+        group_index: '^423-М$'
