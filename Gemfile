@@ -20,7 +20,7 @@ group :default do
   gem 'grape'
   gem 'grape-entity'
   gem 'has_scope'
-  gem 'inherited_resources'
+  gem 'inherited_resources', '1.4.1'
   gem 'memoist'
   gem 'nested_form'
   gem 'nokogiri',             :require => false
