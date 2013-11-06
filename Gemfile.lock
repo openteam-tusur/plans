@@ -94,7 +94,7 @@ GEM
       multi_json (>= 1.1)
     curb (0.8.1)
     decent_exposure (2.0.1)
-    default_value_for (2.0.1)
+    default_value_for (2.0.3)
     descendants_tracker (0.0.1)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
