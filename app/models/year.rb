@@ -3,7 +3,7 @@
 class Year < ActiveRecord::Base
   attr_accessible :number
 
-  has_many :specialities, :dependent => :destroy
+  has_many :specialities, :dependent => :destroy, :order => :code
   has_many :subspecialities, :through => :specialities
 
   has_many :actual_specialities, :class_name => 'Speciality'

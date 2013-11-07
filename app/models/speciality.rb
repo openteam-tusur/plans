@@ -3,7 +3,7 @@ class Speciality < ActiveRecord::Base
 
   belongs_to :year
 
-  has_many :subspecialities
+  has_many :subspecialities, :order => :title
   has_many :actual_subspecialities, :class_name => 'Subspeciality', :conditions => { :deleted_at => nil }
   has_many :disciplines, :through => :subspecialities
   has_many :actual_disciplines, :through => :actual_subspecialities
