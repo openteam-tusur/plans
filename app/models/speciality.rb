@@ -18,6 +18,7 @@ class Speciality < ActiveRecord::Base
 
   scope :ordered, -> { order(:code) }
   scope :actual, -> { where(:deleted_at => nil) }
+  scope :gos3,   -> { where(:gos_generation => '3') }
 
   # TODO: only permitted for non managers
   scope :consumed_by, ->(user) do

@@ -31,6 +31,10 @@ class API::Plans < Grape::API
     def subdepartment
       Subdepartment.find_by_abbr(params[:subdepartment])
     end
+
+    def year
+      Year.find_by_number!(params[:year])
+    end
   end
 
   namespace :disciplines do
@@ -81,6 +85,55 @@ class API::Plans < Grape::API
     namespace :by_group do
       get ":group_number" do
         present subspeciality_by_group, with: API::Entities::Subspeciality
+      end
+    end
+  end
+
+  # API for workprogramm-app
+  #
+  namespace :years do
+    params do
+      requires :year, :type => Integer, :desc => 'Year number'
+    end
+    namespace ':year' do
+      get 'specialities' do
+        year.specialities.actual.gos3.as_json(
+          :only => [:id, :title, :code],
+          :methods => :degree_text
+        )
+      end
+      namespace 'specialities' do
+        namespace ':speciality_id' do
+          params do
+            requires :speciality_id, :type => Integer, :desc => 'Speciality id'
+          end
+          get 'subspecialities' do
+            year.specialities.actual.gos3.find(params[:speciality_id]).subspecialities.actual.as_json(
+              :only => [:id, :title],
+              :methods => [:education_form_text],
+              :include => {
+                :subdepartment => {
+                  :only => [:abbr, :title]
+                },
+                  :department => {
+                  :only => [:abbr, :title]
+                }
+              }
+            )
+          end
+          namespace 'subspecialities' do
+            namespace ':subspeciality_id' do
+              params do
+                requires :subspeciality_id, :type => Integer, :desc => 'Subspeciality id'
+              end
+              get 'disciplines' do
+                year.specialities.actual.gos3.find(params[:speciality_id]).subspecialities.actual.find(params[:subspeciality_id]).disciplines.actual.as_json(
+                  :only => [:title, :summ_srs, :summ_loading, :id, :cycle]
+                )
+              end
+            end
+          end
+        end
       end
     end
   end
