@@ -99,7 +99,7 @@ class API::Plans < Grape::API
       get 'specialities' do
         year.specialities.actual.gos3.as_json(
           :only => [:id, :title, :code],
-          :methods => :degree_text
+          :methods => [:degree_text, :to_s]
         )
       end
       namespace 'specialities' do
@@ -110,7 +110,7 @@ class API::Plans < Grape::API
           get 'subspecialities' do
             year.specialities.actual.gos3.find(params[:speciality_id]).subspecialities.actual.as_json(
               :only => [:id, :title],
-              :methods => [:education_form_text],
+              :methods => [:education_form_text, :to_s],
               :include => {
                 :subdepartment => {
                   :only => [:abbr, :title]
@@ -128,7 +128,8 @@ class API::Plans < Grape::API
               end
               get 'disciplines' do
                 year.specialities.actual.gos3.find(params[:speciality_id]).subspecialities.actual.find(params[:subspeciality_id]).disciplines.actual.as_json(
-                  :only => [:title, :summ_srs, :summ_loading, :id, :cycle]
+                  :only => [:title, :summ_srs, :summ_loading, :id, :cycle],
+                  :methods => :to_s
                 )
               end
             end
