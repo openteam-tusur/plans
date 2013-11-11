@@ -32,6 +32,7 @@ class Subspeciality < ActiveRecord::Base
 
   has_one :programm
   has_one :work_plan
+  has_one :department, :through => :subdepartment
   has_many :disciplines, :dependent => :destroy, :order => :title
   has_many :checks, :through => :disciplines
   has_many :loadings, :through => :disciplines
@@ -46,6 +47,8 @@ class Subspeciality < ActiveRecord::Base
 
   delegate :degree, :gos_generation, :to => :speciality
   delegate :code, :title, to: :speciality, prefix: true
+  delegate :abbr, :title, :to => :department, :prefix => true
+  delegate :abbr, :title, :to => :subdepartment, :prefix => true
   scope :actual, where(:deleted_at => nil)
 
   alias_method :profiled_subdepartment, :subdepartment
