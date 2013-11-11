@@ -32,7 +32,7 @@ class Subspeciality < ActiveRecord::Base
 
   has_one :programm
   has_one :work_plan
-  has_many :disciplines, :dependent => :destroy
+  has_many :disciplines, :dependent => :destroy, :order => :title
   has_many :checks, :through => :disciplines
   has_many :loadings, :through => :disciplines
   has_many :actual_disciplines, :class_name => 'Discipline', :conditions => { :deleted_at => nil }
