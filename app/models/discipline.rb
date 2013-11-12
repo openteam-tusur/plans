@@ -69,6 +69,10 @@ class Discipline < ActiveRecord::Base
     loadings.select(&:classroom?).select{|l| l.semester_id == semester.id}
   end
 
+  def loadings_in_semester(semester)
+    loadings.select{|l| l.semester_id == semester.id}
+  end
+
   def checks_in_semester(semester)
     checks.select{|c| c.semester_id == semester.id}
   end
@@ -106,5 +110,18 @@ class Discipline < ActiveRecord::Base
 
   def didactic_unit
     @didactic_unit ||= DidacticUnit.joins(:gos).where('goses.speciality_code = ? AND didactic_units.discipline = ?', speciality.code, title).first
+  end
+
+  def semesters_info
+    res = {}
+
+    semesters.each do |semester|
+      res[semester.number] = {
+        :checks => checks_in_semester(semester).map(&:kind_text),
+        :loadings => loadings_in_semester(semester).map{|l| { l.kind_text => l.value }}
+      }
+    end
+
+    res
   end
 end
