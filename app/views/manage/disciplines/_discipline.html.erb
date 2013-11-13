@@ -1,6 +1,24 @@
 <li>
   <div class="wrapper">
     <%= discipline %>
+    <% if discipline.loadings.any? %>
+      <table>
+        <tr>
+          <td>Вид нанятий</td>
+          <% discipline.semesters.each do |semester| %>
+            <td><%= "Семестр #{semester.number}" %></td>
+          <% end %>
+        </tr>
+        <% Hash[Loading.kind.options].invert.each do |kind, text| %>
+          <tr>
+            <td><%= text %></td>
+            <% discipline.semesters.each do |semester| %>
+              <td><%= discipline.loadings.with_kind(kind).find_by_semester_id(semester.id).try(&:value) %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
     <% if controller_name =~ /subspecialities/ || controller_name =~ /disciplines/ %>
       <%= content_tag :span, discipline.subdepartment.abbr, :class => :subdepartment if controller_name =~ /subspecialities/ %>
       <% if discipline.kind.common? %>

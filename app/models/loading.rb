@@ -20,7 +20,7 @@ class Loading < ActiveRecord::Base
   validates_presence_of :semester_id, :discipline_id, :kind, :value
 
   extend Enumerize
-  enumerize :kind, :in => %w[lecture lab practice csr exam srs], :predicates => { :prefix => true }
+  enumerize :kind, :in => %w[lecture lab practice csr exam srs], :predicates => { :prefix => true }, :scope => true
 
   enumerize :abbr_kind, :in => %w[lecture lab practice csr]
 
