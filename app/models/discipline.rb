@@ -117,8 +117,8 @@ class Discipline < ActiveRecord::Base
 
     semesters.each do |semester|
       res[semester.number] = {
-        :checks => checks_in_semester(semester).map(&:kind_text),
-        :loadings => loadings_in_semester(semester).map{|l| { l.kind_text => l.value }}
+        :checks => checks_in_semester(semester).map(&:kind),
+        :loadings => loadings_in_semester(semester).map{|l| { l.kind => l.value }}
       }
     end
 
