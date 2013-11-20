@@ -11,6 +11,9 @@ require File.expand_path '../../importer/plan_importer', __FILE__
 require File.expand_path '../../importer/departments_importer', __FILE__
 require File.expand_path '../../importer/discipline_importer', __FILE__
 require File.expand_path '../../importer/discipline_xml', __FILE__
+require File.expand_path '../../importer/competences_importer', __FILE__
+
+Rake::TaskManager.record_task_metadata = true
 
 def refresh(object)
   object.deleted_at = nil
@@ -58,4 +61,11 @@ end
 desc "Синхронизация справочника факультетов и кафедр"
 task :sync_departments => :environment do
   DepartmentsImporter.new.import_departments
+end
+
+
+desc 'Импорт компетенций'
+task :import_competences => :environment do |task|
+  puts task.comment
+  CompetencesImporter.new.import
 end

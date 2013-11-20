@@ -40,6 +40,7 @@ class Subspeciality < ActiveRecord::Base
   has_many :semesters, :dependent => :destroy
   has_many :actual_semesters, :class_name => 'Semester', :conditions => { :deleted_at => nil }
   has_one :year, :through => :speciality
+  has_many :competences, :dependent => :destroy
 
   validates_presence_of :title, :speciality, :subdepartment, :department, :education_form
 

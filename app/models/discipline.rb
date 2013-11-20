@@ -34,6 +34,8 @@ class Discipline < ActiveRecord::Base
 
   has_many :methodologists, :through => :subdepartment
 
+  has_and_belongs_to_many :competences
+
   scope :actual, where(:deleted_at => nil)
 
   validates_presence_of :title, :subspeciality, :subdepartment
