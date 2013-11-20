@@ -121,7 +121,7 @@ class API::Plans < Grape::API
               get 'disciplines' do
                 year.specialities.actual.gos3.find(params[:speciality_id]).subspecialities.actual.find(params[:subspeciality_id]).disciplines.actual.as_json(
                   :only => [:title, :summ_srs, :summ_loading, :id, :cycle],
-                  :methods => [:to_s, :semesters_info]
+                  :methods => [:to_s, :semesters_info], :include => { :competences => { :only => [:index, :content] } }
                 )
               end
             end
