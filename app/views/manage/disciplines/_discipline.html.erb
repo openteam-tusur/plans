@@ -4,7 +4,7 @@
     <% if discipline.loadings.any? %>
       <table>
         <tr>
-          <td>Вид нанятий</td>
+          <td>Вид занятий</td>
           <% discipline.semesters.each do |semester| %>
             <td><%= "Семестр #{semester.number}" %></td>
           <% end %>

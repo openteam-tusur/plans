@@ -1,11 +1,10 @@
 class Manage::ProgrammsController < Manage::ApplicationController
-  inherit_resources
-
+  defaults :singleton => true
   actions :all, :except => :index
 
   belongs_to :year, :finder => :find_by_number! do
     belongs_to :speciality, :finder => :find_by_code! do
-      belongs_to :subspeciality, :singleton => true
+      belongs_to :subspeciality
     end
   end
 
@@ -13,5 +12,10 @@ class Manage::ProgrammsController < Manage::ApplicationController
 
   def destroy
     destroy! { render :file => 'manage/programms/show', :locals => { :resource => nil } and return }
+  end
+
+private
+  def symbols_for_association_chain
+    super.reverse
   end
 end

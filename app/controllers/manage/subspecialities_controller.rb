@@ -1,6 +1,4 @@
 class Manage::SubspecialitiesController < Manage::ApplicationController
-  inherit_resources
-
   actions :only => :show
 
   belongs_to :year, :finder => :find_by_number! do

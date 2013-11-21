@@ -1,5 +1,5 @@
 class Manage::WorkPlansController < Manage::ApplicationController
-  inherit_resources
+  defaults :singleton => true
 
   actions :all, :except => :index
 
@@ -13,5 +13,10 @@ class Manage::WorkPlansController < Manage::ApplicationController
 
   def destroy
     destroy! { render :file => 'manage/work_plans/show', :locals => { :resource => nil } and return }
+  end
+
+private
+  def symbols_for_association_chain
+    super.reverse
   end
 end
