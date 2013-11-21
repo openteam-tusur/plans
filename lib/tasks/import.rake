@@ -11,7 +11,7 @@ require File.expand_path '../../importer/plan_importer', __FILE__
 require File.expand_path '../../importer/departments_importer', __FILE__
 require File.expand_path '../../importer/discipline_importer', __FILE__
 require File.expand_path '../../importer/discipline_xml', __FILE__
-require File.expand_path '../../importer/competences_importer', __FILE__
+require File.expand_path '../../plm', __FILE__
 
 Rake::TaskManager.record_task_metadata = true
 
@@ -67,5 +67,11 @@ end
 desc 'Импорт компетенций'
 task :import_competences => :environment do |task|
   puts task.comment
-  CompetencesImporter.new.import
+  Plm::CompetencesImporter.new.import
+end
+
+desc 'Импорт ЗЕТ'
+task :import_credit_units => :environment do |task|
+  puts task.comment
+  Plm::CreditUnitsImporter.new.import
 end

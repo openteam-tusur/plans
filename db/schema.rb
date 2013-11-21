@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131120044524) do
+ActiveRecord::Schema.define(:version => 20131121073924) do
 
   create_table "academic_years", :id => false, :force => true do |t|
     t.integer  "id",           :null => false
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(:version => 20131120044524) do
     t.string   "cycle_code"
     t.string   "cycle_id"
     t.string   "kind"
+    t.text     "credit_units"
   end
 
   add_index "disciplines", ["subdepartment_id"], :name => "index_disciplines_on_subdepartment_id"

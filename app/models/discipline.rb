@@ -40,6 +40,8 @@ class Discipline < ActiveRecord::Base
 
   validates_presence_of :title, :subspeciality, :subdepartment
 
+  serialize :credit_units, Hash
+
   alias_attribute :deleted?, :deleted_at?
 
   delegate :speciality, :to => :subspeciality
