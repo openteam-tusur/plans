@@ -1,30 +1,33 @@
-class Plm::CompetencesImporter
-  include Common
+module Plm
+  class CompetencesImporter
+    include Common
 
-  private
+    private
 
-  def create_competences(parser)
-    parser.competences_data.each do |index, content|
-      competence = parser.subspeciality.competences.find_or_create_by_index(index)
-      competence.update_attribute :content, content
-    end
-  end
-
-  def add_competences_to_disciplines(parser)
-    parser.disciplines_data.each do |discipline, competence_indexes|
-      discipline.competences.clear
-
-      competence_indexes.each do |index|
-        competence = parser.subspeciality.competences.find_by_index(index)
-        discipline.competences << competence
+    def create_competences(parser)
+      parser.competences_data.each do |index, content|
+        competence = parser.subspeciality.competences.find_or_create_by_index(index)
+        competence.update_attribute :content, content
       end
     end
-  end
 
-  private
+    def add_competences_to_disciplines(parser)
+      parser.disciplines_data.each do |discipline, competence_indexes|
+        discipline.competences.clear
 
-  def import_actions(parser)
-    create_competences(parser)
-    add_competences_to_disciplines(parser)
+        competence_indexes.each do |index|
+          competence = parser.subspeciality.competences.find_by_index(index)
+          discipline.competences << competence
+        end
+      end
+    end
+
+    private
+
+    def import_actions(parser)
+      create_competences(parser)
+      add_competences_to_disciplines(parser)
+    end
   end
 end
+

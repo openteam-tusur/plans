@@ -92,17 +92,17 @@ module Plm
     def credit_units_data
       @credit_units_data ||= {}.tap do |credit_units_data|
         discipline_nodes.map do |discipline_node|
-          title = discipline_node['Дис'].squish
+          title, identifier = discipline_node['Дис'].squish, discipline_node['НовИдДисциплины']
           discipline = subspeciality.disciplines.find_by_title(title)
 
           raise DisciplineNotFoundError, title unless discipline
 
-          credit_units_data[discipline] = {}
+          credit_units_data[discipline] = { :identifier => identifier, :credit_units => {} }
 
           discipline_node.children.css('Сем').map do |credit_unit_node|
             semester, credit_units = credit_unit_node['Ном'], credit_unit_node['ЗЕТ']
 
-            credit_units_data[discipline][semester] = credit_units
+            credit_units_data[discipline][:credit_units][semester] = credit_units
           end
         end
       end

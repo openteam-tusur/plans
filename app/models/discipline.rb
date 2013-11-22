@@ -20,7 +20,7 @@
 
 
 class Discipline < ActiveRecord::Base
-  attr_accessible :title
+  attr_accessible :title, :identifier, :credit_units
 
   belongs_to :subspeciality
   belongs_to :subdepartment
