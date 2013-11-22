@@ -128,4 +128,24 @@ class Discipline < ActiveRecord::Base
 
     res
   end
+
+  def identifier_prefix
+    identifier.split('.')[0..-2].join('.')
+  end
+
+  def has_optionally_disciplines?
+    return false unless identifier?
+
+    identifier.split('.').length > 4
+  end
+
+  def optionally_disciplines
+    return [] unless has_optionally_disciplines?
+
+    subspeciality.disciplines.where('id != :id AND identifier LIKE :identifier_prefix', :id => id, :identifier_prefix => "#{identifier_prefix}%")
+  end
+
+  def optionally_disciplines_with_empty_credit_units
+    optionally_disciplines.select { |d| d.credit_units.empty? }
+  end
 end
