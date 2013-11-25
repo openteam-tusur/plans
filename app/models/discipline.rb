@@ -129,6 +129,10 @@ class Discipline < ActiveRecord::Base
     res
   end
 
+  def provided_subdepartment_info
+    Departments.instance.subdepartment_data(subdepartment)
+  end
+
   def identifier_prefix
     identifier.split('.')[0..-2].join('.')
   end
