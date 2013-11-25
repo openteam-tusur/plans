@@ -98,6 +98,14 @@ class Subspeciality < ActiveRecord::Base
     warnings
   end
 
+  def info
+    {
+      :department => Departments.instance.department_data(department),
+      :profile_subdepartment => Departments.instance.subdepartment_data(Subdepartment.first),
+      :provided_subdepartment => Departments.instance.subdepartment_data(Subdepartment.first)
+    }
+  end
+
   def to_s
     "#{title}, #{education_form_text} форма"
   end

@@ -110,7 +110,7 @@ class API::Plans < Grape::API
           get 'subspecialities' do
             year.specialities.actual.gos3.find(params[:speciality_id]).subspecialities.actual.as_json(
               :only => [:id, :title],
-              :methods => [:education_form_text, :to_s, :department_abbr, :department_title, :subdepartment_abbr, :subdepartment_title]
+              :methods => [:education_form_text, :to_s, :department_abbr, :department_title, :subdepartment_abbr, :subdepartment_title, :info]
             )
           end
           namespace 'subspecialities' do
