@@ -1,69 +1,152 @@
 -
   title:            Радиотехнический факультет
   abbr:             РТФ
+  chief:
+    full_name:        Демидов Анатолий Яковлевич
+    post:             Декан
+    academic_degree:  канд. физ.-мат. наук
+    academic_rank:    доцент
+
   subdepartments:
     -
       title:          Кафедра радиоэлектроники и защиты информации
       abbr:           РЗИ
       number:         1
+      chief:
+        full_name:        Задорин Анатолий Семенович
+        post:             Зав. кафедрой
+        academic_degree:  д-р физ.-мат. наук
+        academic_rank:    профессор
     -
       title:          Кафедра радиотехнических систем
       abbr:           РТС
       number:         2
+      chief:
+        full_name:        Шарыгин Герман Сергеевич
+        post:             Зав. кафедрой
+        academic_degree:  д-р техн. наук
+        academic_rank:    профессор
     -
       title:          Кафедра телекоммуникаций и основ радиотехники
       abbr:           ТОР
       number:         3
+      chief:
+        full_name:        Демидов Анатолий Яковлевич
+        post:             Зав. кафедрой
+        academic_degree:  канд. физ.-мат. наук
+        academic_rank:    доцент
     -
       title:          Кафедра сверхвысокочастотной и квантовой радиотехники
       abbr:           СВЧиКР
       number:         4
+      chief:
+        full_name:        Шарангович Сергей Николаевич
+        post:             Зав. кафедрой
+        academic_degree:  канд. физ.-мат. наук
+        academic_rank:    профессор
     -
       title:          Кафедра телевидения и управления
       abbr:           ТУ
       number:         5
+      chief:
+        full_name:        Пустынский Иван Николаевич
+        post:             Зав. кафедрой
+        academic_degree:  д-р техн. наук
+        academic_rank:    профессор
     -
       title:          Кафедра средств радиосвязи
       abbr:           СРС
       number:         6
+      chief:
+        full_name:        Мелихов Сергей Всеволодович
+        post:             Зав. кафедрой
+        academic_degree:  д-р техн. наук
+        academic_rank:    профессор
 
 -
   title:            Радиоконструкторский факультет
   abbr:             РКФ
+  chief:
+    full_name:        Озеркин Денис Витальевич
+    post:             Декан
+    academic_degree:  канд. техн. наук
+    academic_rank:    доцент
+
   subdepartments:
     -
       title:          Кафедра конструирования и производства радиоаппаратуры
       abbr:           КИПР
       number:         27
+      chief:
+        full_name:        Татаринов Виктор Николаевич
+        post:             Зав. кафедрой
+        academic_degree:  д-р техн. наук
+        academic_rank:    профессор
     -
       title:          Кафедра конструирования узлов и деталей РЭС
       abbr:           КУДР
       number:         28
+      chief:
+        full_name:        Еханин Сергей Георгиевич
+        post:             Зав. кафедрой
+        academic_degree:  доктор физ.-мат. наук
+        academic_rank:    профессор
     -
       title:          Кафедра радиоэлектронных технологий и экологического мониторинга
       abbr:           РЭТЭМ
       number:         29
+      chief:
+        full_name:        Туев Василий Иванович
+        post:             Зав. кафедрой
+        academic_degree:  д-р техн. наук
+        academic_rank:    профессор
 
 -
   title:            Факультет электронной техники
   abbr:             ФЭТ
+  chief:
+    full_name:        Александр Иванович Воронин
+    post:             Декан
+    academic_degree:  канд. техн. наук
+    academic_rank:    доцент
+
   subdepartments:
     -
       title:          Кафедра промышленной электроники
       abbr:           ПрЭ
       number:         11
+      chief:
+        full_name:        Кобзев Анатолий Васильевич
+        post:             Зав. кафедрой
+        academic_degree:  д-р техн. наук
+        academic_rank:    профессор
     -
       title:          Кафедра электронных приборов и устройств
       abbr:           ЭП
       number:         12
+      chief:
+        full_name:        Шандаров Станислав Михайлович
+        post:             Зав. кафедрой
+        academic_degree:  д-р физ.-мат. наук
+        academic_rank:    профессор
     -
       title:          Кафедра физической электроники
       abbr:           ФЭ
       number:         13
+      chief:
+        full_name:        Троян Павел Ефимович
+        post:             Зав. кафедрой
+        academic_degree:  д-р техн. наук
+        academic_rank:    профессор
     -
       title:          Кафедра физики
       abbr:           Физики
       number:         14
+      chief:
+        full_name:        Окс Ефим Михайлович
+        post:             Зав. кафедрой
+        academic_degree:  д-р техн. наук
+        academic_rank:    профессор
 
 
 -
@@ -98,48 +181,105 @@
       title:          Кафедра математики
       abbr:           Математики
       number:         15
+      chief:
+        full_name:        Анна Леонидовна Магазинникова
+        post:             Зав. кафедрой
+        academic_degree:  канд. физ.-мат. наук
+        academic_rank:    доцент
 
 -
   title:            Факультет вычислительных систем
   abbr:             ФВС
+  chief:
+    full_name:        Черкашин Михаил Владимирович
+    post:             Декан
+    academic_degree:  канд. техн. наук
+    academic_rank:    доцент
+
   subdepartments:
     -
       title:          Кафедра механики и графики
       abbr:           МГ
       number:         17
+      chief:
+        full_name:        Люкшин Борис Александрович
+        post:             Зав. кафедрой
+        academic_degree:  д-р техн. наук
+        academic_rank:    профессор
     -
       title:          Кафедра электронных средств автоматизации и управления
       abbr:           ЭСАУ
       number:         24
+      chief:
+        full_name:        Черепанов Олег Иванович
+        post:             Зав. кафедрой
+        academic_degree:  д-р физ.-мат. наук
+        academic_rank:    профессор
     -
       title:          Кафедра комплексной информационной безопасности электронно-вычислительных систем
       abbr:           КИБЭВС
       number:         25
+      chief:
+        full_name:        Шелупанов Александр Александрович
+        post:             Зав. кафедрой
+        academic_degree:  д-р техн. наук
+        academic_rank:    профессор
     -
       title:          Кафедра компьютерных систем в управлении и проектировании
       abbr:           КСУП
       number:         26
+      chief:
+        full_name:        Шурыгин Юрий Алексеевич 
+        post:             Зав. кафедрой
+        academic_degree:  д-р техн. наук
+        academic_rank:    профессор
 
 -
   title:            Гуманитарный факультет
   abbr:             ГФ
+  chief:
+    full_name:        Суслова Татьяна Ивановна
+    post:             Декан
+    academic_degree:  д-р фил. наук
+    academic_rank:    профессор
+
   subdepartments:
     -
       title:          Кафедра истории и социальной работы
       abbr:           ИСР
       number:         18
+      chief:
+        full_name:        Грик Николай Антонович
+        post:             Зав. кафедрой
+        academic_degree:  д-р ист. наук
+        academic_rank:    профессор
     -
       title:          Кафедра философии и социологии
       abbr:           ФС
       number:         19
+      chief:
+        full_name:        Суслова Татьяна Ивановна
+        post:             Зав. кафедрой
+        academic_degree:  д-р фил. наук
+        academic_rank:    профессор
     -
       title:          Кафедра иностранных языков
       abbr:           ИЯ
       number:         20
+      chief:
+        full_name:        Менгардт Елена Рудольфовна
+        post:             Зав. кафедрой
+        academic_degree:  |
+        academic_rank:    доцент
     -
       title:          Кафедра физвоспитания и спорта
       abbr:           ФВиС
       number:         21
+      chief:
+        full_name:        Ильин Александр Александрович
+        post:             Зав. кафедрой
+        academic_degree:  |
+        academic_rank:    |
     -
       title:          Кафедра спортивного совершенствования по академической гребле
       abbr:           СПС
@@ -148,73 +288,163 @@
 -
   title:            Экономический факультет
   abbr:             ЭФ
+  chief:
+    full_name:        Буймов Аркадий Георгиевич
+    post:             Декан
+    academic_degree:  д-р техн. наук
+    academic_rank:    профессор
+
   subdepartments:
     -
       title:          Кафедра экономики
       abbr:           Экономики
       number:         9
+      chief:
+        full_name:        Буймов Аркадий Георгиевич
+        post:             Зав. кафедрой
+        academic_degree:  д-р техн. наук
+        academic_rank:    профессор
     -
       title:          Кафедра экономической математики, информатики и статистики
       abbr:           ЭМИС
       number:         30
+      chief:
+        full_name:        Боровской Игорь Георгиевич
+        post:             Зав. кафедрой
+        academic_degree:  д-р физ.-мат. наук
+        academic_rank:    профессор
 -
   title:            Факультет инновационных технологий
   abbr:             ФИТ
+  chief:
+    full_name:        Лирмак Юрий Михайлович
+    post:             Декан
+    academic_degree:  канд. физ.-мат. наук
+    academic_rank:    |
+
   subdepartments:
     -
       title:          Отделение кафедры ЮНЕСКО
       abbr:           ОКЮ
       number:         33
+      chief:
+        full_name:        Осипов Юрий Мирзоевич
+        post:             Зав. кафедрой
+        academic_degree:  д-р техн. наук
+        academic_rank:    профессор
     -
       title:          Кафедра управления инновациями
       abbr:           УИ
       number:         37
+      chief:
+        full_name:        Уваров Александр Фавстович
+        post:             Зав. кафедрой
+        academic_degree:  кандидат эконом. наук
+        academic_rank:    профессор
     -
       title:          Кафедра электронных систем
       abbr:           ЭС
       number:         22
+      chief:
+        full_name:        Родионов Николай Евдокимович
+        post:             Зав. кафедрой
+        academic_degree:  |
+        academic_rank:    |
 
 -
   title:            Юридический факультет
   abbr:             ЮФ
+  chief:
+    full_name:        Красинский Сергей Лифанович
+    post:             Декан
+    academic_degree:  канд. ист. наук
+    academic_rank:    доцент
+
   subdepartments:
     -
       title:          Кафедра теории права
       abbr:           ТП
       number:         10
+      chief:
+        full_name:        Хаминов Дмитрий Викторович
+        post:             Зав. кафедрой
+        academic_degree:  канд. ист. наук
+        academic_rank:    доцент
     -
       title:          Кафедра уголовного права
       abbr:           УП
       number:         34
+      chief:
+        full_name:        Чаднова Ирина Владимировна
+        post:             Зав. кафедрой
+        academic_degree:  канд. юр. наук
+        academic_rank:    доцент
     -
       title:          Кафедра гражданского права
       abbr:           ГП
       number:         35
+      chief:
+        full_name:        Дедкова Татьяна Анатольевна
+        post:             Зав. кафедрой
+        academic_degree:  канд. юр. наук
+        academic_rank:    доцент
     -
       title:          Кафедра информационного права
       abbr:           ИП
       number:         36
+      chief:
+        full_name:        Мельникова Валентина Григорьевна 
+        post:             Зав. кафедрой
+        academic_degree:  канд. юр. наук
+        academic_rank:    доцент
 
 -
   title:            Факультет моделирования систем
   abbr:             ФМС
+  chief:
+    full_name:        Дмитриев Вячеслав Михайлович
+    post:             Декан
+    academic_degree:  д-р техн. наук
+    academic_rank:    профессор
+
   subdepartments:
     -
       title:            Кафедра системного анализа
       abbr:             СА
       number:           31
+      chief:
+        full_name:        Истигечева Елена Валентиновна
+        post:             Зав. кафедрой
+        academic_degree:  канд. техн. наук
+        academic_rank:    доцент
     -
       title:            Кафедра моделирования и основ теории цепей
       abbr:             МОТЦ
       number:           16
+      chief:
+        full_name:        Дмитриев Вячеслав Михайлович
+        post:             Зав. кафедрой
+        academic_degree:  д-р техн. наук
+        academic_rank:    профессор
 
 -
   title:            Факультет дистанционного обучения
   abbr:             ФДО
+  chief:
+    full_name:        Левшенкова Ирина Петровна
+    post:             Декан
+    academic_degree:  |
+    academic_rank:    |
+
   subdepartments:
     -
       title:          Кафедра прикладной математики и информатики
       abbr:           ПМИ
       number:         32
+      chief:
+        full_name:        |
+        post:             |
+        academic_degree:  |
+        academic_rank:    |
 
 
