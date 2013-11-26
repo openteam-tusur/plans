@@ -122,7 +122,8 @@ class Discipline < ActiveRecord::Base
     semesters.each do |semester|
       res[semester.number] = {
         :checks => checks_in_semester(semester).map(&:kind),
-        :loadings => loadings_in_semester(semester).map{|l| { l.kind => l.value }}
+        :loadings => loadings_in_semester(semester).map{|l| { l.kind => l.value }},
+        :credit_units => credit_units[semester.number.to_s]
       }
     end
 
