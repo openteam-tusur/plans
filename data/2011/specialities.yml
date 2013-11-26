@@ -63,6 +63,7 @@ bachelor:
       -
         subdepartment: "ТУ"
         title: "Информационный менеджмент"
+        graduated_subdepartment: 'Экономики'
 
   -
     code: "080500.62"

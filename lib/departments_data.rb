@@ -10,7 +10,7 @@ class DepartmentsData
   end
 
   def department_data_with_subdepartments(department)
-    departments_data.dup.select { |e| e['abbr'] == department.abbr }.first.dup || {}
+    departments_data.select { |e| e['abbr'] == department.abbr }.first.try(:dup) || {}
   end
 
   def department_data(department)

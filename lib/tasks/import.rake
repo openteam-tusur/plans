@@ -63,7 +63,6 @@ task :sync_departments => :environment do
   DepartmentsImporter.new.import_departments
 end
 
-
 desc 'Импорт компетенций'
 task :import_competences => :environment do |task|
   puts task.comment

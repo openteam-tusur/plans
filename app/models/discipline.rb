@@ -130,7 +130,7 @@ class Discipline < ActiveRecord::Base
   end
 
   def provided_subdepartment_info
-    Departments.instance.subdepartment_data(subdepartment)
+    DepartmentsData.instance.subdepartment_data(subdepartment)
   end
 
   def identifier_prefix
