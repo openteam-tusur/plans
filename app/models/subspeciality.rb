@@ -112,12 +112,15 @@ class Subspeciality < ActiveRecord::Base
 
   def graduated_info
     {
-      #:department => Departments.instance.department_data(subdepartment.department),
-      #:subdepartment => Departments.instance.subdepartment_data(subdepartment)
+      :department => DepartmentsData.instance.department_data(graduated_subdepartment.department),
+      :subdepartment => DepartmentsData.instance.subdepartment_data(graduated_subdepartment)
     }
   end
 
   def profiled_info
-    { :department => DepartmentsData.instance.department_data(subdepartment.department), :subdepartment => ''}
+    {
+      :department => DepartmentsData.instance.department_data(subdepartment.department),
+      :subdepartment => DepartmentsData.instance.subdepartment_data(subdepartment),
+    }
   end
 end

@@ -10,7 +10,7 @@ class DepartmentsData
   end
 
   def department_data_with_subdepartments(department)
-    departments_data.dup.select { |e| e['abbr'] == department.abbr }.first || {}
+    departments_data.dup.select { |e| e['abbr'] == department.abbr }.first.dup || {}
   end
 
   def department_data(department)
@@ -18,5 +18,11 @@ class DepartmentsData
     data.delete('subdepartments')
 
     data
+  end
+
+  def subdepartment_data(subdepartment)
+    data = department_data_with_subdepartments(subdepartment.department)['subdepartments'] || []
+
+    data.select { |e| e['abbr'] == subdepartment.abbr }.first
   end
 end
