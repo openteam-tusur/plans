@@ -98,14 +98,6 @@ class Subspeciality < ActiveRecord::Base
     warnings
   end
 
-  def info
-    {
-      :department => Departments.instance.department_data(department),
-      :profile_subdepartment => Departments.instance.subdepartment_data(Subdepartment.first),
-      :provided_subdepartment => Departments.instance.subdepartment_data(Subdepartment.first)
-    }
-  end
-
   def to_s
     "#{title}, #{education_form_text} форма"
   end
@@ -116,5 +108,16 @@ class Subspeciality < ActiveRecord::Base
 
   def postal?
     !!(education_form =~ /^postal/)
+  end
+
+  def graduated_info
+    {
+      #:department => Departments.instance.department_data(subdepartment.department),
+      #:subdepartment => Departments.instance.subdepartment_data(subdepartment)
+    }
+  end
+
+  def profiled_info
+    { :department => DepartmentsData.instance.department_data(subdepartment.department), :subdepartment => ''}
   end
 end

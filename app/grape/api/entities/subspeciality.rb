@@ -11,5 +11,7 @@ class API::Entities::Subspeciality < Grape::Entity
     { name: subspeciality.education_form, title: subspeciality.education_form_text }
   end
   expose :speciality, :using => API::Entities::Speciality
+
+  # TODO: subdepartment to graduated_subdepartment
   expose :subdepartment, :using => API::Entities::Subdepartment
 end
