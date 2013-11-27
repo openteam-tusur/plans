@@ -229,7 +229,7 @@
       abbr:           КСУП
       number:         26
       chief:
-        full_name:        Шурыгин Юрий Алексеевич 
+        full_name:        Шурыгин Юрий Алексеевич
         post:             Зав. кафедрой
         academic_degree:  д-р техн. наук
         academic_rank:    профессор
@@ -284,7 +284,11 @@
       title:          Кафедра спортивного совершенствования по академической гребле
       abbr:           СПС
       number:         23
-
+      chief:
+        full_name:        |
+        post:             |
+        academic_degree:  |
+        academic_rank:    |
 -
   title:            Экономический факультет
   abbr:             ЭФ
@@ -393,7 +397,7 @@
       abbr:           ИП
       number:         36
       chief:
-        full_name:        Мельникова Валентина Григорьевна 
+        full_name:        Мельникова Валентина Григорьевна
         post:             Зав. кафедрой
         academic_degree:  канд. юр. наук
         academic_rank:    доцент

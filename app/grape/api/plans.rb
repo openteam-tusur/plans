@@ -91,6 +91,11 @@ class API::Plans < Grape::API
 
   # API for workprogramm-app
   #
+
+  get 'departments' do
+    DepartmentsData.instance.departments
+  end
+
   namespace :years do
     params do
       requires :year, :type => Integer, :desc => 'Year number'

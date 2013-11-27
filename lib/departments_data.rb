@@ -25,4 +25,8 @@ class DepartmentsData
 
     data.select { |e| e['abbr'] == subdepartment.abbr }.first
   end
+
+  def departments
+    departments_data
+  end
 end
