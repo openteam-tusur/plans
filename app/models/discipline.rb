@@ -130,8 +130,8 @@ class Discipline < ActiveRecord::Base
     res
   end
 
-  def provided_subdepartment_info
-    DepartmentsData.instance.subdepartment_data(subdepartment)
+  def provided_info
+    { :subdepartment => DepartmentsData.instance.subdepartment_data(subdepartment) }
   end
 
   def identifier_prefix
