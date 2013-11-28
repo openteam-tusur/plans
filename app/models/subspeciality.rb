@@ -32,7 +32,6 @@ class Subspeciality < ActiveRecord::Base
 
   has_one :programm
   has_one :work_plan
-  has_one :department, :through => :subdepartment
   has_many :disciplines, :dependent => :destroy, :order => :title
   has_many :checks, :through => :disciplines
   has_many :loadings, :through => :disciplines
