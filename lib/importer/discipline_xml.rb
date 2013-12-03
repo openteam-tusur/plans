@@ -86,7 +86,7 @@ class DisciplineXML
     lecture:            'Лек',
     lab:                'Лаб',
     practice:           'Пр',
-    interative_lecture: 'ИнтЛек',
+    interactive_lecture: 'ИнтЛек',
     interactive_lab:    'ИнтЛаб',
     interactive_practice: 'ИнтПр'
   }
