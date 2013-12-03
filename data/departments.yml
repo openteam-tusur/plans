@@ -278,17 +278,17 @@
       chief:
         full_name:        Ильин Александр Александрович
         post:             Зав. кафедрой
-        academic_degree:  |
+        academic_degree:  кандидат пед. наук
         academic_rank:    |
     -
       title:          Кафедра спортивного совершенствования по академической гребле
       abbr:           СПС
       number:         23
       chief:
-        full_name:        |
-        post:             |
-        academic_degree:  |
-        academic_rank:    |
+        full_name:        Иванов Анатолий Иванович
+        post:             Зав. кафедрой
+        academic_degree:  кандидат пед. наук
+        academic_rank:    профессор
 -
   title:            Экономический факультет
   abbr:             ЭФ
@@ -324,7 +324,7 @@
     full_name:        Лирмак Юрий Михайлович
     post:             Декан
     academic_degree:  канд. физ.-мат. наук
-    academic_rank:    |
+    academic_rank:    доцент
 
   subdepartments:
     -
@@ -352,7 +352,7 @@
       chief:
         full_name:        Родионов Николай Евдокимович
         post:             Зав. кафедрой
-        academic_degree:  |
+        academic_degree:  кандидат наук
         academic_rank:    |
 
 -
@@ -446,9 +446,9 @@
       abbr:           ПМИ
       number:         32
       chief:
-        full_name:        |
-        post:             |
-        academic_degree:  |
-        academic_rank:    |
+        full_name:        Тимченко Сергей Викторович
+        post:             Зав. кафедрой
+        academic_degree:  д-р физ.-мат. наук
+        academic_rank:    ст. научн. сотр.
 
 
