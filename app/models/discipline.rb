@@ -119,6 +119,8 @@ class Discipline < ActiveRecord::Base
   def semesters_info
     res = {}
 
+    return optionally_disciplines_with_credit_units.semesters_info if semesters.empty? && has_optionally_disciplines?
+
     semesters.each do |semester|
       res[semester.number] = {
         :checks => checks_in_semester(semester).map(&:kind),
@@ -151,6 +153,10 @@ class Discipline < ActiveRecord::Base
     return [] unless has_optionally_disciplines?
 
     subspeciality.disciplines.where('id != :id AND identifier LIKE :identifier_prefix', :id => id, :identifier_prefix => "#{identifier_prefix}%")
+  end
+
+  def optionally_disciplines_with_credit_units
+    optionally_disciplines.select { |d| d.credit_units.any? }.first
   end
 
   def optionally_disciplines_with_empty_credit_units
