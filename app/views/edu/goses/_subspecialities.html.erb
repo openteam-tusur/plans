@@ -16,7 +16,7 @@
     <% subspecialities.each do |subspeciality| %>
       <tr>
         <td>
-          <%= subspeciality.title_with_edu_form_and_year %>
+          <%= subspeciality.link_to_show(subspeciality.title_with_edu_form_and_year) %>
           <%= subspeciality.linked_title %>
         </td>
         <td><%= subspeciality.subdepartment %></td>

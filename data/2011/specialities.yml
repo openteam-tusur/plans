@@ -218,10 +218,7 @@ bachelor:
     subspecialities:
       -
         subdepartment: "КСУП"
-        title: "Управление и информатика в технических системах"
-      -
-        subdepartment: "КСУП"
-        title: "Информационные технологии в управлении"
+        title: "Без профиля"
       -
         subdepartment: "КСУП"
         title: "Без профиля"
