@@ -22,6 +22,14 @@ bachelor:
       -
         subdepartment: "ИП"
         title: "Без профиля"
+      -
+        subdepartment: "ИП"
+        title: "Без профиля"
+        education_form: "postal"
+      -
+        subdepartment: "ИП"
+        title: "Без профиля"
+        education_form: "postal-with-dist"
 
   -
     code: "040400.62"
@@ -30,6 +38,10 @@ bachelor:
       -
         subdepartment: "ИСР"
         title: "Без профиля"
+      -
+        subdepartment: "ИСР"
+        title: "Без профиля"
+        education_form: "postal"
 
   -
     code: "040700.62"
@@ -48,7 +60,12 @@ bachelor:
         title: "Финансы и кредит"
       -
         subdepartment: "Экономики"
-        title: "Анализ и управление рисками"
+        title: "Финансы и кредит"
+        education_form: "postal"
+      -
+        subdepartment: "Экономики"
+        title: "Финансы и кредит"
+        education_form: 'postal-with-dist'
 
   -
     code: "080200.62"
@@ -59,11 +76,21 @@ bachelor:
         title: "Управление проектами"
       -
         subdepartment: "Экономики"
-        title: "Маркетинг"
+        title: "Управление проектами"
+        education_form: "postal"
+      -
+        subdepartment: "Экономики"
+        title: "Управление проектами"
+        education_form: 'postal-with-dist'
       -
         subdepartment: "ТУ"
         title: "Информационный менеджмент"
         graduated_subdepartment: 'Экономики'
+      -
+        subdepartment: "ТУ"
+        title: "Информационный менеджмент"
+        graduated_subdepartment: 'Экономики'
+        education_form: 'part-time'
 
   -
     code: "080500.62"
@@ -73,6 +100,11 @@ bachelor:
         subdepartment: "АОИ"
         title: "Без профиля"
         group_index: '^40[1|2]$'
+      -
+        subdepartment: "АОИ"
+        title: "Без профиля"
+        group_index: '^40[1|2]$'
+        education_form: 'postal-with-dist'
 
   -
     code: "081100.62"
@@ -86,6 +118,10 @@ bachelor:
         subdepartment: "АОИ"
         title: "Без профиля"
         education_form: 'postal'
+      -
+        subdepartment: "АОИ"
+        title: "Без профиля"
+        education_form: 'postal-with-dist'
 
 
   -
@@ -129,6 +165,11 @@ bachelor:
         title: "Квантовая и оптическая электроника"
         group_index: '^35[1|2|3](-\d)?$'
       -
+        subdepartment: "ЭП"
+        title: "Квантовая и оптическая электроника"
+        group_index: '^35[1|2|3](-\d)?$'
+        education_form: "postal"
+      -
         subdepartment: "ПрЭ"
         title: "Промышленная электроника"
         group_index: '^36[1|2]-\d$'
@@ -140,6 +181,10 @@ bachelor:
         subdepartment: "ПрЭ"
         title: "Промышленная электроника"
         education_form: 'postal'
+      -
+        subdepartment: "ПрЭ"
+        title: "Промышленная электроника"
+        education_form: 'part-time'
 
   -
     code: "211000.62"
@@ -149,6 +194,10 @@ bachelor:
         subdepartment: "КИПР"
         title: "Проектирование и технология радиоэлектронных средств"
       -
+        subdepartment: "КИПР"
+        title: "Проектирование и технология радиоэлектронных средств"
+        education_form: "postal"
+      -
         subdepartment: "КУДР"
         title: "Конструирование и технология наноэлектронных средств"
       -
@@ -157,6 +206,14 @@ bachelor:
       -
         subdepartment: "КИБЭВС"
         title: "Проектирование и технология электронно-вычислительных средств"
+      -
+        subdepartment: "КИБЭВС"
+        title: "Проектирование и технология электронно-вычислительных средств"
+        education_form: "postal"
+      -
+        subdepartment: "КИБЭВС"
+        title: "Проектирование и технология электронно-вычислительных средств"
+        education_form: 'postal-with-dist'
 
   -
     code: "210400.62"
@@ -166,15 +223,17 @@ bachelor:
         subdepartment: "РЗИ"
         title: "Радиотехнические средства передачи, приема и обработки сигналов"
       -
-        subdepartment: "СВЧиКР"
-        title: "Радиотехника"
+        subdepartment: "РЗИ"
+        title: "Радиотехнические средства передачи, приема и обработки сигналов"
+        education_form: 'postal-with-dist'
       -
         subdepartment: "СВЧиКР"
         title: "Радиотехнические средства передачи, приема и обработки сигналов"
         education_form: 'part-time'
       -
         subdepartment: "ТОР"
-        title: "Радиотехника"
+        title: "Аудиовизуальная техника"
+        education_form: "postal"
       -
         subdepartment: "ТУ"
         title: "Аудиовизуальная техника"
@@ -190,11 +249,19 @@ bachelor:
         subdepartment: "СВЧиКР"
         title: "Оптические системы и сети связи"
       -
+        subdepartment: "СВЧиКР"
+        title: "Оптические системы и сети связи"
+        education_form: "postal"
+      -
         subdepartment: "СРС"
         title: "Системы мобильной связи"
       -
         subdepartment: "ТОР"
         title: "Системы радиосвязи и радиодоступа"
+      -
+        subdepartment: "ТОР"
+        title: "Системы радиосвязи и радиодоступа"
+        education_form: 'postal-with-dist'
 
   -
     code: "220100.62"
@@ -252,12 +319,20 @@ bachelor:
         subdepartment: "КСУП"
         title: "Системы автоматизированного проектирования"
       -
+        subdepartment: "КСУП"
+        title: "Системы автоматизированного проектирования"
+        education_form: "postal-with-dist"
+      -
         subdepartment: "АСУ"
         title: "Программное обеспечение средств вычислительной техники и автоматизированных систем"
       -
         subdepartment: "АСУ"
         title: "Программное обеспечение средств вычислительной техники и автоматизированных систем"
         education_form: 'postal'
+      -
+        subdepartment: "АСУ"
+        title: "Программное обеспечение средств вычислительной техники и автоматизированных систем"
+        education_form: 'postal-with-dist'
 
   -
     code: "230400.62"
@@ -279,6 +354,10 @@ bachelor:
         subdepartment: "АОИ"
         title: "Без профиля"
         education_form: 'postal'
+      -
+        subdepartment: "АОИ"
+        title: "Без профиля"
+        education_form: 'postal-with-dist'
 
   -
     code: "230700.62"
@@ -291,6 +370,10 @@ bachelor:
         subdepartment: "АСУ"
         title: "Без профиля"
         education_form: 'postal'
+      -
+        subdepartment: "АСУ"
+        title: "Без профиля"
+        education_form: 'postal-with-dist'
 
   -
     code: "280700.62"
@@ -332,6 +415,14 @@ specialty:
       -
         subdepartment: "КИПР"
         title: "Техническая эксплуатация радиоэлектронного оборудования воздушных судов и аэропортов"
+      -
+        subdepartment: "КИПР"
+        title: "Техническая эксплуатация радиоэлектронного оборудования воздушных судов и аэропортов"
+        education_form: "postal"
+      -
+        subdepartment: "КИПР"
+        title: "Техническая эксплуатация радиоэлектронного оборудования воздушных судов и аэропортов"
+        education_form: "postal-with-dist"
 
   -
     code: "210601.65"

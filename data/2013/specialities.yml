@@ -6,6 +6,14 @@ bachelor:
       -
         subdepartment: "ИП"
         title: "Без профиля"
+      -
+        subdepartment: "ИП"
+        title: "Без профиля"
+        education_form: "postal"
+      -
+        subdepartment: "ИП"
+        title: "Без профиля"
+        education_form: "postal-with-dist"
   -
     code: "040700.62"
     title: "Организация работы с молодежью"
@@ -36,6 +44,10 @@ bachelor:
         subdepartment: "ПрЭ"
         title: "Промышленная электроника"
         group_index: '^363-\d$'
+      -
+        subdepartment: "ПрЭ"
+        title: "Промышленная электроника"
+        education_form: 'postal'
   -
     code: "211000.62"
     title: "Конструирование и технология  электронных средств"
@@ -68,6 +80,15 @@ specialty:
         title: "Информационная безопасность финансовых и экономических структур"
 
 magistracy:
+  -
+    code: "210100.68"
+    title: "Электроника и наноэлектроника"
+    subspecialities:
+      -
+        subdepartment: "ПрЭ"
+        title: "Промышленная электроника и микропроцессорная техника"
+        group_index: '^36[2|3]-М1$'
+        education_form: "postal"
   -
     code: "221000.68"
     title: "Мехатроника и робототехника"

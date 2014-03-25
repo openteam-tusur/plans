@@ -24,6 +24,10 @@ bachelor:
         subdepartment: "СВЧиКР"
         title: "Оптические системы и сети связи"
       -
+        subdepartment: "СВЧиКР"
+        title: "Оптические системы и сети связи"
+        education_form: "postal"
+      -
         subdepartment: "СРС"
         title: "Системы мобильной связи"
   -
