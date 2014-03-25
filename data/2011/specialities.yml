@@ -13,7 +13,7 @@ bachelor:
     subspecialities:
       -
         subdepartment: "РЭТЭМ"
-        title: "Экология и природопользование"
+        title: "Без профиля"
 
   -
     code: "030900.62"
@@ -29,7 +29,7 @@ bachelor:
     subspecialities:
       -
         subdepartment: "ИСР"
-        title: "Социальная работа"
+        title: "Без профиля"
 
   -
     code: "040700.62"
@@ -94,7 +94,7 @@ bachelor:
     subspecialities:
       -
         subdepartment: "РЗИ"
-        title: "Информационная безопасность"
+        title: "Без профиля"
 
   -
     code: "100100.62"
@@ -102,7 +102,7 @@ bachelor:
     subspecialities:
       -
         subdepartment: "ТУ"
-        title: "Сервис"
+        title: "Информационный сервис"
 
   -
     code: "200700.62"
@@ -164,7 +164,7 @@ bachelor:
     subspecialities:
       -
         subdepartment: "РЗИ"
-        title: "Радиотехника"
+        title: "Радиотехнические средства передачи, приема и обработки сигналов"
       -
         subdepartment: "СВЧиКР"
         title: "Радиотехника"
@@ -230,7 +230,7 @@ bachelor:
     subspecialities:
       -
         subdepartment: "ЭСАУ"
-        title: "Автоматизация технологических процессов и производств"
+        title: "Без профиля"
 
   -
     code: "222900.62"
@@ -238,7 +238,7 @@ bachelor:
     subspecialities:
       -
         subdepartment: "ФЭ"
-        title: "Нанотехнологии и микросистемная техника"
+        title: "Без профиля"
         group_index: '^32[1|2|3](-\d)?$'
 
   -
@@ -251,9 +251,6 @@ bachelor:
       -
         subdepartment: "КСУП"
         title: "Системы автоматизированного проектирования"
-      -
-        subdepartment: "КСУП"
-        title: "Системы автоматизированного проектирования в радиоэлектронике"
       -
         subdepartment: "АСУ"
         title: "Программное обеспечение средств вычислительной техники и автоматизированных систем"
@@ -268,7 +265,7 @@ bachelor:
     subspecialities:
       -
         subdepartment: "ЭМИС"
-        title: "Информационные системы и технологии"
+        title: "Без профиля"
 
   -
     code: "231000.62"
@@ -301,7 +298,7 @@ bachelor:
     subspecialities:
       -
         subdepartment: "РЭТЭМ"
-        title: "Техносферная безопасность"
+        title: "Без профиля"
 
 specialty:
   -
@@ -310,7 +307,7 @@ specialty:
     subspecialities:
       -
         subdepartment: "РЗИ"
-        title: "Информационная безопасность телекоммуникационных систем"
+        title: "Безопасность телекоммуникационных систем информационного взаимодействия"
 
   -
     code: "090303.65"
@@ -334,7 +331,7 @@ specialty:
     subspecialities:
       -
         subdepartment: "КИПР"
-        title: "Техническая эксплуатация транспортного радиооборудования"
+        title: "Техническая эксплуатация радиоэлектронного оборудования воздушных судов и аэропортов"
 
   -
     code: "210601.65"
@@ -343,6 +340,12 @@ specialty:
       -
         subdepartment: "РТС"
         title: "Радиоэлектронные системы и комплексы"
+      -
+        subdepartment: "РТС"
+        title: "Радиоэлектронные системы передачи информации"
+      -
+        subdepartment: "РТС"
+        title: "Радиоэлектронные системы космических комплексов"
 
 magistracy:
   -
