@@ -77,12 +77,18 @@ module Plm
         discipline_nodes.map do |node|
           title, competences = node['Дис'].squish, node['Компетенции']
 
-          raise EmptyCompetencesError, title if competences.blank?
+          if competences.blank?
+            p EmptyCompetencesError.new(title).message
+            next
+          end
 
           competences = competences.split(',').map(&:squish)
           discipline = subspeciality.disciplines.find_by_title(title)
 
-          raise DisciplineNotFoundError, title unless discipline
+          unless discipline
+            p DisciplineNotFoundError.new(title).message
+            next
+          end
 
           disciplines_data[discipline] = competences
         end
@@ -95,7 +101,10 @@ module Plm
           title, identifier = discipline_node['Дис'].squish, discipline_node['НовИдДисциплины']
           discipline = subspeciality.disciplines.find_by_title(title)
 
-          raise DisciplineNotFoundError, title unless discipline
+          unless discipline
+            p DisciplineNotFoundError.new(title).message
+            next
+          end
 
           credit_units_data[discipline] = { :identifier => identifier, :credit_units => {} }
 
