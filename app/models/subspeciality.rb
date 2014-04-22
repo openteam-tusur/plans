@@ -122,4 +122,8 @@ class Subspeciality < ActiveRecord::Base
       :subdepartment => DepartmentsData.instance.subdepartment_data(subdepartment),
     }
   end
+
+  def with_plan
+    actual_disciplines.any?
+  end
 end
