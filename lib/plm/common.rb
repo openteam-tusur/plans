@@ -7,7 +7,7 @@ module Plm
     end
 
     def initialize
-      @subspecialities = Subspeciality.joins(:speciality).where('specialities.gos_generation = ?', '3').where('file_path IS NOT NULL')
+      @subspecialities = Subspeciality.joins(:speciality).where('specialities.gos_generation = ?', '3').where('file_path IS NOT NULL').readonly(false)
       @progress_bar = ProgressBar.new(@subspecialities.count)
     end
 
@@ -17,9 +17,16 @@ module Plm
 
     private
 
+    def update_approved_on_for(subspeciality, parser)
+      subspeciality.update_attribute :approved_on, parser.approved_on
+    end
+
     def safe_import
       subspecialities.each do |subspeciality|
+
         parser = Plm::SpecialityParser.new(subspeciality)
+
+        update_approved_on_for(subspeciality, parser)
 
         begin
           import_actions(parser)
@@ -62,6 +69,10 @@ module Plm
 
     def initialize(subspeciality)
       @subspeciality = subspeciality
+    end
+
+    def approved_on
+      xml_doc.at('Титул')['ДатаГОСа']
     end
 
     def competences_data

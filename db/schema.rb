@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140418043839) do
+ActiveRecord::Schema.define(:version => 20140422084027) do
 
   create_table "academic_years", :id => false, :force => true do |t|
     t.integer  "id",           :null => false
@@ -501,6 +501,7 @@ ActiveRecord::Schema.define(:version => 20140418043839) do
     t.string   "plan_digest"
     t.string   "reduced"
     t.string   "group_index"
+    t.date     "approved_on"
   end
 
   add_index "subspecialities", ["graduated_subdepartment_id"], :name => "index_subspecialities_on_graduated_subdepartment_id"
