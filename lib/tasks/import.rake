@@ -36,7 +36,7 @@ def move_to_trash(*model_names)
 end
 
 desc "Полная синхронизация"
-task :sync_all => [:sync, :import_competences, :import_credit_units]
+task :sync_all => [:sync, :import_competences, :import_credit_units, :import_practice]
 
 desc "Форсировать полный повторный импорт"
 task :force_sync => :environment do
