@@ -72,6 +72,12 @@ task :import_competences => :environment do |task|
   Plm::CompetencesImporter.new.import
 end
 
+desc 'Импорт специальных видов работ'
+task :import_practice => :environment do |task|
+  puts task.comment
+  Plm::PracticeImporter.new.import
+end
+
 desc 'Импорт ЗЕТ'
 task :import_credit_units => :environment do |task|
   puts task.comment

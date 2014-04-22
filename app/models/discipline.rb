@@ -20,7 +20,7 @@
 
 
 class Discipline < ActiveRecord::Base
-  attr_accessible :title, :identifier, :credit_units
+  attr_accessible :title, :identifier, :credit_units, :subdepartment_id
 
   belongs_to :subspeciality
   belongs_to :subdepartment
@@ -37,6 +37,7 @@ class Discipline < ActiveRecord::Base
   has_and_belongs_to_many :competences
 
   scope :actual, where(:deleted_at => nil)
+  scope :special_work, where(:special_work => true)
 
   validates_presence_of :title, :subspeciality, :subdepartment
 

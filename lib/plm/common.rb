@@ -65,11 +65,15 @@ module Plm
     end
 
     def competences_data
-      @competences_data ||= Hash[xml_doc.at('Компетенции').children.css('Строка').map { |n| [n['Индекс'], n['Содержание']] }]
+      @competences_data ||= Hash[xml_doc.at('Компетенции').children.css('Строка').map { |n| [n['Код'], [n['Индекс'], n['Содержание']]] }]
     end
 
     def discipline_nodes
       @discipline_nodes ||= xml_doc.at('СтрокиПлана').children.css('Строка')
+    end
+
+    def practice_nodes
+      @practice_nodes ||= xml_doc.at('СпецВидыРаботНов').children
     end
 
     def disciplines_data
@@ -91,6 +95,36 @@ module Plm
           end
 
           disciplines_data[discipline] = competences
+        end
+      end
+    end
+
+    def practice_data
+      @practice_data ||= {}.tap do |practice_data|
+        practice_nodes.css('ПрочиеПрактики > ПрочаяПрактика, УчебПрактики > ПрочаяПрактика, НИР > ПрочаяПрактика').each do |node|
+          subdepartment = nil
+          competence_indexes = []
+          node['Компетенции'].try(:split, '&').to_a.each do |competence|
+            competence_indexes << competences_data[competence].first
+          end
+          semesters = []
+          node.children.css('Семестр').each do |semester|
+            if subdepartment.nil?
+              subdepartment_node = semester.children.css('Кафедра').try :first
+              subdepartment ||= Subdepartment.find_by_number(subdepartment_node['Код']) if subdepartment_node
+            end
+            semesters << { :semester     => semester['Ном'].to_i,
+                           :credit_units => semester['ПланЗЕТ'].to_i,
+                           :test         => semester['ЗачО'] == '1',
+                           :total        => semester['ПланЧасов'].to_i,
+                           :lecture      => semester['ПланЧасовАуд'].to_i,
+                           :srs          => semester['ПланЧасовСРС'].to_i }
+          end
+          practice_data.merge! node['Наименование'] => {
+            :subdepartment => subdepartment,
+            :competences   => competence_indexes,
+            :semesters     => semesters
+          }
         end
       end
     end
@@ -123,7 +157,9 @@ module Plm
       return @xml_doc if @xml_doc
 
       file = File.open(Rails.root.join(subspeciality.file_path))
-      @xml_doc = Nokogiri::XML(file)
+      @xml_doc = Nokogiri::XML(file) do |config|
+        config.noblanks
+      end
       file.close
 
       @xml_doc

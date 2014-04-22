@@ -5,9 +5,9 @@ module Plm
     private
 
     def create_competences(parser)
-      parser.competences_data.each do |index, content|
-        competence = parser.subspeciality.competences.find_or_create_by_index(index)
-        competence.update_attribute :content, content
+      parser.competences_data.each do |code, content|
+        competence = parser.subspeciality.competences.find_or_create_by_index(content.first)
+        competence.update_attribute :content, content.last
       end
     end
 
