@@ -1,6 +1,7 @@
 class API::Entities::Subspeciality < Grape::Entity
   expose :id
   expose :title
+  expose :approved_on
   expose :year do |subspeciality, options|
     subspeciality.year.number
   end
