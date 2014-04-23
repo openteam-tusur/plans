@@ -157,6 +157,7 @@ class Discipline < ActiveRecord::Base
   end
 
   def optionally_disciplines_with_credit_units
+    return [] unless has_optionally_disciplines?
     optionally_disciplines.where("credit_units not like '%{}%'")
   end
 
@@ -165,6 +166,7 @@ class Discipline < ActiveRecord::Base
   end
 
   def optionally_disciplines_with_empty_credit_units
+    return [] unless has_optionally_disciplines?
     optionally_disciplines.where("credit_units like '%{}%'")
   end
 end
