@@ -129,6 +129,15 @@ class API::Plans < Grape::API
                   :methods => [:to_s, :semesters_info, :provided_info], :include => { :competences => { :only => [:index, :content] } }
                 )
               end
+
+              namespace :disciplines do
+                params do
+                  requires :discipline_id, :type => Integer, :desc => 'Discipline id'
+                end
+                get ":discipline_id" do
+                  present Discipline.find(params[:discipline_id]), :with => API::Entities::Discipline
+                end
+              end
             end
           end
         end
