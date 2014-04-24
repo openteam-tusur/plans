@@ -38,6 +38,7 @@ class Discipline < ActiveRecord::Base
 
   scope :actual, where(:deleted_at => nil)
   scope :special_work, where(:special_work => true)
+  scope :without_special_work, where('special_work != ?', true)
 
   validates_presence_of :title, :subspeciality, :subdepartment
 
