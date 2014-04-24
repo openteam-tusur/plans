@@ -7,6 +7,7 @@ module Plm
         subdepartment = content[:subdepartment]
         parser.subspeciality.disciplines.special_work.find_or_initialize_by_title(:title => title).tap do |practice|
           practice.subdepartment = subdepartment
+          practice.kind = :common
 
           practice.competences.clear
 
