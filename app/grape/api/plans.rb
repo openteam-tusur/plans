@@ -125,7 +125,7 @@ class API::Plans < Grape::API
               end
               get 'disciplines' do
                 disciplines = year.specialities.actual.gos3.find(params[:speciality_id]).subspecialities.actual.find(params[:subspeciality_id]).disciplines.actual
-                if params[:without_discipline]
+                if params[:without_discipline] && params[:without_discipline].present?
                   disciplines = disciplines - [Discipline.find(params[:without_discipline])]
                 end
                 disciplines.as_json(
