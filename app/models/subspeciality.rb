@@ -123,6 +123,10 @@ class Subspeciality < ActiveRecord::Base
     }
   end
 
+  def localized_approved_on
+    I18n.l approved_on, :format => '%d %B %Y'
+  end
+
   def with_plan
     actual_disciplines.any?
   end
