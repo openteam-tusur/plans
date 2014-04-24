@@ -124,7 +124,8 @@ class Subspeciality < ActiveRecord::Base
   end
 
   def localized_approved_on
-    I18n.l approved_on, :format => '%d %B %Y'
+    return nil if approved_on.nil?
+    I18n.l Time.zone.parse(approved_on), :format => '%d %B %Y'
   end
 
   def with_plan
