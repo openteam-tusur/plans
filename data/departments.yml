@@ -199,7 +199,7 @@
   subdepartments:
     -
       title:          Кафедра механики и графики
-      abbr:           МГ
+      abbr:           МиГ
       number:         17
       chief:
         full_name:        Люкшин Борис Александрович
@@ -216,20 +216,20 @@
         academic_degree:  д-р физ.-мат. наук
         academic_rank:    профессор
     -
-      title:          Кафедра комплексной информационной безопасности электронно-вычислительных систем
-      abbr:           КИБЭВС
-      number:         25
-      chief:
-        full_name:        Шелупанов Александр Александрович
-        post:             Зав. кафедрой
-        academic_degree:  д-р техн. наук
-        academic_rank:    профессор
-    -
       title:          Кафедра компьютерных систем в управлении и проектировании
       abbr:           КСУП
       number:         26
       chief:
         full_name:        Шурыгин Юрий Алексеевич
+        post:             Зав. кафедрой
+        academic_degree:  д-р техн. наук
+        academic_rank:    профессор
+    -
+      title:            Моделирования и системного анализа
+      abbr:             МиСА
+      number:           16
+      chief:
+        full_name:        Дмитриев Вячеслав Михайлович
         post:             Зав. кафедрой
         academic_degree:  д-р техн. наук
         academic_rank:    профессор
@@ -403,30 +403,30 @@
         academic_rank:    доцент
 
 -
-  title:            Факультет моделирования систем
-  abbr:             ФМС
+  title:            Факультет безопасности
+  abbr:             ФБ
   chief:
-    full_name:        Дмитриев Вячеслав Михайлович
+    full_name:        Давыдова Елена Михайловна
     post:             Декан
-    academic_degree:  д-р техн. наук
-    academic_rank:    профессор
+    academic_degree:  канд. техн. наук
+    academic_rank:    доцент
 
   subdepartments:
     -
-      title:            Кафедра системного анализа
-      abbr:             СА
+      title:          Кафедра комплексной информационной безопасности электронно-вычислительных систем
+      abbr:           КИБЭВС
+      number:         25
+      chief:
+        full_name:        Шелупанов Александр Александрович
+        post:             Зав. кафедрой
+        academic_degree:  д-р техн. наук
+        academic_rank:    профессор
+    -
+      title:            Кафедра безопасности информационных систем
+      abbr:             БИС
       number:           31
       chief:
-        full_name:        Истигечева Елена Валентиновна
-        post:             Зав. кафедрой
-        academic_degree:  канд. техн. наук
-        academic_rank:    доцент
-    -
-      title:            Кафедра моделирования и основ теории цепей
-      abbr:             МОТЦ
-      number:           16
-      chief:
-        full_name:        Дмитриев Вячеслав Михайлович
+        full_name:        Мещеряков Роман Валерьевич
         post:             Зав. кафедрой
         academic_degree:  д-р техн. наук
         academic_rank:    профессор
@@ -443,7 +443,7 @@
   subdepartments:
     -
       title:          Кафедра прикладной математики и информатики
-      abbr:           ПМИ
+      abbr:           КПМиИ
       number:         32
       chief:
         full_name:        Тимченко Сергей Викторович
