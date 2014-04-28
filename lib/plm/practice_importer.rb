@@ -6,6 +6,7 @@ module Plm
       parser.practice_data.each do |title, content|
         subdepartment = content[:subdepartment]
         parser.subspeciality.disciplines.special_work.find_or_initialize_by_title(:title => title).tap do |practice|
+          practice.deleted_at = nil
           practice.subdepartment = subdepartment
           practice.kind = :common
 

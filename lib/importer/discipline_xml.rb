@@ -94,6 +94,7 @@ class DisciplineXML
   CHECK_ABBRS = {
     exam:               'Экз',
     end_of_term:        'Зач',
+    end_of_term_diff:   'ЗачО',
     course_work:        'КР',
     course_projecting:  'КП',
   }

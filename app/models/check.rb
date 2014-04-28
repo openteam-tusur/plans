@@ -23,7 +23,7 @@ class Check < ActiveRecord::Base
 
   extend Enumerize
 
-  enumerize :kind, :in => %w[exam end_of_term practice course_work course_projecting], :scope => true, :predicates => {:prefix => true}
+  enumerize :kind, :in => %w[exam end_of_term end_of_term_diff practice course_work course_projecting], :scope => true, :predicates => {:prefix => true}
   enumerize :kind_report, :in => %w[exam end_of_term end_of_term_diff]
   enumerize :plural_kind_report, :in => %w[exam end_of_term end_of_term_diff]
 
