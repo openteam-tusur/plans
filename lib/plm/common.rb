@@ -87,6 +87,10 @@ module Plm
       @practice_nodes ||= xml_doc.at('СпецВидыРаботНов').children
     end
 
+    def cycle_nodes
+      @cycle_nodes ||= xml_doc.at('АтрибутыЦикловНов').children
+    end
+
     def disciplines_data
       @disciplines_data ||= {}.tap do |disciplines_data|
         discipline_nodes.map do |node|
@@ -132,6 +136,7 @@ module Plm
                            :srs          => semester['ПланЧасовСРС'].to_i }
           end
           practice_data.merge! node['Наименование'] => {
+            :cycle         => cycle_nodes.search('Цикл[Название*=Практик]').first['Аббревиатура'],
             :subdepartment => subdepartment,
             :competences   => competence_indexes,
             :semesters     => semesters

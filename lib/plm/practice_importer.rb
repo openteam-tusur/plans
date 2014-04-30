@@ -5,7 +5,11 @@ module Plm
     def create_practices(parser)
       parser.practice_data.each do |title, content|
         subdepartment = content[:subdepartment]
+        cycle         = content[:cycle]
         parser.subspeciality.disciplines.special_work.find_or_initialize_by_title(:title => title).tap do |practice|
+          practice.cycle      ||= cycle
+          practice.cycle_id   ||= cycle
+          practice.cycle_code ||= cycle
           practice.deleted_at = nil
           practice.subdepartment = subdepartment
           practice.kind = :common
