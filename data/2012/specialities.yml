@@ -68,6 +68,19 @@ bachelor:
       -
         subdepartment: "УИ"
         title: "Управление инновациями в электронной технике"
+
+  -
+    code: "220400.62"
+    title: "Управление в технических системах"
+    subspecialities:
+      -
+        subdepartment: "КСУП"
+        title: "Без профиля"
+      -
+        subdepartment: "КСУП"
+        title: "Без профиля"
+        education_form: 'postal-with-dist'
+
   -
     code: "230100.62"
     title: "Информатика и вычислительная техника"

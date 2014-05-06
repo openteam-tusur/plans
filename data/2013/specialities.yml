@@ -62,6 +62,17 @@ bachelor:
       -
         subdepartment: "АСУ"
         title: "Без профиля"
+  -
+    code: "230100.62"
+    title: "Информатика и вычислительная техника"
+    subspecialities:
+      -
+        subdepartment: "КСУП"
+        title: "Системы автоматизированного проектирования"
+      -
+        subdepartment: "КСУП"
+        title: "Системы автоматизированного проектирования"
+        education_form: "postal-with-dist"
 
 specialty:
   -
