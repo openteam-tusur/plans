@@ -25,7 +25,7 @@ module Plm
           practice.loadings.destroy_all
           content[:semesters].each do |item|
             semester_num = item.delete(:semester)
-            practice.credit_units.merge!( semester_num => item.delete(:credit_units) )
+            practice.credit_units.merge!( semester_num.to_s => item.delete(:credit_units) )
             semester = parser.subspeciality.semesters.find_by_number semester_num
             practice.checks.create :semester => semester, :kind => :practice if item.delete(:test)
             item.delete(:total)
