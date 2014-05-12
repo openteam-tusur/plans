@@ -23,7 +23,6 @@ module Plm
           practice.credit_units = {}
           practice.checks.destroy_all
           practice.loadings.destroy_all
-          practice.save(:validate => false)
           content[:semesters].each do |item|
             semester_num = item.delete(:semester)
             practice.credit_units.merge!( semester_num => item.delete(:credit_units) )
@@ -35,7 +34,7 @@ module Plm
               practice.loadings.create :semester => semester, :kind => k, :value => v
             end
           end
-
+          practice.save(:validate => false)
         end
       end
     end
