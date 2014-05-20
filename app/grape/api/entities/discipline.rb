@@ -2,6 +2,7 @@ class API::Entities::Discipline < Grape::Entity
   expose :id
   expose :title
   expose :special_work
+  expose :weeks_count
 
   expose :cycle do |object|
     { :code => object.cycle_code, :title => object.cycle }

@@ -133,7 +133,8 @@ module Plm
                            :test         => semester['ЗачО'] == '1',
                            :total        => semester['ПланЧасов'].to_i,
                            :lecture      => semester['ПланЧасовАуд'].to_i,
-                           :srs          => semester['ПланЧасовСРС'].to_i }
+                           :srs          => semester['ПланЧасовСРС'].to_i,
+                           :weeks        => semester['ПланНед'].to_i }
           end
           practice_data.merge! node['Наименование'] => {
             :cycle         => cycle_nodes.search('Цикл[Название*=Практик]').first['Аббревиатура'],
