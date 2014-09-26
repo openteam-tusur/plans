@@ -1,15 +1,15 @@
 GIT
+  remote: git://github.com/sgruhier/capistrano-db-tasks
+  revision: 229c2a63ebb43a61ed2aa1f042d4d447ee186037
+  specs:
+    capistrano-db-tasks (0.2)
+
+GIT
   remote: git://github.com/brainspec/enumerize
   revision: d07fda637ae07dcb17b37e0128767aa2eebbf9b3
   specs:
     enumerize (0.5.1)
       activesupport (>= 3.2)
-
-GIT
-  remote: git://github.com/sgruhier/capistrano-db-tasks
-  revision: 229c2a63ebb43a61ed2aa1f042d4d447ee186037
-  specs:
-    capistrano-db-tasks (0.2)
 
 GEM
   remote: http://rubygems.org/

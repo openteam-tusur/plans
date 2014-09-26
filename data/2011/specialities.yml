@@ -102,6 +102,10 @@ bachelor:
         group_index: '^40[1|2]$'
       -
         subdepartment: "АОИ"
+        title: "Индивидуальный учебный план с технологией группового проектного обучения"
+        group_index: '^40[1|2]$'
+      -
+        subdepartment: "АОИ"
         title: "Без профиля"
         group_index: '^40[1|2]$'
         education_form: 'postal-with-dist'
@@ -114,6 +118,10 @@ bachelor:
         subdepartment: "АОИ"
         title: "Без профиля"
         group_index: '^47[1|2|3]-\d$'
+      -
+        subdepartment: "АОИ"
+        title: "Индивидуальный учебный план с технологией группового проектного обучения"
+        group_index: '^47[1|2]$'
       -
         subdepartment: "АОИ"
         title: "Без профиля"
@@ -350,6 +358,10 @@ bachelor:
         subdepartment: "АОИ"
         title: "Без профиля"
         group_index: '^42[1|2|3]-\d$'
+      -
+        subdepartment: "АОИ"
+        title: "Индивидуальный учебный план с технологией группового проектного обучения"
+        group_index: '^42[1|2]$'
       -
         subdepartment: "АОИ"
         title: "Без профиля"
