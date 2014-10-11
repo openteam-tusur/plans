@@ -45,6 +45,10 @@ bachelor:
       -
         subdepartment: "ИСР"
         title: "Без профиля"
+        kind: 'gpo'
+      -
+        subdepartment: "ИСР"
+        title: "Без профиля"
         education_form: "postal"
 
   -

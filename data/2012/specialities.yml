@@ -11,6 +11,21 @@ bachelor:
         title: "Без профиля"
         kind: 'gpo'
   -
+    code: "040400.62"
+    title: "Социальная работа"
+    subspecialities:
+      -
+        subdepartment: "ИСР"
+        title: "Без профиля"
+      -
+        subdepartment: "ИСР"
+        title: "Без профиля"
+        kind: 'gpo'
+      -
+        subdepartment: "ИСР"
+        title: "Без профиля"
+        education_form: "postal"
+  -
     code: "080101.65"
     title: "Экономическая безопасность"
     subspecialities:

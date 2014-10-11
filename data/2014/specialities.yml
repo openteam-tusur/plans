@@ -1,5 +1,16 @@
 bachelor:
   -
+    code: "040400.62"
+    title: "Социальная работа"
+    subspecialities:
+      -
+        subdepartment: "ИСР"
+        title: "Без профиля"
+      -
+        subdepartment: "ИСР"
+        title: "Без профиля"
+        kind: 'gpo'
+  -
     code: "081100.62"
     title: "Государственное и муниципальное управление"
     subspecialities:

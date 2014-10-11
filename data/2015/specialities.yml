@@ -1,0 +1,8 @@
+magistracy:
+  -
+    code: "040400.68"
+    title: "Социальная работа"
+    subspecialities:
+      -
+        subdepartment: "ИСР"
+        title: "Социальное проектирование"
