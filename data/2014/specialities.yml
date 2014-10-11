@@ -24,6 +24,17 @@ bachelor:
         group_index: '^47[4]-]d$$'
         kind: 'gpo'
   -
+    code: "090900.62"
+    title: "Информационная безопасность"
+    subspecialities:
+      -
+        subdepartment: "КИБЭВС"
+        title: "Безопасность автоматизированных систем"
+      -
+        subdepartment: "КИБЭВС"
+        title: "Безопасность автоматизированных систем"
+        kind: 'gpo'
+  -
     code: "230700.62"
     title: "Прикладная информатика"
     subspecialities:
