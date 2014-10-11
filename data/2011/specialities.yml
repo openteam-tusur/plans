@@ -6,6 +6,10 @@ bachelor:
       -
         subdepartment: "АСУ"
         title: "Без профиля"
+      -
+        subdepartment: "АСУ"
+        title: "Без профиля"
+        kind: 'gpo'
 
   -
     code: "022000.62"
@@ -102,7 +106,8 @@ bachelor:
         group_index: '^40[1|2]$'
       -
         subdepartment: "АОИ"
-        title: "Индивидуальный учебный план с технологией группового проектного обучения"
+        title: "Без профиля"
+        kind: 'gpo'
         group_index: '^40[1|2]$'
       -
         subdepartment: "АОИ"
@@ -120,7 +125,8 @@ bachelor:
         group_index: '^47[1|2|3]-\d$'
       -
         subdepartment: "АОИ"
-        title: "Индивидуальный учебный план с технологией группового проектного обучения"
+        title: "Без профиля"
+        kind: 'gpo'
         group_index: '^47[1|2]$'
       -
         subdepartment: "АОИ"
@@ -259,6 +265,10 @@ bachelor:
       -
         subdepartment: "СВЧиКР"
         title: "Оптические системы и сети связи"
+        kind: 'gpo'
+      -
+        subdepartment: "СВЧиКР"
+        title: "Оптические системы и сети связи"
         education_form: "postal"
       -
         subdepartment: "СРС"
@@ -336,6 +346,10 @@ bachelor:
       -
         subdepartment: "АСУ"
         title: "Программное обеспечение средств вычислительной техники и автоматизированных систем"
+        kind: 'gpo'
+      -
+        subdepartment: "АСУ"
+        title: "Программное обеспечение средств вычислительной техники и автоматизированных систем"
         education_form: 'postal'
       -
         subdepartment: "АСУ"
@@ -360,7 +374,8 @@ bachelor:
         group_index: '^42[1|2|3]-\d$'
       -
         subdepartment: "АОИ"
-        title: "Индивидуальный учебный план с технологией группового проектного обучения"
+        title: "Без профиля"
+        kind: 'gpo'
         group_index: '^42[1|2]$'
       -
         subdepartment: "АОИ"

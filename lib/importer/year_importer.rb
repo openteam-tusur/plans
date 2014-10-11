@@ -30,11 +30,12 @@ class YearImporter
           raise "Нет кафедры #{subspeciality_attributes['subdepartment']}" unless subdepartment
           graduated_subdepartment = Subdepartment.find_by_abbr(subspeciality_attributes['graduated_subdepartment'] || subspeciality_attributes['subdepartment'])
           department = Department.find_by_abbr(subspeciality_attributes['department']) || subdepartment.department
-          subspeciality = speciality.subspecialities.find_or_initialize_by_title_and_subdepartment_id_and_education_form_and_reduced(
+          subspeciality = speciality.subspecialities.find_or_initialize_by_title_and_subdepartment_id_and_education_form_and_reduced_and_kind(
             :title            => subspeciality_attributes['title'].squish,
             :subdepartment_id => subdepartment.id,
             :education_form   => subspeciality_attributes['education_form'] || 'full-time',
-            :reduced          => subspeciality_attributes['reduced']
+            :reduced          => subspeciality_attributes['reduced'],
+            :kind             => subspeciality_attributes['kind'] || 'basic'
           )
           subspeciality.graduated_subdepartment = graduated_subdepartment
           subspeciality.department = department

@@ -9,8 +9,9 @@ bachelor:
         group_index: '^47[4]-\d$'
       -
         subdepartment: "АОИ"
-        title: "Индивидуальный учебный план с технологией группового проектного обучения"
+        title: "Без профиля"
         group_index: '^47[4]-]d$$'
+        kind: 'gpo'
 
 magistracy:
   -

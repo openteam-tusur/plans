@@ -173,10 +173,11 @@ class PlanImporter
 
   def find_subspeciality
     speciality.subspecialities.actual
-      .find_by_title_and_subdepartment_id_and_education_form_and_reduced!(subspeciality_title,
+      .find_by_title_and_subdepartment_id_and_education_form_and_reduced_and_kind!(subspeciality_title,
                                                                           find_subdepartment(subdepartment_number),
                                                                           education_form,
-                                                                          reduced)
+                                                                          reduced,
+                                                                          kind)
   end
 
   def subspeciality
@@ -190,6 +191,11 @@ class PlanImporter
 
   def file_path_digest
     Digest::SHA256.hexdigest open(file_path).read
+  end
+
+  def kind
+    return 'gpo' if speciality_full_name =~ /группового/
+    'basic'
   end
 
   def find_or_create_semester(number_str)

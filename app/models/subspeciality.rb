@@ -21,7 +21,7 @@
 
 class Subspeciality < ActiveRecord::Base
 
-  attr_accessible :title, :subdepartment_id, :graduated_subdepartment_id, :education_form, :department_id, :plan_digest, :file_path, :reduced
+  attr_accessible :title, :subdepartment_id, :graduated_subdepartment_id, :education_form, :department_id, :plan_digest, :file_path, :reduced, :kind
 
   alias_attribute :deleted?, :deleted_at?
 
@@ -43,7 +43,7 @@ class Subspeciality < ActiveRecord::Base
 
   validates_presence_of :title, :speciality, :subdepartment, :department, :education_form
 
-  validates_uniqueness_of :title, :scope => [:speciality_id, :subdepartment_id, :education_form, :reduced]
+  validates_uniqueness_of :title, :scope => [:speciality_id, :subdepartment_id, :education_form, :reduced, :kind]
 
   delegate :degree, :gos_generation, :to => :speciality
   delegate :code, :title, to: :speciality, prefix: true
@@ -56,6 +56,7 @@ class Subspeciality < ActiveRecord::Base
   extend Enumerize
   enumerize :education_form, :in => %w[full-time part-time postal postal-with-dist], :scope => true
   enumerize :reduced,        :in => %w[higher_specialized higher_unspecialized secondary_specialized secondary_unspecialized]
+  enumerize :kind,        :in => %w[basic gpo]
 
   # TODO: only permitted for non managers
   scope :consumed_by, ->(user) do

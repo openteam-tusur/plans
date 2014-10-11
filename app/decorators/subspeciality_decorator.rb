@@ -2,7 +2,7 @@
 
 class SubspecialityDecorator < Draper::Decorator
   delegate :title, :actual_semesters, :work_plan, :programm, :gos_generation, :graduated_subdepartment, :year, :reduced_text, :education_form_text,
-    :speciality_code, :speciality_title
+    :speciality_code, :speciality_title, :kind, :kind_text
 
   decorates_association :speciality
 
@@ -38,6 +38,7 @@ class SubspecialityDecorator < Draper::Decorator
     content = "#{capitalized_education_form} форма обучения"
     content += " #{reduced_text}" unless reduced_text.blank?
     content += ", план набора #{year_number} г. и последующих лет"
+    content += " (#{kind_text})" unless kind.basic?
     content = h.content_tag :p, content
   end
 
