@@ -29,14 +29,14 @@ bachelor:
     title: "Системный анализ и управление"
     subspecialities:
       -
-        subdepartment: "СА"
+        subdepartment: "МиСА"
         title: "Без профиля"
   -
     code: "220200.62"
     title: "Автоматизация и управление"
     subspecialities:
       -
-        subdepartment: "СА"
+        subdepartment: "МиСА"
         title: "Без профиля"
   -
     code: "220600.62"

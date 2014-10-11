@@ -28,6 +28,7 @@ class Subdepartment < ActiveRecord::Base
   validates_presence_of :title, :abbr, :number, :department
 
   scope :ordered, -> { order(:abbr) }
+  scope :actual, where(:deleted_at => nil)
 
   scope :consumed_by, ->(user) do
     if user.manager?

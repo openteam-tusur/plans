@@ -92,7 +92,7 @@ class PlanImporter
   end
 
   def find_subdepartment(number)
-    Subdepartment.find_by_number!(number)
+    Subdepartment.actual.find_by_number!(number)
   end
 
   def speciality_full_name

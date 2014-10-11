@@ -82,6 +82,17 @@ bachelor:
         subdepartment: "КСУП"
         title: "Системы автоматизированного проектирования"
         education_form: "postal-with-dist"
+  -
+    code: "230700.62"
+    title: "Прикладная информатика"
+    subspecialities:
+      -
+        subdepartment: "АСУ"
+        title: "Прикладная информатика в экономике"
+      -
+        subdepartment: "АСУ"
+        title: "Прикладная информатика в экономике"
+        kind: 'gpo'
 
 specialty:
   -
@@ -96,8 +107,12 @@ specialty:
     title: "Информационно-аналитические системы безопасности"
     subspecialities:
       -
-        subdepartment: "КИБЭВС"
+        subdepartment: "БИС"
         title: "Информационная безопасность финансовых и экономических структур"
+      -
+        subdepartment: "БИС"
+        title: "Информационная безопасность финансовых и экономических структур"
+        kind: 'gpo'
 
 magistracy:
   -
