@@ -35,6 +35,13 @@ bachelor:
         title: "Безопасность автоматизированных систем"
         kind: 'gpo'
   -
+    code: "211000.62"
+    title: "Конструирование и технология электронных средств"
+    subspecialities:
+      -
+        subdepartment: "КИПР"
+        title: "Без профиля"
+  -
     code: "230700.62"
     title: "Прикладная информатика"
     subspecialities:
