@@ -129,6 +129,15 @@ class PlanImporter
       xml.at_css("Специальность[Название^='#{subspeciality_prefix.mb_chars.downcase}']")
   end
 
+  def approved_on
+    begin
+      Date.parse(xml.css('Утверждение').first['Дата'])
+    rescue
+      warn "#{file_path} не указаны сведения утверждения"
+      nil
+    end
+  end
+
   def subspeciality_node_title
     subspeciality_node['Название'].squish
   end
@@ -173,6 +182,7 @@ class PlanImporter
   def subspeciality
     find_subspeciality.tap do |subspeciality|
       subspeciality.update_attributes! :file_path => nil, :plan_digest => nil if options[:force]
+      subspeciality.update_attribute :approved_on, approved_on
       raise "#{subspeciality.import_to_s} уже обновлялась (#{subspeciality.file_path})" if subspeciality.file_path?
       subspeciality.update_attribute :file_path, file_path
     end
