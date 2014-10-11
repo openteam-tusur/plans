@@ -66,7 +66,11 @@ bachelor:
     subspecialities:
       -
         subdepartment: "АСУ"
-        title: "Без профиля"
+        title: "Прикладная информатика в экономике"
+      -
+        subdepartment: "АСУ"
+        title: "Прикладная информатика в экономике"
+        kind: 'gpo'
   -
     code: "230100.62"
     title: "Информатика и вычислительная техника"

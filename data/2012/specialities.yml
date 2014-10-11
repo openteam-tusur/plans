@@ -95,11 +95,22 @@ bachelor:
       -
         subdepartment: "АСУ"
         title: "Программное обеспечение средств вычислительной техники и автоматизированных систем"
+        kind: 'gpo'
+      -
+        subdepartment: "АСУ"
+        title: "Программное обеспечение средств вычислительной техники и автоматизированных систем"
         education_form: 'postal'
   -
     code: "230700.62"
     title: "Прикладная информатика"
     subspecialities:
+      -
+        subdepartment: "АСУ"
+        title: "Прикладная информатика в экономике"
+      -
+        subdepartment: "АСУ"
+        title: "Прикладная информатика в экономике"
+        kind: 'gpo'
       -
         subdepartment: "АСУ"
         title: "Без профиля"

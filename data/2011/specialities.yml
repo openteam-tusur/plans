@@ -392,7 +392,11 @@ bachelor:
     subspecialities:
       -
         subdepartment: "АСУ"
-        title: "Без профиля"
+        title: "Прикладная информатика в экономике"
+      -
+        subdepartment: "АСУ"
+        title: "Прикладная информатика в экономике"
+        kind: 'gpo'
       -
         subdepartment: "АСУ"
         title: "Без профиля"

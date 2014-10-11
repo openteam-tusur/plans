@@ -12,6 +12,17 @@ bachelor:
         title: "Без профиля"
         group_index: '^47[4]-]d$$'
         kind: 'gpo'
+  -
+    code: "230700.62"
+    title: "Прикладная информатика"
+    subspecialities:
+      -
+        subdepartment: "АСУ"
+        title: "Прикладная информатика в экономике"
+      -
+        subdepartment: "АСУ"
+        title: "Прикладная информатика в экономике"
+        kind: 'gpo'
 
 magistracy:
   -
