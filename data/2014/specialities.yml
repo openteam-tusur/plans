@@ -55,6 +55,13 @@ bachelor:
 
 magistracy:
   -
+    code: "022000.68"
+    title: "Экология и природопользование"
+    subspecialities:
+      -
+        subdepartment: "РЭТЭМ"
+        title: "Экологический мониторинг окружающей среды с основами биоиндикации"
+  -
     code: "230100.68"
     title: "Информатика и вычислительная техника"
     subspecialities:
