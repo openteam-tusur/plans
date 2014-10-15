@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Документ Тип="рабочий учебный план">
+<Документ Тип="рабочий учебный план" PrevName="22040010_62-09-12345-2594.plz.xml" LastName="22040010_62-09-12345-2594.plz.xml" LastWrite="14.05.2014 10:29:43">
   <План ПодТип="рабочий учебный план" Шифр=".PLZ.XML" ОбразовательнаяПрограмма="подготовка бакалавров" ФормаОбучения="заочная" УровеньОбразования="ВПО">
-    <Титул ПолноеИмяПлана="22040010_62-09-12345-2594" ИмяПлана="22040010_62-09-12345-2594" НомерПользователя="303179" Пользователь="Семёнов Евгений" ИмяВуза="ФГБОУ ВПО &quot;Томский государственный университет систем управления и радиоэлектроники&quot;" ИмяВуза2="Факультет вычислительных систем" Головная="Министерство образования и науки РФ" КодКафедры="26" Факультет="ФВС" ПоследнийШифр="220400" ГодНачалаПодготовки="2011" ВключатьЭкВСуммуЧасов="1" ДвИГА="1" ГвИГА="1" КСР_ИЗ="КСР" ООПет="240" Интер="24,6" Лекц="36,3" ДВВ="37,5" МаксНагр="39,2" ВидПлана="3" КодУровня="B" Уровень="2" СеместровНаКурсе="1" СессийНаКурсе="3" ЭлементовВНеделе="2" ДатаГОСа="22.12.2009 0:00:00" ДокументГОСа="813" ТипГОСа="3" Приложение="UpVpoZ" ДатаПриложения="13.12.2012" ВерсияПриложения="2088" СокрКонтрольФакт="1" База="СПО">
+    <Титул ПолноеИмяПлана="22040010_62-09-12345-2594" ИмяПлана="22040010_62-09-12345-2594" НомерПользователя="303255" Пользователь="Климанов Андрей Валерьевич" ИмяВуза="ФГБОУ ВПО &quot;Томский государственный университет систем управления и радиоэлектроники&quot;" ИмяВуза2="Факультет вычислительных систем" Головная="Министерство образования и науки Российской федерации" КодКафедры="26" Факультет="ФВС" ПоследнийШифр="220400" ГодНачалаПодготовки="2011" ВключатьЭкВСуммуЧасов="1" ДвИГА="1" ГвИГА="1" КСР_ИЗ="КСР" ООПет="240" Интер="24,6" Лекц="36,3" ДВВ="37,5" МаксНагр="39,2" ВидПлана="3" КодУровня="B" Уровень="2" СеместровНаКурсе="1" СессийНаКурсе="3" ЭлементовВНеделе="2" ДатаГОСа="22.12.2009 0:00:00" ДокументГОСа="813" ТипГОСа="3" Приложение="UpVpoZ" ДатаПриложения="26.06.2013" ВерсияПриложения="2097" СокрКонтрольФакт="1" База="СПО">
       <АтрибутыЦикловНов>
         <Цикл Ном="1" Аббревиатура="Б1" Название="Гуманитарный, социальный и экономический цикл" />
         <Цикл Ном="2" Аббревиатура="Б2" Название="Математический и естественнонаучный цикл" />
@@ -28,11 +28,11 @@
         <Квалификация Ном="1" Название="бакалавр" СрокОбучения="5л" />
       </Квалификации>
       <Разработчики>
-        <Разработчик Ном="1" ФИО="Шурыгин Ю.А." Должность="Ректор" />
-        <Разработчик Ном="2" ФИО="Боков Л.А." Должность="Проректор по УР" />
-        <Разработчик Ном="3" ФИО="Плотников А.П." Должность="Начальник УО" />
-        <Разработчик Ном="4" ФИО="Черкашин М.В." Должность="Декан" />
-        <Разработчик Ном="5" ФИО="Шурыгин Ю.А." Должность="Зав. кафедрой" />
+        <Разработчик Ном="1" ФИО="Шурыгин Ю.А." Должность="Ректор" Активный="1" />
+        <Разработчик Ном="2" ФИО="Боков Л.А." Должность="Первый проректор - проректор по УР" Активный="1" />
+        <Разработчик Ном="3" ФИО="Плотников А.П." Должность="Начальник УО" Активный="1" />
+        <Разработчик Ном="4" ФИО="Левшенкова И.П." Должность="Декан ФДО" Активный="1" />
+        <Разработчик Ном="5" ФИО="Шурыгин Ю.А." Должность="Зав. кафедрой КСУП" Активный="1" />
       </Разработчики>
       <ГрафикУчПроцесса НовУстановкиСессий="1">
         <Курс График="====================================================" />
@@ -540,8 +540,14 @@
       </ПрочиеПрактики>
       <ДиссертацияМагистров ЧасовВЗЕТ="36" ЗЕТвНеделе="1,5" />
       <ГосЭкзаменыМагистров ЧасовВЗЕТ="36" ЗЕТвНеделе="1,5" />
+      <ВКР>
+        <Руководство />
+        <Консультации />
+        <Рецензии />
+      </ВКР>
     </СпецВидыРаботНов>
     <Нормы>
+      <ЗЕТ Точность="0,25" />
       <Контроль ЧасовНаЭкзамен="9" ЧасовНаЗачет="4" ЧасовНаЗачетОц="4" />
       <Прочее УчащихсяВПодгруппе="15" />
       <ИГА ЧасовВЗЕТ="36" ЗЕТвНеделе="1,5" />
@@ -613,7 +619,7 @@
         <Семестр Ном="1" />
       </Курс>
     </АПП>
-    <ПараметрыПроверки count="9" Flag_FillTitle="1" Flag_SrokO="1" SrokOYear="5" Flag_OOPItog="1" OOPItog="240" OOPyear="48" Flag_ZETdelta="1" Flag_DVVpersent="1" Flag_DVVpersent1p3="1" DVVpersent30Min="30" DVVpersent30Max="100" BasePartMax="50" Flag_ZETDiscMin="1" ZETDiscMin="2" Flag_DiscZETIsInt="1" Flag_DiscZETYearIsInt="1" Flag_ZETExpertTrue="1" Flag_DiscZETExpertTrue="1" Flag_HinW54="1" HinW54="54" Flag_HinWAudit="1" HinWAuditMax="200" Flag_HinWAuditMin="1" HinWAuditMinMin="160" Flag_Lect="1" LectMax="40" Flag_Inter="1" InterMin="20" InterMax="100" Flag_ZETAndHoursIsTrue="1" Flag_DiscZETAndHoursIsTrue="1" Flag_GlCheckFlag_EqZET36="1" Flag_CntrlEx="1" CntrlExMax="10" Flag_CntrlZach="1" CntrlZachMax="12" Flag_CntrlKR="1" CntrlKRMax="1" Flag_CntrlExHours="1" CntrlExHoursMin="9" CntrlExHoursMax="4" Flag_CntrlHasHours="1" Flag_CntrlHasHoursItogS="1" Flag_HoursCouple="1" Flag_HoursAudSemTrue="1" Flag_HoursSRSSemTrue="1" Flag_HoursDPSess="1" Flag_HoursDPNegftive="1" Flag_PracticsWeeksCorrrect="1" Flag_HolidaysWeeks="1" HolidaysWeeksMin="7" HolidaysWeeksMax="10" Flag_HolidaysWinterWeeks="1" HolidaysWinterWeeksMin="2" HolidaysWinterWeeksMax="10" Flag_DiscAltTrue="1" Flag_DiscDiscMust="1" Flag_DiscCompTrue="1" Flag_DiscCompDBTrue="1" DiscCompHandMadeOK="10" DiscCompHandMadePK="15" Flag_DiscFatalCoincidence="1" Flag_DiscKafTrue="1" Flag_DiscPhysCZET="1" DiscPhysCZET="2" Flag_DiscPhysCHours="1" DiscPhysCHours="400" Flag_DiscPhysCHoursPractices="1" DiscPhysCHoursPractices="10" ZET_Pereat="60" />
+    <ПараметрыПроверки count="10" Flag_FillTitle="1" Flag_SrokO="1" SrokOYear="5" Flag_OOPItog="1" OOPItog="240" Flag_OOPyear="1" OOPyear="48" Flag_ZETdelta="1" Flag_DVVpersent="1" Flag_DVVpersent1p3="1" DVVpersent30Min="30" DVVpersent30Max="100" Flag_BasePart="1" BasePartMax="50" Flag_ZETDiscMin="1" ZETDiscMin="2" Flag_DiscZETIsInt="1" Flag_DiscZETYearIsInt="1" Flag_ZETExpertTrue="1" Flag_DiscZETExpertTrue="1" Flag_HinW54="1" HinW54="54" Flag_HinWAudit="1" HinWAuditMax="200" Flag_HinWAuditMin="1" HinWAuditMinMin="160" LectMax="40" InterMin="20" InterMax="100" Flag_ZETAndHoursIsTrue="1" Flag_DiscZETAndHoursIsTrue="1" Flag_GlCheckFlag_EqZET36="1" Flag_CntrlEx="1" CntrlExMax="10" Flag_CntrlZach="1" CntrlZachMax="12" Flag_CntrlKR="1" CntrlKRMax="1" Flag_CntrlExHours="1" CntrlExHoursMin="9" CntrlExHoursMax="4" Flag_CntrlHasHours="1" Flag_CntrlHasHoursItogS="1" Flag_HoursCouple="1" Flag_HoursAudSemTrue="1" Flag_HoursSRSSemTrue="1" Flag_HoursDPSess="1" Flag_HoursDPNegftive="1" Flag_PracticsWeeksCorrrect="1" Flag_HolidaysWeeks="1" HolidaysWeeksMin="7" HolidaysWeeksMax="10" Flag_HolidaysWinterWeeks="1" HolidaysWinterWeeksMin="2" HolidaysWinterWeeksMax="2" Flag_DiscAltTrue="1" Flag_DiscDiscMust="1" Flag_DiscCompTrue="1" Flag_DiscCompDBTrue="1" DiscCompHandMadeOK="10" DiscCompHandMadePK="15" Flag_DiscFatalCoincidence="1" Flag_DiscKafTrue="1" Flag_DiscPhysCZET="1" DiscPhysCZET="2" Flag_DiscPhysCHours="1" DiscPhysCHours="400" Flag_DiscPhysCHoursPractices="1" DiscPhysCHoursPractices="10" ZET_Pereat="60" />
     <Примечание />
   </План>
 </Документ>

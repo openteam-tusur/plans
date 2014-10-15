@@ -319,6 +319,10 @@ bachelor:
       -
         subdepartment: "КСУП"
         title: "Без профиля"
+        kind: 'gpo'
+      -
+        subdepartment: "КСУП"
+        title: "Без профиля"
         education_form: 'postal-with-dist'
 
   -
@@ -348,6 +352,10 @@ bachelor:
       -
         subdepartment: "КСУП"
         title: "Системы автоматизированного проектирования"
+      -
+        subdepartment: "КСУП"
+        title: "Системы автоматизированного проектирования"
+        kind: "gpo"
       -
         subdepartment: "КСУП"
         title: "Системы автоматизированного проектирования"

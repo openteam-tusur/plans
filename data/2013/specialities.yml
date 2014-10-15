@@ -85,6 +85,10 @@ bachelor:
       -
         subdepartment: "КСУП"
         title: "Системы автоматизированного проектирования"
+        kind: 'gpo'
+      -
+        subdepartment: "КСУП"
+        title: "Системы автоматизированного проектирования"
         education_form: "postal-with-dist"
   -
     code: "230700.62"
