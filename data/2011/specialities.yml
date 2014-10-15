@@ -497,13 +497,25 @@ specialty:
     subspecialities:
       -
         subdepartment: "РТС"
-        title: "Радиоэлектронные системы и комплексы"
+        title: "Радиолокационные системы и комплексы"
+      -
+        subdepartment: "РТС"
+        title: "Радиолокационные системы и комплексы"
+        kind: 'gpo'
       -
         subdepartment: "РТС"
         title: "Радиоэлектронные системы передачи информации"
       -
         subdepartment: "РТС"
+        title: "Радиоэлектронные системы передачи информации"
+        kind: 'gpo'
+      -
+        subdepartment: "РТС"
         title: "Радиоэлектронные системы космических комплексов"
+      -
+        subdepartment: "РТС"
+        title: "Радиоэлектронные системы космических комплексов"
+        kind: 'gpo'
 
 magistracy:
   -
