@@ -7,7 +7,7 @@ module Plm
     end
 
     def initialize
-      @subspecialities = Subspeciality.joins(:speciality).where('specialities.gos_generation = ?', '3').where('file_path IS NOT NULL').readonly(false)
+      @subspecialities = Subspeciality.actual.joins(:speciality).where('specialities.gos_generation = ?', '3').where('file_path IS NOT NULL').readonly(false)
       @progress_bar = ProgressBar.new(@subspecialities.count)
     end
 

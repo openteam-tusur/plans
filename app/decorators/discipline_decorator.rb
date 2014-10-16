@@ -1,5 +1,5 @@
 class DisciplineDecorator < Draper::Decorator
-  delegate :cycle, :title, :checks, :semesters, :subspeciality, :cycle_id, :work_programms
+  delegate :cycle, :title, :checks, :semesters, :subspeciality, :cycle_id, :work_programms, :subdepartment, :loadings, :competences
 
   def work_programm
     work_programms.first if work_programms.length > 0
@@ -24,6 +24,6 @@ class DisciplineDecorator < Draper::Decorator
   private
 
   def check_semesters(&block)
-    checks.select(&block).map(&:semester).map(&:number).uniq.join(', ')
+    checks.actual.select(&block).map(&:semester).map(&:number).uniq.join(', ')
   end
 end

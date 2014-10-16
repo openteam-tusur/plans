@@ -2,12 +2,12 @@
 
 class SubspecialityDecorator < Draper::Decorator
   delegate :title, :actual_semesters, :work_plan, :programm, :gos_generation, :graduated_subdepartment, :year, :reduced_text, :education_form_text,
-    :speciality_code, :speciality_title, :kind, :kind_text
+    :speciality_code, :speciality_title, :kind, :kind_text, :actual_disciplines
 
   decorates_association :speciality
 
   def headers
-    @headers ||= ["№<br/>п/п".html_safe, "Цикл", "Название дисциплины", "Экз", "Зач", "КрР/<br/>КрПр".html_safe] + actual_semesters.map(&:number)
+    @headers ||= ["№<br/>п/п".html_safe, "Цикл", "Название дисциплины", "Кафедра", "Экз", "Зач", "КрР/<br/>КрПр".html_safe] + actual_semesters.map(&:number)
   end
 
   def speciality_code_with_title

@@ -1,0 +1,89 @@
+<% content_for :head_title, subspeciality.full_title %>
+
+<% content_for :breadcrumbs do %>
+  <a href="/">Главная страница</a>
+
+  <span class="black">→</span>
+  <a href="/edu">Наши специальности</a>
+
+  <span class="black">→</span>
+  <% if speciality.gos2? %>
+    <%= link_to "ГОС-2", edu_gos_path(:gos_generation => 2) %>
+  <% else %>
+    <%= link_to "ФГОС-3", edu_gos_path(:gos_generation => 3) %>
+  <% end %>
+
+  <span class="black">→</span>
+  <%= link_to "#{speciality.code} #{speciality.title} (#{subspeciality.title})", edu_subspeciality_path(subspeciality) %>
+
+  <span class="black">→</span>
+  <%= link_to discipline.title, edu_subspeciality_discipline_path(subspeciality, discipline) %>
+<% end %>
+
+<h1><%= discipline.title %></h1>
+
+<p><%= subspeciality.full_title %></p>
+<p><%= subspeciality.title_with_edu_form_and_year %></p>
+<p>Обучение проводится в <strong><%= discipline.semesters.map(&:number).join(', ')  %> семестре</strong>.</p>
+<p>Цикл дисциплины: <strong><%= discipline.cycle %></strong></p>
+<p>Обеспечивающая кафедра: <strong><%= discipline.subdepartment.abbr %></strong></p>
+
+<h2>Контрольные испытания</h2>
+<table>
+  <tr>
+    <th>Вид контроля</th>
+    <th>Семестры</th>
+  </tr>
+  <% discipline.checks.actual.group_by{|c| c.kind}.each do |check_kind, checks| %>
+    <tr>
+      <td><%= checks.first.kind_text %></td>
+      <td><%= checks.map(&:semester).map(&:number).sort.join(', ') %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h2>Объем дисциплины и виды учебной деятельности</h2>
+<table>
+  <tr>
+    <th>Вид учебной деятельности</th>
+    <% subspeciality.actual_semesters.map(&:number).sort.each do |semester_number| %>
+      <th><%= semester_number %> семестр</td>
+    <% end %>
+    <th>Всего</th>
+  </tr>
+  <% discipline_loadinds = discipline.loadings.actual.group_by {|l| l.kind} %>
+  <%
+      loading_values = {}.tap do |hash|
+        Loading.kind.options[0..5].each do |loading|
+          hash[loading.second] = 0
+        end
+      end
+    %>
+  <% Loading.kind.options[0..5].each do |loading| %>
+    <tr>
+      <td><%= loading.first %></td>
+      <% subspeciality.actual_semesters.map(&:number).sort.each do |semester_number| %>
+        <%
+            loading_value = (discipline_loadinds[loading.second] || []).select {|l| l.semester.number == semester_number}.sum(&:value)
+            loading_values[loading.second] += loading_value
+        %>
+      <td><%= loading_value > 0 ? loading_value  : '' %></td>
+      <% end %>
+      <td><%= loading_values[loading.second] > 0 ? loading_values[loading.second] : '' %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h2>Компетенции</h2>
+<table>
+  <tr>
+    <th>Код</th>
+    <th>Содержание</th>
+  </tr>
+  <% discipline.competences.each do |competence| %>
+    <tr>
+      <td><%= competence.index %></td>
+      <td><%= competence.content %></td>
+    </tr>
+  <% end %>
+</table>

@@ -48,11 +48,10 @@
             <%= discipline.cycle_id %>
           </td>
           <td class='discipline_name'>
-            <% if discipline.work_programm.try(&:file_url) %>
-              <%= link_to discipline.title, discipline.work_programm.file_url %>
-            <% else %>
-              <%= discipline.title %>
-            <% end %>
+            <%= link_to discipline.title, [:edu, subspeciality, discipline] %>
+          </td>
+          <td>
+            <%= discipline.subdepartment.abbr %>
           </td>
           <td>
             <%= discipline.exam_semesters %>
