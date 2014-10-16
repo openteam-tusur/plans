@@ -98,6 +98,11 @@ bachelor:
         subdepartment: "ТУ"
         title: "Информационный менеджмент"
         graduated_subdepartment: 'Экономики'
+        kind: 'gpo'
+      -
+        subdepartment: "ТУ"
+        title: "Информационный менеджмент"
+        graduated_subdepartment: 'Экономики'
         education_form: 'part-time'
 
   -
@@ -157,6 +162,10 @@ bachelor:
       -
         subdepartment: "ТУ"
         title: "Информационный сервис"
+      -
+        subdepartment: "ТУ"
+        title: "Информационный сервис"
+        kind: 'gpo'
 
   -
     code: "200700.62"
@@ -267,6 +276,10 @@ bachelor:
       -
         subdepartment: "ТУ"
         title: "Аудиовизуальная техника"
+      -
+        subdepartment: "ТУ"
+        title: "Аудиовизуальная техника"
+        kind: 'gpo'
 
   -
     code: "210700.62"
@@ -275,6 +288,10 @@ bachelor:
       -
         subdepartment: "ТУ"
         title: "Цифровое телерадиовещание"
+      -
+        subdepartment: "ТУ"
+        title: "Цифровое телерадиовещание"
+        kind: 'gpo'
       -
         subdepartment: "СВЧиКР"
         title: "Оптические системы и сети связи"
