@@ -29,6 +29,13 @@ magistracy:
         subdepartment: "СВЧиКР"
         title: "Микроволновая техника и антенны"
   -
+    code: "230400.68"
+    title: "Информационные системы и технологии"
+    subspecialities:
+      -
+        subdepartment: "ЭМИС"
+        title: "Менеджмент информационных систем"
+  -
     code: "280700.68"
     title: "Техносферная безопасность"
     subspecialities:
