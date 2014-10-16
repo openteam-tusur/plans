@@ -290,6 +290,10 @@ bachelor:
         subdepartment: "СРС"
         title: "Системы мобильной связи"
       -
+        subdepartment: "СРС"
+        title: "Системы мобильной связи"
+        kind: 'gpo'
+      -
         subdepartment: "ТОР"
         title: "Системы радиосвязи и радиодоступа"
       -
