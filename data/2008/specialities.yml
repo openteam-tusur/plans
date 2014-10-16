@@ -76,7 +76,7 @@ specialty:
     title: "Организация работы с молодежью"
     subspecialities:
       -
-        subdepartment: "ФС"
+        subdepartment: "ФиС"
         title: "Без специализации"
   -
     code: "080105.65"

@@ -7,6 +7,13 @@ magistracy:
         subdepartment: "ИСР"
         title: "Социальное проектирование"
   -
+    code: "040700.68"
+    title: "Организация работы с молодежью"
+    subspecialities:
+      -
+        subdepartment: "ФиС"
+        title: "Развитие инновационной активности молодежи"
+  -
     code: "211000.68"
     title: "Конструирование и технология электронных средств"
     subspecialities:

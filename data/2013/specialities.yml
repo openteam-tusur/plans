@@ -19,7 +19,7 @@ bachelor:
     title: "Организация работы с молодежью"
     subspecialities:
       -
-        subdepartment: "ФС"
+        subdepartment: "ФиС"
         title: "Без профиля"
   -
     code: "080101.65"
