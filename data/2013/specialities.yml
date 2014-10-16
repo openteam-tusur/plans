@@ -29,6 +29,14 @@ bachelor:
         subdepartment: "КИБЭВС"
         title: "Экономико-правовое обеспечение экономической безопасности"
   -
+    code: "080200.62"
+    title: "Менеджмент"
+    subspecialities:
+      -
+        subdepartment: "Экономики"
+        title: "Управление проектом"
+        education_form: "postal"
+  -
     code: "080500.62"
     title: "Бизнес-информатика"
     subspecialities:

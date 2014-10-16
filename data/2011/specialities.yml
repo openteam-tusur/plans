@@ -69,6 +69,10 @@ bachelor:
       -
         subdepartment: "Экономики"
         title: "Финансы и кредит"
+        kind: 'gpo'
+      -
+        subdepartment: "Экономики"
+        title: "Финансы и кредит"
         education_form: "postal"
       -
         subdepartment: "Экономики"
@@ -81,7 +85,11 @@ bachelor:
     subspecialities:
       -
         subdepartment: "Экономики"
-        title: "Управление проектами"
+        title: "Управление проектом"
+      -
+        subdepartment: "Экономики"
+        title: "Управление проектом"
+        kind: 'gpo'
       -
         subdepartment: "Экономики"
         title: "Управление проектами"
