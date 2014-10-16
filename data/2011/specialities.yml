@@ -369,6 +369,10 @@ bachelor:
       -
         subdepartment: "ЭСАУ"
         title: "Без профиля"
+      -
+        subdepartment: "ЭСАУ"
+        title: "Без профиля"
+        kind: 'gpo'
 
   -
     code: "222900.62"
