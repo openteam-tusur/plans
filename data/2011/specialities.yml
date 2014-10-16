@@ -262,7 +262,7 @@ bachelor:
         education_form: 'part-time'
       -
         subdepartment: "ТОР"
-        title: "Аудиовизуальная техника"
+        title: "Без профиля"
         education_form: "postal"
       -
         subdepartment: "ТУ"
@@ -295,10 +295,10 @@ bachelor:
         kind: 'gpo'
       -
         subdepartment: "ТОР"
-        title: "Системы радиосвязи и радиодоступа"
+        title: "Системы радиосвязи и радио доступа"
       -
         subdepartment: "ТОР"
-        title: "Системы радиосвязи и радиодоступа"
+        title: "Системы радиосвязи и радио доступа"
         education_form: 'postal-with-dist'
 
   -
