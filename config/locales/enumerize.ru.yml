@@ -38,6 +38,9 @@ ru:
         lab:                      Лаб. раб.
         practice:                 Практ. раб.
         csr:                      Кр. пр.
+        interactive_practice:     Инт. практ. раб.
+        interactive_lab:          Инт. лаб. раб.
+        interactive_lecture:      Инт. лекц.
       kind:
         lecture:                  Лекции
         lab:                      Лабораторные занятия
@@ -45,6 +48,9 @@ ru:
         csr:                      "Контроль самостоятельной работы\n(курсовой проект / курсовая работа)"
         exam:                     Подготовка к экзамену
         srs:                      Самостоятельная работа
+        interactive_practice:     Интерактивные практические занятия
+        interactive_lab:          Интерактивные лабораторные занятия
+        interactive_lecture:      Интерактивные лекции
 
     publication:
       location:

@@ -58,7 +58,14 @@
           hash[loading.second] = 0
         end
       end
-    %>
+  %>
+  <%
+      semester_loading_values = {}.tap do |hash|
+        subspeciality.actual_semesters.map(&:number).sort.each do |semester_number|
+          hash[semester_number] = 0
+        end
+      end
+  %>
   <% Loading.kind.options[0..5].each do |loading| %>
     <tr>
       <td><%= loading.first %></td>
@@ -66,12 +73,74 @@
         <%
             loading_value = (discipline_loadinds[loading.second] || []).select {|l| l.semester.number == semester_number}.sum(&:value)
             loading_values[loading.second] += loading_value
+            semester_loading_values[semester_number] += loading_value
         %>
-      <td><%= loading_value > 0 ? loading_value  : '' %></td>
+        <td><%= loading_value > 0 ? loading_value  : '' %></td>
       <% end %>
       <td><%= loading_values[loading.second] > 0 ? loading_values[loading.second] : '' %></td>
     </tr>
   <% end %>
+  <tr>
+    <td>Всего</td>
+    <% subspeciality.actual_semesters.map(&:number).sort.each do |semester_number| %>
+      <td><%= semester_loading_values[semester_number] > 0 ? semester_loading_values[semester_number]  : '' %></td>
+    <% end %>
+    <td><%= loading_values.values.sum %></td>
+  </tr>
+  <tr>
+    <td>В зачетных единицах</td>
+    <% subspeciality.actual_semesters.map(&:number).sort.each do |semester_number| %>
+      <td><%= discipline.credit_units[semester_number.to_s] %></td>
+    <% end %>
+    <td><%= discipline.credit_units.values.map(&:to_f).sum %></td>
+  </tr>
+</table>
+
+<h2>Интерактивные занятия</h2>
+<table>
+  <tr>
+    <th>Вид учебной деятельности</th>
+    <% subspeciality.actual_semesters.map(&:number).sort.each do |semester_number| %>
+      <th><%= semester_number %> семестр</td>
+    <% end %>
+    <th>Всего</th>
+  </tr>
+  <% discipline_loadinds = discipline.loadings.actual.group_by {|l| l.kind} %>
+  <%
+      loading_values = {}.tap do |hash|
+        Loading.kind.options[6..-1].each do |loading|
+          hash[loading.second] = 0
+        end
+      end
+  %>
+  <%
+      semester_loading_values = {}.tap do |hash|
+        subspeciality.actual_semesters.map(&:number).sort.each do |semester_number|
+          hash[semester_number] = 0
+        end
+      end
+  %>
+  <% Loading.kind.options[6..-1].each do |loading| %>
+    <tr>
+      <td><%= loading.first %></td>
+      <% subspeciality.actual_semesters.map(&:number).sort.each do |semester_number| %>
+        <%
+            loading_value = (discipline_loadinds[loading.second] || []).select {|l| l.semester.number == semester_number}.sum(&:value)
+            loading_values[loading.second] += loading_value
+            semester_loading_values[semester_number] += loading_value
+        %>
+        <td><%= loading_value > 0 ? loading_value  : '' %></td>
+      <% end %>
+      <td><%= loading_values[loading.second] > 0 ? loading_values[loading.second] : '' %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td>Всего</td>
+    <% subspeciality.actual_semesters.map(&:number).sort.each do |semester_number| %>
+      <td><%= semester_loading_values[semester_number] > 0 ? semester_loading_values[semester_number]  : '' %></td>
+    <% end %>
+    <td><%= loading_values.values.sum %></td>
+  </tr>
 </table>
 
 <h2>Компетенции</h2>
