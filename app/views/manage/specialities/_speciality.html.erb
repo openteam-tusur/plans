@@ -13,6 +13,7 @@
             <%= link_to subspeciality, manage_year_speciality_subspeciality_path(@year.number, speciality.code, subspeciality) %>
             <span class='subdepartment'><%= subspeciality.subdepartment.abbr %></span>
             <%= content_tag :div, subspeciality.reduced_text %>
+            <%= content_tag :div, subspeciality.kind_text unless subspeciality.kind.basic? %>
           </div>
         </li>
       <% end %>

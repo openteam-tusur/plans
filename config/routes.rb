@@ -52,7 +52,7 @@ Plans::Application.routes.draw do
       resources :disciplines, :only => :index
     end
 
-    root :to => 'disciplines#redirect_to_available_subdepartment'
+    root :to => 'specialities#redirect_to_year_and_degree'
   end
 
   namespace :edu do

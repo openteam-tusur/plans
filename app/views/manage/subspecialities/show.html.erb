@@ -37,6 +37,7 @@
     <span><%= speciality.degree %></span>
     <span><%= speciality.full_title %> (<%= subspeciality.title %>)</span>
     <span><%= subspeciality.capitalized_education_form %> форма <%= subspeciality.reduced_text %></span>
+    <%= content_tag :span, subspeciality.kind_text unless subspeciality.kind.basic? %>
   </div>
 
   <h6>Циклы дисциплин</h6>
