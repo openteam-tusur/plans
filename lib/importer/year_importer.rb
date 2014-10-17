@@ -26,7 +26,7 @@ class YearImporter
         refresh speciality
         speciality.update_attributes! speciality_attributes.merge(:degree => degree)
         subspecialities_attributes.each do |subspeciality_attributes|
-          subdepartment = Subdepartment.find_by_abbr(subspeciality_attributes['subdepartment'])
+          subdepartment = Subdepartment.actual.find_by_abbr(subspeciality_attributes['subdepartment'])
           raise "Нет кафедры #{subspeciality_attributes['subdepartment']}" unless subdepartment
           graduated_subdepartment = Subdepartment.find_by_abbr(subspeciality_attributes['graduated_subdepartment'] || subspeciality_attributes['subdepartment'])
           department = Department.find_by_abbr(subspeciality_attributes['department']) || subdepartment.department
