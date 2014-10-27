@@ -26,13 +26,6 @@ bachelor:
         title: "Без профиля"
         education_form: "postal"
   -
-    code: "080101.65"
-    title: "Экономическая безопасность"
-    subspecialities:
-      -
-        subdepartment: "КИБЭВС"
-        title: "Экономико-правовое обеспечение экономической безопасности"
-  -
     code: "210700.62"
     title: "Инфокоммуникационные технологии и системы связи"
     subspecialities:
@@ -156,6 +149,17 @@ bachelor:
         education_form: "postal"
 
 specialty:
+  -
+    code: "080101.65"
+    title: "Экономическая безопасность"
+    subspecialities:
+      -
+        subdepartment: "КИБЭВС"
+        title: "Экономико-правовое обеспечение экономической безопасности"
+      -
+        subdepartment: "КИБЭВС"
+        title: "Экономико-правовое обеспечение экономической безопасности"
+        kind: 'gpo'
   -
     code: "090303.65"
     title: "Информационная безопасность автоматизированных систем"

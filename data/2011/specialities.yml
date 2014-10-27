@@ -96,7 +96,7 @@ bachelor:
         education_form: "postal"
       -
         subdepartment: "Экономики"
-        title: "Управление проектами"
+        title: "Управление проектом"
         education_form: 'postal-with-dist'
       -
         subdepartment: "ТУ"
@@ -261,6 +261,14 @@ bachelor:
       -
         subdepartment: "КИБЭВС"
         title: "Проектирование и технология электронно-вычислительных средств"
+      -
+        subdepartment: "КИБЭВС"
+        title: "Проектирование и технология электронно-вычислительных средств"
+        education_form: 'postal'
+      -
+        subdepartment: "КИБЭВС"
+        title: "Проектирование и технология электронно-вычислительных средств"
+        education_form: 'postal-with-dist'
       -
         subdepartment: "КИБЭВС"
         title: "Проектирование и технология электронно-вычислительных средств"
