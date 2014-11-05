@@ -17,7 +17,7 @@ group :default do
   # TODO: remove git after v0.5.2 release
   gem 'enumerize',            :git => 'git://github.com/brainspec/enumerize'
   gem 'esp-views'
-  gem 'grape'
+  gem 'grape', '0.6.0 '
   gem 'grape-entity'
   gem 'has_scope'
   gem 'inherited_resources', '1.4.1'
