@@ -398,6 +398,9 @@ bachelor:
         subdepartment: "ФЭ"
         title: "Без профиля"
         group_index: '^32[1|2|3](-\d)?$'
+      -
+        subdepartment: "ФЭ"
+        title: "Нанотехнологии в электронике и микросистемной технике"
 
   -
     code: "230100.62"
