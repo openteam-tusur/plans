@@ -37,52 +37,52 @@ class API::Plans < Grape::API
     end
   end
 
-  namespace :disciplines do
-    params do
-      requires :subspeciality_id, :type => Integer, :desc => "id of subspeciality"
-    end
+  resource :disciplines do
+    #params do
+      #requires :subspeciality_id, :type => Integer, :desc => "id of subspeciality"
+    #end
 
-    namespace ":subspeciality_id" do
+    resource ":subspeciality_id" do
       desc 'Retrieve subspeciality disciplines in semester'
-      params do
-        requires :semester, :type => Integer, :desc => "number of semester"
-      end
+      #params do
+        #requires :semester, :type => Integer, :desc => "number of semester"
+      #end
       get ":semester" do
         present semester.disciplines.actual, :with => API::Entities::Discipline, :semester => semester
       end
     end
   end
 
-  namespace :disciplines_provided_by do
-    params do
-      requires :subdepartment, :type => String, :desc => 'Name of subdepartment'
-    end
+  resource :disciplines_provided_by do
+    #params do
+      #requires :subdepartment, :type => String, :desc => 'Name of subdepartment'
+    #end
     get ':subdepartment' do
       present subdepartment, :with => API::Entities::ProvidedDiscipline
     end
   end
 
   desc 'Redirect to work_plan'
-  namespace :work_plans do
-    params do
-      requires :subspeciality_id, :type => Integer, :desc => "id of subspeciality"
-    end
-    get ":subspeciality_id" do
+  resource :work_plans do
+    #params do
+      #requires :subspeciality_id, :type => String, :desc => "id of subspeciality"
+    #end
+    get ':subspeciality_id' do
       redirect subspeciality.work_plan.try :file_url
     end
   end
 
-  namespace :programms do
-    params do
-      requires :subspeciality_id, :type => Integer, :desc => 'id of subspeciality'
-    end
+  resource :programms do
+    #params do
+      #requires :subspeciality_id, :type => Integer, :desc => 'id of subspeciality'
+    #end
     get ":subspeciality_id" do
       redirect subspeciality.programm.try :file_url
     end
   end
 
-  namespace :subspecialities do
-    namespace :by_group do
+  resource :subspecialities do
+    resource :by_group do
       get ":group_number" do
         present subspeciality_by_group, with: API::Entities::Subspeciality
       end
@@ -96,33 +96,33 @@ class API::Plans < Grape::API
     DepartmentsData.instance.departments
   end
 
-  namespace :years do
-    params do
-      requires :year, :type => Integer, :desc => 'Year number'
-    end
-    namespace ':year' do
+  resource :years do
+    #params do
+      #requires :year, :type => Integer, :desc => 'Year number'
+    #end
+    resource ':year' do
       get 'specialities' do
         year.specialities.actual.gos3.as_json(
           :only => [:id, :title, :code],
           :methods => [:degree_text, :to_s]
         )
       end
-      namespace 'specialities' do
-        namespace ':speciality_id' do
-          params do
-            requires :speciality_id, :type => Integer, :desc => 'Speciality id'
-          end
+      resource 'specialities' do
+        resource ':speciality_id' do
+          #params do
+            #requires :speciality_id, :type => Integer, :desc => 'Speciality id'
+          #end
           get 'subspecialities' do
             year.specialities.actual.gos3.find(params[:speciality_id]).subspecialities.actual.as_json(
               :only => [:id, :title],
               :methods => [:education_form_text, :to_s, :profiled_info, :graduated_info, :with_plan, :localized_approved_on]
             )
           end
-          namespace 'subspecialities' do
-            namespace ':subspeciality_id' do
-              params do
-                requires :subspeciality_id, :type => Integer, :desc => 'Subspeciality id'
-              end
+          resource 'subspecialities' do
+            resource ':subspeciality_id' do
+              #params do
+                #requires :subspeciality_id, :type => Integer, :desc => 'Subspeciality id'
+              #end
               get 'disciplines' do
                 disciplines = year.specialities.actual.gos3.find(params[:speciality_id]).subspecialities.actual.find(params[:subspeciality_id]).disciplines.actual
                 if params[:without_discipline] && params[:without_discipline].present?
@@ -134,10 +134,10 @@ class API::Plans < Grape::API
                 )
               end
 
-              namespace :disciplines do
-                params do
-                  requires :discipline_id, :type => Integer, :desc => 'Discipline id'
-                end
+              resource :disciplines do
+                #params do
+                  #requires :discipline_id, :type => Integer, :desc => 'Discipline id'
+                #end
                 get ":discipline_id" do
                   present Discipline.find(params[:discipline_id]), :with => API::Entities::Discipline
                 end
