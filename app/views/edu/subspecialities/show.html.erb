@@ -51,7 +51,7 @@
             <%= link_to discipline.title, [:edu, subspeciality, discipline] %>
           </td>
           <td>
-            <%= discipline.subdepartment.abbr %>
+            <%= discipline.subdepartment.try :abbr %>
           </td>
           <td>
             <%= discipline.exam_semesters %>

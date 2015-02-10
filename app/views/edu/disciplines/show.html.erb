@@ -26,7 +26,7 @@
 <p><%= subspeciality.title_with_edu_form_and_year %></p>
 <p>Обучение проводится в <strong><%= discipline.semesters.map(&:number).join(', ')  %> семестре</strong>.</p>
 <p>Цикл дисциплины: <strong><%= discipline.cycle %></strong></p>
-<p>Обеспечивающая кафедра: <strong><%= discipline.subdepartment.abbr %></strong></p>
+<p>Обеспечивающая кафедра: <strong><%= discipline.subdepartment.try :abbr %></strong></p>
 
 <h2>Контрольные испытания</h2>
 <table>
