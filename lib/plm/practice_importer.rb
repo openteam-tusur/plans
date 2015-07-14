@@ -28,11 +28,11 @@ module Plm
             practice.weeks_count = item.delete(:weeks)
             practice.credit_units.merge!( semester_num.to_s => item.delete(:credit_units) )
             semester = parser.subspeciality.semesters.find_by_number semester_num
-            practice.checks.create :semester => semester, :kind => :end_of_term_diff if item.delete(:test)
+            practice.checks.new :semester => semester, :kind => :end_of_term_diff if item.delete(:test)
             item.delete(:total)
             item.each do |k,v|
               next if v.zero?
-              practice.loadings.create :semester => semester, :kind => k, :value => v
+              practice.loadings.new :semester => semester, :kind => k, :value => v
             end
           end
           practice.save(:validate => false)

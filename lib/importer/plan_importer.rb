@@ -103,14 +103,19 @@ class PlanImporter
   end
 
   def speciality_code
-    File.basename(file_path).match(/^(\d{6})(?:\d{2})?_(62|65|68)/) do
-      "#{$1}.#{$2}"
+    File.basename(file_path).match(/^(\d{6})(?:\d{2})?_(62|65|68)|(\d{2}\.\d{2}\.\d{2})/) do
+      $3 || "#{$1}.#{$2}"
     end
+  end
+
+  def gos_generation_code
+    gos_title = title_node['ТипГОСа']
+    gos_title.present? ? gos_title.first : 2
   end
 
   def speciality
     year.specialities.actual.find_by_code!(speciality_code) do |speciality|
-      speciality.update_attribute :gos_generation, title_node['ТипГОСа'] || 2
+      speciality.update_attribute :gos_generation, gos_generation_code
     end
   end
 
