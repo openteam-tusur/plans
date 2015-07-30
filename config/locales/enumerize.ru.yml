@@ -6,6 +6,7 @@ ru:
         end_of_term:              Зачет
         course_work:              Курсовое проектирование / Курсовая работа
         course_projecting:        Курсовое проектирование / Курсовая работа
+        end_of_term_diff:         Диф. зачет
       kind_report:
         exam:                     Экзамен
         end_of_term:              Зачет
