@@ -120,7 +120,7 @@ class DisciplineXML
   def update_loadings(semester, xml_or_hash)
     LOADING_ABBRS.each do |kind, abbr|
       value = (xml_or_hash[abbr] || xml_or_hash[kind]).to_i
-      loading(semester)[kind] += value if value > 0
+      loading(semester)[kind] += value if value >= 0
     end
   end
 
