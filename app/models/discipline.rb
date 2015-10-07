@@ -131,6 +131,9 @@ class Discipline < ActiveRecord::Base
       }
     end
 
+    if res.empty?
+      res[subspeciality.semesters.last.number] = {}
+    end
     res
   end
 
