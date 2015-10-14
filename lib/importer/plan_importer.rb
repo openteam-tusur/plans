@@ -76,7 +76,7 @@ class PlanImporter
   end
 
   def title_node
-    xml.css('Титул').first
+    xml.at_css('Титул')
   end
 
   def year
@@ -109,8 +109,7 @@ class PlanImporter
   end
 
   def gos_generation_code
-    gos_title = title_node['ТипГОСа']
-    gos_title.present? ? gos_title.first : 2
+    title_node['ТипГОСа'] || 2
   end
 
   def speciality
