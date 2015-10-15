@@ -112,6 +112,10 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       request_store (~> 1.0.3)
+    el_vfs_client (0.4.1)
+      configliere
+      curb
+      rails
     equalizer (0.0.9)
     erubis (2.7.0)
     esp-views (0.0.2)
@@ -347,6 +351,7 @@ DEPENDENCIES
   decent_exposure
   default_value_for
   draper
+  el_vfs_client
   enumerize!
   esp-views
   execjs
