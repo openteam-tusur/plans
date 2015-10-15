@@ -1,28 +1,31 @@
 # encoding: utf-8
 
 class YearImporter
-  attr_accessor :year_number, :bar
+  attr_accessor :year_number, :bar, :all_files
 
   def initialize(year_number)
     self.year_number = year_number
+    self.all_files = Dir.glob("data/#{year.number}/plans/*.xml") + Dir.glob("data/#{year.number}/plans/*/*.xml")
   end
 
   def import
     year.save!
     puts year.number
-    self.bar = ProgressBar.new(Dir["data/#{year.number}/**/*.{xml,yml}"].count)
     import_specialities
     import_plans
     puts
   end
 
   def import_specialities
-    YAML.load_file("data/#{year.number}/specialities.yml").each do |degree, specialities_attributes|
+    puts "Импорт специальностей из YML"
+    year_specialities = YAML.load_file("data/#{year.number}/specialities.yml")
+    bar = ProgressBar.new(year_specialities.count)
+    year_specialities.each do |degree, specialities_attributes|
       next unless specialities_attributes
       specialities_attributes.each do |speciality_attributes|
         subspecialities_attributes = speciality_attributes.delete('subspecialities')
         speciality = year.specialities.find_or_initialize_by_code(speciality_attributes['code'])
-        speciality.gos_generation ||= (year.number >= 2011 ? 3 : 2)
+        speciality.gos_generation ||= get_generation(speciality_attributes['code'])
         refresh speciality
         speciality.update_attributes! speciality_attributes.merge(:degree => degree)
         subspecialities_attributes.each do |subspeciality_attributes|
@@ -55,7 +58,9 @@ class YearImporter
   end
 
   def import_plans
-    Dir.glob("data/#{year.number}/plans/*.xml") do |file_path|
+    puts "Импорт планов"
+    bar = ProgressBar.new(all_files.count)
+    all_files.each do |file_path|
       begin
         PlanImporter.new(file_path).import
       rescue => e
@@ -72,6 +77,14 @@ class YearImporter
   def year
     Year.find_or_initialize_by_number(year_number).tap do |year|
       refresh year
+    end
+  end
+
+  def get_generation(code)
+    if year.number >= 2011
+      code.match(/\d{2}[.]\d{2}[.]\d{2}/) ? "3.5" : 3
+    else
+      2
     end
   end
 

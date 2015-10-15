@@ -48,7 +48,7 @@ end
 
 desc "Синхронизация справочников"
 task :sync => :environment do
-  move_to_trash :year, :speciality, :subspeciality
+  #move_to_trash :year, :speciality, :subspeciality
   Dir.glob("data/*").sort.each do |folder|
     year_number = File.basename(folder)
     next if year_number.to_i == 0

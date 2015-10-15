@@ -37,6 +37,7 @@ class PlanImporter
     Timecop.freeze(time_of_sync) do
       check_year
       if subspeciality.plan_digest != file_path_digest
+        puts "importing file #{file_path}"
         really_import
       end
     end
@@ -245,6 +246,7 @@ class PlanImporter
     reset_acuality_of_associations
     discipline_importers(xml.css('СтрокиПлана Строка')).each(&:import)
     subspeciality.update_column(:plan_digest, file_path_digest)
+    puts "plan #{file_path} imported"
   end
 
   def discipline_importers(xml_node_set)
