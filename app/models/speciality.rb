@@ -1,5 +1,5 @@
 class Speciality < ActiveRecord::Base
-  attr_accessible :code, :title, :degree
+  attr_accessible :code, :title, :degree, :gos_generation
 
   belongs_to :year
 
