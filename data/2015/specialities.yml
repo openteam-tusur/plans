@@ -171,3 +171,24 @@ magistracy:
       - 
         subdepartment: "Экономики"
         title: "Экономика предпринимательства"
+  -
+    code: 12.04.03
+    title: "Фотоника и оптоинформатика"
+    subspecialities:
+      - 
+        subdepartment: "ЭП"
+        title: "Фотоника волноводных,нелинейных и периодических структур"
+  -
+    code: 11.04.01
+    title: "Радиотехника"
+    subspecialities:
+      -
+        subdepartment: "СВЧиКР"
+        title: "Микроволновая техника и антенны"
+  -
+    code: 11.04.04
+    title: "Электроника и наноэлектроника"
+    subspecialities:
+      -
+        subdepartment: "ЭП"
+        title: "Квантовая и оптическая электроника"
