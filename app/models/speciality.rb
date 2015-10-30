@@ -19,6 +19,8 @@ class Speciality < ActiveRecord::Base
   scope :ordered, -> { order(:code) }
   scope :actual, -> { where(:deleted_at => nil) }
   scope :gos3,   -> { where(:gos_generation => '3') }
+  scope :gos3_new,   -> { where(:gos_generation => '3.5') }
+  scope :gos3_all,   -> { where(:gos_generation => ['3', '3.5'])}
 
   # TODO: only permitted for non managers
   scope :consumed_by, ->(user) do
@@ -48,6 +50,10 @@ class Speciality < ActiveRecord::Base
 
   def gos3?
     gos_generation == '3'
+  end
+
+  def gos3_new?
+    gos_generation == '3.5'
   end
 
   def to_s

@@ -102,7 +102,7 @@ class API::Plans < Grape::API
     #end
     resource ':year' do
       get 'specialities' do
-        year.specialities.actual.gos3.as_json(
+        year.specialities.actual.gos3_all.as_json(
           :only => [:id, :title, :code],
           :methods => [:degree_text, :to_s]
         )
@@ -113,7 +113,7 @@ class API::Plans < Grape::API
             #requires :speciality_id, :type => Integer, :desc => 'Speciality id'
           #end
           get 'subspecialities' do
-            year.specialities.actual.gos3.find(params[:speciality_id]).subspecialities.actual.as_json(
+            year.specialities.actual.gos3_all.find(params[:speciality_id]).subspecialities.actual.as_json(
               :only => [:id, :title],
               :methods => [:education_form_text, :to_s, :profiled_info, :graduated_info, :with_plan, :localized_approved_on]
             )
@@ -124,7 +124,7 @@ class API::Plans < Grape::API
                 #requires :subspeciality_id, :type => Integer, :desc => 'Subspeciality id'
               #end
               get 'disciplines' do
-                disciplines = year.specialities.actual.gos3.find(params[:speciality_id]).subspecialities.actual.find(params[:subspeciality_id]).disciplines.actual
+                disciplines = year.specialities.actual.gos3_all.find(params[:speciality_id]).subspecialities.actual.find(params[:subspeciality_id]).disciplines.actual
                 if params[:without_discipline] && params[:without_discipline].present?
                   disciplines = disciplines - [Discipline.find(params[:without_discipline])]
                 end
