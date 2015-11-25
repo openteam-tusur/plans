@@ -7,7 +7,7 @@ module Plm
     end
 
     def initialize
-      @subspecialities = Subspeciality.actual.joins(:speciality).where('specialities.gos_generation = ?', '3').where('file_path IS NOT NULL').readonly(false)
+      @subspecialities = Subspeciality.actual.joins(:speciality).where('specialities.gos_generation IN (?)', ['3',"3.5"]).where('file_path IS NOT NULL').readonly(false)
       @progress_bar = ProgressBar.new(@subspecialities.count)
     end
 
@@ -23,7 +23,6 @@ module Plm
 
     def safe_import
       subspecialities.each do |subspeciality|
-
         parser = Plm::SpecialityParser.new(subspeciality)
 
         update_approved_on_for(subspeciality, parser)

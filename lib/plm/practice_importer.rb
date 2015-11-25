@@ -32,7 +32,7 @@ module Plm
             item.delete(:total)
             item.each do |k,v|
               next if v.zero?
-              practice.loadings.new :semester => semester, :kind => k, :value => v
+              practice.loadings.create :semester => semester, :kind => k, :value => v
             end
           end
           practice.save(:validate => false)
