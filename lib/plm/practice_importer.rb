@@ -19,7 +19,7 @@ module Plm
           content[:competences].each do |competence|
             practice.competences << parser.subspeciality.competences.find_by_index(competence)
           end
-
+          
           practice.credit_units = {}
           practice.checks.destroy_all
           practice.loadings.destroy_all
