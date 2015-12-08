@@ -138,6 +138,7 @@ class Discipline < ActiveRecord::Base
   end
 
   def provided_info
+    subdepartment = subdepartment ? subdepartment : subspeciality.subdepartment
     {
       :subdepartment => DepartmentsData.instance.subdepartment_data(subdepartment),
       :department    => DepartmentsData.instance.department_data(subdepartment.department)
