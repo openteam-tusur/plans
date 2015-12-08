@@ -138,10 +138,10 @@ class Discipline < ActiveRecord::Base
   end
 
   def provided_info
-    subdepartment = subdepartment ? subdepartment : subspeciality.subdepartment
+    s = subdepartment.presence || subspeciality.subdepartment
     {
-      :subdepartment => DepartmentsData.instance.subdepartment_data(subdepartment),
-      :department    => DepartmentsData.instance.department_data(subdepartment.department)
+      :subdepartment => DepartmentsData.instance.subdepartment_data(s),
+      :department    => DepartmentsData.instance.department_data(s.department)
     }
   end
 
