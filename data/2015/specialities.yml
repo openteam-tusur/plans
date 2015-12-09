@@ -163,7 +163,7 @@ magistracy:
       - 
         subdepartment: "МиСА"
         title: "Компьютерное моделирование и обработка информации в технических системах"
-      - 
+      -
         subdepartment: "МиСА"
         title: "Автоматизация управления в административных, коммерческих и финансовых сферах"
 
@@ -171,7 +171,7 @@ magistracy:
     code: 27.04.05
     title: "Инноватика"
     subspecialities:
-      - 
+      -
         subdepartment: "УИ"
         title: "Управление инновациями в электронной технике"
 
@@ -181,7 +181,7 @@ magistracy:
     code: 38.04.01
     title: "Экономика"
     subspecialities:
-      - 
+      -
         subdepartment: "Экономики"
         title: "Экономика предпринимательства"
 
@@ -189,8 +189,8 @@ magistracy:
     code: 38.04.02
     title: "Менеджмент"
     subspecialities:
-      - 
-        subdepartment: "ТП"
+      -
+        subdepartment: "Менеджмента"
         title: "Управление бизнесом"
   -
     code: 38.04.04

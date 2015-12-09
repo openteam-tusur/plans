@@ -332,10 +332,10 @@ bachelor:
         title: "Оптические системы и сети связи"
         education_form: "postal"
       -
-        subdepartment: "СРС"
+        subdepartment: "РТС"
         title: "Системы мобильной связи"
       -
-        subdepartment: "СРС"
+        subdepartment: "РТС"
         title: "Системы мобильной связи"
         kind: 'gpo'
       -
@@ -669,7 +669,7 @@ magistracy:
     title: "Инноватика"
     subspecialities:
       -
-        subdepartment: "ОКЮ"
+        subdepartment: "УИ"
         title: "Управление инновациями в мехатронике и робототехнике"
       -
         subdepartment: "УИ"
