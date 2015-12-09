@@ -120,18 +120,35 @@ class PlanImporter
   end
 
   SUBSPECIALITY_PREFIX_BY_DEGREE = {
-    'bachelor'   => 'Профиль',
-    'magistracy' => 'Магистерская программа',
-    'specialty'  => 'Специализация',
+    'bachelor'   => ['Профиль подготовки', 'Профиль'],
+    'magistracy' => ['Магистерская программа', 'Программа академической магистратуры'],
+    'specialty'  => ['Специализация подготовки', 'Специализация' ],
   }
 
   def subspeciality_prefix
     SUBSPECIALITY_PREFIX_BY_DEGREE[speciality.degree]
   end
 
-  def subspeciality_node
-    xml.at_css("Специальность[Название^='#{subspeciality_prefix}']") ||
-      xml.at_css("Специальность[Название^='#{subspeciality_prefix.mb_chars.downcase}']")
+  def get_subspeciality_title
+    title = nil
+    subspeciality_prefix.each do |prefix_variant|
+      title ||= normalize_title(prefix_variant, node_with_title(prefix_variant))
+    end
+    title
+  end
+
+  def normalize_title(prefix, node)
+    if node
+      prefix = "#{prefix}(?: -)?"
+      title = node['Название'].squish
+      match = title.match(/"(.*?)"/) || title.gsub(/"/, '').match(/^#{prefix} (.*?)$/i)
+      match.try(:captures).try(:first)
+    end
+  end
+
+  def node_with_title(prefix)
+    xml.at_css("Специальность[Название^='#{prefix}']") ||
+      xml.at_css("Специальность[Название^='#{prefix.mb_chars.downcase}']")
   end
 
   def approved_on
@@ -140,19 +157,6 @@ class PlanImporter
     rescue
       warn "#{file_path} не указаны сведения утверждения"
       nil
-    end
-  end
-
-  def subspeciality_node_title
-    subspeciality_node['Название'].squish
-  end
-
-  def get_subspeciality_title
-    if subspeciality_node
-      prefix = "#{subspeciality_prefix}(?: -)?"
-      match = subspeciality_node_title.match(/"(.*?)"/) ||
-        subspeciality_node_title.gsub(/"/, '').match(/^#{prefix} (.*?)$/i)
-      match.try(:captures).try(:first)
     end
   end
 
@@ -218,7 +222,7 @@ class PlanImporter
   extend Memoist
   memoize :xml, :title_node, :year, :year_number, :speciality_full_name, :speciality_code
   memoize :speciality, :subspeciality_title, :human_education_form, :education_form, :reduced, :subspeciality, :file_path_digest
-  memoize :find_subdepartment, :subspeciality_node, :find_or_create_semester, :subdisciplines
+  memoize :find_subdepartment, :find_or_create_semester, :subdisciplines
   memoize :discipline_xml
 
   def default_subspeciality_title
