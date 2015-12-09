@@ -79,17 +79,18 @@ class DisciplineXML
 
   private
 
-  LOADING_ABBRS = {
-    csr:                'КСР',
-    exam:               'ЧасЭкз',
-    srs:                'СРС',
-    lecture:            'Лек',
-    lab:                'Лаб',
-    practice:           'Пр',
-    interactive_lecture: 'ИнтЛек',
-    interactive_lab:    'ИнтЛаб',
-    interactive_practice: 'ИнтПр'
-  }
+  LOADING_ABBRS = [
+    [:csr,                  'КСР'],
+    [:csr,                  'КурсР'],
+    [:exam,                 'ЧасЭкз'],
+    [:srs,                  'СРС'],
+    [:lecture,              'Лек'],
+    [:lab,                  'Лаб'],
+    [:practice,             'Пр'],
+    [:interactive_lecture,  'ИнтЛек'],
+    [:interactive_lab,      'ИнтЛаб'],
+    [:interactive_practice, 'ИнтПр']
+  ]
 
   CHECK_ABBRS = {
     exam:               'Экз',
