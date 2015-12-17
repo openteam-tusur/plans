@@ -400,6 +400,3 @@ DEPENDENCIES
   timecop
   uglifier
   wicked_pdf
-
-BUNDLED WITH
-   1.10.6

@@ -65,7 +65,7 @@ class DisciplineImporter
       warn("у дисциплины '#{discipline_xml.title}' не указан цикл")
     end
   rescue => e
-    warn("не могу импорировать дисциплину #{discipline_xml.title}")
+    warn("не могу импортировать дисциплину #{discipline_xml.title}")
     raise e
   end
 end

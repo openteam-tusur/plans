@@ -6,14 +6,7 @@ class DepartmentsData
   attr_accessor :departments_data
 
   def initialize
-    @response = RestClient::Request.execute(
-      method: :get,
-      url:"#{Settings['directory.url']}/api/structure",
-      timeout: 600,
-      headers: { :Accept => 'application/json', :timeout => 600 }
-    ) do |response, request, result, &block|
-        @departments_data = JSON.parse(response.body)
-    end
+    update_departments_data
   end
 
   def department_data_with_subdepartments(department)
@@ -40,6 +33,22 @@ class DepartmentsData
   end
 
   private
+
+  def check_update_time
+    Time.zone.now - 12.hours > @last_data_update ? update_departments_data : nil
+  end
+
+  def update_departments_data
+    RestClient::Request.execute(
+      method: :get,
+      url:"#{Settings['directory.url']}/api/structure",
+      timeout: 600,
+      headers: { :Accept => 'application/json', :timeout => 600 }
+    ) do |response, request, result, &block|
+        @departments_data = JSON.parse(response.body)
+    end
+    @last_data_update = Time.zone.now
+  end
 
   def clean(data)
     %w(surname name patronymic deleted_at id emails_list).each{|e| data["chief"].delete(e) if data["chief"]}
