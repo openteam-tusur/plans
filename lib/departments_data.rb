@@ -17,12 +17,14 @@ class DepartmentsData
   end
 
   def department_data(department)
+    check_update_time
     data = department_data_with_subdepartments(department)
     data["chief"] = data["dean"]
     clean data
   end
 
   def subdepartment_data(subdepartment)
+    check_update_time
     data = department_data_with_subdepartments(subdepartment.department)['subdepartments'] || []
 
     clean data.select { |e| e['abbr'] == subdepartment.abbr }.first
