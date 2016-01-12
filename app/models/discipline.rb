@@ -174,4 +174,10 @@ class Discipline < ActiveRecord::Base
     return [] unless has_optionally_disciplines?
     optionally_disciplines.where("credit_units like '%{}%'")
   end
+
+  def subdepartment
+    h = DepartmentsData.instance.abolished_departments
+    return subspeciality.subdepartment unless super
+    h[super.abbr] ? Subdepartment.find_by_abbr(h[super.abbr]) : super
+  end
 end

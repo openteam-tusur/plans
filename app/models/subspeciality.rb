@@ -132,4 +132,10 @@ class Subspeciality < ActiveRecord::Base
   def with_plan
     actual_disciplines.any?
   end
+
+  def subdepartment
+    h = DepartmentsData.instance.abolished_departments
+    h[super.abbr] ? Subdepartment.find_by_abbr(h[super.abbr]) : super
+  end
+
 end

@@ -3,11 +3,23 @@ require 'singleton'
 class DepartmentsData
   include Singleton
 
+  ABOLISHED_DEPARTMENTS = {"СРС" => "РТС",
+                           "МОТЦ" => "МиСА",
+                           "СА" => "МиСА",
+                           "ЭС" => "УИ",
+                           "ОКЮ" => "УИ"
+                           }
+
   attr_accessor :departments_data
 
   def initialize
     update_departments_data
   end
+
+  def abolished_departments
+    ABOLISHED_DEPARTMENTS
+  end
+
 
   def department_data_with_subdepartments(department)
     department = departments_data.select { |e| e['abbr'] == department.abbr }.first.try(:dup) || {}
@@ -25,9 +37,8 @@ class DepartmentsData
 
   def subdepartment_data(subdepartment)
     check_update_time
-    data = department_data_with_subdepartments(subdepartment.department)['subdepartments'] || []
-
-    clean data.select { |e| e['abbr'] == subdepartment.abbr }.first
+    data = departments_data.flat_map{|f| f["chairs"]}
+    data.select { |chair| chair['title'].mb_chars.downcase == subdepartment.title.mb_chars.downcase }.first
   end
 
   def departments
@@ -57,4 +68,5 @@ class DepartmentsData
     %w(subdepartments dean ).each{|e| data.delete(e) if data }
     data
   end
+
 end
