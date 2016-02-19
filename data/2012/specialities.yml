@@ -147,6 +147,13 @@ bachelor:
         subdepartment: "АСУ"
         title: "Без профиля"
         education_form: "postal"
+  -
+    code: "11.03.01"
+    title: "РАДИОТЕХНИКА"
+    subspecialities:
+      -
+        subdepartment: "РЗИ"
+        title: "Радиотехнические средства передачи, приема и обработки сигналов"
 
 specialty:
   -

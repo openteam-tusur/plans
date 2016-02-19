@@ -52,6 +52,13 @@ bachelor:
         subdepartment: "АСУ"
         title: "Прикладная информатика в экономике"
         kind: 'gpo'
+  -
+    code: '210700.62'
+    title: "Инфокоммуникационные технологии и системы связи"
+    subspecialities:
+    -
+      subdepartment: "РЗИ"
+      title: "Защищенные системы  и сети связи"
 
 magistracy:
   -
