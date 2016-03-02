@@ -49,6 +49,8 @@ class Subspeciality < ActiveRecord::Base
   delegate :code, :title, to: :speciality, prefix: true
   delegate :abbr, :title, :to => :department, :prefix => true
   delegate :abbr, :title, :to => :subdepartment, :prefix => true
+  delegate :number, to: :year, prefix: true
+
   scope :actual, where(:deleted_at => nil)
 
   alias_method :profiled_subdepartment, :subdepartment
