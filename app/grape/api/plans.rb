@@ -103,7 +103,7 @@ class API::Plans < Grape::API
     resource ':year' do
       get 'specialities' do
         year.specialities.actual.gos3_all.as_json(
-          :only => [:id, :title, :code],
+          :only => [:id, :title, :code, :degree, :deleted_at, :gos_generation],
           :methods => [:degree_text, :to_s]
         )
       end
