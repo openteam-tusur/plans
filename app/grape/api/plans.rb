@@ -129,7 +129,7 @@ class API::Plans < Grape::API
                   disciplines = disciplines - [Discipline.find(params[:without_discipline])]
                 end
                 disciplines.as_json(
-                  :only => [:title, :summ_srs, :summ_loading, :id, :cycle_id, :special_work, :weeks_count],
+                  :only => [:title, :summ_srs, :summ_loading, :id, :cycle, :cycle_code, :cycle_id, :special_work, :weeks_count, :identifier],
                   :methods => [:to_s, :semesters_info, :provided_info], :include => { :competences => { :only => [:index, :content] } }
                 )
               end
