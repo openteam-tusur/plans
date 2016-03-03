@@ -8,8 +8,8 @@ NEWFGOS = /\d{2}[.]\d{2}[.]\d{2}/
 
 desc 'Парсинг содержимого папки в файл specialities.yml'
 task :parse_files => :environment do
-  bar = ProgressBar.new((2015..2016).count)
-  (2015..2016).each do |year|
+  bar = ProgressBar.new((2012..2016).count)
+  (2012..2016).each do |year|
     dir = Dir.glob("data/#{year}/plans/*/*") + Dir.glob("data/#{year}/plans/*")
     puts dir.count.to_s + "файла в работе"
     rups = dir.collect do |path|
@@ -46,7 +46,7 @@ end
 
 
 def get_subspeciality_title(xml)
-  result = xml.css("Специальности Специальность")[1]["Название"]
+  result = xml.css("Специальности Специальность")[1]["Название"] || ''
   %w(Магистерская программа Программа академической магистратуры - ").each {|w| result.gsub!(w, "")}
   result.squish
 end
